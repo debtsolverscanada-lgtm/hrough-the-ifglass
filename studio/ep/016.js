@@ -183,7 +183,7 @@ function i16_bgBuilding(g,o={}){ const {lights=1,alarm=0}=o; let rooms='';
   fl.forEach((fy,f)=>{for(let c=0;c<9;c++){const rx=230+c*115; rooms+=`<rect x="${rx}" y="${fy}" width="105" height="140" fill="${lights>0&&((c+f)%3)?'#FFE08A':'#151B36'}" opacity="${lights>0&&((c+f)%3)?lights*.8:1}" stroke="#2B3560" stroke-width="5"/><rect x="${rx+40}" y="${fy+90}" width="26" height="50" fill="#0A0E20"/>`;}});
   return `${card('cardDark',g)}<path d="M190 210 L700 90 L1270 210Z" fill="#1E2546" stroke="${INK}" stroke-width="8"/><rect x="200" y="210" width="1070" height="660" fill="#10162E" stroke="${INK}" stroke-width="10"/>${rooms}
    ${[0,1,2].map(i=>`<path d="M${i%2?1150:250} ${370+i*160} L${i%2?250:1150} ${370+i*160}" stroke="none"/>`).join('')}
-   <rect x="200" y="690" width="1070" height="10" fill="#2B3560"/><text x="1230" y="770" text-anchor="end" font-size="28" font-weight="900" fill="#5D6A82">BASEMENT</text>
+   <rect x="200" y="690" width="1070" height="10" fill="#2B3560"/><text x="220" y="770" text-anchor="start" font-size="28" font-weight="900" fill="#5D6A82">BASEMENT</text>
    ${alarm?`<g transform="translate(1180,170)"><circle r="40" fill="${P.red}" stroke="${INK}" stroke-width="6" opacity="${.5+.5*Math.abs(Math.sin(g*8))}"/>${rings(0,0,g*2,alarm*.6,P.red).replace(/r="(\d+(\.\d+)?)"/g,(m,a)=>`r="${(+a)*.35}"`)}</g>`:''}`;
 }
 
@@ -194,7 +194,7 @@ invCold(t,d,p,g){
   const nanA=p.nan??2.5, hA=p.heart??8.7, paA=p.para??11.7, loA=p.lost??13.9, wyA=p.way??15.9, invA=p.inv??20.7, dtA=p.dots??23.1;
   const beat=Math.max(0,Math.sin(g*13))*(.5+.5*Math.sin(g*3.7)), gf=prog(t,invA,invA+1.5), sw=Math.sin(g*1.3);
   const m1=i16_medic(1150,250,.5,g,{dir:-1,ang:20+sw*25,beam:IN(t,paA),len:700}), m2=i16_medic(1350,250,.5,g+1,{dir:-1,head:'#8D5A3B',ang:-5+Math.sin(g*1.1+1)*25,beam:IN(t,paA),len:700});
-  const nan=person({x:700,y:770,s:.55,t:g,who:'nan',mouth:'o',brows:'sad',blink:BL(g),rot:-88,sweat:1}).replace(/<ellipse cx="0" cy="302"[^>]*\/>/,'');
+  const nan=person({x:720,y:760,s:.7,t:g,who:'nan',mouth:'o',brows:'sad',blink:BL(g),rot:-88,sweat:1}).replace(/<ellipse cx="0" cy="302"[^>]*\/>/,'');
   const zoom=IN(t,dtA);
   return `${i16_DEFS}<rect width="1920" height="450" fill="#121833"/>${[...Array(5)].map((_,i)=>`<rect x="${120+i*380}" y="40" width="70" height="400" fill="#182044"/>`).join('')}
    <g transform="translate(0,0)">${i16_bgBase(g,{stairs:0,moon:0}).replace('<rect width="1920" height="1080" fill="#100E1E"/>','<rect y="470" width="1920" height="610" fill="#100E1E"/>')}</g>
@@ -331,7 +331,7 @@ invPutBack(t,d,p,g){
    ${sit?`<g transform="translate(560,760)"><rect x="-110" y="-30" width="220" height="30" fill="#8C5C44" stroke="${INK}" stroke-width="6"/><path d="M-100 0 V140 M100 0 V140" stroke="#8C5C44" stroke-width="16"/><rect x="-110" y="-230" width="26" height="230" fill="#8C5C44" stroke="${INK}" stroke-width="6"/></g>`:''}
    ${person({x:560,y:sit?490:560,s:1,t:g,who:'nan',pose:sit?'hold':(AT(t,sh)&&!AT(t,ca)?'up':'point'),legs:sit?'sit':'stand',mouth:sit?'frown':(AT(t,sh)&&!AT(t,ca)?'o':'flat'),brows:sit?'sad':(AT(t,sh)&&!AT(t,ca)?'raised':'angry'),blink:BL(g),look:1})}
    ${!sit?`<g transform="translate(600,190)">${bubble(0,0,Math.max(300,words.length*30+80),120,words,{size:52,tail:'left'})}</g>`:''}
-   ${AT(t,la)&&!AT(t,ca)?T(1060,300+Math.sin(g*12)*8,'HA HA!',{size:60,fill:P.mint}):''}${AT(t,sh)&&!AT(t,ca)?T(330,250,'EEK!',{size:70,fill:P.coral,sc:IN(t,sh)}):''}
+   ${AT(t,la)&&!AT(t,ca)?T(1060,300+Math.sin(g*12)*8,'HA HA!',{size:60,fill:P.mint}):''}${AT(t,sh)&&!AT(t,ca)?T(330,420,'EEK!',{size:70,fill:P.coral,sc:IN(t,sh)}):''}
    ${i16_ghost({x:sit?820:1020,y:520+(AT(t,la)&&!AT(t,ca)?-Math.abs(Math.sin(g*10))*20:0),s:.95,t:g,op:.25,look:-1})}
    ${AT(t,ca)?`${i16_cat(1450,800,.95,g,{mood:'grump',blink:0})}${labelPill(1450,920,'MR. PICKLES',P.warm,34)}${!sit?`<path d="M1380 720 Q1200 560 1050 470" stroke="#fff" stroke-width="4" stroke-dasharray="10 10" opacity=".6"/>${labelPill(1640,640,'BLINKS: 0',P.gold,34)}`:''}`:''}
    ${sit?`${heart(600,600,.16,beat)}${labelPill(560,170,'HER HEART IS WEAK',P.coral,46)}`:''}
@@ -344,7 +344,7 @@ invHands(t,d,p,g){
   let sn=''; if(AT(t,whA)) pts.forEach(([x,y],i)=>{sn+=`<circle cx="${560+x*1.05}" cy="${510+y*1.05}" r="${16+6*Math.sin(g*5+i)}" fill="${P.gold}" opacity=".85"/><path d="M${560+x*1.05} ${510+y*1.05} L560 380" stroke="${P.gold}" stroke-width="3" opacity=".4"/>`;});
   const tb=IN(t,fiA), kn=AT(t,caA)?1:0, bx=AT(t,caA)?1520+Math.sin(g*4)*40:1280+Math.sin(g*3)*120, by=AT(t,caA)?640+Math.cos(g*4)*20:590+Math.cos(g*5)*60;
   return `${i16_DEFS}${card('cardDark',g)}<rect width="1920" height="1080" fill="#000" opacity=".25"/>
-   ${AT(t,prA)?T(560,150,'PROPRIOCEPTION',{size:80,fill:P.gold,sc:IN(t,prA)}):''}${AT(t,whA)?labelPill(560,230,'EYES SHUT? STILL WORKS',P.mint,34):''}
+   ${AT(t,prA)&&!AT(t,fiA)?T(1100,170,'PROPRIOCEPTION',{size:96,fill:P.gold,sc:IN(t,prA)}):''}${AT(t,whA)&&!AT(t,fiA)?labelPill(1100,270,'EYES SHUT? STILL WORKS',P.mint,40):''}
    ${i16_ghost({x:560,y:510,s:1.05,t:g,pose:AT(t,noA)&&!AT(t,fiA)?'nose':(AT(t,fiA)?'reach':'down'),op:.55})}${sn}
    ${AT(t,stA)?icon('check',800,330,IN(t,stA)*.7):''}
    ${tb>0?`<g opacity="${tb}"><rect x="1050" y="700" width="800" height="40" rx="10" fill="#8C5C44" stroke="${INK}" stroke-width="7"/><path d="M1100 740 V900 M1800 740 V900" stroke="#8C5C44" stroke-width="22"/>
@@ -424,7 +424,7 @@ invHeatCam(t,d,p,g){
    <rect x="1150" y="190" width="660" height="520" rx="22" fill="#2A3248" stroke="${INK}" stroke-width="10"/><rect x="1175" y="215" width="610" height="470" rx="10" fill="#14081F"/>
    <g opacity="${on}"><rect x="1175" y="215" width="610" height="470" rx="10" fill="#3A1A5A"/><g opacity="${sil}">${th}</g>${T(1480,260,'HEAT CAMERA',{size:36,fill:P.warm,stroke:8})}</g>
    ${AT(t,thA)?T(1480,800,'GLOWING ORANGE',{size:64,fill:P.warm,sc:IN(t,thA)}):''}
-   ${AT(t,woA)?labelPill(700,170,'IN THIS WORLD: HIDDEN ONLY FROM VISIBLE LIGHT',P.gold,32):''}
+   ${AT(t,woA)?labelPill(1060,120,'IN THIS WORLD: HIDDEN ONLY FROM VISIBLE LIGHT',P.gold,32):''}
    ${AT(t,heA)?labelPill(900,880,'BODY HEAT = INFRARED LIGHT',P.warm,40):''}
    ${i16_pm(t,'plus',"DR. OSEI'S LAB")}`;
 },
@@ -451,7 +451,7 @@ invNanWorry(t,d,p,g){
      ${i16_ghost({x:1350,y:520,s:.9,t:g,op:.25,look:-1})}
      ${AT(t,fcA)&&!AT(t,qA)?labelPill(1350,250,"CAN'T SEE HIS FACE",P.coral,40):''}
      ${AT(t,tsA)&&!AT(t,qA)?['TIRED?','SAD?','FIBBING?'].map((s,i)=>`<g transform="translate(${1050+i*230},${380+(i%2)*60}) scale(${pop(t,tsA+i*.9)})">${labelPill(0,0,s,P.violet,38)}</g>`).join(''):''}
-     ${AT(t,qA)?`<g transform="translate(960,190) scale(${IN(t,qA)})">${bubble(0,0,1240,130,'I RAISED YOU BY LOOKING AT YOU.',{size:54,tail:'left'})}</g>`:''}
+     ${AT(t,qA)?`<g transform="translate(1080,300) scale(${IN(t,qA)})">${bubble(0,0,1100,130,'I RAISED YOU BY LOOKING AT YOU.',{size:50,tail:'left'})}</g>`:''}
      ${i16_pm(t,'minus','NAN STOPS SLEEPING')}`;
   }
   const out=AT(t,ouA), w=prog(t,buA+1,drA);
@@ -642,7 +642,7 @@ invGlasses(t,d,p,g){
   const rows=['E','F P','T O Z','L P E D'];
   return `${i16_DEFS}${i16_bgHosp(g,1)}
    <g transform="translate(260,400)"><rect x="-150" y="-250" width="300" height="440" rx="14" fill="#FFF6EA" stroke="${INK}" stroke-width="8"/>${rows.map((r,i)=>`<text y="${-150+i*95}" text-anchor="middle" font-size="${90-i*18}" font-weight="900" fill="${INK}">${r}</text>`).join('')}${icon('check',120,170,.5)}</g>
-   ${labelPill(260,700,'EYE TESTS: NEVER SKIPPED',P.mint,30)}
+   ${labelPill(270,700,'NEVER SKIPPED',P.mint,34)}
    ${person({x:760,y:470,s:.95,t:g,who:'nan',pose:'hold',legs:'sit',mouth:'smile',brows:'calm',blink:BL(g),look:1})}${i16_bed(820,760)}
    ${glint({x:1380,y:540,s:1.05,t:g,mouth:AT(t,quA)?'smile':'o',brows:AT(t,quA)?'calm':'raised',blink:BL(g),look:-1,glint:AT(t,glA+1.4)?Math.max(0,Math.sin((t-glA)*3)):0})}
    ${AT(t,glA)&&fly<1?`<g transform="translate(${lerp(900,1380,fly)},${lerp(420,477,fly)-Math.sin(fly*Math.PI)*150}) scale(1.05)"><circle cx="-30" cy="0" r="29" fill="none" stroke="${P.goldRim}" stroke-width="10"/><circle cx="30" cy="0" r="29" fill="none" stroke="${P.goldRim}" stroke-width="10"/></g>`:''}
@@ -651,7 +651,7 @@ invGlasses(t,d,p,g){
    ${AT(t,quA)?`<g transform="translate(960,200) scale(${IN(t,quA)})">${bubble(0,0,1100,130,'I ALWAYS KNOW WHERE TO LOOK.',{size:56,tail:'left'})}</g>`:''}`;
 },
 invAsk(t,d,p,g){
-  const q=p.q??1.7, f=(Math.sin(g*1.6)+1)/2;
+  const q=p.q??1.7, f=clamp(Math.sin(g*1.4)*2.5+.5);
   return `${i16_DEFS}${bgNight(g)}${i16_fade({x:960,y:600,s:1.4,t:g,pose:'shrug',mouth:'smile',brows:'raised',blink:BL(g)},f)}
    ${person({x:420,y:600,s:.9,t:g,who:'nan',pose:'hold',mouth:'smile',blink:BL(g),look:1})}
    ${AT(t,q)?`${T(960,160,'WOULD YOU?',{size:130,fill:P.mint,sc:pop(t,q)})}${T(960,260,'BE INVISIBLE, IF NOBODY COULD SEE YOUR FACE',{size:44,fill:P.white,sc:pop(t,q+.4)})}${labelPill(1460,480,'YES',P.mint,64)}${labelPill(1460,640,'NO',P.coral,64)}`:''}`;
