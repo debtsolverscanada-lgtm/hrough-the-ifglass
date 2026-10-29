@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/ep/012.js"></script><script>
+let th_t=(x,y,s,str,col,sw)=>`<text x="${x}" y="${y}" font-size="${s}" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="${sw}" stroke-linejoin="round">${str}</text><text x="${x}" y="${y}" font-size="${s}" font-weight="900" fill="${col}">${str}</text>`;
+let th_w=(x,y,str,col,rot,sz)=>`<g transform="translate(${x},${y}) rotate(${rot})">${w12_chip(0,0,str,col,1,sz)}</g>`;
+document.getElementById('s').innerHTML=`<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">${DEFS}
+ <rect width="1920" height="1080" fill="url(#cardWarm)"/>
+ <circle cx="1400" cy="560" r="520" fill="url(#gGold)" opacity=".6"/>
+ ${th_w(1040,120,'"MONDAY"','#3A7BD5',-8,64)}${w12_food('toast',1170,360,.9,0)}
+ ${th_w(1660,140,'YOUR NAME',P.red,6,52)}${w12_food('straw',1720,330,1.1,0)}
+ ${th_w(1740,620,'"HEY"','#1FAF8A',6,60)}${w12_food('mint',1760,800,.9,0)}
+ ${w12_food('pancake',1080,820,.9,1)}
+ <path d="M1180 420 Q1260 480 1330 530" stroke="${P.gold}" stroke-width="12" fill="none" stroke-dasharray="20 14"/>
+ <path d="M1700 420 Q1620 480 1560 520" stroke="${P.gold}" stroke-width="12" fill="none" stroke-dasharray="20 14"/>
+ <g transform="translate(1440,560) scale(1.35)">${glint({t:.3,mouth:'o',brows:'raised',glint:1})}</g>
+ ${th_t(60,300,170,'WORDS',P.white,42)}
+ ${th_t(60,520,170,'TASTE',P.gold,42)}
+ ${th_t(60,740,150,'LIKE FOOD',P.gold,40)}
+ <rect x="10" y="10" width="1900" height="1060" rx="18" fill="none" stroke="${P.gold}" stroke-width="20"/>${VIG}</svg>`;
+</script></body></html>

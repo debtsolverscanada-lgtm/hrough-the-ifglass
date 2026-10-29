@@ -243,7 +243,7 @@ twHey(t,d,p,g){
   const words=['HELLO','PIZZA?','LOL','THANKS','RAIN','WOW','OKAY','LATER'], foods=['straw','pancake','sweet','choc','mint','berry','cake','coffee'];
   let sw='';
   const song=AT(t,so), news=AT(t,nw);
-  if(!song) words.forEach((w,i)=>{const a=i/8*6.283+g*.35, rx=680, ry=230; const x=960+Math.cos(a)*rx, y=560+Math.sin(a)*ry;
+  if(!song) words.forEach((w,i)=>{const a=i/8*6.283+g*.35, rx=700, ry=265; const x=960+Math.cos(a)*rx, y=565+Math.sin(a)*ry;
      sw+=`${w12_chip(x,y-70,w,[P.coral,'#3A7BD5','#1FAF8A','#B47CFF'][i%4],pop(t,ev+i*.1),48)}${w12_food(foods[i],x,y+45,.5*pop(t,ev+.2+i*.1),g+i)}`;});
   const tv=`<g transform="translate(1360,500)"><rect x="-230" y="-170" width="460" height="320" rx="20" fill="#2A3248" stroke="${INK}" stroke-width="9"/><rect x="-200" y="-140" width="400" height="250" rx="10" fill="#1E2A48"/><text y="-50" text-anchor="middle" font-size="64" font-weight="900" fill="${P.red}">NEWS</text><rect x="-160" y="0" width="320" height="18" rx="9" fill="#5D6A82"/><rect x="-160" y="40" width="240" height="18" rx="9" fill="#5D6A82"/></g>`;
   return `${card(song?'cardGold':'cardDark',g)}${sw}
