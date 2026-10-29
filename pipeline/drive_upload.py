@@ -12,6 +12,7 @@ PARTS_ONLY = '--parts-only' in sys.argv
 THUMB_ONLY = '--thumb-only' in sys.argv  # replace this episode's queued thumbnail in place (same Drive file id)  # only the vertical Part series (main video already queued)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 META = json.load(open(f'{EP}/meta.json')); OUT = f'{ROOT}/build/{name}/out'
+ORDER = META.get('post_order', int(META['episode']))  # queue position: stories interleave with science (e.g. 2.5 posts between 002 and 003)
 CID, CSEC, RTOK = (os.environ[k].strip().strip('"').strip("'") for k in ('GDRIVE_CLIENT_ID', 'GDRIVE_CLIENT_SECRET', 'GDRIVE_REFRESH_TOKEN'))
 tok = requests.post('https://oauth2.googleapis.com/token', data={
     'client_id': CID, 'client_secret': CSEC, 'refresh_token': RTOK, 'grant_type': 'refresh_token'}).json()
@@ -88,8 +89,8 @@ if not SHEET:
     SHEET = ok(requests.post(API, headers=H, json={'name': 'Ifglass Queue', 'mimeType': 'application/vnd.google-apps.spreadsheet', 'parents': [top]}))['id']
     requests.put(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/A1:I1?valueInputOption=RAW', headers=H, json={'values': [cols]}).raise_for_status()
 if not PARTS_ONLY:
-    row = [META['episode'], META['title'], META['description'], ', '.join(META['tags']), vid, th, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z']
-    requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/A:I:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': [row]}).raise_for_status()
+    row = [META['episode'], META['title'], META['description'], ', '.join(META['tags']), vid, th, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z', ORDER]
+    requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/A:J:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': [row]}).raise_for_status()
     print(f'queued episode {META["episode"]}: video {vid}, thumbnail {th}, sheet {SHEET}')
 
 # ---- Shorts tab: one row per clip, posted by the Shorts Zap ----
@@ -111,7 +112,7 @@ for c in clips:
     else:
         desc = f'From the full video: {META["title"]}\n▶ Full episode out this week on the channel: youtube.com/@throughtheifglass\n\n#whatif #science #shorts'
     srows.append([META['episode'], f'{c["n"]:02d}' if PARTS else str(c['n']), title, desc, 'shorts, what if, science, science facts, what if shorts, ' + ', '.join(META['tags'][:5]),
-                  fid, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z'])
+                  fid, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z', ORDER])
 if PARTS and srows:
     # the Part series replaces this episode's highlight clips that haven't posted yet
     cur = ok(requests.get(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Shorts!A:G', headers=H)).get('values', [])
@@ -120,16 +121,16 @@ if PARTS and srows:
     if upd: ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values:batchUpdate', headers=H, json={'valueInputOption': 'RAW', 'data': upd}))
     print(f'marked {len(upd)} highlight rows as replaced')
 if srows:
-    ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Shorts!A:I:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': srows}))
+    ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Shorts!A:J:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': srows}))
 print(f'queued {len(srows)} shorts')
 
 # keep both tabs in episode order (builds can finish out of order); the Zaps always take the first 'ready' row
 props = ok(requests.get(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}', headers=H, params={'fields': 'sheets.properties(sheetId,title)'}))['sheets']
 sid = {x['properties']['title']: x['properties']['sheetId'] for x in props}
 reqs = []
-for title, keys in (('Sheet1', [0]), ('Shorts', [0, 1])):
+for title, keys in (('Sheet1', [9]), ('Shorts', [9, 1])):  # column J = post order
     if title in sid:
-        reqs.append({'sortRange': {'range': {'sheetId': sid[title], 'startRowIndex': 1, 'startColumnIndex': 0, 'endColumnIndex': 9},
+        reqs.append({'sortRange': {'range': {'sheetId': sid[title], 'startRowIndex': 1, 'startColumnIndex': 0, 'endColumnIndex': 10},
                                    'sortSpecs': [{'dimensionIndex': k, 'sortOrder': 'ASCENDING'} for k in keys]}})
 if reqs:
     ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}:batchUpdate', headers=H, json={'requests': reqs}))

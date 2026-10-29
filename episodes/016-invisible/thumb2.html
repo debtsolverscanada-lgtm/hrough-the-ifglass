@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/cast.js"></script><script src="../../studio/thumbkit.js"></script><script src="../../studio/ep/016.js"></script><script>
+let th_dust='';{const r=rng(16);for(let i=0;i<70;i++)th_dust+=`<circle cx="${1000+r()*900}" cy="${150+r()*700}" r="${2+r()*5}" fill="#FFF6D6" opacity="${.2+r()*.5}"/>`;}
+let th_cols='';[120,560,980].forEach(x=>th_cols+=`<rect x="${x}" y="0" width="110" height="1080" fill="#141A36"/>`);
+let th_nan=`<g opacity=".35">${person({x:1790,y:600,s:.75,t:.2,who:'nan',pose:'hold',mouth:'o',brows:'raised'})}</g>`;
+document.getElementById('s').innerHTML=TK.wrap(`${i16_DEFS}
+ <rect width="1920" height="1080" fill="#0A0D1F"/>${th_cols}
+ ${TK.glowBlob(1460,460,520,'#FF3B4E',.35)}${TK.glowBlob(300,250,380,'#3A5BFF',.25)}
+ <g opacity=".5">${i16_bgDino(0).replace('<rect width="1920" height="1080" fill="#11162C"/>','')}</g>
+ ${th_nan}
+ ${i16_beam(1920,500,182,1100,330,1)}${i16_beam(1920,500,182,900,150,.8)}
+ ${TK.rays(1460,467,'#FF6B7A',16,900,.10)}
+${TK.rim(i16_ghost({x:1460,y:600,s:2.15,t:1.2,pose:'shrug',op:.95,red:0,dots:0,halo:0}),'#FF3B4E',14)}
+ ${[-1,1].map(d=>`<g transform="translate(${1460+d*64},${600-62*2.15+1})"><circle r="120" fill="url(#gRed)"/><circle r="34" fill="#FF2E46" stroke="#FFD0D6" stroke-width="5"/><circle r="13" fill="#FFF2F2"/><path d="M0 -70 L6 -6 L70 0 L6 6 L0 70 L-6 6 L-70 0 L-6 -6Z" fill="#FFE6E8" opacity=".85"/></g>`).join('')}
+ <g transform="translate(1460,${600-62*2.15+1})">
+   <circle cx="-64" r="62" fill="none" stroke="${INK}" stroke-width="22"/><circle cx="64" r="62" fill="none" stroke="${INK}" stroke-width="22"/>
+   <circle cx="-64" r="62" fill="none" stroke="#F2C14E" stroke-width="12"/><circle cx="64" r="62" fill="none" stroke="#F2C14E" stroke-width="12"/><path d="M-6 -4 Q0 -14 6 -4" stroke="#F2C14E" stroke-width="10" fill="none"/>
+   <path d="M-100 -30 A40 40 0 0 1 -76 -48" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/></g>
+ ${th_dust}
+ ${TK.text(70,400,"I'M INVISIBLE",{size:120,fill:'#fff',rot:-3})}
+ ${TK.text(55,640,'EXCEPT THIS',{size:150,fill:'#FFD43B',rot:-3,depth:14})}
+ 
+ <path d="M760 720 Q1050 760 1250 520" stroke="#FFD43B" stroke-width="26" fill="none" stroke-linecap="round" filter="url(#tkShadow)"/><path d="M1215 515 L1275 480 L1280 545Z" fill="#FFD43B" stroke="#FFD43B" stroke-width="20" stroke-linejoin="round"/>
+ ${TK.badge(330,960,'TIME LEFT','0:90 SEC'.replace('0:90 SEC','90 SEC'),'#FF5E6E',-3)}
+`,'#0A0D1F');
+</script></body></html>
