@@ -5,6 +5,10 @@ on:
       episode:
         description: 'Episode folder, e.g. episodes/002-woke-up-1000-years'
         required: true
+      parts_only:
+        description: 'Only render + queue the vertical Part series (episode already posted/queued)'
+        required: false
+        default: ''
       test_seconds:
         description: 'Test only: render just the first N seconds and do NOT queue it for posting'
         required: false
@@ -36,6 +40,7 @@ jobs:
       - name: Build video, thumbnail, clips
         run: |
           if [ -n "${{ github.event.inputs.test_seconds }}" ]; then EXTRA="--seconds ${{ github.event.inputs.test_seconds }}"; fi
+          if [ -n "${{ github.event.inputs.parts_only }}" ]; then EXTRA="$EXTRA --parts-only"; fi
           python3 pipeline/build.py "${{ steps.ep.outputs.dir }}" --workers 4 $EXTRA
       - name: Upload to Drive & queue
         env:
@@ -44,6 +49,7 @@ jobs:
           GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
         run: |
           if [ -n "${{ github.event.inputs.test_seconds }}" ]; then EXTRA="--test"; fi
+          if [ -n "${{ github.event.inputs.parts_only }}" ]; then EXTRA="$EXTRA --parts-only"; fi
           python3 pipeline/drive_upload.py "${{ steps.ep.outputs.dir }}" $EXTRA
       - uses: actions/upload-artifact@v4
         if: always()

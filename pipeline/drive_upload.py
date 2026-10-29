@@ -8,6 +8,7 @@ usage: python3 pipeline/drive_upload.py episodes/001-frozen-100-years
 import json, os, sys, datetime, requests
 EP = os.path.abspath(sys.argv[1]); name = os.path.basename(EP)
 TEST = '--test' in sys.argv  # upload to a Test folder, never queue
+PARTS_ONLY = '--parts-only' in sys.argv  # only the vertical Part series (main video already queued)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 META = json.load(open(f'{EP}/meta.json')); OUT = f'{ROOT}/build/{name}/out'
 CID, CSEC, RTOK = (os.environ[k].strip().strip('"').strip("'") for k in ('GDRIVE_CLIENT_ID', 'GDRIVE_CLIENT_SECRET', 'GDRIVE_REFRESH_TOKEN'))
@@ -58,8 +59,10 @@ def upload(path, title, parent, mime):
 
 top = folder('Through the Ifglass - Auto'); ready = folder('Test' if TEST else 'Ready', top); folder('Posted', top)
 clips_dir = folder(name, folder('Clips', top))
-vid = upload(f'{OUT}/{name}.mp4', f'{name}.mp4', ready, 'video/mp4')
-th = upload(f'{OUT}/thumbnail.jpg', f'{name}-thumbnail.jpg', ready, 'image/jpeg')
+vid = th = None
+if not PARTS_ONLY:
+    vid = upload(f'{OUT}/{name}.mp4', f'{name}.mp4', ready, 'video/mp4')
+    th = upload(f'{OUT}/thumbnail.jpg', f'{name}-thumbnail.jpg', ready, 'image/jpeg')
 clip_ids = {}
 for c in sorted(os.listdir(f'{OUT}/clips')) if os.path.isdir(f'{OUT}/clips') else []:
     clip_ids[c] = upload(f'{OUT}/clips/{c}', c, clips_dir, 'video/mp4')
@@ -73,9 +76,10 @@ cols = ['episode', 'title', 'description', 'tags', 'video_file_id', 'thumbnail_f
 if not SHEET:
     SHEET = ok(requests.post(API, headers=H, json={'name': 'Ifglass Queue', 'mimeType': 'application/vnd.google-apps.spreadsheet', 'parents': [top]}))['id']
     requests.put(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/A1:I1?valueInputOption=RAW', headers=H, json={'values': [cols]}).raise_for_status()
-row = [META['episode'], META['title'], META['description'], ', '.join(META['tags']), vid, th, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z']
-requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/A:I:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': [row]}).raise_for_status()
-print(f'queued episode {META["episode"]}: video {vid}, thumbnail {th}, sheet {SHEET}')
+if not PARTS_ONLY:
+    row = [META['episode'], META['title'], META['description'], ', '.join(META['tags']), vid, th, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z']
+    requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/A:I:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': [row]}).raise_for_status()
+    print(f'queued episode {META["episode"]}: video {vid}, thumbnail {th}, sheet {SHEET}')
 
 # ---- Shorts tab: one row per clip, posted by the Shorts Zap ----
 meta_sheet = ok(requests.get(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}', headers=H, params={'fields': 'sheets.properties.title'}))
@@ -83,15 +87,27 @@ if 'Shorts' not in [x['properties']['title'] for x in meta_sheet['sheets']]:
     ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}:batchUpdate', headers=H, json={'requests': [{'addSheet': {'properties': {'title': 'Shorts'}}}]}))
     ok(requests.put(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Shorts!A1:I1?valueInputOption=RAW', headers=H,
                     json={'values': [['episode', 'clip', 'title', 'description', 'tags', 'video_file_id', 'status', 'youtube_id', 'added_at']]}))
-clips = json.load(open(f'{EP}/clips.json')) if os.path.exists(f'{EP}/clips.json') else []
+PARTS = os.path.exists(f'{EP}/parts.json')
+clips = json.load(open(f'{EP}/parts.json' if PARTS else f'{EP}/clips.json')) if PARTS or os.path.exists(f'{EP}/clips.json') else []
 srows = []
 for c in clips:
-    fid = clip_ids.get(f'clip-{c["n"]:02d}.mp4')
+    fid = clip_ids.get(f'{"part" if PARTS else "clip"}-{c["n"]:02d}.mp4')
     if not fid: continue
     title = c.get('title') or (f'{c["hook"]} {c["hook2"]}'.strip().capitalize() + ' #shorts')
-    desc = f'From the full video: {META["title"]}\n▶ Full episode out this week on the channel: youtube.com/@throughtheifglass\n\n#whatif #science #shorts'
-    srows.append([META['episode'], str(c['n']), title, desc, 'shorts, what if, science, science facts, what if shorts, ' + ', '.join(META['tags'][:5]),
+    if PARTS:
+        nxt = 'Part {} is next. Follow so you don\'t miss it.'.format(c['n'] + 1) if c['n'] < len(clips) else 'That\'s the final part. The full episode is on the channel.'
+        desc = f'Part {c["n"]} of {len(clips)}: {META["title"]}\n{nxt}\n▶ Full episode out this week on the channel: youtube.com/@throughtheifglass\n\n#whatif #science #shorts'
+    else:
+        desc = f'From the full video: {META["title"]}\n▶ Full episode out this week on the channel: youtube.com/@throughtheifglass\n\n#whatif #science #shorts'
+    srows.append([META['episode'], f'{c["n"]:02d}' if PARTS else str(c['n']), title, desc, 'shorts, what if, science, science facts, what if shorts, ' + ', '.join(META['tags'][:5]),
                   fid, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z'])
+if PARTS and srows:
+    # the Part series replaces this episode's highlight clips that haven't posted yet
+    cur = ok(requests.get(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Shorts!A:G', headers=H)).get('values', [])
+    upd = [{'range': f'Shorts!G{i+1}', 'values': [['replaced']]} for i, r in enumerate(cur)
+           if i and len(r) >= 7 and r[0] == META['episode'] and r[6] == 'ready']
+    if upd: ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values:batchUpdate', headers=H, json={'valueInputOption': 'RAW', 'data': upd}))
+    print(f'marked {len(upd)} highlight rows as replaced')
 if srows:
     ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Shorts!A:I:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': srows}))
 print(f'queued {len(srows)} shorts')

@@ -9,6 +9,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument('episode'); ap.add_argument('--workers', type=int, default=os.cpu_count() or 2)
 ap.add_argument('--seconds', type=float, default=None, help='only render the first N seconds (test)')
 ap.add_argument('--no-clips', action='store_true')
+ap.add_argument('--parts-only', action='store_true', help='skip the main video; render only the vertical Part series')
 a = ap.parse_args()
 EP = os.path.abspath(a.episode); name = os.path.basename(EP)
 META = json.load(open(f'{EP}/meta.json'))
@@ -45,23 +46,31 @@ run('ffmpeg', '-loglevel', 'error', '-y', '-i', voice, '-i', pad, '-filter_compl
     '-map', '[a]', '-ar', '48000', '-c:a', 'pcm_s16le', mix)
 
 # 4. main video (kept ~100 MB so Zapier can move it)
-frames = f'{B}/frames'; render(f'{EP}/timeline.json', frames, N, 'land')
 main = f'{OUT}/{name}.mp4'
-run('ffmpeg', '-loglevel', 'error', '-y', '-framerate', str(FPS), '-i', f'{frames}/f%06d.jpg', '-i', mix, '-t', str(dur),
+if a.parts_only: a.no_main = True
+frames = f'{B}/frames'
+if not getattr(a, 'no_main', False): render(f'{EP}/timeline.json', frames, N, 'land')
+if not getattr(a, 'no_main', False):
+  run('ffmpeg', '-loglevel', 'error', '-y', '-framerate', str(FPS), '-i', f'{frames}/f%06d.jpg', '-i', mix, '-t', str(dur),
     '-c:v', 'libx264', '-preset', 'medium', '-crf', '22', '-tune', 'animation', '-pix_fmt', 'yuv420p',
     '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', main)
-shutil.rmtree(frames)
+  shutil.rmtree(frames)
 shutil.copy(f'{EP}/{META["thumbnail"]}', f'{OUT}/thumbnail.jpg')
 
-# 5. vertical clips
-if not a.no_clips and os.path.exists(f'{EP}/clips.json'):
-    for c in json.load(open(f'{EP}/clips.json')):
+# 5. vertical clips: the Part series (parts.json) if present, else highlight clips (clips.json)
+PARTS = os.path.exists(f'{EP}/parts.json')
+if PARTS: shutil.rmtree(f'{OUT}/clips', ignore_errors=True); os.makedirs(f'{OUT}/clips')
+if not a.no_clips and (PARTS or os.path.exists(f'{EP}/clips.json')):
+    CL = json.load(open(f'{EP}/parts.json' if PARTS else f'{EP}/clips.json'))
+    for c in CL:
         if a.seconds and c['s'] > dur: continue
-        tl = dict(TL, hook=c['hook'], hook2=c['hook2']); tlf = f'{B}/tl_clip{c["n"]}.json'; json.dump(tl, open(tlf, 'w'))
+        tl = dict(TL, hook=c['hook'], hook2=c['hook2'])
+        if PARTS: tl['part'] = {'n': c['n'], 'N': len(CL), 's': c['s'], 'e': c['e']}
+        tlf = f'{B}/tl_clip{c["n"]}.json'; json.dump(tl, open(tlf, 'w'))
         n = int((c['e'] - c['s']) * FPS); cf = f'{B}/clip{c["n"]}'
         render(tlf, cf, n, 'vert', c['s'])
         run('ffmpeg', '-loglevel', 'error', '-y', '-framerate', str(FPS), '-i', f'{cf}/f%06d.jpg', '-ss', str(c['s']), '-t', str(c['e'] - c['s']),
             '-i', mix, '-c:v', 'libx264', '-preset', 'medium', '-crf', '21', '-tune', 'animation', '-pix_fmt', 'yuv420p',
-            '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', f'{OUT}/clips/clip-{c["n"]:02d}.mp4')
+            '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', f'{OUT}/clips/{"part" if PARTS else "clip"}-{c["n"]:02d}.mp4')
         shutil.rmtree(cf)
-print('done:', main, f'{os.path.getsize(main)/1e6:.1f} MB')
+print('done:', main if os.path.exists(main) else '(parts only)', f'{os.path.getsize(main)/1e6:.1f} MB' if os.path.exists(main) else '')

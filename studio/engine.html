@@ -28,6 +28,14 @@ function drawShot(i,gt){
   let body; try{ body=SHOTS[s.shot](t,d,s.p||{},gt); }catch(e){ body=`<rect width="1920" height="1080" fill="#300"/><text x="40" y="80" fill="#fff" font-size="40">${s.shot}: ${e.message}</text>`; }
   return `<g transform="translate(960,540) scale(${z}) translate(${-960+px},${-540+py})">${body}</g>`;
 }
+function partTop(gt){ if(!TL.part) return ''; const p=TL.part;
+  const lab=`PART ${p.n}/${p.N}`, w=lab.length*30+70;
+  return `<g transform="translate(540,165) scale(${.8+.2*pop(gt-p.s,0)})"><rect x="${-w/2}" y="-46" width="${w}" height="92" rx="46" fill="${P.mint}" stroke="${INK}" stroke-width="8"/><text y="20" text-anchor="middle" font-size="56" font-weight="900" fill="${INK}">${lab}</text></g>`; }
+function partEnd(gt){ if(!TL.part) return ''; const p=TL.part, k=gt-(p.e-2.2); if(k<0) return '';
+  const last=p.n>=p.N, l1=last?'FULL EPISODE':`PART ${p.n+1} NEXT`, l2=last?'ON YOUTUBE':'FOLLOW SO YOU DON\'T MISS IT';
+  const sc=pop(k,0,.3), bob=Math.sin(gt*8)*6;
+  return `<g transform="translate(540,${1640+bob}) scale(${sc})"><rect x="-430" y="-95" width="860" height="190" rx="36" fill="${P.gold}" stroke="${INK}" stroke-width="10"/>
+    <text y="-8" text-anchor="middle" font-size="66" font-weight="900" fill="${INK}">${l1} →</text><text y="62" text-anchor="middle" font-size="38" font-weight="900" fill="${INK}">${l2}</text></g>`; }
 window.renderFrame=(gt,mode='land',caps=true)=>{
   const i=shotAt(gt); const s=TL.shots[i]; const t=gt-s.s; const XF=.28;
   let scene=drawShot(i,gt);
@@ -42,7 +50,9 @@ window.renderFrame=(gt,mode='land',caps=true)=>{
       <rect width="1080" height="1920" fill="#0B1026"/>
       <g transform="translate(${ox},${oy}) scale(${sc})">${scene}${VIG}</g>
       <rect width="1080" height="${oy+40}" fill="#0B1026"/><rect y="${oy+h-40}" width="1080" height="${1920-oy-h+40}" fill="#0B1026"/>
-      ${TL.hook?T(540,250,TL.hook,{size:64,fill:P.white}):''}${TL.hook2?T(540,340,TL.hook2,{size:64,fill:P.mint}):''}
+      ${partTop(gt)}
+      ${TL.hook?T(540,TL.part?290:250,TL.hook,{size:TL.part?70:64,fill:P.white,sc:TL.part?.85+.15*pop(gt-TL.part.s,0):1}):''}${TL.hook2?T(540,TL.part?385:340,TL.hook2,{size:TL.part?70:64,fill:TL.part?P.gold:P.mint,sc:TL.part?.85+.15*pop(gt-TL.part.s,.12):1}):''}
+      ${partEnd(gt)}
       ${capSVG(gt,1080,1470,64)}
       <g transform="translate(540,1800)" opacity=".85">${TL.handle?T(0,0,TL.handle,{size:34,fill:P.gold,stroke:8}):''}</g></svg>`;
     document.getElementById('stage').style.cssText='width:1080px;height:1920px';
