@@ -60,8 +60,9 @@ top = folder('Through the Ifglass - Auto'); ready = folder('Test' if TEST else '
 clips_dir = folder(name, folder('Clips', top))
 vid = upload(f'{OUT}/{name}.mp4', f'{name}.mp4', ready, 'video/mp4')
 th = upload(f'{OUT}/thumbnail.jpg', f'{name}-thumbnail.jpg', ready, 'image/jpeg')
+clip_ids = {}
 for c in sorted(os.listdir(f'{OUT}/clips')) if os.path.isdir(f'{OUT}/clips') else []:
-    upload(f'{OUT}/clips/{c}', c, clips_dir, 'video/mp4')
+    clip_ids[c] = upload(f'{OUT}/clips/{c}', c, clips_dir, 'video/mp4')
 
 if TEST:
     print(f'TEST upload ok: video {vid}, thumbnail {th} (not queued)'); sys.exit(0)
@@ -75,3 +76,22 @@ if not SHEET:
 row = [META['episode'], META['title'], META['description'], ', '.join(META['tags']), vid, th, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z']
 requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/A:I:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': [row]}).raise_for_status()
 print(f'queued episode {META["episode"]}: video {vid}, thumbnail {th}, sheet {SHEET}')
+
+# ---- Shorts tab: one row per clip, posted by the Shorts Zap ----
+meta_sheet = ok(requests.get(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}', headers=H, params={'fields': 'sheets.properties.title'}))
+if 'Shorts' not in [x['properties']['title'] for x in meta_sheet['sheets']]:
+    ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}:batchUpdate', headers=H, json={'requests': [{'addSheet': {'properties': {'title': 'Shorts'}}}]}))
+    ok(requests.put(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Shorts!A1:I1?valueInputOption=RAW', headers=H,
+                    json={'values': [['episode', 'clip', 'title', 'description', 'tags', 'video_file_id', 'status', 'youtube_id', 'added_at']]}))
+clips = json.load(open(f'{EP}/clips.json')) if os.path.exists(f'{EP}/clips.json') else []
+srows = []
+for c in clips:
+    fid = clip_ids.get(f'clip-{c["n"]:02d}.mp4')
+    if not fid: continue
+    title = c.get('title') or (f'{c["hook"]} {c["hook2"]}'.strip().capitalize() + ' #shorts')
+    desc = f'From the full video: {META["title"]}\n▶ Full episode on the channel: youtube.com/@throughtheifglass\n\n#whatif #science #shorts'
+    srows.append([META['episode'], str(c['n']), title, desc, 'shorts, what if, science, science facts, what if shorts, ' + ', '.join(META['tags'][:5]),
+                  fid, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z'])
+if srows:
+    ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Shorts!A:I:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': srows}))
+print(f'queued {len(srows)} shorts')
