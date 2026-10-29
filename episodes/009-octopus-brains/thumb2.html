@@ -2,10 +2,10 @@
 <script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/ep/009.js"></script><script src="../../studio/thumbkit.js"></script><script>
 let th_g=1.3;
 // tentacle tips (Glint units): spread wide and up, each grabbing something
-let th_E=[[-300,-230],[-330,-20],[-260,190],[-100,290],[110,290],[260,190],[320,-20],[290,-240]];
-let th_items=[[0,o9_item('phone',1.3,th_g,-15)],[1,o9_item('cookie',1.2,th_g)],[2,o9_item('pan',1.0,th_g,20)],[5,o9_item('pizza',1.1,th_g)],[6,o9_item('laptop',1.0,th_g,10)],[7,o9_item('mug',1.2,th_g,15)]];
+let th_E=[[-250,-230],[-300,-20],[-250,170],[-110,270],[100,270],[230,170],[260,-20],[215,-235]];
+let th_items=[[0,o9_item('phone',1.1,th_g,-15)],[2,o9_item('pan',.85,th_g,20)],[5,o9_item('pizza',.9,th_g)],[6,o9_item('cookie',1.0,th_g)],[7,o9_item('mug',1.0,th_g,15)]];
 // near-layer kelp
-let th_kelp='';[[40,1.1],[180,.8],[1880,1.2],[1760,.9]].forEach(([x,s],i)=>{let d=`M${x} 1100`;for(let k=1;k<=6;k++)d+=` Q${x+(k%2?60:-60)*s} ${1100-k*110*s+55*s} ${x} ${1100-k*110*s}`;th_kelp+=`<path d="${d}" stroke="${INK}" stroke-width="${46*s}" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#1F7A4A" stroke-width="${30*s}" fill="none" stroke-linecap="round"/>`;});
+let th_kelp='';[[30,1.0],[1900,.8]].forEach(([x,s],i)=>{let d=`M${x} 1100`;for(let k=1;k<=6;k++)d+=` Q${x+(k%2?60:-60)*s} ${1100-k*110*s+55*s} ${x} ${1100-k*110*s}`;th_kelp+=`<path d="${d}" stroke="${INK}" stroke-width="${46*s}" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#1F7A4A" stroke-width="${30*s}" fill="none" stroke-linecap="round"/>`;});
 let th_bub='';{const r=rng(31);for(let i=0;i<30;i++)th_bub+=`<circle cx="${r()*1920}" cy="${r()*1000}" r="${6+r()*18}" fill="none" stroke="#DFF6FF" stroke-width="4" opacity="${.25+r()*.4}"/>`;}
 document.getElementById('s').innerHTML=TK.wrap(`${o9_DEFS}
  ${o9_bgSea(th_g)}
@@ -13,7 +13,7 @@ document.getElementById('s').innerHTML=TK.wrap(`${o9_DEFS}
  ${TK.rays(1380,-80,'#BFEFFF',20,1600,.10)}
  <g opacity=".55">${o9_rocks(th_g,'#3A4A66')}</g>
  ${TK.bokeh(6,['#7CF5FF','#FF9F7A','#FFD43B'],35,850)}
- ${TK.rim(o9_gT({x:1380,y:560,s:1.75,t:th_g,mouth:'grin',brows:'raised',glint:1,look:-.2},th_E,{mini:1.3,items:th_items,w:50}),'#FF7A59',30)}
+ ${TK.rim(o9_gT({x:1370,y:540,s:1.6,t:th_g,mouth:'grin',brows:'raised',glint:1,look:-.2},th_E,{mini:1.3,items:th_items,w:50}),'#FF7A59',30)}
  ${th_kelp}${th_bub}
  ${TK.text(70,330,'I HAVE',{size:120,fill:'#fff',rot:-3})}
  ${TK.text(55,640,'9',{size:330,fill:'#FFD43B',rot:-3,depth:18})}

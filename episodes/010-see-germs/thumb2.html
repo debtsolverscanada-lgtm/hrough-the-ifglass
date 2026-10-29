@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/ep/010.js"></script><script src="../../studio/thumbkit.js"></script><script>
+let th_G='#8CFF5A';
+// Glint: right hand holds the phone out, left hand thrown up in horror
+let th_gl=glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'point',look:.8,sweat:1}).split('M0 40 Q-48 80 -62 150').join('M0 40 Q-70 70 -110 10');
+document.getElementById('s').innerHTML=TK.wrap(`
+ <g opacity=".7">${g10_bath(1.3)}</g>
+ <rect width="1920" height="1080" fill="#04140C" opacity=".55"/>
+ ${TK.glowBlob(1560,470,520,th_G,.55)}${TK.glowBlob(300,200,380,'#7C5CFF',.45)}${TK.glowBlob(900,1000,420,'#FF5E7A',.25)}
+ ${TK.rays(1640,520,'#C8FFB0',18,1600,.11)}
+ ${g10_dots(960,540,960,540,120,7,1.3,{r:6,op:.6})}${g10_sparks(960,540,960,540,30,8,1.3,{size:16})}
+ ${g10_bug(1120,180,.8,2,{col:'#7CD8FF'})}${g10_bug(1840,130,.6,4,{col:g10_C.bug3})}
+ ${TK.rim(g10_phone(1720,560,1.15,{g:1.3,germ:1.4,glow:1.8,rot:10}),th_G,22)}
+ ${TK.rim(`<g transform="translate(1370,520) scale(2.0)">${th_gl}${g10_glintDots(0,0,1,1.3,22,.9,5)}</g>`,th_G,28)}
+ ${g10_bug(1040,880,1.1,1,{col:'#FF5E7A',mood:'mean'})}${g10_bug(1790,840,.85,3,{col:g10_C.bug,mood:'mean',rot:-10})}
+ ${TK.text(70,330,'I CAN SEE',{size:118,fill:'#fff',rot:-3})}
+ ${TK.text(55,640,'GERMS',{size:270,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(390,860,'BACTERIA ON YOU','38 TRILLION',th_G,-3)}
+`,'#071410');
+</script></body></html>

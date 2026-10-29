@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/ep/011.js"></script><script src="../../studio/thumbkit.js"></script><script>
+// frozen water droplets hanging in the air (near layer) and a far city window layer
+let th_drops='';{const r=rng(5);for(let i=0;i<22;i++){const x=r()*1920,y=60+r()*900,s=.8+r()*1.4;if(Math.hypot(x-1360,y-420)<300||Math.hypot(x-560,y-130)<130||(x<1050&&y>180&&y<680))continue;th_drops+=`<g transform="translate(${x},${y}) scale(${s})"><path d="M0 -26 q16 30 0 44 q-16 -14 0 -44Z" fill="#9FD8FF" stroke="${INK}" stroke-width="4"/><circle cx="-4" cy="6" r="4" fill="#fff" opacity=".8"/></g>`;}}
+// the giant swatter, frozen mid-swing, with motion ghosts trailing up-right
+let th_sw=f11_ghost(4,q=>f11_swatter(1705+q*150,300-q*150,.92,225+q*14),.45);
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#14183A"/>
+ ${TK.glowBlob(1380,500,560,'#3DF5C2',.45)}${TK.glowBlob(330,220,380,'#FF9F43',.45)}${TK.glowBlob(900,1000,420,'#7C5CFF',.4)}
+ ${TK.skyline(11,900,'#1E2250',['#FFD43B','#FF9F43','#3DF5C2'],180,520,90,200)}
+ ${TK.rays(1380,500,'#C8FFF0',18,1600,.10)}
+ ${f11_bulb(560,120,.9,1)}
+ <path d="M0 900 H1920 V1080 H0Z" fill="#0E1030"/>
+ ${th_sw}
+ ${TK.rim(`<g transform="translate(1360,540) scale(2.0)">${glint({t:.3,mouth:'grin',brows:'raised',glint:1,pose:'reach',look:.6}).split('M0 40 Q60 30 130 0').join('M0 40 Q100 30 135 -95').split('M0 40 Q-60 30 -130 0').join('M0 40 Q-80 70 -125 -5')}</g>`,'#3DF5C2',28)}
+ ${f11_fly(1010,820,.55,0,{rot:-30,wings:'still'})}
+ ${th_drops}
+ ${TK.text(70,330,'EVERYTHING IS',{size:108,fill:'#fff',rot:-3})}
+ ${TK.text(55,640,'SLOW',{size:320,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(380,860,'FLY VISION','250 FPS','#3DF5C2',-3)}
+`,'#14183A');
+</script></body></html>
