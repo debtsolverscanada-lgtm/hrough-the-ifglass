@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/thumbkit.js"></script><script>
+let th_cars='';[[260,250,1],[700,170,.7],[1180,300,.8],[1650,140,.6],[420,420,.5]].forEach(([x,y,s])=>th_cars+=`<g transform="translate(${x},${y}) scale(${s})"><ellipse rx="90" ry="26" fill="#E8E8FF" stroke="#0A0612" stroke-width="7"/><ellipse cy="-14" rx="40" ry="20" fill="#7CF5FF" stroke="#0A0612" stroke-width="6"/><path d="M-90 0 H-260" stroke="#FF6BD6" stroke-width="10" opacity=".7"/></g>`);
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="url(#future)"/>
+ ${TK.glowBlob(1250,700,520,'#FF6BD6',.55)}${TK.glowBlob(400,800,420,'#7C5CFF',.6)}
+ ${TK.glowBlob(960,820,700,'#FF8A3D',.45)}${TK.skyline(5,820,'#24124A',null,250,700,90,220)}
+ ${TK.skyline(9,960,'#140A2E',['#7CF5FF','#FF6BD6','#FFD43B'],120,420,120,260)}
+ ${TK.bokeh(3,['#FF6BD6','#7CF5FF','#FFD43B'],50,900)}${th_cars}
+ ${TK.rays(1360,620,'#7CF5FF',16,1500,.12)}
+ <g transform="translate(1360,660) scale(1.25)"><rect x="-230" y="-330" width="460" height="760" rx="200" fill="#BFEFFF" opacity=".35" stroke="#0A0612" stroke-width="12"/><rect x="-230" y="-330" width="460" height="760" rx="200" fill="none" stroke="#7CF5FF" stroke-width="10"/></g>
+ ${TK.rim(`<g transform="translate(1380,470) scale(1.95)">${glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'shrug',look:-.3})}</g>`,'#7CF5FF',30)}
+ ${TK.text(70,330,'I WOKE UP IN',{size:108,fill:'#fff',rot:-3})}
+ ${TK.text(60,640,'3026',{size:330,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(380,850,'TIME FROZEN','1,000 YEARS','#7CF5FF',-3)}
+`);
+</script></body></html>

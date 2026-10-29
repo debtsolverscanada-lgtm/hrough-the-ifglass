@@ -8,7 +8,8 @@ usage: python3 pipeline/drive_upload.py episodes/001-frozen-100-years
 import json, os, sys, datetime, requests
 EP = os.path.abspath(sys.argv[1]); name = os.path.basename(EP)
 TEST = '--test' in sys.argv  # upload to a Test folder, never queue
-PARTS_ONLY = '--parts-only' in sys.argv  # only the vertical Part series (main video already queued)
+PARTS_ONLY = '--parts-only' in sys.argv
+THUMB_ONLY = '--thumb-only' in sys.argv  # replace this episode's queued thumbnail in place (same Drive file id)  # only the vertical Part series (main video already queued)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 META = json.load(open(f'{EP}/meta.json')); OUT = f'{ROOT}/build/{name}/out'
 CID, CSEC, RTOK = (os.environ[k].strip().strip('"').strip("'") for k in ('GDRIVE_CLIENT_ID', 'GDRIVE_CLIENT_SECRET', 'GDRIVE_REFRESH_TOKEN'))
@@ -58,6 +59,16 @@ def upload(path, title, parent, mime):
     raise SystemExit('upload ended without file id')
 
 top = folder('Through the Ifglass - Auto'); ready = folder('Test' if TEST else 'Ready', top); folder('Posted', top)
+if THUMB_ONLY:
+    SHEET = find('Ifglass Queue', top, 'application/vnd.google-apps.spreadsheet')
+    rows = ok(requests.get(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Sheet1!A:F', headers=H)).get('values', [])
+    tid = next((r[5] for r in rows[1:] if r and r[0] == META['episode'] and len(r) > 5), None)
+    if not tid: raise SystemExit(f'episode {META["episode"]} has no queued thumbnail')
+    with open(f'{EP}/{META["thumbnail"]}', 'rb') as f:
+        ok(requests.patch(f'https://www.googleapis.com/upload/drive/v3/files/{tid}?uploadType=media', headers={**H, 'Content-Type': 'image/jpeg'}, data=f.read()))
+    # readable by link so the YouTube thumbnail can be swapped from a URL once the video is live
+    ok(requests.post(f'{API}/{tid}/permissions', headers=H, json={'role': 'reader', 'type': 'anyone'}))
+    print(f'thumbnail replaced: {tid}  https://drive.google.com/uc?export=download&id={tid}'); sys.exit(0)
 clips_dir = folder(name, folder('Clips', top))
 vid = th = None
 if not PARTS_ONLY:

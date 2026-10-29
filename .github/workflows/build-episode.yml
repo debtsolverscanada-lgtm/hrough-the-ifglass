@@ -5,6 +5,10 @@ on:
       episode:
         description: 'Episode folder, e.g. episodes/002-woke-up-1000-years'
         required: true
+      thumb_only:
+        description: 'Only replace the queued thumbnail with the committed one (no render)'
+        required: false
+        default: ''
       parts_only:
         description: 'Only render + queue the vertical Part series (episode already posted/queued)'
         required: false
@@ -38,6 +42,7 @@ jobs:
           npm install --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
           pip install pocketsphinx requests
       - name: Build video, thumbnail, clips
+        if: ${{ !github.event.inputs.thumb_only }}
         run: |
           if [ -n "${{ github.event.inputs.test_seconds }}" ]; then EXTRA="--seconds ${{ github.event.inputs.test_seconds }}"; fi
           if [ -n "${{ github.event.inputs.parts_only }}" ]; then EXTRA="$EXTRA --parts-only"; fi
@@ -50,6 +55,7 @@ jobs:
         run: |
           if [ -n "${{ github.event.inputs.test_seconds }}" ]; then EXTRA="--test"; fi
           if [ -n "${{ github.event.inputs.parts_only }}" ]; then EXTRA="$EXTRA --parts-only"; fi
+          if [ -n "${{ github.event.inputs.thumb_only }}" ]; then EXTRA="$EXTRA --thumb-only"; fi
           python3 pipeline/drive_upload.py "${{ steps.ep.outputs.dir }}" $EXTRA
       - uses: actions/upload-artifact@v4
         if: always()

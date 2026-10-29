@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/thumbkit.js"></script><script>
+let th_fog='';for(let i=0;i<14;i++)th_fog+=`<ellipse cx="${(i*173)%1920}" cy="${930+(i%3)*40}" rx="${260+(i%4)*60}" ry="70" fill="#DFF6FF" opacity=".22" filter="url(#tkSoft)"/>`;
+let th_snow='';{const r=rng(12);for(let i=0;i<90;i++)th_snow+=`<circle cx="${r()*1920}" cy="${r()*1080}" r="${2+r()*6}" fill="#fff" opacity="${.3+r()*.6}"/>`;}
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#071A2E"/>
+ ${TK.glowBlob(1380,520,560,'#3FA9FF',.55)}${TK.glowBlob(300,200,380,'#7CF5FF',.25)}
+ <g opacity=".75">${tankRow(820,640,.95,5,0.4,{fog:.9})}</g>
+ ${TK.rays(1380,470,'#BFEFFF',18,1500,.10)}
+ <g transform="translate(1390,600)">${iceBlock(0,0,720,900,1)}</g>
+ ${TK.rim(`<g transform="translate(1390,500) scale(1.85)">${glint({t:.3,mouth:'o',brows:'raised',eyes:'open',tint:'#D6F3FF',frost:.9,pose:'up',shiver:0})}</g>`,'#7CF5FF',28)}
+ <g transform="translate(1390,600)" opacity=".28">${iceBlock(0,0,720,900,1)}</g>
+ ${th_fog}${th_snow}
+ ${TK.text(70,320,'FROZEN FOR',{size:118,fill:'#fff',rot:-3})}
+ ${TK.text(55,600,'100',{size:300,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.text(560,600,'YEARS',{size:150,fill:'#FFD43B',rot:-3,depth:14})}
+ ${TK.badge(330,840,'BODY TEMP','-196°C','#7CF5FF',-3)}
+`,'#071A2E');
+</script></body></html>
