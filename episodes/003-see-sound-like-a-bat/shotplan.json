@@ -1,0 +1,265 @@
+[
+ [
+  "What if you could see",
+  "svHook",
+  {
+   "clicks": [
+    "@Click your tongue",
+    "@And suddenly the whole"
+   ],
+   "label": "SEEING WITH SOUND",
+   "labelAt": 0
+  }
+ ],
+ [
+  "That's how a bat sees",
+  "batHunt",
+  {
+   "label": "THAT'S HOW A BAT SEES"
+  }
+ ],
+ [
+  "Let's start with the bat",
+  "batHunt",
+  {
+   "label": "PITCH BLACK",
+   "sub": "hunting bugs the size of rice"
+  }
+ ],
+ [
+  "How",
+  "batHunt",
+  {
+   "label": "IT SHOUTS",
+   "size": 120
+  }
+ ],
+ [
+  "Bats send out calls",
+  "batHunt",
+  {
+   "label": "ECHOLOCATION",
+   "labelAt": "@This is called echolocation",
+   "sub": "time = distance \u00b7 direction = where \u00b7 shape = what"
+  }
+ ],
+ [
+  "They can detect a wire",
+  "bigWord",
+  {
+   "word": "HAIR-THIN",
+   "size": 150,
+   "card": "cardDark",
+   "col": "#3DF5C2",
+   "sub": "wires detected in total darkness"
+  }
+ ],
+ [
+  "So why can't you hear",
+  "hzScale",
+  {
+   "bats": "@Most bat calls"
+  }
+ ],
+ [
+  "And that's lucky for you",
+  "batLoud",
+  {
+   "clamp": "@Bats even have"
+  }
+ ],
+ [
+  "The night sky isn't quiet",
+  "batHunt",
+  {
+   "label": "THE SKY IS SCREAMING"
+  }
+ ],
+ [
+  "Now let's give you that power",
+  "svRoom",
+  {
+   "clicks": [
+    "@Click",
+    "@The walls are flat",
+    "@The bed is",
+    "@The doorway is"
+   ],
+   "label": "YOUR TURN",
+   "labelAt": 0
+  }
+ ],
+ [
+  "Here's what's wild",
+  "echoTime",
+  {
+   "ms": "@So when you click"
+  }
+ ],
+ [
+  "Now walk outside",
+  "svStreet",
+  {
+   "clicks": [
+    "@Click again",
+    "@The world sounds"
+   ],
+   "label": "OUTSIDE",
+   "labelAt": 0
+  }
+ ],
+ [
+  "Hard things are bright",
+  "hardSoft",
+  {
+   "soft": "@Soft things are dim"
+  }
+ ],
+ [
+  "Glass is even stranger",
+  "glassWall",
+  {}
+ ],
+ [
+  "And there are things your sound",
+  "noColor",
+  {
+   "book": "@You couldn't read"
+  }
+ ],
+ [
+  "And there's a downside",
+  "noiseStorm",
+  {}
+ ],
+ [
+  "You'd start to love quiet",
+  "svStreet",
+  {
+   "scene": "home",
+   "clicks": [
+    "@Libraries",
+    "@Empty streets",
+    "@Snow which"
+   ],
+   "label": "QUIET = CLEAR",
+   "labelAt": 0
+  }
+ ],
+ [
+  "Want to try a tiny bit",
+  "handDemo",
+  {
+   "move": "@And slowly bring",
+   "echo": "@That's an echo"
+  }
+ ],
+ [
+  "But your new sense has superpowers",
+  "darkPowers",
+  {
+   "corner": "@And sound bends"
+  }
+ ],
+ [
+  "Now let's turn it up",
+  "feedingBuzz",
+  {
+   "buzz": "@It's called a feeding"
+  }
+ ],
+ [
+  "And some animals take it",
+  "dolphinScan",
+  {
+   "us": "@That's the same idea"
+  }
+ ],
+ [
+  "Of course the insects",
+  "mothWar",
+  {
+   "dive": "@When they hear",
+   "jam": "@Some tiger moths"
+  }
+ ],
+ [
+  "So right now above your house",
+  "batHunt",
+  {
+   "label": "A SILENT WAR OVERHEAD"
+  }
+ ],
+ [
+  "Here's the part that sounds",
+  "bigWord",
+  {
+   "word": "IT'S REAL",
+   "card": "cardGold",
+   "col": "#FFC83D",
+   "sub": "some humans can do this"
+  }
+ ],
+ [
+  "Daniel Kish lost",
+  "kish",
+  {}
+ ],
+ [
+  "And when scientists scanned",
+  "brainCortex",
+  {
+   "lit": "@The echoes were being",
+   "sight": "@Their brains had turned"
+  }
+ ],
+ [
+  "And here's the best part",
+  "tenWeeks",
+  {
+   "skill": "@It's a skill"
+  }
+ ],
+ [
+  "So imagine walking home",
+  "svStreet",
+  {
+   "scene": "home",
+   "walk": true,
+   "clicks": [
+    "@You click",
+    "@And the street draws",
+    "@The parked cars",
+    "@The cat sitting"
+   ]
+  }
+ ],
+ [
+  "Everyone else is lost",
+  "svStreet",
+  {
+   "scene": "home",
+   "clicks": [
+    "@You're the only one"
+   ],
+   "label": "ONLY YOU CAN SEE",
+   "labelAt": "@You're the only one"
+  }
+ ],
+ [
+  "So let me ask you",
+  "ask",
+  {
+   "q": "@Would you rather"
+  }
+ ],
+ [
+  "Tell me in the comments",
+  "endCard",
+  {
+   "next": "@And next time",
+   "n1": "SEE WIFI?",
+   "n2": "COMING NEXT"
+  }
+ ]
+]

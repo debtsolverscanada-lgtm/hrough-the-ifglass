@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script>
+let rr='';for(let i=0;i<5;i++)rr+=`<circle cx="1380" cy="420" r="${140+i*120}" fill="none" stroke="${P.mint}" stroke-width="${10-i}" opacity="${.9-i*.15}"/>`;
+document.getElementById('s').innerHTML=`<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">${DEFS}
+ <rect width="1920" height="1080" fill="#03040A"/>${rr}
+ ${OBJ.door(.9)}${OBJ.person(.0)}<g transform="translate(240,0)">${OBJ.table(.9)}</g>
+ <g transform="translate(1380,520) scale(1.45)">${glint({t:.3,eyes:'closed',mouth:'o',brows:'raised'})}</g>
+ ${bat(1720,170,1.6,1)}
+ <text x="80" y="330" font-size="150" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="40" stroke-linejoin="round">I SEE</text><text x="80" y="330" font-size="150" font-weight="900" fill="#fff">I SEE</text>
+ <text x="70" y="560" font-size="200" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="48" stroke-linejoin="round">SOUND</text><text x="70" y="560" font-size="200" font-weight="900" fill="${P.mint}">SOUND</text>
+ <rect x="10" y="10" width="1900" height="1060" rx="18" fill="none" stroke="${P.mint}" stroke-width="20"/>${VIG}</svg>`;
+</script></body></html>

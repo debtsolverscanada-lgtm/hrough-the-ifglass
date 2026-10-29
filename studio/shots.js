@@ -589,3 +589,158 @@ hook3026(t,d,p,g){
    ${T(960,190,String(yr),{size:180,fill:k>=1?P.mint:P.white})}`;
 }
 });
+
+// ===================== episode 003 scenes (sound vision) =====================
+const SV={col:P.mint};
+// outline object library: each returns svg drawn in outline style with opacity op
+const OBJ={
+  wallL:op=>`<path d="M140 120 V940" stroke="${P.mint}" stroke-width="14" opacity="${op}"/>`,
+  wallR:op=>`<path d="M1780 120 V940" stroke="${P.mint}" stroke-width="14" opacity="${op}"/>`,
+  floor:op=>`<path d="M140 940 H1780" stroke="${P.mint}" stroke-width="10" opacity="${op}"/>`,
+  table:op=>`<g opacity="${op}" stroke="${P.mint}" stroke-width="10" fill="none"><path d="M1180 700 H1520 M1220 700 V900 M1480 700 V900"/></g>`,
+  bed:op=>`<g opacity="${op*.6}" stroke="${P.mint}" stroke-width="10" fill="none" stroke-dasharray="6 10"><rect x="260" y="720" width="460" height="180" rx="40"/><rect x="280" y="660" width="140" height="70" rx="30"/></g>`,
+  door:op=>`<g opacity="${op}" stroke="${P.mint}" stroke-width="10" fill="none"><path d="M880 940 V420 H1060 V940"/></g>`,
+  person:op=>`<g opacity="${op}" stroke="${P.mint}" stroke-width="10" fill="none"><circle cx="1660" cy="420" r="60"/><path d="M1660 480 V720 M1660 540 L1600 640 M1660 540 L1720 640 M1660 720 L1610 900 M1660 720 L1710 900"/></g>`,
+  car:op=>`<g opacity="${op}" stroke="${P.mint}" stroke-width="10" fill="none"><path d="M1100 860 V790 L1180 720 H1420 L1500 790 V860 Z"/><circle cx="1180" cy="870" r="40"/><circle cx="1420" cy="870" r="40"/></g>`,
+  lamp:op=>`<g opacity="${op}" stroke="${P.mint}" stroke-width="10" fill="none"><path d="M1640 940 V300 Q1640 260 1600 260 H1540"/><path d="M1520 260 h60 l-10 30 h-40z"/></g>`,
+  tree:op=>`<g opacity="${op}" stroke="${P.mint}" stroke-width="10" fill="none"><path d="M400 940 V640"/><circle cx="400" cy="560" r="120" stroke-dasharray="8 10" opacity=".6"/></g>`,
+  cat:op=>`<g opacity="${op}" stroke="${P.mint}" stroke-width="8" fill="none"><path d="M760 600 H1000"/><path d="M820 600 q0 -60 40 -70 l10 -30 l14 26 h20 l14 -26 l10 30 q40 10 40 70"/><path d="M948 600 q40 -10 30 -60"/></g>`,
+  brick:op=>`<g opacity="${op}" stroke="${P.mint}" stroke-width="12" fill="none"><rect x="1220" y="380" width="440" height="520"/>${[0,1,2,3,4].map(i=>`<path d="M1220 ${480+i*90} H1660" stroke-width="5"/>`).join('')}</g>`,
+};
+const SCENES_SV={room:[['wallL',140,540],['wallR',1780,540],['floor',960,940],['bed',490,800],['door',970,680],['table',1350,800],['person',1660,640]],
+  street:[['floor',960,940],['tree',400,700],['car',1300,800],['lamp',1600,600],['brick',1440,640]],
+  home:[['floor',960,940],['car',1300,800],['lamp',1600,600],['cat',880,560],['tree',400,700]]};
+function soundVision(t,g,o){
+  const {scene='room',clicks=[.5],ox=560,oy=560,speed=1100,walk=false,glintOn=true}=o;
+  let objs='', rings='';
+  for(const [k,x,y] of SCENES_SV[scene]){
+    const dist=Math.hypot(x-ox,y-oy); let b=0;
+    for(const c of clicks){const hit=c+dist/speed; if(t>=hit) b=Math.max(b,Math.exp(-(t-hit)/1.6));}
+    objs+=OBJ[k](Math.max(.04,b));
+  }
+  for(const c of clicks){const r=(t-c)*speed; if(r>0&&r<2400) rings+=`<circle cx="${ox}" cy="${oy}" r="${r}" fill="none" stroke="${P.mint}" stroke-width="6" opacity="${Math.max(0,.6-r/2600)}"/>`;}
+  const lastClick=clicks.filter(c=>t>=c).pop(); const clickNow=lastClick!=null&&t-lastClick<.25;
+  return `<rect width="1920" height="1080" fill="#03040A"/>${objs}${rings}
+   ${glintOn?glint({x:ox,y:oy-20,s:.7,t:g,eyes:'closed',mouth:clickNow?'o':'smile',legs:walk?'walk':'stand',tint:'#1A2A30'}).replace(/fill="#FFF6EA"/g,'fill="#1A2A30"'):''}
+   ${clickNow?T(ox+150,oy-200,'CLICK',{size:60,fill:P.mint,sc:pop(t,lastClick,.15)}):''}`;
+}
+function bat(x,y,s,flap,col='#4A3F78'){const w=Math.sin(flap)*30;return `<g transform="translate(${x},${y}) scale(${s})"><path d="M0 0 Q-60 ${-40-w} -130 ${-10-w} Q-110 10 -90 30 Q-60 10 -40 30 Q-20 10 0 25 Q20 10 40 30 Q60 10 90 30 Q110 10 130 ${-10-w} Q60 ${-40-w} 0 0Z" fill="${col}" stroke="${P.mint}" stroke-width="5" stroke-opacity=".7"/><circle cx="-8" cy="-6" r="4" fill="#fff"/><circle cx="8" cy="-6" r="4" fill="#fff"/><path d="M-12 -20 l-6 -18 l12 10 M12 -20 l6 -18 l-12 10" fill="${col}" stroke="#2a2440" stroke-width="3"/></g>`;}
+function bug(x,y,s=1){return `<g transform="translate(${x},${y}) scale(${s})"><ellipse rx="14" ry="8" fill="#C8B07A" stroke="${INK}" stroke-width="3"/><path d="M-4 -6 q-10 -16 -20 -6 M4 -6 q10 -16 20 -6" stroke="#E8E8FF" stroke-width="4" fill="none"/></g>`;}
+function nightSky(g){const r=rng(41);let st='';for(let i=0;i<90;i++)st+=`<circle cx="${r()*1920}" cy="${r()*900}" r="${r()*2+.5}" fill="#fff" opacity="${.2+.5*Math.abs(Math.sin(g+i))}"/>`;
+  return `<rect width="1920" height="1080" fill="#05060F"/>${st}<path d="M0 1080 L0 900 ${[...Array(20)].map((_,i)=>`L${i*100+50} ${860-((i*37)%80)} L${i*100+100} 900`).join(' ')} L1920 1080Z" fill="#0A0716"/>`;}
+Object.assign(SHOTS,{
+svHook(t,d,p,g){return soundVision(t,g,{scene:'room',clicks:p.clicks||[1.6],ox:560,oy:560})+(p.label?T(960,120,p.label,{size:80,fill:P.white,sc:IN(t,p.labelAt??0)}):'');},
+svRoom(t,d,p,g){return soundVision(t,g,{scene:'room',clicks:p.clicks||[.6],ox:560,oy:560})+(p.label?T(960,120,p.label,{size:72,fill:P.mint,sc:IN(t,p.labelAt??.3)}):'');},
+svStreet(t,d,p,g){return soundVision(t,g,{scene:p.scene||'street',clicks:p.clicks||[.6],ox:p.ox??700,oy:600,walk:!!p.walk})+(p.label?T(960,120,p.label,{size:72,fill:P.mint,sc:IN(t,p.labelAt??.3)}):'');},
+batHunt(t,d,p,g){
+  const bx=330+((t*200)%1200), by=420+Math.sin(t*1.5)*120; let rings='';
+  for(let i=0;i<5;i++){const k=((t*1.5+i/5)%1);rings+=`<path d="M${bx+60+k*300} ${by-60-k*120} Q${bx+100+k*360} ${by} ${bx+60+k*300} ${by+60+k*120}" stroke="${P.mint}" stroke-width="6" fill="none" opacity="${1-k}"/>`;}
+  return `${nightSky(g)}${rings}${bat(bx,by,1.9,g*14)}${bug(bx+460,by-20+Math.sin(g*9)*20,1.8)}
+   ${p.label?T(960,150,p.label,{size:p.size||90,fill:P.mint,sc:IN(t,p.labelAt??.3)}):''}${p.sub?T(960,880,p.sub,{size:50,fill:P.white,op:prog(t,(p.subAt??1),(p.subAt??1)+.3)}):''}`;
+},
+batLoud(t,d,p,g){
+  const lv=eout(prog(t,.4,2)); const clamp_=AT(t,p.clamp??7);
+  return `${card('cardWarm',g)}${bat(560,520,2.4,g*14)}
+   ${[0,1,2].map(i=>{const k=((g*1.4+i/3)%1);return `<path d="M${700+k*200} ${420-k*80} q${60} ${100} 0 ${200+k*160}" stroke="${P.red}" stroke-width="10" fill="none" opacity="${1-k}"/>`}).join('')}
+   <rect x="1240" y="${820-480*lv}" width="120" height="${480*lv}" rx="20" fill="${P.red}" stroke="${INK}" stroke-width="8"/><rect x="1240" y="340" width="120" height="480" rx="20" fill="none" stroke="${INK}" stroke-width="8"/>
+   ${T(1300,300,Math.round(130*lv)+' dB',{size:96,fill:P.white})}${T(1580,620,'✈️ JET',{size:70,fill:P.gold,op:prog(t,2,2.4)})}
+   ${clamp_?labelPill(560,880,'EAR MUSCLES CLAMP SHUT',P.ice,44):''}`;
+},
+hzScale(t,d,p,g){
+  const X=f=>200+Math.log10(f/20)/Math.log10(200000/20)*1520;
+  const hb=pop(t,.3), bb=pop(t,p.bats??4.2);
+  return `${card('cardDark',g)}<path d="M200 640 H1720" stroke="#fff5" stroke-width="6"/>
+   ${[20,200,2000,20000,200000].map(f=>`<path d="M${X(f)} 620 V660" stroke="#fff8" stroke-width="5"/>${T(X(f),720,f>=1000?(f/1000)+'k':String(f),{size:36,fill:'#fffa',stroke:6})}`).join('')}
+   <rect x="${X(20)}" y="540" width="${(X(20000)-X(20))*hb}" height="70" rx="20" fill="${P.iceDeep}" stroke="${INK}" stroke-width="6"/>${T((X(20)+X(20000))/2,505,'YOU HEAR',{size:52,fill:P.ice,op:hb})}
+   ${AT(t,p.bats??4.2)?`<rect x="${X(20000)}" y="770" width="${(X(120000)-X(20000))*bb}" height="70" rx="20" fill="${P.mint}" stroke="${INK}" stroke-width="6"/>${T((X(20000)+X(120000))/2,900,'BATS SHOUT',{size:52,fill:P.mint})}`:''}
+   ${T(960,170,'VIBRATIONS PER SECOND',{size:72,fill:P.white,sc:IN(t,.2)})}`;
+},
+echoTime(t,d,p,g){
+  const cyc=((t-.4)%2.2+2.2)%2.2, out=cyc<1, k=out?cyc:2-cyc, x=lerp(560,1440,eout(Math.min(1,k)));
+  return `${card('cardDark',g)}${glint({x:420,y:540,s:.9,t:g,eyes:'closed',mouth:cyc<.2?'o':'smile'})}
+   <rect x="1460" y="200" width="70" height="680" fill="#5D6A82" stroke="${INK}" stroke-width="8"/>
+   <path d="M${x} 420 q40 120 0 240" stroke="${out?P.mint:P.gold}" stroke-width="12" fill="none"/>${T(x,380,out?'→':'←',{size:70,fill:out?P.mint:P.gold})}
+   ${T(960,150,'343 METERS / SECOND',{size:80,fill:P.white,sc:IN(t,.3)})}${AT(t,p.ms??4.2)?T(960,900,'ECHO BACK IN ~0.01 s',{size:72,fill:P.gold,sc:pop(t,p.ms??4.2)}):''}`;
+},
+hardSoft(t,d,p,g){
+  return `${soundVision(t,g,{scene:'street',clicks:[.4,3.4,6.4],ox:860,oy:620,glintOn:true})}
+   ${T(1440,300,'HARD = BRIGHT',{size:64,fill:P.mint,op:prog(t,.8,1.1)})}${AT(t,p.soft??7)?T(400,300,'SOFT = DIM',{size:64,fill:'#5aa',sc:pop(t,p.soft??7)}):''}`;
+},
+glassWall(t,d,p,g){
+  const op=Math.exp(-Math.max(0,t-1)/2);
+  return `${card('cardDark',g)}<rect x="0" y="0" width="960" height="1080" fill="#0B1026"/><rect x="960" y="0" width="960" height="1080" fill="#03040A"/>
+   ${T(480,150,'YOUR EYES',{size:64,fill:P.white})}${T(1440,150,'YOUR SOUND VISION',{size:64,fill:P.mint})}
+   <rect x="300" y="300" width="360" height="460" rx="10" fill="url(#iceG)" opacity=".25" stroke="#fff" stroke-width="8"/>${extra({x:480,y:560,s:.5,t:g,head:'#FFD3A8'})}
+   <rect x="1260" y="300" width="360" height="460" rx="10" fill="${P.mint}" opacity="${.25+op*.6}" stroke="${P.mint}" stroke-width="12"/>
+   ${T(1440,880,'= SOLID WALL',{size:60,fill:P.mint,op:prog(t,1,1.3)})}`;
+},
+noColor(t,d,p,g){
+  const book=AT(t,p.book??12.5);
+  return `${card('cardDark',g)}${!book?`<g transform="translate(560,560) scale(1.4)"><path d="M-160 60 V0 L-100 -60 H100 L160 0 V60Z" fill="${lerp(1,0,prog(t,1,2.5))>0?P.red:'#555'}" opacity="${1-prog(t,1.5,2.5)*.7}" stroke="${P.mint}" stroke-width="8"/></g>
+     <g transform="translate(1360,560) scale(1.4)"><path d="M-160 60 V0 L-100 -60 H100 L160 0 V60Z" fill="${P.iceDeep}" opacity="${1-prog(t,1.5,2.5)*.7}" stroke="${P.mint}" stroke-width="8"/></g>${T(960,180,'NO COLORS',{size:96,fill:P.white,sc:IN(t,.2)})}`
+   :`<g transform="translate(960,540)"><rect x="-320" y="-220" width="640" height="440" rx="16" fill="#03040A" stroke="${P.mint}" stroke-width="10"/><path d="M0 -220 V220" stroke="${P.mint}" stroke-width="6"/>
+     ${[...Array(6)].map((_,i)=>`<path d="M-270 ${-150+i*55} h210 M50 ${-150+i*55} h210" stroke="#fff" stroke-width="8" opacity="${.5*(1-prog(t,(p.book??12.5)+.4,(p.book??12.5)+1.6))}"/>`).join('')}</g>
+     ${T(960,180,'INK MAKES NO ECHO',{size:90,fill:P.mint,sc:pop(t,p.book??12.5)})}`}`;
+},
+noiseStorm(t,d,p,g){
+  const r=rng(Math.floor(g*20)); let n='';for(let i=0;i<160;i++)n+=`<rect x="${r()*1920}" y="${r()*1080}" width="${4+r()*10}" height="3" fill="#fff" opacity="${r()*.6}"/>`;
+  const flash=Math.max(0,Math.sin(g*2.2))>.95;
+  return `${soundVision(t,g,{scene:'street',clicks:[.4,2.4,4.4,6.4,8.4],ox:860,oy:620})}${n}${flash?'<rect width="1920" height="1080" fill="#fff" opacity=".35"/>':''}
+   ${T(960,150,'NOISE = SNOWSTORM',{size:90,fill:P.white,sc:IN(t,.3)})}`;
+},
+handDemo(t,d,p,g){
+  const k=eout(prog(t,p.move??10,(p.move??10)+5)); const hx=lerp(1500,1050,k);
+  let w='';for(let i=0;i<4;i++){const kk=((g*1.6+i/4)%1);w+=`<path d="M${820+kk*(hx-860)} ${470-40} q30 40 0 80" stroke="${P.mint}" stroke-width="${6+k*6}" fill="none" opacity="${(1-kk)*(.4+k*.6)}"/>`;}
+  return `${card('cardMint',g)}${glint({x:600,y:540,s:1,t:g,mouth:'o',brows:'raised'})}${w}
+   <g transform="translate(${hx},500)"><rect x="-50" y="-150" width="100" height="260" rx="44" fill="#FFE3C9" stroke="${INK}" stroke-width="8"/>${[0,1,2,3].map(i=>`<rect x="${-46+i*24}" y="-210" width="22" height="80" rx="11" fill="#FFE3C9" stroke="${INK}" stroke-width="5"/>`).join('')}</g>
+   ${T(1300,170,'TRY IT: "SHHHH"',{size:84,fill:P.white,sc:IN(t,.3)})}${AT(t,p.echo??20.5)?T(1300,940,"THAT'S AN ECHO",{size:76,fill:P.mint,sc:pop(t,p.echo??20.5)}):''}`;
+},
+darkPowers(t,d,p,g){
+  const fog=[...Array(14)].map((_,i)=>`<circle cx="${(i*160+g*40)%2100-100}" cy="${500+Math.sin(i)*200}" r="${160+i%3*40}" fill="#9AA7BD" opacity=".12"/>`).join('');
+  return `${soundVision(t,g,{scene:'street',clicks:[.5,2.5,4.5,6.5,8.5,10.5,12.5],ox:860,oy:620})}${fog}
+   ${T(960,150,'DARKNESS · FOG · SMOKE',{size:76,fill:P.white,sc:IN(t,.3)})}${AT(t,p.corner??10.6)?labelPill(960,950,'IT EVEN BENDS AROUND CORNERS',P.mint,42):''}`;
+},
+feedingBuzz(t,d,p,g){
+  const k=prog(t,.5,d-1); const rate=lerp(3,40,k*k); const bx=lerp(300,1150,eout(k)); let rings='';
+  for(let i=0;i<10;i++){const kk=((g*rate/10+i/10)%1);rings+=`<path d="M${bx+60+kk*200} ${480-50-kk*60} q${30+kk*30} ${80} 0 ${100+kk*120}" stroke="${P.mint}" stroke-width="5" fill="none" opacity="${1-kk}"/>`;}
+  return `${nightSky(g)}${rings}${bat(bx,520,1.8,g*20)}${bug(1500,520+Math.sin(g*12)*30,1.6)}
+   ${T(960,150,Math.round(lerp(10,200,k*k))+' CALLS / SECOND',{size:84,fill:P.mint})}${AT(t,p.buzz??6.6)?T(960,960,'THE FEEDING BUZZ',{size:70,fill:P.gold,sc:pop(t,p.buzz??6.6)}):''}`;
+},
+dolphinScan(t,d,p,g){
+  const scan=AT(t,p.us??8);
+  return `${card(scan?'cardDark':'cardIce',g)}${!scan?`<g transform="translate(760,560)"><path d="M-260 0 Q-80 -140 180 -40 Q240 -20 260 10 Q200 20 160 30 Q-60 120 -260 0Z" fill="#7C9BC0" stroke="${INK}" stroke-width="9"/><path d="M-60 -70 l40 -80 l30 70" fill="#7C9BC0" stroke="${INK}" stroke-width="8"/><circle cx="150" cy="-20" r="9" fill="${INK}"/></g>
+    ${[0,1,2,3].map(i=>{const k=((g*1.5+i/4)%1);return `<path d="M${1040+k*400} ${440-k*80} q50 ${120+k*80} 0 ${240+k*160}" stroke="${P.mint}" stroke-width="8" fill="none" opacity="${1-k}"/>`}).join('')}${T(960,150,'DOLPHIN CLICKS',{size:90,fill:P.white})}`
+   :`<g transform="translate(960,560)"><rect x="-460" y="-330" width="920" height="620" rx="30" fill="#111" stroke="#555" stroke-width="10"/><path d="M0 -280 L-380 240 A460 460 0 0 0 380 240Z" fill="#1d1d1d"/>
+     <path d="M-60 40 q-20 -140 100 -160 q120 0 110 110 q-10 90 -110 110 q-90 10 -100 -60Z" fill="none" stroke="#ccc" stroke-width="8" opacity=".8"/><circle cx="90" cy="-60" r="40" fill="none" stroke="#ccc" stroke-width="7" opacity=".8"/></g>${T(960,150,'ULTRASOUND = ECHOLOCATION',{size:72,fill:P.mint,sc:pop(t,p.us??8)})}`}`;
+},
+mothWar(t,d,p,g){
+  const dive=AT(t,p.dive??9), jam=AT(t,p.jam??13.2);
+  const my=dive&&!jam?lerp(420,900,eout(prog(t,p.dive??9,(p.dive??9)+1.2))):420;
+  let jz='';if(jam)for(let i=0;i<5;i++){const k=((g*3+i/5)%1);jz+=`<path d="M${1300-k*260} ${400} l-20 -30 l-20 30 l-20 -30 l-20 30" stroke="${P.gold}" stroke-width="6" fill="none" opacity="${1-k}"/>`;}
+  const bx=jam?lerp(500,860,eout(prog(t,(p.jam??13.2)+3,(p.jam??13.2)+4))):500;
+  return `${nightSky(g)}${bat(bx,420,1.9,g*14)}
+   <g transform="translate(1320,${my})"><ellipse rx="40" ry="20" fill="${jam?'#E8C27A':'#B8A27A'}" stroke="${INK}" stroke-width="5"/><path d="M-10 -10 q-50 -60 -90 -10 q40 20 90 10 M10 -10 q50 -60 90 -10 q-40 20 -90 10" fill="${jam?'#F2A65A':'#C8B07A'}" stroke="${INK}" stroke-width="5"/></g>${jz}
+   ${T(960,150,jam?'TIGER MOTHS JAM THE SONAR':dive?'MOTHS HEAR IT… AND DROP':'THE SILENT WAR',{size:80,fill:jam?P.gold:P.white})}
+   ${AT(t,(p.jam??13.2)+4.5)?T(960,960,'MISS!',{size:110,fill:P.red,sc:pop(t,(p.jam??13.2)+4.5)}):''}`;
+},
+kish(t,d,p,g){
+  const x=lerp(300,1500,(t*.12)%1);
+  const shades=`<rect x="-60" y="-78" width="120" height="34" rx="14" fill="${INK}"/>`;
+  return `${bgNight(g,t*80)}<g transform="translate(${x},480)"><circle cx="-110" cy="200" r="80" fill="none" stroke="${INK}" stroke-width="12"/><circle cx="130" cy="200" r="80" fill="none" stroke="${INK}" stroke-width="12"/><path d="M-110 200 L0 120 L130 200 M0 120 L-20 40" stroke="#C9302C" stroke-width="12" fill="none"/></g>
+   ${extra({x:x-10,y:300,s:.75,t:g,head:'#E0B48A',hair:shades})}${[0,1].map(i=>{const k=((g*1.2+i/2)%1);return `<circle cx="${x+40}" cy="${330}" r="${40+k*360}" fill="none" stroke="${P.mint}" stroke-width="6" opacity="${(1-k)*.8}"/>`}).join('')}
+   ${labelPill(960,130,'DANIEL KISH · ECHOLOCATOR',P.gold,48)}`;
+},
+brainCortex(t,d,p,g){
+  const lit=prog(t,p.lit??7,(p.lit??7)+1.5);
+  return `${card('cardDark',g)}${brain(960,560,1.6,.6,g)}
+   <ellipse cx="${960+190}" cy="${560-10}" rx="130" ry="110" fill="${P.gold}" opacity="${lit*.55}"/>
+   ${[0,1,2].map(i=>{const k=((g*1.2+i/3)%1);return `<path d="M${400+k*300} 460 q40 100 0 200" stroke="${P.mint}" stroke-width="8" fill="none" opacity="${1-k}"/>`}).join('')}
+   ${lit>0?labelPill(1240,860,'VISUAL CORTEX',P.gold,46):''}${T(960,130,AT(t,p.sight??12)?'SOUND → SIGHT':'BRAIN SCAN',{size:96,fill:P.white,sc:pop(t,AT(t,p.sight??12)?p.sight??12:.2)})}`;
+},
+tenWeeks(t,d,p,g){
+  const k=prog(t,.5,6); let cal='';
+  for(let i=0;i<10;i++){const on=k*10>i;cal+=`<g transform="translate(${360+(i%5)*300},${i<5?420:640})"><rect x="-110" y="-80" width="220" height="160" rx="16" fill="${on?P.mint:'#2A2450'}" stroke="${INK}" stroke-width="7"/><text y="20" text-anchor="middle" font-size="44" font-weight="900" fill="${INK}">WK ${i+1}</text></g>`;}
+  return `${card('cardMint',g)}${cal}${T(960,170,'10 WEEKS OF PRACTICE',{size:90,fill:P.white,sc:IN(t,.2)})}
+   ${AT(t,p.skill??13)?T(960,900,"IT'S A SKILL",{size:100,fill:P.gold,sc:pop(t,p.skill??13)}):''}`;
+}
+});

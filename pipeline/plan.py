@@ -20,6 +20,8 @@ for anchor,shot,p in PLAN:
     i=find(anchor); pos=i+1
     s=W[i]['s']; rp={}
     for k,v in p.items():
+        if isinstance(v,list):
+            rp[k]=[round(W[find(x[1:],start=i)]['s']-s,3) if isinstance(x,str) and x.startswith('@') else x for x in v]; continue
         if isinstance(v,str) and v.startswith('@'):
             j=find(v[1:],start=i); rp[k]=round(W[j]['s']-s,3)
             if shot=='heartShock' and k=='t2': # second Thump
@@ -29,7 +31,7 @@ for anchor,shot,p in PLAN:
 for a,b in zip(shots,shots[1:]): a['e']=b['s']
 shots[0]['s']=0; shots[-1]['e']=round(W[-1]['e']+2.0,3)
 # ---- captions with number formatting ----
-SUBS=[("three thousand and twenty six","3026"),("seven hundred and five","705"),("ninety nine point nine nine percent","99.99%"),
+SUBS=[("twenty thousand","20,000"),("a hundred and thirty decibels","130 decibels"),("three hundred and forty meters","340 meters"),("two hundred calls","200 calls"),("ten weeks","10 weeks"),("three thousand and twenty six","3026"),("seven hundred and five","705"),("ninety nine point nine nine percent","99.99%"),
  ("fourteen seventy two","1472"),("nineteen seventy seven","1977"),("five hundred and fifty","550"),("six hundred trillion dollars","$600 trillion"),
  ("one hundred dollars","$100"),("three percent","3%"),("twenty twenty six","2026"),("forty generations","40 generations"),("fourteen years","14 years"),
  ("four thousand years","4,000 years"),("one thousand years","1,000 years"),("a thousand years","1,000 years"),("a thousand","1,000"),("four light years","4 light years"),
