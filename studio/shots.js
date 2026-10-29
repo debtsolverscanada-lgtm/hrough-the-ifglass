@@ -1169,3 +1169,95 @@ stubToe(t,d,p,g){
    ${hit?T(1180,560,'OW!',{size:120,fill:P.red,sc:pop(t,p.hit??1.5)}):''}${AT(t,p.thank??4.5)?T(960,170,'THANK YOUR NERVES',{size:96,fill:P.mint,sc:pop(t,p.thank??4.5)}):''}`;
 }
 });
+
+// ===================== episode 008 scenes (dog nose) =====================
+const SM=['#FFB86B','#B47CFF','#7CF5A0','#FF8FA3','#7CF5FF'];
+function smellTrail(pts,g,col,op=1,w=14){let d='';pts.forEach(([x,y],i)=>d+=`${i?'L':'M'}${x} ${y+Math.sin(g*2+i)*14}`);return `<path d="${d}" stroke="${col}" stroke-width="${w}" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="${op}" stroke-dasharray="2 26"/><path d="${d}" stroke="${col}" stroke-width="${w*2.4}" fill="none" stroke-linecap="round" opacity="${op*.15}"/>`;}
+function smellCloud(x,y,g,col,lab,op=1,s=1){let c='';for(let i=0;i<4;i++){const k=((g*.3+i/4)%1);c+=`<circle cx="${x+Math.sin(g+i*2)*30*s}" cy="${y-k*80*s}" r="${(40+k*40)*s}" fill="${col}" opacity="${.6*op*(1-k)}"/>`;}return c+(lab?T(x,y+90*s,lab,{size:38*s,fill:col,stroke:7,op}):'');}
+function dog(x,y,s=1,g=0,o={}){const {col='#C9A46A',sniff=0,badge=false}=o;const sn=sniff?Math.sin(g*30)*3:0;
+  return `<g transform="translate(${x},${y}) scale(${s})"><ellipse cx="0" cy="0" rx="120" ry="60" fill="${col}" stroke="${INK}" stroke-width="8"/><path d="M-90 40 v80 M-40 50 v70 M50 50 v70 M95 40 v80" stroke="${INK}" stroke-width="22" stroke-linecap="round"/><path d="M-90 40 v80 M-40 50 v70 M50 50 v70 M95 40 v80" stroke="${col}" stroke-width="12" stroke-linecap="round"/>
+   <path d="M-115 -20 q-60 -40 -50 -90" stroke="${INK}" stroke-width="16" fill="none" stroke-linecap="round"/><g transform="translate(${130+sn},-50)"><ellipse rx="70" ry="56" fill="${col}" stroke="${INK}" stroke-width="8"/><ellipse cx="70" cy="14" rx="44" ry="30" fill="${col}" stroke="${INK}" stroke-width="7"/><circle cx="108" cy="6" r="14" fill="${INK}"/><circle cx="10" cy="-14" r="9" fill="${INK}"/><path d="M-40 -40 q-30 30 -10 80" stroke="${INK}" stroke-width="7" fill="#8A6A4A"/></g>
+   ${badge?`<g transform="translate(-10,-10)"><rect x="-50" y="-30" width="100" height="60" rx="10" fill="#fff" stroke="${INK}" stroke-width="5"/><path d="M-12 0 H12 M0 -12 V12" stroke="${P.red}" stroke-width="9"/></g>`:''}</g>`;}
+Object.assign(SHOTS,{
+dogHook(t,d,p,g){
+  const L=[['WHO WAS HERE',p.who??2.6,SM[0],[[200,900],[500,820],[800,860],[1100,760]]],['1 HOUR AGO',p.when??6.5,SM[1],[[200,700],[600,640],[900,700],[1300,600]]],['PIZZA FOR LUNCH',p.lunch??8.2,SM[2],[[300,500],[700,520],[1000,460]]],['NERVOUS',p.nerv??9.7,SM[3],[[500,350],[900,380],[1200,320]]]];
+  return `${bgRoom(g)}${L.map(([s,a,c,pts])=>AT(t,a)?smellTrail(pts,g,c)+T(pts[pts.length-1][0]+120,pts[pts.length-1][1]-30,s,{size:40,fill:c,stroke:7,sc:pop(t,a)}):'').join('')}
+   ${glint({x:1600,y:560,s:1,t:g,mouth:'o',brows:'raised',blink:BL(g)})}`;
+},
+receptors(t,d,p,g){
+  const dg=AT(t,p.dog??4.2), br=AT(t,p.brain??7.8);
+  return `${card('cardDark',g)}<rect x="380" y="${820-30}" width="140" height="30" rx="8" fill="${P.mint}" stroke="${INK}" stroke-width="6"/>${T(450,900-10,'YOU: ~6 MILLION',{size:40,fill:P.mint,stroke:7})}
+   ${dg?`<rect x="1100" y="${820-560*eout(prog(t,p.dog??4.2,(p.dog??4.2)+1.5))}" width="300" height="${560*eout(prog(t,p.dog??4.2,(p.dog??4.2)+1.5))}" rx="12" fill="${P.gold}" stroke="${INK}" stroke-width="7"/>${T(1250,900-10,'DOG: UP TO 300 MILLION',{size:40,fill:P.gold,stroke:7})}`:''}
+   ${br?dog(640,500,.9,g,{sniff:1}):''}${T(960,150,'SMELL RECEPTORS',{size:96,fill:P.white,sc:IN(t,.2)})}`;
+},
+sugarLake(t,d,p,g){
+  const drop=prog(t,p.drop??4,(p.drop??4)+1.2);const rip=prog(t,(p.drop??4)+1.2,(p.drop??4)+5);
+  return `<rect width="1920" height="1080" fill="url(#sky)"/><path d="M0 560 Q480 520 960 560 T1920 560 V1080 H0Z" fill="#1F5A8A"/><path d="M0 560 Q480 520 960 560 T1920 560" stroke="#7CC4FF" stroke-width="6" fill="none"/>
+   ${rip>0?[0,1,2].map(i=>`<ellipse cx="960" cy="640" rx="${(rip*600+i*80)}" ry="${(rip*120+i*16)}" fill="none" stroke="#fff" stroke-width="5" opacity="${(1-rip)*.8}"/>`).join(''):''}
+   <g transform="translate(960,${lerp(200,620,drop)})" opacity="${drop<1?1:0}"><path d="M-80 0 Q0 60 80 0Z" fill="#C9D3E0" stroke="${INK}" stroke-width="6"/><circle cy="-6" r="22" fill="#fff"/><path d="M80 0 L220 -60" stroke="#C9D3E0" stroke-width="16" stroke-linecap="round"/></g>
+   ${AT(t,p.still??9)?`${dog(1400,860,.9,g,{sniff:1})}${T(1400,700,'STILL SMELLS IT',{size:56,fill:P.gold,sc:pop(t,p.still??9)})}`:''}${T(960,150,'1 TEASPOON OF SUGAR',{size:90,fill:P.white,sc:IN(t,.2)})}`;
+},
+sniffNose(t,d,p,g){
+  const out=AT(t,p.out??6.2), st=AT(t,p.stereo??13.8);const k=(g*3)%1;
+  return `${card('cardWarm',g)}<g transform="translate(960,560)"><ellipse rx="420" ry="300" fill="#2A1F1A" stroke="${INK}" stroke-width="14"/><ellipse cx="-150" cy="0" rx="80" ry="110" fill="#0E0A08"/><ellipse cx="150" cy="0" rx="80" ry="110" fill="#0E0A08"/>
+     <path d="M-210 40 q-70 40 -110 120 M210 40 q70 40 110 120" stroke="#0E0A08" stroke-width="22" fill="none"/>
+     ${[-150,150].map(x=>`<path d="M${x} ${-280+k*200} v60" stroke="${P.mint}" stroke-width="12" stroke-linecap="round" opacity="${1-k}"/>`).join('')}
+     ${out?[-1,1].map(s=>`<path d="M${s*(330+k*200)} ${170+k*120} l${s*50} ${20}" stroke="${P.coral}" stroke-width="12" stroke-linecap="round" opacity="${1-k}"/>`).join(''):''}</g>
+   ${st?`${T(560,960-60,'LEFT',{size:60,fill:SM[1]})}${T(1360,960-60,'RIGHT',{size:60,fill:SM[0]})}`:''}${out&&!st?T(960,960-60,'OUT THE SIDES',{size:60,fill:P.coral}):''}
+   ${T(960,140,st?'SMELL IN STEREO':'SNIFF SNIFF SNIFF',{size:96,fill:P.white,sc:pop(t,st?p.stereo??13.8:.2)})}`;
+},
+homeSmells(t,d,p,g){
+  const items=[[420,420,'TOAST · 20 MIN AGO',SM[0],p.toast??8.3],[960,640,'ROOMMATE · BY THE DOOR',SM[1],p.room??11],[1460,420,'THE CAT. AGAIN.',SM[2],p.cat??15.3]];
+  const fr=AT(t,p.fridge??19);
+  return `${bgRoom(g)}${fr?`<g transform="translate(1500,560)"><rect x="-150" y="-260" width="300" height="520" rx="20" fill="#E8EEF5" stroke="${INK}" stroke-width="9"/><path d="M-150 -60 H150" stroke="${INK}" stroke-width="7"/>${smellCloud(-20,-120,g,'#9BE15D','GOING OFF',1)}</g>`:''}
+   ${(fr?items.slice(0,2):items).map(([x,y,s,c,a])=>AT(t,a)?smellCloud(x,y,g,c,s,pop(t,a)):'').join('')}${glint({x:fr?700:960,y:fr?560:300,s:fr?.9:.6,t:g,mouth:'o',blink:BL(g)})}
+   ${T(960,120,AT(t,p.time??29)?'YOU CAN SMELL TIME':'YOUR HOUSE, IN SMELLS',{size:90,fill:AT(t,p.time??29)?P.gold:P.white,sc:pop(t,AT(t,p.time??29)?p.time??29:.2)})}`;
+},
+smellTime(t,d,p,g){
+  const ppl=[['JUST NOW',1,p.now??10.2],['1 HOUR AGO',.5,p.hour??14],['YESTERDAY',.18,p.yday??17]];
+  return `${card('cardDark',g)}${ppl.map(([s,o,a],i)=>AT(t,a)?`<g opacity="${o}">${smellCloud(480+i*480,520,g,SM[i],'',1,1.6)}${extra({x:480+i*480,y:540,s:.8,t:g,head:'#FFD3A8'})}</g>${T(480+i*480,880,s,{size:50,fill:SM[i],stroke:8})}`:'').join('')}
+   ${T(960,140,'SMELLS FADE = A CLOCK',{size:90,fill:P.white,sc:IN(t,.2)})}`;
+},
+trailSteps(t,d,p,g){
+  const fl=AT(t,p.follow??13);let st='';for(let i=0;i<8;i++){const x=260+i*200,y=760-(i%2)*70;const o=.2+i*.1;st+=`<ellipse cx="${x}" cy="${y}" rx="34" ry="54" fill="${SM[0]}" opacity="${o}" transform="rotate(80 ${x} ${y})"/><circle cx="${x}" cy="${y}" r="${60+i*6}" fill="${SM[0]}" opacity="${o*.25}"/>`;}
+  const dx=fl?lerp(200,1500,prog(t,p.follow??13,(p.follow??13)+6)):200;
+  return `${plGarden(g)}${st}${dog(dx,600,.8,g,{sniff:1})}${fl?T(1500,420,'STRONGER →',{size:60,fill:SM[0]}):''}
+   ${T(960,140,AT(t,p.world??17)?'INVISIBLE FOOTPRINTS':'WHICH WAY DID THEY GO?',{size:84,fill:P.white,sc:pop(t,AT(t,p.world??17)?p.world??17:.2)})}`;
+},
+streetSmells(t,d,p,g){
+  const L=[['GARBAGE','#9BE15D',260,700,p.bins??0],['EXHAUST','#9AA7BD',640,560,p.exh??2],['COFFEE',SM[0],1000,700,p.coffee??4.2],['BAKERY','#FFE14D',1320,560,p.bake??5.4],['PERFUME',SM[3],1660,700,p.perf??6.5],['THE LAMP POST',SM[2],460,380,p.post??8.8]];
+  const sub=AT(t,p.subway??12.7);
+  return `${sub?`<rect width="1920" height="1080" fill="#1A2030"/><rect y="760" width="1920" height="320" fill="#2A3248"/>${[...Array(7)].map((_,i)=>extra({x:180+i*260,y:560,s:.75,t:g+i,head:['#FFD3A8','#C68B59','#F2C9A0','#8D5A3B'][i%4]})+smellCloud(180+i*260,330,g+i,SM[i%5],'',1,.8)).join('')}`
+     :`${bgNight(g)}${L.map(([s,c,x,y,a])=>AT(t,a)?smellCloud(x,y,g,c,s,pop(t,a)):'').join('')}`}
+   ${T(960,130,sub?'THE SUBWAY...':"IT'S A LOT",{size:96,fill:sub?P.coral:P.white,sc:pop(t,sub?p.subway??12.7:.2)})}`;
+},
+stressSniff(t,d,p,g){
+  const pick=AT(t,p.pick??12), fear=AT(t,p.fear??25);
+  const jar=(x,lab,c,on)=>`<g transform="translate(${x},620)"><rect x="-80" y="-120" width="160" height="220" rx="24" fill="#E8EEF5" opacity=".85" stroke="${INK}" stroke-width="7"/><rect x="-90" y="-140" width="180" height="40" rx="10" fill="#9AA7BD" stroke="${INK}" stroke-width="6"/>${T(0,160,lab,{size:36,fill:c,stroke:6})}${on?icon('check',0,-230,.7*pop(t,p.pick??12)):''}</g>`;
+  return fear?`${bgNight(g)}${extra({x:1300,y:600,s:1,t:g,head:'#FFD3A8',mouth:'flat'})}${[0,1,2].map(i=>`<path d="M${1260+i*40} ${440+((g*60+i*30)%60)} q6 14 0 20" fill="#7CC4FF"/>`).join('')}${smellCloud(1300,360,g,SM[3],'FEAR',1,1.2)}${glint({x:600,y:600,s:1,t:g,mouth:'o',brows:'raised',blink:BL(g)})}${T(960,140,"YOU'D SMELL FEAR",{size:96,fill:SM[3],sc:pop(t,p.fear??25)})}`
+   :`${bgLab(g)}${jar(560,'CALM',P.mint,false)}${jar(960,'STRESSED',P.coral,pick)}${jar(1360,'CALM',P.mint,false)}${dog(960,900,.6,g,{sniff:1})}${T(960,140,'DOGS SMELL STRESS',{size:90,fill:P.white,sc:IN(t,.2)})}`;
+},
+diseaseDog(t,d,p,g){
+  return `${card('cardMint',g)}${dog(600,620,1.3,g,{badge:true})}${AT(t,p.sugar??5)?labelPill(1340,420,'LOW BLOOD SUGAR',P.coral,48):''}${AT(t,p.cancer??10)?labelPill(1340,560,'SOME CANCERS (STUDIES)',P.gold,44):''}
+   ${T(960,140,'NOSES THAT DIAGNOSE',{size:90,fill:P.white,sc:IN(t,.2)})}`;
+},
+joyMilne(t,d,p,g){
+  const test=AT(t,p.test??20), later=AT(t,p.later??29);
+  return test?`${bgLab(g)}${[...Array(12)].map((_,i)=>{const x=200+(i%6)*300,y=380+Math.floor(i/6)*300;const ok=i!==9||later;return `<g transform="translate(${x},${y})"><path d="M-80 -70 L-40 -90 H40 L80 -70 L60 -30 L50 -40 V90 H-50 V-40 L-60 -30Z" fill="#FFF6EA" stroke="${INK}" stroke-width="6"/>${AT(t,(p.test??20)+2+i*.25)?icon(ok?'check':'cross',0,10,.45):''}</g>`;}).join('')}
+     ${T(960,140,later?'SHE WAS RIGHT':'THE T-SHIRT TEST',{size:90,fill:later?P.mint:P.white,sc:pop(t,later?p.later??29:.2)})}`
+   :`${card('cardWarm',g)}${extra({x:620,y:600,s:1.1,t:g,head:'#FFD3A8',glasses:true})}${extra({x:1280,y:600,s:1.1,t:g,head:'#F2C9A0'})}${smellCloud(1280,380,g,SM[4],AT(t,p.musky??5)?'MUSKY, OILY':'',1,1.2)}
+     ${T(960,140,'JOY MILNE, SCOTLAND',{size:84,fill:P.white,sc:IN(t,.2)})}${AT(t,p.park??7.5)?T(960,960-60,"SHE SMELLED PARKINSON'S",{size:60,fill:P.gold,sc:pop(t,p.park??7.5)}):''}`;
+},
+chocTrail(t,d,p,g){
+  const k=prog(t,p.crawl??13,(p.crawl??13)+12);let pts=[];for(let i=0;i<=20;i++)pts.push([150+i*82,760+Math.sin(i*.7)*90]);
+  const hx=lerp(150,1700,k), hy=760+Math.sin(((hx-150)/82)*.7)*90;
+  return `${plGarden(g)}<path d="${pts.map(([x,y],i)=>`${i?'L':'M'}${x} ${y}`).join(' ')}" stroke="#6B3A1E" stroke-width="16" fill="none" stroke-dasharray="20 18" stroke-linecap="round"/>
+   ${AT(t,p.crawl??13)?`<g transform="translate(${hx},${hy-60})">${glint({x:0,y:0,s:.55,t:g,mouth:'o',brows:'raised',blink:0,rot:70})}<rect x="-40" y="-170" width="80" height="22" rx="8" fill="${INK}" transform="rotate(70)"/></g>`:''}
+   ${T(960,140,AT(t,p.most??20)?'MOST PEOPLE COULD DO IT':'A CHOCOLATE TRAIL',{size:84,fill:AT(t,p.most??20)?P.mint:'#E8B07A',sc:pop(t,AT(t,p.most??20)?p.most??20:.2)})}`;
+},
+walkHomeNose(t,d,p,g){
+  const L=[['RAIN COMING','#7CC4FF',360,320,p.rain??3.4],['NEIGHBOR\'S DINNER',SM[0],960,420,p.dinner??5.4],['YOUR BEST FRIEND',SM[2],1560,560,p.friend??7.9]];
+  return `${bgNight(g)}<rect y="820" width="1920" height="260" fill="#141C34"/>${L.map(([s,c,x,y,a])=>AT(t,a)?smellCloud(x,y,g,c,s,pop(t,a),1.2):'').join('')}
+   ${glint({x:lerp(300,700,prog(t,0,d)),y:600,s:.9,t:g,legs:'walk',blink:BL(g)})}`;
+}
+});

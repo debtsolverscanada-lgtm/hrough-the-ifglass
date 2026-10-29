@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script>
+document.getElementById('s').innerHTML=`<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">${DEFS}
+ <rect width="1920" height="1080" fill="#1A1208"/>
+ ${smellTrail([[900,950],[1150,860],[1350,900],[1600,780],[1880,820]],0,SM[0],1,20)}${smellTrail([[950,250],[1200,330],[1450,260],[1700,340],[1900,300]],1,SM[1],1,20)}${smellTrail([[1000,620],[1250,560],[1500,640],[1800,560]],2,SM[2],1,20)}
+ ${dog(1520,820,1.4,0,{sniff:1})}
+ <g transform="translate(1150,520) scale(1.2)">${glint({t:.3,mouth:'o',brows:'raised',glint:1})}</g>
+ <text x="70" y="330" font-size="150" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="40" stroke-linejoin="round">I CAN</text><text x="70" y="330" font-size="150" font-weight="900" fill="#fff">I CAN</text>
+ <text x="55" y="560" font-size="190" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="46" stroke-linejoin="round">SMELL</text><text x="55" y="560" font-size="190" font-weight="900" fill="${SM[0]}">SMELL</text>
+ <text x="55" y="780" font-size="190" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="46" stroke-linejoin="round">TIME</text><text x="55" y="780" font-size="190" font-weight="900" fill="${SM[0]}">TIME</text>
+ <rect x="10" y="10" width="1900" height="1060" rx="18" fill="none" stroke="${SM[0]}" stroke-width="20"/>${VIG}</svg>`;
+</script></body></html>

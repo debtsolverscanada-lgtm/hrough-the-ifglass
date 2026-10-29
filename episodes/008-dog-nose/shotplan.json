@@ -1,0 +1,21 @@
+[
+ ["What if you could smell like a dog","dogHook",{"who":"@you instantly know","when":"@How long ago","lunch":"@What they had","nerv":"@Whether they were"}],
+ ["A dog does this every single day","talk",{"bg":"night","text":"YOUR NOSE","text2":"TELLS A STORY","pose":"point","mouth":"smile","col":"#FFB86B"}],
+ ["First how good is a dog's nose","receptors",{"dog":"@A dog can have","brain":"@And the part of its brain"}],
+ ["Some dogs can detect","sugarLake",{"drop":"@Imagine one teaspoon","still":"@And the dog can still"}],
+ ["Dogs even breathe differently","sniffNose",{"out":"@And when they breathe out","stereo":"@Which means a dog"}],
+ ["Now let's give you that nose","homeSmells",{"toast":"@Someone made toast","room":"@Your roommate","cat":"@The cat walked","fridge":"@You open the fridge","time":"@You can smell time"}],
+ ["Smells fade","smellTime",{"now":"@The person who just","hour":"@The person who left","yday":"@The person who visited"}],
+ ["Dogs use this to follow trails","trailSteps",{"follow":"@So the dog follows","world":"@With your new nose"}],
+ ["Now step outside","streetSmells",{"bins":"@The garbage","exh":"@The exhaust","coffee":"@The coffee","bake":"@The bakery","perf":"@Someone's perfume","post":"@Every dog that","subway":"@The subway"}],
+ ["Luckily your brain has a trick","bigWord",{"word":"NOSE BLIND","card":"cardDark","col":"#7CF5A0","size":150,"sub":"why you can't smell your own home"}],
+ ["But it's not all garbage","stressSniff",{"pick":"@The dogs picked","fear":"@So with your new nose"}],
+ ["And it gets even more serious","diseaseDog",{"sugar":"@Some dogs can warn","cancer":"@In studies"}],
+ ["And here's the craziest part","joyMilne",{"musky":"@A musky","park":"@Years later","test":"@So they tested","later":"@That person was"}],
+ ["A human nose smelling","bigWord",{"word":"A HUMAN NOSE","card":"cardWarm","col":"#FFC83D","size":130,"sub":"smelled it before doctors could"}],
+ ["And here's the twist","chocTrail",{"crawl":"@Then they blindfolded","most":"@Most of them"}],
+ ["You've had a pretty good nose","talk",{"bg":"mint","text":"STOP LOOKING","text2":"START SMELLING","pose":"flex","mouth":"grin","col":"#FFB86B"}],
+ ["So imagine walking home","walkHomeNose",{"rain":"@You can smell the rain","dinner":"@You can tell which","friend":"@You know your best"}],
+ ["So let me ask you","ask",{"q":"@Would you want"}],
+ ["Tell me in the comments","endCard",{"next":"@And next time","n1":"9 BRAINS","n2":"LIKE AN OCTOPUS?"}]
+]
