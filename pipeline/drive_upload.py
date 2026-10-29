@@ -23,16 +23,24 @@ H = {'Authorization': f'Bearer {tok["access_token"]}'}
 API = 'https://www.googleapis.com/drive/v3/files'
 FOLDER = 'application/vnd.google-apps.folder'
 
+def ok(r):
+    """Return JSON or stop with Google's actual error message."""
+    if r.status_code >= 400:
+        try: err = r.json().get('error', {}); msg = err.get('message', r.text)
+        except Exception: msg = r.text
+        raise SystemExit(f'Google API error {r.status_code}: {msg[:500]}')
+    return r.json()
+
 def find(title, parent=None, mime=None):
     q = [f"name = '{title}'", 'trashed = false'] + ([f"'{parent}' in parents"] if parent else []) + ([f"mimeType = '{mime}'"] if mime else [])
-    r = requests.get(API, headers=H, params={'q': ' and '.join(q), 'fields': 'files(id)'}).json()
+    r = ok(requests.get(API, headers=H, params={'q': ' and '.join(q), 'fields': 'files(id)'}))
     return r['files'][0]['id'] if r.get('files') else None
 
 def folder(title, parent=None):
     fid = find(title, parent, FOLDER)
     if fid: return fid
     body = {'name': title, 'mimeType': FOLDER, **({'parents': [parent]} if parent else {})}
-    return requests.post(API, headers=H, json=body).json()['id']
+    return ok(requests.post(API, headers=H, json=body))['id']
 
 def upload(path, title, parent, mime):
     meta = {'name': title, 'parents': [parent]}
@@ -62,7 +70,7 @@ if TEST:
 SHEET = find('Ifglass Queue', top, 'application/vnd.google-apps.spreadsheet')
 cols = ['episode', 'title', 'description', 'tags', 'video_file_id', 'thumbnail_file_id', 'status', 'youtube_id', 'added_at']
 if not SHEET:
-    SHEET = requests.post(API, headers=H, json={'name': 'Ifglass Queue', 'mimeType': 'application/vnd.google-apps.spreadsheet', 'parents': [top]}).json()['id']
+    SHEET = ok(requests.post(API, headers=H, json={'name': 'Ifglass Queue', 'mimeType': 'application/vnd.google-apps.spreadsheet', 'parents': [top]}))['id']
     requests.put(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/A1:I1?valueInputOption=RAW', headers=H, json={'values': [cols]}).raise_for_status()
 row = [META['episode'], META['title'], META['description'], ', '.join(META['tags']), vid, th, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z']
 requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/A:I:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': [row]}).raise_for_status()
