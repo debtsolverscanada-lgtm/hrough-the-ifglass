@@ -89,7 +89,7 @@ for c in clips:
     fid = clip_ids.get(f'clip-{c["n"]:02d}.mp4')
     if not fid: continue
     title = c.get('title') or (f'{c["hook"]} {c["hook2"]}'.strip().capitalize() + ' #shorts')
-    desc = f'From the full video: {META["title"]}\n▶ Full episode on the channel: youtube.com/@throughtheifglass\n\n#whatif #science #shorts'
+    desc = f'From the full video: {META["title"]}\n▶ Full episode out this week on the channel: youtube.com/@throughtheifglass\n\n#whatif #science #shorts'
     srows.append([META['episode'], str(c['n']), title, desc, 'shorts, what if, science, science facts, what if shorts, ' + ', '.join(META['tags'][:5]),
                   fid, 'ready', '', datetime.datetime.utcnow().isoformat(timespec='seconds') + 'Z'])
 if srows:
