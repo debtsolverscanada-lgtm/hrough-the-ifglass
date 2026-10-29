@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/thumbkit.js"></script><script>
+// warm evening park: far trees, near grass, glowing scent trails all flowing into Glint's nose
+let th_trees='';{const r=rng(4);for(let i=0;i<16;i++){const x=i*130+r()*60,h=260+r()*260,w=120+r()*90;th_trees+=`<rect x="${x-10}" y="${760-h*.4}" width="20" height="${h*.4+60}" fill="#2A1430"/><ellipse cx="${x}" cy="${760-h*.55}" rx="${w}" ry="${h*.42}" fill="#2A1430"/>`;}}
+let th_near='';{const r=rng(9);for(let i=0;i<70;i++){const x=r()*1920,h=30+r()*60;th_near+=`<path d="M${x} 1080 q${8} ${-h*.6} ${-6+r()*20} ${-h}" stroke="#1A0E10" stroke-width="10" fill="none" stroke-linecap="round"/>`;}}
+// glowing scent trails drifting through the park behind Glint
+let th_trails=smellTrail([[700,90],[900,200],[1060,130],[1200,230],[1400,150],[1600,240],[1900,170]],0,SM[3],1,22)
+ +smellTrail([[1520,420],[1640,330],[1760,400],[1900,320]],1,SM[1],1,22)
+ +smellTrail([[1560,640],[1700,560],[1820,620],[1900,560]],2,SM[4],1,20)
+ +smellTrail([[60,990],[400,930],[700,980],[900,930]],3,SM[0],1,22);
+let th_clouds=smellCloud(1720,300,1,SM[1],'',1,.9)+smellCloud(1760,600,2.3,SM[4],'',1,.8)+smellCloud(1060,150,0.7,SM[3],'',.9,.7);
+// Glint with his left hand reaching down to pat the dog
+let th_g=glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'shrug',look:-.4}).split('M0 40 Q-70 70 -110 10').join('M0 40 Q-80 60 -105 118');
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#2A0F2E"/>
+ ${TK.glowBlob(1320,470,560,'#FF9F43',.75)}${TK.glowBlob(300,250,420,'#7C5CFF',.45)}${TK.glowBlob(1700,900,380,'#B47CFF',.35)}
+ ${TK.rays(1320,470,'#FFD9A0',18,1600,.12)}
+ <g opacity=".85">${th_trees}</g>
+ <path d="M0 860 Q500 810 960 850 T1920 830 V1080 H0Z" fill="#1F1020"/>
+ ${TK.bokeh(8,['#FFB86B','#B47CFF','#FFD43B'],45,800)}
+ ${th_clouds}
+ ${th_trails}
+ ${TK.rim(`<g transform="translate(1400,520) scale(2.0)">${th_g}</g>`,'#FFB86B',30)}
+ ${TK.rim(`<g transform="translate(990,880) scale(1.55)">${dog(0,0,1,0,{sniff:0})}</g>`,'#FFB86B',16)}
+ ${smellCloud(1390,820,1.4,SM[0],'',1,.6)}
+ ${th_near}
+ ${TK.text(70,330,'I CAN SMELL',{size:112,fill:'#fff',rot:-3})}
+ ${TK.text(60,640,'TIME',{size:320,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(380,860,'SMELL RECEPTORS','300 MILLION','#FFB86B',-3)}
+`,'#2A0F2E');
+</script></body></html>
