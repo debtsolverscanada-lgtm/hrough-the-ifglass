@@ -243,8 +243,8 @@ twHey(t,d,p,g){
   const words=['HELLO','PIZZA?','LOL','THANKS','RAIN','WOW','OKAY','LATER'], foods=['straw','pancake','sweet','choc','mint','berry','cake','coffee'];
   let sw='';
   const song=AT(t,so), news=AT(t,nw);
-  if(!song) words.forEach((w,i)=>{const a=i/8*6.283+g*.35, rx=700, ry=290; const x=960+Math.cos(a)*rx, y=500+Math.sin(a)*ry;
-     sw+=`${w12_chip(x,y-60,w,[P.coral,'#3A7BD5','#1FAF8A','#B47CFF'][i%4],pop(t,ev+i*.1),38)}${w12_food(foods[i],x,y+40,.4*pop(t,ev+.2+i*.1),g+i)}`;});
+  if(!song) words.forEach((w,i)=>{const a=i/8*6.283+g*.35, rx=680, ry=230; const x=960+Math.cos(a)*rx, y=560+Math.sin(a)*ry;
+     sw+=`${w12_chip(x,y-70,w,[P.coral,'#3A7BD5','#1FAF8A','#B47CFF'][i%4],pop(t,ev+i*.1),48)}${w12_food(foods[i],x,y+45,.5*pop(t,ev+.2+i*.1),g+i)}`;});
   const tv=`<g transform="translate(1360,500)"><rect x="-230" y="-170" width="460" height="320" rx="20" fill="#2A3248" stroke="${INK}" stroke-width="9"/><rect x="-200" y="-140" width="400" height="250" rx="10" fill="#1E2A48"/><text y="-50" text-anchor="middle" font-size="64" font-weight="900" fill="${P.red}">NEWS</text><rect x="-160" y="0" width="320" height="18" rx="9" fill="#5D6A82"/><rect x="-160" y="40" width="240" height="18" rx="9" fill="#5D6A82"/></g>`;
   return `${card(song?'cardGold':'cardDark',g)}${sw}
    ${song&&!news?`${[0,1,2,3].map(i=>w12_note(420+i*130,440+Math.sin(g*3+i)*40,.9,[P.gold,P.coral,P.mint,'#B47CFF'][i])).join('')}${w12_food('cake',1350,520,1.3*pop(t,so),g)}${w12_food('icecream',1060,560,.8*pop(t,so+.3),g)}${T(1200,800,'AMAZING',{size:90,fill:P.gold,sc:pop(t,so+.4)})}`:''}
@@ -381,8 +381,8 @@ twWorld(t,d,p,g){
     ppl+=`${extra({x,y:y-40,s:.32,t:g+i,head:['#FFD3A8','#8D5A3B','#F2C9A0','#C68B59'][i%4],mouth:'smile'})}<g transform="translate(${x+60},${y-120})"><rect x="-50" y="-30" width="100" height="60" rx="12" fill="#FFF6EA" stroke="${INK}" stroke-width="4"/>${w12_blob(-22,0,16,g,'#7CF5FF')}${w12_star(22,0,18,g,P.gold)}</g>`;}
   return `${card('cardIce',g)}<circle cx="960" cy="530" r="210" fill="#2A6FB0" stroke="${INK}" stroke-width="10"/>
    <path d="M820 420 q60 -60 120 -20 q40 40 -20 80 q-60 20 -40 80 q-40 20 -60 -40Z M1020 560 q60 -40 110 10 q10 60 -50 90 q-60 -20 -60 -100Z M1000 360 q40 -20 70 10 q-20 30 -70 -10Z" fill="#3DBE5C" stroke="${INK}" stroke-width="6"/>
-   ${ppl}${nob?`<g transform="translate(960,530) scale(${pop(t,nb)})">${icon('cross',0,0,1.6)}</g>${T(960,880-40,'NOBODY TAUGHT YOU',{size:72,fill:P.coral,sc:pop(t,nb+.2)})}`:''}
-   ${T(960,150,'SAME ANSWER, EVERYWHERE',{size:84,fill:P.white,sc:IN(t,.2)})}`;
+   ${ppl}${nob?`<g transform="translate(960,530) scale(${pop(t,nb)})">${icon('cross',0,0,1.6)}</g>`:''}
+   ${T(960,150,nob?'NOBODY TAUGHT YOU':'SAME ANSWER, EVERYWHERE',{size:84,fill:nob?P.coral:P.white,sc:pop(t,nob?nb:.2)})}`;
 },
 twSweetSound(t,d,p,g){
   const sw=p.sweet??3.3, sm=p.smooth??4.6, ld=p.loud??6.4, mx=p.mixed??9.1;

@@ -3,9 +3,9 @@ const h15_BR='#8B5A3C', h15_BRD='#5E3A26', h15_MUZ='#D9A27A';
 const h15_MON=['NOV','DEC','JAN','FEB','MAR','APR'];
 function h15_zzz(x,y,g,s=1,col=P.ice){let z='';for(let i=0;i<3;i++){const k=((g*.45+i/3)%1);z+=T(x+k*70*s,y-k*130*s,'Z',{size:(34+i*12)*s,fill:col,stroke:7*s,op:Math.sin(k*Math.PI)});}return z;}
 function h15_snow(g,n=70,op=1,x0=0,y0=0,w=1920,h=1080){const r=rng(17);let s='';for(let i=0;i<n;i++){const x=x0+r()*w,sp=40+r()*70,y=y0+((r()*h+g*sp)%h),rr=3+r()*6;s+=`<circle cx="${x+Math.sin(g+i)*14}" cy="${y}" r="${rr}" fill="#fff" opacity="${op*(.5+r()*.5)}"/>`;}return s;}
-function h15_bgSnow(g,flakes=1){
+function h15_bgSnow(g,flakes=1,moon=1){
   return `<rect width="1920" height="1080" fill="url(#sky)"/>${bgCard('cardDark',g).replace('<rect width="1920" height="1080" fill="url(#cardDark)"/>','')}
-   <circle cx="1560" cy="200" r="70" fill="#fff4dc" opacity=".9"/><circle cx="1560" cy="200" r="200" fill="url(#moon)" opacity=".5"/>
+   ${moon?`<circle cx="1560" cy="200" r="70" fill="#fff4dc" opacity=".9"/><circle cx="1560" cy="200" r="200" fill="url(#moon)" opacity=".5"/>`:''}
    <path d="M-50 1080 V760 Q300 680 700 730 Q1200 660 1970 740 V1080Z" fill="#DDEBFA" stroke="${INK}" stroke-width="8"/>
    <path d="M-50 1080 V860 Q500 800 1000 850 Q1500 800 1970 860 V1080Z" fill="#F2F8FF"/>${flakes?h15_snow(g,70,flakes):''}`;
 }
@@ -186,11 +186,11 @@ Object.assign(SHOTS,{
 hibHook(t,d,p,g){
   const cl=p.close??4.7, wk=p.wake??6.2, five=p.five??12, asleep=AT(t,cl)&&!AT(t,wk);
   const wake=AT(t,wk);
-  const inner=`<g transform="translate(-40,-20)">${h15_bed(0,0,.62,g,{eyes:asleep?'closed':'open',mouth:wake?'grin':(asleep?'smile':'smile'),lid:AT(t,cl-1)&&!asleep&&!wake?.5:0,blanket:P.violet})}</g>`;
+  const inner=`<g transform="translate(-10,-30)">${h15_bed(0,0,.85,g,{eyes:asleep?'closed':'open',mouth:wake?'grin':(asleep?'smile':'smile'),lid:AT(t,cl-1)&&!asleep&&!wake?.5:0,blanket:P.violet})}</g>`;
   const nd=[['food',p.food??8.2],['water',p.water??9.3],['wc',p.wc??10.3]];
-  return `${h15_bgSnow(g)}${h15_den(960,880,1,{inner})}${asleep?h15_zzz(1040,520,g,1.2):''}
+  return `${h15_bgSnow(g,1,0)}${h15_den(960,880,1,{inner})}${asleep?h15_zzz(1000,480,g,1.2):''}
    ${h15_flipCal(300,360,1.1,t,cl,wk)}
-   ${nd.map(([k,a],i)=>AT(t,a)?h15_need(k,1660,250+i*215,.95*pop(t,a),prog(t,a+.3,a+.7)):'').join('')}
+   ${nd.map(([k,a],i)=>AT(t,a)?h15_need(k,1680,300+i*200,.95*pop(t,a),prog(t,a+.3,a+.7)):'').join('')}
    ${AT(t,five)?T(960,170,'5 MONTHS. GONE.',{size:120,fill:P.gold,sc:pop(t,five)}):T(960,170,'HIBERNATE?',{size:140,fill:P.ice,sc:IN(t,.1)})}`;
 },
 hibTease(t,d,p,g){
@@ -221,9 +221,9 @@ hibVitals(t,d,p,g){
   const fk=lerp(1,.25,prog(t,(p.fat??12.3)+.4,d));
   return `${card('cardIce',g)}
    ${heart(470,330,.75,beat)}${h15_dial(470,720,240,bpm/60)}${T(470,640,Math.round(bpm),{size:110,fill:bpm<12?P.iceDeep:P.white})}${T(470,830,'BEATS / MIN',{size:44,fill:P.ice,stroke:8})}
-   ${br?`<g transform="translate(0,0) scale(1)" opacity="${prog(t,p.breath??6.1,(p.breath??6.1)+.3)}"><g transform="translate(1040,250)"><ellipse rx="${70+breath*14}" ry="${90+breath*16}" fill="#FF9EC0" stroke="${INK}" stroke-width="7" transform="translate(-50,0)"/><ellipse rx="${70+breath*14}" ry="${90+breath*16}" fill="#FF9EC0" stroke="${INK}" stroke-width="7" transform="translate(50,0)"/><path d="M0 -110 V-40" stroke="${INK}" stroke-width="14" stroke-linecap="round"/></g>${T(1400,270,'A FEW BREATHS',{size:56,fill:P.white,anchor:'start',stroke:9})}${T(1400,330,'PER MINUTE',{size:44,fill:P.ice,anchor:'start',stroke:8})}</g>`:''}
-   ${tp?`<g transform="translate(1040,600) scale(.5)">${thermometer(0,0,lerp(.75,.55,prog(t,p.temp??9.5,(p.temp??9.5)+2)))}</g>${T(1150,540,'BODY TEMP',{size:56,fill:P.white,anchor:'start',stroke:9,sc:pop(t,p.temp??9.5)})}${T(1150,600,'DOWN A FEW DEGREES',{size:44,fill:P.iceDeep,anchor:'start',stroke:8})}`:''}
-   ${ft?h15_bar(1350,790,640,fk,'FAT RESERVES',P.gold,48):''}`;
+   ${br?`<g transform="translate(0,0) scale(1)" opacity="${prog(t,p.breath??6.1,(p.breath??6.1)+.3)}"><g transform="translate(1000,250)"><ellipse rx="${70+breath*14}" ry="${90+breath*16}" fill="#FF9EC0" stroke="${INK}" stroke-width="7" transform="translate(-50,0)"/><ellipse rx="${70+breath*14}" ry="${90+breath*16}" fill="#FF9EC0" stroke="${INK}" stroke-width="7" transform="translate(50,0)"/><path d="M0 -110 V-40" stroke="${INK}" stroke-width="14" stroke-linecap="round"/></g>${T(1140,250,'A FEW BREATHS',{size:56,fill:P.white,anchor:'start',stroke:9})}${T(1140,310,'PER MINUTE',{size:44,fill:P.ice,anchor:'start',stroke:8})}</g>`:''}
+   ${tp?`<g transform="translate(1000,700) scale(.5)">${thermometer(0,0,lerp(.75,.55,prog(t,p.temp??9.5,(p.temp??9.5)+2)))}</g>${T(1140,520,'BODY TEMP',{size:56,fill:P.white,anchor:'start',stroke:9,sc:pop(t,p.temp??9.5)})}${T(1140,580,'DOWN A FEW DEGREES',{size:44,fill:P.iceDeep,anchor:'start',stroke:8})}`:''}
+   ${ft?h15_bar(1440,780,560,fk,'FAT RESERVES',P.gold,48):''}`;
 },
 hibBedRot(t,d,p,g){
   const mus=p.mus??4.4, bone=p.bone??6, walk=AT(t,p.walk??8);
@@ -299,18 +299,18 @@ hibWinterPass(t,d,p,g){
   const snowD=k<.7?lerp(.15,.55,k/.7):lerp(.55,.05,(k-.7)/.3);
   const win=ps<=t?`<rect width="560" height="420" fill="${day?'#5A8AC0':'#0E1838'}"/><circle cx="${(g*700)%700-70}" cy="${80+Math.sin(g*3)*20}" r="34" fill="${day?P.gold:'#fff4dc'}"/>${h15_snow(g*3,40,1,0,0,560,420)}<path d="M0 420 V${420-420*snowD} Q280 ${420-420*snowD-30} 560 ${420-420*snowD} V420Z" fill="#F2F8FF"/>`:h15_winSnow(g,560,420,.2);
   const hud=[[`HEART SLOWS`,p.heart??0,P.red],['BREATHING SLOWS',p.breath??1.4,P.ice],['BODY COOLS',p.cool??3.1,P.iceDeep]];
-  return `${h15_room(g,win,0,{cal:AT(t,ps)?h15_flipCal(260,560,.85,t,ps,d-.3):''})}
+  return `${h15_room(g,win,0,{cal:AT(t,ps)?h15_flipCal(250,360,.8,t,ps,d-.3):''})}
    ${h15_bed(700,760,1.05,g,{eyes:'closed'})}${h15_zzz(640,470,g,1.1)}
    ${!AT(t,ps)?hud.map(([l,a,c],i)=>AT(t,a)?labelPill(380,200+i*120,l,c,46):'').join(''):''}
-   ${AT(t,ps)?T(700,170,'WINTER PASSES...',{size:100,fill:P.ice,sc:pop(t,ps)}):''}`;
+   ${AT(t,ps)?T(760,170,'WINTER PASSES...',{size:100,fill:P.ice,sc:pop(t,ps)}):''}`;
 },
 hibWake(t,d,p,g){
   const lt=AT(t,p.light??1.5), ok=AT(t,p.ok??2.9);
   return `${h15_room(g,h15_winSpring(g),0,{cal:h15_cal(260,300,.95,'APR',{col:'#4AA845'})})}
-   ${glint({x:720,y:480,s:1.05,t:g,pose:'up',mouth:'grin',brows:'raised',blink:BL(g),glint:ok?1:0})}
-   ${lt?`<g transform="translate(1040,${560}) scale(${pop(t,p.light??1.5)})">${labelPill(0,0,'LIGHTER',P.gold,56)}<path d="M0 60 V150 M-30 120 L0 156 L30 120" stroke="${P.gold}" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`:''}
-   ${ok?`${icon('check',1060,330,pop(t,p.ok??2.9))}${T(1060,460,'FEELS OKAY',{size:60,fill:P.mint,stroke:10})}`:''}
-   ${T(720,160,'APRIL!',{size:130,fill:P.mint,sc:IN(t,.1)})}`;
+   ${glint({x:580,y:480,s:1.05,t:g,pose:'up',mouth:'grin',brows:'raised',blink:BL(g),glint:ok?1:0})}
+   ${lt?`<g transform="translate(940,${600}) scale(${pop(t,p.light??1.5)})">${labelPill(0,0,'LIGHTER',P.gold,56)}<path d="M0 60 V150 M-30 120 L0 156 L30 120" stroke="${P.gold}" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`:''}
+   ${ok?`${icon('check',940,330,pop(t,p.ok??2.9))}${T(940,460,'FEELS OKAY',{size:60,fill:P.mint,stroke:10})}`:''}
+   ${T(640,160,'APRIL!',{size:130,fill:P.mint,sc:IN(t,.1)})}`;
 },
 hibMissed(t,d,p,g){
   const msg=p.msg??1.9, nt=p.notif??4, ch=AT(t,p.chap??14.8);
@@ -344,7 +344,7 @@ hibLemur(t,d,p,g){
 hibCooling(t,d,p,g){
   const ox=AT(t,p.oxy??9.2), br=AT(t,p.brain??11.9);
   const lv=lerp(.75,.5,prog(t,1,4));
-  return `${bgRoom(g)}
+  return `${card('cardIce',g)}<rect y="820" width="1920" height="260" fill="#0A1A2A"/>
    <rect x="260" y="620" width="820" height="60" rx="18" fill="#E8EEF8" stroke="${INK}" stroke-width="8"/><path d="M290 680 V820 M1050 680 V820" stroke="#9AA7BD" stroke-width="22"/>
    <g transform="translate(420,600) rotate(-90) scale(.62)">${extra({t:g,head:'#F2C9A0',mouth:'flat'})}</g>
    <path d="M500 520 Q760 500 1060 540 V630 H500Z" fill="${P.iceDeep}" stroke="${INK}" stroke-width="8"/>${[0,1,2,3].map(i=>`<path d="M${580+i*120} ${560+Math.sin(g*2+i)*6} l16 -14 l16 14" stroke="#fff" stroke-width="5" fill="none"/>`).join('')}
@@ -390,7 +390,7 @@ hibPods(t,d,p,g){
    ${h15_pod(560,560,1,g,sleeper(extra({t:0,head:'#C68B59',mouth:'flat'})))}
    ${h15_pod(960,540,1.1,g,sleeper(glint({t:g,eyes:'closed',mouth:'smile'})))}
    ${h15_pod(1360,560,1,g,sleeper(extra({t:0,head:'#FFD3A8',mouth:'flat'})))}
-   ${h15_zzz(1060,240,g,1)}
+   ${!nd?h15_zzz(1060,240,g,1):''}
    ${!nd?T(960,170,rs?'NASA + ESA STUDIES':'SLEEP THE WHOLE WAY?',{size:96,fill:rs?P.gold:P.ice,sc:pop(t,rs?p.res??3:.2)}):''}
    ${nd?[['LESS FOOD',P.gold,0],['LESS OXYGEN',P.mint,1.6],['SMALLER SPACE',P.violet,3.6]].map(([l,c,o],i)=>AT(t,(p.need??8.2)+o)?labelPill(480+i*480,150,l,c,48):'').join(''):''}`;
 },

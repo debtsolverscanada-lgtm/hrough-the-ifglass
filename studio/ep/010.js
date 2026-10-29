@@ -119,8 +119,8 @@ germGoggles(t,d,p,g){
 germGlow(t,d,p,g){
   const op=AT(t,p.open??0.1), me=prog(t,p.self??3.5,(p.self??3.5)+1.2);
   const L=[[1330,330,'SKIN',p.skin??6.2,[1100,420]],[1330,520,'MOUTH',p.mouth??8.6,[1010,500]],[1330,710,'GUT: TRILLIONS',p.gut??10.4,[990,690]]];
-  return `${card('cardDark',g)}${g10_dim(.4)}${glint({x:760,y:560,s:1.2,t:g,eyes:AT(t,.6)?'open':'closed',mouth:me>0?'o':'smile',brows:me>0?'raised':'calm',blink:BL(g)})}
-   ${g10_glintDots(760,560,1.2,g,90,me)}
+  return `${card('cardDark',g)}${g10_dim(.4)}${glint({x:760,y:520,s:1.1,t:g,eyes:AT(t,.6)?'open':'closed',mouth:me>0?'o':'smile',brows:me>0?'raised':'calm',blink:BL(g)})}
+   ${g10_glintDots(760,520,1.1,g,90,me)}${AT(t,p.gut??10.4)?g10_dots(760,640,40,60,16,19,g,{r:7,op:pop(t,p.gut??10.4)}):""}
    ${L.map(([x,y,s,a,[ax,ay]])=>AT(t,a)?`<path d="M${x-60} ${y} L${ax} ${ay}" stroke="${g10_C.germ}" stroke-width="6" stroke-dasharray="4 14" stroke-linecap="round" opacity="${pop(t,a)}"/>${T(x+200,y+20,s,{size:58,fill:g10_C.germ,sc:pop(t,a)})}`:'').join('')}
    ${AT(t,p.glow??4.9)?T(960,150,"YOU'RE GLOWING",{size:110,fill:g10_C.germ,sc:pop(t,p.glow??4.9)}):''}`;
 },
@@ -173,7 +173,7 @@ germLaser(t,d,p,g){
    <g transform="translate(120,80)"><rect x="-60" y="-30" width="120" height="60" rx="12" fill="#5D6A82" stroke="${INK}" stroke-width="6"/><circle cx="50" cy="20" r="14" fill="${g10_C.germ}"/></g>
    ${g10_toilet(820,840,1.2,{lid:lid?0:1})}${g10_plume(820,564,k,g,h,{spread:440,n:110})}
    ${lid?T(820,330,'SLAM!',{size:80,fill:P.white,sc:pop(t,p.lid??16.4),rot:-8}):''}
-   ${AT(t,p.drops??7.3)&&!lid?`<path d="M560 520 H1080" stroke="#fff" stroke-width="5" stroke-dasharray="16 12"/>${T(1250,540,'SEAT',{size:44,fill:P.white,stroke:7})}${T(1220,440,"WELL ABOVE IT"',{size:56,fill:g10_C.germ,sc:pop(t,(p.drops??7.3)+1.5)})}`:''}
+   ${AT(t,p.drops??7.3)&&!lid?`<path d="M560 520 H1080" stroke="#fff" stroke-width="5" stroke-dasharray="16 12"/>${T(1250,540,'SEAT',{size:44,fill:P.white,stroke:7})}${T(1220,440,'WELL ABOVE IT',{size:56,fill:g10_C.germ,sc:pop(t,(p.drops??7.3)+1.5)})}`:''}
    ${br?`<g transform="translate(1500,${lid?560:540})"><rect x="-150" y="120" width="300" height="60" rx="12" fill="#EEF3FA" stroke="${INK}" stroke-width="7"/><rect x="-55" y="0" width="110" height="130" rx="16" fill="#7CD8FF" opacity=".8" stroke="${INK}" stroke-width="7"/>${g10_brush(10,-40,.6,10,P.coral)}${lid?'':g10_dots(10,-80,70,60,24,81,g,{r:5})}</g>${T(1500,800,lid?'SAFE':'YOUR TOOTHBRUSH?!',{size:52,fill:lid?P.mint:P.coral,sc:pop(t,lid?p.lid??16.4:p.brush??13.2)})}`:''}
    ${T(960,140,lid?'CLOSE THE LID':'REAL: GREEN LASERS, COLORADO',{size:lid?110:76,fill:lid?P.mint:P.white,sc:pop(t,lid?p.lid??16.4:.2)})}`;
 },
@@ -288,11 +288,11 @@ germBleach(t,d,p,g){
      ${!tw?[0,1,2,3,4].map(i=>{const k=(g*1.5+i/5)%1;return `<circle cx="${900+k*500}" cy="${470+Math.sin(i*2)*60*k}" r="${10+k*30}" fill="#E6FAFF" opacity="${.6*(1-k)}"/>`;}).join(''):''}
      ${tw?icon('cross',1380,520,1.6*pop(t,p.twist??3.4))+T(1380,760,'COULD MAKE IT WORSE',{size:56,fill:P.coral,sc:pop(t,(p.twist??3.4)+.6)}):''}
      ${T(960,150,tw?'THE TWIST':'BLEACH EVERYTHING?',{size:100,fill:tw?P.coral:P.white,sc:pop(t,tw?p.twist??3.4:.2)})}`;
-  const r=rng(181);let f='';for(let i=0;i<22;i++){const x=260+r()*1400,y=330+r()*480,mean=i%7===0;const gone=!mean&&x<lerp(-200,2100,wp);const grow=mean?1+wp*.8:1;if(!gone)f+=g10_bug(x,y,.68*grow,g+i,{col:mean?g10_C.bad:[g10_C.bug,g10_C.bug2,g10_C.bug3][i%3],mood:mean?'mean':'happy',glow:0});}
+  const r=rng(181);let f='';for(let i=0;i<22;i++){const x=260+r()*1400,y=320+r()*420,mean=i%7===0;const gone=!mean&&x<lerp(-200,2100,wp);const grow=mean?1+wp*.8:1;if(!gone)f+=g10_bug(x,y,.68*grow,g+i,{col:mean?g10_C.bad:[g10_C.bug,g10_C.bug2,g10_C.bug3][i%3],mood:mean?'mean':'happy',glow:0});}
   return `${card('cardMint',g)}${f}${wp>0&&wp<1?`<rect x="${lerp(-200,2100,wp)-60}" y="260" width="120" height="640" rx="40" fill="#E6FAFF" opacity=".55"/>`:''}
    ${tr&&wp<=0?`<g transform="translate(1700,760) scale(${pop(t,p.trained??13)})"><path d="M0 -90 L80 -60 V10 Q80 70 0 100 Q-80 70 -80 10 V-60Z" fill="${P.iceDeep}" stroke="${INK}" stroke-width="8"/>${icon('check',0,0,.6)}</g>`:''}
    ${T(960,150,wp>0?'WIPE OUT THE FRIENDLY ONES...':tr?'THEY TRAIN YOUR IMMUNE SYSTEM':'MOST ARE HARMLESS',{size:wp>0?80:84,fill:wp>0?P.coral:P.mint,sc:pop(t,wp>0?p.wipe??15.6:tr?p.trained??13:p.harm??6.7)})}
-   ${wp>=1?T(960,880,'...AND THE BAD ONES MOVE IN',{size:56,fill:P.coral,sc:pop(t,(p.wipe??15.6)+1.8)}):''}`;
+   ${wp>=1?T(960,830,'...THAT KEPT THE BAD ONES IN CHECK',{size:52,fill:P.coral,sc:pop(t,(p.wipe??15.6)+1.8)}):''}`;
 },
 germTips(t,d,p,g){
   const tiles=[[1020,400,'WASH 20 SEC',p.wash??5.4,`<rect x="-60" y="-30" width="120" height="60" rx="24" fill="#FFB4D8" stroke="${INK}" stroke-width="6"/>${[0,1,2].map(i=>`<circle cx="${-40+i*40}" cy="${-50-((g*40+i*20)%40)}" r="14" fill="#E6FAFF" stroke="${INK}" stroke-width="4" opacity=".9"/>`).join('')}`],
