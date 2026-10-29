@@ -46,17 +46,34 @@ def folder(title, parent=None):
     return ok(requests.post(API, headers=H, json=body))['id']
 
 def upload(path, title, parent, mime):
+    """Resumable upload; rides out Google's occasional 5xx / dropped connections by resuming where it stopped."""
+    import time
     meta = {'name': title, 'parents': [parent]}
-    r = requests.post('https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable', headers={**H, 'X-Upload-Content-Type': mime}, json=meta)
+    for attempt in range(5):
+        r = requests.post('https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable', headers={**H, 'X-Upload-Content-Type': mime}, json=meta)
+        if r.status_code < 500: break
+        time.sleep(5 * (attempt + 1))
     r.raise_for_status(); url = r.headers['Location']; size = os.path.getsize(path); chunk = 32 * 1024 * 1024
+    pos, fails = 0, 0
     with open(path, 'rb') as f:
-        pos = 0
         while pos < size:
-            data = f.read(chunk); end = pos + len(data) - 1
-            rr = requests.put(url, headers={'Content-Range': f'bytes {pos}-{end}/{size}'}, data=data)
-            if rr.status_code in (200, 201): return rr.json()['id']
-            if rr.status_code != 308: raise SystemExit(f'upload failed {rr.status_code}: {rr.text[:300]}')
-            pos = end + 1
+            f.seek(pos); data = f.read(chunk); end = pos + len(data) - 1
+            try:
+                rr = requests.put(url, headers={'Content-Range': f'bytes {pos}-{end}/{size}'}, data=data, timeout=300)
+            except requests.RequestException:
+                rr = None
+            if rr is not None and rr.status_code in (200, 201): return rr.json()['id']
+            if rr is not None and rr.status_code == 308:
+                rng = rr.headers.get('Range'); pos = int(rng.split('-')[1]) + 1 if rng else 0; fails = 0; continue
+            if rr is not None and rr.status_code < 500 and rr.status_code != 429:
+                raise SystemExit(f'upload failed {rr.status_code}: {rr.text[:300]}')
+            fails += 1
+            if fails > 6: raise SystemExit(f'upload kept failing ({rr.status_code if rr is not None else "connection error"})')
+            time.sleep(min(60, 5 * 2 ** fails))
+            # ask Google how much it already has, then resume from there
+            q = requests.put(url, headers={'Content-Range': f'bytes */{size}'}, timeout=60)
+            if q.status_code in (200, 201): return q.json()['id']
+            rng = q.headers.get('Range'); pos = int(rng.split('-')[1]) + 1 if (q.status_code == 308 and rng) else 0
     raise SystemExit('upload ended without file id')
 
 top = folder('Through the Ifglass - Auto'); ready = folder('Test' if TEST else 'Ready', top); folder('Posted', top)
