@@ -4,11 +4,11 @@
 <script src="lib.js"></script><script src="shots.js"></script>
 <script>
 let TL=null;
-window.setData=async d=>{TL=d; await document.fonts.load('900 64px "Inter Display"'); await document.fonts.ready;};
+window.setData=async d=>{TL=d; await document.fonts.load('900 64px "Inter Display", "Inter"'); await document.fonts.ready;};
 const _cv=document.createElement('canvas').getContext('2d');
 function capSVG(gt, W, Y, size){
   const c=TL.captions.find(c=>gt>=c.s && gt<c.e+0.05); if(!c) return '';
-  _cv.font=`900 ${size}px "Inter Display"`;
+  _cv.font=`900 ${size}px "Inter Display", "Inter", sans-serif`;
   const ws=c.words.map(w=>_cv.measureText(w.w).width+size*.42);
   const tot=ws.reduce((a,b)=>a+b,0); let x=W/2-tot/2, out='';
   const k=clamp((gt-c.s)/.12);
