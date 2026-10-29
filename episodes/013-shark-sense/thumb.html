@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/ep/013.js"></script><script>
+let th_g=0.4;
+document.getElementById('s').innerHTML=`<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">${DEFS}
+ ${s13_water(th_g,{sy:900})}
+ ${s13_pulse(1400,560,th_g,{max:560,n:5,op:.9,w:10})}
+ ${s13_shark(1600,250,.75,th_g,{dir:-1,glow:1})}
+ <g transform="translate(1390,610) scale(1.45)">${glint({t:.3,mouth:'o',brows:'raised',eyes:'closed',glint:1,pose:'up'})}</g>
+ ${s13_heartMini(1395,790,.3,0.05,1)}
+ ${s13_sparks(1390,520,330,th_g,9,7)}
+ <text x="70" y="330" font-size="150" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="40" stroke-linejoin="round">I FEEL</text><text x="70" y="330" font-size="150" font-weight="900" fill="#fff">I FEEL</text>
+ <text x="55" y="560" font-size="170" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="44" stroke-linejoin="round">YOUR</text><text x="55" y="560" font-size="170" font-weight="900" fill="${s13_Y}">YOUR</text>
+ <text x="55" y="770" font-size="170" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="44" stroke-linejoin="round">HEARTBEAT</text><text x="55" y="770" font-size="170" font-weight="900" fill="${s13_Y}">HEARTBEAT</text>
+ <rect x="10" y="10" width="1900" height="1060" rx="18" fill="none" stroke="${s13_Y}" stroke-width="20"/>${VIG}</svg>`;
+</script></body></html>

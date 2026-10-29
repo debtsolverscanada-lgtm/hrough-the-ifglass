@@ -1,0 +1,226 @@
+[
+ [
+  "What if you had a shark's",
+  "shkHook",
+  {
+   "fish": "@You swim through",
+   "notSee": "@Not see it",
+   "notSmell": "@Not smell it",
+   "feel": "@Feel it",
+   "beat": "@The tiny electric buzz"
+  }
+ ],
+ [
+  "Sharks do this every day",
+  "shkPromise",
+  {
+   "you": "@And by the end"
+  }
+ ],
+ [
+  "First here's something most",
+  "bigWord",
+  {
+   "word": "ELECTRICITY",
+   "card": "cardDark",
+   "col": "#FFE14D",
+   "size": 140,
+   "sub": "every living thing makes it"
+  }
+ ],
+ [
+  "Your heart beats because",
+  "shkBody",
+  {
+   "mus": "@Your muscles move",
+   "brain": "@Even your thoughts"
+  }
+ ],
+ [
+  "That's how doctors can",
+  "shkEcg",
+  {
+   "pick": "@They're picking up"
+  }
+ ],
+ [
+  "In water that electricity",
+  "shkField",
+  {
+   "weak": "@A very very weak",
+   "shark": "@And sharks can feel"
+  }
+ ],
+ [
+  "If you look closely",
+  "shkSnout",
+  {
+   "tube": "@Each one leads",
+   "sensor": "@At the end of the tube"
+  }
+ ],
+ [
+  "They're called the ampullae",
+  "shkLorenzini",
+  {
+   "named": "@Named after",
+   "back": "@Back then nobody"
+  }
+ ],
+ [
+  "Today we know they're",
+  "shkNano",
+  {
+   "sense": "@Sharks can sense"
+  }
+ ],
+ [
+  "Scientists proved it with",
+  "shkTank",
+  {
+   "buried": "@They buried a flatfish",
+   "swim": "@A shark swam over",
+   "hide": "@Then they hid",
+   "past": "@The shark swam right",
+   "elec": "@And when they buried",
+   "attack": "@The shark attacked",
+   "feel": "@It wasn't smelling",
+   "feel2": "@It was feeling"
+  }
+ ],
+ [
+  "Now let's give you",
+  "shkPool",
+  {
+   "feel": "@And you can still feel",
+   "buzz": "@A faint buzz",
+   "mus": "@Their muscles",
+   "hearts": "@Their hearts"
+  }
+ ],
+ [
+  "You'd know exactly where your friend",
+  "shkHideSeek",
+  {
+   "hide": "@You could play"
+  }
+ ],
+ [
+  "You dive into the ocean",
+  "shkOcean",
+  {
+   "alive": "@And it's alive",
+   "fish": "@Fish hiding",
+   "crab": "@Crabs buried",
+   "every": "@Every living thing"
+  }
+ ],
+ [
+  "Okay",
+  "shkCheat",
+  {
+   "water": "@In real life",
+   "land": "@But let's imagine"
+  }
+ ],
+ [
+  "You walk into your house",
+  "shkHouse",
+  {
+   "loud": "@And it's loud",
+   "charger": "@Every phone charger",
+   "wiring": "@The electrical wiring",
+   "laptop": "@Your laptop",
+   "tv": "@Your TV",
+   "fridge": "@Your fridge",
+   "all": "@All of them"
+  }
+ ],
+ [
+  "You'd know exactly where every wire",
+  "shkWires",
+  {
+   "plug": "@You'd feel when"
+  }
+ ],
+ [
+  "And outside the power lines",
+  "shkStorm",
+  {
+   "storm": "@You'd feel a thunderstorm"
+  }
+ ],
+ [
+  "Sharks aren't the only ones",
+  "shkPlatypus",
+  {
+   "platy": "@The platypus hunts",
+   "sweep": "@It finds shrimp"
+  }
+ ],
+ [
+  "Some dolphins have this",
+  "shkBee",
+  {
+   "bee": "@And bumblebees",
+   "land": "@When a bee lands",
+   "skip": "@Scientists think other",
+   "nectar": "@Because someone already",
+   "secret": "@Electricity is a secret"
+  }
+ ],
+ [
+  "And here's a strange side effect",
+  "shkDeterrent",
+  {
+   "blast": "@To a shark",
+   "turn": "@It turns away"
+  }
+ ],
+ [
+  "And there are reports of sharks",
+  "shkCable",
+  {
+   "why": "@Nobody is completely",
+   "idea": "@One idea",
+   "wrap": "@Some companies"
+  }
+ ],
+ [
+  "So could you ever feel",
+  "shkMagnet",
+  {
+   "tried": "@Some people have tried",
+   "implant": "@A few have even",
+   "near": "@When they get near",
+   "feel": "@They say they",
+   "weak": "@It's nowhere near",
+   "taste": "@But it's a taste"
+  }
+ ],
+ [
+  "So imagine walking along",
+  "shkBeach",
+  {
+   "crab": "@You can feel the crabs",
+   "fish": "@The fish in the waves",
+   "friend": "@The person walking"
+  }
+ ],
+ [
+  "So let me ask you",
+  "ask",
+  {
+   "q": "@Would you want"
+  }
+ ],
+ [
+  "Tell me in the comments",
+  "endCard",
+  {
+   "next": "@And next time",
+   "n1": "FEEL EARTH'S",
+   "n2": "MAGNETISM?"
+  }
+ ]
+]
