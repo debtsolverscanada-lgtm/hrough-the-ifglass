@@ -57,7 +57,7 @@ function h15_cal(x,y,s,m,o={}){const {col=P.red,flip=1,sub=''}=o;
 }
 // calendar that flips through h15_MON between a and b
 function h15_flipCal(x,y,s,t,a,b){const f=(clamp((t-a)/(b-a)))*5, i=Math.floor(f+1e-6), fr=f-i; const fl=(t>a&&t<b)?Math.abs(Math.cos(fr*Math.PI)):1;
-  return h15_cal(x,y,s,h15_MON[Math.min(5,i)],{flip:Math.max(.08,fl),col:i>=5?'#4AA845':P.red});}
+  return h15_cal(x,y,s,h15_MON[Math.min(5,i)],{flip:Math.max(.35,fl),col:i>=5?'#4AA845':P.red});}
 function h15_need(kind,x,y,s,cr=0){
   const k={food:`<circle cx="0" cy="10" r="40" fill="${P.red}" stroke="${INK}" stroke-width="6"/><path d="M0 -28 q4 -16 14 -22" stroke="${INK}" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M6 -34 q22 -18 38 -6 q-18 16 -38 6Z" fill="${P.mint}" stroke="${INK}" stroke-width="4"/>`,
     water:`<path d="M0 -52 Q38 0 38 18 A38 38 0 0 1 -38 18 Q-38 0 0 -52Z" fill="${P.iceDeep}" stroke="${INK}" stroke-width="6"/><path d="M-16 10 q0 16 12 22" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/>`,
@@ -207,7 +207,7 @@ hibDen(t,d,p,g){
   const ins=AT(t,arr);
   const nd=[['food','EAT',p.eat??8.4],['water','DRINK',p.drink??10.7],['pee','PEE',p.pee??11.9],['poop','POOP',p.poop??13.1]];
   const any=AT(t,p.eat??8.4);
-  return `${h15_bgSnow(g)}${h15_den(960,880,.95,{inner:ins?h15_bearSleep(0,0,.62,g):''})}${ins?h15_zzz(1100,520,g,1.1):''}
+  return `${h15_bgSnow(g,1,0)}${h15_den(960,880,.95,{inner:ins?h15_bearSleep(0,0,.62,g):''})}${ins?h15_zzz(1100,520,g,1.1):''}
    ${AT(t,dn)&&!ins?h15_bear(lerp(-250,900,wk),lerp(900,860,wk),lerp(.75,.5,wk),g,{walk:1}):''}
    ${!AT(t,dn)?h15_bear(1500,880,.6,g,{dir:-1}):''}
    ${nd.map(([k,l,a],i)=>AT(t,a)?`${h15_need(k,510+i*300,250,.9*pop(t,a),prog(t,a+.25,a+.6))}${T(510+i*300,400,l,{size:48,fill:P.white,stroke:9,op:prog(t,a,a+.3)})}`:'').join('')}
@@ -319,12 +319,12 @@ hibMissed(t,d,p,g){
     ['NEW SONG',p.song??8.6,`<path d="M-30 40 V-50 L40 -64 V26" stroke="${INK}" stroke-width="12" fill="none" stroke-linejoin="round"/><ellipse cx="-44" cy="42" rx="24" ry="18" fill="${P.violet}" stroke="${INK}" stroke-width="6"/><ellipse cx="26" cy="28" rx="24" ry="18" fill="${P.violet}" stroke="${INK}" stroke-width="6"/>`],
     ['PRICES UP',p.price??10.9,`<path d="M-60 -30 L10 -30 L50 10 L10 50 L-60 50Z" fill="${P.gold}" stroke="${INK}" stroke-width="7" stroke-linejoin="round"/><text x="-20" y="26" text-anchor="middle" font-size="56" font-weight="900" fill="${INK}">$</text><path d="M60 -20 V-80 M36 -56 L60 -84 L84 -56" stroke="${P.red}" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`],
     ['HOLIDAYS',p.hol??12.4,`${h15_cal(0,-10,.5,'DEC',{col:P.red})}<path d="M-56 -66 L56 50 M56 -66 L-56 50" stroke="${P.red}" stroke-width="14" stroke-linecap="round"/>`]];
-  return `${ch?card('cardDark',g):bgRoom(g)}
+  return `${ch?card('cardDark',g):card('cardWarm',g)}
    ${glint({x:ch?960:380,y:ch?560:520,s:ch?1.05:.95,t:g,pose:ch?'shrug':'reach',mouth:AT(t,p.party??6.75)?'frown':'o',brows:AT(t,p.party??6.75)?'sad':'raised',blink:BL(g)})}
    ${!ch?`${h15_phone(820,470,1.15,n,g,{msgs:Math.min(5,n)})}
      ${it.map(([l,a,svg],i)=>AT(t,a)?`<g transform="translate(${1330+(i%2)*340},${300+Math.floor(i/2)*330}) scale(${pop(t,a)})"><circle r="110" fill="#1A1430" stroke="${P.gold}" stroke-width="6"/>${svg}</g>${T(1330+(i%2)*340,300+Math.floor(i/2)*330+165,l,{size:42,fill:P.white,stroke:8})}`:'').join('')}
      ${T(820,140,'YOU MISSED A LOT',{size:90,fill:P.coral,sc:IN(t,.1)})}`
-     :`${T(960,170,'NO WINTER...',{size:100,fill:P.ice,sc:pop(t,p.chap??14.8)})}${AT(t,p.life??17.3)?T(960,880-30,'...BUT NO PARTIES EITHER',{size:64,fill:P.coral,sc:pop(t,p.life??17.3)}):''}`}`;
+     :`${T(960,170,'NO WINTER...',{size:100,fill:P.ice,sc:pop(t,p.chap??14.8)})}${AT(t,p.life??17.3)?T(960,290,'...AND A CHAPTER OF LIFE',{size:64,fill:P.coral,sc:pop(t,p.life??17.3)}):''}`}`;
 },
 hibLemur(t,d,p,g){
   const pr=AT(t,p.prim??5), mo=AT(t,p.months??7), tl=AT(t,p.tail??11.7), far=AT(t,p.far??15);
@@ -376,7 +376,7 @@ hibMarsTrip(t,d,p,g){
    ${AT(t,p.trip??3.7)?T(960,170,'6–9 MONTHS',{size:120,fill:'#FF8A5B',sc:pop(t,p.trip??3.7)}):T(960,170,'WHY SPACE AGENCIES CARE',{size:84,fill:P.white,sc:IN(t,.2)})}
    ${sp?[['FOOD',P.gold],['WATER',P.iceDeep],['O2',P.mint]].map(([l,c],i)=>h15_crate(470+i*190,820,.85*pop(t,(p.sup??8.4)+i*.25),l,c)).join(''):''}
    ${sz?labelPill(1180,800,'ROOM TO MOVE',P.violet,40):''}
-   ${bo?[0,1,2].map(i=>`<g transform="translate(${1510+i*120},790) scale(.36)">${extra({t:g+i,head:['#FFD3A8','#C68B59','#F2C9A0'][i],mouth:'flat'})}</g>`).join('')+T(1630,700,'BORED · STRESSED · SICK',{size:34,fill:P.coral,stroke:7}):''}`;
+   ${bo?[0,1,2].map(i=>`<g transform="translate(${1440+i*120},790) scale(.36)">${extra({t:g+i,head:['#FFD3A8','#C68B59','#F2C9A0'][i],mouth:'flat'})}</g>`).join('')+T(1560,700,'BORED · STRESSED · SICK',{size:34,fill:P.coral,stroke:7}):''}`;
 },
 hibPods(t,d,p,g){
   const rs=AT(t,p.res??3), nd=AT(t,p.need??8.2), sh=AT(t,p.ship??14.3);
@@ -404,7 +404,7 @@ hibArrive(t,d,p,g){
    ${glint({x:520,y:520,s:1,t:g,pose:sf?'shrug':'up',mouth:sf?'smirk':'grin',brows:'raised',blink:BL(g),lid:t<1.5?.5:0})}
    ${!sf?bubble(540,190,560,130,'MORNING, MARS!',{size:56,tail:'left'}):''}
    ${sf?T(560,170,'SCIENCE FICTION?',{size:90,fill:P.violet,sc:pop(t,p.scifi??4.1)}):''}
-   ${nw?stamp(1300,800,.9,'BEING STUDIED',P.mint,-6):''}`;
+   ${nw?stamp(1300,830,.9,'BEING STUDIED',P.mint,-6):''}`;
 },
 hibSquirrel(t,d,p,g){
   const nt=AT(t,p.not??2.6), sq=AT(t,p.sq??6.5), why=AT(t,p.why??14.3), td=AT(t,p.tired??19.8), st=AT(t,p.still??23.2);
@@ -413,7 +413,7 @@ hibSquirrel(t,d,p,g){
      ${glint({x:760,y:500,s:1.05,t:g,pose:st?'shrug':'down',legs:'wobble',mouth:st?'flat':'wavy',brows:'sad',lid:.6,blink:BL(g)})}
      <path d="M712 432 q18 12 36 0 M772 432 q18 12 36 0" stroke="#7C5CFF" stroke-width="6" fill="none" opacity=".7"/>
      <g transform="translate(1100,620)"><rect x="-50" y="-60" width="100" height="120" rx="14" fill="#FFF6EA" stroke="${INK}" stroke-width="7"/><path d="M50 -30 q40 0 40 30 q0 30 -40 30" stroke="${INK}" stroke-width="10" fill="none"/>${[0,1].map(i=>{const k=((g*.6+i/2)%1);return `<path d="M${-14+i*28} ${-80-k*60} q10 -14 0 -28" stroke="#fff" stroke-width="6" fill="none" opacity="${1-k}"/>`;}).join('')}</g>
-     ${T(760,160,st?'STILL TIRED.':'5 MONTHS OF SLEEP...',{size:st?140:90,fill:st?P.coral:P.white,sc:pop(t,st?p.still??23.2:p.tired??19.8)})}`;
+     ${T(640,160,st?'STILL TIRED.':'5 MONTHS OF SLEEP...',{size:st?120:84,fill:st?P.coral:P.white,sc:pop(t,st?p.still??23.2:p.tired??19.8)})}`;
   }
   const cyc=sq?((t-(p.sq??6.5))%4):0, warm=sq&&cyc>2.2?Math.sin((cyc-2.2)/1.8*Math.PI):0;
   return `<rect width="1920" height="1080" fill="#4A2E1E"/><rect width="1920" height="230" fill="#F2F8FF"/><path d="M0 230 H1920" stroke="${INK}" stroke-width="8"/>

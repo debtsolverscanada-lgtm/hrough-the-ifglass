@@ -42,7 +42,7 @@ function o9_brain(g){return brain(0,0,1,1,g);}
 // Glint with octopus arms instead of his own two arms. ends: local endpoints (glint units)
 const o9_REST=[[-250,-20],[-240,100],[-180,210],[-80,265],[80,265],[180,210],[240,100],[250,-20]];
 function o9_gT(o,ends=o9_REST,q={}){
-  const {grow=1,mini=0,col=P.cream,w=30,items=[],wav=16,tips=null}=o9_q(q);const g=o.t||0;let tt='',it='';
+  const {grow=1,mini=0,col=P.cream,w=38,items=[],wav=16,tips=null}=o9_q(q);const g=o.t||0;let tt='',it='';
   ends.forEach(([ex,ey],i)=>{const x1=lerp(0,ex,grow),y1=lerp(40,ey,grow);const pts=o9_tentPts(0,40,x1,y1,g,i*1.3,{bow:(i%2?1:-1)*26*grow,wav:wav*grow});
     tt+=o9_tentDraw(pts,{w:w*Math.max(.25,grow),col,suck:'#FFC2B0',tip:.2,sw:6});if(mini>0)it+=o9_mini(pts[5][0],pts[5][1],mini*.8,g+i);if(tips)it+=tips(i,x1,y1);});
   items.forEach(([i,svg])=>{if(!svg)return;const [ex,ey]=ends[i];it+=`<g transform="translate(${lerp(0,ex,grow)},${lerp(40,ey,grow)})">${svg}</g>`;});
@@ -193,7 +193,7 @@ octBed(t,d,p,g){
    <path d="M220 700 Q640 640 1140 700 V820 H220Z" fill="#7C8FD0" stroke="${INK}" stroke-width="8"/>
    <g transform="translate(1440,${595-(k>.95?Math.min(1,(t-(p.finds??2.4)-1.6)*2)*30:0)}) rotate(${k>.95?0:90})">${o9_item('phone',.9,g)}</g>
    ${!kn&&k<.95?T(1450,480,'BZZ',{size:50,fill:P.mint,rot:Math.sin(g*30)*4}):''}${T(820,300,'z',{size:60,fill:P.ice,op:.5+.5*Math.sin(g*2)})}${T(870,240,'Z',{size:80,fill:P.ice,op:.5+.5*Math.sin(g*2+1)})}
-   ${AT(t,p.look??6)?labelPill(640,180+60,'EYES: STILL CLOSED',P.ice,40):''}
+   ${AT(t,p.look??6)?labelPill(1000,330,'EYES: STILL CLOSED',P.ice,40):''}
    ${o9_ttl(t,.2,p.knows??7.7,'YOU WAKE UP','IT JUST KNOWS',P.white,P.gold,90,130)}`;
 },
 octKitchen(t,d,p,g){
@@ -213,7 +213,7 @@ octMulti(t,d,p,g){
   const gx=960,gy=500,s=.95;
   const S=[[0,[-470,-160],'phone','TEXT',0],[1,[-470,120],'pan','COOK',0],[2,[-260,330],'shoe','SHOES',p.shoes??2.7],[6,[200,-280],'comb','HAIR',p.hair??4.4],[7,[480,40],'laptop','EMAIL',p.email??5.4]];
   const ends=o9_REST.slice();const items=[];let labs='';
-  S.forEach(([i,e,k,lab,a])=>{const q=eout(prog(t,a,a+.7));ends[i]=[lerp(o9_REST[i][0],e[0],q),lerp(o9_REST[i][1],e[1],q)];if(AT(t,a)){items.push([i,o9_item(k,.9*pop(t,a),g,k==='comb'?Math.sin(g*8)*20:0)]);labs+=T(gx+e[0]*s,gy+e[1]*s+(k==='comb'?-80:110),lab,{size:40,fill:P.mint,stroke:8});}});
+  S.forEach(([i,e,k,lab,a])=>{const q=eout(prog(t,a,a+.7));ends[i]=[lerp(o9_REST[i][0],e[0],q),lerp(o9_REST[i][1],e[1],q)];if(AT(t,a)){items.push([i,o9_item(k,.9*pop(t,a),g,k==='comb'?Math.sin(g*8)*20:0)]);labs+=T(gx+e[0]*s+(k==='comb'?170:0),gy+e[1]*s+(k==='comb'?10:110),lab,{size:40,fill:P.mint,stroke:8});}});
   const as=AT(t,p.assist??8.1);
   return `${bgRoom(g)}${o9_gT({x:gx,y:gy,s,t:g,mouth:as?'grin':'o',brows:'raised',blink:BL(g),glint:as?1:0},ends,{items,mini:as?1:0})}${labs}
    ${T(960,130,as?'8 LITTLE ASSISTANTS':'ALL AT ONCE',{size:90,fill:as?P.gold:P.white,sc:pop(t,as?p.assist??8.1:.2)})}`;

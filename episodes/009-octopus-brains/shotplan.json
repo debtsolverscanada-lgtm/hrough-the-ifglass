@@ -17,7 +17,7 @@
  ["There's a mystery scientists","octTangle",{"tangle":"@How does an octopus","trick":"@One study found","auto":"@Octopus suckers grab","chem":"@But there seems","you":"@Your arms would need","stuck":"@Otherwise you'd spend"}],
  ["The octopus has other strange powers","octPowers",{"hearts":"@It has three hearts","blood":"@Its blood is blue","skin":"@It can change"}],
  ["And here's the twist","octEye",{"cb":"@Octopuses are thought","one":"@Their eyes have","how":"@So how do they","nobody":"@Nobody knows","prot":"@But scientists have found","eyes":"@Seeing without eyes"}],
- ["So could a human ever think","talk",{"bg":"mint","text":"YOU ALREADY DO","text2":"A LITTLE.","textAt":"@You already do","text2At":"@A little","pose":"shrug","mouth":"smirk","brows":"raised","col":"#FFC83D","size":96}],
+ ["So could a human ever think","talk",{"bg":"mint","text":"YOU ALREADY DO","text2":"A LITTLE.","textAt":"@You already do","text2At":"@A little","pose":"shrug","mouth":"smirk","brows":"raised","col":"#FFC83D","size":96,"icon":"bulb"}],
  ["Inside your gut","octGut",{"num":"@Hundreds of millions","oct":"@Roughly as many","second":"@Scientists call it"}],
  ["It runs your digestion","octGutSolo",{"cut":"@Even if the main","up":"@And it's constantly","fly":"@That's part of why"}],
  ["And your spinal cord does","octSpine",{"hot":"@When you touch","brain":"@before your brain","mind":"@You're not one","team":"@You're a team"}],
