@@ -10,10 +10,15 @@ EP = os.path.abspath(sys.argv[1]); name = os.path.basename(EP)
 TEST = '--test' in sys.argv  # upload to a Test folder, never queue
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 META = json.load(open(f'{EP}/meta.json')); OUT = f'{ROOT}/build/{name}/out'
+CID, CSEC, RTOK = (os.environ[k].strip().strip('"').strip("'") for k in ('GDRIVE_CLIENT_ID', 'GDRIVE_CLIENT_SECRET', 'GDRIVE_REFRESH_TOKEN'))
 tok = requests.post('https://oauth2.googleapis.com/token', data={
-    'client_id': os.environ['GDRIVE_CLIENT_ID'], 'client_secret': os.environ['GDRIVE_CLIENT_SECRET'],
-    'refresh_token': os.environ['GDRIVE_REFRESH_TOKEN'], 'grant_type': 'refresh_token'}).json()
-if 'access_token' not in tok: raise SystemExit(f'token error: {tok}')
+    'client_id': CID, 'client_secret': CSEC, 'refresh_token': RTOK, 'grant_type': 'refresh_token'}).json()
+if 'access_token' not in tok:
+    # safe diagnostics: shapes only, never the values
+    print('client_id  : len', len(CID), '| ends with .apps.googleusercontent.com:', CID.endswith('.apps.googleusercontent.com'))
+    print('secret     : len', len(CSEC), '| starts with GOCSPX-:', CSEC.startswith('GOCSPX-'))
+    print('refresh tok: len', len(RTOK), '| starts with 1//:', RTOK.startswith('1//'))
+    raise SystemExit(f'token error: {tok}')
 H = {'Authorization': f'Bearer {tok["access_token"]}'}
 API = 'https://www.googleapis.com/drive/v3/files'
 FOLDER = 'application/vnd.google-apps.folder'
