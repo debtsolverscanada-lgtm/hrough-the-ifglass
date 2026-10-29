@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/ep/014.js"></script><script src="../../studio/thumbkit.js"></script><script>
+let th_g=1.3;
+let th_st='';{const r=rng(14);for(let i=0;i<110;i++)th_st+=`<circle cx="${r()*1920}" cy="${r()*900}" r="${.8+r()*2.4}" fill="#fff" opacity="${.25+r()*.6}"/>`;}
+let th_fl='';[520,760,1000].forEach((L,i)=>[-1,1].forEach(d=>{const p=`M1400 880 C${1400+d*L*.35} ${880-L*.95} ${1400+d*L*1.35} ${880-L*.55} ${1400+d*L*1.15} 1120`;th_fl+=`<path d="${p}" stroke="#7CF5FF" stroke-width="26" fill="none" opacity=".12"/><path d="${p}" stroke="#7CF5FF" stroke-width="9" fill="none" opacity="${.75-i*.15}" stroke-dasharray="26 18" stroke-linecap="round"/>`;}));
+let th_pine=(x,y,h,c)=>`<path d="M${x} ${y-h} L${x+h*.32} ${y-h*.35} H${x+h*.14} L${x+h*.42} ${y} H${x-h*.42} L${x-h*.14} ${y-h*.35} H${x-h*.32}Z" fill="${c}" stroke="#0A0612" stroke-width="8" stroke-linejoin="round"/>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#061026"/>${th_st}
+ ${TK.glowBlob(1400,900,620,'#2E7CFF',.45)}${TK.glowBlob(300,250,420,'#7CF5A0',.22)}
+ ${m14_aurora(-40,230,2000,170,th_g,.95)}
+ ${TK.rays(1690,380,'#FFE6A0',16,1500,.09)}
+ ${th_fl}
+ <g opacity=".95">${m14_earth(1400,1560,680,th_g,{id:'th',glow:.12})}</g>
+ ${TK.glowBlob(1700,395,280,'#FFC23B',.7)}
+ ${TK.rim(`<g transform="translate(1380,350) scale(1.8)">${glint({t:.3,mouth:'grin',brows:'raised',glint:1,pose:'reach',look:.5})}</g>`,'#7CF5A0',28)}
+ <g filter="url(#tkShadow)">${m14_compass(1700,395,1.45,0,{glow:.8})}</g>
+ <g transform="translate(1700,150)" filter="url(#tkShadow)"><path d="M0 -60 L44 0 H16 V40 H-16 V0 H-44Z" fill="#FF4D4D" stroke="#0A0612" stroke-width="9" stroke-linejoin="round"/></g>
+ <g style="filter:blur(6px)">${th_pine(70,1140,520,'#04140C')}${th_pine(900,1150,300,'#04140C')}</g>
+ ${TK.text(70,320,'I ALWAYS KNOW',{size:108,fill:'#fff',rot:-3})}
+ ${TK.text(55,620,'NORTH',{size:290,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(350,850,'POLE DRIFT','50 KM/YR','#7CF5A0',-3)}
+`,'#061026');
+</script></body></html>

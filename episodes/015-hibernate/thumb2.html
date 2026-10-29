@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/ep/015.js"></script><script src="../../studio/thumbkit.js"></script><script>
+let th_g=.4;
+let th_st='';{const r=rng(15);for(let i=0;i<80;i++)th_st+=`<circle cx="${r()*1920}" cy="${r()*640}" r="${.8+r()*2.2}" fill="#fff" opacity="${.25+r()*.5}"/>`;}
+let th_pine=(x,y,h,c)=>`<path d="M${x} ${y-h} L${x+h*.32} ${y-h*.35} H${x+h*.14} L${x+h*.42} ${y} H${x-h*.42} L${x-h*.14} ${y-h*.35} H${x-h*.32}Z" fill="${c}"/>`;
+let th_far='';[[60,760,330],[230,740,260],[520,760,300],[760,730,240],[1820,760,320],[1640,740,250]].forEach(([x,y,h])=>th_far+=th_pine(x,y,h,'#16234A'));
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#0B1838"/>${th_st}
+ ${TK.glowBlob(1000,170,300,'#BFD8FF',.45)}
+ ${TK.rays(1000,170,'#DDE9FF',18,1500,.08)}
+ <circle cx="1000" cy="170" r="74" fill="#FFF4DC"/><circle cx="1022" cy="150" r="14" fill="#E8DCC0"/><circle cx="975" cy="195" r="10" fill="#E8DCC0"/>
+ ${th_far}
+ <path d="M-50 1080 V760 Q300 700 700 740 Q1200 680 1970 750 V1080Z" fill="#C9DBF2" stroke="#0A0612" stroke-width="8"/>
+ ${h15_den(1340,900,1.25,{snow:1,inner:TK.glowBlob(0,-120,260,'#FF8A2E',.8)})}
+ ${TK.glowBlob(1340,780,420,'#FF9A3D',.35)}
+ <path d="M-50 1080 V880 Q500 830 1000 870 Q1500 830 1970 880 V1080Z" fill="#EEF5FF"/>
+ <g filter="url(#tkShadow)">${h15_bearSleep(1340,1075,1.7,th_g)}</g>
+ ${TK.rim(`<g transform="translate(1385,392) scale(1.8)">${glint({t:.3,mouth:'o',brows:'raised',eyes:'closed',pose:'up',legs:'sit'})}</g>`,'#FFA24D',28)}
+ ${h15_zzz(1010,780,th_g,1.6,'#BFE3FF')}${h15_zzz(1600,250,th_g+1.4,1.4,'#BFE3FF')}
+ ${h15_snow(th_g,90,.9)}
+ <g style="filter:blur(5px)">${[[90,140,16],[880,960,22],[1180,80,14],[620,420,12]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" opacity=".8"/>`).join('')}</g>
+ ${TK.text(70,320,'I SLEPT FOR',{size:112,fill:'#fff',rot:-3})}
+ ${TK.text(55,630,'5',{size:330,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.text(290,615,'MONTHS',{size:170,fill:'#FFD43B',rot:-3,depth:14})}
+ ${TK.badge(330,860,'HEART RATE','&lt;10 BPM','#FFA24D',-3)}
+`,'#0B1838');
+</script></body></html>

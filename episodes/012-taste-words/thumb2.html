@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
 <script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/ep/012.js"></script><script src="../../studio/thumbkit.js"></script><script>
-let th_sw='';[['A',1060,170,-14,'#FF6B8A'],['K',1820,190,12,'#7CF5FF'],['E',1090,820,10,'#B47CFF'],['M',1820,840,-8,'#FFD43B'],['Z',1190,110,6,'#9BE15D']].forEach(([c,x,y,r,col])=>th_sw+=`<g transform="translate(${x},${y}) rotate(${r})"><text text-anchor="middle" font-size="96" font-weight="900" fill="#0A0612" stroke="#0A0612" stroke-width="22" stroke-linejoin="round">${c}</text><text text-anchor="middle" font-size="96" font-weight="900" fill="${col}">${c}</text></g>`);
+let th_sw='';[['A',1060,170,-14,'#FF6B8A'],['E',1090,820,10,'#B47CFF'],['M',1820,840,-8,'#FFD43B'],['Z',1190,110,6,'#9BE15D']].forEach(([c,x,y,r,col])=>th_sw+=`<g transform="translate(${x},${y}) rotate(${r})"><text text-anchor="middle" font-size="96" font-weight="900" fill="#0A0612" stroke="#0A0612" stroke-width="22" stroke-linejoin="round">${c}</text><text text-anchor="middle" font-size="96" font-weight="900" fill="${col}">${c}</text></g>`);
 let th_bub=(x,y,w,h,str,size,tx,ty)=>`<g filter="url(#tkShadow)"><path d="M${x-w/2} ${y-h/2} h${w} a30 30 0 0 1 30 30 v${h-60} a30 30 0 0 1 -30 30 H${tx+40} L${tx} ${ty} L${tx-10} ${y+h/2} H${x-w/2} a30 30 0 0 1 -30 -30 v${-h+60} a30 30 0 0 1 30 -30Z" fill="#FFF6EA" stroke="#0A0612" stroke-width="12" stroke-linejoin="round"/><text x="${x}" y="${y+size*.36}" text-anchor="middle" font-size="${size}" font-weight="900" fill="#0A0612">${str}</text></g>`;
 document.getElementById('s').innerHTML=TK.wrap(`
  <rect width="1920" height="1080" fill="#2A0A2E"/>
@@ -9,11 +9,11 @@ document.getElementById('s').innerHTML=TK.wrap(`
  ${TK.bokeh(21,['#FF6BA8','#FFD43B','#B47CFF','#7CF5FF'],46,820)}
  ${TK.rays(1400,430,'#FFD1E0',18,1500,.12)}
  ${th_sw}
- <g opacity=".28">${th_bub(1050,180,420,130,'"MONDAY"',70,1100,260)}${th_bub(1780,980,300,110,'"HEY"',64,1740,900)}</g>
+ <g opacity=".28">${th_bub(1050,180,420,130,'"MONDAY"',70,1100,260)}</g>
  <g opacity=".5" filter="url(#tkSoft)"></g>
  ${TK.rim(`<g transform="translate(1440,520) scale(2.05)">${glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'reach',look:.4})}</g>`,'#FF5C9A',30)}
  <g filter="url(#tkShadow)"><g transform="translate(1730,580) rotate(14)">${TK.glowBlob(0,0,170,'#FF3B5C',.7)}${w12_food('straw',0,0,1.75,0)}</g></g>
- ${th_bub(1640,230,420,124,'YOUR NAME',62,1700,320)}
+ ${th_bub(1655,135,370,116,'YOUR NAME',58,1720,240)}
  <g opacity=".9"><g transform="translate(160,120) rotate(-18) scale(.7)" style="filter:blur(5px)">${w12_food('toast',0,0,1,1)}</g><g transform="translate(900,990) rotate(12) scale(.9)" style="filter:blur(6px)">${w12_food('pancake',0,0,1,0)}</g></g>
  ${TK.text(70,320,'I CAN TASTE',{size:112,fill:'#fff',rot:-3})}
  ${TK.text(55,610,'WORDS',{size:272,fill:'#FFD43B',rot:-3,depth:18})}

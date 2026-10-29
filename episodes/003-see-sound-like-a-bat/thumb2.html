@@ -2,22 +2,22 @@
 <script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/thumbkit.js"></script><script>
 const th_pines=(seed,y0,col,hmin,hmax,wmin,wmax,edge)=>{const r=rng(seed);let s='',x=-60;while(x<1990){const w=wmin+r()*(wmax-wmin),h=hmin+r()*(hmax-hmin);s+=`<path d="M${x} ${y0} L${x+w/2} ${y0-h} L${x+w} ${y0}Z" fill="${col}" ${edge?`stroke="${edge}" stroke-width="6" stroke-opacity=".55"`:''}/>`;x+=w*.55;}return s+`<rect x="0" y="${y0-2}" width="1920" height="${1090-y0}" fill="${col}"/>`;};
 let th_stars='';{const r=rng(7);for(let i=0;i<110;i++)th_stars+=`<circle cx="${r()*1920}" cy="${r()*620}" r="${1+r()*2.5}" fill="#fff" opacity="${.25+r()*.6}"/>`;}
-let th_sonar='';for(let i=0;i<7;i++)th_sonar+=`<circle cx="1420" cy="450" r="${190+i*130}" fill="none" stroke="#3DF5C2" stroke-width="${16-i*1.8}" opacity="${.85-i*.11}"/>`;
-let th_echo='';[0,1,2].forEach(i=>th_echo+=`<path d="M${1640+i*36} ${420-i*34} q30 -6 44 -44" stroke="#FFD43B" stroke-width="12" fill="none" stroke-linecap="round" opacity="${1-i*.25}"/>`);
+let th_sonar='';for(let i=0;i<7;i++)th_sonar+=`<circle cx="1390" cy="480" r="${190+i*130}" fill="none" stroke="#3DF5C2" stroke-width="${16-i*1.8}" opacity="${.85-i*.11}"/>`;
+let th_echo='';[70,115,160].forEach((r,i)=>{const a1=-2.55,a2=-1.75,cx=1722,cy=600;th_echo+=`<path d="M${cx+Math.cos(a1)*r} ${cy+Math.sin(a1)*r} A${r} ${r} 0 0 1 ${cx+Math.cos(a2)*r} ${cy+Math.sin(a2)*r}" stroke="#0A0612" stroke-width="22" fill="none" stroke-linecap="round"/><path d="M${cx+Math.cos(a1)*r} ${cy+Math.sin(a1)*r} A${r} ${r} 0 0 1 ${cx+Math.cos(a2)*r} ${cy+Math.sin(a2)*r}" stroke="#FFD43B" stroke-width="11" fill="none" stroke-linecap="round" opacity="${1-i*.2}"/>`;});
 const th_ear=d=>`<g transform="scale(${d},1)"><path d="M-70 -110 Q-150 -120 -190 -236 Q-150 -200 -120 -214 Q-80 -190 -14 -148Z" fill="#4A3F78" stroke="#120E1C" stroke-width="10" stroke-linejoin="round"/><path d="M-72 -128 Q-130 -140 -160 -206 Q-120 -186 -100 -196 Q-70 -176 -36 -150Z" fill="#FF9EC0"/></g>`;
-const th_ears=th_ear(1)+th_ear(-1);
+const th_ears=`<g transform="translate(0,-60) scale(.78) translate(0,52)">${th_ear(1)+th_ear(-1)}</g>`;
 document.getElementById('s').innerHTML=TK.wrap(`
  <rect width="1920" height="1080" fill="#0A0B2A"/>
  ${TK.glowBlob(1390,430,560,'#2E5BFF',.45)}${TK.glowBlob(380,900,420,'#7C5CFF',.45)}${th_stars}
- <circle cx="1420" cy="440" r="300" fill="#FFE2A8" opacity=".95"/>${TK.glowBlob(1420,440,420,'#FFB65C',.7)}
- ${TK.rays(1420,440,'#FFE2A8',16,1500,.10)}
+ <circle cx="1390" cy="440" r="300" fill="#FFE2A8" opacity=".95"/>${TK.glowBlob(1390,440,420,'#FFB65C',.7)}
+ ${TK.rays(1390,440,'#FFE2A8',16,1500,.10)}
  <g opacity=".95">${th_pines(3,840,'#1B1650',220,460,160,260)}</g>
  ${bat(380,170,.9,1,'#2A2152')}${bat(860,120,.7,2,'#2A2152')}${bat(1080,300,.6,0,'#2A2152')}
  ${th_sonar}
- ${th_pines(11,1000,'#07061A',260,520,200,320,'#3DF5C2')}
+ ${th_pines(11,1000,'#07061A',260,520,200,320)}
  
- ${TK.rim(`<g transform="translate(1420,600) scale(2.0)">${th_ears}${glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'reach',look:.6})}</g>`,'#3DF5C2',30)}
- ${TK.glowBlob(1730,520,190,'#3DF5C2',.45)}${TK.rim(bat(1730,540,1.3,1.4,'#5B4BA0'),'#3DF5C2',14)}${th_echo}
+ ${TK.rim(`<g transform="translate(1390,610) scale(1.9)">${th_ears}${glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'reach',look:.6})}</g>`,'#3DF5C2',30)}
+ ${TK.glowBlob(1720,620,170,'#3DF5C2',.5)}${TK.rim(bat(1722,648,1.1,1.4,'#5B4BA0'),'#3DF5C2',14)}${th_echo}
  ${TK.text(70,320,'I SEE WITH',{size:112,fill:'#fff',rot:-3})}
  ${TK.text(55,620,'SOUND',{size:290,fill:'#FFD43B',rot:-3,depth:18})}
  ${TK.badge(330,850,'BAT CLICKS','200 / SEC','#3DF5C2',-3)}

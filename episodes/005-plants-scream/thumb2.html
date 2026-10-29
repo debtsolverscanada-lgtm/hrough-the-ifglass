@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/thumbkit.js"></script><script>
+let th_frame='';for(let i=0;i<9;i++){const x=-40+i*250;th_frame+=`<path d="M${x} 1080 V420 Q${x+125} 300 ${x+250} 420" stroke="#1E3A2C" stroke-width="16" fill="none" opacity=".9"/><path d="M${x} 640 H${x+250}" stroke="#1E3A2C" stroke-width="10" opacity=".8"/>`;}
+let th_leaves='';{const r=rng(21);for(let i=0;i<16;i++){const x=r()*1150,y=930+r()*180,a=-60+r()*120;th_leaves+=`<ellipse cx="${x}" cy="${y}" rx="${90+r()*60}" ry="${34+r()*14}" fill="${i%2?'#123A22':'#0C2A18'}" transform="rotate(${a} ${x} ${y})"/>`;}}
+let th_burst='';[[1580,250,.9],[1795,300,.7],[1810,560,.6]].forEach(([x,y,s])=>{for(let i=0;i<10;i++){const a=i*Math.PI/5,p=`M${x+Math.cos(a)*36*s} ${y+Math.sin(a)*36*s} L${x+Math.cos(a)*92*s} ${y+Math.sin(a)*92*s}`;th_burst+=`<path d="${p}" stroke="#0A0612" stroke-width="${24*s}" stroke-linecap="round"/><path d="${p}" stroke="#FFE14D" stroke-width="${12*s}" stroke-linecap="round"/>`;}});
+const th_face=`<g transform="translate(1700,842) scale(1.15)"><ellipse cx="-44" cy="-22" rx="20" ry="24" fill="#fff" stroke="#0A0612" stroke-width="7"/><ellipse cx="44" cy="-22" rx="20" ry="24" fill="#fff" stroke="#0A0612" stroke-width="7"/><circle cx="-44" cy="-18" r="9" fill="#0A0612"/><circle cx="44" cy="-18" r="9" fill="#0A0612"/>
+ <path d="M-64 -58 L-26 -46 M64 -58 L26 -46" stroke="#0A0612" stroke-width="9" stroke-linecap="round"/><ellipse cx="0" cy="34" rx="30" ry="34" fill="#3a1220" stroke="#0A0612" stroke-width="7"/><ellipse cx="0" cy="50" rx="16" ry="12" fill="#FF6B8A"/></g>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#1A2A1C"/>
+ ${TK.glowBlob(1500,420,620,'#FF9A3D',.6)}${TK.glowBlob(300,250,360,'#FFCF6B',.3)}${TK.glowBlob(400,900,420,'#2E8A47',.5)}
+ ${TK.rays(1500,420,'#FFE6A8',16,1500,.12)}
+ <circle cx="1500" cy="420" r="210" fill="#FFE2A0" opacity=".9"/>
+ ${th_frame}
+ ${TK.bokeh(5,['#FFE14D','#9BE15D','#FFB65C'],40,800)}
+ ${TK.glowBlob(1700,560,340,'#9BE15D',.5)}
+ ${TK.rim(`<g transform="translate(1290,600) scale(1.8)">${glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'point',look:.8})}</g>`,'#9BE15D',28)}
+ ${TK.rim(plPot(1700,760,1.7,{g:0}),'#9BE15D',16)}${th_face}${th_burst}
+ ${th_leaves}
+ ${TK.text(70,320,'I CAN HEAR',{size:112,fill:'#fff',rot:-3})}
+ ${TK.text(55,620,'PLANTS',{size:250,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(330,850,'CLICKS / HOUR','35','#9BE15D',-3)}
+`,'#1A2A1C');
+</script></body></html>

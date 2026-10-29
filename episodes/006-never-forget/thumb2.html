@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/thumbkit.js"></script><script>
+let th_drawers='';for(let c=0;c<9;c++)for(let r=0;r<6;r++){const x=-20+c*220,y=60+r*150;th_drawers+=`<rect x="${x}" y="${y}" width="200" height="132" rx="10" fill="#22164A" stroke="#120B2A" stroke-width="8"/><rect x="${x+70}" y="${y+56}" width="60" height="16" rx="8" fill="${(c*7+r*3)%5?'#3A2A6E':'#FFB86B'}"/>`;}
+const th_ks=['cake','school','party','house','teacher','heart','rain','face','cake','party'];
+let th_far='';[[1060,180,.42,-14],[1780,130,.4,12],[1180,930,.42,10],[1830,760,.38,-8]].forEach(([x,y,s,r],i)=>th_far+=memCard(x,y,s,th_ks[i+3],r,{glow:.5}));
+let th_near='';[[1640,250,.62,14,'cake'],[1150,300,.58,-12,'school'],[1120,720,.7,-10,'party'],[1690,720,.7,10,'heart']].forEach(([x,y,s,r,k])=>th_near+=memCard(x,y,s,k,r,{glow:.8}));
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#140C2E"/>
+ <g opacity=".75">${th_drawers}</g>
+ ${TK.glowBlob(1400,480,520,'#FF9A3D',.5)}${TK.glowBlob(300,850,400,'#7C5CFF',.55)}
+ ${TK.rays(1400,480,'#FFE2A8',18,1500,.13)}
+ <circle cx="1400" cy="480" r="250" fill="#FFD9A0" opacity=".55" filter="url(#tkSoft)"/>
+ ${th_far}
+ ${TK.rim(`<g transform="translate(1400,610) scale(1.9)">${glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'shrug'})}</g>`,'#FFB86B',30)}
+ ${th_near}
+ ${TK.bokeh(17,['#FFD43B','#FFB86B','#B47CFF'],34,1080)}
+ ${TK.text(70,320,"I CAN'T",{size:118,fill:'#fff',rot:-3})}
+ ${TK.text(55,630,'FORGET',{size:250,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(330,850,'MEMORY LOST','0%','#FFB86B',-3)}
+`,'#140C2E');
+</script></body></html>

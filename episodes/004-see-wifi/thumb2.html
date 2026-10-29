@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/thumbkit.js"></script><script>
+let th_waves='';for(let i=0;i<7;i++){const r=230+i*150;th_waves+=`<circle cx="1400" cy="700" r="${r}" fill="none" stroke="${i%2?'#B47CFF':'#7CF5FF'}" stroke-width="${18-i*2}" opacity="${.9-i*.11}"/>`;}
+let th_tw='';for(let i=0;i<4;i++)th_tw+=`<circle cx="960" cy="190" r="${50+i*60}" fill="none" stroke="#B47CFF" stroke-width="6" opacity="${.5-i*.1}"/>`;
+const th_tower=`<g transform="translate(960,190) scale(.75)"><path d="M-60 560 L0 0 L60 560 M-44 400 H44 M-30 260 H30 M-18 130 H18 M-44 400 L30 260 M44 400 L-30 260" stroke="#2A1E5A" stroke-width="12" fill="none"/><circle r="16" fill="#FF4D5E"/>${TK.glowBlob(0,0,50,'#FF4D5E',.9)}</g>`;
+const th_router=`<g transform="translate(0,60)">
+ <path d="M-112 -10 L-160 -150" stroke="#0A0612" stroke-width="30" stroke-linecap="round"/><path d="M-112 -10 L-160 -150" stroke="#2C3650" stroke-width="16" stroke-linecap="round"/>
+ <path d="M112 -10 L160 -150" stroke="#0A0612" stroke-width="30" stroke-linecap="round"/><path d="M112 -10 L160 -150" stroke="#2C3650" stroke-width="16" stroke-linecap="round"/>
+ <circle cx="-160" cy="-150" r="14" fill="#7CF5FF" stroke="#0A0612" stroke-width="5"/><circle cx="160" cy="-150" r="14" fill="#7CF5FF" stroke="#0A0612" stroke-width="5"/>
+ <rect x="-140" y="-40" width="280" height="84" rx="20" fill="#1C2433" stroke="#0A0612" stroke-width="10"/><rect x="-132" y="-32" width="264" height="68" rx="14" fill="none" stroke="#7CF5FF" stroke-width="4" opacity=".8"/>
+ <rect x="-128" y="-30" width="256" height="18" rx="9" fill="#33405C"/>
+ ${[-1,1].map(d=>`<g transform="translate(${d*128},-30)"><rect x="-22" y="-14" width="44" height="40" rx="18" fill="#FFF6EA" stroke="#0A0612" stroke-width="7"/></g>`).join('')}
+ ${[-80,-40,0,40,80].map((x,i)=>`<circle cx="${x}" cy="14" r="20" fill="${i%2?'#B47CFF':'#7CF5FF'}" opacity=".35"/><circle cx="${x}" cy="14" r="9" fill="${i%2?'#E4CCFF':'#DFFDFF'}"/>`).join('')}</g>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#0A0A26"/>
+ ${TK.glowBlob(1400,640,600,'#2C7BFF',.5)}${TK.glowBlob(260,900,380,'#FF8A3D',.55)}${TK.glowBlob(960,200,240,'#B47CFF',.45)}
+ ${TK.bokeh(8,['#7CF5FF','#B47CFF','#FFB65C'],36,700)}
+ ${th_tw}${th_tower}
+ ${TK.skyline(4,860,'#1D1446',['#FFB65C','#FFD43B'],200,520,90,200)}
+ ${TK.rays(1400,700,'#BFF6FF',16,1500,.10)}
+ ${th_waves}
+ ${TK.skyline(12,1000,'#0B0820',['#FFB65C','#7CF5FF'],80,300,140,280)}
+ ${TK.glowBlob(1400,720,240,'#7CF5FF',.8)}
+ ${TK.rim(`<g transform="translate(1400,600) scale(1.9)">${glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'reach'})}${th_router}</g>`,'#7CF5FF',30)}
+ ${TK.text(70,330,'I CAN SEE',{size:118,fill:'#fff',rot:-3})}
+ ${TK.text(55,650,'WIFI',{size:330,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(330,850,'FREQUENCY','2.4 GHz','#7CF5FF',-3)}
+`,'#0A0A26');
+</script></body></html>

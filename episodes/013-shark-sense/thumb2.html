@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/ep/013.js"></script><script src="../../studio/thumbkit.js"></script><script>
+let th_g=0.4;
+let th_far='';[[180,960,300],[420,980,380],[760,950,260],[1040,990,340],[1700,950,300]].forEach(([x,y,h],i)=>th_far+=s13_weed(x,y,h,th_g+i,'#0E3A4A'));
+let th_fish='';[[640,180,.45,1],[820,250,.35,1],[900,150,.3,1],[300,140,.4,-1]].forEach(([x,y,s,d],i)=>th_fish+=s13_fish(x,y,s,th_g+i,'#2C6A8A',d));
+let th_bub='';{const r=rng(8);for(let i=0;i<26;i++)th_bub+=`<circle cx="${1050+r()*820}" cy="${80+r()*820}" r="${4+r()*14}" fill="none" stroke="#BFEFFF" stroke-width="3" opacity="${.25+r()*.4}"/>`;}
+document.getElementById('s').innerHTML=TK.wrap(`
+ ${s13_water(th_g,{sy:930})}
+ ${TK.glowBlob(1450,430,560,'#1E9BD8',.55)}${TK.glowBlob(300,300,380,'#0F6A9A',.4)}${TK.glowBlob(1560,520,260,'#FFE14D',.35)}
+ ${TK.rays(1300,-80,'#BFEFFF',22,1400,.08)}
+ <g opacity=".8">${th_far}${th_fish}</g>
+ ${s13_pulse(1340,700,th_g,{max:620,n:5,op:.75,w:10})}
+ <g filter="url(#tkShadow)"><g style="filter:drop-shadow(0 0 14px #5CF2FF)">${s13_shark(1600,250,1.6,th_g,{dir:-1,glow:1,mouth:'open'})}</g></g>
+ ${TK.rim(`<g transform="translate(1340,600) scale(1.9)">${glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'up',look:-.2})}</g>`,'#5CF2FF',30)}
+ ${s13_zap(1535,460,110,-70,th_g,2,'#FFE14D',9)}${s13_zap(1540,465,120,-40,th_g+.3,5,'#5CF2FF',8)}${s13_zap(1150,460,110,-110,th_g+.6,9,'#FFE14D',8)}${s13_zap(1140,465,100,-140,th_g+.9,4,'#5CF2FF',7)}
+ ${s13_heartMini(1340,780,.42,0.05,1)}
+ ${th_bub}
+ <g style="filter:blur(6px)" opacity=".8"><circle cx="1010" cy="990" r="46" fill="#BFEFFF" fill-opacity=".15" stroke="#DFF8FF" stroke-width="8"/><circle cx="1090" cy="900" r="26" fill="none" stroke="#DFF8FF" stroke-width="6"/><circle cx="110" cy="110" r="40" fill="#BFEFFF" fill-opacity=".15" stroke="#DFF8FF" stroke-width="8"/></g>
+ ${TK.text(70,320,"I HAVE A SHARK'S",{size:104,fill:'#fff',rot:-3})}
+ ${TK.text(55,620,'6TH',{size:320,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.text(600,605,'SENSE',{size:150,fill:'#FFD43B',rot:-3,depth:14})}
+ ${TK.badge(380,850,'DETECTS','0.000000001 V','#5CF2FF',-3)}
+`,'#06213A');
+</script></body></html>
