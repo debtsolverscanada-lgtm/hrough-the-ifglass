@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script>
+document.getElementById('s').innerHTML=`<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">${DEFS}
+ ${bgFuture(2.3,0)}<rect width="1920" height="1080" fill="#0B1026" opacity=".25"/>
+ <path d="M980 830 H1920 V1080 H980Z" fill="#120826" stroke="${INK}" stroke-width="8"/><path d="M980 830 H1920" stroke="${P.mint}" stroke-width="6" opacity=".6"/>
+ <circle cx="1420" cy="520" r="430" fill="url(#gMint)" opacity=".35"/>
+ <g transform="translate(1420,520) scale(1.5)">${glint({t:.4,mouth:'o',brows:'raised',glint:1,look:-.4})}</g>
+ ${T(90,0,'',{})}
+ <text x="90" y="330" font-size="150" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="40" stroke-linejoin="round">YEAR</text>
+ <text x="90" y="330" font-size="150" font-weight="900" fill="#fff">YEAR</text>
+ <text x="80" y="590" font-size="270" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="54" stroke-linejoin="round">3026</text>
+ <text x="80" y="590" font-size="270" font-weight="900" fill="${P.mint}">3026</text>
+ <rect x="10" y="10" width="1900" height="1060" rx="18" fill="none" stroke="${P.mint}" stroke-width="20"/>${VIG}</svg>`;
+</script></body></html>

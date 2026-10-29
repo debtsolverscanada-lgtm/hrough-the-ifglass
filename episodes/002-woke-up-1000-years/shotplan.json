@@ -1,0 +1,354 @@
+[
+ [
+  "What if you closed",
+  "hook3026",
+  {
+   "open": "@It's the year"
+  }
+ ],
+ [
+  "You can't read a single",
+  "signs3026",
+  {}
+ ],
+ [
+  "And the people staring",
+  "hazard",
+  {}
+ ],
+ [
+  "Let's find out what",
+  "talk",
+  {
+   "bg": "future",
+   "pose": "point",
+   "mouth": "grin",
+   "text": "YEAR",
+   "text2": "3026",
+   "col2": "#3DF5C2"
+  }
+ ],
+ [
+  "But first how do you",
+  "tankOrShip",
+  {
+   "who": "@That's the problem",
+   "ship": "@Option two"
+  }
+ ],
+ [
+  "The oldest hotel",
+  "hotel705",
+  {}
+ ],
+ [
+  "Your tank would need",
+  "talk",
+  {
+   "bg": "lab",
+   "mouth": "smirk",
+   "text": "THAT",
+   "text2": "LUCKY?",
+   "size": 110
+  }
+ ],
+ [
+  "Option two is wilder",
+  "bigWord",
+  {
+   "word": "TIME DILATION",
+   "size": 120,
+   "card": "cardGold",
+   "col": "#FFC83D",
+   "sub": "real physics"
+  }
+ ],
+ [
+  "Einstein showed",
+  "talk",
+  {
+   "bg": "dark",
+   "icon": "bulb",
+   "mouth": "o",
+   "brows": "raised",
+   "text": "FASTER =",
+   "text2": "SLOWER TIME",
+   "size": 100
+  }
+ ],
+ [
+  "So we put you on a spaceship",
+  "dilation",
+  {}
+ ],
+ [
+  "Then you land back",
+  "yearSpin",
+  {
+   "open": "@And here one thousand",
+   "years": 1000
+  }
+ ],
+ [
+  "You didn't freeze",
+  "talk",
+  {
+   "bg": "future",
+   "pose": "up",
+   "mouth": "grin",
+   "text": "SKIPPED",
+   "text2": "AHEAD",
+   "gl": 1
+  }
+ ],
+ [
+  "Either way the door opens",
+  "doorOpen",
+  {}
+ ],
+ [
+  "First thing you'd try",
+  "noTalk",
+  {
+   "lost": 99
+  }
+ ],
+ [
+  "Here's proof",
+  "oldEnglish",
+  {
+   "tr": "@That's Our Father"
+  }
+ ],
+ [
+  "Now flip that around",
+  "noTalk",
+  {
+   "lost": "@In the year three thousand"
+  }
+ ],
+ [
+  "So you're on your own",
+  "talk",
+  {
+   "bg": "future",
+   "mouth": "frown",
+   "brows": "sad",
+   "text": "ON YOUR",
+   "text2": "OWN",
+   "size": 110
+  }
+ ],
+ [
+  "Because the moment you step",
+  "hazard",
+  {}
+ ],
+ [
+  "Your immune system is trained",
+  "viruses",
+  {
+   "badge": "3026",
+   "title": "NEW GERMS"
+  }
+ ],
+ [
+  "And it works the other way",
+  "viruses",
+  {
+   "badge": "2026",
+   "col": "#C8B07A",
+   "title": "YOUR OLD GERMS"
+  }
+ ],
+ [
+  "You might be a walking outbreak",
+  "bigWord",
+  {
+   "word": "OUTBREAK",
+   "card": "cardWarm",
+   "col": "#FF4D5E",
+   "sub": "\u2026that's you"
+  }
+ ],
+ [
+  "So just like in the last video",
+  "quarantine",
+  {}
+ ],
+ [
+  "Okay Let's say you're cleared",
+  "futureHumans",
+  {
+   "same": "@Probably not",
+   "impl": 999
+  }
+ ],
+ [
+  "Evolution works over",
+  "talk",
+  {
+   "bg": "future",
+   "mouth": "smile",
+   "text": "EVOLUTION",
+   "text2": "IS SLOW",
+   "size": 110
+  }
+ ],
+ [
+  "Their bodies though",
+  "futureHumans",
+  {
+   "same": 0,
+   "impl": "@Some people might have"
+  }
+ ],
+ [
+  "You might be the only person",
+  "talk",
+  {
+   "bg": "room",
+   "mouth": "grin",
+   "brows": "raised",
+   "text": "CHICKEN",
+   "text2": "POX?",
+   "size": 120
+  }
+ ],
+ [
+  "Now let's look at the planet",
+  "drift",
+  {
+   "dz": "@In a thousand years that's"
+  }
+ ],
+ [
+  "But the coastline",
+  "seaWall",
+  {}
+ ],
+ [
+  "Here's a strange one",
+  "moonDay",
+  {
+   "plus": "@By the year three thousand",
+   "watch": "@But your watch"
+  }
+ ],
+ [
+  "At night you look up",
+  "talk",
+  {
+   "bg": "night",
+   "mouth": "smile",
+   "text": "SAME",
+   "text2": "SKY",
+   "size": 120,
+   "col": "#FFC83D"
+  }
+ ],
+ [
+  "And remember Voyager One",
+  "voyager",
+  {
+   "fly": "@In a thousand years it's still",
+   "noth": "@To space it's nothing"
+  }
+ ],
+ [
+  "So what's left of your world",
+  "survivors",
+  {
+   "a": "@The big stone",
+   "b": "@Some of our trash",
+   "c": "@And our nuclear waste"
+  }
+ ],
+ [
+  "But here's the scary part",
+  "digitalDecay",
+  {
+   "fade": "@Almost everything we make",
+   "name": "@Scientists even have",
+   "tab": "@A clay tablet"
+  }
+ ],
+ [
+  "The future might know more",
+  "talk",
+  {
+   "bg": "dark",
+   "mouth": "frown",
+   "brows": "sad",
+   "text": "EGYPT",
+   "text2": "> YOU",
+   "size": 120
+  }
+ ],
+ [
+  "Okay but what about money",
+  "money",
+  {
+   "p0": 100,
+   "rate": 0.03,
+   "years": 1000,
+   "comp": "@After one thousand years"
+  }
+ ],
+ [
+  "There's just one problem",
+  "oldBank",
+  {
+   "yrs": "@That's about five hundred",
+   "never": "@No bank has ever"
+  }
+ ],
+ [
+  "Your money isn't worth",
+  "exhibit",
+  {
+   "title": "WORTH: A MUSEUM DISPLAY"
+  }
+ ],
+ [
+  "And that's the strangest part",
+  "exhibit",
+  {
+   "title": "YOU ARE HISTORY"
+  }
+ ],
+ [
+  "Scientists would want to study",
+  "talk",
+  {
+   "bg": "future",
+   "mouth": "o",
+   "brows": "raised",
+   "text": "MOST",
+   "text2": "INTERESTING",
+   "size": 110,
+   "gl": 1
+  }
+ ],
+ [
+  "And the loneliest",
+  "aloneHill",
+  {}
+ ],
+ [
+  "So let me ask you",
+  "ask",
+  {
+   "q": "@If you could jump"
+  }
+ ],
+ [
+  "Tell me in the comments",
+  "endCard",
+  {
+   "next": "@And if you think",
+   "n1": "EPISODE 003",
+   "n2": "COMING NEXT"
+  }
+ ]
+]

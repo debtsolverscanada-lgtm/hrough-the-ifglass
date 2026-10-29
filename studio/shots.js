@@ -49,7 +49,7 @@ hook(t,d,p,g){
    ${T(960,190,'100 YEARS',{size:150*IN(t,3.4),fill:P.ice,op:prog(t,3.4,3.6)})}`;
 },
 yearSpin(t,d,p,g){
-  const k=ease(prog(t,p.open??2.2,(p.open??2.2)+1.6)); const yr=Math.round(2026+100*k);
+  const k=ease(prog(t,p.open??2.2,(p.open??2.2)+1.6)); const yr=Math.round(2026+(p.years??100)*k);
   return `${card('cardIce',g)}
    ${glint({x:480,y:560,s:.95,t:g,eyes:AT(t,p.open??2.2)?'open':'closed',mouth:AT(t,p.open??2.2)?'o':'smile',brows:AT(t,p.open??2.2)?'raised':'calm'})}
    ${T(1260,600,String(yr),{size:300,fill:k>=1?P.mint:P.white})}
@@ -382,11 +382,11 @@ paperwork(t,d,p,g){
    ${items.map(([k,l,a],i)=>a!=null&&AT(t,a)?`${icon(k,1100,330+i*220,.9*pop(t,a))}${T(1220,350+i*220,l,{size:58,anchor:'start',fill:P.white,op:prog(t,a,a+.3)})}`:'').join('')}`;
 },
 money(t,d,p,g){
-  const c=p.comp??8.6; const k=prog(t,c,c+5); const val=10000*Math.pow(1.07,100*k);
-  const fmt='$'+Math.round(val).toLocaleString('en-US');
+  const c=p.comp??8.6; const k=prog(t,c,c+5); const P0=p.p0??10000, R=p.rate??0.07, Y=p.years??100; const val=P0*Math.pow(1+R,Y*k);
+  const fmt= val>=1e12?'$'+Math.round(val/1e12).toLocaleString('en-US')+' TRILLION': val>=1e9?'$'+(val/1e9).toFixed(1)+' BILLION': val>=1e7?'$'+(val/1e6).toFixed(1)+' MILLION':'$'+Math.round(val).toLocaleString('en-US');
   return `${card('cardGold',g)}${coinStack(520,860,Math.round(3+k*22),1.1)}
    ${T(1240,520,fmt,{size:150,fill:k>=1?P.gold:P.white})}
-   ${T(1240,680,'7% A YEAR · YEAR '+Math.round(100*k),{size:56,fill:P.white,op:prog(t,.5,.9)})}
+   ${T(1240,680,Math.round(R*100)+'% A YEAR · YEAR '+Math.round(Y*k),{size:56,fill:P.white,op:prog(t,.5,.9)})}
    ${T(960,150,'THE TWIST',{size:90,fill:P.mint,sc:IN(t,.2)})}`;
 },
 prices(t,d,p,g){
@@ -458,6 +458,134 @@ endCard(t,d,p,g){
   return `${bgNight(g)}${icon('comment',520,300,pop(t,.2))}${T(520,500,'COMMENT BELOW',{size:56,fill:P.white,op:prog(t,.3,.6)})}
    ${glint({x:520,y:700,s:.8,t:g,pose:'wave',mouth:'grin',blink:BL(g)})}
    ${AT(t,p.next??1.8)?`<g transform="translate(1340,540) scale(${pop(t,p.next??1.8)})"><rect x="-380" y="-260" width="760" height="520" rx="30" fill="url(#future)" stroke="${P.mint}" stroke-width="12"/>
-     ${T(0,-130,'NEXT',{size:60,fill:P.mint})}${T(0,20,'1,000 YEARS',{size:110,fill:P.white})}${T(0,140,'IN THE FUTURE',{size:70,fill:P.gold})}</g>`:''}`;
+     ${T(0,-130,'NEXT',{size:60,fill:P.mint})}${T(0,20,p.n1||'1,000 YEARS',{size:110,fill:P.white})}${T(0,140,p.n2||'IN THE FUTURE',{size:70,fill:P.gold})}</g>`:''}`;
 }
 };
+
+// ===================== episode 002 scenes =====================
+const GLY='ᚠᛟᛉᚹᚱᚲᛞᛇᛒᛗ';
+function glyphs(n,seed){const r=rng(seed);let s='';for(let i=0;i<n;i++)s+=GLY[Math.floor(r()*GLY.length)];return s;}
+Object.assign(SHOTS,{
+signs3026(t,d,p,g){
+  let signs='';[[300,260,'#FF6BD6'],[1560,300,P.mint],[700,520,P.gold],[1300,560,'#6BE4FF']].forEach(([x,y,c],i)=>{
+    const fl=.75+.25*Math.sin(g*6+i*2);
+    signs+=`<g transform="translate(${x},${y})" opacity="${fl}"><rect x="-150" y="-50" width="300" height="100" rx="18" fill="#120826" stroke="${c}" stroke-width="8"/>
+      <text y="22" text-anchor="middle" font-size="60" font-weight="900" fill="${c}" font-family="serif">${glyphs(5,i+9)}</text></g>`;});
+  return `${bgFuture(g,t*12)}${signs}${glint({x:960,y:700,s:.75,t:g,mouth:'o',brows:'raised',look:Math.sin(g*1.3),blink:BL(g)})}
+   ${T(960,150,'YEAR 3026',{size:140,fill:P.mint,sc:IN(t,.2)})}`;
+},
+hotel705(t,d,p,g){
+  const roof=(y,w)=>`<path d="M${960-w} ${y} Q960 ${y-90} ${960+w} ${y} L${960+w-40} ${y+24} L${960-w+40} ${y+24}Z" fill="#5A2A2A" stroke="${INK}" stroke-width="8"/>`;
+  let steam='';for(let i=0;i<4;i++){const k=((g*.4+i/4)%1);steam+=`<circle cx="${1420+Math.sin(g+i)*20}" cy="${760-k*260}" r="${20+k*40}" fill="#fff" opacity="${.35*(1-k)}"/>`;}
+  return `${bgNight(g)}<rect x="640" y="560" width="640" height="320" fill="#C9A46A" stroke="${INK}" stroke-width="8"/>${roof(560,380)}
+   <rect x="740" y="400" width="440" height="160" fill="#C9A46A" stroke="${INK}" stroke-width="8"/>${roof(400,280)}
+   ${[700,820,940,1060,1180].map(x=>`<rect x="${x}" y="640" width="70" height="110" fill="#FFD98E" opacity=".75" stroke="${INK}" stroke-width="5"/>`).join('')}
+   <ellipse cx="1420" cy="830" rx="150" ry="40" fill="#6BE4FF" opacity=".6" stroke="${INK}" stroke-width="6"/>${steam}
+   ${labelPill(960,950,'OPEN SINCE 705 AD',P.gold,46)}${T(960,170,'1,300+ YEARS',{size:110,fill:P.white,sc:IN(t,.4)})}`;
+},
+tankOrShip(t,d,p,g){
+  const two=AT(t,p.ship??14);
+  return `${card('cardDark',g)}<rect x="960" y="140" width="6" height="800" fill="#fff" opacity=".15"/>
+   ${dewar(480,600,.8,g,{inside:true,warn:AT(t,p.who??10)?1:0})}${T(480,170,'OPTION 1: FREEZE',{size:56,fill:P.ice})}
+   ${AT(t,p.who??10)?T(480,880,'WHO KEEPS IT COLD?',{size:52,fill:P.red,sc:pop(t,p.who??10)}):''}
+   <g opacity="${two?1:.25}">${T(1440,170,'OPTION 2: FLY',{size:56,fill:P.gold})}
+   <g transform="translate(1440,560) rotate(-20)"><path d="M-200 0 Q-60 -90 200 0 Q-60 90 -200 0Z" fill="#E8E8FF" stroke="${INK}" stroke-width="9"/><circle cx="60" r="34" fill="${P.iceDeep}" stroke="${INK}" stroke-width="7"/>
+   <path d="M-200 0 L-${330+Math.sin(g*20)*20} 0" stroke="${P.warm}" stroke-width="40" stroke-linecap="round" opacity=".8"/></g></g>`;
+},
+dilation(t,d,p,g){
+  const k=eout(prog(t,.4,d-.6)); const ship=(14.1*k).toFixed(1), earth=Math.round(1000*k);
+  let stars='';const r=rng(2);for(let i=0;i<60;i++){const y=r()*1080,x=(r()*1920-g*1800*(.5+r()))%1920;stars+=`<path d="M${x<0?x+1920:x} ${y} h${60+r()*140}" stroke="#fff" stroke-width="3" opacity="${.3+r()*.5}"/>`;}
+  return `<rect width="1920" height="1080" fill="#05060F"/>${stars}
+   <g transform="translate(960,470)"><path d="M-330 0 Q-100 -140 330 0 Q-100 140 -330 0Z" fill="#E8E8FF" stroke="${INK}" stroke-width="10"/>
+   <circle cx="110" r="52" fill="${P.iceDeep}" stroke="${INK}" stroke-width="8"/><g transform="translate(110,18) scale(.22)">${glint({t:g,mouth:'grin',scarf:false})}</g>
+   <path d="M-330 0 L-${520+Math.sin(g*25)*25} 0" stroke="${P.warm}" stroke-width="60" stroke-linecap="round" opacity=".85"/></g>
+   ${T(960,140,'99.99% SPEED OF LIGHT',{size:80,fill:P.gold,sc:IN(t,.2)})}
+   ${T(520,880,'YOU: '+ship+' YRS',{size:80,fill:P.mint})}${T(1400,880,'EARTH: '+earth+' YRS',{size:80,fill:P.white})}`;
+},
+oldEnglish(t,d,p,g){
+  const tr=p.tr??7.5;
+  return `${card('cardGold',g)}<g transform="translate(960,520) rotate(-2)"><rect x="-620" y="-240" width="1240" height="480" rx="24" fill="#F2E2BE" stroke="${INK}" stroke-width="10"/>
+   <rect x="-650" y="-270" width="60" height="540" rx="30" fill="#B08850" stroke="${INK}" stroke-width="8"/><rect x="590" y="-270" width="60" height="540" rx="30" fill="#B08850" stroke="${INK}" stroke-width="8"/>
+   <text y="-40" text-anchor="middle" font-size="84" font-weight="800" fill="#4A2A10" font-family="serif" font-style="italic" opacity="${prog(t,.2,1.2)}">Fæder ūre þū þe eart</text>
+   <text y="70" text-anchor="middle" font-size="84" font-weight="800" fill="#4A2A10" font-family="serif" font-style="italic" opacity="${prog(t,.8,1.8)}">on heofonum…</text></g>
+   ${T(960,150,'ENGLISH · 1,000 YEARS AGO',{size:72,fill:P.gold,sc:IN(t,.2)})}
+   ${AT(t,tr)?labelPill(960,870,'"Our Father, who art in heaven"',P.mint,46):''}`;
+},
+noTalk(t,d,p,g){
+  return `${bgFuture(g)}${extra({x:1400,y:560,s:.95,t:g,head:'#6BE4FF',mouth:'flat',glasses:false})}
+   ${bubble(1440,200,420,140,glyphs(4,3)+' '+glyphs(3,7)+'?',{size:60,tail:'right'})}
+   ${glint({x:600,y:560,s:1,t:g,mouth:'wavy',brows:'raised',look:1,blink:BL(g)})}${bubble(560,210,320,140,'Hello…?',{size:60})}
+   ${AT(t,p.lost??6)?T(960,880,"YOU'RE THE OLD LANGUAGE",{size:72,fill:P.gold,sc:pop(t,p.lost??6)}):''}`;
+},
+futureHumans(t,d,p,g){
+  const imp=(x,y)=>`<circle cx="${x}" cy="${y}" r="14" fill="${P.mint}" opacity="${.6+.4*Math.sin(g*5+x)}"/><circle cx="${x}" cy="${y}" r="34" fill="url(#gMint)"/>`;
+  return `${bgFuture(g)}${extra({x:380,y:560,s:.85,t:g,head:'#FFD3A8'})}${imp(440,420)}${extra({x:1540,y:560,s:.85,t:g+1,head:'#C9967A'})}${imp(1480,420)}
+   ${glint({x:960,y:560,s:1,t:g,mouth:AT(t,p.same??7)?'smile':'o',brows:'raised',blink:BL(g)})}
+   ${T(960,150,AT(t,p.same??7)?'THEY LOOK LIKE YOU':'~40 GENERATIONS',{size:96,fill:P.mint,sc:pop(t,AT(t,p.same??7)?p.same??7:.2)})}
+   ${AT(t,p.impl??22)?labelPill(960,880,'IMPLANTS · EDITED GENES · LONGER LIVES',P.gold,40):''}`;
+},
+drift(t,d,p,g){
+  const k=eout(prog(t,.5,d-.5));
+  return `${card('cardIce',g)}<rect x="0" y="0" width="1920" height="1080" fill="#1C5D8A" opacity=".45"/>
+   <path d="M${420-k*30} 300 q120 -80 260 -20 q90 90 40 240 q-60 160 -200 140 q-140 -40 -160 -170 q-10 -120 60 -190Z" fill="#7BD88F" stroke="${INK}" stroke-width="9"/>
+   <path d="M${1240+k*30} 280 q200 -40 300 60 q60 140 -40 260 q-140 90 -250 0 q-80 -120 -10 -320Z" fill="#7BD88F" stroke="${INK}" stroke-width="9"/>
+   <g transform="translate(960,560)"><path d="M-40 -60 h80 v90 q0 40 -40 40 q-40 0 -40 -40Z" fill="#FFE3C9" stroke="${INK}" stroke-width="7"/><rect x="-32" y="-60" width="64" height="40" rx="10" fill="#FFF6EA" stroke="${INK}" stroke-width="5"/></g>
+   ${T(960,860,'2–5 CM A YEAR',{size:80,fill:P.white,sc:IN(t,.5)})}${T(960,150,'1,000 YEARS = A FEW DOZEN METERS',{size:64,fill:P.ice,sc:IN(t,p.dz??3)})}`;
+},
+moonDay(t,d,p,g){
+  const a=g*.8;
+  return `<rect width="1920" height="1080" fill="#05060F"/>${bgCard('cardDark',g).replace('<rect width="1920" height="1080" fill="url(#cardDark)"/>','')}
+   <circle cx="760" cy="540" r="200" fill="#3A7BD5" stroke="${INK}" stroke-width="10"/><path d="M640 470 q60 -50 120 0 q40 60 -30 100 q-90 0 -90 -100Z M800 600 q60 -20 90 40 q-40 50 -90 -40Z" fill="#7BD88F"/>
+   <ellipse cx="760" cy="540" rx="520" ry="160" fill="none" stroke="#fff" stroke-width="3" stroke-dasharray="10 14" opacity=".4"/>
+   <circle cx="${760+Math.cos(a)*520}" cy="${540+Math.sin(a)*160}" r="64" fill="#D8D8E0" stroke="${INK}" stroke-width="8"/>
+   ${T(1460,480,'+0.017 s',{size:120,fill:P.gold,sc:IN(t,p.plus??7)})}${T(1460,600,'EVERY DAY',{size:64,fill:P.white,op:prog(t,(p.plus??7)+.3,(p.plus??7)+.6)})}
+   ${AT(t,p.watch??13)?T(1460,760,'⌚ WRONG',{size:70,fill:P.red,sc:pop(t,p.watch??13)}):''}`;
+},
+voyager(t,d,p,g){
+  const vx=lerp(300,420,eout(prog(t,p.fly??8,d)));
+  return `<rect width="1920" height="1080" fill="#05060F"/>${bgCard('cardDark',g).replace('<rect width="1920" height="1080" fill="url(#cardDark)"/>','')}
+   <g transform="translate(${vx},430) rotate(-8)"><circle r="46" fill="none" stroke="#E8E8E8" stroke-width="10"/><path d="M0 0 L-120 0 M0 0 L80 -60 M0 0 L60 90" stroke="#E8E8E8" stroke-width="8"/><rect x="-24" y="-18" width="48" height="36" fill="${P.gold}" stroke="${INK}" stroke-width="5"/></g>
+   <path d="M200 760 H1720" stroke="#fff" stroke-width="6" opacity=".5"/>
+   <circle cx="200" cy="760" r="16" fill="${P.iceDeep}"/>${T(200,840,'EARTH',{size:40,fill:P.white})}
+   <circle cx="${200+1520*0.06/4.24}" cy="760" r="12" fill="${P.gold}"/>${T(330,700,'VOYAGER 1 · 3026',{size:40,fill:P.gold,op:prog(t,p.fly??8,(p.fly??8)+.4)})}
+   <circle cx="1720" cy="760" r="30" fill="#FF9F43"/><circle cx="1720" cy="760" r="90" fill="url(#gWarm)" opacity=".7"/>${T(1720,860,'NEAREST STAR · 4.24 LY',{size:40,fill:P.white})}
+   ${T(960,170,AT(t,p.noth??20)?"TO SPACE, IT'S NOTHING":'1977 → 3026',{size:96,fill:P.mint,sc:pop(t,AT(t,p.noth??20)?p.noth??20:.2)})}`;
+},
+survivors(t,d,p,g){
+  const items=[[420,'pyr','PYRAMIDS',p.a??0.3],[960,'bottle','PLASTIC',p.b??10.5],[1500,'barrel','NUCLEAR WASTE',p.c??19]];
+  const draw={pyr:`<path d="M-170 120 L0 -150 L170 120Z" fill="#E0B86A" stroke="${INK}" stroke-width="9"/><path d="M0 -150 L60 120" stroke="#B8903E" stroke-width="6"/>`,
+    bottle:`<rect x="-50" y="-110" width="100" height="230" rx="40" fill="#9AD1FF" opacity=".8" stroke="${INK}" stroke-width="8"/><rect x="-24" y="-150" width="48" height="44" rx="8" fill="${P.red}" stroke="${INK}" stroke-width="6"/>`,
+    barrel:`<rect x="-90" y="-130" width="180" height="250" rx="22" fill="${P.gold}" stroke="${INK}" stroke-width="9"/>${'<g transform="scale(.55)">'+''+'</g>'}`};
+  return `${card('cardDark',g)}${items.map(([x,k,l,a])=>AT(t,a)?`<g transform="translate(${x},520) scale(${pop(t,a)})">${draw[k]}${k==='barrel'?`<g transform="scale(.6)">${icon('hazard',0,0,1).replace('<g transform="translate(0,0) scale(1)" opacity="1">','<g>')}</g>`:''}</g>${T(x,770,l,{size:52,fill:P.white})}${icon('check',x+130,340,.6*pop(t,a+.3))}`:'').join('')}
+   ${T(960,150,'WHAT SURVIVES',{size:100,fill:P.gold,sc:IN(t,.2)})}`;
+},
+digitalDecay(t,d,p,g){
+  const k=prog(t,p.fade??3,d-1); const r=rng(6); let tiles='';
+  for(let i=0;i<3;i++)for(let j=0;j<4;j++){const on=r()>k;tiles+=`<rect x="${-150+i*102}" y="${-260+j*100}" width="92" height="90" rx="10" fill="${on?['#FFB4A2','#9AD1FF','#7BD88F','#FFD98E'][(i+j)%4]:'#222'}" opacity="${on?1:.6}"/>`;}
+  const tab=AT(t,p.tab??12.5);
+  return `${card('cardDark',g)}<g transform="translate(${tab?1300:960},560)"><rect x="-180" y="-330" width="360" height="660" rx="44" fill="${INK}" stroke="#555" stroke-width="8"/>${tiles}</g>
+   ${tab?`<g transform="translate(560,560) rotate(-6) scale(${pop(t,p.tab??12.5)})"><rect x="-170" y="-220" width="340" height="440" rx="30" fill="#C9A46A" stroke="${INK}" stroke-width="9"/>${[...Array(7)].map((_,i)=>`<path d="M-120 ${-160+i*55} h${200+((i*29)%40)}" stroke="#8A6A3A" stroke-width="10" stroke-dasharray="14 10"/>`).join('')}</g>
+     ${T(560,900,'4,000 YEARS',{size:64,fill:P.gold})}${T(1300,950,'~50 YEARS?',{size:64,fill:P.red})}`:''}
+   ${T(960,140,'DIGITAL DARK AGE',{size:100,fill:P.red,sc:IN(t,p.name??8.5)})}`;
+},
+oldBank(t,d,p,g){
+  const x=AT(t,p.never??7.6);
+  return `${card('cardGold',g)}${icon('bank',700,540,2.4)}${labelPill(700,820,'OPENED 1472',P.gold,48)}
+   ${T(1400,480,'~550 YEARS',{size:110,fill:P.white,sc:IN(t,p.yrs??4.6)})}
+   ${x?`${T(1400,660,'1,000 YEARS?',{size:90,fill:P.red,sc:pop(t,p.never??7.6)})}${icon('cross',1400,820,pop(t,(p.never??7.6)+.3))}`:''}`;
+},
+exhibit(t,d,p,g){
+  let crowd='';[[260,'#6BE4FF'],[1660,'#FF6BD6']].forEach(([x,h],i)=>crowd+=extra({x,y:600,s:.75,t:g+i,head:h,pose:i?'point':'down',look:i?-1:1}));
+  return `${bgFuture(g)}<rect width="1920" height="1080" fill="#0B1026" opacity=".35"/>${crowd}
+   <rect x="700" y="840" width="520" height="140" fill="#2A2450" stroke="${INK}" stroke-width="10"/>
+   ${glint({x:960,y:520,s:.85,t:g,mouth:'flat',brows:'sad',look:Math.sin(g*.7),blink:BL(g)})}
+   <rect x="690" y="140" width="540" height="700" fill="url(#iceG)" opacity=".22" stroke="#fff" stroke-width="8"/>
+   ${labelPill(960,910,'HUMAN · c. 2026',P.gold,42)}${T(960,120,p.title||'YOU ARE HISTORY',{size:96,fill:P.white,sc:IN(t,.3)})}`;
+},
+hook3026(t,d,p,g){
+  const op=p.open??3.5, k=ease(prog(t,1,op)); const yr=Math.round(2026+1000*k);
+  return `${k<1?bgNight(g):bgFuture(g)}<rect width="1920" height="1080" fill="#000" opacity="${k<1?.25+.4*Math.sin(k*Math.PI):0}"/>
+   ${glint({x:960,y:560,s:1.1,t:g,eyes:AT(t,op)?'open':'closed',mouth:AT(t,op)?'o':'smile',brows:AT(t,op)?'raised':'calm',blink:0})}
+   ${T(960,190,String(yr),{size:180,fill:k>=1?P.mint:P.white})}`;
+}
+});

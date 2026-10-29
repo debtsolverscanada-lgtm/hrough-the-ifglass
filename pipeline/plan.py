@@ -29,7 +29,11 @@ for anchor,shot,p in PLAN:
 for a,b in zip(shots,shots[1:]): a['e']=b['s']
 shots[0]['s']=0; shots[-1]['e']=round(W[-1]['e']+2.0,3)
 # ---- captions with number formatting ----
-SUBS=[("minus one hundred and ninety six degrees Celsius","−196°C"),("twenty one twenty six","2126"),("one hundred","100"),
+SUBS=[("three thousand and twenty six","3026"),("seven hundred and five","705"),("ninety nine point nine nine percent","99.99%"),
+ ("fourteen seventy two","1472"),("nineteen seventy seven","1977"),("five hundred and fifty","550"),("six hundred trillion dollars","$600 trillion"),
+ ("one hundred dollars","$100"),("three percent","3%"),("twenty twenty six","2026"),("forty generations","40 generations"),("fourteen years","14 years"),
+ ("four thousand years","4,000 years"),("one thousand years","1,000 years"),("a thousand years","1,000 years"),("a thousand","1,000"),("four light years","4 light years"),
+ ("minus one hundred and ninety six degrees Celsius","−196°C"),("twenty one twenty six","2126"),("one hundred","100"),
  ("sixty percent","60%"),("twenty twenty three","2023"),("twenty twenty","2020"),("twenty seven","27"),("nineteen seventies","1970s"),
  ("ten billion","10 billion"),("twenty eighties","2080s"),("ten thousand dollars","$10,000"),("seven percent","7%"),
  ("eight million","8 million"),("five hundred","500"),("nineteen sixty seven","1967"),("one thousand","1,000"),("six months","6 months"),("a hundred","100")]

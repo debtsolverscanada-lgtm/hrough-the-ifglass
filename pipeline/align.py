@@ -4,7 +4,8 @@ from pocketsphinx import Decoder
 EXTRA = {  # phonemes for words missing from the CMU dictionary (add more per episode as needed)
  'cryogenically':'K R AY AH JH EH N IH K L IY','cryoprotectant':'K R AY OW P R AH T EH K T AH N T',
  'nanoparticles':'N AE N OW P AA R T IH K AH L Z','rewarmed':'R IY W AO R M D','rewarming':'R IY W AO R M IH NG',
- 'vitrification':'V IH T R AH F AH K EY SH AH N','vitrified':'V IH T R AH F AY D'}
+ 'vitrification':'V IH T R AH F AH K EY SH AH N','vitrified':'V IH T R AH F AY D',
+ 'chickenpox':'CH IH K AH N P AA K S','loneliest':'L OW N L IY AH S T','fah':'F AA','hev':'HH EH V','oo':'UW','theh':'DH EH','thoo':'TH UW'}
 script, audio, out = sys.argv[1:4]
 src = open(script).read()
 disp = []
