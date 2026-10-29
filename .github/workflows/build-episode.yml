@@ -18,11 +18,12 @@ jobs:
     timeout-minutes: 340
     steps:
       - uses: actions/checkout@v4
+        with: { fetch-depth: 2 }
       - name: Pick episode
         id: ep
         run: |
           if [ -n "${{ github.event.inputs.episode }}" ]; then echo "dir=${{ github.event.inputs.episode }}" >> $GITHUB_OUTPUT;
-          else echo "dir=$(git diff --name-only HEAD~1 HEAD | grep '/READY$' | head -1 | xargs dirname)" >> $GITHUB_OUTPUT; fi
+          else D=$(git diff --name-only --diff-filter=A HEAD~1 HEAD | grep '/READY$' | head -1 | xargs -r dirname); [ -n "$D" ] || { echo "no new READY file"; exit 1; }; echo "dir=$D" >> $GITHUB_OUTPUT; fi
       - uses: actions/setup-node@v4
         with: { node-version: 20 }
       - uses: actions/setup-python@v5
