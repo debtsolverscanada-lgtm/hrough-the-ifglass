@@ -7,6 +7,7 @@ usage: python3 pipeline/drive_upload.py episodes/001-frozen-100-years
 """
 import json, os, sys, datetime, requests
 EP = os.path.abspath(sys.argv[1]); name = os.path.basename(EP)
+TEST = '--test' in sys.argv  # upload to a Test folder, never queue
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 META = json.load(open(f'{EP}/meta.json')); OUT = f'{ROOT}/build/{name}/out'
 tok = requests.post('https://oauth2.googleapis.com/token', data={
@@ -42,11 +43,15 @@ def upload(path, title, parent, mime):
             pos = end + 1
     raise SystemExit('upload ended without file id')
 
-top = folder('Through the Ifglass - Auto'); ready = folder('Ready', top); folder('Posted', top); clips_dir = folder(name, folder('Clips', top))
+top = folder('Through the Ifglass - Auto'); ready = folder('Test' if TEST else 'Ready', top); folder('Posted', top)
+clips_dir = folder(name, folder('Clips', top))
 vid = upload(f'{OUT}/{name}.mp4', f'{name}.mp4', ready, 'video/mp4')
 th = upload(f'{OUT}/thumbnail.jpg', f'{name}-thumbnail.jpg', ready, 'image/jpeg')
 for c in sorted(os.listdir(f'{OUT}/clips')) if os.path.isdir(f'{OUT}/clips') else []:
     upload(f'{OUT}/clips/{c}', c, clips_dir, 'video/mp4')
+
+if TEST:
+    print(f'TEST upload ok: video {vid}, thumbnail {th} (not queued)'); sys.exit(0)
 
 # queue sheet (created by this app so drive.file can edit it)
 SHEET = find('Ifglass Queue', top, 'application/vnd.google-apps.spreadsheet')

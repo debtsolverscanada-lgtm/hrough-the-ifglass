@@ -5,6 +5,10 @@ on:
       episode:
         description: 'Episode folder, e.g. episodes/002-woke-up-1000-years'
         required: true
+      test_seconds:
+        description: 'Test only: render just the first N seconds and do NOT queue it for posting'
+        required: false
+        default: ''
   push:
     branches: [main]
     paths: ['episodes/*/READY']   # commit an empty READY file in an episode folder to build it
@@ -29,13 +33,17 @@ jobs:
           npm install --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
           pip install pocketsphinx requests
       - name: Build video, thumbnail, clips
-        run: python3 pipeline/build.py "${{ steps.ep.outputs.dir }}" --workers 4
+        run: |
+          if [ -n "${{ github.event.inputs.test_seconds }}" ]; then EXTRA="--seconds ${{ github.event.inputs.test_seconds }}"; fi
+          python3 pipeline/build.py "${{ steps.ep.outputs.dir }}" --workers 4 $EXTRA
       - name: Upload to Drive & queue
         env:
           GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
           GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
           GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
-        run: python3 pipeline/drive_upload.py "${{ steps.ep.outputs.dir }}"
+        run: |
+          if [ -n "${{ github.event.inputs.test_seconds }}" ]; then EXTRA="--test"; fi
+          python3 pipeline/drive_upload.py "${{ steps.ep.outputs.dir }}" $EXTRA
       - uses: actions/upload-artifact@v4
         if: always()
         with: { name: output, path: build/*/out/*.mp4, retention-days: 7 }
