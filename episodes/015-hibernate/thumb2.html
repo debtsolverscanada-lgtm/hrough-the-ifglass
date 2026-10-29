@@ -11,12 +11,12 @@ document.getElementById('s').innerHTML=TK.wrap(`
  <circle cx="1000" cy="170" r="74" fill="#FFF4DC"/><circle cx="1022" cy="150" r="14" fill="#E8DCC0"/><circle cx="975" cy="195" r="10" fill="#E8DCC0"/>
  ${th_far}
  <path d="M-50 1080 V760 Q300 700 700 740 Q1200 680 1970 750 V1080Z" fill="#C9DBF2" stroke="#0A0612" stroke-width="8"/>
- ${h15_den(1340,900,1.25,{snow:1,inner:TK.glowBlob(0,-120,260,'#FF8A2E',.8)})}
+ ${h15_den(1330,860,1.4,{snow:1,inner:TK.glowBlob(0,-120,260,'#FF8A2E',.8)})}
  ${TK.glowBlob(1340,780,420,'#FF9A3D',.35)}
  <path d="M-50 1080 V880 Q500 830 1000 870 Q1500 830 1970 880 V1080Z" fill="#EEF5FF"/>
- <g filter="url(#tkShadow)">${h15_bearSleep(1340,1075,1.7,th_g)}</g>
- ${TK.rim(`<g transform="translate(1385,392) scale(1.8)">${glint({t:.3,mouth:'o',brows:'raised',eyes:'closed',pose:'up',legs:'sit'})}</g>`,'#FFA24D',28)}
- ${h15_zzz(1010,780,th_g,1.6,'#BFE3FF')}${h15_zzz(1600,250,th_g+1.4,1.4,'#BFE3FF')}
+ <g filter="url(#tkShadow)">${h15_bearSleep(1270,1010,1.9,th_g)}</g>
+ ${TK.rim(`<g transform="translate(1500,450) scale(1.85)">${glint({t:.3,mouth:'o',brows:'raised',eyes:'closed',pose:'up'})}</g>`,'#FFA24D',28)}
+ ${h15_zzz(1120,690,th_g,1.5,'#DDF0FF')}${h15_zzz(1700,270,th_g+1.4,1.3,'#DDF0FF')}
  ${h15_snow(th_g,90,.9)}
  <g style="filter:blur(5px)">${[[90,140,16],[880,960,22],[1180,80,14],[620,420,12]].map(([x,y,r])=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#fff" opacity=".8"/>`).join('')}</g>
  ${TK.text(70,320,'I SLEPT FOR',{size:112,fill:'#fff',rot:-3})}
