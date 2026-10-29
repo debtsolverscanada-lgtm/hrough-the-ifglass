@@ -986,3 +986,113 @@ loudWorld(t,d,p,g){
    ${AT(t,p.louder??8)?T(960,160,'LOUDER THAN YOU THINK',{size:96,fill:P.white,sc:pop(t,p.louder??8)}):''}`;
 }
 });
+
+// ===================== episode 006 scenes (never forget) =====================
+const MEM='#FFB86B';
+function memCard(x,y,s,kind,rot=0,o={}){const {glow=0,sad=0}=o;
+  const pics={cake:`<rect x="-60" y="10" width="120" height="70" rx="10" fill="#FF9EC0" stroke="${INK}" stroke-width="6"/><path d="M-30 10 V-20 M0 10 V-26 M30 10 V-20" stroke="${INK}" stroke-width="6"/><circle cx="-30" cy="-30" r="8" fill="${P.gold}"/><circle cx="0" cy="-36" r="8" fill="${P.gold}"/><circle cx="30" cy="-30" r="8" fill="${P.gold}"/>`,
+    school:`<path d="M-80 70 V-10 L0 -60 L80 -10 V70Z" fill="#E86A5A" stroke="${INK}" stroke-width="6"/><rect x="-18" y="20" width="36" height="50" fill="#7A5A3A" stroke="${INK}" stroke-width="5"/><path d="M0 -60 V-100 l30 10 l-30 10" stroke="${INK}" stroke-width="5" fill="${P.gold}"/>`,
+    house:`<path d="M-80 70 V-10 L0 -70 L80 -10 V70Z" fill="#FFF6EA" stroke="${INK}" stroke-width="6"/><rect x="-50" y="0" width="34" height="30" fill="${P.iceDeep}" stroke="${INK}" stroke-width="4"/><path d="M40 -60 q10 -20 0 -40 q-10 -20 0 -40" stroke="#ccc" stroke-width="6" fill="none"/>`,
+    teacher:`<rect x="-90" y="-60" width="180" height="110" fill="#1E5A3A" stroke="${INK}" stroke-width="6"/><text y="10" text-anchor="middle" font-size="48" font-weight="900" fill="#fff">2+2=5</text><path d="M60 -30 l20 20 m0 -20 l-20 20" stroke="${P.red}" stroke-width="8"/>`,
+    party:`${[...Array(8)].map((_,i)=>`<circle cx="${-70+((i*53)%140)}" cy="${-60+((i*37)%120)}" r="10" fill="${[P.mint,P.gold,P.coral,P.violet][i%4]}"/>`).join('')}<path d="M-40 70 L0 -10 L40 70Z" fill="${P.violet}" stroke="${INK}" stroke-width="6"/>`,
+    rain:`<path d="M-70 -10 q0 -50 50 -50 q20 -40 70 -20 q50 0 40 50 q20 30 -20 40 H-60 q-40 0 -10 -20Z" fill="#7A869A" stroke="${INK}" stroke-width="6"/>${[-40,0,40].map(x=>`<path d="M${x} 40 l-10 30" stroke="${P.iceDeep}" stroke-width="6"/>`).join('')}`,
+    heart:`<path d="M0 60 C-90 0 -70 -70 0 -30 C70 -70 90 0 0 60Z" fill="${P.red}" stroke="${INK}" stroke-width="7"/>${sad?`<path d="M0 -30 l-14 30 l20 10 l-12 40" stroke="${INK}" stroke-width="7" fill="none"/>`:''}`,
+    face:`<circle r="60" fill="#FFD3A8" stroke="${INK}" stroke-width="6"/><circle cx="-20" cy="-10" r="7" fill="${INK}"/><circle cx="20" cy="-10" r="7" fill="${INK}"/><path d="M-22 22 q22 ${sad?-16:16} 44 0" stroke="${INK}" stroke-width="6" fill="none"/>`};
+  return `<g transform="translate(${x},${y}) rotate(${rot}) scale(${s})">${glow?`<circle r="190" fill="url(#gGold)" opacity="${glow*.6}"/>`:''}<rect x="-120" y="-120" width="240" height="250" rx="10" fill="#FFF6EA" stroke="${INK}" stroke-width="8"/><rect x="-100" y="-100" width="200" height="180" fill="${sad?'#3A3F55':'#22305A'}"/><g transform="translate(0,-10) scale(.9)">${pics[kind]||''}</g></g>`;}
+function memOrbit(g,cx,cy,list,R=420,o={}){return list.map((k,i)=>{const a=g*.25+i*2*Math.PI/list.length;return memCard(cx+Math.cos(a)*R,cy+Math.sin(a)*R*.55,o.s||.6,k,Math.sin(a)*10,o);}).join('');}
+Object.assign(SHOTS,{
+memHook(t,d,p,g){
+  return `${bgNight(g)}${memOrbit(g,960,560,['cake','school','party','house','teacher','heart'],560)}${glint({x:960,y:560,s:1.1,t:g,mouth:'o',brows:'raised',blink:BL(g),glint:1})}
+   ${AT(t,p.forever??10.3)?T(960,170,'FOREVER',{size:130,fill:MEM,sc:pop(t,p.forever??10.3)}):''}`;
+},
+forgetCurve(t,d,p,g){
+  const k=prog(t,p.draw??3,(p.draw??3)+4);let path='';for(let i=0;i<=60*k;i++){const x=320+i*21, y=300+560*(1-Math.exp(-i/9))*.82;path+=`${i?'L':'M'}${x} ${y}`;}
+  return `${card('cardDark',g)}<path d="M300 260 V880 H1640" stroke="#fff" stroke-width="6" fill="none" opacity=".6"/>${T(300,230,'REMEMBERED',{size:36,fill:'#fffa',anchor:'start',stroke:6})}${T(1640,940,'TIME',{size:36,fill:'#fffa',anchor:'end',stroke:6})}
+   <path d="${path}" stroke="${MEM}" stroke-width="12" fill="none" stroke-linecap="round"/>
+   ${AT(t,p.day??9)?`<path d="M520 260 V880" stroke="${P.coral}" stroke-width="4" stroke-dasharray="10 8"/>${T(520,960-30,'1 DAY',{size:44,fill:P.coral})}`:''}${AT(t,p.week??14.5)?`<path d="M1300 260 V880" stroke="${P.red}" stroke-width="4" stroke-dasharray="10 8"/>${T(1300,960-30,'1 WEEK',{size:44,fill:P.red})}`:''}
+   ${T(960,150,'THE FORGETTING CURVE',{size:84,fill:P.white,sc:IN(t,.2)})}`;
+},
+brainClean(t,d,p,g){
+  const stop=AT(t,p.stop??8);const r=rng(4);let cards='';
+  for(let i=0;i<7;i++){const k=stop?0:((g*.35+i/7)%1);const x=lerp(960+(r()-.5)*300,1500,k), y=lerp(500+(r()-.5)*200,820,k);cards+=memCard(x,y,.32*(1-k*.4),['cake','school','rain','party','house','face','teacher'][i],k*200);}
+  return `${card('cardMint',g)}${brain(960,480,1.5,1,g)}<g transform="translate(1520,840)"><path d="M-90 -100 H90 L70 90 H-70Z" fill="#9AA7BD" stroke="${INK}" stroke-width="8"/><path d="M-100 -100 H100" stroke="${INK}" stroke-width="12"/></g>${cards}
+   ${T(960,140,stop?'NOW IT STOPS':'YOUR BRAIN CLEANS',{size:96,fill:stop?P.coral:P.white,sc:pop(t,stop?p.stop??8:.2)})}`;
+},
+calendar(t,d,p,g){
+  const days=['MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY','SUNDAY'];const k=Math.floor(g*2.2)%7;
+  const hs=AT(t,p.hsam??23);
+  return `${card('cardWarm',g)}<g transform="translate(560,560)"><rect x="-240" y="-280" width="480" height="560" rx="24" fill="#FFF6EA" stroke="${INK}" stroke-width="10"/><rect x="-240" y="-280" width="480" height="120" rx="24" fill="${P.red}" stroke="${INK}" stroke-width="10"/>
+     <text y="-200" text-anchor="middle" font-size="56" font-weight="900" fill="#fff">${['MAR','JUN','AUG','OCT','DEC','FEB','MAY'][k]} ${1980+((k*7)%30)}</text><text y="70" text-anchor="middle" font-size="200" font-weight="900" fill="${INK}">${(k*5)%28+1}</text></g>
+   ${T(1300,400,days[(k*3)%7],{size:80,fill:MEM})}${AT(t,p.weather??13)?icon('bulb',1150,620,.6):''}${AT(t,p.news??15)?icon('tv',1450,620,.8):''}
+   ${hs?T(1300,850,'HSAM',{size:120,fill:P.mint,sc:pop(t,p.hsam??23)}):''}${AT(t,p.few??28)?T(1300,960-40,'~ A FEW DOZEN PEOPLE',{size:46,fill:P.white}):''}
+   ${T(960,130,hs?'HIGHLY SUPERIOR MEMORY':'ANY DATE. ANY DAY.',{size:84,fill:P.white,sc:pop(t,hs?p.hsam??23:.2)})}`;
+},
+splitScreen(t,d,p,g){
+  const m=AT(t,p.movie??7);
+  let strip='';for(let i=0;i<5;i++){const y=((g*120+i*240)%1200)-120;strip+=`<rect x="1150" y="${y}" width="420" height="200" fill="#22305A" stroke="#555" stroke-width="6"/>${memCard(1360,y+100,.55,['cake','rain','school','heart','party'][i],0)}`;}
+  return `${card('cardDark',g)}<rect x="960" y="0" width="960" height="1080" fill="#0B0814"/><rect x="1110" y="0" width="500" height="1080" fill="#111"/>${[...Array(18)].map((_,i)=>`<rect x="1125" y="${(i*60+g*120)%1080}" width="20" height="30" fill="#333"/><rect x="1575" y="${(i*60+g*120)%1080}" width="20" height="30" fill="#333"/>`).join('')}${m?strip:''}
+   <path d="M960 0 V1080" stroke="${MEM}" stroke-width="8"/>${glint({x:480,y:600,s:1,t:g,mouth:'flat',brows:'sad',blink:BL(g),look:1})}
+   ${T(480,170,'NOW',{size:90,fill:P.white})}${T(1360,170,'THE PAST',{size:90,fill:MEM})}${AT(t,p.ex??0)?T(480,300,AT(t,p.split??10)?'"LIKE A SPLIT SCREEN"':'"TOTALLY EXHAUSTING"',{size:50,fill:P.coral}):''}`;
+},
+morningMem(t,d,p,g){
+  const ks=['school','house','teacher'];const ats=[p.school??3,p.house??5.6,p.teach??8];
+  return `${bgRoom(g)}<rect x="300" y="700" width="760" height="140" rx="20" fill="#5A6FA8" stroke="${INK}" stroke-width="8"/><rect x="280" y="620" width="140" height="120" rx="20" fill="#FFF6EA" stroke="${INK}" stroke-width="7"/>
+   ${glint({x:520,y:560,s:.95,t:g,mouth:'o',brows:'raised',blink:BL(g),pose:'up'})}
+   ${ks.map((k,i)=>AT(t,ats[i])?memCard(1000+i*300,330+(i%2)*120,.85*pop(t,ats[i]),k,(i-1)*8,{glow:1}):'').join('')}
+   ${AT(t,p.sharp??13)?T(1300,860,'SHARP. LIKE THIS MORNING.',{size:56,fill:MEM}):''}`;
+},
+quizFriends(t,d,p,g){
+  const ans=['THE FOOD','THE MUSIC','WHO LEFT EARLY','11:42 PM'];const a0=p.ans??5;
+  return `${bgNight(g)}${extra({x:1380,y:600,s:.95,t:g,head:'#FFD3A8',pose:'point'})}${extra({x:1640,y:620,s:.9,t:g,head:'#C9A6FF'})}
+   ${glint({x:520,y:600,s:1,t:g,mouth:'grin',blink:BL(g),glint:AT(t,a0)?1:0,pose:AT(t,a0)?'flex':'down'})}
+   ${bubble(1380,220,640,120,'NEW YEAR\'S, 5 YEARS AGO?',{size:44,tail:'left'})}
+   ${ans.map((s,i)=>AT(t,a0+i*1.15)?labelPill(900,420+i*110,s,MEM,44):'').join('')}
+   ${AT(t,p.win??12.3)?stamp(960,330,.75,'YOU WIN EVERY ARGUMENT',P.mint,-4):''}`;
+},
+badMemories(t,d,p,g){
+  const ks=['rain','heart','face','rain','teacher','heart'];
+  return `${card('cardDark',g)}<rect width="1920" height="1080" fill="#000" opacity=".3"/>${memOrbit(g,960,560,ks,520,{sad:1})}${glint({x:960,y:580,s:1,t:g,mouth:'frown',brows:'sad',blink:BL(g)})}
+   ${T(960,140,p.title||'EVERY ARGUMENT YOU LOST',{size:84,fill:P.coral,sc:IN(t,.2)})}`;
+},
+fadeBars(t,d,p,g){
+  const k=prog(t,1,6), you=AT(t,p.you??9.3);
+  const bar=(x,lab,col,h)=>`<rect x="${x-80}" y="${880-h}" width="160" height="${h}" rx="16" fill="${col}" stroke="${INK}" stroke-width="7"/>${T(x,950-40,lab,{size:40,fill:col,stroke:7})}`;
+  return `${card('cardDark',g)}${bar(600,'GOOD FEELING','#7CF5A0',520*(1-k*.35))}${bar(960,'BAD FEELING',P.coral,520*(1-k*(you?0:.75)))}
+   ${you?`<g>${T(1450,500,'NOT FOR YOU',{size:90,fill:P.red,sc:pop(t,p.you??9.3)})}${T(1450,620,'10 YEARS LATER: SAME',{size:46,fill:P.white})}</g>`:T(1450,520,'TIME HEALS',{size:90,fill:P.mint,sc:pop(t,p.heal??7.8)*(AT(t,p.heal??7.8)?1:0)})}
+   ${T(960,150,'BAD MEMORIES FADE FASTER',{size:80,fill:P.white,sc:IN(t,.2)})}`;
+},
+examDesk(t,d,p,g){
+  const avg=AT(t,p.avg??7.6);
+  return `${bgRoom(g)}<rect x="300" y="700" width="900" height="40" rx="8" fill="#8A6A4A" stroke="${INK}" stroke-width="6"/>${paper(760,560,.7,4,'TEST',-6)}
+   ${glint({x:1400,y:560,s:1,t:g,mouth:avg?'flat':'smile',brows:avg?'sad':'calm',blink:BL(g)})}${avg?stamp(760,560,.55,'AVERAGE',P.gold,-12):''}
+   ${AT(t,p.life??10)?T(960,180,'LIFE, NOT TEXTBOOKS',{size:84,fill:MEM,sc:pop(t,p.life??10)}):T(960,180,'GENIUSES AT SCHOOL?',{size:84,fill:P.white,sc:IN(t,.2)})}`;
+},
+mnemonist(t,d,p,g){
+  const burn=prog(t,p.burn??30,(p.burn??30)+3);const r=rng(8);let nums='';for(let i=0;i<6;i++)for(let j=0;j<6;j++)nums+=`<text x="${-225+j*78}" y="${-150+i*64}" font-size="36" font-weight="900" fill="#5A4A3A">${Math.floor(r()*90+10)}</text>`;
+  let fire='';if(burn>0)for(let i=0;i<8;i++){const k=((g*1.5+i/8)%1);fire+=`<ellipse cx="${-150+i*42+Math.sin(g*8+i)*8}" cy="${200-k*200}" rx="${30*(1-k)}" ry="${60*(1-k)}" fill="${k<.4?P.gold:P.warm}" opacity="${(1-k)*burn}"/>`;}
+  let smoke='';if(burn>.6)for(let i=0;i<5;i++){const k=((g*.4+i/5)%1);smoke+=`<circle cx="${Math.sin(g+i)*60}" cy="${-260-k*300}" r="${40+k*60}" fill="#888" opacity="${.4*(1-k)}"/>`;}
+  return `<rect width="1920" height="1080" fill="#3A2E22"/><rect width="1920" height="1080" fill="#D9C7A3" opacity=".12"/>
+   <g transform="translate(700,580)"><rect x="-260" y="-230" width="520" height="460" rx="10" fill="#E8D9B8" stroke="${INK}" stroke-width="8" opacity="${1-burn*.7}"/><g opacity="${1-burn}">${nums}</g>${fire}${smoke}</g>
+   ${extra({x:1420,y:600,s:1,t:g,head:'#E8D9B8',glasses:true,tie:true})}
+   ${T(960,150,burn>0?'HE TRIED TO BURN HIS MEMORIES':'THE MAN CALLED "S"',{size:80,fill:'#F2D8A0',sc:pop(t,burn>0?(p.burn??30):.2)})}${AT(t,p.didnt??36.5)?stamp(1420,880,.7,"IT DIDN'T WORK",P.red,-6):''}`;
+},
+falseMem(t,d,p,g){
+  const ed=AT(t,p.rebuild??18);const sw=Math.floor(g*1.5)%3;
+  return `${card('cardMint',g)}${memCard(960,540,1.6,ed?['party','cake','house'][sw]:'party',Math.sin(g)*3)}
+   ${ed?`<g transform="translate(960,540)">${[...Array(6)].map((_,i)=>`<rect x="${-180+((i*97+Math.floor(g*3)*41)%300)}" y="${-160+((i*61+Math.floor(g*3)*29)%260)}" width="60" height="60" fill="${[P.mint,P.gold,P.coral][i%3]}" opacity=".5"/>`).join('')}</g>`:''}
+   ${AT(t,p.plant??6.5)?`<g transform="translate(1500,300)">${T(0,0,'+ FAKE DETAIL',{size:50,fill:P.coral,sc:pop(t,p.plant??6.5)})}</g>`:''}
+   ${T(960,140,ed?'YOUR BRAIN REBUILDS IT':'EVEN THEY GET FOOLED',{size:84,fill:P.white,sc:pop(t,ed?p.rebuild??18:.2)})}${AT(t,p.story??27)?T(960,960-40,'MEMORY IS A STORY',{size:64,fill:MEM}):''}`;
+},
+dogPattern(t,d,p,g){
+  const m=eout(prog(t,p.merge??11,(p.merge??11)+2));const r=rng(19);
+  let dogs='';for(let i=0;i<12;i++){const x0=200+r()*1520,y0=260+r()*600;const x=lerp(x0,960,m),y=lerp(y0,560,m);const c=['#C9A46A','#7A5A3A','#E8E8E8','#333','#D98A4A'][i%5];
+    dogs+=`<g transform="translate(${x},${y}) scale(${.6*(1-m*.4)})" opacity="${1-m*.9}"><ellipse rx="70" ry="40" fill="${c}" stroke="${INK}" stroke-width="7"/><circle cx="70" cy="-30" r="34" fill="${c}" stroke="${INK}" stroke-width="7"/><path d="M-60 30 v40 M60 30 v40 M-70 -10 l-40 -30" stroke="${INK}" stroke-width="9" stroke-linecap="round"/></g>`;}
+  return `${card('cardDark',g)}${dogs}${m>.6?T(960,600,'"DOG"',{size:200,fill:P.mint,sc:pop(t,(p.merge??11)+1.4)}):''}
+   ${T(960,150,m>.6?'1,000 MEMORIES → 1 IDEA':'FORGETTING IS USEFUL',{size:84,fill:P.white,sc:pop(t,m>.6?(p.merge??11)+1.4:.2)})}`;
+},
+lifeMem(t,d,p,g){
+  const sad=AT(t,p.sad??18.8);
+  return `${bgNight(g)}${memOrbit(g,960,560,sad?['heart','face','rain','heart','teacher','rain']:['heart','face','cake','party','house','school'],520,{sad:sad?1:0})}
+   ${glint({x:960,y:580,s:1.05,t:g,mouth:sad?'flat':'smile',brows:sad?'sad':'calm',blink:BL(g)})}${T(960,140,'20 YEARS FROM NOW',{size:84,fill:MEM,sc:IN(t,.2)})}`;
+}
+});

@@ -95,3 +95,15 @@ for c in clips:
 if srows:
     ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Shorts!A:I:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS', headers=H, json={'values': srows}))
 print(f'queued {len(srows)} shorts')
+
+# keep both tabs in episode order (builds can finish out of order); the Zaps always take the first 'ready' row
+props = ok(requests.get(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}', headers=H, params={'fields': 'sheets.properties(sheetId,title)'}))['sheets']
+sid = {x['properties']['title']: x['properties']['sheetId'] for x in props}
+reqs = []
+for title, keys in (('Sheet1', [0]), ('Shorts', [0, 1])):
+    if title in sid:
+        reqs.append({'sortRange': {'range': {'sheetId': sid[title], 'startRowIndex': 1, 'startColumnIndex': 0, 'endColumnIndex': 9},
+                                   'sortSpecs': [{'dimensionIndex': k, 'sortOrder': 'ASCENDING'} for k in keys]}})
+if reqs:
+    ok(requests.post(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}:batchUpdate', headers=H, json={'requests': reqs}))
+    print('sorted queue by episode')

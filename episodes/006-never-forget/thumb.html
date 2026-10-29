@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script>
+const ks=['cake','school','party','house','teacher','heart','rain','face'];let cards='';
+ks.forEach((k,i)=>{const a=i*2*Math.PI/ks.length+.3;cards+=memCard(1380+Math.cos(a)*400,540+Math.sin(a)*380,.62,k,Math.sin(a*3)*12,{glow:.6});});
+document.getElementById('s').innerHTML=`<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">${DEFS}
+ <rect width="1920" height="1080" fill="#120B22"/><circle cx="1380" cy="540" r="420" fill="url(#gGold)" opacity=".35"/>${cards}
+ <g transform="translate(1380,500) scale(1.25)">${glint({t:.3,mouth:'o',brows:'raised',glint:1,pose:'up'})}</g>
+ <text x="70" y="330" font-size="140" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="40" stroke-linejoin="round">I REMEMBER</text><text x="70" y="330" font-size="140" font-weight="900" fill="#fff">I REMEMBER</text>
+ <text x="60" y="570" font-size="190" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="46" stroke-linejoin="round">EVERY</text><text x="60" y="570" font-size="190" font-weight="900" fill="${MEM}">EVERY</text>
+ <text x="60" y="780" font-size="190" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="46" stroke-linejoin="round">DAY</text><text x="60" y="780" font-size="190" font-weight="900" fill="${MEM}">DAY</text>
+ <rect x="10" y="10" width="1900" height="1060" rx="18" fill="none" stroke="${MEM}" stroke-width="20"/>${VIG}</svg>`;
+</script></body></html>
