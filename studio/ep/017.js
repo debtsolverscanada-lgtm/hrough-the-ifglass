@@ -25,8 +25,8 @@ function r17_arrow(x,y,r,col=P.mint,w=16,rot=0){ // counter-clockwise circular a
   const [sx,sy]=p(-115),[ex,ey]=p(-65); const dx=Math.sin(r17_rad(-65)), dy=-Math.cos(r17_rad(-65));
   const nx=Math.cos(r17_rad(-65)), ny=Math.sin(r17_rad(-65));
   const tip=[ex+dx*30,ey+dy*30], b1=[ex+nx*26-dx*6,ey+ny*26-dy*6], b2=[ex-nx*26-dx*6,ey-ny*26-dy*6];
-  const d=`M${sx.toFixed(1)} ${sy.toFixed(1)} A${r} ${r} 0 1 1 ${ex.toFixed(1)} ${ey.toFixed(1)}`;
-  return `<g transform="translate(${x},${y}) rotate(${rot}) scale(-1,1)"><path d="${d}" stroke="${INK}" stroke-width="${w+12}" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${col}" stroke-width="${w}" fill="none" stroke-linecap="round"/>
+  const d=`M${sx.toFixed(1)} ${sy.toFixed(1)} A${r} ${r} 0 1 0 ${ex.toFixed(1)} ${ey.toFixed(1)}`;
+  return `<g transform="translate(${x},${y}) rotate(${rot})"><path d="${d}" stroke="${INK}" stroke-width="${w+12}" fill="none" stroke-linecap="round"/><path d="${d}" stroke="${col}" stroke-width="${w}" fill="none" stroke-linecap="round"/>
    <path d="M${tip[0]} ${tip[1]} L${b1[0]} ${b1[1]} L${b2[0]} ${b2[1]}Z" fill="${col}" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/></g>`;
 }
 function r17_hud(x,y,s,g,o={}){ const {col=P.mint,spin=0,sec='60s',secCol=null}=o;
@@ -66,10 +66,10 @@ function r17_rewWrap(inner,k,g,o={}){ if(k<=.001) return inner; const lv=Math.mi
 const r17_rk=(t,a,dur=1.1)=>a==null?0:clamp(Math.min((t-a)/.15,(a+dur-t)/.2));
 // big PLUS: / MINUS: label that pops, then flies to the top-left corner
 function r17_pm(t,kind,title,o={}){ const plus=kind==='plus', col=plus?P.mint:P.red; const fly=o.fly??1.9;
-  const k=eout(prog(t,fly,fly+.5)); const x=lerp(960,240,k), y=lerp(520,120,k), sc=lerp(1,.36,k)*pop(t,.02,.4);
+  const k=eout(prog(t,fly,fly+.5)); const x=lerp(960,270,k), y=lerp(520,120,k), sc=lerp(1,.36,k)*pop(t,.02,.4);
   return `<rect width="1920" height="1080" fill="#05040C" opacity="${.62*(1-k)}"/>
    <g transform="translate(${x},${y}) scale(${sc})">${T(0,60,plus?'PLUS:':'MINUS:',{size:300,fill:col,stroke:60})}</g>
-   ${k<1?T(960,760,title,{size:110,fill:'#fff',op:1-k,sc:pop(t,.3,.4)}):`<g transform="translate(${470+title.length*16},108)">${T(0,0,title,{size:52,fill:'#fff',anchor:'middle',stroke:12})}</g>`}`;
+   ${k<1?T(960,760,title,{size:110,fill:'#fff',op:1-k,sc:pop(t,.3,.4)}):`<g transform="translate(${plus?470:540},140)">${T(0,0,title,{size:52,fill:'#fff',anchor:'start',stroke:12})}</g>`}`;
 }
 // ---------- props ----------
 function r17_gear(x,y,r,n,rot,col=r17_BRASS){ let d='';
@@ -88,14 +88,15 @@ function r17_rain(g,op=1,dir=1,n=80,seed=23){const r=rng(seed);let s='';
     s+=`<path d="M${x.toFixed(0)} ${y.toFixed(0)} l-10 ${l.toFixed(0)}" stroke="#A9D8FF" stroke-width="4" stroke-linecap="round" opacity="${(op*(.35+r()*.4)).toFixed(2)}"/>`;}
   return s;}
 function r17_bolt(x,y,s,op=1){return `<g transform="translate(${x},${y}) scale(${s})" opacity="${op}"><path d="M0 0 L-40 150 L10 140 L-50 320 L80 110 L20 120 L60 0Z" fill="#FFF8D0" stroke="#fff" stroke-width="8" stroke-linejoin="round"/><circle cx="0" cy="150" r="220" fill="url(#gWhite)" opacity=".5"/></g>`;}
+function r17_winRain(g){let s='';const r=rng(8);for(let i=0;i<14;i++){const x=-110+r()*220,y=((r()*380+g*700)%380)-180;s+=`<path d="M${x.toFixed(0)} ${y.toFixed(0)} l-6 26" stroke="#A9D8FF" stroke-width="4" opacity=".7"/>`;}return s;}
 function r17_clouds(g,op=1){let s='';[[200,120,1.3],[760,70,1],[1300,140,1.4],[1800,90,1.1]].forEach(([x,y,k],i)=>{const xx=x+Math.sin(g*.2+i)*30;
   s+=`<g transform="translate(${xx},${y}) scale(${k})" opacity="${op}"><ellipse rx="210" ry="70" fill="#2A2C52"/><ellipse cx="-90" cy="-40" rx="110" ry="70" fill="#2A2C52"/><ellipse cx="80" cy="-50" rx="120" ry="80" fill="#30325C"/></g>`;});return s;}
 function r17_bgStorm(g,o={}){const {flash=0,rain=1,city=1,dir=1}=o; const r=rng(31); let st='';
   for(let i=0;i<50;i++) st+=`<circle cx="${r()*1920}" cy="${r()*500}" r="${1+r()*2}" fill="#fff" opacity="${.25+.3*Math.abs(Math.sin(g+i))}"/>`;
   return `<rect width="1920" height="1080" fill="url(#r17_storm)"/>${st}${r17_clouds(g)}
-   ${city?`${TK_r17sky(g)}`:''}${rain?r17_rain(g,rain,dir):''}<rect width="1920" height="1080" fill="#E8F0FF" opacity="${flash*.55}"/>`;
+   ${city?`${r17_sky(g)}`:''}${rain?r17_rain(g,rain,dir):''}<rect width="1920" height="1080" fill="#E8F0FF" opacity="${flash*.55}"/>`;
 }
-function TK_r17sky(g){const r=rng(5);let s='',x=-40;while(x<1960){const w=50+r()*90,h=60+r()*170;s+=`<rect x="${x}" y="${1080-h}" width="${w}" height="${h}" fill="#151230"/>`;
+function r17_sky(g){const r=rng(5);let s='',x=-40;while(x<1960){const w=50+r()*90,h=60+r()*170;s+=`<rect x="${x}" y="${1080-h}" width="${w}" height="${h}" fill="#151230"/>`;
   for(let k=0;k<4;k++) if(r()>.3) s+=`<rect x="${x+6+r()*(w-16)}" y="${1080-h+10+r()*(h-20)}" width="6" height="7" fill="${P.gold}" opacity="${.5+.4*Math.sin(g*2+k+x)}"/>`; x+=w+6;}return s;}
 function r17_clockPt(cx,cy,R,ma,f){const a=r17_rad(ma);return [cx+R*f*Math.sin(a),cy-R*f*Math.cos(a)];}
 function r17_face(cx,cy,R,ma,ha,o={}){ const {glow=1,back=false}=o; let tk='';
@@ -131,7 +132,7 @@ function r17_wind(g,op=1,y0=200,h=500){let s='';for(let i=0;i<9;i++){const x=((g
 function r17_bgTowerIn(g,o={}){const {flash=0,win=true}=o; let st='';
   for(let y=40,row=0;y<820;y+=80,row++){st+=`<path d="M0 ${y} H1920" stroke="#151225" stroke-width="5"/>`;for(let x=(row%2?90:0);x<1920;x+=180) st+=`<path d="M${x} ${y} V${y+80}" stroke="#151225" stroke-width="5"/>`;}
   return `<rect width="1920" height="1080" fill="url(#r17_stoneIn)"/>${st}
-   ${win?`<g transform="translate(1600,300)"><path d="M-130 200 V-60 Q-130 -190 0 -190 Q130 -190 130 -60 V200Z" fill="#0A0D20" stroke="${INK}" stroke-width="12"/><g opacity=".8">${r17_rain(g,.8,1,10,7).replace(/M(-?\d+) /g,(m,x)=>m)}</g><path d="M0 -190 V200 M-130 40 H130" stroke="#2A2440" stroke-width="12"/><rect x="-130" y="-190" width="260" height="390" fill="#DDE8FF" opacity="${flash}"/></g>`:''}
+   ${win?`<g transform="translate(1600,300)"><path d="M-130 200 V-60 Q-130 -190 0 -190 Q130 -190 130 -60 V200Z" fill="#0A0D20" stroke="${INK}" stroke-width="12"/>${r17_winRain(g)}<path d="M0 -190 V200 M-130 40 H130" stroke="#2A2440" stroke-width="12"/><rect x="-130" y="-190" width="260" height="390" fill="#DDE8FF" opacity="${flash}"/></g>`:''}
    <rect y="0" width="1920" height="60" fill="#3A2A20" stroke="${INK}" stroke-width="8"/><path d="M200 60 V0 M760 60 V0 M1320 60 V0" stroke="${INK}" stroke-width="6"/>
    <rect y="820" width="1920" height="260" fill="#2A1E18"/>${[0,1,2,3,4,5,6,7,8,9].map(i=>`<path d="M${i*200} 820 V1080" stroke="#1C140F" stroke-width="5"/>`).join('')}<path d="M0 820 H1920" stroke="${INK}" stroke-width="8"/>
    <rect width="1920" height="1080" fill="#DDE8FF" opacity="${flash*.35}"/>`;
@@ -187,7 +188,7 @@ function r17_dpDraw(x,y,L,key,a1,a2,t,col){const st=r17_dp(key,a1,a2,t), p=s=>{c
    <circle cx="${x1}" cy="${y1}" r="26" fill="${col}" stroke="${INK}" stroke-width="7"/><circle cx="${x2}" cy="${y2}" r="34" fill="${col}" stroke="${INK}" stroke-width="7"/><circle cx="${x}" cy="${y}" r="14" fill="${INK}"/>`;}
 function r17_banner(x,y,w,str,g,o={}){const {fold=0,s=1}=o;const wv=Math.sin(g*2)*8;
   return `<g transform="translate(${x},${y}) scale(${s})"><path d="M${-w/2} 0 Q0 ${wv} ${w/2} 0 L${w/2} 130 Q0 ${130+wv} ${-w/2} 130Z" fill="#FFF6EA" stroke="${INK}" stroke-width="8"/>
-   <text y="88" text-anchor="middle" font-size="72" font-weight="900" fill="${P.red}" letter-spacing="2">${str}</text>
+   ${Array.isArray(str)?`<text x="${-w*.3}" y="88" text-anchor="middle" font-size="72" font-weight="900" fill="${P.red}">${str[0]}</text><text x="${w*.3}" y="88" text-anchor="middle" font-size="72" font-weight="900" fill="${P.red}">${str[1]}</text>`:`<text y="88" text-anchor="middle" font-size="72" font-weight="900" fill="${P.red}" letter-spacing="2">${str}</text>`}
    ${fold>0?`<path d="M${-w*.18} -6 L${w*.2} -6 L${w*.24} 136 L${-w*.14} 136Z" fill="#E9DCC6" stroke="${INK}" stroke-width="7" opacity="${fold}"/>`:''}</g>`;}
 const r17_glow=(x,y,r,col='url(#gGold)',op=.6)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${col}" opacity="${op}"/>`;
 
@@ -235,7 +236,7 @@ rwPower(t,d,p,g){
    ${r17_hud(960,200,pop(t,p.hud??.2,.45),g,{spin:g*60,secCol:only&&!one?(Math.sin(g*8)>0?P.red:P.mint):P.mint})}
    ${only?T(960,385,'ONLY 60 SECONDS',{size:64,fill:P.gold,sc:pop(t,p.only??2.3)}):''}
    ${one?r17_left(1480,520,1,g,{s:1.35,flash:1-prog(t,p.one??4.3,(p.one??4.3)+.5)}):''}
-   ${r17_timer(1660,850,tm,g,{s:.75})}<rect width="1920" height="1080" fill="url(#r17_sl)" opacity=".18"/>`;
+   ${r17_timer(1660,790,tm,g,{s:.75})}<rect width="1920" height="1080" fill="url(#r17_sl)" opacity=".18"/>`;
 },
 // ---------------- ONE WEEK EARLIER ----------------
 rwTower(t,d,p,g){
@@ -266,7 +267,7 @@ rwLightning(t,d,p,g){
    ${r17_pend(520,40,640,rev?Math.sin(-(t-spin)*4)*16:Math.sin(g*2.1)*14,80)}
    ${glint({x:760,y:540,s:1.05,t:g,pose:'reach',mouth:fl>0||rev?'o':'flat',brows:fl>0||rev?'raised':'calm',look:1,blink:0,sweat:rev?1:0})}
    <g transform="translate(905,${545})"><rect x="-26" y="-22" width="52" height="44" rx="10" fill="${P.gold}" stroke="${INK}" stroke-width="6"/><circle r="13" fill="#FFF6EA" stroke="${INK}" stroke-width="3"/><path d="M0 0 V-9 M0 0 L${rev?-8:6} 3" stroke="${INK}" stroke-width="3"/></g>
-   ${!rev?T(960,150,'HIS WATCH CATCHES',{size:72,fill:'#fff',sc:pop(t,.4)}):''}
+   ${t<bolt?T(960,150,'HIS WATCH CATCHES',{size:72,fill:'#fff',sc:pop(t,.4)}):''}
    ${fl>0?r17_bolt(1600,90,1,fl):''}`;
   const k=rev?clamp((t-spin)/.4):0;
   return `${R17_DEFS}${rev?r17_rewWrap(inner,.35+.65*k,g,{hud:false}):inner}${fl>0?`<rect width="1920" height="1080" fill="#fff" opacity="${fl*.7}"/>`:''}
@@ -293,7 +294,7 @@ rwStill(t,d,p,g){
   return `${R17_DEFS}${rk>0?r17_rewWrap(inner,rk*.7,g,{hud:false}):inner}
     ${AT(lt,snap)&&lt<rain?`${T(820,330,'SNAP!',{size:110,fill:P.gold,sc:pop(lt,snap),rot:-8})}<circle cx="740" cy="460" r="${40+(lt-snap)*200}" fill="none" stroke="${P.gold}" stroke-width="8" opacity="${Math.max(0,1-(lt-snap)*1.5)}"/>`:''}
     ${AT(lt,rain)?T(1300,150,'THE RAIN UN-FALLS',{size:76,fill:'#A9D8FF',sc:pop(lt,rain)}):''}
-    ${AT(lt,sixty)?r17_hud(960,800,.85*pop(lt,sixty),g,{spin:g*200}):''}
+    ${AT(lt,sixty)?r17_hud(1180,800,.8*pop(lt,sixty),g,{spin:g*200}):''}
     ${AT(lt,every)?T(560,150,'EVERY TIME',{size:84,fill:P.mint,sc:pop(lt,every)})+tries:''}`;
 },
 // ---------------- THE RULES ----------------
@@ -309,8 +310,8 @@ rwRules(t,d,p,g){
    <path d="M${X(-60)} ${y} H${x1}" stroke="${P.mint}" stroke-width="14" stroke-linecap="round" opacity="${AT(t,send)?1:0}"/>${ticks}
    ${T(X(0),y+110,'NOW',{size:56,fill:'#fff'})}${T(X(-60),y+110,'-60 s',{size:56,fill:P.mint})}${T(X(-120),y+110,'-120 s',{size:56,fill:'#8C87A8'})}
    ${AT(t,send)&&!AT(t,stack)?arc(0,-60,P.mint,k1):''}
-   ${AT(t,send)?T(960,300,'THE WHOLE UNIVERSE: BACK 60 s',{size:60,fill:'#fff',sc:pop(t,send)}):''}
-   ${AT(t,more)?`<g transform="translate(${X(-60)-10},${y})"><rect x="-14" y="-110" width="28" height="220" fill="${P.red}" stroke="${INK}" stroke-width="6"/></g>${T(X(-90),y-140,'NOT 1 SECOND MORE',{size:44,fill:P.red,stroke:9,sc:pop(t,more)})}`:''}
+   ${AT(t,send)?T(960,265,'THE WHOLE UNIVERSE: BACK 60 s',{size:60,fill:'#fff',sc:pop(t,send)}):''}
+   ${AT(t,more)?`<g transform="translate(${X(-60)-10},${y})"><rect x="-14" y="-110" width="28" height="220" fill="${P.red}" stroke="${INK}" stroke-width="6"/></g>${!AT(t,stack)?T(X(-90),y-140,'NOT 1 SECOND MORE',{size:44,fill:P.red,stroke:9,sc:pop(t,more)}):''}`:''}
    ${AT(t,stack)?`${arc(0,-60,P.mint,1,-60)}${AT(t,twice)?arc(-60,-120,P.red,eout(prog(t,twice,twice+.8)),-60)+(AT(t,twice+.8)?icon('cross',X(-90),y-150,.7*pop(t,twice+.8)):''):''}`:''}
    ${AT(t,stack)?T(960,780,"CAN'T STACK REWINDS",{size:80,fill:P.gold,sc:pop(t,stack)}):''}
    ${AT(t,never)?T(960,870,'NEVER FURTHER',{size:60,fill:P.red,sc:pop(t,never)}):''}
@@ -418,8 +419,8 @@ rwPendulums(t,d,p,g){
   if(AT(t,dbl)){ const tt=AT(t,fl)?t-fl:0; const a1=2.4,a2=2.7;
     dp=r17_dpDraw(1400,400,200,'r17a',a1,a2,tt,P.gold)+(AT(t,fl)?r17_dpDraw(1400,400,200,'r17b',a1,a2+.004,tt,P.mint):'');}
   let ghosts='';if(AT(t,same)) for(let i=1;i<=3;i++) ghosts+=`<g opacity="${.18}">${r17_pend(720,250,400,Math.sin((g-.05*i)*2.6)*32,52,{rod:'#C9D6FF'})}</g>`;
-  return `${R17_DEFS}${bgLab(g)}${person({x:220,y:560,s:.85,t:g,who:'osei',pose:AT(t,dbl)?'point':'hips',mouth:AT(t,q)?'smile':'flat',blink:BL(g)})}
-   ${glint({x:1760,y:620,s:.7,t:g,mouth:AT(t,fl)?'o':'smile',brows:AT(t,fl)?'raised':'calm',look:-1,blink:BL(g),dir:-1})}
+  return `${R17_DEFS}${bgLab(g)}${person({x:170,y:580,s:.8,t:g,who:'osei',pose:AT(t,dbl)?'point':'hips',mouth:AT(t,q)?'smile':'flat',blink:BL(g)})}
+   ${glint({x:390,y:640,s:.6,t:g,mouth:AT(t,fl)?'o':'smile',brows:AT(t,fl)?'raised':'calm',look:1,blink:BL(g)})}
    <rect x="560" y="236" width="320" height="28" rx="8" fill="#5D6A82" stroke="${INK}" stroke-width="6"/>${ghosts}${r17_pend(720,250,400,sa,52)}
    <path d="M${720+Math.sin(r17_rad(-32))*400} ${250+Math.cos(r17_rad(-32))*400} A400 400 0 0 0 ${720+Math.sin(r17_rad(32))*400} ${250+Math.cos(r17_rad(32))*400}" stroke="${P.mint}" stroke-width="5" fill="none" stroke-dasharray="10 12" opacity="${AT(t,same)?.8:0}" transform="scale(1,1)"/>
    ${AT(t,dbl)?`<rect x="1240" y="386" width="320" height="28" rx="8" fill="#5D6A82" stroke="${INK}" stroke-width="6"/>${dp}`:''}
@@ -469,7 +470,7 @@ rwGhosts(t,d,p,g){
   }
   if(t<kai){
     const r=rng(5);let dots='';for(let i=0;i<40;i++){dots+=`<circle cx="${-150+r()*300}" cy="${-100+r()*190}" r="${7+r()*5}" fill="${P.red}" opacity="${.4+.6*Math.abs(Math.sin(g*5+i))}"/>`;}
-    return `${R17_DEFS}${bgLab(g)}<g transform="translate(1100,400)"><rect x="-330" y="-260" width="660" height="460" rx="24" fill="#0B1026" stroke="${INK}" stroke-width="10"/><rect x="-310" y="-240" width="620" height="420" rx="14" fill="#0E2A36"/>${brain(0,-30,1,1,g)}<g transform="translate(0,-30)">${dots}</g></g>
+    return `${R17_DEFS}${bgLab(g)}<g transform="translate(1100,450)"><rect x="-330" y="-260" width="660" height="460" rx="24" fill="#0B1026" stroke="${INK}" stroke-width="10"/><rect x="-310" y="-240" width="620" height="420" rx="14" fill="#0E2A36"/>${brain(0,-30,1,1,g)}<g transform="translate(0,-30)">${dots}</g></g>
      ${person({x:340,y:560,s:.9,t:g,who:'osei',pose:AT(t,stop)?'point':'cross',mouth:AT(t,stop)?'frown':'flat',brows:'sad',blink:BL(g)})}
      ${glint({x:1640,y:600,s:.85,t:g,mouth:AT(t,prom)?'flat':'o',brows:'sad',blink:BL(g),dir:-1,pose:AT(t,prom)?'cross':'down'})}
      ${AT(t,say)&&!AT(t,stop)?T(1100,770,'MEMORIES WITH NO PLACE TO FILE',{size:56,fill:'#fff',sc:pop(t,say)}):''}
@@ -483,48 +484,48 @@ rwGhosts(t,d,p,g){
 rwBanner(t,d,p,g){
   const plan=p.plan??6.3, mid=p.mid??11.6, yell=p.yell??14.9, slip=p.slip??18, hang=p.hang??20.6;
   if(t<plan) return `${R17_DEFS}${r17_bgKitchen(g)}${T(960,150,"IT'S NAN'S BIRTHDAY",{size:96,fill:P.gold,sc:pop(t,.1)})}
-     ${r17_banner(960,330,1500,'HAPPY BRITHDAY NAN',g)}${person({x:880,y:560,s:1.05,t:g,who:'kai',pose:'hold',mouth:'grin',brows:'raised',blink:BL(g)})}
-     <rect x="640" y="320" width="220" height="150" fill="#FFF6EA"/><rect x="600" y="320" width="140" height="150" fill="#FFF6EA"/><path d="M640 320 V450" stroke="none"/>
+     ${r17_banner(960,300,1500,['HAPPY','NAN'],g,{fold:1})}${person({x:860,y:600,s:1.05,t:g,who:'kai',pose:'hold',mouth:'grin',brows:'raised',blink:BL(g)})}
+     ${AT(t,p.say??4.4)?T(960,880,'"HAPPY BIRTHDAY NAN"',{size:60,fill:'#fff',sc:pop(t,p.say??4.4)}):''}
      <g transform="translate(1180,700) rotate(30)"><rect x="-10" y="-120" width="20" height="160" fill="${r17_WOOD}" stroke="${INK}" stroke-width="5"/><path d="M-16 40 h32 l-6 40 h-20Z" fill="${P.red}" stroke="${INK}" stroke-width="5"/></g>`;
   if(t<mid){ const lt=t-plan;
     return `${R17_DEFS}${r17_bgStorm(g,{rain:.4})}${r17_tower(520,420,150,g,{ma:0,ha:0})}
      <g transform="translate(1500,600)"><rect x="-260" y="-200" width="520" height="500" fill="#3A2E4E" stroke="${INK}" stroke-width="10"/><path d="M-300 -200 L0 -380 L300 -200Z" fill="#5A3550" stroke="${INK}" stroke-width="10"/><rect x="-110" y="-110" width="220" height="170" fill="#FFD27A" stroke="${INK}" stroke-width="8"/><path d="M0 -110 V60 M-110 -25 H110" stroke="${INK}" stroke-width="7"/></g>
      <path d="M700 420 Q1100 ${150} 1400 500" stroke="${P.gold}" stroke-width="10" fill="none" stroke-dasharray="22 16" stroke-dashoffset="${-g*60}"/>
      ${T(1500,250,"NAN'S KITCHEN",{size:56,fill:P.gold,stroke:11})}${T(960,880,'SHE\'LL SEE IT FROM HER WINDOW',{size:56,fill:'#fff',sc:pop(lt,.4)})}`;}
-  const cx=860,cy=380,R=230; const hanging=AT(t,hang); const ma=hanging?96:84;
+  const cx=860,cy=430,R=200; const hanging=AT(t,hang); const ma=hanging?96:84;
   const kx=AT(t,slip)&&!hanging?r17_clockPt(cx,cy,R*.92,84,.8):null;
   const clock=AT(t,yell)?'12:14':'12:00';
-  return `${R17_DEFS}${r17_bgStorm(g)}${r17_tower(cx,cy,R,g,{ma:t<yell?0:ma,ha:t<yell?0:7,hatch:[cx+250,cy-330]})}
-   ${!AT(t,slip)?person({x:cx+250+Math.min(1,(t-mid)/2)*-40,y:cy-260,s:.45,t:g,who:'kai',pose:'hold',legs:'walk',mouth:'grin'}):''}
+  return `${R17_DEFS}${r17_bgStorm(g)}${r17_tower(cx,cy,R,g,{ma:t<yell?0:ma,ha:t<yell?0:7,hatch:[cx+170,cy-R-90]})}
+   ${!AT(t,slip)?person({x:cx+170+Math.min(1,(t-mid)/2)*60,y:cy-R-60,s:.4,t:g,who:'kai',pose:AT(t,yell)?'up':'hold',legs:'walk',mouth:AT(t,yell)?'o':'grin',brows:AT(t,yell)?'raised':'calm'}):''}
    ${kx?`<g transform="rotate(${(t-slip)*40} ${kx[0]} ${kx[1]})">${person({x:kx[0],y:kx[1]+60,s:.55,t:g,who:'kai',pose:'up',mouth:'o',brows:'raised',legs:'walk'})}</g>`:''}
    ${hanging?r17_kaiHang(cx,cy,R*.92,ma,.84,.6,g):''}
    ${labelPill(1600,160,clock,AT(t,yell)?P.red:P.gold,70)}
    ${AT(t,yell)&&!AT(t,slip)?T(1320,420,'AAAAH!',{size:110,fill:P.red,sc:pop(t,yell),rot:-6}):''}
    ${AT(t,slip)&&!hanging?T(1300,780,'WET STONE',{size:70,fill:'#A9D8FF',sc:pop(t,slip)}):''}
-   ${hanging?T(1360,820,'JUST PAST THE THREE',{size:62,fill:P.gold,sc:pop(t,hang)}):''}${T(960,130-0,'MIDNIGHT',{size:70,fill:'#fff',op:t<yell?1:0})}`;
+   ${hanging?T(1360,820,'JUST PAST THE THREE',{size:62,fill:P.gold,sc:pop(t,hang)}):''}${t<yell?T(1600,290,'MIDNIGHT',{size:60,fill:'#fff'}):''}`;
 },
 rwGears(t,d,p,g){
   const clunk=p.clunk??1.6, jump=p.jump??3.7, slide=p.slide??5.9, rule=p.rule??8.9, tip=p.tip??12.7, sh=p.shout??15.4, ks=p.kai??17.3;
   const step=AT(t,jump)?1:0, ma=96+6*eout(prog(t,jump,jump+.2)); const f=.84+.04*eout(prog(t,slide,slide+.8));
   const tm=t<jump?jump-t:60-(t-jump); const gr=AT(t,clunk)?(t<clunk+.25?prog(t,clunk,clunk+.25)*15:15):0;
   return `${R17_DEFS}${r17_bgTowerIn(g,{win:false})}
-   <g transform="translate(470,470)">${r17_face(0,0,330,264-ma+180,0,{back:true,glow:.6})}</g>
+   <g transform="translate(470,470)">${r17_face(0,0,330,-ma,-7,{back:true,glow:.6})}</g>
    ${r17_gear(300,560,150,16,gr+g*2)}${r17_gear(520,380,100,11,-gr*1.5)}${r17_gear(700,600,120,12,gr*1.2)}
    ${glint({x:470,y:640,s:.75,t:g,pose:AT(t,sh)?'up':'down',mouth:AT(t,sh)?'teeth':'o',brows:'raised',blink:BL(g),look:1})}
    ${AT(t,clunk)?T(560,200,'CLUNK',{size:96,fill:P.gold,sc:pop(t,clunk),op:1-prog(t,clunk+2,clunk+2.5)}):''}
    <g transform="translate(1390,460)"><circle r="400" fill="#000" opacity=".25"/><g clip-path="url(#r17_cp)"><clipPath id="r17_cp"><circle r="380"/></clipPath>
      <g transform="translate(-1390,-460)">${r17_bgStorm(g,{city:0,rain:.6})}${r17_tower(1230,380,230,g,{ma})}${r17_kaiHang(1230,380,230*.92,ma,f,.55,g)}</g></g><circle r="380" fill="none" stroke="${INK}" stroke-width="16"/><circle r="380" fill="none" stroke="${P.gold}" stroke-width="7"/></g>
    ${AT(t,rule)?labelPill(1390,150,'1 NOTCH EVERY MINUTE',P.gold,48):''}
-   ${AT(t,tip)?T(1390,880,'EVERY JUMP = STEEPER',{size:60,fill:P.red,sc:pop(t,tip)}):''}
+   ${AT(t,tip)?T(800,880,'EVERY JUMP = STEEPER',{size:60,fill:P.red,sc:pop(t,tip)}):''}
    ${AT(t,sh)?bubble(420,170,420,110,"I'M COMING!",{size:54}):''}${AT(t,ks)?bubble(1500,250,380,110,'HURRY!',{size:64,tail:'right'}):''}
-   ${AT(t,jump)?r17_timer(160+0,880,tm,g,{s:.7,label:'NEXT NOTCH'}):''}`;
+   ${AT(t,jump)?r17_timer(1390,790,tm,g,{s:.7,label:'NEXT NOTCH'}):''}`;
 },
 rwTry12(t,d,p,g){
   const thr=p.throw??1, wind=p.wind??4.6, miss=p.miss??6.1, slip=p.slip??7.9, r1=p.r1??9.7, t2=p.t2??10.7, gust=p.gust??14.1, ch=p.chaos??16.4, m2=p.miss2??18.1, r2=p.r2??20.4;
   const second=t>=t2; const T0=second?t2:0; const lt=t-T0;
   const cx=1240,cy=600,R=270, ma=102; const [kx,ky]=r17_clockPt(cx,cy,R*.92,ma,.84);
   const hx=560,hy=250; const thrA=second?t2+.9:thr;
-  const kk=eout(prog(t,thrA,thrA+(second?3:3.2))); const missX=second?250:130, missY=second?-140:-70;
+  let kk=eout(prog(t,thrA,thrA+(second?3:3.2))); if(!second&&t>r1) kk=1-prog(t,r1,t2); if(second&&t>r2) kk=1-prog(t,r2,d); const missX=second?250:130, missY=second?-140:-70;
   const end=[kx+missX*eout(prog(t,second?gust:wind,(second?gust:wind)+1.4)),ky-60+missY*eout(prog(t,second?gust:wind,(second?gust:wind)+1.4))];
   const rope=AT(t,thrA)?r17_rope([hx+40,hy+40,(hx+end[0])/2,hy-160,end[0],end[1]],Math.min(1,kk*1.05)):r17_coil(hx+60,hy+50,.7);
   const slipK=AT(t,slip)&&!second?1:0;
@@ -544,17 +545,17 @@ rwTry12(t,d,p,g){
 },
 rwTry3(t,d,p,g){
   const go=p.go??3.5, q=p.q??6.2, brain_=p.brain??7.9, dr=p.drop??10.7, br=p.brush??14.3, miss=p.miss??15.9;
-  const slow=AT(t,q)&&t<br; const fall=AT(t,go)? (t<q? (t-go)*.15 : t<br? .4+ (t-q)*.03 : .4+(br-q)*.03+(t-br)*.9 ):0;
-  const ky=640+fall*80+(AT(t,miss)?Math.pow(Math.max(0,t-miss),2)*600:0);
+  const slow=AT(t,q)&&t<miss;
+  const ky=t<go?620:t<go+.6?lerp(620,480,eout((t-go)/.6)):t<miss?480+60*prog(t,dr,br):540+Math.pow(t-miss,2)*900;
   const tm=48-(t+21.3*0); const timer=r17_timer(1690,330,40-t,g,{s:.7,label:'NEXT NOTCH'});
   return `${R17_DEFS}${r17_bgStorm(g,{rain:.7,city:0})}${slow?`<rect width="1920" height="1080" fill="#7CC4FF" opacity=".12"/>`:''}
    ${r17_tower(1280,980,330,g,{ma:110,top:false})}
    <rect x="0" y="0" width="1100" height="330" fill="${r17_STONE}" stroke="${INK}" stroke-width="10"/><rect x="0" y="300" width="1100" height="40" fill="#5A5280" stroke="${INK}" stroke-width="8"/>
-   <g transform="translate(720,250)">${glint({s:.85,t:g,pose:'point',rot:90,mouth:AT(t,miss)?'o':'teeth',brows:AT(t,miss)?'raised':'angry',blink:0})}</g>
-   ${person({x:780,y:ky,s:.85,t:g,who:'kai',pose:'up',mouth:'o',brows:'raised',legs:'walk',sweat:1})}
+   <g transform="translate(720,222)">${glint({s:.85,t:g,pose:'point',rot:90,mouth:AT(t,miss)?'o':'teeth',brows:AT(t,miss)?'raised':'angry',blink:0})}</g>
+   ${person({x:700,y:ky,s:.85,t:g,who:'kai',pose:'up',mouth:'o',brows:'raised',legs:'walk',sweat:1})}
    ${AT(t,q)?`<g transform="translate(1480,480) scale(${pop(t,q)})">${clockP(0,0,110,slow?g*.1:g)}</g>${T(1480,670,'0.25 SECONDS',{size:70,fill:P.gold,sc:pop(t,q)})}`:''}
    ${AT(t,brain_)&&!AT(t,dr)?T(1480,770,"GLINT'S REACTION TIME",{size:50,fill:'#fff',sc:pop(t,brain_)}):''}
-   ${AT(t,dr)?`<g transform="translate(1080,${640-130})"><rect x="-22" y="0" width="44" height="${lerp(0,1,prog(t,dr,dr+.5))*0+ 120}" rx="6" fill="${P.gold}" stroke="${INK}" stroke-width="6"/>${[0,1,2].map(i=>`<path d="M-22 ${i*40+20} h18" stroke="${INK}" stroke-width="4"/>`).join('')}</g>${T(1240,610,'30 CM',{size:80,fill:P.gold,sc:pop(t,dr)})}`:''}
+   ${AT(t,dr)?`<g transform="translate(900,410)"><rect x="-22" y="0" width="44" height="130" rx="6" fill="${P.gold}" stroke="${INK}" stroke-width="6"/>${[0,1,2].map(i=>`<path d="M-22 ${i*40+20} h18" stroke="${INK}" stroke-width="4"/>`).join('')}</g>${T(1040,500,'30 CM',{size:80,fill:P.gold,sc:pop(t,dr)})}`:''}
    ${AT(t,br)&&!AT(t,miss)?T(960,150,'BRUSH...',{size:96,fill:'#fff',sc:pop(t,br)}):''}${AT(t,miss)?T(960,150,'MISS!',{size:150,fill:P.red,sc:pop(t,miss)}):''}
    ${labelPill(200,420,'TRY 3',P.red,54)}${r17_left(1690,140,2,g,{s:.85})}${timer}`;
 },
@@ -578,7 +579,7 @@ rwThink(t,d,p,g){
   const card_=(x,lab,sub,col,a,b,inner,cross)=>`<g transform="translate(${x},460) scale(${pop(t,a)})"><rect x="-200" y="-220" width="400" height="440" rx="30" fill="#0E1A2A" stroke="${col}" stroke-width="9"/>${inner}${T(0,150,lab,{size:56,fill:'#fff',stroke:11})}${AT(t,b)?T(0,205,sub,{size:40,fill:col,stroke:9}):''}${cross?icon(cross,140,-180,.6*pop(t,b)):''}</g>`;
   const pend=`<g transform="translate(0,-200)">${r17_pend(0,0,230,Math.sin(g*2.4)*20,44,{glow:AT(t,pe)?.6:0})}</g>`;
   return `${R17_DEFS}${card('cardDark',g)}${glint({x:220,y:560,s:.8,t:g,mouth:AT(t,pe)?'grin':'flat',brows:AT(t,pe)?'raised':'angry',blink:BL(g),pose:AT(t,pe)?'point':'cross',glint:AT(t,pe)?1:0})}
-   ${AT(t,wi)?card_(700,'WIND','= CHAOS',P.red,wi,ch,r17_wind(g,1,-200,200).replace(/M(-?[\d.]+) /g,(m,x)=>`M${(+x%380)-190} `)+`<g transform="translate(0,-40)">${[0,1,2].map(i=>`<path d="M-120 ${-60+i*50} q60 -40 120 0 t120 0" stroke="#CFE6FF" stroke-width="10" fill="none" stroke-linecap="round"/>`).join('')}</g>`,'cross'):''}
+   ${AT(t,wi)?card_(700,'WIND','= CHAOS',P.red,wi,ch,`<g transform="translate(0,-40)">${[0,1,2].map(i=>`<path d="M-120 ${-60+i*50} q60 -40 120 0 t120 0" stroke="#CFE6FF" stroke-width="10" fill="none" stroke-linecap="round"/>`).join('')}</g>`,'cross'):''}
    ${AT(t,re)?card_(1170,'REACTION','= BIOLOGY',P.red,re,bi,`<g transform="translate(0,-40)">${clockP(0,0,90,g)}</g>`,'cross'):''}
    ${AT(t,on)?card_(1640,'PENDULUM','NEVER CHAOTIC',P.mint,on,pe,AT(t,pe)?pend:T(0,-20,'?',{size:200,fill:P.gold}),AT(t,pe)?'check':null):''}
    ${T(960,140,AT(t,pe)?'THE PENDULUM.':'GLINT STOPS. THINKS.',{size:84,fill:AT(t,pe)?P.gold:'#fff',sc:pop(t,AT(t,pe)?pe:.1)})}`;
@@ -586,11 +587,11 @@ rwThink(t,d,p,g){
 rwEscape(t,d,p,g){
   const cl=p.clocks??4.2, sw=p.swing??6.4, es=p.esc??9.3, stp=p.step??14.2, stop=p.stop??17.9, hand=p.hand??20.7;
   const stopK=AT(t,stop)?Math.max(0,1-(t-stop)*1.2):1; const A=22*stopK; const ph=g*Math.PI/1.0; const pa=Math.sin(ph)*A;
-  const swings=Math.floor((g+.5)/1.0); const wheel=AT(t,stop)?Math.floor((stop+(g-t)+.5)/1.0)*24:swings*24+eout(clamp(((g+.5)%1.0)*6))*0;
+  const swings=Math.floor((g+.5)/1.0); const wheel=AT(t,stop)?Math.floor((stop+(g-t)+.5)/1.0)*24:(swings-1)*24+24*eout(clamp(((g+.5)%1.0)*5));
   const zoom=AT(t,es);
-  const esc=`<g transform="translate(1180,330)"><g transform="rotate(${pa*.9})"><path d="M-170 -10 Q0 -90 170 -10 L190 80 L150 70 L130 10 Q0 -40 -130 10 L-150 70 L-190 80Z" fill="#9AA7BD" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/><circle r="22" fill="${INK}"/></g>
-     <g transform="translate(0,230)">${r17_gear(0,0,170,15,wheel,'#E0B050')}</g></g>${r17_gear(1560,640,120,12,-wheel*1.4)}${r17_gear(1420,820,80,10,wheel*2.1)}`;
-  return `${R17_DEFS}${card('cardGold',g)}${r17_pend(zoom?1180:760,zoom?330:120,zoom?560:600,pa,zoom?60:80)}${zoom?esc:''}
+  const esc=`${r17_gear(1180,170,140,15,wheel,'#E0B050')}${r17_gear(1420,200,90,11,-wheel*15/11)}${r17_gear(1590,330,70,9,wheel*15/9)}
+     <g transform="translate(1180,360) rotate(${pa*.9}) scale(1,-1)"><path d="M-170 -10 Q0 -90 170 -10 L190 80 L150 70 L130 10 Q0 -40 -130 10 L-150 70 L-190 80Z" fill="#9AA7BD" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/><circle r="22" fill="${INK}"/></g>`;
+  return `${R17_DEFS}${card('cardGold',g)}${zoom?esc:''}${r17_pend(zoom?1180:760,zoom?360:120,zoom?400:600,pa,zoom?60:80)}
    ${!zoom?`${T(1380,330,'MOST PREDICTABLE',{size:72,fill:P.gold,sc:pop(t,.4)})}${T(1380,420,'THING IN PHYSICS',{size:72,fill:'#fff',sc:pop(t,.7)})}${AT(t,cl)?T(1380,560,'= WHY CLOCKS USE IT',{size:56,fill:P.mint,sc:pop(t,cl)}):''}
       ${AT(t,sw)?[0,1,2,3].map(i=>`<rect x="${1100+i*150}" y="700" width="130" height="50" rx="12" fill="${P.mint}" stroke="${INK}" stroke-width="6" opacity="${pop(t,sw+i*.2)}"/>`).join('')+T(1380,830,'EVERY SWING: SAME TIME',{size:52,fill:'#fff',sc:pop(t,sw)}):''}`:''}
    ${zoom?`${T(500,190,'THE ESCAPEMENT',{size:70,fill:P.gold,sc:pop(t,es)})}${AT(t,stp)?T(500,300,'1 SWING =',{size:60,fill:'#fff',sc:pop(t,stp)})+T(500,380,'1 TINY STEP',{size:72,fill:P.mint,sc:pop(t,stp+.2)}):''}
@@ -606,7 +607,7 @@ rwChoose(t,d,p,g){
     if(AT(t,s[i])) sl+=`<g transform="translate(1240,${y}) scale(${pop(t,s[i])})">${T(0,20,nw[i],{size:58,fill:'#fff',stroke:12})}</g>${T(900,y+20,String(i+1),{size:64,fill:P.mint})}`;}
   return `${R17_DEFS}${card('cardMint',g)}${glint({x:420,y:560,s:1.05,t:g,eyes:AT(t,cl)?'closed':'open',mouth:AT(t,ch)?'flat':'o',brows:'calm',blink:0})}
    ${AT(t,cl)?`<circle cx="420" cy="500" r="${200+Math.sin(g*3)*10}" fill="url(#gMint)" opacity=".4"/>`:''}${T(1240,110,'ROOM FOR 4 THINGS',{size:72,fill:P.mint,sc:pop(t,.1)})}${sl}
-   ${AT(t,fifth)&&!AT(t,lo)?`${r17_slot(1240,860,620,90,'',{col:P.red,op:.8})}${T(1240,880,'NOT A FIFTH',{size:52,fill:P.red,stroke:10})}`:''}`;
+   ${AT(t,fifth)&&!AT(t,lo)?`${r17_slot(1240,840,620,90,'',{col:P.red,op:.8})}${T(1240,860,'NOT A FIFTH',{size:52,fill:P.red,stroke:10})}`:''}`;
 },
 rwRun(t,d,p,g){
   const back=p.back??1.1, rope=p.rope??2.8, echo=p.echo??5.2, run=p.run??7.5, st=p.stairs??8.7, door=p.door??10.8, room=p.room??13.1, hug=p.hug??18.3, drag=p.drag??22.9, slow=p.slow??24.5, stops=p.stops??25.8;
@@ -618,52 +619,54 @@ rwRun(t,d,p,g){
     return `${R17_DEFS}${rk>0?r17_rewWrap(inner,rk,g,{hy:300}):inner}${t<.6?T(960,520,'SNAP',{size:200,fill:P.gold,sc:pop(t,0)}):''}
      ${AT(t,back)?T(960,170,'60 SECONDS BACK',{size:86,fill:P.mint,sc:pop(t,back)}):''}${AT(t,rope)?T(1100,700,'ROPE: BACK AT HIS FEET',{size:46,fill:'#fff',stroke:10,sc:pop(t,rope)}):''}
      ${AT(t,echo)?T(1400,380,'aaaah...',{size:70,fill:P.red,op:.6,sc:pop(t,echo)}):''}
-     ${r17_left(1690,140,0,g,{s:.85,flash:1-prog(t,.8,1.3)})}${list}${r17_timer(1690,850,tm,g,{s:.7,label:'NEXT NOTCH'})}`;
+     ${r17_left(1690,140,0,g,{s:.85,flash:1-prog(t,.8,1.3)})}${list}${r17_timer(1690,815,tm,g,{s:.7,label:'NEXT NOTCH'})}`;
   }
   if(t<room){ const lt=t-run; const dr=AT(t,door);
-    let steps='';for(let i=0;i<9;i++) steps+=`<rect x="${200+i*140}" y="${860-i*70}" width="150" height="${70+i*70}" fill="#3A2E4E" stroke="${INK}" stroke-width="7"/>`;
-    const gx=dr?lerp(1200,1500,prog(t,door,door+1)):lerp(260,1150,prog(t,run,door)); const gy=dr?300:lerp(560,0,prog(t,run,door))+ (dr?0:0);
-    return `${R17_DEFS}${r17_bgTowerIn(g,{win:false})}${steps}<g transform="translate(1560,330)">${dr?`<g transform="rotate(${-70*eout(prog(t,door,door+.3))} -110 0)"><rect x="-110" y="-190" width="220" height="380" fill="${P.red}" stroke="${INK}" stroke-width="10"/></g><rect x="-110" y="-190" width="220" height="380" fill="#1A1626" opacity=".6"/>`:`<rect x="-110" y="-190" width="220" height="380" fill="${P.red}" stroke="${INK}" stroke-width="10"/><circle cx="70" cy="10" r="14" fill="${P.gold}" stroke="${INK}" stroke-width="5"/>`}</g>
-     ${glint({x:gx,y:Math.min(gy,560)+0,s:.7,t:g,legs:'walk',pose:'reach',mouth:'teeth',brows:'angry',blink:0})}
+    let steps='';for(let i=0;i<7;i++) steps+=`<rect x="${180+i*150}" y="${860-i*60}" width="160" height="${80+i*60}" fill="#3A2E4E" stroke="${INK}" stroke-width="7"/>`;
+    steps+=`<rect x="1230" y="500" width="700" height="440" fill="#3A2E4E" stroke="${INK}" stroke-width="7"/>`;
+    const gx=dr?lerp(1260,1470,prog(t,door,door+1)):lerp(240,1250,prog(t,run,door)); const gy=dr?290:860-Math.min(6,Math.floor((gx-180)/150))*60-210;
+    return `${R17_DEFS}${r17_bgTowerIn(g,{win:false})}${steps}<g transform="translate(1560,310)">${dr?`<g transform="rotate(${-70*eout(prog(t,door,door+.3))} -110 0)"><rect x="-110" y="-190" width="220" height="380" fill="${P.red}" stroke="${INK}" stroke-width="10"/></g><rect x="-110" y="-190" width="220" height="380" fill="#1A1626" opacity=".6"/>`:`<rect x="-110" y="-190" width="220" height="380" fill="${P.red}" stroke="${INK}" stroke-width="10"/><circle cx="70" cy="10" r="14" fill="${P.gold}" stroke="${INK}" stroke-width="5"/>`}</g>
+     ${glint({x:gx,y:gy,s:.7,t:g,legs:'walk',pose:'reach',mouth:'teeth',brows:'angry',blink:0})}
      ${AT(t,st)&&!dr?T(700,180,'3 AT A TIME',{size:72,fill:P.gold,sc:pop(t,st)}):''}${dr?T(1000,180,'SHOULDER FIRST!',{size:80,fill:P.red,sc:pop(t,door)}):''}
-     ${list}${r17_timer(1690,850,tm,g,{s:.7,label:'NEXT NOTCH'})}`;
+     ${list}${r17_timer(1690,815,tm,g,{s:.7,label:'NEXT NOTCH'})}`;
   }
   const holdK=AT(t,hug); const amp=!holdK?18:AT(t,stops)?0:AT(t,slow)?lerp(9,0,prog(t,slow,stops)):AT(t,drag)?12:lerp(18,12,prog(t,hug,hug+1.5));
   const pa=Math.sin(g*2.2)*amp; const bx=960+Math.sin(r17_rad(pa))*560, by=40+Math.cos(r17_rad(pa))*560;
   let dust='';const r=rng(3);for(let i=0;i<40;i++) dust+=`<circle cx="${r()*1920}" cy="${(r()*1080+g*12*(1+r()))%1080}" r="${2+r()*3}" fill="#E8D7AA" opacity="${.15+r()*.25}"/>`;
   return `${R17_DEFS}${r17_bgTowerIn(g,{win:false})}<rect width="1920" height="1080" fill="#C9A46A" opacity=".1"/>${dust}${r17_gear(1500,380,150,15,AT(t,stops)?0:g*15)}${r17_gear(380,330,110,12,AT(t,stops)?0:-g*20)}
-   ${r17_pend(960,40,560,pa,90)}
-   ${holdK?glint({x:bx-60,y:by-10,s:.85,t:g,pose:'reach',mouth:AT(t,stops)?'grin':'teeth',brows:'angry',legs:'walk',rot:pa*.6}):glint({x:lerp(1500,1150,prog(t,room,room+3)),y:560,s:.85,t:g,legs:'walk',pose:'reach',mouth:'o',brows:'raised'})}
+   ${holdK?glint({x:bx-30,y:by-120,s:.85,t:g,pose:'reach',mouth:AT(t,stops)?'grin':'teeth',brows:'angry',legs:'walk',rot:pa*.5}):''}
+   ${r17_pend(960,40,560,pa,90)}${holdK?`<circle cx="${bx-82}" cy="${by-8}" r="20" fill="${P.cream}" stroke="${INK}" stroke-width="7"/><circle cx="${bx+82}" cy="${by-8}" r="20" fill="${P.cream}" stroke="${INK}" stroke-width="7"/>`:''}
+   ${holdK?'':glint({x:lerp(1500,1150,prog(t,room,room+3)),y:560,s:.85,t:g,legs:'walk',pose:'reach',mouth:'o',brows:'raised'})}
    ${!holdK?T(960,880-0,'TICK... TOCK...',{size:64,fill:'#E8D7AA',sc:pop(t,room+.3)}):''}
    ${AT(t,drag)&&!AT(t,slow)?T(960,880,'IT DRAGS HIM',{size:64,fill:'#fff',sc:pop(t,drag)}):''}${AT(t,slow)&&!AT(t,stops)?T(960,880,'SLOWER...',{size:72,fill:P.gold,sc:pop(t,slow)}):''}
-   ${AT(t,stops)?T(960,880,'STOPPED.',{size:110,fill:P.mint,sc:pop(t,stops)}):''}${list}${r17_timer(1690,850,tm,g,{s:.7,label:'NEXT NOTCH',stopped:AT(t,stops)})}`;
+   ${AT(t,stops)?T(960,880,'STOPPED.',{size:110,fill:P.mint,sc:pop(t,stops)}):''}${list}${r17_timer(1690,815,tm,g,{s:.7,label:'NEXT NOTCH',stopped:AT(t,stops)})}`;
 },
 rwRescue(t,d,p,g){
   const nr=p.norush??4, lo=p.lower??6, nt=p.nothrow??9.1, nw=p.nowind??10.1, lp=p.loop??11.7, hl=p.haul??13.7;
-  const cx=900,cy=560,R=290,ma=102; const [kx0,ky0]=r17_clockPt(cx,cy,R*.92,ma,.84);
-  const hx=kx0, hy=110; const ropeY=lerp(hy+40,ky0-60,eout(prog(t,lo,lo+2)));
+  const cx=900,cy=600,R=250,ma=102; const [kx0,ky0]=r17_clockPt(cx,cy,R*.92,ma,.84);
+  const hx=kx0, hy=170; const ropeY=lerp(hy+40,ky0-60,eout(prog(t,lo,lo+2)));
   const up=eout(prog(t,hl,hl+4.5)); const lift=up*(ky0-hy+40);
-  const frozen=`${T(cx-200,cy+R+120,'MINUTE HAND: FROZEN',{size:56,fill:P.mint,sc:pop(t,.5)})}`;
+  const frozen=`${T(1500,240,'MINUTE HAND',{size:60,fill:'#fff',sc:pop(t,.4)})}${T(1500,330,'FROZEN',{size:90,fill:P.mint,sc:pop(t,.7)})}`;
   return `${R17_DEFS}${r17_bgStorm(g,{rain:.4})}${r17_tower(cx,cy,R,g,{ma,top:false})}
-   <rect x="${hx-120}" y="0" width="240" height="${hy+30}" fill="${r17_STONE}"/><rect x="${hx-90}" y="${hy-90}" width="180" height="120" rx="16" fill="#FFC86B" stroke="${INK}" stroke-width="8"/><rect x="${hx-110}" y="${hy+20}" width="220" height="26" rx="8" fill="#5A5280" stroke="${INK}" stroke-width="7"/>
+   <rect x="${hx-130}" y="0" width="260" height="${hy+40}" fill="${r17_STONE}" stroke="${INK}" stroke-width="8"/><rect x="${hx-90}" y="${hy-90}" width="180" height="120" rx="16" fill="#FFC86B" stroke="${INK}" stroke-width="8"/><rect x="${hx-110}" y="${hy+20}" width="220" height="26" rx="8" fill="#5A5280" stroke="${INK}" stroke-width="7"/>
    ${glint({x:hx-10,y:hy-70,s:.42,t:g,pose:'reach',mouth:up>0?'teeth':'smile',brows:'angry',blink:BL(g)})}
    ${AT(t,lo)?`<path d="M${hx} ${hy+30} V${ropeY-lift}" stroke="${INK}" stroke-width="20" stroke-linecap="round"/><path d="M${hx} ${hy+30} V${ropeY-lift}" stroke="#E8C98A" stroke-width="10" stroke-dasharray="14 8"/>`:''}
    ${up>0?person({x:kx0,y:ky0+60-lift,s:.6,t:g,who:'kai',pose:'up',mouth:'grin',brows:'raised',legs:'stand'}):r17_kaiHang(cx,cy,R*.92,ma,.84,.6,g,{mouth:AT(t,lp)?'smile':'o'})}
    ${AT(t,lp)?`<ellipse cx="${kx0}" cy="${ky0+120-lift}" rx="70" ry="22" fill="none" stroke="#E8C98A" stroke-width="12"/>`:''}
-   ${t<lo?frozen:''}${AT(t,nr)&&t<lo+2?T(1500,330,'NO RUSH NOW',{size:70,fill:P.gold,sc:pop(t,nr)}):''}
+   ${t<nr?frozen:''}${AT(t,nr)&&t<lo+2?T(1500,330,'NO RUSH NOW',{size:70,fill:P.gold,sc:pop(t,nr)}):''}
    ${AT(t,nt)?T(1500,330,'NO THROWING',{size:64,fill:'#fff',sc:pop(t,nt)}):''}${AT(t,nw)?T(1500,430,'NO WIND GAMES',{size:64,fill:'#fff',sc:pop(t,nw)}):''}
-   ${AT(t,hl)?T(1500,600,'INCH BY INCH',{size:70,fill:P.mint,sc:pop(t,hl)}):''}${r17_timer(1690,850,0,g,{s:.7,label:'NEXT NOTCH',stopped:true})}`;
+   ${AT(t,hl)?T(1500,600,'INCH BY INCH',{size:70,fill:P.mint,sc:pop(t,hl)}):''}${r17_timer(1690,815,0,g,{s:.7,label:'NEXT NOTCH',stopped:true})}`;
 },
 // ---------------- THE TWIST ----------------
 rwFloor(t,d,p,g){
   const od=p.odd??3.8, we=p.weird??6.4, fe=p.fell??8.7, ca=p.cant??11.9, fo=p.forever??16.2;
   const sad=AT(t,ca);
   let falls='';if(sad) for(let i=0;i<3;i++){const k=((g*.5+i/3)%1);falls+=`<g opacity="${(1-k)*.8}">${person({x:1240+i*170,y:240+k*120,s:.28,t:g,who:'kai',pose:'up',mouth:'o',legs:'walk',rot:k*40})}</g>`;}
-  return `${R17_DEFS}${r17_bgTowerIn(g,{win:true})}
+  return `${R17_DEFS}${r17_bgTowerIn(g,{win:false})}
    <g transform="translate(560,760) rotate(-90)">${glint({s:.85,t:g,mouth:sad?'flat':'grin',brows:sad?'sad':'raised',blink:BL(g),pose:'up'})}</g>
    <g transform="translate(1180,780) rotate(90)">${person({s:.85,t:g,who:'kai',mouth:AT(t,we)?'flat':'laugh',brows:AT(t,we)?'raised':'calm',pose:'up'})}</g>
    ${!AT(t,od)?T(960,160,'LAUGHING AND SHAKING',{size:76,fill:P.gold,sc:pop(t,.4)}):''}
-   ${AT(t,we)&&!sad?bubble(1160,300,780,170,AT(t,fe)?"I FEEL LIKE I'VE FALLEN 3 TIMES":'WEIRD.',{size:AT(t,fe)?44:80,tail:'right'})+(AT(t,fe)?T(1160,350,'TONIGHT.',{size:44,fill:INK,stroke:0}):''):''}
+   ${AT(t,we)&&!sad?bubble(1160,280,920,190,AT(t,fe)?"I FEEL LIKE I'VE FALLEN 3 TIMES":'WEIRD.',{size:AT(t,fe)?44:80,tail:'right'})+(AT(t,fe)?`<text x="1160" y="350" text-anchor="middle" font-size="44" font-weight="900" fill="${INK}">TONIGHT.</text>`:''):''}
    ${sad?`<g><path d="M1080 120 H1820 V420 H1080Z" fill="#1A1630" stroke="#C9D6FF" stroke-width="6" stroke-dasharray="16 10" rx="20"/>${falls}</g>${T(560,240,"HE CAN'T TELL HIM",{size:60,fill:'#C9D6FF',sc:pop(t,ca)})}`:''}
    ${AT(t,fo)?T(1450,520,'ALONE. FOREVER.',{size:66,fill:'#C9D6FF',sc:pop(t,fo)}):''}`;
 },
@@ -673,10 +676,10 @@ rwBrithday(t,d,p,g){
   return `${R17_DEFS}<rect width="1920" height="1080" fill="url(#r17_morning)"/><circle cx="1700" cy="200" r="90" fill="${P.gold}" stroke="${INK}" stroke-width="8"/><circle cx="1700" cy="200" r="240" fill="url(#gGold)" opacity=".6"/>
    ${r17_tower(1260,330,170,g,{ma:102,ha:7})}
    <path d="M${1260-230} ${330+190} L${1260+230} ${330+190}" stroke="${INK}" stroke-width="6"/>
-   ${r17_banner(1260,560,reveal?720:620,reveal?'HAPPY BRITHDAY NAN':'HAPPY ... NAN',g,{s:reveal?1+.06*pop(t,sp):1})}
+   ${r17_banner(1260,560,reveal?760:620,reveal?'HAPPY BRITHDAY NAN':['HAPPY','NAN'],g,{s:reveal?1+.06*pop(t,sp):1,fold:reveal?0:1})}
    ${reveal?`<ellipse cx="${1260-30}" cy="${560+62}" rx="150" ry="56" fill="none" stroke="${P.red}" stroke-width="10" transform="rotate(-4 1230 622)"/>`:''}
    <g transform="translate(470,620)"><rect x="-330" y="-330" width="660" height="560" fill="#5A3550" stroke="${INK}" stroke-width="12"/><rect x="-260" y="-260" width="520" height="420" fill="#FFE9C0" stroke="${INK}" stroke-width="10"/>
-    <g transform="translate(0,-40)">${person({s:.9,t:g,who:'nan',pose:AT(t,la)?'hips':'point',mouth:AT(t,la)?'laugh':'o',brows:'raised',legs:AT(t,la)?'sit':'stand',blink:BL(g)})}</g><path d="M-260 160 H260" stroke="${INK}" stroke-width="10"/></g>
+    <clipPath id="r17_win"><rect x="-255" y="-255" width="510" height="410"/></clipPath><g clip-path="url(#r17_win)"><g transform="translate(0,${AT(t,la)?20:-40})">${person({s:.9,t:g,who:'nan',pose:AT(t,la)?'hips':'point',mouth:AT(t,la)?'laugh':'o',brows:'raised',legs:AT(t,la)?'sit':'stand',blink:BL(g)})}</g></g><path d="M-260 160 H260" stroke="${INK}" stroke-width="10"/></g>
    ${AT(t,la)?T(470,200,'HA HA HA!',{size:96,fill:P.gold,sc:pop(t,la)}):''}${T(960,140,'THE NEXT MORNING',{size:70,fill:'#fff',op:AT(t,la)?0:1})}
    ${AT(t,sp)?T(1260,820,"IT'S 'BIRTHDAY', KAI",{size:58,fill:P.red,sc:pop(t,sp+.6)}):''}
    ${AT(t,no)?r17_left(1690,380,0,g,{s:1.1,flash:1-prog(t,no,no+.5)}):''}`;
