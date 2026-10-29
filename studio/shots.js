@@ -857,3 +857,132 @@ seesYou(t,d,p,g){
    ${T(960,130,AT(t,p.sees??21)?'IT CAN SEE YOU':'THROUGH WALLS',{size:100,fill:WV,sc:pop(t,AT(t,p.sees??21)?p.sees??21:.2)})}`;
 }
 });
+
+// ===================== episode 005 scenes (plants scream) =====================
+const LEAF='#4FC36A', LEAFD='#2E8A47', CLK='#FFE14D';
+function plPot(x,y,s=1,o={}){const {g=0,dry=0,tomato=true,cut=false}=o;const sw=Math.sin(g*1.3)*3;
+  const lc=dry>.5?'#9DA35A':LEAF;
+  let lv='';[[-60,-120,-30],[60,-150,30],[-50,-210,-40],[55,-250,35],[0,-300,0]].forEach(([lx,ly,a],i)=>lv+=`<ellipse cx="${lx}" cy="${ly+dry*20}" rx="44" ry="20" fill="${lc}" stroke="${INK}" stroke-width="6" transform="rotate(${a+dry*(i%2?25:-25)} ${lx} ${ly})"/>`);
+  return `<g transform="translate(${x},${y}) scale(${s}) rotate(${sw})"><path d="M0 -10 Q${dry*20} -150 0 -300" stroke="${LEAFD}" stroke-width="12" fill="none" stroke-linecap="round"/>${cut?`<path d="M-20 -180 L20 -170" stroke="${P.red}" stroke-width="8"/>`:''}${lv}
+   ${tomato?`<circle cx="40" cy="-110" r="26" fill="${P.red}" stroke="${INK}" stroke-width="6"/><circle cx="-36" cy="-180" r="20" fill="${P.red}" stroke="${INK}" stroke-width="5"/>`:''}
+   <path d="M-80 -10 H80 L62 100 H-62Z" fill="#C7683E" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/><rect x="-90" y="-24" width="180" height="26" rx="8" fill="#D9804F" stroke="${INK}" stroke-width="7"/></g>`;}
+function plClick(x,y,g,phase=0,o={}){const {rate=1.3,size=1,label=true}=o;const k=((g*rate+phase)%1);if(k>.35)return '';const e=k/.35;
+  let r='';for(let i=0;i<8;i++){const a=i*Math.PI/4;r+=`<path d="M${x+Math.cos(a)*(14+e*30)*size} ${y+Math.sin(a)*(14+e*30)*size} L${x+Math.cos(a)*(30+e*46)*size} ${y+Math.sin(a)*(30+e*46)*size}" stroke="${CLK}" stroke-width="${7*size}" stroke-linecap="round" opacity="${1-e}"/>`;}
+  return r+(label?T(x+60*size,y-50*size,'click',{size:40*size,fill:CLK,op:1-e,stroke:8}):'');}
+function plClicksAt(t,list,x,y){return (list||[]).map((a,i)=>{const k=t-a;if(k<0||k>.7)return '';const e=k/.7;let r='';for(let j=0;j<10;j++){const an=j*Math.PI/5;r+=`<path d="M${x+Math.cos(an)*(20+e*60)} ${y+Math.sin(an)*(20+e*60)} L${x+Math.cos(an)*(50+e*110)} ${y+Math.sin(an)*(50+e*110)}" stroke="${CLK}" stroke-width="10" stroke-linecap="round" opacity="${1-e}"/>`;}return r+T(x+(i%2?150:-150),y-120,'CLICK!',{size:80,fill:CLK,sc:1+e*.3,op:1-e*e});}).join('');}
+function plGarden(g){return `<rect width="1920" height="1080" fill="url(#sky)"/><circle cx="1600" cy="200" r="90" fill="#FFE9A8" opacity=".9"/><path d="M0 820 Q480 760 960 800 T1920 790 V1080 H0Z" fill="#1F4A2E"/><path d="M0 880 H1920 V1080 H0Z" fill="#183A24"/>`;}
+Object.assign(SHOTS,{
+plantHook(t,d,p,g){
+  return `${plGarden(g)}${plPot(1180,820,1.5,{g})}${glint({x:620,y:560,s:1.05,t:g,pose:'reach',mouth:AT(t,(p.clicks||[99])[0])?'o':'smile',brows:AT(t,(p.clicks||[99])[0])?'raised':'calm',blink:BL(g)})}
+   ${plClicksAt(t,p.clicks,1180,450)}${p.label?T(960,150,p.label,{size:110,fill:CLK,sc:IN(t,p.labelAt)}):''}`;
+},
+soundBox(t,d,p,g){
+  const box=(x,lab,on,rate,col,o)=>`<g transform="translate(${x},0)"><rect x="-230" y="260" width="460" height="560" rx="24" fill="#152238" stroke="${col}" stroke-width="8"/><path d="M-230 300 H230" stroke="${col}" stroke-width="3" opacity=".4"/>
+     ${plPot(0,760,.95,{g,...o})}<g transform="translate(150,330)"><rect x="-14" y="0" width="28" height="70" rx="14" fill="#9AA7BD" stroke="${INK}" stroke-width="5"/><path d="M0 70 V120" stroke="#9AA7BD" stroke-width="6"/></g>
+     ${on?plClick(0,430,g,x*.001,{rate,label:false}):''}${T(0,890,lab,{size:46,fill:col})}</g>`;
+  const th=AT(t,p.thirsty??12), cu=AT(t,p.cut??17);
+  return `${bgLab(g)}${box(420,'HEALTHY',false,0,P.mint,{})}${box(960,'THIRSTY',th,1.6,CLK,{dry:1})}${box(1500,'CUT',cu,1.2,P.coral,{cut:true})}
+   ${AT(t,p.quiet??7)?T(420,220,'< 1 / hour',{size:52,fill:P.white,sc:pop(t,p.quiet??7)}):''}${th?T(960,220,'~35 / hour',{size:52,fill:CLK,sc:pop(t,p.thirsty??12)}):''}
+   ${AT(t,p.loud??31)?`<g transform="translate(960,${150})">${labelPill(0,0,'AS LOUD AS A CONVERSATION (UP CLOSE)',P.gold,44)}</g>`:T(960,130,'THE EXPERIMENT',{size:90,fill:P.white,sc:IN(t,.2)})}`;
+},
+hzPlants(t,d,p,g){
+  const X=f=>240+f*16.5, pl=AT(t,p.plants??4.4);
+  return `${card('cardDark',g)}<rect x="240" y="560" width="1440" height="40" rx="20" fill="#22305A" stroke="${INK}" stroke-width="6"/>
+   <rect x="240" y="560" width="${X(20)-240}" height="40" rx="20" fill="${P.mint}"/>${T(X(10),520,'YOU HEAR',{size:46,fill:P.mint})}${T(X(20),660,'20 kHz',{size:40,fill:P.white,stroke:7})}
+   ${pl?`<rect x="${X(40)}" y="560" width="${X(80)-X(40)}" height="40" rx="20" fill="${CLK}" opacity="${pop(t,p.plants??4.4)}"/>${T(X(60),520,'PLANT CLICKS',{size:46,fill:CLK,sc:pop(t,p.plants??4.4)})}${T(X(40),660,'40',{size:40,fill:'#fffa',stroke:7})}${T(X(80),660,'80 kHz',{size:40,fill:'#fffa',stroke:7})}`:''}
+   ${AT(t,p.ultra??8.4)?T(960,820,'ULTRASONIC',{size:110,fill:CLK,sc:pop(t,p.ultra??8.4)}):''}${AT(t,p.bat??9.7)?bat(1560,300,1.3,g*10):''}
+   ${T(960,170,'TOO HIGH TO HEAR',{size:96,fill:P.white,sc:IN(t,.2)})}`;
+},
+popcorn(t,d,p,g){
+  let wv='';for(let i=0;i<=160;i++){const x=200+i*9.5, sp=((i*7)%23===0)?(1-((g*2+i*.05)%1))*160:0;wv+=`${i?'L':'M'}${x} ${560+Math.sin(i*.9)*6-sp}`;}
+  const r=rng(31);let pc='';for(let i=0;i<14;i++){const ph=r();const k=((g*.8+ph)%1);if(k<.5){pc+=`<g transform="translate(${200+r()*1520},${700-k*200}) scale(${pop(k,0,.12)*.9})"><circle r="30" fill="#FFF3C4" stroke="${INK}" stroke-width="6"/><circle cx="20" cy="-14" r="22" fill="#FFF3C4" stroke="${INK}" stroke-width="6"/><circle cx="-18" cy="-16" r="20" fill="#FFF3C4" stroke="${INK}" stroke-width="6"/></g>`;}else r();}
+  return `${card('cardWarm',g)}<path d="${wv}" stroke="${INK}" stroke-width="14" fill="none"/><path d="${wv}" stroke="${CLK}" stroke-width="6" fill="none"/>${pc}
+   ${T(960,170,AT(t,p.bubble??5.4)?'LIKE BUBBLE WRAP':'SLOWED DOWN: POPCORN',{size:90,fill:P.white,sc:pop(t,AT(t,p.bubble??5.4)?p.bubble??5.4:.2)})}`;
+},
+sillPlant(t,d,p,g){
+  const ai=AT(t,p.ai??17), farm=AT(t,p.farm??28);
+  return `${bgRoom(g)}<rect x="1150" y="530" width="580" height="40" rx="8" fill="#8A6A4A" stroke="${INK}" stroke-width="6"/>${plPot(1440,520,.9,{g,dry:.8,tomato:false})}${plClick(1440,300,g,0,{rate:.45})}
+   ${glint({x:560,y:600,s:1,t:g,mouth:AT(t,p.thirst??10.4)?'o':'smile',brows:'raised',blink:BL(g),look:1})}
+   ${AT(t,p.thirst??10.4)&&!ai?bubble(1440,180,420,110,'WATER ME!',{size:56,tail:'right'}):''}
+   ${ai?`<g transform="translate(960,${farm?260:280})"><rect x="-330" y="-110" width="660" height="220" rx="20" fill="#0B1026" stroke="${P.mint}" stroke-width="6"/>${[...Array(40)].map((_,i)=>`<rect x="${-300+i*15}" y="${-Math.abs(Math.sin(i*1.7+g*3))*60}" width="9" height="${Math.abs(Math.sin(i*1.7+g*3))*120+4}" fill="${P.mint}"/>`).join('')}${T(0,160,'AI: "THIRSTY"',{size:50,fill:P.mint})}</g>`:''}
+   ${farm?T(560,930,'FARMS THAT LISTEN',{size:70,fill:CLK,sc:pop(t,p.farm??28)}):''}`;
+},
+xylem(t,d,p,g){
+  const pop0=p.pop??12;let tubes='';for(let i=0;i<4;i++){const x=560+i*260;tubes+=`<rect x="${x-50}" y="160" width="100" height="760" rx="50" fill="#0E2A3A" stroke="${LEAF}" stroke-width="8"/>`;
+    for(let k=0;k<6;k++){const y=900-(((g*.25+k/6+i*.13)%1)*720);tubes+=`<circle cx="${x+Math.sin(y*.05)*10}" cy="${y}" r="16" fill="${P.iceDeep}" opacity=".8"/>`;}
+    const bt=t-pop0-i*.35;if(bt>-2.5){const b=prog(bt,-2.5,0);tubes+=bt<0?`<circle cx="${x}" cy="${500+i*40}" r="${8+b*36}" fill="#fff" opacity=".85" stroke="${INK}" stroke-width="4"/>`:(bt<.6?plClick(x,500+i*40,0,0,{label:false,size:1.4}).replace(/opacity="1"/g,''):'')}
+  }
+  return `${card('cardDark',g)}${tubes}${T(1500,300,'WATER',{size:48,fill:P.iceDeep})}${AT(t,pop0-2.5)?T(1500,420,'AIR BUBBLES',{size:48,fill:P.white}):''}
+   ${T(960,110,AT(t,pop0)?'POP = CLICK':'LIKE A LONG STRAW',{size:90,fill:AT(t,pop0)?CLK:P.white,sc:pop(t,AT(t,pop0)?pop0:.2)})}${AT(t,p.ship??14.5)?T(960,1000-80,'A SOUND OF STRESS, NOT PAIN',{size:56,fill:P.mint}):''}`;
+},
+mothListen(t,d,p,g){
+  const mx=900+Math.sin(g*1.2)*260, my=360+Math.sin(g*2.1)*60, fl=Math.sin(g*30)*.5+.5;
+  return `${plGarden(g)}${plPot(1400,840,1.3,{g,dry:1})}${plClick(1400,480,g,0,{rate:1.4})}${plPot(520,840,1.3,{g})}
+   <g transform="translate(${mx},${my})"><ellipse rx="26" ry="16" fill="#C8B07A" stroke="${INK}" stroke-width="5"/><path d="M-6 -6 Q-80 ${-80*fl-20} -110 -10 Q-70 20 -6 6Z M6 -6 Q80 ${-80*fl-20} 110 -10 Q70 20 6 6Z" fill="#E6D3A0" stroke="${INK}" stroke-width="5"/>
+   ${[1,2].map(i=>`<path d="M30 -20 a${i*30} ${i*30} 0 0 1 0 40" stroke="${P.mint}" stroke-width="5" fill="none" opacity="${.5+.5*Math.sin(g*5+i)}"/>`).join('')}</g>
+   ${T(960,130,AT(t,p.choose??12)?'NOT THIS ONE...':'MOTHS HEAR ULTRASOUND',{size:84,fill:P.white,sc:pop(t,AT(t,p.choose??12)?p.choose??12:.2)})}
+   ${AT(t,p.unproven??17.3)?stamp(960,290,.7,'NOT PROVEN YET',P.gold,-6):''}`;
+},
+beeFlower(t,d,p,g){
+  const sw=prog(t,p.sweet??6,(p.sweet??6)+2.5), bx=1300+Math.sin(g*2)*30, by=330+Math.sin(g*3)*20, wf=Math.sin(g*40);
+  return `${plGarden(g)}<path d="M760 900 Q770 700 760 560" stroke="${LEAFD}" stroke-width="16" fill="none"/>${[0,72,144,216,288].map(a=>`<ellipse cx="760" cy="440" rx="60" ry="110" fill="#FFE97A" stroke="${INK}" stroke-width="7" transform="rotate(${a} 760 540) "/>`).join('')}<circle cx="760" cy="540" r="50" fill="#F5A623" stroke="${INK}" stroke-width="7"/>
+   <g transform="translate(${bx},${by})"><ellipse rx="56" ry="38" fill="${P.gold}" stroke="${INK}" stroke-width="6"/><path d="M-20 -36 V36 M8 -38 V38" stroke="${INK}" stroke-width="10"/><ellipse cx="-10" cy="-50" rx="30" ry="${16+wf*10}" fill="#fff" opacity=".7" stroke="${INK}" stroke-width="4"/></g>
+   ${[1,2,3].map(i=>`<path d="M${bx-80-i*40} ${by-50} q-30 50 0 100" stroke="${P.white}" stroke-width="5" fill="none" opacity="${.3+.6*((g*3+i/3)%1)}"/>`).join('')}
+   <g transform="translate(1600,780)"><rect x="-40" y="-240" width="80" height="240" rx="20" fill="#22305A" stroke="${INK}" stroke-width="6"/><rect x="-28" y="${-12-sw*200}" width="56" height="${sw*200}" rx="14" fill="${P.gold}"/>${T(0,60,'SWEETNESS',{size:36,fill:P.gold,stroke:7})}</g>
+   ${T(960,130,AT(t,p.sweet??6)?'SWEETER IN 3 MINUTES':'FLOWERS HEAR BEES',{size:90,fill:AT(t,p.sweet??6)?P.gold:P.white,sc:pop(t,AT(t,p.sweet??6)?p.sweet??6:.2)})}`;
+},
+caterpillarVib(t,d,p,g){
+  const play=AT(t,p.play??5.6), def=prog(t,p.defend??9.1,(p.defend??9.1)+2), ch=Math.sin(g*14)*6;
+  return `${card('cardMint',g)}<g transform="translate(520,560)"><path d="M-260 0 Q0 -200 260 0 Q0 200 -260 0Z" fill="${LEAF}" stroke="${INK}" stroke-width="9"/><path d="M-240 0 H240" stroke="${LEAFD}" stroke-width="6"/>
+     <g transform="translate(${100+ch},-40)">${[0,1,2,3,4].map(i=>`<circle cx="${-i*38}" cy="${Math.sin(g*6+i)*6}" r="26" fill="#9BE15D" stroke="${INK}" stroke-width="5"/>`).join('')}<circle cx="0" cy="0" r="6" fill="${INK}"/></g>
+     ${[1,2,3].map(i=>`<path d="M${280+i*40} -60 q30 60 0 120" stroke="${INK}" stroke-width="6" fill="none" opacity="${.3+.7*((g*4+i/3)%1)}"/>`).join('')}</g>
+   ${play?`<g transform="translate(1050,560)"><path d="M-40 -40 H0 L50 -90 V90 L0 40 H-40Z" fill="#2A3248" stroke="${INK}" stroke-width="6"/></g>${plPot(1460,880,1.25,{g})}
+     <circle cx="1460" cy="560" r="${220+def*40}" fill="none" stroke="${P.violet}" stroke-width="${10*def}" opacity="${def*.8}"/>`:''}
+   ${T(960,130,def>0?'SHIELDS UP':'RECORDED: CHEWING',{size:90,fill:def>0?P.violet:P.white,sc:pop(t,def>0?(p.defend??9.1):.2)})}`;
+},
+peaRoots(t,d,p,g){
+  const gr=eout(prog(t,.5,6));
+  let roots='';for(let i=0;i<5;i++){const a=-.6+i*.3;roots+=`<path d="M960 420 Q${960+Math.cos(a)*100} ${500+i*20} ${960+gr*(380+i*30)} ${520+i*60}" stroke="#F3E2B8" stroke-width="${10-i}" fill="none" stroke-linecap="round"/>`;}
+  return `${card('cardDark',g)}<rect x="300" y="380" width="1320" height="560" rx="30" fill="#3B2A20" stroke="${INK}" stroke-width="10"/><rect x="1480" y="380" width="80" height="560" fill="#22305A" stroke="${INK}" stroke-width="7"/>
+   ${[...Array(6)].map((_,i)=>`<circle cx="1520" cy="${400+((g*120+i*95)%540)}" r="14" fill="${P.iceDeep}"/>`).join('')}${roots}
+   <path d="M960 380 V230" stroke="${LEAFD}" stroke-width="12"/><ellipse cx="920" cy="250" rx="44" ry="20" fill="${LEAF}" stroke="${INK}" stroke-width="5"/><ellipse cx="1000" cy="230" rx="44" ry="20" fill="${LEAF}" stroke="${INK}" stroke-width="5"/>
+   ${T(1520,330,'SEALED PIPE',{size:40,fill:P.iceDeep,stroke:7})}${T(760,140,AT(t,p.hear??7)?'ONLY HEAR IT':'ROOTS FIND WATER',{size:84,fill:P.white,sc:pop(t,AT(t,p.hear??7)?p.hear??7:.2)})}`;
+},
+crackleStreet(t,d,p,g){
+  const rain=prog(t,p.rain??25,(p.rain??25)+3), tr=AT(t,p.trees??15);
+  let hedges='';for(let i=0;i<6;i++){const x=180+i*320;hedges+=`<ellipse cx="${x}" cy="800" rx="150" ry="90" fill="${rain>.5?LEAF:'#8C9B4A'}" stroke="${INK}" stroke-width="7"/>${rain<.8?plClick(x,720,g,i*.17,{rate:1.6,label:i%2==0}):''}`;}
+  let trees='';if(tr)for(let i=0;i<4;i++){const x=300+i*440;trees+=`<path d="M${x} 700 V480" stroke="#5A3A22" stroke-width="30"/><circle cx="${x}" cy="400" r="140" fill="${rain>.5?'#3F9F57':'#7A8A40'}" stroke="${INK}" stroke-width="8"/>${rain<.8?plClick(x,360,g,i*.29,{rate:1.2,label:false}):''}`;}
+  let drops='';if(rain>0)for(let i=0;i<70;i++){const x=(i*137)%1920, y=((g*900+i*71)%1080);drops+=`<path d="M${x} ${y} l-8 30" stroke="#BFEFFF" stroke-width="4" opacity="${rain*.8}"/>`;}
+  return `<rect width="1920" height="1080" fill="${rain>.3?'#2A3550':'#3A6EA5'}"/>${rain<.3?`<circle cx="1650" cy="180" r="100" fill="#FFE14D"/>`:''}${trees}<rect y="860" width="1920" height="220" fill="#2A2A33"/>${hedges}${drops}
+   ${T(960,130,rain>.3?'THE GARDEN GOES CALM':tr?'FORESTS CRACKLE TOO':'THE STREET IS CRACKLING',{size:84,fill:rain>.3?P.iceDeep:CLK,sc:pop(t,rain>.3?(p.rain??25):tr?(p.trees??15):.2)})}`;
+},
+mower(t,d,p,g){
+  const mx=lerp(-200,2100,prog(t,.3,(p.end??11)));
+  let grass='';for(let i=0;i<96;i++){const x=i*20+5, cut=x<mx;grass+=`<path d="M${x} 960 l8 ${cut?-30:-130}" stroke="${INK}" stroke-width="16" stroke-linecap="round"/><path d="M${x} 960 l8 ${cut?-30:-130}" stroke="${cut?'#6FD67F':LEAF}" stroke-width="9" stroke-linecap="round"/>`;}
+  let smell='';for(let i=0;i<8;i++){const k=((g*.4+i/8)%1);if(mx>i*240)smell+=`<circle cx="${i*240+Math.sin(g+i)*40}" cy="${820-k*500}" r="${40+k*60}" fill="#B6F25A" opacity="${.6*(1-k)}"/>`;}
+  return `${plGarden(g)}${grass}${smell}<g transform="translate(${mx},880) scale(1.6)"><rect x="-90" y="-50" width="180" height="70" rx="16" fill="${P.coral}" stroke="${INK}" stroke-width="7"/><path d="M-80 -50 L-200 -200" stroke="${INK}" stroke-width="10"/><circle cx="-60" cy="30" r="24" fill="#333" stroke="${INK}" stroke-width="5"/><circle cx="60" cy="30" r="24" fill="#333" stroke="${INK}" stroke-width="5"/></g>
+   ${AT(t,p.clicks??99)?[...Array(6)].map((_,i)=>mx>i*320?plClick(i*320+80,820,g,i*.21,{rate:1.8,label:false}):'').join(''):''}
+   ${T(960,130,AT(t,p.warn??11)?'A WARNING SIGNAL':'THAT CUT-GRASS SMELL',{size:90,fill:AT(t,p.warn??11)?'#9BE15D':P.white,sc:pop(t,AT(t,p.warn??11)?p.warn??11:.2)})}`;
+},
+cornWasp(t,d,p,g){
+  const ws=prog(t,p.wasp??6,(p.wasp??6)+3), wx=lerp(1900,1060,ws), wy=300+Math.sin(g*4)*40;
+  let smell='';for(let i=0;i<6;i++){const k=((g*.35+i/6)%1);smell+=`<circle cx="${900+k*700}" cy="${500-k*150+Math.sin(g*2+i)*30}" r="${30+k*50}" fill="#C9F27A" opacity="${.4*(1-k)}"/>`;}
+  return `${plGarden(g)}<g transform="translate(860,900)"><path d="M0 0 V-600" stroke="${LEAFD}" stroke-width="22"/>${[-1,1,-1,1].map((s,i)=>`<path d="M0 ${-120-i*120} Q${s*160} ${-200-i*120} ${s*260} ${-120-i*120}" stroke="${LEAF}" stroke-width="22" fill="none" stroke-linecap="round"/>`).join('')}<rect x="20" y="-420" width="54" height="150" rx="27" fill="${CLK}" stroke="${INK}" stroke-width="6"/>
+     <g transform="translate(-150,-330)">${[0,1,2,3].map(i=>`<circle cx="${-i*30}" cy="0" r="20" fill="#9BE15D" stroke="${INK}" stroke-width="5"/>`).join('')}</g></g>${smell}
+   <g transform="translate(${wx},${wy})"><ellipse rx="44" ry="18" fill="#1a1a1a" stroke="${CLK}" stroke-width="5"/><path d="M-10 -10 V10 M10 -10 V10" stroke="${CLK}" stroke-width="6"/><ellipse cx="0" cy="-26" rx="34" ry="${10+Math.sin(g*40)*6}" fill="#fff" opacity=".6"/><path d="M44 0 L66 6" stroke="${INK}" stroke-width="5"/></g>
+   ${T(960,130,AT(t,p.backup??14)?'IT CALLED FOR BACKUP':'A SMELL FOR HELP',{size:90,fill:AT(t,p.backup??14)?P.coral:'#C9F27A',sc:pop(t,AT(t,p.backup??14)?p.backup??14:.2)})}`;
+},
+kitchenPlant(t,d,p,g){
+  const list=AT(t,p.list??18);
+  return `${bgRoom(g)}<rect x="0" y="700" width="1920" height="60" fill="#8A6A4A" stroke="${INK}" stroke-width="6"/>${plPot(1180,700,1,{g,tomato:false})}
+   <rect x="1400" y="660" width="320" height="40" rx="10" fill="#C99A6A" stroke="${INK}" stroke-width="6"/><circle cx="1560" cy="640" r="44" fill="${P.red}" stroke="${INK}" stroke-width="7"/>
+   ${plClicksAt(t,p.clicks,1260,420)}${glint({x:560,y:520,s:1,t:g,mouth:list?'smile':'o',brows:list?'calm':'raised',blink:BL(g),pose:'point'})}
+   ${list?`<g transform="translate(960,200)">${['NO BRAIN','NO NERVES','NO FEAR'].map((s,i)=>AT(t,(p.list??18)+i*.9)?labelPill(-560+i*560,0,s,P.mint,48):'').join('')}</g>`:T(960,170,'SHOULD YOU FEEL GUILTY?',{size:84,fill:P.white,sc:pop(t,p.guilt??10)*(AT(t,p.guilt??10)?1:0)})}`;
+},
+loudWorld(t,d,p,g){
+  const a=AT(t,p.bats??0), b=AT(t,p.wifi??2.5), c=AT(t,p.plants??5.2);
+  return `${nightSky(g)}${hill(g)}${a?bat(480,300,1.4,g*10)+`<circle cx="480" cy="300" r="${120+((g*.8)%1)*200}" fill="none" stroke="${P.mint}" stroke-width="5" opacity="${1-((g*.8)%1)}"/>`:''}
+   ${b?router(960,640,1)+wifiWaves(960,640,g,{n:4,max:400,op:.5}):''}${c?plPot(1440,900,1.2,{g})+plClick(1440,560,g,0,{rate:1.3}):''}
+   ${AT(t,p.louder??8)?T(960,160,'LOUDER THAN YOU THINK',{size:96,fill:P.white,sc:pop(t,p.louder??8)}):''}`;
+}
+});

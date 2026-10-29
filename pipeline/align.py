@@ -7,7 +7,8 @@ EXTRA = {  # phonemes for words missing from the CMU dictionary (add more per ep
  'vitrification':'V IH T R AH F AH K EY SH AH N','vitrified':'V IH T R AH F AY D',
  'chickenpox':'CH IH K AH N P AA K S','loneliest':'L OW N L IY AH S T','fah':'F AA','hev':'HH EH V','oo':'UW','theh':'DH EH','thoo':'TH UW',
  "bat's":'B AE T S','shhhhh':'SH','slideshow':'S L AY D SH OW','terrifyingly':'T EH R AH F AY IH NG L IY',
- 'earbuds':'IH R B AH D Z','gigahertz':'G IH G AH HH ER T S','smartwatch':'S M AA R T W AA CH'}
+ 'earbuds':'IH R B AH D Z','gigahertz':'G IH G AH HH ER T S','smartwatch':'S M AA R T W AA CH',
+ 'windowsill':'W IH N D OW S IH L','soundproof':'S AW N D P R UW F','heatwave':'HH IY T W EY V','ebbinghaus':'EH B IH NG HH AW S'}
 script, audio, out = sys.argv[1:4]
 src = open(script).read()
 disp = []

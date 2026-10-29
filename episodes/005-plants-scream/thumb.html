@@ -1,0 +1,12 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script>
+let bursts='';[[1470,330,1.5],[1750,520,1.1],[1290,600,.9],[1680,230,.85]].forEach(([x,y,s])=>{for(let i=0;i<10;i++){const a=i*Math.PI/5;bursts+=`<path d="M${x+Math.cos(a)*40*s} ${y+Math.sin(a)*40*s} L${x+Math.cos(a)*100*s} ${y+Math.sin(a)*100*s}" stroke="${INK}" stroke-width="${22*s}" stroke-linecap="round"/><path d="M${x+Math.cos(a)*40*s} ${y+Math.sin(a)*40*s} L${x+Math.cos(a)*100*s} ${y+Math.sin(a)*100*s}" stroke="${CLK}" stroke-width="${12*s}" stroke-linecap="round"/>`;}});
+document.getElementById('s').innerHTML=`<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">${DEFS}
+ <rect width="1920" height="1080" fill="#0B1A12"/><circle cx="1400" cy="560" r="520" fill="url(#gMint)" opacity=".35"/>
+ ${plPot(1530,1000,2.3,{g:0})}${bursts}
+ <g transform="translate(1030,640) scale(1.2)">${glint({t:.3,mouth:'o',brows:'raised',look:1,glint:1,pose:'up'})}</g>
+ <text x="70" y="330" font-size="150" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="40" stroke-linejoin="round">PLANTS</text><text x="70" y="330" font-size="150" font-weight="900" fill="#fff">PLANTS</text>
+ <text x="55" y="580" font-size="180" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="44" stroke-linejoin="round">SCREAM</text><text x="55" y="580" font-size="180" font-weight="900" fill="${CLK}">SCREAM</text>
+ <text x="70" y="770" font-size="150" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="34" stroke-linejoin="round">?!</text><text x="70" y="770" font-size="150" font-weight="900" fill="${LEAF}">?!</text>
+ <rect x="10" y="10" width="1900" height="1060" rx="18" fill="none" stroke="${LEAF}" stroke-width="20"/>${VIG}</svg>`;
+</script></body></html>

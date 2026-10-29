@@ -1,0 +1,232 @@
+[
+ [
+  "What if you could hear plants",
+  "plantHook",
+  {
+   "label": "PLANTS SCREAM?",
+   "labelAt": "@and they were screaming",
+   "clicks": [
+    "@there's a sharp little",
+    "@Then another",
+    "@And another"
+   ]
+  }
+ ],
+ [
+  "That's not a sound effect",
+  "bigWord",
+  {
+   "word": "IT'S REAL",
+   "card": "cardDark",
+   "col": "#FFE14D",
+   "sub": "scientists recorded it"
+  }
+ ],
+ [
+  "And by the end of this video",
+  "talk",
+  {
+   "bg": "night",
+   "text": "SALAD WILL",
+   "text2": "NEVER BE THE SAME",
+   "pose": "shrug",
+   "mouth": "o",
+   "col": "#4FC36A",
+   "size": 84
+  }
+ ],
+ [
+  "Let's start with the experiment",
+  "soundBox",
+  {
+   "quiet": "@The healthy plants",
+   "thirsty": "@They clicked about",
+   "cut": "@The cut plants",
+   "loud": "@Up close"
+  }
+ ],
+ [
+  "So why have you never heard",
+  "hzPlants",
+  {
+   "plants": "@The plant clicks",
+   "ultra": "@Ultrasonic",
+   "bat": "@Just like bat"
+  }
+ ],
+ [
+  "When the scientists slowed",
+  "popcorn",
+  {
+   "bubble": "@Like bubble wrap"
+  }
+ ],
+ [
+  "Now let's give you the power",
+  "sillPlant",
+  {
+   "thirst": "@Forgot to water",
+   "ai": "@A computer listening",
+   "farm": "@One day farmers"
+  }
+ ],
+ [
+  "So are the plants actually",
+  "talk",
+  {
+   "bg": "dark",
+   "text": "IN PAIN?",
+   "pose": "shrug",
+   "mouth": "frown",
+   "brows": "sad",
+   "col": "#FF5E5B"
+  }
+ ],
+ [
+  "Plants don't have brains",
+  "xylem",
+  {
+   "pop": "@and pop",
+   "ship": "@So it's less like"
+  }
+ ],
+ [
+  "But here's where it gets strange",
+  "talk",
+  {
+   "bg": "night",
+   "text": "SOMETHING",
+   "text2": "IS LISTENING",
+   "pose": "point",
+   "mouth": "o",
+   "brows": "raised",
+   "col": "#FFE14D"
+  }
+ ],
+ [
+  "Moths can hear ultrasound",
+  "mothListen",
+  {
+   "choose": "@A plant that's clicking",
+   "unproven": "@That hasn't been proven"
+  }
+ ],
+ [
+  "And here's the wild part",
+  "beeFlower",
+  {
+   "sweet": "@Within three minutes"
+  }
+ ],
+ [
+  "In another study",
+  "caterpillarVib",
+  {
+   "play": "@Then they played",
+   "defend": "@And those plants started"
+  }
+ ],
+ [
+  "Pea plants have even",
+  "peaRoots",
+  {
+   "hear": "@Only hear"
+  }
+ ],
+ [
+  "Now step outside",
+  "crackleStreet",
+  {
+   "trees": "@And trees do it",
+   "rain": "@Then the rain comes"
+  }
+ ],
+ [
+  "And then there's the lawn mower",
+  "mower",
+  {
+   "warn": "@Plants use smells",
+   "end": 13
+  }
+ ],
+ [
+  "And some plants use them",
+  "cornWasp",
+  {
+   "wasp": "@The wasps follow",
+   "backup": "@The plant called"
+  }
+ ],
+ [
+  "So with your new power",
+  "mower",
+  {
+   "clicks": 0,
+   "warn": 99,
+   "end": 7
+  }
+ ],
+ [
+  "Now let's go to the kitchen",
+  "kitchenPlant",
+  {
+   "clicks": [
+    "@The plant clicks",
+    "@Click Click",
+    "@Click So"
+   ],
+   "guilt": "@So should you feel",
+   "list": "@No brain"
+  }
+ ],
+ [
+  "But you'd still notice",
+  "talk",
+  {
+   "bg": "warm",
+   "text": "THE TOMATOES",
+   "text2": "CLICK TOO",
+   "pose": "shrug",
+   "mouth": "grin",
+   "col": "#FF4D5E",
+   "text2At": "@The tomatoes click"
+  }
+ ],
+ [
+  "And here's the biggest idea",
+  "bigWord",
+  {
+   "word": "NOT SILENT",
+   "card": "cardDark",
+   "col": "#4FC36A",
+   "size": 150,
+   "sub": "they never were"
+  }
+ ],
+ [
+  "The bats were screaming",
+  "loudWorld",
+  {
+   "bats": 0,
+   "wifi": "@The WiFi was",
+   "plants": "@And the plants were",
+   "louder": "@The world is so"
+  }
+ ],
+ [
+  "So let me ask you",
+  "ask",
+  {
+   "q": "@Would you want"
+  }
+ ],
+ [
+  "Tell me in the comments",
+  "endCard",
+  {
+   "next": "@And next time",
+   "n1": "NEVER FORGET",
+   "n2": "ANYTHING?"
+  }
+ ]
+]
