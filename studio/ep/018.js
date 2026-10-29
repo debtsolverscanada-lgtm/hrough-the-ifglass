@@ -53,7 +53,7 @@ function n18_boiler(g,o={}){const {boil=1,leak=0,hum=0}=o;const f1=Math.sin(g*9)
   if(boil)s+=`<circle cx="1610" cy="440" r="${(270+Math.sin(g*3)*10).toFixed(0)}" fill="url(#gWarm)" opacity="${leak?.55:.28}"/>`;
   s+=`<rect x="1490" y="220" width="240" height="380" rx="20" fill="#E8E2D6" stroke="${INK}" stroke-width="9"/><rect x="1530" y="258" width="160" height="44" rx="8" fill="#C9C2B8" stroke="${INK}" stroke-width="5"/><circle cx="1560" cy="280" r="8" fill="${boil?P.mint:'#555'}"/>
    <rect x="1560" y="400" width="100" height="92" rx="12" fill="#1A1020" stroke="${INK}" stroke-width="6"/>`;
-  if(boil)s+=`<path d="M1580 484 Q1592 ${(446+f1).toFixed(0)} 1610 ${(418+f2).toFixed(0)} Q1628 ${(446+f1).toFixed(0)} 1640 484Z" fill="${leak?'#FFB13B':'#5AB8FF'}" opacity=".95"/>`;
+  if(boil){const fc=leak?'#FFB13B':'#5AB8FF';[[1585,0],[1610,1],[1635,2]].forEach(([fx,i])=>{const hh=(i===1?62:44)+Math.sin(g*8+i*2)*8;s+=`<path d="M${fx-14} 484 Q${fx-16} ${(484-hh*.5).toFixed(0)} ${fx+Math.sin(g*6+i)*5} ${(484-hh).toFixed(0)} Q${fx+16} ${(484-hh*.5).toFixed(0)} ${fx+14} 484Z" fill="${fc}" opacity=".95"/>`;});s+=`<rect x="1572" y="478" width="76" height="8" rx="4" fill="#6A6A72"/>`;}
   if(hum)for(let i=0;i<3;i++){const k=((g*.9+i/3)%1);s+=`<path d="M${1750+k*60} ${330+i*50} q20 -14 40 0 t40 0" stroke="${P.gold}" stroke-width="6" fill="none" opacity="${(hum*(1-k)).toFixed(2)}"/>`;}
   return s;}
 function n18_kitchen(g,o={}){const {win=0,door=0,boil=1,leak=1,alarm='off',clock=3,morning=0,hum=0}=o;
@@ -116,11 +116,11 @@ function n18_garden(g,o={}){const {house=1,doorLit=1}=o;const r=rng(61);let st='
    ${house?`<rect x="-20" y="220" width="420" height="560" fill="#2A2246" stroke="${INK}" stroke-width="8"/><path d="M-40 230 L190 90 L420 230Z" fill="#3A2E5A" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
    <rect x="200" y="460" width="150" height="320" fill="${doorLit?'#FFD98E':'#0A1430'}" stroke="${INK}" stroke-width="8"/>${doorLit?`<path d="M350 780 L560 900 H200 Z" fill="#FFD98E" opacity=".18"/>`:''}<rect x="40" y="300" width="120" height="110" fill="#FFD98E" opacity=".8" stroke="${INK}" stroke-width="6"/>`:''}`;}
 function n18_steps(t,cur,done){const L=['WINDOW','BACK DOOR','NAN','PICKLES','PHONE'],X=[220,480,710,900,1110];
-  return L.map((s,i)=>{const d=i<done,c=i===cur&&!d;const w=s.length*21+(d?96:60);const k=c?1+.06*Math.sin(t*8):1;
-    return `<g transform="translate(${X[i]},110) scale(${k.toFixed(3)})"><rect x="${-w/2}" y="-30" width="${w}" height="60" rx="30" fill="${d?P.mint:c?P.gold:'#2A3248'}" stroke="${INK}" stroke-width="6"/>${d?`<path d="M${-w/2+18} 0 l12 12 l20 -22" stroke="${INK}" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`:''}<text x="${d?18:0}" y="12" text-anchor="middle" font-size="34" font-weight="900" fill="${d||c?INK:'#9AA7BD'}">${s}</text></g>`;}).join('');}
+  return L.map((s,i)=>{const d=i<done,c=i===cur&&!d;const w=s.length*21+(d?110:60);const k=c?1+.06*Math.sin(t*8):1;
+    return `<g transform="translate(${X[i]},110) scale(${k.toFixed(3)})"><rect x="${-w/2}" y="-30" width="${w}" height="60" rx="30" fill="${d?P.mint:c?P.gold:'#2A3248'}" stroke="${INK}" stroke-width="6"/>${d?`<path d="M${-w/2+18} 0 l12 12 l20 -22" stroke="${INK}" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`:''}<text x="${d?24:0}" y="12" text-anchor="middle" font-size="34" font-weight="900" fill="${d||c?INK:'#9AA7BD'}">${s}</text></g>`;}).join('');}
 function n18_rbc(x,y,s,nCO,g){const seats=[[-130,-60],[130,-60],[-130,75],[130,75]];
   let o=`<g transform="translate(${x},${y}) scale(${s})"><ellipse rx="320" ry="220" fill="#D93A4A" stroke="${INK}" stroke-width="10"/><ellipse rx="200" ry="120" fill="#B82838" opacity=".7"/>`;
-  seats.forEach(([sx,sy],i)=>{const co=i<nCO;o+=`<circle cx="${sx}" cy="${sy}" r="58" fill="#7A1420" stroke="${INK}" stroke-width="6"/>`+(co?n18_coMol(sx,sy,.5)+`<circle cx="${sx}" cy="${sy}" r="70" fill="none" stroke="${n18_HZ}" stroke-width="6" stroke-dasharray="10 10"/>`:n18_o2(sx,sy+Math.sin(g*3+i)*6,.5));});
+  seats.forEach(([sx,sy],i)=>{const co=i<nCO;o+=`<circle cx="${sx}" cy="${sy}" r="58" fill="#7A1420" stroke="${INK}" stroke-width="6"/>`+(co?n18_coMol(sx,sy,.55)+`<circle cx="${sx}" cy="${sy}" r="70" fill="none" stroke="${n18_HZ}" stroke-width="6" stroke-dasharray="10 10"/>`:n18_o2(sx,sy+Math.sin(g*3+i)*6,.5));});
   return o+'</g>';}
 function n18_coMol(x,y,s){return `<g transform="translate(${x},${y}) scale(${s})"><circle cx="-42" r="58" fill="${n18_CO1}" stroke="${INK}" stroke-width="8"/><circle cx="46" r="52" fill="${P.red}" stroke="${INK}" stroke-width="8"/><text x="-42" y="18" text-anchor="middle" font-size="54" font-weight="900" fill="#fff">C</text><text x="46" y="18" text-anchor="middle" font-size="54" font-weight="900" fill="#fff">O</text></g>`;}
 function n18_o2(x,y,s){return `<g transform="translate(${x.toFixed(1)},${y.toFixed(1)}) scale(${s})"><circle cx="-44" r="52" fill="#6FD3F7" stroke="${INK}" stroke-width="8"/><circle cx="44" r="52" fill="#6FD3F7" stroke="${INK}" stroke-width="8"/><text x="-44" y="18" text-anchor="middle" font-size="54" font-weight="900" fill="${INK}">O</text><text x="44" y="18" text-anchor="middle" font-size="54" font-weight="900" fill="${INK}">O</text></g>`;}
@@ -129,7 +129,7 @@ function n18_phone(x,y,s,g,o={}){const {screen='CALLING...',ring=1}=o;return `<g
    <rect x="-110" y="-200" width="220" height="400" rx="34" fill="${INK}"/><rect x="-94" y="-170" width="188" height="320" rx="16" fill="#123A34"/><circle cy="0" r="46" fill="${P.mint}" stroke="${INK}" stroke-width="6"/><path d="M-20 -14 q0 34 34 34 l8 -14 l-16 -10 l-8 8 q-12 -6 -18 -18 l8 -8 l-10 -16Z" fill="${INK}"/>
    <text y="-110" text-anchor="middle" font-size="30" font-weight="900" fill="#fff">${screen}</text></g>`;}
 function n18_gGlint(o){return glint(Object.assign({blink:BL(o.t||0)},o));}
-function n18_dark(x,y,s){return `<g transform="translate(${x},${y}) scale(${s})"><path d="M-56 -36 q26 14 52 0 M4 -36 q26 14 52 0" stroke="#6A4A8A" stroke-width="8" fill="none" opacity=".75" stroke-linecap="round"/></g>`;}
+function n18_dark(x,y,s){return `<g transform="translate(${x},${y}) scale(${s})"><path d="M-47 -27 q17 9 34 0 M13 -27 q17 9 34 0" stroke="#6A4A8A" stroke-width="7" fill="none" opacity=".8" stroke-linecap="round"/></g>`;}
 
 Object.assign(SHOTS,{
 nsHook(t,d,p,g){
@@ -137,7 +137,7 @@ nsHook(t,d,p,g){
   return `${n18_city(g,{win:Math.max(.12,win)})}
    <rect x="720" y="380" width="480" height="560" fill="#151030" stroke="${INK}" stroke-width="8"/><path d="M700 392 L960 250 L1220 392Z" fill="#221A44" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
    <circle cx="960" cy="585" r="${(280+Math.sin(g*2)*10).toFixed(0)}" fill="url(#gGold)" opacity=".55"/><rect x="800" y="470" width="320" height="240" fill="#FFD98E"/>
-   <clipPath id="n18w1"><rect x="800" y="470" width="320" height="240"/></clipPath><g clip-path="url(#n18w1)">${glint({x:960,y:640,s:.75,t:g,mouth:'flat',lid:.05,look:Math.sin(g*.8)*.6})}${n18_dark(960,640-45,.75)}</g>
+   <clipPath id="n18w1"><rect x="800" y="470" width="320" height="240"/></clipPath><g clip-path="url(#n18w1)">${glint({x:960,y:640,s:.75,t:g,mouth:'flat',lid:.05,look:Math.sin(g*.8)*.6})}${n18_dark(960,640,.75)}</g>
    <rect x="800" y="470" width="320" height="240" fill="none" stroke="${INK}" stroke-width="10"/>
    ${n18_clock(380,540,150,3+t/3600)}${T(380,780,'3:00 AM',{size:80,fill:P.gold,sc:IN(t,.3)})}
    ${T(960,160,'THE ONLY ONE AWAKE',{size:96,fill:P.white,sc:IN(t,p.only??.4)})}
@@ -145,7 +145,7 @@ nsHook(t,d,p,g){
 },
 nsColdOpen(t,d,p,g){
   const nan=AT(t,p.nan??5.05), few=AT(t,p.few??12.4), head=AT(t,p.head??2.95);
-  if(!nan) return `${card('cardDark',g)}${n18_throb(960,470,g,1.4,head?1:0)}${glint({x:960,y:600,s:1.4,t:g,lid:.55+.12*Math.sin(g*2),mouth:'flat',brows:'sad'})}${n18_dark(960,600-84,1.4)}
+  if(!nan) return `${card('cardDark',g)}${n18_throb(960,470,g,1.4,head?1:0)}${glint({x:960,y:600,s:1.4,t:g,lid:.55+.12*Math.sin(g*2),mouth:'flat',brows:'sad'})}${n18_dark(960,600,1.4)}
     ${T(960,170,head?'HEAD: POUNDING':'EYELIDS: HEAVY',{size:100,fill:head?P.red:P.ice,sc:pop(t,head?p.head??2.95:.1)})}`;
   return `${n18_kitchen(g,{alarm:'off',leak:1})}${n18_nanChair(1250,g,{state:'slump'})}${pickles(930,860,.62,0,{blink:1})}${n18_haze(g,.55)}
    ${T(960,150,"NAN WON'T WAKE UP",{size:84,fill:P.red,sc:pop(t,p.nan??5.05)})}
@@ -310,7 +310,7 @@ nsGardner(t,d,p,g){
 nsGaps(t,d,p,g){
   const mi=p.micro??10.61;
   if(t<mi){const bl=(p.blink??5.46)+.35, over=AT(t,bl+.8), two=AT(t,p.two??8.66);const fill=over?1:clamp(prog(t,2,bl)*.7);
-    return `${n18_kitchen(g,{morning:1,leak:0,alarm:'off',clock:8.2})}${n18_days(1660,470,7,.7,{label:'DAY'})}
+    return `${n18_kitchen(g,{morning:1,leak:0,alarm:'off',clock:8.2})}${n18_days(300,700,7,.7,{label:'DAY'})}
      ${n18_table(1000,720,380,'#8A6A4A')}
      ${glint({x:760,y:545,s:.9,t:g,pose:'reach',mouth:over?'o':'smile',brows:over?'raised':'calm',lid:over?0:.25,blink:BL(g)})}
      <g transform="translate(900,560) rotate(${over?5:30})"><ellipse rx="70" ry="54" fill="#FFF6EA" stroke="${INK}" stroke-width="7"/><path d="M60 -10 L120 -40" stroke="${INK}" stroke-width="18" stroke-linecap="round"/><path d="M60 -10 L120 -40" stroke="#FFF6EA" stroke-width="8" stroke-linecap="round"/></g>
@@ -366,7 +366,7 @@ nsSleepy(t,d,p,g){
   const sl=AT(t,p.sleepy??4.01), sag=AT(t,p.sag??5.4), thr=AT(t,p.throb??7.15), con=AT(t,p.conf??8.92), jmp=AT(t,p.jump??10.47), shr=AT(t,p.shrug??13.85), tdy=AT(t,p.ten??16.79);
   const tick=jmp&&t>(p.jump??10.47)+.6?3+8/60:3+7/60;
   return `${card('cardDark',g)}${n18_throb(760,470,g,1.4,thr?1:0)}
-   ${glint({x:760,y:600,s:1.4,t:g,mouth:shr?'smirk':sl?'flat':'o',brows:sl&&!shr?'sad':'raised',lid:sag?.55+.15*Math.sin(g*1.5):0,pose:shr?'shrug':'down'})}${sag?n18_dark(760,600-84,1.4):''}
+   ${glint({x:760,y:600,s:1.4,t:g,mouth:shr?'smirk':sl?'flat':'o',brows:sl&&!shr?'sad':'raised',lid:sag?.55+.15*Math.sin(g*1.5):0,pose:shr?'shrug':'down'})}${sag?n18_dark(760,600,1.4):''}
    ${con?n18_swirl(760,250,g,.9):''}
    ${n18_clock(1450,500,150,tick)}${T(1450,730,jmp?'+1 MINUTE?':'3:07 AM',{size:56,fill:jmp?P.red:P.white})}${n18_gap(t,(p.jump??10.47)+.2,.5)}
    ${sl&&!shr?T(960,170,'SLEEPY.',{size:150,fill:P.violet,sc:pop(t,p.sleepy??4.01)}):''}${!sl?T(960,160,'SOMETHING NEW...',{size:84,fill:P.white,sc:IN(t,.2)}):''}
@@ -384,11 +384,11 @@ nsLogic(t,d,p,g){
 nsCO(t,d,p,g){
   const col=AT(t,p.col??1.65), bo=AT(t,p.boil??4.79), bl=AT(t,p.blood??6.6), two=AT(t,p.two??9), sym=AT(t,p.sym??15.79), asl=AT(t,p.asleep??19.21);
   if(bl){const n=Math.floor(4.2*prog(t,(p.blood??6.6)+1.5,(p.blood??6.6)+7));
-    let free='';for(let i=0;i<3;i++){const x=1550+Math.sin(g+i*2)*60,y=280+i*170+Math.cos(g*1.3+i)*20;free+=i<Math.min(n,3)?n18_o2(x,y,.42):'';}
-    return `${bgMicro(g)}${n18_rbc(760,520,1,n,g)}${free}${!sym?`<g transform="translate(${lerp(1500,1000,prog(t,(p.blood??6.6)+.5,(p.blood??6.6)+1.5)).toFixed(0)},${(820).toFixed(0)})">${n18_coMol(0,0,.7)}</g>`:''}
-     ${two&&!sym?`<g transform="translate(1450,520) scale(${pop(t,p.two??9)})">${labelPill(0,0,'~200x TIGHTER GRIP',P.gold,52)}</g>`:''}
-     ${sym?[['SLEEPY',0],['DIZZY',.6],['CONFUSED',1.2]].map(([s,o],i)=>`<g transform="translate(1520,${300+i*120}) scale(${pop(t,(p.sym??15.79)+o)})">${labelPill(0,0,s,P.violet,48)}</g>`).join(''):''}
-     ${asl?`<g transform="translate(1520,720) scale(${pop(t,p.asleep??19.21)})">${labelPill(0,0,'SLEEPERS MAY NOT WAKE',P.red,40)}</g>`:''}
+    let free='';for(let i=0;i<3;i++){const x=1240+Math.sin(g+i*2)*40,y=300+i*170+Math.cos(g*1.3+i)*20;free+=i<Math.min(n,3)?n18_o2(x,y,.42):'';}
+    return `${bgMicro(g)}${n18_rbc(760,520,1,n,g)}${free}${!sym?`<g transform="translate(${lerp(1500,1180,prog(t,(p.blood??6.6)+.5,(p.blood??6.6)+1.5)).toFixed(0)},680)">${n18_coMol(0,0,.6)}</g>`:''}
+     ${two&&!sym?`<g transform="translate(1420,800) scale(${pop(t,p.two??9)})">${labelPill(0,0,'~200x TIGHTER GRIP',P.gold,52)}</g>`:''}
+     ${sym?[['SLEEPY',0],['DIZZY',.6],['CONFUSED',1.2]].map(([s,o],i)=>`<g transform="translate(1600,${300+i*120}) scale(${pop(t,(p.sym??15.79)+o)})">${labelPill(0,0,s,P.violet,48)}</g>`).join(''):''}
+     ${asl?`<g transform="translate(1560,720) scale(${pop(t,p.asleep??19.21)})">${labelPill(0,0,'SLEEPERS MAY NOT WAKE',P.red,40)}</g>`:''}
      ${T(960,150,'IT STEALS OXYGEN SEATS',{size:84,fill:P.white,sc:pop(t,p.blood??6.6)})}${T(760,880,'RED BLOOD CELL',{size:44,fill:'#FF9EC0',stroke:8})}`;}
   if(bo) return `${n18_kitchen(g,{leak:1,alarm:'off'})}${n18_haze(g,.75)}${[0,1,2,3].map(i=>{const k=((g*.4+i/4)%1);return `<circle cx="${(1610-k*300).toFixed(0)}" cy="${(420-k*120).toFixed(0)}" r="${(40+k*120).toFixed(0)}" fill="${n18_HZ}" opacity="${((1-k)*.45).toFixed(2)}"/>`;}).join('')}
     <g transform="translate(1610,700) scale(${pop(t,p.boil??4.79)})">${labelPill(0,0,'FAULTY BOILER',P.red,46)}</g>${T(960,150,'IT CAN LEAK',{size:100,fill:P.white,sc:pop(t,p.boil??4.79)})}`;
@@ -424,7 +424,7 @@ nsHeart(t,d,p,g){
   return `${card('cardWarm',g)}${o2}${heart(600,500,.95,beat)}${hard?`<path d="M780 300 q12 20 0 30 q-12 -10 0 -30Z" fill="#9AD1FF" stroke="${INK}" stroke-width="4"/>`:''}
    <g transform="translate(600,820) scale(${IN(t,.2)})">${labelPill(0,0,"NAN'S WEAK HEART",P.red,48)}</g>
    ${need?`<g transform="translate(1320,300) scale(${pop(t,p.need??3.73)})">${labelPill(0,0,'NEEDS NONSTOP OXYGEN',P.iceDeep,44)}</g>`:''}${hard?`<g transform="translate(1320,760) scale(${pop(t,p.hard??8.0)})">${labelPill(0,0,'WORKING TOO HARD',P.coral,48)}</g>`:''}
-   ${T(960,150,'HARDEST ON A WEAK HEART',{size:84,fill:P.white,sc:IN(t,.1)})}${n18_timer(tl,g)}`;
+   ${T(760,150,'HARDEST ON A WEAK HEART',{size:80,fill:P.white,sc:IN(t,.1)})}${n18_timer(tl,g)}`;
 },
 nsPlan(t,d,p,g){
   const gp=AT(t,p.gaps??5.02), lg=AT(t,p.long??8.67), sh=AT(t,p.short??11.02), sf=AT(t,p.safe??12.8), ld=AT(t,p.loud??16.61);const tl=n18_left(g);
@@ -447,7 +447,7 @@ nsSteps(t,d,p,g){
    <rect x="0" y="40" width="1340" height="140" fill="#05030C" opacity=".35"/>${n18_steps(t,dn?1:0,dn?(fl?1:1):(wo>=1?1:0))}
    ${!dn&&wo>0?T(470,880,'"WINDOW."',{size:70,fill:P.gold,sc:pop(t,p.shove??1.04)}):''}${air&&!dn?T(1150,560,'COLD AIR',{size:56,fill:n18_ICE,stroke:9}):''}
    ${dn&&!fl&&!AT(t,gp)?T(1000,250,'"BACK DOOR."',{size:70,fill:P.gold,sc:pop(t,p.door??5.39)}):''}
-   ${AT(t,gp+.9)&&!kg?T(1250,300,'2 SECONDS GONE',{size:70,fill:P.red,sc:pop(t,gp+.9)}):''}${kg?T(1250,300,'KEEP GOING.',{size:90,fill:P.mint,sc:pop(t,p.keep??12.36)}):''}
+   ${AT(t,gp+.9)&&!kg?T(1330,760,'2 SECONDS GONE',{size:70,fill:P.red,sc:pop(t,gp+.9)}):''}${kg?T(1330,760,'KEEP GOING.',{size:90,fill:P.mint,sc:pop(t,p.keep??12.36)}):''}
    ${n18_gap(t,gp,.9)}${n18_timer(tl,g)}`;
 },
 nsNanOut(t,d,p,g){
@@ -505,9 +505,9 @@ nsHospital(t,d,p,g){
   const hrs=h14?Math.min(14,Math.round(14*prog(t,p.h14??9.2,(p.h14??9.2)+2.2))):0;
   return `<rect width="1920" height="1080" fill="#C9D6E8"/><rect y="760" width="1920" height="320" fill="#8E9AB0"/><rect x="1500" y="200" width="300" height="220" rx="16" fill="#0A1E1A" stroke="${INK}" stroke-width="8"/>${ecg(1520,330,260,g)}
    ${bed}${gl}${sl&&lying?n18_zzz(700,420,g,1.2,P.violet):''}
-   ${h14&&!wk?`${n18_clock(1650,640,110,22+hrs)}${n18_days(1650,850-30,hrs+'h',.55,{label:'ASLEEP',col:P.violet})}`:''}
+   ${!wk?`${person({x:1640,y:560,s:.85,t:g,who:'nan',legs:'sit',mouth:'smile',blink:BL(g+1)})}${n18_mask(1640,510,.85)}`:''}${h14&&!wk?`${n18_clock(230,330,100,22+hrs)}${n18_days(230,560,hrs+'h',.55,{label:'ASLEEP',col:P.violet})}`:''}
    ${T(960,150,gn?'THE POWER IS GONE':ti?'TIRED. NORMALLY TIRED.':wk?'HE WAKES UP...':rg?'JUST LIKE RANDY GARDNER':h14?'14 HOURS':sl?'AND GLINT SLEEPS':'OXYGEN FOR BOTH',{size:84,fill:gn?P.gold:ti?P.mint:P.white,sc:pop(t,gn?p.gone??18.7:ti?p.tired??15.95:wk?p.wake??13.7:rg?p.randy??11.61:h14?p.h14??9.2:sl?p.sleeps??6.79:p.hosp??3.74)})}
-   ${gn?n18_days(1650,560,0,.8):''}`;
+   ${gn?n18_days(1650,620,0,.8):''}`;
 },
 nsSong(t,d,p,g){
   const hm=AT(t,p.hum??2.99), fg=AT(t,p.fing??5.45), ev=AT(t,p.every??7.75), dr=AT(t,p.draft??9.17), ns=AT(t,p.nan??17.45);

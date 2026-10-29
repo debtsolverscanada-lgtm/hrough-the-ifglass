@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/cast.js"></script><script src="../../studio/thumbkit.js"></script><script src="../../studio/ep/018.js"></script><script>
+let th_g=1.3;
+let th_hero=`<g transform="translate(1470,470) scale(2.05)">${glint({t:.3,mouth:'o',brows:'raised',pose:'up',blink:0,glint:0})}${n18_dark(0,0,1)}</g>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ ${n18_kitchen(th_g,{leak:1,alarm:'off'})}
+ <rect width="1920" height="1080" fill="#05030C" opacity=".55"/>
+ ${TK.glowBlob(1610,430,520,'#FF8A3D',.55)}${TK.rays(1610,430,'#FFB13B',16,1600,.10)}
+ ${TK.glowBlob(300,250,300,'#5B6CFF',.25)}
+ <g opacity=".9">${n18_nanChair(1780,th_g,{state:'doze',s:.8})}</g>${n18_zzz(1700,330,th_g+.6,1.2)}
+ ${n18_haze(th_g,.5)}
+ <ellipse cx="1150" cy="930" rx="230" ry="40" fill="#6A3A4A" opacity=".9"/>${pickles(1150,890,.85,0,{blink:1})}
+ ${TK.rim(th_hero,'#FF9F43',30)}
+ <g transform="translate(1720,300) rotate(10)">${n18_coAlarm(0,0,1.8,'off',0)}</g>
+ ${TK.tag(1650,120,'LIGHT OFF','#FF3B3B',4)}
+ ${TK.text(70,320,'DAY TEN',{size:120,fill:'#fff',rot:-3})}
+ ${TK.text(55,600,'NO SLEEP',{size:250,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(330,850,'DAYS AWAKE','10','#7CF5FF',-3)}
+`,'#0B1026');
+</script></body></html>
