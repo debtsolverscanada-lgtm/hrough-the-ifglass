@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/thumbkit.js"></script><script>
+let th_cab='';for(let i=0;i<8;i++){const x=-40+i*250;th_cab+=`<rect x="${x}" y="60" width="230" height="300" rx="12" fill="#18244A" stroke="#0C1430" stroke-width="10"/><rect x="${x+180}" y="190" width="14" height="60" rx="7" fill="#2E4170"/>`;}
+const th_flame=(x,y,s)=>`<g transform="translate(${x},${y}) scale(${s})"><path d="M0 0 C-60 -10 -70 -90 -30 -140 C-30 -100 -10 -90 0 -110 C10 -160 40 -190 30 -240 C80 -190 90 -110 60 -60 C80 -70 90 -90 90 -110 C120 -50 80 0 0 0Z" fill="#FF5E3A" stroke="#0A0612" stroke-width="8" stroke-linejoin="round"/><path d="M5 -10 C-30 -20 -30 -70 0 -100 C10 -70 30 -80 30 -110 C60 -70 50 -20 5 -10Z" fill="#FFD43B"/></g>`;
+let th_steam='';[0,1,2].forEach(i=>th_steam+=`<path d="M${1530+i*44} 570 q-22 -36 0 -72 q22 -36 0 -72" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round" opacity="${.85-i*.2}"/>`);
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#0E1636"/>
+ ${th_cab}
+ <rect x="1240" y="110" width="300" height="230" rx="10" fill="#1E3A6E" stroke="#0C1430" stroke-width="12"/><circle cx="1460" cy="180" r="40" fill="#DDEBFF" opacity=".9"/>
+ ${TK.glowBlob(1640,600,480,'#FF4D2E',.55)}${TK.glowBlob(300,250,380,'#3F6BFF',.45)}
+ ${TK.rays(1600,640,'#FFB37A',16,1500,.14)}
+ <rect x="0" y="690" width="1920" height="40" fill="#2A3248"/><rect x="0" y="730" width="1920" height="400" fill="#141C38"/>
+ ${TK.bokeh(31,['#FF9F43','#FF5E3A','#FFD43B'],26,900)}
+ ${stove(1680,700,1.1,0,0)}${[[1560,656],[1790,656]].map(([x,y])=>`<ellipse cx="${x}" cy="${y}" rx="104" ry="22" fill="#FF3B1F" stroke="#0A0612" stroke-width="6"/><ellipse cx="${x}" cy="${y}" rx="64" ry="12" fill="none" stroke="#FFD43B" stroke-width="6"/><ellipse cx="${x}" cy="${y}" rx="30" ry="6" fill="none" stroke="#FFD43B" stroke-width="5"/>`).join('')}${TK.glowBlob(1560,650,130,'#FF5E3A',.9)}
+ ${th_flame(1770,650,.72)}
+ ${TK.rim(`<g transform="translate(1316,612) scale(1.85)">${glint({t:.3,mouth:'grin',brows:'raised',glint:1,pose:'reach',look:.6})}</g>`,'#FF6B6B',30)}
+ ${th_flame(1640,664,.36)}${th_steam}
+ ${TK.text(70,330,'I FEEL NO',{size:118,fill:'#fff',rot:-3})}
+ ${TK.text(55,650,'PAIN',{size:330,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(330,850,'PAIN LEVEL','0 / 10','#FF6B6B',-3)}
+`,'#0E1636');
+</script></body></html>
