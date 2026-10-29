@@ -1,0 +1,57 @@
+{
+ "episode": "014",
+ "title": "What If You Could Feel Earth's Magnetic Field?",
+ "description": "Imagine always knowing which way is north. In a forest, in a city you've never visited, in total darkness. Birds and sea turtles navigate with Earth's magnetic field, and a 2019 Caltech experiment suggests your own brain might be reacting to it right now.\n\nWould you trade your phone's map for a built-in compass? Tell me in the comments 👇\n\n▶ More What Ifs: What If You Had a Shark's Sixth Sense?\n\nCHAPTERS\n0:00 Feeling north\n0:23 What is Earth's magnetic field?\n0:57 The robin's quantum compass\n1:30 Radio noise scrambles birds\n1:45 Turtles that come home\n2:24 Your new sense\n3:00 People who always know north\n3:40 The moving pole and field flips\n4:33 Solar storms\n4:59 Can humans sense it?\n\nSOURCES\n• Robin magnetic compass, cryptochrome / radical-pair hypothesis (Mouritsen; Ritz)\n• Engels et al., Nature 2014: urban electromagnetic noise disrupts the robin compass\n• Lohmann: sea turtle magnetic navigation and natal homing\n• Levinson: Guugu Yimithirr cardinal directions\n• Wang et al., eNeuro 2019 (Caltech): human alpha-wave response to magnetic fields\n• North magnetic pole drift (~50 km/yr); last reversal ~780,000 years ago; South Atlantic Anomaly\n\n#whatif #science #magnetism",
+ "tags": [
+  "what if",
+  "magnetic sense",
+  "earth's magnetic field",
+  "magnetoreception",
+  "feel magnetic field",
+  "bird compass",
+  "sea turtle navigation",
+  "quantum biology",
+  "guugu yimithirr",
+  "magnetic pole shift",
+  "geomagnetic storm",
+  "northern lights",
+  "science what if",
+  "animal superpowers",
+  "through the ifglass"
+ ],
+ "category_id": "28",
+ "hook": [
+  "WHAT IF YOU COULD",
+  "FEEL NORTH?"
+ ],
+ "handle": "@throughtheifglass",
+ "thumbnail": "014-thumbnail.jpg",
+ "script": "014-magnetic-sense-VOICEOVER.txt",
+ "voice": "voiceover.mp3",
+ "subs": [
+  [
+   "seven hundred and eighty thousand years",
+   "780,000 years"
+  ],
+  [
+   "three thousand kilometers",
+   "3,000 kilometers"
+  ],
+  [
+   "sixty thousand times",
+   "60,000 times"
+  ],
+  [
+   "fifty kilometers",
+   "50 kilometers"
+  ],
+  [
+   "a hundred times",
+   "100 times"
+  ],
+  [
+   "twenty nineteen",
+   "2019"
+  ]
+ ]
+}

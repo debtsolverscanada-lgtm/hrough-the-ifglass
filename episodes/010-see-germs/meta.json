@@ -1,0 +1,49 @@
+{
+ "episode": "010",
+ "title": "What If You Could See Every Germ Around You?",
+ "description": "Your phone. Your toothbrush. Your kitchen sponge. What if you could see every germ on them, glowing? Here's what life with germ vision would look like: the toilet plume, the blazing sponge, the phone galaxy, the five-second rule... and why most of those germs are actually on your side.\n\nWould you want germ vision, or would you rather not know? Tell me in the comments 👇\n\n▶ More What Ifs: What If You Had 9 Brains Like an Octopus?\n\nCHAPTERS\n0:00 Germ vision\n0:23 What are germs?\n0:56 You are half germ\n1:46 The toilet cloud\n2:17 The blazing sponge\n2:47 Your phone\n3:15 The five-second rule\n3:46 Sneeze clouds\n4:15 Your personal germ cloud\n4:45 Should you bleach everything?\n\nSOURCES\n• Sender, Fuchs & Milo 2016: ~38 trillion bacteria vs ~30 trillion human cells\n• Crimaldi et al., Scientific Reports 2022: toilet plume made visible with lasers\n• Cardinale et al., Scientific Reports 2017: kitchen sponges up to 5.4x10^10 cells/cm³\n• Miranda & Schaffner, Rutgers 2016: five-second rule; transfer in under 1 s\n• Bourouiba (MIT): sneeze gas cloud travels several meters\n• Meadow et al., PeerJ 2015: personal microbial cloud\n\n#whatif #germs #science",
+ "tags": [
+  "what if",
+  "see germs",
+  "germ vision",
+  "bacteria",
+  "microbes",
+  "toilet plume",
+  "kitchen sponge bacteria",
+  "phone germs",
+  "five second rule",
+  "sneeze",
+  "microbiome",
+  "science what if",
+  "what if video",
+  "hypothetical",
+  "through the ifglass"
+ ],
+ "category_id": "28",
+ "hook": [
+  "WHAT IF YOU COULD",
+  "SEE EVERY GERM?"
+ ],
+ "handle": "@throughtheifglass",
+ "thumbnail": "010-thumbnail.jpg",
+ "script": "010-see-germs-VOICEOVER.txt",
+ "voice": "voiceover.mp3",
+ "subs": [
+  [
+   "thirty eight trillion",
+   "38 trillion"
+  ],
+  [
+   "less than one second",
+   "less than 1 second"
+  ],
+  [
+   "twenty seconds",
+   "20 seconds"
+  ],
+  [
+   "five second rule",
+   "5-second rule"
+  ]
+ ]
+}
