@@ -188,8 +188,8 @@ function r17_dpDraw(x,y,L,key,a1,a2,t,col){const st=r17_dp(key,a1,a2,t), p=s=>{c
    <circle cx="${x1}" cy="${y1}" r="26" fill="${col}" stroke="${INK}" stroke-width="7"/><circle cx="${x2}" cy="${y2}" r="34" fill="${col}" stroke="${INK}" stroke-width="7"/><circle cx="${x}" cy="${y}" r="14" fill="${INK}"/>`;}
 function r17_banner(x,y,w,str,g,o={}){const {fold=0,s=1}=o;const wv=Math.sin(g*2)*8;
   return `<g transform="translate(${x},${y}) scale(${s})"><path d="M${-w/2} 0 Q0 ${wv} ${w/2} 0 L${w/2} 130 Q0 ${130+wv} ${-w/2} 130Z" fill="#FFF6EA" stroke="${INK}" stroke-width="8"/>
-   ${Array.isArray(str)?`<text x="${-w*.3}" y="88" text-anchor="middle" font-size="72" font-weight="900" fill="${P.red}">${str[0]}</text><text x="${w*.3}" y="88" text-anchor="middle" font-size="72" font-weight="900" fill="${P.red}">${str[1]}</text>`:`<text y="88" text-anchor="middle" font-size="72" font-weight="900" fill="${P.red}" letter-spacing="2">${str}</text>`}
-   ${fold>0?`<path d="M${-w*.18} -6 L${w*.2} -6 L${w*.24} 136 L${-w*.14} 136Z" fill="#E9DCC6" stroke="${INK}" stroke-width="7" opacity="${fold}"/>`:''}</g>`;}
+   ${Array.isArray(str)?`<text x="${-w*.33}" y="88" text-anchor="middle" font-size="72" font-weight="900" fill="${P.red}">${str[0]}</text><text x="${w*.33}" y="88" text-anchor="middle" font-size="72" font-weight="900" fill="${P.red}">${str[1]}</text>`:`<text y="88" text-anchor="middle" font-size="72" font-weight="900" fill="${P.red}" letter-spacing="2">${str}</text>`}
+   ${fold>0?`<path d="M${-w*.12} -6 L${w*.12} -6 L${w*.15} 136 L${-w*.09} 136Z" fill="#E9DCC6" stroke="${INK}" stroke-width="7" opacity="${fold}"/>`:''}</g>`;}
 const r17_glow=(x,y,r,col='url(#gGold)',op=.6)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${col}" opacity="${op}"/>`;
 
 Object.assign(SHOTS,{
@@ -208,7 +208,7 @@ rwHook(t,d,p,g){
      ${r17_kaiHang(cx,cy,R*.92,ma,f,.62,g)}
      ${m40?`<g opacity="${prog(t,p.m40??2.7,(p.m40??2.7)+.4)}"><path d="M${kx+150} ${ky+260} V880" stroke="#fff" stroke-width="6" stroke-dasharray="16 12"/><path d="M${kx+130} 860 L${kx+150} 890 L${kx+170} 860" stroke="#fff" stroke-width="6" fill="none"/>${T(kx+300,ky+420,'40 M',{size:96,fill:P.gold,sc:pop(t,p.m40??2.7)})}${T(kx+300,ky+480,'STRAIGHT DOWN',{size:36,fill:'#fff',stroke:8})}</g>`:''}
      ${AT(t,jump)?T(cx+40,cy+R+110,'CLUNK!',{size:84,fill:P.gold,sc:pop(t,jump),op:1-prog(t,jump+1.6,jump+2.2)}):''}
-     ${steep?`<g transform="translate(${cx},${cy})"><path d="M120 0 H${R*.95}" stroke="#fff" stroke-width="5" stroke-dasharray="12 10"/><path d="M${R*.55} 0 A${R*.55} ${R*.55} 0 0 1 ${R*.55*Math.cos(r17_rad(ma-90))} ${R*.55*Math.sin(r17_rad(ma-90))}" stroke="${P.red}" stroke-width="8" fill="none"/></g>${T(cx+R+40,cy-R-40,'STEEPER',{size:64,fill:P.red,sc:pop(t,p.steep??13.4)})}`:''}
+     ${steep?`<g transform="translate(${cx},${cy})"><path d="M120 0 H${R*.95}" stroke="#fff" stroke-width="5" stroke-dasharray="12 10"/><path d="M${R*.55} 0 A${R*.55} ${R*.55} 0 0 1 ${R*.55*Math.cos(r17_rad(ma-90))} ${R*.55*Math.sin(r17_rad(ma-90))}" stroke="${P.red}" stroke-width="8" fill="none"/></g>${T(cx+R+260,cy+40,'STEEPER',{size:64,fill:P.red,sc:pop(t,p.steep??13.4)})}`:''}
      ${AT(t,p.soon??16.4)?`<path d="M${kx-20} ${ky-70} h120" stroke="${P.red}" stroke-width="14" stroke-linecap="round"/><path d="M${kx+90} ${ky-90} l34 20 l-34 20" fill="none" stroke="${P.red}" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>`:''}
      </g>${timer}`;
   }
@@ -254,7 +254,7 @@ rwTower(t,d,p,g){
    ${glint({x:1130,y:520,s:1,t:g,pose:'point',mouth:'smile',look:-1,blink:BL(g)})}
    <g transform="translate(1310,500) rotate(-20)"><rect x="-40" y="-30" width="80" height="90" rx="12" fill="#C9302C" stroke="${INK}" stroke-width="6"/><path d="M20 -26 L80 -80" stroke="${INK}" stroke-width="10" stroke-linecap="round"/><path d="M-30 -30 q30 -36 60 0" stroke="${INK}" stroke-width="6" fill="none"/></g>
    ${AT(t,p.age??3.4)?labelPill(960,150,'150 YEARS OLD',P.gold,52):''}
-   ${AT(t,p.tall??5.6)?`<g opacity="${prog(t,p.tall??5.6,(p.tall??5.6)+.4)}"><path d="M330 90 V740" stroke="#fff" stroke-width="6"/><path d="M310 100 h40 M310 730 h40" stroke="#fff" stroke-width="6"/>${T(280,420,'TALLER THAN',{size:40,fill:'#fff',stroke:8,anchor:'end'})}${T(280,470,'A MAN',{size:40,fill:'#fff',stroke:8,anchor:'end'})}</g>`:''}
+   ${AT(t,p.tall??5.6)?`<g opacity="${prog(t,p.tall??5.6,(p.tall??5.6)+.4)}"><path d="M260 90 V740" stroke="#fff" stroke-width="6"/><path d="M240 100 h40 M240 730 h40" stroke="#fff" stroke-width="6"/>${T(260,800,'TALLER THAN A MAN',{size:40,fill:'#fff',stroke:8})}</g>`:''}
    ${AT(t,p.job??8.8)?T(1180,860,'JOB: OIL THE GEARS',{size:56,fill:P.mint,sc:pop(t,p.job??8.8)}):''}
    ${AT(t,p.creak??11.8)?T(420,860,'CREAK...',{size:56,fill:P.steel,sc:pop(t,p.creak??11.8)}):''}
    ${AT(t,p.storm??15.4)?T(1600,600,'RUMBLE',{size:52,fill:'#9AD1FF',sc:pop(t,p.storm??15.4)}):''}</g>`;
@@ -308,7 +308,7 @@ rwRules(t,d,p,g){
   return `${R17_DEFS}${card('cardDark',g)}${T(960,150,'THE RULES',{size:120,fill:P.gold,sc:pop(t,.1)})}
    <path d="M${x0} ${y} H${x1}" stroke="${INK}" stroke-width="26" stroke-linecap="round"/><path d="M${x0} ${y} H${x1}" stroke="#5D587A" stroke-width="14" stroke-linecap="round"/>
    <path d="M${X(-60)} ${y} H${x1}" stroke="${P.mint}" stroke-width="14" stroke-linecap="round" opacity="${AT(t,send)?1:0}"/>${ticks}
-   ${T(X(0),y+110,'NOW',{size:56,fill:'#fff'})}${T(X(-60),y+110,'-60 s',{size:56,fill:P.mint})}${T(X(-120),y+110,'-120 s',{size:56,fill:'#8C87A8'})}
+   ${T(X(0),y+150,'NOW',{size:56,fill:'#fff'})}${T(X(-60),y+150,'-60 s',{size:56,fill:P.mint})}${T(X(-120),y+150,'-120 s',{size:56,fill:'#8C87A8'})}
    ${AT(t,send)&&!AT(t,stack)?arc(0,-60,P.mint,k1):''}
    ${AT(t,send)?T(960,265,'THE WHOLE UNIVERSE: BACK 60 s',{size:60,fill:'#fff',sc:pop(t,send)}):''}
    ${AT(t,more)?`<g transform="translate(${X(-60)-10},${y})"><rect x="-14" y="-110" width="28" height="220" fill="${P.red}" stroke="${INK}" stroke-width="6"/></g>${!AT(t,stack)?T(X(-90),y-140,'NOT 1 SECOND MORE',{size:44,fill:P.red,stroke:9,sc:pop(t,more)}):''}`:''}
@@ -383,8 +383,8 @@ rwLottery(t,d,p,g){
    ${AT(t,plan)&&!AT(t,diff)?r17_drawRow(1250,820,[7,19,23,31,42],t,plan+.6):''}`;
   return `${R17_DEFS}${rk>0?r17_rewWrap(inner,rk,g,{hy:300}):inner}
    ${AT(t,idea)&&!AT(t,plan)?T(1250,820,"KAI'S TERRIBLE IDEA",{size:64,fill:P.gold,sc:pop(t,idea)}):''}
-   ${AT(t,plan)&&!AT(t,tries)?`${T(1250,150,'1. WATCH  2. REWIND  3. BUY',{size:56,fill:'#fff',sc:pop(t,plan),stroke:12})}`:''}
-   ${AT(t,diff)?r17_drawRow(1250,820,[3,11,28,36,40],t,diff)+T(1250,160,'COMPLETELY DIFFERENT!',{size:80,fill:P.red,sc:pop(t,diff+.5)}):''}
+   ${AT(t,plan)&&!AT(t,tries)?`${T(1360,150,'1. WATCH  2. REWIND  3. BUY',{size:50,fill:'#fff',sc:pop(t,plan),stroke:12})}`:''}
+   ${AT(t,diff)?r17_drawRow(1250,820,[3,11,28,36,40],t,diff)+T(1360,160,'COMPLETELY DIFFERENT!',{size:64,fill:P.red,sc:pop(t,diff+.5)}):''}
    ${r17_pm(t,'minus','THE LOTTERY')}`;
 },
 rwLorenz(t,d,p,g){
@@ -451,7 +451,7 @@ rwForget(t,d,p,g){
   const rk=r17_rk(t,rew,1.2);
   const inner=`${bgLab(g)}${person({x:300,y:560,s:.85,t:g,who:'osei',pose:'point',mouth:'flat',blink:BL(g)})}<rect x="760" y="190" width="980" height="590" rx="24" fill="#0E1A2A" opacity=".7" stroke="${P.mint}" stroke-width="6"/>${grid}`;
   return `${R17_DEFS}${rk>0?r17_rewWrap(inner,rk,g,{hy:470}):inner}
-   ${T(1250,150,after?'HE BRINGS BACK 4':'20 WORDS',{size:70,fill:after?P.mint:'#fff',sc:pop(t,after?four:2.4)})}
+   ${T(1400,150,after?'HE BRINGS BACK 4':'20 WORDS',{size:70,fill:after?P.mint:'#fff',sc:pop(t,after?four:2.4)})}
    ${AT(t,five)&&!AT(t,ch)?T(1250,860,'MAYBE 5',{size:64,fill:P.gold,sc:pop(t,five)}):''}
    ${AT(t,ch)?T(1250,860,AT(t,gone)?'THE REST: GONE FOR GOOD':'CHOOSE WHAT TO KEEP',{size:64,fill:AT(t,gone)?P.red:P.gold,sc:pop(t,AT(t,gone)?gone:ch)}):''}
    ${r17_pm(t,'minus','THE FORGETTING')}`;
@@ -624,14 +624,14 @@ rwRun(t,d,p,g){
   if(t<room){ const lt=t-run; const dr=AT(t,door);
     let steps='';for(let i=0;i<7;i++) steps+=`<rect x="${180+i*150}" y="${860-i*60}" width="160" height="${80+i*60}" fill="#3A2E4E" stroke="${INK}" stroke-width="7"/>`;
     steps+=`<rect x="1230" y="500" width="700" height="440" fill="#3A2E4E" stroke="${INK}" stroke-width="7"/>`;
-    const gx=dr?lerp(1260,1470,prog(t,door,door+1)):lerp(240,1250,prog(t,run,door)); const gy=dr?290:860-Math.min(6,Math.floor((gx-180)/150))*60-210;
-    return `${R17_DEFS}${r17_bgTowerIn(g,{win:false})}${steps}<g transform="translate(1560,310)">${dr?`<g transform="rotate(${-70*eout(prog(t,door,door+.3))} -110 0)"><rect x="-110" y="-190" width="220" height="380" fill="${P.red}" stroke="${INK}" stroke-width="10"/></g><rect x="-110" y="-190" width="220" height="380" fill="#1A1626" opacity=".6"/>`:`<rect x="-110" y="-190" width="220" height="380" fill="${P.red}" stroke="${INK}" stroke-width="10"/><circle cx="70" cy="10" r="14" fill="${P.gold}" stroke="${INK}" stroke-width="5"/>`}</g>
+    const gx=dr?lerp(1250,1330,prog(t,door,door+1)):lerp(240,1250,prog(t,run,door)); const gy=dr?290:860-Math.min(6,Math.floor((gx-180)/150))*60-210;
+    return `${R17_DEFS}${r17_bgTowerIn(g,{win:false})}${steps}<g transform="translate(1380,310)">${dr?`<g transform="rotate(${-70*eout(prog(t,door,door+.3))} -110 0)"><rect x="-110" y="-190" width="220" height="380" fill="${P.red}" stroke="${INK}" stroke-width="10"/></g><rect x="-110" y="-190" width="220" height="380" fill="#1A1626" opacity=".6"/>`:`<rect x="-110" y="-190" width="220" height="380" fill="${P.red}" stroke="${INK}" stroke-width="10"/><circle cx="70" cy="10" r="14" fill="${P.gold}" stroke="${INK}" stroke-width="5"/>`}</g>
      ${glint({x:gx,y:gy,s:.7,t:g,legs:'walk',pose:'reach',mouth:'teeth',brows:'angry',blink:0})}
      ${AT(t,st)&&!dr?T(700,180,'3 AT A TIME',{size:72,fill:P.gold,sc:pop(t,st)}):''}${dr?T(1000,180,'SHOULDER FIRST!',{size:80,fill:P.red,sc:pop(t,door)}):''}
      ${list}${r17_timer(1690,815,tm,g,{s:.7,label:'NEXT NOTCH'})}`;
   }
   const holdK=AT(t,hug); const amp=!holdK?18:AT(t,stops)?0:AT(t,slow)?lerp(9,0,prog(t,slow,stops)):AT(t,drag)?12:lerp(18,12,prog(t,hug,hug+1.5));
-  const pa=Math.sin(g*2.2)*amp; const bx=960+Math.sin(r17_rad(pa))*560, by=40+Math.cos(r17_rad(pa))*560;
+  const pa=Math.sin(g*2.2)*amp; const bx=960-Math.sin(r17_rad(pa))*560, by=40+Math.cos(r17_rad(pa))*560;
   let dust='';const r=rng(3);for(let i=0;i<40;i++) dust+=`<circle cx="${r()*1920}" cy="${(r()*1080+g*12*(1+r()))%1080}" r="${2+r()*3}" fill="#E8D7AA" opacity="${.15+r()*.25}"/>`;
   return `${R17_DEFS}${r17_bgTowerIn(g,{win:false})}<rect width="1920" height="1080" fill="#C9A46A" opacity=".1"/>${dust}${r17_gear(1500,380,150,15,AT(t,stops)?0:g*15)}${r17_gear(380,330,110,12,AT(t,stops)?0:-g*20)}
    ${holdK?glint({x:bx-30,y:by-120,s:.85,t:g,pose:'reach',mouth:AT(t,stops)?'grin':'teeth',brows:'angry',legs:'walk',rot:pa*.5}):''}
@@ -676,7 +676,7 @@ rwBrithday(t,d,p,g){
   return `${R17_DEFS}<rect width="1920" height="1080" fill="url(#r17_morning)"/><circle cx="1700" cy="200" r="90" fill="${P.gold}" stroke="${INK}" stroke-width="8"/><circle cx="1700" cy="200" r="240" fill="url(#gGold)" opacity=".6"/>
    ${r17_tower(1260,330,170,g,{ma:102,ha:7})}
    <path d="M${1260-230} ${330+190} L${1260+230} ${330+190}" stroke="${INK}" stroke-width="6"/>
-   ${r17_banner(1260,560,reveal?760:620,reveal?'HAPPY BRITHDAY NAN':['HAPPY','NAN'],g,{s:reveal?1+.06*pop(t,sp):1,fold:reveal?0:1})}
+   ${r17_banner(1260,560,reveal?760:820,reveal?'HAPPY BRITHDAY NAN':['HAPPY','NAN'],g,{s:reveal?1+.06*pop(t,sp):1,fold:reveal?0:1})}
    ${reveal?`<ellipse cx="${1260-30}" cy="${560+62}" rx="150" ry="56" fill="none" stroke="${P.red}" stroke-width="10" transform="rotate(-4 1230 622)"/>`:''}
    <g transform="translate(470,620)"><rect x="-330" y="-330" width="660" height="560" fill="#5A3550" stroke="${INK}" stroke-width="12"/><rect x="-260" y="-260" width="520" height="420" fill="#FFE9C0" stroke="${INK}" stroke-width="10"/>
     <clipPath id="r17_win"><rect x="-255" y="-255" width="510" height="410"/></clipPath><g clip-path="url(#r17_win)"><g transform="translate(0,${AT(t,la)?20:-40})">${person({s:.9,t:g,who:'nan',pose:AT(t,la)?'hips':'point',mouth:AT(t,la)?'laugh':'o',brows:'raised',legs:AT(t,la)?'sit':'stand',blink:BL(g)})}</g></g><path d="M-260 160 H260" stroke="${INK}" stroke-width="10"/></g>
