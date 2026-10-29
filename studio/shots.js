@@ -1096,3 +1096,76 @@ lifeMem(t,d,p,g){
    ${glint({x:960,y:580,s:1.05,t:g,mouth:sad?'flat':'smile',brows:sad?'sad':'calm',blink:BL(g)})}${T(960,140,'20 YEARS FROM NOW',{size:84,fill:MEM,sc:IN(t,.2)})}`;
 }
 });
+
+// ===================== episode 007 scenes (no pain) =====================
+const NERVE='#FF6B6B';
+function stove(x,y,s=1,hot=1,g=0){return `<g transform="translate(${x},${y}) scale(${s})"><rect x="-200" y="-20" width="400" height="260" rx="16" fill="#D8DEE8" stroke="${INK}" stroke-width="8"/><rect x="-200" y="-40" width="400" height="40" rx="10" fill="#2A3248" stroke="${INK}" stroke-width="7"/>
+  ${[-100,100].map(cx=>`<ellipse cx="${cx}" cy="-40" rx="80" ry="16" fill="${hot?'#FF5E3A':'#444'}" opacity="${hot?.7+.3*Math.sin(g*6):1}"/>`).join('')}${hot?[0,1,2].map(i=>`<path d="M${-120+i*20} -70 q-14 -30 0 -60 q14 -30 0 -60" stroke="#fff" stroke-width="5" fill="none" opacity="${.3+.3*Math.sin(g*3+i)}"/>`).join(''):''}</g>`;}
+Object.assign(SHOTS,{
+painHook(t,d,p,g){
+  const items=[['HEADACHE',p.head??2.1],['STUBBED TOE',p.toe??3.1],['PAPER CUT',p.cut??4.4]];
+  return `${bgNight(g)}${glint({x:960,y:560,s:1.15,t:g,mouth:'grin',blink:BL(g),pose:'flex'})}<rect x="1010" y="440" width="70" height="110" rx="20" fill="#fff" stroke="${INK}" stroke-width="6" transform="rotate(-20 1040 500)"/>
+   ${items.map(([s,a],i)=>AT(t,a)?`<g transform="translate(${[380,1540,1540][i]},${[420,420,700][i]})">${labelPill(0,0,s,P.coral,44)}${icon('cross',0,90,.5*pop(t,a))}</g>`:'').join('')}
+   ${T(960,170,'NO PAIN. EVER.',{size:110,fill:P.mint,sc:IN(t,.3)})}`;
+},
+joCameron(t,d,p,g){
+  const st=[['BURNS: DIDN\'T NOTICE',p.burn??6.7],['CHILDBIRTH: BARELY HURT',p.birth??12.1],['HOTTEST CHILLIES: "A GLOW"',p.chilli??15.5]];
+  const hip=AT(t,p.hip??20.4), calm=AT(t,p.calm??40.4);
+  return `${card('cardWarm',g)}${extra({x:420,y:600,s:1.1,t:g,head:'#FFD3A8',glasses:true,mouth:'smile'})}${T(420,260,'JO CAMERON, SCOTLAND',{size:44,fill:P.white,stroke:8})}
+   ${hip?'':st.map(([s,a],i)=>AT(t,a)?labelPill(1220,330+i*150,s,P.gold,40):'').join('')}
+   ${hip?`${T(1220,300,'AGE 65',{size:120,fill:P.gold,sc:pop(t,p.hip??20.4)})}${AT(t,p.nopk??27.9)?stamp(1220,480,.7,'NO PAINKILLERS',P.mint,-6):''}${AT(t,p.dna??31.6)&&!calm?T(1220,680,'A TINY GENE CHANGE',{size:56,fill:P.white}):''}${calm?`${labelPill(1220,650,'RARELY ANXIOUS',P.mint,44)}${AT(t,p.heal??44.3)?labelPill(1220,770,'HEALS FAST',P.mint,44):''}`:''}`:''}`;
+},
+babyTeeth(t,d,p,g){
+  return `${card('cardDark',g)}<g transform="translate(700,600)">${glint({x:0,y:0,s:.75,t:g,mouth:'teeth',blink:BL(g),pose:'up'})}</g><rect x="420" y="760" width="560" height="60" rx="30" fill="#9AD1FF" stroke="${INK}" stroke-width="6"/>
+   ${AT(t,p.warn??4)?`<g transform="translate(1340,420) scale(${pop(t,p.warn??4)})"><path d="M0 -110 L120 100 H-120Z" fill="${P.gold}" stroke="${INK}" stroke-width="12" stroke-linejoin="round"/><rect x="-12" y="-50" width="24" height="90" rx="10" fill="${INK}"/><circle cy="70" r="14" fill="${INK}"/></g>${T(1340,640,'NOTHING SAYS STOP',{size:56,fill:P.gold})}`:''}${AT(t,p.first??17)?T(1340,780,'OFTEN THE FIRST SIGN',{size:50,fill:P.coral}):''}
+   ${T(960,150,'BABY TEETH',{size:96,fill:P.white,sc:IN(t,.2)})}`;
+},
+toddlerFall(t,d,p,g){
+  const lim=AT(t,p.limp??9.6), xr=AT(t,p.xray??12);
+  return `${bgRoom(g)}${glint({x:lim?520:700,y:640,s:.8,t:g,mouth:'smile',blink:BL(g),legs:lim?'wobble':'stand',rot:AT(t,p.fall??2)&&!AT(t,p.up??5.5)?70:0})}
+   ${xr?`<g transform="translate(1340,520)"><rect x="-230" y="-300" width="460" height="600" rx="16" fill="#0A1420" stroke="${P.iceDeep}" stroke-width="6"/><path d="M-40 -260 L-30 120 Q-30 200 60 220 L150 230" stroke="#DDEBFF" stroke-width="44" fill="none" stroke-linecap="round"/><path d="M-60 40 l40 10 l-30 15 l40 10" stroke="${P.red}" stroke-width="8" fill="none"/>${T(0,350-60,'BROKEN 3 DAYS AGO',{size:42,fill:P.red,stroke:7})}</g>`:''}
+   ${T(960,150,lim?'WHY ARE YOU LIMPING?':'YOU FALL. NO TEARS.',{size:90,fill:P.white,sc:pop(t,lim?p.limp??9.6:.2)})}`;
+},
+nerveAlarm(t,d,p,g){
+  const sig=prog(t,p.signal??13,(p.signal??13)+1.2), pull=AT(t,p.pull??17.3);
+  const path='M1230 620 Q1000 560 820 600 Q700 620 640 520 L640 300';
+  return `${card('cardDark',g)}${stove(1420,820,.9,1,g)}<g transform="translate(${pull?1140:1260},${pull?560:690})"><path d="M0 0 L-140 -20" stroke="${P.cream}" stroke-width="40" stroke-linecap="round"/><circle r="40" fill="#FFD3A8" stroke="${INK}" stroke-width="7"/></g>
+   <path d="${path}" stroke="#333" stroke-width="14" fill="none"/><path d="${path}" stroke="${NERVE}" stroke-width="10" fill="none" stroke-dasharray="1400" stroke-dashoffset="${1400*(1-sig)}"/>
+   <rect x="600" y="220" width="80" height="120" rx="30" fill="#FFF6EA" stroke="${INK}" stroke-width="7"/>${T(640,190,'SPINAL CORD',{size:36,fill:P.white,stroke:6})}
+   ${pull?T(1250,420,'YANK!',{size:90,fill:P.gold,sc:pop(t,p.pull??17.3)}):''}${AT(t,p.teach??28)?T(640,880,'IT TEACHES YOU',{size:64,fill:P.mint}):''}
+   ${T(960,140,'PAIN = AN ALARM',{size:96,fill:NERVE,sc:IN(t,p.alarm??2.6)})}`;
+},
+dayHazards(t,d,p,g){
+  const h=[['AWKWARD SLEEP','bed',p.sleep??0],['STONE IN SHOE','shoe',p.shoe??19.4],['STOVE BURN','stove',p.stove??26.6],['EYE SCRATCH','eye',p.eye??33]];
+  const ic={bed:`<rect x="-90" y="-10" width="180" height="50" rx="10" fill="#5A6FA8" stroke="${INK}" stroke-width="6"/><rect x="-90" y="-40" width="50" height="40" rx="10" fill="#FFF6EA" stroke="${INK}" stroke-width="5"/>`,
+    shoe:`<path d="M-80 30 V-20 Q-60 -40 -20 -30 L40 10 Q90 10 90 30Z" fill="#7A5A3A" stroke="${INK}" stroke-width="6"/><circle cx="10" cy="10" r="12" fill="#999" stroke="${INK}" stroke-width="4"/>`,
+    stove:`<rect x="-80" y="-30" width="160" height="70" rx="10" fill="#D8DEE8" stroke="${INK}" stroke-width="6"/><ellipse cy="-30" rx="50" ry="10" fill="#FF5E3A"/>`,
+    eye:`<ellipse rx="80" ry="44" fill="#fff" stroke="${INK}" stroke-width="7"/><circle r="26" fill="${INK}"/><path d="M-30 -20 l60 40" stroke="${P.red}" stroke-width="5"/>`};
+  return `${bgRoom(g)}${h.map(([s,k,a],i)=>AT(t,a)?`<g transform="translate(${300+i*440},480) scale(${pop(t,a)})"><circle r="150" fill="#22305A" stroke="${P.coral}" stroke-width="8"/><g transform="scale(1.1)">${ic[k]}</g>${T(0,230,s,{size:38,fill:P.coral,stroke:7})}</g>`:'').join('')}
+   ${AT(t,p.check??40)?T(960,820,'CHECK YOUR BODY EVERY DAY',{size:70,fill:P.gold,sc:pop(t,p.check??40)}):''}${T(960,150,'AN ORDINARY DAY',{size:90,fill:P.white,sc:IN(t,.2)})}`;
+},
+hiddenDanger(t,d,p,g){
+  const spots=[[1010,640,'APPENDIX',p.app??5.5],[930,420,'HEART',p.heart??18.6],[1060,470,'RIB',p.rib??19.8],[880,600,'INFECTION',p.inf??21]];
+  return `${card('cardDark',g)}<g opacity=".9"><circle cx="960" cy="240" r="90" fill="none" stroke="#fff" stroke-width="8"/><path d="M960 330 V760 M960 420 L780 600 M960 420 L1140 600 M960 760 L840 980 M960 760 L1080 980" stroke="#fff" stroke-width="10" stroke-linecap="round"/><rect x="860" y="360" width="200" height="420" rx="90" fill="#fff" opacity=".08" stroke="#fff" stroke-width="5"/></g>
+   ${spots.map(([x,y,s,a],i)=>AT(t,a)?`<circle cx="${x}" cy="${y}" r="${30+8*Math.sin(g*4+i)}" fill="${P.red}" opacity=".85"/>${T(x+(x>960?240:-240),y,s,{size:40,fill:P.red,stroke:7})}`:'').join('')}
+   ${T(960,110,AT(t,p.late??25)?'NO WARNING':'PAIN FROM INSIDE',{size:90,fill:AT(t,p.late??25)?P.red:P.white,sc:pop(t,AT(t,p.late??25)?p.late??25:.2)})}`;
+},
+geneCase(t,d,p,g){
+  const dna=AT(t,p.gene??10.4);let h='';for(let i=0;i<28;i++){const y=230+i*24, a=g*2+i*.45;h+=`<path d="M${1400+Math.sin(a)*120} ${y} L${1400-Math.sin(a)*120} ${y}" stroke="${i===14?P.red:'#7C5CFF'}" stroke-width="${i===14?10:6}" opacity="${.5+.5*Math.cos(a)}"/><circle cx="${1400+Math.sin(a)*120}" cy="${y}" r="9" fill="${P.mint}"/><circle cx="${1400-Math.sin(a)*120}" cy="${y}" r="9" fill="${P.gold}"/>`;}
+  let coals='';for(let i=0;i<14;i++)coals+=`<ellipse cx="${200+i*50}" cy="${880+(i%2)*10}" rx="30" ry="14" fill="${['#FF5E3A','#FF9F43','#B33A2A'][i%3]}" opacity="${.7+.3*Math.sin(g*5+i)}"/>`;
+  return `${card('cardDark',g)}${coals}<g opacity=".95">${extra({x:520,y:600,s:.9,t:g,head:'#C68B59'})}</g>${dna?h+T(1400,960-40,'SCN9A',{size:60,fill:P.red,sc:pop(t,p.gene??10.4)}):''}
+   ${T(960,140,dna?'ONE GENE':'HOT COALS. NO PAIN.',{size:90,fill:dna?P.red:P.gold,sc:pop(t,dna?p.gene??10.4:.2)})}`;
+},
+volumeKnob(t,d,p,g){
+  const turn=eout(prog(t,p.turn??14,(p.turn??14)+2.5)), pill=AT(t,p.pill??31.4);
+  return `${card('cardMint',g)}<g transform="translate(${pill?560:960},560)"><circle r="230" fill="#2A3248" stroke="${INK}" stroke-width="12"/><circle r="170" fill="#3B4A78" stroke="${INK}" stroke-width="8"/><g transform="rotate(${120-turn*170})"><rect x="-14" y="-170" width="28" height="90" rx="14" fill="${P.gold}"/></g>
+     ${[...Array(11)].map((_,i)=>{const a=(-210+i*24)*Math.PI/180;return `<circle cx="${Math.cos(a)*270}" cy="${Math.sin(a)*270}" r="10" fill="${i<10-turn*7?NERVE:'#555'}"/>`;}).join('')}${T(0,330,'PAIN VOLUME',{size:44,fill:P.white,stroke:7})}</g>
+   ${pill?`<g transform="translate(1380,520) rotate(-20) scale(${pop(t,p.pill??31.4)})"><rect x="-170" y="-60" width="340" height="120" rx="60" fill="#FFF6EA" stroke="${INK}" stroke-width="9"/><rect x="0" y="-60" width="170" height="120" rx="0" fill="${P.mint}" stroke="${INK}" stroke-width="9"/></g>${T(1380,780,'2025: A NEW KIND OF PAINKILLER',{size:46,fill:P.white})}`:''}
+   ${T(960,130,AT(t,p.opioid??24.5)&&!pill?'NO OPIOIDS':'TURN IT DOWN?',{size:90,fill:P.white,sc:pop(t,AT(t,p.opioid??24.5)&&!pill?p.opioid??24.5:.2)})}`;
+},
+stubToe(t,d,p,g){
+  const hit=AT(t,p.hit??1.5);
+  return `${bgRoom(g)}<rect x="1060" y="640" width="260" height="200" rx="12" fill="#8A6A4A" stroke="${INK}" stroke-width="8"/>${glint({x:hit?880:760,y:560,s:1,t:g,mouth:hit?'teeth':'smile',brows:hit?'angry':'calm',blink:BL(g),legs:hit?'wobble':'walk',pose:hit?'up':'down'})}
+   ${hit?T(1180,560,'OW!',{size:120,fill:P.red,sc:pop(t,p.hit??1.5)}):''}${AT(t,p.thank??4.5)?T(960,170,'THANK YOUR NERVES',{size:96,fill:P.mint,sc:pop(t,p.thank??4.5)}):''}`;
+}
+});

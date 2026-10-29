@@ -1,0 +1,20 @@
+[
+ ["What if you couldn't feel pain","painHook",{"head":"@No headaches","toe":"@No stubbed","cut":"@No paper"}],
+ ["Sounds amazing right","talk",{"bg":"night","text":"BORN","text2":"LIKE THIS","pose":"point","mouth":"o","brows":"raised","col":"#FF6B6B"}],
+ ["And by the end of this video","bigWord",{"word":"DANGEROUS","card":"cardDark","col":"#FF4D5E","size":150,"sub":"one of the most dangerous conditions"}],
+ ["Let's start with a story","joCameron",{"burn":"@She'd burn","birth":"@She went through","chilli":"@She ate","hip":"@It wasn't until","nopk":"@She didn't need","dna":"@When scientists","calm":"@Jo said","heal":"@Her wounds"}],
+ ["So she's lucky right","talk",{"bg":"warm","text":"A MILD","text2":"VERSION","pose":"shrug","mouth":"flat","col":"#FFC83D"}],
+ ["Let's give you that version","babyTeeth",{"warn":"@Nothing tells you","first":"@Doctors who treat"}],
+ ["Then you learn to walk","toddlerFall",{"fall":"@You fall","up":"@You just get up","limp":"@Until they notice","xray":"@You broke your ankle"}],
+ ["Here's what pain actually is","nerveAlarm",{"alarm":"@Pain is an alarm","signal":"@When they detect","pull":"@your hand pulls","teach":"@And it teaches"}],
+ ["Now you're older","dayHazards",{"sleep":"@You wake up after","shoe":"@You walk with a stone","stove":"@You cook dinner","eye":"@You rub your eye","check":"@You'd have to check"}],
+ ["And then there's the hidden danger","hiddenDanger",{"app":"@Appendicitis","heart":"@A heart attack","rib":"@A broken rib","inf":"@An infection","late":"@Without it"}],
+ ["That's why many people born","talk",{"bg":"dark","text":"BROKEN BONES","text2":"WORN JOINTS","pose":"down","mouth":"frown","brows":"sad","col":"#FF5E5B","text2At":"@Joints that wore"}],
+ ["There's a famous case","geneCase",{"gene":"@Scientists who studied"}],
+ ["But here's where this story","volumeKnob",{"turn":"@So scientists thought","opioid":"@Instead of opioids","pill":"@And in twenty twenty five"}],
+ ["Some of the rarest people","bigWord",{"word":"RARE GENES","card":"cardMint","col":"#3DF5C2","size":140,"sub":"building future painkillers"}],
+ ["So is life without pain","bigWord",{"word":"PAIN = ALARM","card":"cardDark","col":"#FF6B6B","size":140,"sub":"it might be why you're alive"}],
+ ["The next time you stub","stubToe",{"thank":"@maybe thank"}],
+ ["So let me ask you","ask",{"q":"@If you could turn"}],
+ ["Tell me in the comments","endCard",{"next":"@And next time","n1":"DOG NOSE","n2":"SMELL TIME?"}]
+]
