@@ -39,6 +39,7 @@ SUBS=[("twenty twenty three","2023"),("thirty five times","35 times"),("ten cent
  ("sixty percent","60%"),("twenty twenty three","2023"),("twenty twenty","2020"),("twenty seven","27"),("nineteen seventies","1970s"),
  ("ten billion","10 billion"),("twenty eighties","2080s"),("ten thousand dollars","$10,000"),("seven percent","7%"),
  ("eight million","8 million"),("five hundred","500"),("nineteen sixty seven","1967"),("one thousand","1,000"),("six months","6 months"),("a hundred","100")]
+SUBS=[tuple(x) for x in META.get('subs',[])]+SUBS  # per-episode number formats from meta.json
 toks=[dict(w) for w in W]; i=0; merged=[]
 while i<len(toks):
     hit=False
