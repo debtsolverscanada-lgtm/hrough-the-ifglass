@@ -213,7 +213,7 @@ octMulti(t,d,p,g){
   const gx=960,gy=500,s=.95;
   const S=[[0,[-470,-160],'phone','TEXT',0],[1,[-470,120],'pan','COOK',0],[2,[-260,330],'shoe','SHOES',p.shoes??2.7],[6,[200,-280],'comb','HAIR',p.hair??4.4],[7,[480,40],'laptop','EMAIL',p.email??5.4]];
   const ends=o9_REST.slice();const items=[];let labs='';
-  S.forEach(([i,e,k,lab,a])=>{const q=eout(prog(t,a,a+.7));ends[i]=[lerp(o9_REST[i][0],e[0],q),lerp(o9_REST[i][1],e[1],q)];if(AT(t,a)){items.push([i,o9_item(k,.9*pop(t,a),g,k==='comb'?Math.sin(g*8)*20:0)]);labs+=T(gx+e[0]*s+(k==='comb'?170:0),gy+e[1]*s+(k==='comb'?10:110),lab,{size:40,fill:P.mint,stroke:8});}});
+  S.forEach(([i,e,k,lab,a])=>{const q=eout(prog(t,a,a+.7));ends[i]=[lerp(o9_REST[i][0],e[0],q),lerp(o9_REST[i][1],e[1],q)];if(AT(t,a)){items.push([i,o9_item(k,.9*pop(t,a),g,k==='comb'?Math.sin(g*8)*20:0)]);labs+=T(gx+e[0]*s+(k==='comb'?170:k==='shoe'?-190:0),gy+e[1]*s+(k==='comb'?10:k==='shoe'?10:110),lab,{size:40,fill:P.mint,stroke:8});}});
   const as=AT(t,p.assist??8.1);
   return `${bgRoom(g)}${o9_gT({x:gx,y:gy,s,t:g,mouth:as?'grin':'o',brows:'raised',blink:BL(g),glint:as?1:0},ends,{items,mini:as?1:0})}${labs}
    ${T(960,130,as?'8 LITTLE ASSISTANTS':'ALL AT ONCE',{size:90,fill:as?P.gold:P.white,sc:pop(t,as?p.assist??8.1:.2)})}`;
