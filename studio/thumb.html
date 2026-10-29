@@ -1,0 +1,15 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display",sans-serif}</style></head><body><div id="s"></div>
+<script src="lib.js"></script><script>
+const v=+(new URLSearchParams(location.search).get('v')||1);
+let shards=''; const r=rng(17); for(let i=0;i<22;i++){shards+=iceShard(r()*1920,r()*1080,60+r()*160,r()*360,.55);}
+const glow=`<circle cx="1320" cy="560" r="520" fill="url(#gIce)" opacity=".55"/>`;
+const ice=`<g transform="translate(1320,580) rotate(-4)">${iceBlock(0,0,560,860,1)}
+  <g transform="translate(0,-30) scale(1.25)">${glint({t:.6,mouth:'o',brows:'raised',tint:'#D8F2FF',frost:.6,glint:1})}</g>
+  <rect x="-280" y="-430" width="560" height="860" rx="26" fill="url(#iceG)" opacity=".38"/>
+  <path d="M-120 -430 l40 160 l-60 120 l80 140 l-30 160" stroke="#fff" stroke-width="10" fill="none" stroke-linejoin="round"/></g>`;
+const txt = v==1 ? `${T(500,430,'100',{size:330,fill:P.white,stroke:70})}${T(500,640,'YEARS',{size:200,fill:P.ice,stroke:50})}`
+                 : `${T(500,380,'FROZEN',{size:190,fill:P.ice,stroke:46})}${T(500,640,'100 YRS',{size:210,fill:P.white,stroke:50})}`;
+document.getElementById('s').innerHTML=`<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">${DEFS}
+ <rect width="1920" height="1080" fill="url(#cardIce)"/>${shards}${glow}${ice}${txt}
+ <rect x="10" y="10" width="1900" height="1060" rx="18" fill="none" stroke="${P.mint}" stroke-width="20"/>${VIG}</svg>`;
+</script></body></html>

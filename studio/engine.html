@@ -1,0 +1,52 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:#000}#stage{overflow:hidden}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style>
+</head><body><div id="stage"></div>
+<script src="lib.js"></script><script src="shots.js"></script>
+<script>
+let TL=null;
+window.setData=async d=>{TL=d; await document.fonts.load('900 64px "Inter Display"'); await document.fonts.ready;};
+const _cv=document.createElement('canvas').getContext('2d');
+function capSVG(gt, W, Y, size){
+  const c=TL.captions.find(c=>gt>=c.s && gt<c.e+0.05); if(!c) return '';
+  _cv.font=`900 ${size}px "Inter Display"`;
+  const ws=c.words.map(w=>_cv.measureText(w.w).width+size*.42);
+  const tot=ws.reduce((a,b)=>a+b,0); let x=W/2-tot/2, out='';
+  const k=clamp((gt-c.s)/.12);
+  c.words.forEach((w,i)=>{const on=gt>=w.s && gt<w.e+0.08, past=gt>=w.s;
+    const sc=on?1.08:1; const col=on?P.mint:P.white;
+    out+=`<g transform="translate(${x+ws[i]/2},${Y}) scale(${sc*(.85+.15*k)})" opacity="${past?1:.55}">
+      <text text-anchor="middle" font-size="${size}" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="${size*.26}" stroke-linejoin="round">${w.w}</text>
+      <text text-anchor="middle" font-size="${size}" font-weight="900" fill="${col}">${w.w}</text></g>`;
+    x+=ws[i];});
+  return out;
+}
+function shotAt(gt){ let i=TL.shots.findIndex(s=>gt>=s.s && gt<s.e); if(i<0) i=TL.shots.length-1; return i; }
+function drawShot(i,gt){
+  const s=TL.shots[i]; const t=gt-s.s, d=s.e-s.s;
+  const k=clamp(t/d), dir=(i%2?1:-1);
+  const z=1.0+0.06*k, px=dir*28*k, py=-10*k;
+  let body; try{ body=SHOTS[s.shot](t,d,s.p||{},gt); }catch(e){ body=`<rect width="1920" height="1080" fill="#300"/><text x="40" y="80" fill="#fff" font-size="40">${s.shot}: ${e.message}</text>`; }
+  return `<g transform="translate(960,540) scale(${z}) translate(${-960+px},${-540+py})">${body}</g>`;
+}
+window.renderFrame=(gt,mode='land',caps=true)=>{
+  const i=shotAt(gt); const s=TL.shots[i]; const t=gt-s.s; const XF=.28;
+  let scene=drawShot(i,gt);
+  if(t<XF && i>0) scene=drawShot(i-1,gt)+`<g opacity="${eout(t/XF)}">${scene}</g>`;
+  let svg;
+  if(mode==='land'){
+    svg=`<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">${DEFS}${scene}${VIG}${caps?capSVG(gt,1920,995,64):''}</svg>`;
+    document.getElementById('stage').style.cssText='width:1920px;height:1080px';
+  } else { // vertical 1080x1920: scene cropped/zoomed in the middle, captions + hook title
+    const sc=.78, w=1920*sc, h=1080*sc, ox=(1080-w)/2, oy=(1920-h)/2-40;
+    svg=`<svg width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">${DEFS}
+      <rect width="1080" height="1920" fill="#0B1026"/>
+      <g transform="translate(${ox},${oy}) scale(${sc})">${scene}${VIG}</g>
+      <rect width="1080" height="${oy+40}" fill="#0B1026"/><rect y="${oy+h-40}" width="1080" height="${1920-oy-h+40}" fill="#0B1026"/>
+      ${TL.hook?T(540,250,TL.hook,{size:64,fill:P.white}):''}${TL.hook2?T(540,340,TL.hook2,{size:64,fill:P.mint}):''}
+      ${capSVG(gt,1080,1470,64)}
+      <g transform="translate(540,1800)" opacity=".85">${TL.handle?T(0,0,TL.handle,{size:34,fill:P.gold,stroke:8}):''}</g></svg>`;
+    document.getElementById('stage').style.cssText='width:1080px;height:1920px';
+  }
+  document.getElementById('stage').innerHTML=svg;
+};
+</script></body></html>
