@@ -457,7 +457,7 @@ ask(t,d,p,g){
 endCard(t,d,p,g){
   return `${bgNight(g)}${icon('comment',520,300,pop(t,.2))}${T(520,500,'COMMENT BELOW',{size:56,fill:P.white,op:prog(t,.3,.6)})}
    ${glint({x:520,y:700,s:.8,t:g,pose:'wave',mouth:'grin',blink:BL(g)})}
-   ${AT(t,p.next??1.8)?`<g transform="translate(1340,540) scale(${pop(t,p.next??1.8)})"><rect x="-380" y="-260" width="760" height="520" rx="30" fill="url(#future)" stroke="${P.mint}" stroke-width="12"/>
+   ${AT(t,p.next??1.8)?`<g transform="translate(1340,540) scale(${pop(t,p.next??1.8)})"><rect x="-380" y="-260" width="760" height="520" rx="30" fill="url(#gMint)" stroke="${P.mint}" stroke-width="12"/>
      ${T(0,-130,'NEXT',{size:60,fill:P.mint})}${T(0,20,p.n1||'1,000 YEARS',{size:110,fill:P.white})}${T(0,140,p.n2||'IN THE FUTURE',{size:70,fill:P.gold})}</g>`:''}`;
 }
 };
@@ -742,5 +742,118 @@ tenWeeks(t,d,p,g){
   for(let i=0;i<10;i++){const on=k*10>i;cal+=`<g transform="translate(${360+(i%5)*300},${i<5?420:640})"><rect x="-110" y="-80" width="220" height="160" rx="16" fill="${on?P.mint:'#2A2450'}" stroke="${INK}" stroke-width="7"/><text y="20" text-anchor="middle" font-size="44" font-weight="900" fill="${INK}">WK ${i+1}</text></g>`;}
   return `${card('cardMint',g)}${cal}${T(960,170,'10 WEEKS OF PRACTICE',{size:90,fill:P.white,sc:IN(t,.2)})}
    ${AT(t,p.skill??13)?T(960,900,"IT'S A SKILL",{size:100,fill:P.gold,sc:pop(t,p.skill??13)}):''}`;
+}
+});
+
+// ===================== episode 004 scenes (WiFi vision) =====================
+const WV='#7CF5FF', WV2='#B47CFF';
+function wifiWaves(x,y,g,o={}){const {n=6,max=900,col=WV,speed=.5,op=.7,w=8}=o;let s='';for(let i=0;i<n;i++){const k=((g*speed+i/n)%1);s+=`<circle cx="${x}" cy="${y}" r="${30+k*max}" fill="none" stroke="${col}" stroke-width="${w}" opacity="${op*(1-k)}"/>`;}return s;}
+function router(x,y,s=1){return `<g transform="translate(${x},${y}) scale(${s})"><rect x="-70" y="-20" width="140" height="44" rx="12" fill="#1C2433" stroke="${WV}" stroke-width="5"/><path d="M-40 -20 V-80 M40 -20 V-80" stroke="${WV}" stroke-width="7" stroke-linecap="round"/>${[-40,-10,20,50].map(i=>`<circle cx="${i}" cy="2" r="5" fill="${P.mint}"/>`).join('')}<circle r="120" fill="url(#gMint)" opacity=".5"/></g>`;}
+function wvBg(){return `<rect width="1920" height="1080" fill="#050814"/>`;}
+Object.assign(SHOTS,{
+wifiHook(t,d,p,g){
+  return `${wvBg()}<rect x="500" y="160" width="920" height="700" fill="none" stroke="${WV}" stroke-width="4" opacity=".25" stroke-dasharray="14 12"/>
+   ${wifiWaves(1200,520,g,{max:1300})}${router(1200,520,1.2)}
+   ${glint({x:620,y:560,s:.95,t:g,mouth:'o',brows:'raised',look:1,blink:BL(g),glint:1})}
+   ${T(960,140,p.label||'WIFI VISION',{size:110,fill:WV,sc:IN(t,p.labelAt??.3)})}`;
+},
+spectrum(t,d,p,g){
+  const big=AT(t,p.big??15);
+  let small='';for(let i=0;i<60;i++)small+=`${i?'L':'M'}${330+i*8} ${520+Math.sin(i*1.4+g*6)*24}`;
+  let wide='';for(let i=0;i<=80;i++)wide+=`${i?'L':'M'}${960+i*9} ${520+Math.sin(i*.16+g*3)*80}`;
+  return `${card('cardDark',g)}<path d="${small}" stroke="${P.gold}" stroke-width="6" fill="none"/>${T(560,700,'LIGHT YOU SEE',{size:48,fill:P.gold})}${T(560,770,'< a bacterium',{size:36,fill:'#fffa',stroke:6})}
+   ${big?`<path d="${wide}" stroke="${WV}" stroke-width="10" fill="none"/>${T(1320,700,'WIFI',{size:56,fill:WV})}${T(1320,770,'~12 cm ≈ your phone',{size:40,fill:'#fffa',stroke:6})}`:''}
+   ${T(960,170,'WIFI IS LIGHT',{size:110,fill:P.white,sc:IN(t,p.lightAt??4)})}`;
+},
+kmEyes(t,d,p,g){
+  const k=eout(prog(t,.4,2.5));
+  return `${card('cardDark',g)}<rect x="1380" y="${880-420}" width="180" height="420" fill="#2A2450" stroke="${INK}" stroke-width="8"/><rect x="1600" y="560" width="140" height="320" fill="#2A2450" stroke="${INK}" stroke-width="8"/>
+   <g transform="translate(700,520)"><ellipse rx="${120+k*360}" ry="${70+k*220}" fill="#fff" stroke="${INK}" stroke-width="12"/><circle r="${50+k*170}" fill="${INK}"/><circle cx="${30+k*60}" cy="${-20-k*50}" r="${14+k*30}" fill="#fff"/></g>
+   ${T(960,150,'PUPILS 1 KM WIDE',{size:110,fill:WV,sc:IN(t,.3)})}${T(1500,300,'(so we cheat)',{size:56,fill:'#fffa',op:prog(t,p.cheat??7,(p.cheat??7)+.3)})}`;
+},
+wifiRoom(t,d,p,g){
+  const walls=prog(t,p.walls??17,(p.walls??17)+2), shadow=AT(t,p.shadow??44);
+  return `${wvBg()}<rect x="200" y="160" width="1520" height="760" fill="none" stroke="#fff" stroke-width="8" opacity="${.8-walls*.6}"/>
+   <rect x="1720" y="160" width="200" height="760" fill="${WV}" opacity="${walls*.08}"/><rect x="0" y="160" width="200" height="760" fill="${WV}" opacity="${walls*.06}"/>
+   ${wifiWaves(1500,600,g,{max:1500,op:.55})}${router(1500,600,1)}
+   <rect x="280" y="300" width="200" height="560" rx="16" fill="#000" stroke="#333" stroke-width="6" opacity="${AT(t,p.fridge??37)?1:.2}"/>${AT(t,p.fridge??37)?T(380,270,'FRIDGE',{size:40,fill:'#fff8',stroke:6}):''}
+   ${shadow?`<path d="M900 520 L320 380 L320 900 L900 900Z" fill="#000" opacity=".75"/>`:''}
+   ${glint({x:960,y:560,s:.85,t:g,mouth:shadow?'o':'smile',brows:'raised',look:1,blink:BL(g)})}
+   ${shadow?T(560,860,'YOUR WIFI SHADOW',{size:64,fill:WV,sc:pop(t,p.shadow??44)}):''}`;
+},
+phoneStrobe(t,d,p,g){
+  const burst=(g*2.2)%1<.15;
+  return `${wvBg()}<g transform="translate(960,560)"><rect x="-150" y="-280" width="300" height="560" rx="44" fill="#111" stroke="${WV}" stroke-width="6"/><rect x="-128" y="-250" width="256" height="480" rx="20" fill="#1C2433"/>
+   ${burst?`<circle r="420" fill="url(#gMint)" opacity=".9"/>${wifiWaves(0,0,g*4,{n:3,max:600,col:'#fff',op:.9})}`:''}</g>
+   ${T(960,140,"IT'S SHOUTING BACK",{size:96,fill:WV,sc:IN(t,.2)})}`;
+},
+devices(t,d,p,g){
+  const items=[['tv',380,380],['bulb',960,330],['pc',1540,380],['finger',380,760],['comment',960,780],['bolt',1540,760]];
+  const lbl=['SMART TV','SPEAKER','WATCH','BABY MONITOR','EARBUDS','…'];
+  return `${wvBg()}${items.map(([k,x,y],i)=>`${wifiWaves(x,y,g+i*.37,{n:3,max:200,op:.6,w:5})}${icon(k,x,y,.8)}${T(x,y+130,lbl[i],{size:36,fill:WV,stroke:7})}`).join('')}
+   ${T(960,120,'EVERYTHING IS TALKING',{size:90,fill:P.white,sc:IN(t,.2)})}`;
+},
+keyFlash(t,d,p,g){
+  const press=prog(t,p.press??1.5,(p.press??1.5)+1.2);
+  return `${wvBg()}${extra({x:460,y:560,s:.9,t:g,head:'#FFD3A8',pose:'point'})}<rect x="590" y="500" width="60" height="90" rx="20" fill="#333" stroke="${WV}" stroke-width="5"/>
+   ${press>0&&press<1?`<path d="M650 540 L${650+press*900} 540" stroke="#fff" stroke-width="${40*(1-press)+6}" stroke-linecap="round" opacity="${1-press*.5}"/><circle cx="${650+press*900}" cy="540" r="60" fill="url(#gWhite)"/>`:''}
+   <g transform="translate(1500,560) scale(1.4)"><path d="M-160 60 V0 L-100 -60 H100 L160 0 V60Z" fill="#1C2433" stroke="${WV}" stroke-width="7"/><circle cx="-90" cy="70" r="34" fill="#111" stroke="${WV}" stroke-width="5"/><circle cx="90" cy="70" r="34" fill="#111" stroke="${WV}" stroke-width="5"/></g>
+   ${T(960,140,'CAR KEYS',{size:90,fill:WV,sc:IN(t,.2)})}`;
+},
+tapPay(t,d,p,g){
+  const k=eout(prog(t,p.enter??5,(p.enter??5)+1.5)), on=k>.95;
+  return `${card('cardDark',g)}<rect x="1180" y="380" width="260" height="380" rx="30" fill="#2A3248" stroke="${INK}" stroke-width="8"/><rect x="1210" y="420" width="200" height="120" rx="10" fill="#0B1026"/>
+   <ellipse cx="1080" cy="560" rx="${200+Math.sin(g*4)*10}" ry="${220+Math.sin(g*4)*10}" fill="${WV}" opacity=".18" stroke="${WV}" stroke-width="5"/>
+   <g transform="translate(${lerp(380,1000,k)},560) rotate(-8)"><rect x="-150" y="-95" width="300" height="190" rx="18" fill="#7C5CFF" stroke="${INK}" stroke-width="7"/><rect x="-110" y="-30" width="60" height="44" rx="8" fill="${on?P.gold:'#C9A46A'}" stroke="${INK}" stroke-width="4"/>${on?`<circle cx="-80" cy="-8" r="70" fill="url(#gGold)"/>`:''}</g>
+   ${T(960,150,on?'POWER FROM THIN AIR':'TAP TO PAY',{size:96,fill:on?P.gold:P.white,sc:on?pop(t,(p.enter??5)+1.5):1})}${on?T(960,880,'NO BATTERY NEEDED',{size:60,fill:WV}):''}`;
+},
+microwave(t,d,p,g){
+  const pw=AT(t,p.power??11);
+  return `${card('cardDark',g)}<g transform="translate(${pw?560:960},560)"><rect x="-300" y="-190" width="600" height="380" rx="24" fill="#D8DEE8" stroke="${INK}" stroke-width="9"/><rect x="-270" y="-160" width="400" height="320" rx="14" fill="#111"/>
+   <rect x="-270" y="-160" width="400" height="320" rx="14" fill="${WV}" opacity="${.25+.15*Math.sin(g*8)}"/><circle cx="-70" r="${200+Math.sin(g*6)*20}" fill="url(#gMint)" opacity=".7"/>
+   <rect x="160" y="-150" width="110" height="300" rx="10" fill="#B8C0CC" stroke="${INK}" stroke-width="5"/></g>
+   ${pw?`<g>${T(1360,330,'ROUTER  0.1 W',{size:56,fill:WV})}<rect x="1180" y="370" width="${6}" height="40" fill="${WV}"/>${T(1360,560,'MICROWAVE  1,000 W',{size:56,fill:P.gold})}<rect x="1100" y="600" width="520" height="40" fill="${P.gold}"/>${T(1360,760,'10,000× MORE',{size:80,fill:P.white,sc:pop(t,(p.power??11)+5.5)})}</g>`:''}
+   ${T(960,140,'SAME WAVE: 2.4 GHz',{size:96,fill:WV,sc:IN(t,p.same??3)})}`;
+},
+wifiStreet(t,d,p,g){
+  let houses='';[260,620,980,1340,1700].forEach((x,i)=>{houses+=`<path d="M${x-130} 900 V700 L${x} 590 L${x+130} 700 V900Z" fill="#0E1426" stroke="#2A3550" stroke-width="6"/>${wifiWaves(x,760,g+i*.31,{n:4,max:260,op:.45,w:5})}<circle cx="${x}" cy="760" r="12" fill="${WV}"/>`;});
+  const tower=AT(t,p.tower??14), a=g*1.4;
+  return `${wvBg()}${houses}
+   ${tower?`<path d="M1500 560 L1560 160 L1620 560Z" fill="none" stroke="${WV2}" stroke-width="8"/><circle cx="1560" cy="170" r="30" fill="${WV2}"/>
+     <path d="M1560 170 L${1560+Math.cos(a)*1400} ${170+Math.sin(a)*500} L${1560+Math.cos(a+.25)*1400} ${170+Math.sin(a+.25)*500}Z" fill="${WV2}" opacity=".18"/>`:''}
+   ${T(960,130,tower?'THE CELL TOWER LIGHTHOUSE':'EVERY HOUSE GLOWS',{size:84,fill:tower?WV2:WV,sc:pop(t,tower?(p.tower??14):.2)})}`;
+},
+radioRadar(t,d,p,g){
+  const radar=AT(t,p.radar??8.7), a=g*2;
+  let rip='';for(let i=0;i<4;i++){const k=((g*.25+i/4)%1);rip+=`<path d="M-100 ${640-k*20} ${[...Array(12)].map((_,j)=>`q90 ${j%2?60:-60} 180 0`).join(' ')}" stroke="${P.gold}" stroke-width="8" fill="none" opacity="${.7*(1-k)}" transform="translate(${k*300},${-k*420})"/>`;}
+  return `${wvBg()}${rip}<path d="M0 900 ${[...Array(20)].map((_,i)=>`H${i*100+60} V${700-((i*53)%180)} H${i*100+100} V900`).join(' ')} H1920 V1080 H0Z" fill="#0E1426"/>
+   ${radar?`<g transform="translate(1500,700)"><path d="M-70 120 L0 0 L70 120Z" fill="#2A3550"/><ellipse rx="110" ry="40" fill="#D8DEE8" stroke="${INK}" stroke-width="6" transform="rotate(${Math.sin(a)*30})"/>
+     <path d="M0 0 L${Math.cos(a-1.6)*1600} ${Math.sin(a-1.6)*1600} L${Math.cos(a-1.5)*1600} ${Math.sin(a-1.5)*1600}Z" fill="${P.mint}" opacity=".2"/></g>`:''}
+   ${T(960,130,radar?'AIRPORT RADAR':'RADIO: 3-METER WAVES',{size:90,fill:radar?P.mint:P.gold,sc:pop(t,radar?(p.radar??8.7):.2)})}`;
+},
+wifiSky(t,d,p,g){
+  const cmb=prog(t,p.cmb??28,(p.cmb??28)+4), sun=AT(t,p.sun??20);
+  const r=rng(77);let speck='';for(let i=0;i<220;i++)speck+=`<circle cx="${r()*1920}" cy="${r()*900}" r="${3+r()*8}" fill="${r()>.5?'#FF7A6B':'#6BA8FF'}" opacity="${cmb*.25*r()}"/>`;
+  let gps='';for(let i=0;i<6;i++){const x=(i*340+g*20)%2100-100;gps+=`<circle cx="${x}" cy="${160+i*70}" r="7" fill="${WV}" opacity=".9"/><circle cx="${x}" cy="${160+i*70}" r="30" fill="url(#gMint)" opacity=".5"/>`;}
+  return `<rect width="1920" height="1080" fill="#03040A"/>${speck}${gps}
+   ${sun?`<circle cx="1620" cy="260" r="90" fill="${P.warm}"/>${wifiWaves(1620,260,g,{n:4,max:300,col:P.warm,op:.5,w:6})}`:''}
+   <path d="M0 1080 V920 ${[...Array(24)].map((_,i)=>`L${i*80+40} ${900-((i*31)%60)} L${i*80+80} 920`).join(' ')} V1080Z" fill="#0A0716"/>
+   ${T(960,cmb>0?500:130,cmb>0?'THE BIG BANG\'S AFTERGLOW':'GPS SATELLITES',{size:cmb>0?100:84,fill:cmb>0?'#FFB4A2':WV,sc:pop(t,cmb>0?(p.cmb??28):.2)})}${cmb>.5?T(960,620,'13.8 BILLION YEARS OLD',{size:60,fill:P.white}):''}`;
+},
+safeWaves(t,d,p,g){
+  return `${card('cardMint',g)}<rect x="160" y="440" width="1600" height="90" rx="45" fill="url(#gMint)" stroke="${INK}" stroke-width="7"/>
+   <path d="M1240 400 V580" stroke="${P.red}" stroke-width="10" stroke-dasharray="16 10"/>${T(1500,380,'IONIZING (X-RAYS, UV)',{size:42,fill:P.red})}${T(560,380,'NON-IONIZING',{size:42,fill:P.mint})}
+   ${icon('home',380,660,.6)}${T(380,780,'WIFI',{size:40,fill:P.white})}${icon('check',560,660,.7*pop(t,1.5))}
+   ${T(960,170,'IS IT DANGEROUS?',{size:96,fill:P.white,sc:IN(t,.2)})}${AT(t,p.harm??23)?T(960,860,'A HARMLESS LIGHT SHOW',{size:76,fill:P.mint,sc:pop(t,p.harm??23)}):''}`;
+},
+seesYou(t,d,p,g){
+  const breath=AT(t,p.breath??22);
+  let wave='';for(let i=0;i<=120;i++)wave+=`${i?'L':'M'}${1100+i*6} ${820+Math.sin((i/120)*12+g*2)*30*(breath?1:.2)}`;
+  return `${wvBg()}<rect x="900" y="200" width="70" height="680" fill="#2A3550" stroke="${INK}" stroke-width="8"/>
+   ${wifiWaves(420,520,g,{max:900,op:.5})}${router(420,520,1)}
+   <g transform="translate(1400,${560+Math.sin(g*2)*4})">${extra({x:0,y:0,s:.9,t:g,head:'#FFD3A8'}).replace(/stroke="#FFF6EA"/g,`stroke="${WV}"`)}</g>
+   <rect x="1080" y="760" width="760" height="120" rx="16" fill="#0B1026" stroke="${WV}" stroke-width="4"/><path d="${wave}" stroke="${P.mint}" stroke-width="6" fill="none"/>
+   ${T(1460,730,breath?'BREATHING DETECTED':'MOTION DETECTED',{size:44,fill:P.mint})}
+   ${T(960,130,AT(t,p.sees??21)?'IT CAN SEE YOU':'THROUGH WALLS',{size:100,fill:WV,sc:pop(t,AT(t,p.sees??21)?p.sees??21:.2)})}`;
 }
 });

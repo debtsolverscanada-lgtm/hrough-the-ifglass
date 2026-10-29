@@ -1,0 +1,177 @@
+[
+ [
+  "What if you woke up tomorrow",
+  "wifiHook",
+  {
+   "label": "WIFI VISION",
+   "labelAt": "@and could see"
+  }
+ ],
+ [
+  "Not a little icon",
+  "wifiStreet",
+  {
+   "tower": "@every tower"
+  }
+ ],
+ [
+  "You'd discover",
+  "wifiRoom",
+  {
+   "walls": 0,
+   "fridge": 99,
+   "shadow": 99
+  }
+ ],
+ [
+  "And by the end",
+  "seesYou",
+  {
+   "sees": "@The WiFi can see",
+   "breath": 99
+  }
+ ],
+ [
+  "First let's understand",
+  "bigWord",
+  {
+   "word": "WHY CAN'T YOU SEE IT?",
+   "size": 110,
+   "card": "cardDark",
+   "col": "#7CF5FF"
+  }
+ ],
+ [
+  "WiFi is light",
+  "spectrum",
+  {
+   "lightAt": 0,
+   "big": "@WiFi waves are about"
+  }
+ ],
+ [
+  "And here's the catch",
+  "kmEyes",
+  {
+   "cheat": "@So we're going to cheat"
+  }
+ ],
+ [
+  "You open your eyes",
+  "wifiRoom",
+  {
+   "walls": "@Then you notice the walls",
+   "fridge": "@Your fridge",
+   "shadow": "@Yours"
+  }
+ ],
+ [
+  "Yours",
+  "bigWord",
+  {
+   "word": "YOURS.",
+   "size": 200,
+   "card": "cardDark",
+   "col": "#7CF5FF"
+  }
+ ],
+ [
+  "Your body is about",
+  "wifiRoom",
+  {
+   "walls": 0,
+   "fridge": 0,
+   "shadow": 0
+  }
+ ],
+ [
+  "Now pick up your phone",
+  "phoneStrobe",
+  {}
+ ],
+ [
+  "And then you start noticing",
+  "devices",
+  {}
+ ],
+ [
+  "You pick up your car keys",
+  "keyFlash",
+  {
+   "press": "@and press the button"
+  }
+ ],
+ [
+  "And next time you pay",
+  "tapPay",
+  {
+   "enter": "@When your card enters"
+  }
+ ],
+ [
+  "You'd realize your home",
+  "devices",
+  {}
+ ],
+ [
+  "Now walk into the kitchen",
+  "microwave",
+  {
+   "same": "@Your microwave and",
+   "power": "@The difference is power"
+  }
+ ],
+ [
+  "Okay",
+  "wifiStreet",
+  {
+   "tower": "@Above the rooftops"
+  }
+ ],
+ [
+  "And it gets bigger",
+  "radioRadar",
+  {
+   "radar": "@At the airport"
+  }
+ ],
+ [
+  "Now look up",
+  "wifiSky",
+  {
+   "sun": "@The Sun is different",
+   "cmb": "@The entire sky is shining"
+  }
+ ],
+ [
+  "At this point",
+  "safeWaves",
+  {
+   "harm": "@You'd be living inside"
+  }
+ ],
+ [
+  "Now here's the part",
+  "seesYou",
+  {
+   "sees": "@Your router can notice",
+   "breath": "@Researchers have even"
+  }
+ ],
+ [
+  "So let me ask you",
+  "ask",
+  {
+   "q": "@If you could turn"
+  }
+ ],
+ [
+  "Tell me in the comments",
+  "endCard",
+  {
+   "next": "@next time",
+   "n1": "PLANTS",
+   "n2": "SCREAMING?"
+  }
+ ]
+]

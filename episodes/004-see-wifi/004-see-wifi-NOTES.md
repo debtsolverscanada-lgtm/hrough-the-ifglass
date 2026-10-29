@@ -1,6 +1,6 @@
-# Video 003: What If You Could See WiFi?
+# Video 004: What If You Could See WiFi?
 
-Voiceover: `003-see-wifi-VOICEOVER.txt` (about 8.5 min)
+Voiceover: `004-see-wifi-VOICEOVER.txt` (about 8.5 min)
 
 ## ElevenLabs
 Use the same voice and settings as episodes 001–002. Export one MP3.

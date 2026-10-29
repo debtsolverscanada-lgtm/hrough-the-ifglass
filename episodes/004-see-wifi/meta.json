@@ -1,0 +1,31 @@
+{
+ "episode": "004",
+ "title": "What If You Could See WiFi?",
+ "description": "What if you woke up tomorrow and could actually SEE WiFi? Glowing routers, see-through walls, your own WiFi shadow, a cell tower blazing like a lighthouse... and the afterglow of the Big Bang across the whole sky. Here's the real science of seeing the invisible light you've been living in your whole life. And why your WiFi might be able to see you too.\n\nWould you turn on WiFi vision for a day? Tell me in the comments 👇\n\n▶ More What Ifs: What If You Were Frozen for 100 Years? https://www.youtube.com/watch?v=5D-s1nQuhWk\n\nCHAPTERS\n0:00 Seeing WiFi\n0:30 Why you can't see it\n1:15 WiFi vision: your bedroom\n2:03 Your WiFi shadow\n2:24 Everything is talking\n3:11 Power from thin air\n3:42 The microwave problem\n4:24 The glowing city\n5:29 The sky in WiFi\n6:30 Is it dangerous?\n7:06 Your WiFi can see you\n\nSOURCES\n• Wavelength of 2.4 GHz WiFi: about 12.5 cm\n• Microwave ovens: 2.45 GHz, about 1,000 W (FDA)\n• WHO / ICNIRP: radiofrequency fields are non-ionizing\n• Adib et al., MIT CSAIL: RF-Capture (2015) and Vital-Radio (2015), sensing people and breathing through walls with radio\n• Geng, Huang & De la Torre, CMU 2023: \"DensePose from WiFi\"\n• Planck mission (ESA): cosmic microwave background\n\n#whatif #wifi #science",
+ "tags": [
+  "what if",
+  "what if you could see wifi",
+  "see wifi",
+  "wifi signals",
+  "radio waves",
+  "electromagnetic spectrum",
+  "invisible light",
+  "microwave and wifi",
+  "cosmic microwave background",
+  "wifi sensing",
+  "can wifi see you",
+  "wifi shadow",
+  "science what if",
+  "what if video",
+  "hypothetical"
+ ],
+ "category_id": "28",
+ "hook": [
+  "WHAT IF YOU COULD",
+  "SEE WIFI?"
+ ],
+ "handle": "@throughtheifglass",
+ "thumbnail": "004-thumbnail.jpg",
+ "script": "004-see-wifi-VOICEOVER.txt",
+ "voice": "voiceover.mp3"
+}
