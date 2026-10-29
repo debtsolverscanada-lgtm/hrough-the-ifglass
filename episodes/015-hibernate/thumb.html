@@ -4,13 +4,14 @@ let th_c='#FF7A45';
 document.getElementById('s').innerHTML=`<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">${DEFS}
  ${h15_bgSpace(.4)}
  <circle cx="1420" cy="380" r="360" fill="#2A3248" stroke="${INK}" stroke-width="14"/><circle cx="1420" cy="380" r="315" fill="#070818"/>
- ${h15_planet(1500,330,230,'mars',0)}
+ ${h15_planet(1480,330,240,'mars',0)}
  <circle cx="1420" cy="380" r="315" fill="none" stroke="#5D6A82" stroke-width="22"/><path d="M1220 190 A280 280 0 0 1 1370 110" stroke="#fff" stroke-width="14" fill="none" opacity=".3" stroke-linecap="round"/>
- <rect x="700" y="900" width="1300" height="200" fill="#0A0F1C"/>
- ${h15_bed(1360,900,1.75,0,{eyes:'closed',mouth:'smile',blanket:P.violet})}
- ${h15_zzz(1180,520,.35,2.2)}
- <text x="70" y="400" font-size="190" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="46" stroke-linejoin="round">SLEEP</text><text x="70" y="400" font-size="190" font-weight="900" fill="#fff">SLEEP</text>
- <text x="70" y="620" font-size="190" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="46" stroke-linejoin="round">TO</text><text x="70" y="620" font-size="190" font-weight="900" fill="#fff">TO</text>
- <text x="55" y="850" font-size="220" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="50" stroke-linejoin="round">MARS</text><text x="55" y="850" font-size="220" font-weight="900" fill="${th_c}">MARS</text>
+ ${glint({x:1420,y:700,s:1.75,t:0,eyes:'closed',mouth:'smile',brows:'calm',pose:'down'})}
+ <path d="M1150 1100 Q1110 820 1260 770 Q1420 730 1580 770 Q1730 820 1690 1100Z" fill="${P.violet}" stroke="${INK}" stroke-width="12" stroke-linejoin="round"/>
+ <path d="M1210 830 Q1420 780 1630 830" stroke="#fff" stroke-width="10" fill="none" opacity=".35" stroke-linecap="round"/>
+ <ellipse cx="1420" cy="390" rx="0" ry="0"/>
+ ${h15_zzz(1640,420,.35,1.8)}
+ <text x="60" y="470" font-size="190" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="46" stroke-linejoin="round">SLEEP TO</text><text x="60" y="470" font-size="190" font-weight="900" fill="#fff">SLEEP TO</text>
+ <text x="55" y="760" font-size="280" font-weight="900" fill="${INK}" stroke="${INK}" stroke-width="56" stroke-linejoin="round">MARS</text><text x="55" y="760" font-size="280" font-weight="900" fill="${th_c}">MARS</text>
  <rect x="10" y="10" width="1900" height="1060" rx="18" fill="none" stroke="${th_c}" stroke-width="20"/>${VIG}</svg>`;
 </script></body></html>
