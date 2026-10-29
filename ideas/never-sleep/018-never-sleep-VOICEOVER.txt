@@ -14,7 +14,7 @@ The museum is opening a new sleep exhibit. Glowing brain models. A giant dreamin
 
 Glint is testing it on the night shift. Sensors stuck to his forehead. A storm outside. He presses the big green button.
 
-Lightning hits the roof.
+The museum's old wiring surges. Every light in the hall flares.
 
 The dials spin to zero. The machine sparks. And Glint feels it, like a window opening in his head. Fresh. Bright. Wide awake.
 
@@ -54,9 +54,9 @@ Plus: Kai's challenge.
 
 Kai, being Kai, decides to stay awake too. "Solidarity," he says. He makes it twenty-six hours before falling asleep face-first in a bowl of cereal.
 
-Glint looks up the record. In nineteen sixty-four, a seventeen-year-old named Randy Gardner stayed awake for about eleven days for a school science fair. Doctors watched him. By the end, he was moody, struggled to concentrate, and had trouble with memory. He even saw things that weren't there. Then he slept for about fourteen hours and recovered. Record books don't accept attempts anymore. It's considered too risky.
+Glint looks up the record. In nineteen sixty-four, a seventeen-year-old named Randy Gardner stayed awake for about eleven days for a school science fair. Researchers checked on him. By the end, he was moody, struggled to concentrate, and had trouble with memory. He even saw things that weren't there. Then he slept for about fourteen hours and recovered. Record books don't accept attempts anymore. It's considered too risky.
 
-Glint passes eleven days on Tuesday.
+If nothing changes, Glint passes eleven days on Friday.
 
 Minus: The gaps.
 
@@ -104,7 +104,11 @@ He looks up at the alarm by the boiler.
 
 Its light is off. The battery is still in his coat pocket. Where it's been for ten days.
 
-Nan won't wake when he shakes her. Mr. Pickles barely mews.
+Nan won't wake when he shakes her. Her breathing is slow and shallow. Mr. Pickles barely mews.
+
+And carbon monoxide is especially hard on a weak heart. Because the heart is a muscle that needs a constant supply of oxygen. Nan's heart is already working too hard.
+
+The house is filling with something he can't see. And every minute, there's more.
 
 <break time="1.0s" />
 
@@ -134,7 +138,9 @@ The cat comes out under his arm, very annoyed. A good sign.
 
 He dials. He says the words slowly and clearly. Carbon monoxide. Grandmother. Weak heart. Breathing. Then he sits in the frosty grass, holding Nan's hand, saying the address over and over so he won't lose it.
 
-The sirens come. Then the oxygen masks.
+The operator tells him to stay outside, stay awake, and keep talking. For once, staying awake is the easy part.
+
+The sirens come. Then the oxygen masks. A firefighter walks into the kitchen with a meter, looks at the reading, and goes very quiet. Then she turns the boiler off.
 
 <break time="1.0s" />
 
@@ -148,7 +154,7 @@ When he wakes up, he's tired. Gloriously, normally tired. The power is gone.
 
 And then the strangest thing happens. He hums Nan's favourite song. And his fingers move on the blanket. Every note.
 
-The memories were never lost. They were waiting to be filed.
+In this world, the memories were never lost. They were sitting in the pencil drafts, waiting for one long night of filing.
 
 Nan says, "Next time, love, just take the nap."
 
@@ -156,6 +162,6 @@ Nan says, "Next time, love, just take the nap."
 
 So, would you give up sleep forever, knowing you'd lose the dreams, the memories, and the warning signs?
 
-If you want Part 2, tell me in the comments.
+If you want Part Two, tell me in the comments.
 
 Next time: what if you shrank to the size of an ant?
