@@ -90,11 +90,11 @@ Ten minutes later, the paramedics are in the building. And the building is a maz
 
 Four floors. Hundreds of rooms. Every light is out. The storm has set off the fire alarm, and it's so loud that shouting is useless. Their flashlights swing through the dinosaur hall. The wrong way. Toward the wrong stairs.
 
-Glint sprints to them. He waves. They see nothing. He grabs a spare flashlight to lead them, and it fades in his hand. Anything he holds turns invisible. He is a guide nobody can follow.
+Glint sprints to them. He shouts. The alarm swallows his voice. He waves. They see nothing. He tugs a sleeve, and the paramedic spins around, shines a light at empty air, and backs away, shaken. He grabs a spare flashlight to lead them, and it fades in his hand. Anything he holds turns invisible. He is a guide nobody can follow.
 
 On the phone, the operator is clear. Nan needs help now. Not in ten minutes. Now.
 
-Nan is a hundred and forty metres away. Down two staircases. Through three doors.
+Nan is a hundred and forty metres away. Down two staircases. Through three doors. In a building the paramedics have never been inside, in the pitch dark.
 
 The paramedics turn back toward the exit.
 
@@ -118,7 +118,7 @@ So he walks backwards through the black museum, eyes locked on the beam, like a 
 
 Two red sparks, leading the way.
 
-Forty seconds later, the paramedics are kneeling beside Nan.
+Forty seconds later, the paramedics are kneeling beside Nan. Oxygen. A heart monitor. Calm voices. Glint stands in the corner of the room, where nobody can see him shaking.
 
 <break time="1.0s" />
 
@@ -128,7 +128,9 @@ And by sunrise, Glint is fading back in. Hands. Scarf. Glasses.
 
 But here's the strange part. Nan was never scared of the floating dots. Not once.
 
-Because, she tells him, his grandfather worked nights at that museum too. In the summer of nineteen sixty-eight, during a storm, he vanished for three days. And she found him by his eyes.
+Because, she tells him, his grandfather worked nights at that museum too. In the summer of nineteen sixty-eight, during a storm, he vanished for three days. Nobody else ever knew. And she found him the same way. Two dark dots, hiding in the museum's stairwell.
+
+That's why she never let Glint skip an eye test. That's why she gave him the gold glasses. So she'd always know where his eyes were.
 
 Nan says, "I always know where to look."
 
