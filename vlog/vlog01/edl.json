@@ -1,5 +1,6 @@
 {
  "raw": "raw",
+ "norotate": ["C0048.MP4"],
  "sections": [
   {"type": "hikids", "clips": [
     ["C0014.MP4", 0.95, 1.85], ["C0015.MP4", 0.0, 1.0], ["C0016.MP4", 1.55, 2.4],

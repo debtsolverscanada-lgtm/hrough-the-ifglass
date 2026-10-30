@@ -18,6 +18,7 @@ FONTS = HERE / 'fonts'
 MARKER, BOLD = FONTS / 'PermanentMarker-Regular.ttf', FONTS / 'Anton-Regular.ttf'
 PREVIEW = float(sys.argv[sys.argv.index('--preview') + 1]) if '--preview' in sys.argv else None
 FPS, BEATS = 30, json.load(open(MUSIC / 'beats.json'))
+NOROTATE = set(EDL.get('norotate', []))  # clips whose camera rotation tag is wrong (footage is already upright)
 GRADE = 'eq=contrast=1.06:saturation=1.14:gamma=0.98,colorbalance=rs=0.03:bs=-0.03:rh=0.02:bh=-0.02,vignette=PI/5'
 GRAIN = 'noise=alls=7:allf=t'
 LETTERBOX = 'drawbox=y=0:w=iw:h=132:color=black:t=fill,drawbox=y=ih-132:w=iw:h=132:color=black:t=fill'
@@ -89,7 +90,7 @@ def piece(i, p):
     if p.get('mute'): af.append('volume=0')
     if p.get('freeze'): af.append(f"apad=pad_dur={p['freeze']}")
     af += [f'atrim=0:{out_dur:.3f}', 'afade=t=in:d=0.02', f'afade=t=out:st={max(0, out_dur - 0.03):.3f}:d=0.03']
-    inputs = ['-ss', f'{s:.3f}', '-t', f'{dur_src:.3f}', '-i', str(src)]
+    inputs = (['-noautorotate'] if p.get('clip') in NOROTATE else []) + ['-ss', f'{s:.3f}', '-t', f'{dur_src:.3f}', '-i', str(src)]
     if has_audio(src):
         graph = f"[0:v]{vf[0]}[v0];[v0]{','.join(vf[1:])}[v];[0:a:0]{','.join(af)}[a]"
         amap = ['-map', '[v]', '-map', '[a]']

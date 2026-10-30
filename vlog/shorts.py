@@ -19,7 +19,7 @@ BEATS = json.load(open(MUSIC / 'beats.json'))
 GRADE = 'eq=contrast=1.06:saturation=1.16:gamma=0.98,colorbalance=rs=0.03:bs=-0.03'
 PANEL_Y, PANEL_H = 500, 810  # 4:3 panel 1080x810
 
-from edit import run, clip, has_audio, load_audio  # same helpers as the long-form editor
+from edit import run, clip, has_audio, load_audio, NOROTATE  # same helpers as the long-form editor
 
 
 def seg(i, p, slug):
@@ -39,7 +39,7 @@ def seg(i, p, slug):
     out_dur = dur + p.get('freeze', 0)
     af = f"aresample=48000,aformat=channel_layouts=stereo,volume={0 if p.get('mute') else p.get('vol', 1.0)}" \
          + (f",apad=pad_dur={p['freeze']}" if p.get('freeze') else '') + f",atrim=0:{out_dur:.3f},afade=t=in:d=0.02[a]"
-    ins = ['-ss', f'{s:.3f}', '-t', f'{dur:.3f}', '-i', str(src)]
+    ins = (['-noautorotate'] if p['clip'] in NOROTATE else []) + ['-ss', f'{s:.3f}', '-t', f'{dur:.3f}', '-i', str(src)]
     if has_audio(src): graph = f'{v};[0:a:0]{af}'
     else:
         ins += ['-f', 'lavfi', '-t', f'{out_dur:.3f}', '-i', 'anullsrc=r=48000:cl=stereo']; graph = f'{v};[1:a]{af}'

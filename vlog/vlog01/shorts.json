@@ -56,7 +56,7 @@
 
   {"slug": "rain-umbrella", "hook": "NYC SAID|NO", "title": "day 3 in NYC: rain + a broken umbrella ☔ #nyc #shorts",
    "music": {"song": "reverse-psychology.mp3", "from": 0.6, "gain": 0.15}, "segs": [
-    {"clip": "C0048.MP4", "s": 0.6, "e": 18.3, "full": true}]},
+    {"clip": "C0048.MP4", "s": 0.6, "e": 18.3}]},
 
   {"slug": "first-time-nyc", "hook": "POV: YOUR FIRST|TIME IN NYC", "title": "pov: your first time in NYC 🗽 #nyc #newyork #shorts",
    "music": {"song": "big-talk.mp3", "from": 15.7, "gain": 0.9}, "beats": "big-talk.mp3", "segs": [
