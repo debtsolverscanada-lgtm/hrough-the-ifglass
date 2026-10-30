@@ -8,6 +8,10 @@ on:
       name:
         description: 'Vlog id (folder under vlog/ holding thumb.json)'
         required: true
+      files:
+        description: 'Optional space-separated Drive file IDs: download only these clips instead of whole folders'
+        required: false
+        default: ''
 permissions:
   contents: write
 jobs:
@@ -27,7 +31,8 @@ jobs:
       - name: Free disk space
         run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL || true
       - name: Download raw footage
-        run: vlog/fetch.sh ${{ github.event.inputs.folders }}
+        run: |
+          if [ -n "${{ github.event.inputs.files }}" ]; then mkdir -p raw && cd raw && for id in ${{ github.event.inputs.files }}; do for t in 1 2 3; do gdown -q "$id" && break; sleep 15; done; done; ls -la; else vlog/fetch.sh ${{ github.event.inputs.folders }}; fi
       - name: Build thumbnails
         run: python3 vlog/thumb/make.py "vlog/${{ github.event.inputs.name }}"
       - name: Commit
