@@ -1,0 +1,37 @@
+name: Vlog ingest
+on:
+  workflow_dispatch:
+    inputs:
+      folders:
+        description: 'Space-separated public Google Drive folder URLs with the raw clips'
+        required: true
+      name:
+        description: 'Vlog id, e.g. 2026-10-nyc'
+        required: true
+permissions:
+  contents: write
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Install tools
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          pip install gdown faster-whisper numpy
+      - name: Download raw footage
+        run: |
+          df -h . | tail -1
+          i=0; for u in ${{ github.event.inputs.folders }}; do i=$((i+1)); gdown --folder "$u" -O "raw/batch$i" --remaining-ok || echo "WARN folder $i download issue"; done
+          find raw -type f -exec ls -la {} \; | awk '{print $5, $9}'
+          du -sh raw; df -h . | tail -1
+      - name: Transcribe and analyse
+        run: python3 vlog/ingest.py raw "vlog/${{ github.event.inputs.name }}/ingest"
+      - name: Commit analysis
+        run: |
+          git config user.name "vlog-bot" && git config user.email "vlog-bot@users.noreply.github.com"
+          git add "vlog/${{ github.event.inputs.name }}/ingest"
+          git commit -m "Vlog ingest: ${{ github.event.inputs.name }}" && git pull --rebase && git push
