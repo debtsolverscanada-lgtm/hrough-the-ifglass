@@ -6,3 +6,5 @@ frames/
 __pycache__/
 vlog/*/thumbwork/
 vlog/*/work/
+vlog/map/frames/
+!vlog/map/map.mp4

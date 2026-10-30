@@ -58,7 +58,7 @@ def title_filter(text, style='lower', start=0.25, dur=3.2):
 def piece(i, p):
     """Render one normalised piece -> work/pNNN.mp4. Returns its duration."""
     out = W / f'p{i:03d}.mp4'
-    src = clip(p['clip']); s, e = p['s'], p['e']; speed = p.get('speed', 1.0)
+    src = HERE / p['asset'] if p.get('asset') else clip(p['clip']); s, e = p['s'], p['e']; speed = p.get('speed', 1.0)
     dur_src = e - s
     vf = [  # fit any orientation onto a blurred 16:9 background
         f"split[fa][fb];[fb]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,boxblur=28:2[bg];"
@@ -186,7 +186,7 @@ def main():
         total = min(total, PREVIEW)
     print(f'{len(pieces)} pieces, {total/60:.1f} min')
     for i, p in enumerate(pieces):
-        piece(i, p); print('piece', i, p['clip'], p['s'], flush=True)
+        piece(i, p); print('piece', i, p.get('clip', p.get('asset')), p['s'], flush=True)
     lst = W / 'list.txt'; lst.write_text(''.join(f"file 'p{i:03d}.mp4'\n" for i in range(len(pieces))))
     run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', str(lst), '-c', 'copy', str(W / 'cut.mp4')])
     run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'cut.mp4'), '-vn', '-ac', '2', '-ar', '48000', str(W / 'dialogue.wav')])
