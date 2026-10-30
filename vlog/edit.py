@@ -239,8 +239,9 @@ def main():
          '-map', '[out]', '-ar', '48000', str(W / 'mix.wav')])
     captions(W / 'dialogue.wav', W / 'caps.ass')
     out = D / ('preview.mp4' if PREVIEW else 'vlog.mp4')
+    vb = int(min(12e6, 940e6 * 8 / total - 200e3))  # keep the file under ~950 MB so the YouTube upload step accepts it
     run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'cut.mp4'), '-i', str(W / 'mix.wav'), '-map', '0:v', '-map', '1:a',
-         '-vf', f"subtitles={W / 'caps.ass'}:fontsdir={FONTS}", '-c:v', 'libx264', '-preset', 'fast', '-crf', '20',
+         '-vf', f"subtitles={W / 'caps.ass'}:fontsdir={FONTS}", '-c:v', 'libx264', '-preset', 'fast', '-b:v', f'{vb}', '-maxrate', f'{int(vb * 1.5)}', '-bufsize', f'{vb * 2}',
          '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', str(out)])
     print('done', out, f'{out.stat().st_size/1e6:.0f} MB')
 
