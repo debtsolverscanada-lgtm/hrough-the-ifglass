@@ -36,7 +36,7 @@
     {"clip": "C0021.MP4", "s": 0.0, "e": 21.0, "loc": "central-park"},
     {"clip": "C0022.MP4", "s": 0.5, "e": 12.0},
     {"clip": "C0023.MP4", "s": 7.0, "e": 24.5},
-    {"clip": "C0025.MP4", "s": 0.0, "e": 29.0, "letterbox": true, "titles": [{"text": "SPOOKY SEASON"}]},
+    {"clip": "C0025.MP4", "s": 0.0, "e": 29.0, "letterbox": true, "titles": [{"text": "SPOOKY SEASON"}, {"text": "our audio went missing for this part... so enjoy the vibes", "style": "note", "at": 0.6, "dur": 3.4}]},
     {"clip": "C0026.MP4", "s": 3.0, "e": 19.0, "letterbox": true},
     {"clip": "C0024.MP4", "s": 0.0, "e": 77.0}
   ]},

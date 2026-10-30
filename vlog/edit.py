@@ -96,6 +96,10 @@ def esc(t):
 def title_filter(text, style='lower', start=0.25, dur=3.2):
     """Slide-in title: 'lower' = marker lower-third, 'big' = centred title card."""
     t, e = esc(text), start + dur
+    if style == 'note':  # small heads-up line, centred under the top bar, fades in and out
+        fade = f"if(lt(t,{start}),0,min(1,(t-{start})/0.3))*if(gt(t,{e}),max(0,1-(t-{e})/0.4),1)"
+        return (f"drawtext=fontfile={BOLD}:text='{t}':fontsize=46:fontcolor=white:box=1:boxcolor=black@0.55:boxborderw=18:"
+                f"x=(w-text_w)/2:y=170:alpha='{fade}'")
     if style == 'big':
         return (f"drawtext=fontfile={MARKER}:text='{t}':fontsize=150:fontcolor=white:borderw=8:bordercolor=black@0.85:"
                 f"x=(w-text_w)/2:y=(h-text_h)/2-20+40*max(0\\,1-(t-{start})/0.35):alpha='if(lt(t,{start}),0,min(1,(t-{start})/0.25))*if(gt(t,{e}),max(0,1-(t-{e})/0.3),1)'")
@@ -239,7 +243,8 @@ def montage(p, beat, per):
     cut = per * beat
     if p.get('photos'):  # photos are timed against the whole shot: keep it in one piece, just land it on the beat
         n = max(2, round((end - p['s']) / sp / cut)); return [dict(p, e=min(p['s'] + n * cut * sp, end))]
-    first = cut * max(1, -(-(4.2 if p.get('loc') else 3.4 if p.get('titles') else 0) // cut))
+    hold = max([4.2 if p.get('loc') else 0] + [t.get('at', 0.25) + t.get('dur', 3.2) + 0.3 for t in p.get('titles', [])])
+    first = cut * max(1, -(-hold // cut))
     real = (end - p['s']) / sp
     n = max(1, min(10, round((real - first) / (2 * cut)))) if real > first + cut else 0
     out = [dict(p, e=p['s'] + first * sp, letterbox=True, push=0.05)]
