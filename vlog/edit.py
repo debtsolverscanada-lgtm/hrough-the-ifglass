@@ -116,6 +116,7 @@ def frames(sec):
 def piece(i, p):
     """Render one normalised piece -> work/pNNN.mov. Returns its duration."""
     out = W / f'p{i:03d}.mov'  # PCM sound: no AAC padding added per piece
+    if p.get('letterbox') and p.get('clip') and talking(p): p = dict(p, letterbox=False)  # bars only where nobody talks
     src = HERE / p['asset'] if p.get('asset') else clip(p['clip']); s, e = p['s'], p['e']; speed = p.get('speed', 1.0)
     dur_src = e - s
     vf = [  # fit any orientation onto a blurred 16:9 background

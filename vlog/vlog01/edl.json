@@ -172,6 +172,12 @@
        "style": "big",
        "at": 0.1,
        "dur": 2.2
+      },
+      {
+       "text": "(there was a homeless man right next to me)",
+       "style": "note",
+       "at": 15.0,
+       "dur": 3.5
       }
      ]
     },
