@@ -1,0 +1,12 @@
+{
+ "toronto":   {"name": "Toronto",             "sub": "the night before"},
+ "ytz":       {"name": "Billy Bishop Airport","sub": "Toronto Island, ON"},
+ "times-sq":  {"name": "Times Square",        "sub": "Midtown Manhattan"},
+ "leons":     {"name": "Leon's Bagels",       "sub": "1235 Broadway · NoMad"},
+ "central-park": {"name": "Central Park",     "sub": "Manhattan, NYC"},
+ "broadway":  {"name": "Broadway",            "sub": "Theater District"},
+ "chinatown": {"name": "Chinatown",           "sub": "Lower Manhattan"},
+ "ferry":     {"name": "Staten Island Ferry", "sub": "New York Harbor"},
+ "liberty":   {"name": "Statue of Liberty",   "sub": "Liberty Island"},
+ "apollo":    {"name": "Apollo Bagels",       "sub": "41 John St · Financial District"}
+}

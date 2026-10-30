@@ -142,7 +142,12 @@ def piece(i, p):
         extra += (f";[{k + 1}:v]scale=-2:{o.get('h', 760)},pad=iw+24:ih+24:12:12:white,format=rgba,rotate={o.get('rot', -3)}*PI/180:c=none:ow=rotw(iw):oh=roth(ih),format=rgba[ph{k}]"
                   f";{vout}[ph{k}]overlay=x={o.get('x', 'W-w-90')}:y=(H-h)/2+H*max(0\\,1-(t-{a})/0.25):enable='between(t,{a},{b})'[pv{k}]")
         vout = f'[pv{k}]'
-    na = 1 + len(pics)
+    if p.get('loc'):  # cute location tag in the top-left corner (vlog/loc/<slug>.webm, rendered by loc/render.js)
+        at = p.get('loc_at', 0.3)
+        inputs += ['-itsoffset', f'{at:.3f}', '-c:v', 'libvpx-vp9', '-i', str(HERE / 'loc' / f"{p['loc']}.webm")]
+        extra += f";[{1 + len(pics)}:v]format=rgba[lc];{vout}[lc]overlay=x=40:y={150 if p.get('letterbox') else 40}:eof_action=pass[lv]"
+        vout = '[lv]'
+    na = 1 + len(pics) + (1 if p.get('loc') else 0)
     if has_audio(src) and not p.get('_silent'):
         graph = f"[0:v]{vf[0]}[v0];[v0]{','.join(vf[1:])}[v];[0:a:0]{','.join(af)}[a]{extra}"
         amap = ['-map', vout, '-map', '[a]']
@@ -212,12 +217,14 @@ def expand(edl):
                             bar = 4 * 60 / BEATS[sec['music']['song']]['bpm']
                             n = max(2, round((p['e'] - p['s']) / p['speed'] / bar))
                             p['e'] = min(p['s'] + n * bar * p['speed'], clip_len(p['clip']) - 0.1)
+                if p.get('loc'): sfx.append(('pin', t + p.get('loc_at', 0.3)))
                 add(p)
             if sec.get('music'): cues[-1]['dur'] = t - cues[-1]['at']
     return pieces, cues, sfx, t
 
 
 def synth_sfx(kind, out, opt=None):
+    if kind == 'pin': shutil.copy(HERE / 'loc' / 'pin.wav', out); return
     if kind == 'rewind' and opt and (MUSIC / opt['song']).exists():
         # tape rewind: the teaser's song runs backwards, sped up and pitched up with wow/flutter, over a motor whir
         sp, d = 3.0, opt['dur']; a = max(0.0, opt['end'] - d * sp)

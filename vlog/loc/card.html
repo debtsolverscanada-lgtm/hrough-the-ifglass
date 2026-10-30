@@ -1,0 +1,65 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:transparent;overflow:hidden}
+svg{display:block}
+text{font-family:"Inter Display","Inter",sans-serif}
+</style></head><body><svg id="s" width="1100" height="300" viewBox="0 0 1100 300"></svg><script>
+// Cute location tag: a pin with a little face drops in and squashes, a card unrolls beside it, the place
+// name pops in letter by letter, sparkles twinkle, then everything hops away. frame(t) draws time t (s).
+const P = new URLSearchParams(location.search), NAME = P.get('name'), SUB = (P.get('sub') || '').toUpperCase();
+window.DUR = 4.0;
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const backOut = x => { const c = 2.2; x = clamp(x); return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const bounce = x => { x = clamp(x); const n = 7.5625, d = 2.75;
+  if (x < 1 / d) return n * x * x; if (x < 2 / d) return n * (x -= 1.5 / d) * x + .75;
+  if (x < 2.5 / d) return n * (x -= 2.25 / d) * x + .9375; return n * (x -= 2.625 / d) * x + .984375; };
+const PINK = '#FF4F8B', INK = '#2B2148', CREAM = '#FFF8FB';
+// measure the name to size the card
+const m = document.createElementNS('http://www.w3.org/2000/svg', 'text'); m.setAttribute('font-size', 64); m.setAttribute('font-weight', 900);
+m.textContent = NAME; document.getElementById('s').appendChild(m); const NW = m.getComputedTextLength();
+const OFF = [...NAME].map((_, i) => i ? m.getSubStringLength(0, i) : 0);  // real kerning, letter by letter
+m.setAttribute('font-size', 26); m.setAttribute('font-weight', 700); m.setAttribute('letter-spacing', 3); m.textContent = SUB;
+const SW = m.getComputedTextLength(); m.remove();
+const CW = Math.max(NW, SW) + 190;
+function star(x, y, r, a, c) { // four-point sparkle
+  const k = r * .28; return `<path transform="translate(${x},${y}) rotate(${a}) " d="M0 ${-r} Q${k} ${-k} ${r} 0 Q${k} ${k} 0 ${r} Q${-k} ${k} ${-r} 0 Q${-k} ${-k} 0 ${-r}Z" fill="${c}"/>`; }
+window.frame = t => {
+  const out = clamp((t - (DUR - .45)) / .45);             // exit
+  const drop = bounce(t / .55), land = clamp((t - .42) / .25);
+  const sq = t > .42 && t < .7 ? 1 - .22 * Math.sin(Math.PI * land) : 1; // squash on landing
+  const py = -260 * (1 - drop);
+  const card = backOut((t - .5) / .45);                   // card unrolls
+  const w = 60 + (CW - 60) * card;
+  const blink = (t % 1.7) > 1.6 ? .15 : 1;
+  let g = '';
+  // ground ripple
+  if (t > .45) { const r = clamp((t - .45) / .6); g += `<ellipse cx="95" cy="236" rx="${20 + 70 * r}" ry="${6 + 18 * r}" fill="none" stroke="${PINK}" stroke-width="${6 * (1 - r)}" opacity="${1 - r}"/>`; }
+  // card
+  g += `<g opacity="${card > 0 ? 1 : 0}">
+    <rect x="70" y="${92 + 8}" width="${w}" height="130" rx="65" fill="#000" opacity=".18"/>
+    <rect x="70" y="92" width="${w}" height="130" rx="65" fill="${CREAM}" stroke="${PINK}" stroke-width="6"/>
+    <clipPath id="cl"><rect x="70" y="92" width="${w}" height="130" rx="65"/></clipPath>
+    <g clip-path="url(#cl)">`;
+  [...NAME].forEach((ch, i) => { const a = backOut((t - .75 - i * .035) / .3);
+    if (a <= 0) return; const x = 165 + OFF[i];
+    g += `<text x="0" y="0" font-size="64" font-weight="900" fill="${INK}" transform="translate(${x},${163 - 18 * (1 - a)}) scale(${a})" opacity="${clamp(a * 2)}" xml:space="preserve">${ch.replace('&', '&amp;').replace('<', '&lt;')}</text>`; });
+  const sa = clamp((t - 1.0) / .3);
+  g += `<text x="${165 + 30 * (1 - sa)}" y="203" font-size="25" font-weight="700" letter-spacing="3" fill="${PINK}" opacity="${sa}">${SUB.replace('&', '&amp;')}</text>`;
+  g += `</g></g>`;
+  // pin with a little face
+  g += `<g transform="translate(95,${230 + py}) scale(${1 / Math.sqrt(sq)},${sq})">
+    <path d="M0 0 C-14 -26 -50 -60 -50 -100 A50 50 0 1 1 50 -100 C50 -60 14 -26 0 0Z" fill="${PINK}" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M-34 -118 A36 36 0 0 1 -6 -140" stroke="#fff" stroke-width="7" stroke-linecap="round" fill="none" opacity=".7"/>
+    <ellipse cx="-15" cy="-100" rx="6" ry="${8 * blink}" fill="${INK}"/><ellipse cx="15" cy="-100" rx="6" ry="${8 * blink}" fill="${INK}"/>
+    <circle cx="-13" cy="-103" r="2.2" fill="#fff"/><circle cx="17" cy="-103" r="2.2" fill="#fff"/>
+    <path d="M-8 -86 Q0 -78 8 -86" stroke="${INK}" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <ellipse cx="-30" cy="-86" rx="8" ry="5" fill="#fff" opacity=".45"/><ellipse cx="30" cy="-86" rx="8" ry="5" fill="#fff" opacity=".45"/>
+  </g>`;
+  // sparkles
+  [[CW + 50, 88, 22, '#FFD43B', 1.0], [CW + 85, 140, 13, PINK, 1.25], [150, 70, 15, '#7AD7F0', 1.45], [CW + 20, 236, 11, '#7AD7F0', 1.6]]
+    .forEach(([x, y, r, c, at]) => { const k = clamp((t - at) / .25); if (k <= 0) return;
+      const tw = .75 + .25 * Math.sin((t - at) * 9); g += star(x, y, r * backOut(k) * tw, 20 * Math.sin(t * 3), c); });
+  const ex = backOut(out) ;
+  document.getElementById('s').innerHTML = `<g transform="translate(0,${-40 * out}) translate(95,230) scale(${1 - .9 * out}) translate(-95,-230)" opacity="${1 - out}">${g}</g>`;
+};
+window.ready = true;
+</script></body></html>

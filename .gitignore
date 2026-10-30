@@ -16,3 +16,4 @@ vlog/*/ingest/
 vlog/*/probe/
 vlog/*/thumb-*.jpg
 vlog/*/photos/
+vlog/loc/frames/
