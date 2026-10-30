@@ -24,43 +24,45 @@ const th_bed=`
  <rect x="1110" y="490" width="760" height="40" rx="16" fill="#B5552E" opacity=".7"/>
  <ellipse cx="1690" cy="700" rx="160" ry="54" fill="#FFF6FB" stroke="${INK}" stroke-width="8"/>
 
- <!-- him: black shadow stickman with white sneaky eyes, lying on the pillow -->
- <g transform="translate(1700,650)">
-  <circle r="92" fill="#07040D" stroke="${W_}" stroke-width="6" style="filter:drop-shadow(0 0 12px ${W_})"/>
-  <path d="M-58 -6 Q-30 -32 -6 -10 Q-30 4 -58 -6Z M58 -6 Q30 -32 6 -10 Q30 4 58 -6Z" fill="#fff"/>
-  <circle cx="-26" cy="-12" r="7" fill="#07040D"/><circle cx="26" cy="-12" r="7" fill="#07040D"/>
-  <path d="M-30 40 Q6 58 40 30" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
- </g>
 
- <!-- her: polished anime style (adult): glossy hair with shine, lashes, gradient eyes, lip colour, fitted top -->
  <defs>
-  <linearGradient id="gHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A2A1C"/><stop offset="1" stop-color="#24100A"/></linearGradient>
+  <linearGradient id="gHair" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5A2A1C"/><stop offset="1" stop-color="#1E0C08"/></linearGradient>
   <radialGradient id="gIris" cx="50%" cy="35%" r="70%"><stop offset="0" stop-color="#E8A0FF"/><stop offset=".55" stop-color="#8A3BD8"/><stop offset="1" stop-color="#3A0F66"/></radialGradient>
-  <radialGradient id="gSkin" cx="45%" cy="35%" r="75%"><stop offset="0" stop-color="#FFE3CC"/><stop offset="1" stop-color="#F1BC95"/></radialGradient>
+  <linearGradient id="gSkin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE3CC"/><stop offset="1" stop-color="#EDB48C"/></linearGradient>
  </defs>
- <g transform="translate(1470,560) rotate(-8)">
-  <path d="M-118 -50 Q-160 -190 6 -196 Q166 -188 130 -50 Q160 90 236 190 Q140 176 104 70 Q80 180 0 250 Q-50 170 -84 70 Q-130 170 -236 196 Q-156 90 -118 -50Z" fill="url(#gHair)" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
-  <path d="M-70 96 Q10 70 170 116 L250 214 Q130 240 -14 206Z" fill="#E8346E" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
-  <path d="M-30 100 Q40 92 150 120" stroke="#FF8FB8" stroke-width="8" fill="none" stroke-linecap="round"/>
-  <path d="M130 156 Q196 152 246 204" stroke="${INK}" stroke-width="46" fill="none" stroke-linecap="round"/><path d="M130 156 Q196 152 246 204" stroke="url(#gSkin)" stroke-width="32" fill="none" stroke-linecap="round"/>
-  <path d="M-30 64 Q0 96 30 64 L26 98 Q0 112 -26 98Z" fill="url(#gSkin)" stroke="${INK}" stroke-width="6"/>
-  <path d="M-84 -70 Q-90 40 -30 74 Q0 88 30 74 Q90 40 84 -70 Q60 -120 0 -122 Q-60 -120 -84 -70Z" fill="url(#gSkin)" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
+ <!-- him: shadow stickman lying on the pillow, smirking at the door -->
+ <g transform="translate(1790,650)">
+  <circle r="90" fill="#07040D" stroke="${W_}" stroke-width="6" style="filter:drop-shadow(0 0 12px ${W_})"/>
+  <path d="M-62 -4 Q-34 -30 -10 -8 Q-34 6 -62 -4Z M54 -4 Q28 -28 4 -8 Q28 6 54 -4Z" fill="#fff"/>
+  <circle cx="-38" cy="-8" r="7" fill="#07040D"/><circle cx="16" cy="-8" r="7" fill="#07040D"/>
+  <path d="M-36 40 Q0 56 34 30" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
+ </g>
+ <!-- her: lying on her stomach across the bed, looking back over her shoulder -->
+ <g>
+  <path d="M1380 700 Q1500 640 1640 660 Q1760 676 1860 720 L1860 800 L1380 800Z" fill="#141018" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M1400 690 Q1440 640 1500 650 M1560 652 Q1600 640 1640 660" stroke="#2C2433" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <path d="M1470 660 L1500 600 M1600 656 L1612 610" stroke="#141018" stroke-width="7" stroke-linecap="round"/>
+  <path d="M1462 640 Q1500 600 1560 606 Q1610 612 1640 650 Q1560 640 1462 640Z" fill="url(#gSkin)" stroke="${INK}" stroke-width="7" stroke-linejoin="round"/>
+ </g>
+ <g transform="translate(1420,560) rotate(-6)">
+  <path d="M-110 -40 Q-150 -180 10 -186 Q160 -176 126 -40 Q170 40 260 96 Q160 120 110 60 Q90 150 30 200 Q-20 120 -60 60 Q-120 150 -200 170 Q-140 80 -110 -40Z" fill="url(#gHair)" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M-150 140 Q-60 110 40 150 Q-20 190 -150 190Z" fill="url(#gSkin)" stroke="${INK}" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M-84 -70 Q-92 40 -30 76 Q0 90 30 76 Q90 40 84 -70 Q60 -122 0 -124 Q-60 -122 -84 -70Z" fill="url(#gSkin)" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
   <path d="M-98 -54 Q-92 -160 4 -162 Q100 -160 104 -54 Q84 -96 54 -104 Q50 -70 24 -58 Q22 -96 -6 -108 Q-24 -74 -54 -62 Q-56 -94 -98 -54Z" fill="url(#gHair)" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
   <path d="M-60 -140 Q-10 -158 50 -142" stroke="#C7754F" stroke-width="10" fill="none" stroke-linecap="round" opacity=".8"/>
-  <path d="M-150 20 Q-170 110 -200 170 M150 30 Q176 110 206 170" stroke="#7A3C26" stroke-width="8" fill="none" stroke-linecap="round" opacity=".8"/>
-  ${[-1,1].map(d=>`<g transform="translate(${d*38},-10) scale(${-d},1)">
-    <path d="M-28 4 Q-26 -30 0 -32 Q26 -30 28 4 Q26 30 0 32 Q-26 30 -28 4Z" fill="#fff" stroke="${INK}" stroke-width="4"/>
-    <ellipse cx="${d*2}" cy="6" rx="19" ry="25" fill="url(#gIris)"/><ellipse cx="${d*2}" cy="10" rx="9" ry="12" fill="#1A0630"/>
-    <ellipse cx="${d*-6}" cy="-4" rx="7" ry="9" fill="#fff"/><circle cx="${d*8}" cy="18" r="3.5" fill="#fff"/>
-    <path d="M-34 -6 Q-10 -40 30 -22" stroke="${INK}" stroke-width="9" fill="none" stroke-linecap="round"/>
-    <path d="${d<0?'M-34 -6 l-12 -8 M-28 -16 l-10 -12':'M30 -22 l12 -6 M24 -30 l8 -12'}" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
-    <path d="M-20 -52 Q0 -60 22 -54" stroke="#3A1C14" stroke-width="6" fill="none" stroke-linecap="round" transform="translate(0,-6) rotate(${d*8})"/></g>`).join('')}
-  <path d="M-4 18 L-8 34 Q-2 38 4 36" stroke="#D9967A" stroke-width="4" fill="none" stroke-linecap="round"/>
-  <ellipse cx="-52" cy="30" rx="20" ry="10" fill="#FF7FA0" opacity=".5"/><ellipse cx="52" cy="30" rx="20" ry="10" fill="#FF7FA0" opacity=".5"/>
-  <path d="M-20 48 Q0 60 22 46 Q0 54 -20 48Z" fill="#E0436E" stroke="${INK}" stroke-width="4" stroke-linejoin="round"/>
-  <path d="M-8 50 Q2 53 10 50" stroke="#FFC2D4" stroke-width="3" fill="none"/>
+  <path d="M96 -20 Q130 60 120 150 Q150 90 170 120 M-96 -10 Q-130 70 -150 120" stroke="#7A3C26" stroke-width="8" fill="none" stroke-linecap="round" opacity=".85"/>
+  ${[-1,1].map(d=>`<g transform="translate(${d*38},-8)">
+    <path d="M-28 6 Q-26 -24 0 -26 Q26 -24 28 6 Q26 26 0 26 Q-26 26 -28 6Z" fill="#fff" stroke="${INK}" stroke-width="4"/>
+    <ellipse cx="${d*4}" cy="6" rx="18" ry="20" fill="url(#gIris)"/><ellipse cx="${d*4}" cy="9" rx="8" ry="10" fill="#1A0630"/>
+    <ellipse cx="${d*-2}" cy="0" rx="6" ry="7" fill="#fff"/><circle cx="${d*10}" cy="16" r="3" fill="#fff"/>
+    <path d="M-32 -2 Q0 -26 32 -4" stroke="${INK}" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <path d="M${d*30} -4 l${d*12} -6 M${d*24} -12 l${d*9} -10" stroke="${INK}" stroke-width="5" stroke-linecap="round"/>
+    <path d="M-22 -40 Q0 -48 24 -42" stroke="#3A1C14" stroke-width="6" fill="none" stroke-linecap="round"/></g>`).join('')}
+  <path d="M-2 20 L-6 36 Q0 40 6 38" stroke="#D9967A" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <ellipse cx="-54" cy="30" rx="20" ry="10" fill="#FF7FA0" opacity=".55"/><ellipse cx="54" cy="30" rx="20" ry="10" fill="#FF7FA0" opacity=".55"/>
+  <path d="M-22 50 Q2 62 26 44" stroke="#C2385F" stroke-width="7" fill="none" stroke-linecap="round"/>
  </g>
- <path d="M1060 790 Q1200 740 1340 730 Q1460 712 1560 728 Q1650 745 1730 760 Q1820 765 1910 775 L1910 960 L1060 960Z" fill="url(#thSheet)" stroke="${INK}" stroke-width="12" stroke-linejoin="round"/>
+ <path d="M1060 800 Q1240 760 1420 770 Q1600 740 1700 730 Q1800 728 1910 760 L1910 960 L1060 960Z" fill="url(#thSheet)" stroke="${INK}" stroke-width="12" stroke-linejoin="round"/>
  <path d="M1120 820 Q1320 790 1500 830 M1560 830 Q1740 800 1880 840" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="10" fill="none" stroke-linecap="round"/>
  <rect x="1040" y="930" width="880" height="110" rx="16" fill="#5A2412" stroke="${INK}" stroke-width="10"/>`;
 const th_door=`
