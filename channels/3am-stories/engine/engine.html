@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Marker;src:url(PermanentMarker-Regular.ttf)}
+html,body{margin:0;background:#000;overflow:hidden}svg{display:block}
+</style></head><body><div id="s"></div><script src="scenes.js"></script><script>
+// window.setup(timeline, view) then window.frame(seconds, frameNo) draws that moment of the video.
+let TL = [], VIEW = [0, 420, 1920, 1080];
+window.setup = (tl, view) => { TL = tl; VIEW = view; return document.fonts.ready.then(() => true); };
+window.frame = (T, n) => {
+  let k = TL.findIndex((s) => T < s.start + s.dur); if (k < 0) k = TL.length - 1;
+  const s = TL[k], t = T - s.start;
+  let svg = frameSVG(s.scene, t, s.dur, s.p || {}, VIEW, n);
+  const fadeIn = s.fade ?? 0.25, out = Math.min(0.25, s.dur / 4);   // quick dip to black between scenes
+  const a = Math.max(t < fadeIn ? 1 - t / fadeIn : 0, t > s.dur - out ? (t - (s.dur - out)) / out : 0);
+  document.getElementById('s').innerHTML = svg + (a > 0 ? `<div style="position:fixed;inset:0;background:#000;opacity:${a}"></div>` : '');
+};
+window.ready = true;
+</script></body></html>

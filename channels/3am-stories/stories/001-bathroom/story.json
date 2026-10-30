@@ -1,0 +1,23 @@
+{
+ "format": "short",
+ "voice": "Brian",
+ "tts": {"stability": 0.55, "similarity": 0.8, "style": 0.25, "speed": 0.9},
+ "thumb": {"text": "DON'T LOOK UP."},
+ "yt": {
+  "title": "Never forget to say this before the bathroom at 3 AM 😨 #scary #horror #shorts",
+  "description": "Your grandmother had one rule: say bismillah before you step into the bathroom at night. Tonight, you forgot.\n\nWould you have looked up? 👇\n\n#scarystories #horrorstories #3amstories #jinn #shorts",
+  "tags": ["scary stories", "horror shorts", "jinn", "jinn stories", "bismillah", "bathroom at night", "3am", "mirror", "animated horror", "pov horror", "shorts"]
+ },
+ "scenes": [
+  {"scene": "bed", "p": {"time": "3:17", "eyes": "wide", "look": 0.8}, "text": "It's three seventeen A.M. You wake up with a dry mouth... and you really need the bathroom.", "sfx": [["tick", 0], ["breath", 1.5]]},
+  {"scene": "nan", "text": "Your grandmother always had one rule. Before you step into the bathroom at night... you say bismillah. Because that's where they live.", "sfx": [["whisper", 3]]},
+  {"scene": "hall", "p": {"light": "bathroom", "walk": 1, "flicker": true}, "text": "The hallway is cold. The bathroom light is already on. You don't remember leaving it on.", "sfx": [["steps", 0], ["buzz", 0]]},
+  {"scene": "door", "text": "You're half asleep. You push the door open... and you forget to say it.", "sfx": [["creak", 0.3]]},
+  {"scene": "sink", "p": {"reflect": "copy", "flicker": true}, "text": "You splash water on your face. You look up. In the mirror, you look tired. Normal.", "sfx": [["water", 0], ["buzz", 0]]},
+  {"scene": "mirror", "p": {"state": "lag"}, "text": "You blink.", "pause": 1.2, "sfx": [["heart", 0.4]]},
+  {"scene": "mirror", "p": {"state": "stare"}, "text": "Your reflection doesn't.", "pause": 1.0, "sfx": [["heart", 0], ["drone", 0]]},
+  {"scene": "mirror", "p": {"state": "smile"}, "text": "It's still staring at you. And very slowly... it starts to smile.", "pause": 0.6, "sfx": [["sting", 3.2]]},
+  {"scene": "text", "p": {"text": "NEXT TIME...|SAY IT.", "color": "#fff"}, "text": "Next time... say it.", "pause": 1.4, "sfx": [["boom", 0]]},
+  {"scene": "text", "p": {"text": "WOULD YOU HAVE|LOOKED UP?", "sub": "comment below", "size": 120}, "dur": 2.6}
+ ]
+}

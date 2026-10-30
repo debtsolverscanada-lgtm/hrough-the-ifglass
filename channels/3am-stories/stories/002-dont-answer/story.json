@@ -1,0 +1,598 @@
+{
+ "format": "long",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.55,
+  "similarity": 0.8,
+  "style": 0.25,
+  "speed": 0.9
+ },
+ "thumb": {
+  "text": "DON'T ANSWER."
+ },
+ "yt": {
+  "title": "If You Hear Your Name at 3 AM... DON'T Answer",
+  "description": "It's 3 AM, and someone in the kitchen is calling your name. It sounds exactly like your mom. The problem is... your mom is asleep in the room next to yours.\n\nYour grandmother had one rule: if someone calls your name at night and you can't see their face, don't answer. They learn our voices.\n\nBased on the jinn folklore told across the Middle East and South Asia, and the stories people swear really happened to them.\n\nWould you have answered? Tell me in the comments 👇\nSubscribe for a new story every night. Don't watch alone.\n\n#scarystories #horrorstories #3amstories #jinn #animatedhorror",
+  "tags": [
+   "scary stories",
+   "animated horror stories",
+   "jinn",
+   "jinn stories",
+   "dont answer at night",
+   "voice calling your name",
+   "3am stories",
+   "true scary stories",
+   "paranormal",
+   "islamic horror stories",
+   "creepy stories",
+   "pov horror"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:00",
+    "eyes": "wide",
+    "look": 1
+   },
+   "text": "It's three A.M., and someone in the kitchen is calling your name.",
+   "sfx": [
+    [
+     "tick",
+     0
+    ],
+    [
+     "voice_far",
+     2.5
+    ]
+   ],
+   "pause": 0.3
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:00",
+    "eyes": "wide",
+    "look": 1
+   },
+   "text": "Are you awake, sweetheart?",
+   "voice": [
+    "Sarah",
+    "Laura",
+    "Jessica",
+    "Rachel",
+    "Charlotte"
+   ],
+   "fx": "far",
+   "pause": 0.5,
+   "sfx": []
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:00",
+    "eyes": "wide",
+    "look": 1
+   },
+   "text": "It sounds exactly like your mom.",
+   "pause": 0.45,
+   "sfx": []
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:00",
+    "eyes": "wide",
+    "look": -1,
+    "sweat": true
+   },
+   "text": "The problem is... your mom is asleep. In the room right next to yours.",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "heart",
+     1
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "DON'T ANSWER."
+   },
+   "dur": 2.8,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "nan",
+   "text": "Your grandmother had rules about the night. Don't whistle after dark. Don't leave the mirror uncovered. And the most important one of all.",
+   "sfx": []
+  },
+  {
+   "scene": "nan",
+   "text": "If someone calls your name at night... and you can't see their face... don't answer. They learn our voices.",
+   "voice": [
+    "Dorothy",
+    "Matilda",
+    "Alice",
+    "Lily",
+    "Charlotte"
+   ],
+   "pause": 0.5,
+   "sfx": []
+  },
+  {
+   "scene": "nan",
+   "text": "They listen to us all day, she said. And at night... they use them.",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "whisper",
+     3
+    ]
+   ]
+  },
+  {
+   "scene": "morning",
+   "p": {
+    "kid": true,
+    "eyes": "normal"
+   },
+   "text": "You laughed. You were nine. Years later, after she passed, you move into her old house. You, your mom, and your little brother.",
+   "sfx": []
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:00",
+    "eyes": "normal",
+    "look": 0.5
+   },
+   "text": "The first night, you wake up at exactly three A.M. The house is silent.",
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:00",
+    "eyes": "wide",
+    "look": 1
+   },
+   "text": "Then, from downstairs, a soft voice.",
+   "sfx": [
+    [
+     "voice_far",
+     2
+    ]
+   ],
+   "pause": 0.3
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:00",
+    "eyes": "wide",
+    "look": 1
+   },
+   "text": "Are you awake?",
+   "voice": [
+    "Sarah",
+    "Laura",
+    "Jessica",
+    "Rachel",
+    "Charlotte"
+   ],
+   "fx": "far",
+   "pause": 0.5,
+   "sfx": []
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:00",
+    "eyes": "wide",
+    "look": 1
+   },
+   "text": "It's your mom. Calm. Normal.",
+   "pause": 0.45,
+   "sfx": []
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "none",
+    "walk": 0.5
+   },
+   "text": "You almost answer. But something stops you. Your mom's door is right next to yours. And through it, you can hear her snoring.",
+   "sfx": [
+    [
+     "steps",
+     0
+    ],
+    [
+     "snore",
+     4
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "watcher": 0
+   },
+   "text": "You stand at the top of the stairs. The kitchen light is off. But the fridge door is open, and its light is spilling across the floor.",
+   "sfx": [
+    [
+     "fridge",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "watcher": 0.35
+   },
+   "text": "Come downstairs. I made you something.",
+   "voice": [
+    "Sarah",
+    "Laura",
+    "Jessica",
+    "Rachel",
+    "Charlotte"
+   ],
+   "fx": "wrong",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "fridge",
+     0
+    ],
+    [
+     "voice_far",
+     0.2
+    ],
+    [
+     "heart",
+     2
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "watcher": 0.35
+   },
+   "text": "The voice is your mom's. But it's coming from the dark.",
+   "pause": 1.0,
+   "sfx": []
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "wide",
+    "time": "3:04"
+   },
+   "text": "You go back to bed. You don't answer. You don't sleep.",
+   "sfx": []
+  },
+  {
+   "scene": "morning",
+   "p": {
+    "kid": true
+   },
+   "text": "In the morning, your mom says she never left her room. She laughs. She says you were dreaming. But the fridge was still open. And all the milk inside had gone sour.",
+   "sfx": []
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {},
+   "text": "The second night, it's closer. Three A.M. again. This time, the voice is right outside your door.",
+   "sfx": [
+    [
+     "creak",
+     2
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true
+   },
+   "text": "Under the door, there's a thin line of light from the hallway. And in it, two shadows. Feet. Standing very still.",
+   "sfx": [
+    [
+     "heart",
+     1
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true,
+    "knock": true
+   },
+   "text": "Open the door, habibi. It's cold out here.",
+   "voice": [
+    "Dorothy",
+    "Matilda",
+    "Alice",
+    "Lily",
+    "Charlotte"
+   ],
+   "fx": "wrong",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "knock",
+     0
+    ],
+    [
+     "knock",
+     2.5
+    ],
+    [
+     "sting",
+     7
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true,
+    "knock": true
+   },
+   "text": "It's your grandmother's voice. And she's been gone for three years.",
+   "pause": 1.0,
+   "sfx": []
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "closed",
+    "time": "3:12"
+   },
+   "text": "You pull the blanket over your head. You remember her rule. You don't answer. You count to one hundred. Then two hundred.",
+   "sfx": [
+    [
+     "breath",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": false
+   },
+   "text": "At three thirty three, the shadows under the door walk away. But you never hear footsteps.",
+   "pause": 1.0,
+   "sfx": []
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:00",
+    "msgs": [
+     [
+      "Mom",
+      "are you awake? come to the kitchen. quietly.",
+      1.5
+     ]
+    ]
+   },
+   "text": "The third night, your phone lights up at three A.M. A text from your mom. Are you awake? Come to the kitchen. Quietly.",
+   "sfx": [
+    [
+     "buzzphone",
+     1.4
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:01",
+    "msgs": [
+     [
+      "Mom",
+      "are you awake? come to the kitchen. quietly.",
+      0
+     ],
+     [
+      "Mom",
+      "why is the kitchen light on?? im in bed. who are you talking to",
+      1.2
+     ]
+    ]
+   },
+   "text": "Then a second text. Also from your mom. Why is the kitchen light on? I'm in bed. Who are you talking to?",
+   "pause": 1.2,
+   "sfx": [
+    [
+     "buzzphone",
+     1.1
+    ],
+    [
+     "heart",
+     3
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "watcher": 0.6
+   },
+   "text": "From downstairs, you hear a voice. Your voice. And it's saying...",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "fridge",
+     0
+    ],
+    [
+     "sting",
+     4.5
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "watcher": 0.6
+   },
+   "text": "I'm coming, mom.",
+   "voice": [
+    "Liam",
+    "Will",
+    "Chris",
+    "Eric",
+    "Josh"
+   ],
+   "fx": "far",
+   "pause": 0.5,
+   "sfx": []
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "kitchen",
+    "kid": true,
+    "you": false
+   },
+   "text": "Then you hear a door open. Not yours. Your little brother's. He's walking down the stairs. Slowly. Half asleep. Answering the voice that sounds like you.",
+   "sfx": [
+    [
+     "creak",
+     0.5
+    ],
+    [
+     "steps",
+     2
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "watcher": 1,
+    "kid": true
+   },
+   "text": "You run. You grab his arm at the bottom of the stairs. And the fridge light goes out.",
+   "pause": 1.4,
+   "sfx": [
+    [
+     "steps",
+     0
+    ],
+    [
+     "boom",
+     4.4
+    ]
+   ]
+  },
+  {
+   "scene": "morning",
+   "p": {
+    "kid": true,
+    "eyes": "tired"
+   },
+   "text": "In the morning, your brother doesn't remember anything. He's fine. He eats his breakfast. He laughs at the TV.",
+   "sfx": []
+  },
+  {
+   "scene": "brother",
+   "p": {
+    "eyes": "closed"
+   },
+   "text": "But that night, at three A.M., you hear him whisper from his room.",
+   "sfx": [
+    [
+     "whisper",
+     2
+    ]
+   ]
+  },
+  {
+   "scene": "brother",
+   "p": {
+    "eyes": "black"
+   },
+   "text": "Are you awake?",
+   "voice": [
+    "Jessica",
+    "Lily",
+    "Laura"
+   ],
+   "fx": "wrong",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "sting",
+     0.6
+    ],
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "brother",
+   "p": {
+    "eyes": "black"
+   },
+   "text": "And it doesn't sound like him at all.",
+   "pause": 1.4,
+   "sfx": []
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "IF YOU HEAR YOUR NAME|AT 3 AM...",
+    "size": 120
+   },
+   "text": "If you hear your name at three A.M...",
+   "sfx": []
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "DON'T ANSWER.",
+    "eyes": true
+   },
+   "text": "don't answer.",
+   "pause": 2.0,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "WOULD YOU HAVE|ANSWERED?",
+    "sub": "tell me in the comments. don't watch alone.",
+    "size": 120
+   },
+   "dur": 4.0
+  }
+ ]
+}

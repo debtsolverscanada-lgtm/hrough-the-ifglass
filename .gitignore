@@ -18,3 +18,5 @@ vlog/*/thumb-*.jpg
 vlog/*/photos/
 vlog/loc/frames/
 !vlog/loc/pin.wav
+channels/3am-stories/stories/*/work/
+channels/3am-stories/stories/*/out/
