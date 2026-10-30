@@ -1,4 +1,4 @@
-// Render map.html frame by frame into vlog/map/map.mp4 (4.2 s, 30 fps, with a jet fly-by sound).
+// Render map.html frame by frame into vlog/map/map.mp4 (30 fps, with a jet fly-by sound).
 // usage: node vlog/map/render.js
 const { chromium } = require('playwright');
 const http = require('http'), fs = require('fs'), path = require('path'), { execFileSync } = require('child_process');
@@ -20,6 +20,6 @@ const srv = http.createServer((q, r) => {
   await b.close(); srv.close();
   const jet = `anoisesrc=d=${dur}:c=brown:a=0.9,lowpass=f=900,highpass=f=60,volume='0.15+0.85*sin(PI*t/${dur})':eval=frame,afade=t=in:d=0.4,afade=t=out:st=${dur - 0.6}:d=0.6`;
   execFileSync('ffmpeg', ['-v', 'error', '-y', '-framerate', '30', '-i', path.join(OUT, 'f%04d.png'), '-f', 'lavfi', '-i', jet,
-    '-c:v', 'libx264', '-crf', '16', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ar', '48000', '-ac', '2', '-shortest', path.join(__dirname, 'map.mp4')]);
+    '-vf', `rgbashift=rh=-12:bh=12:gv=3:enable='gt(t,${dur - 0.75})'`, '-c:v', 'libx264', '-crf', '16', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ar', '48000', '-ac', '2', '-shortest', path.join(__dirname, 'map.mp4')]);
   console.log('map.mp4', n, 'frames');
 });

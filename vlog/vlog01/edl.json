@@ -18,7 +18,7 @@
   ]},
 
   {"type": "scenes", "music": {"song": "reverse-psychology.mp3", "from": 0.6, "gain": 0.3}, "clips": [
-    {"asset": "map/map.mp4", "s": 0.0, "e": 4.2, "vol": 0.5},
+    {"asset": "map/map.mp4", "s": 0.0, "e": 5.6, "vol": 0.5},
     {"clip": "C0016.MP4", "s": 0.0, "e": 27.8, "titles": [{"text": "WELCOME TO NEW YORK", "style": "big", "at": 0.1, "dur": 2.2}]},
     {"clip": "C0017.MP4", "s": 0.0, "e": 17.5, "letterbox": true, "titles": [{"text": "TIMES SQUARE"}]}
   ]},

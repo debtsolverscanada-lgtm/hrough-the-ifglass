@@ -1,7 +1,6 @@
 <!doctype html>
 <html><head><meta charset="utf-8">
 <style>
-@font-face { font-family: Marker; src: url(../fonts/PermanentMarker-Regular.ttf); }
 @font-face { font-family: Anton; src: url(../fonts/Anton-Regular.ttf); }
 html, body { margin: 0; background: #000; }
 canvas { display: block; }
@@ -11,104 +10,131 @@ canvas { display: block; }
 </head><body>
 <canvas id="c" width="1920" height="1080"></canvas>
 <script>
-// Animated flight-path transition: Toronto (Billy Bishop) -> New York City.
-// render(t) draws one frame at time t seconds; map.js steps it frame by frame.
-const W = 1920, H = 1080, DUR = 4.2;
-const YTZ = [-79.396, 43.628], NYC = [-74.006, 40.713];
-const CTRL = [-77.2, 43.9];  // bend the route into an arc
-const OCEAN = '#a8cde6', LAND = '#f6efdf', EDGE = '#d9c9a6', ROUTE = '#ff3b5c', INK = '#1d1d1f';
+// Cinematic flight transition: zoom from space onto Toronto, GPS route to New York on a night map,
+// then a punch-in toward the city. render(t) draws one frame; render.js steps it frame by frame.
+const W = 1920, H = 1080, DUR = 5.6;
+const YTZ = [-79.396, 43.628], NYC = [-74.006, 40.713], CTRL = [-76.6, 43.6];
+const SPACE = '#04050b', SEA = '#0b1828', LAND = '#1c2c3c', EDGE = '#3f6a8c', ROUTE = '#c45cff', WAYPT = '#ffd200';
 const ctx = document.getElementById('c').getContext('2d');
-let GEO = null;
+let WORLD = null, GEO = null;
 
-const ease = x => x < 0 ? 0 : x > 1 ? 1 : x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
 const clamp = x => Math.max(0, Math.min(1, x));
+const ease = x => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
 const lerp = (a, b, k) => a + (b - a) * k;
-const pop = (t, at) => { const k = clamp((t - at) / 0.35); return k === 0 ? 0 : 1 + 0.25 * Math.sin(k * Math.PI) * (1 - k) + (k < 1 ? -(1 - k) * (1 - k) : 0); };
+const zlerp = (a, b, k) => a * Math.pow(b / a, k);  // zoom feels linear when scale moves geometrically
+const pop = (t, at) => { const k = clamp((t - at) / 0.3); return k === 0 ? 0 : 1 + 0.3 * Math.sin(k * Math.PI) * (1 - k * 0.5) - (1 - k) * (1 - k) * 0.6; };
+const route = k => { const a = (1 - k) * (1 - k), b = 2 * (1 - k) * k, c = k * k;
+  return [a * YTZ[0] + b * CTRL[0] + c * NYC[0], a * YTZ[1] + b * CTRL[1] + c * NYC[1]]; };
 
-function route(k) {  // quadratic bezier in lon/lat
-  const a = (1 - k) * (1 - k), b = 2 * (1 - k) * k, c = k * k;
-  return [a * YTZ[0] + b * CTRL[0] + c * NYC[0], a * YTZ[1] + b * CTRL[1] + c * NYC[1]];
+// seeded starfield
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const STARS = d3.range(420).map(() => [rnd() * W, rnd() * H, rnd() * 1.6 + 0.3, rnd()]);
+
+function camera(t) {
+  let c, s;
+  if (t < 2.3) {  // descend from orbit
+    const k = ease(t / 2.3);
+    c = [lerp(-35, YTZ[0], k), lerp(18, YTZ[1], k)]; s = zlerp(330, 9000, k);
+  } else {  // follow the flight, then punch in on the city
+    const k1 = ease((t - 2.4) / 1.1), k2 = ease((t - 3.4) / 1.3), k3 = clamp((t - 4.9) / 0.7);
+    const mid = route(0.5);
+    c = [lerp(lerp(YTZ[0], mid[0], k1), NYC[0], k2), lerp(lerp(YTZ[1], mid[1], k1), NYC[1], k2)];
+    s = zlerp(zlerp(zlerp(9000, 5600, k1), 10500, k2), 80000, k3 * k3);
+  }
+  return d3.geoOrthographic().rotate([-c[0], -c[1]]).scale(s).translate([W / 2, H / 2]).clipAngle(90).precision(0.3);
 }
 
-function camera(t) {  // centre + scale over time
-  const mid = route(0.5);
-  const k1 = ease((t - 0.35) / 1.4), k2 = ease((t - 2.2) / 1.6);
-  const c1 = [lerp(YTZ[0], mid[0], k1), lerp(YTZ[1], mid[1], k1)];
-  const c = [lerp(c1[0], NYC[0], k2), lerp(c1[1], NYC[1], k2)];
-  const s = lerp(lerp(6800, 3700, k1), 7200, k2) * (1 + 0.04 * t);  // slow push-in throughout
-  return d3.geoMercator().center(c).scale(s).translate([W / 2, H / 2]);
+function glow(x, y, r, color, a) {
+  const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+  g.addColorStop(0, color.replace('A', a)); g.addColorStop(1, color.replace('A', 0));
+  ctx.fillStyle = g; ctx.fillRect(x - r, y - r, 2 * r, 2 * r);
 }
 
-function plane(x, y, ang, size) {
-  ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.scale(size / 100, size / 100);
-  const p = new Path2D('M50 0 L58 6 L58 34 L100 58 L100 68 L58 54 L56 82 L70 94 L70 100 L50 94 L30 100 L30 94 L44 82 L42 54 L0 68 L0 58 L42 34 L42 6 Z');
-  ctx.translate(-50, -50);
-  ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 10;
-  ctx.fillStyle = '#fff'; ctx.fill(p); ctx.shadowColor = 'transparent';
-  ctx.lineWidth = 4; ctx.strokeStyle = INK; ctx.stroke(p);
-  ctx.restore();
-}
-
-function pin(x, y, s) {
+function blip(x, y, s, color, ring) {  // map marker: glowing disc with a pulsing ring
   if (s <= 0) return;
+  glow(x, y, 70 * s, 'rgba(255,220,120,A)', 0.3);
   ctx.save(); ctx.translate(x, y); ctx.scale(s, s);
-  ctx.shadowColor = 'rgba(0,0,0,.3)'; ctx.shadowBlur = 12; ctx.shadowOffsetY = 6;
-  ctx.beginPath(); ctx.moveTo(0, 0); ctx.bezierCurveTo(-26, -34, -30, -52, -30, -62);
-  ctx.arc(0, -62, 30, Math.PI, 0); ctx.bezierCurveTo(30, -52, 26, -34, 0, 0);
-  ctx.fillStyle = ROUTE; ctx.fill(); ctx.shadowColor = 'transparent';
-  ctx.lineWidth = 5; ctx.strokeStyle = INK; ctx.stroke();
-  ctx.beginPath(); ctx.arc(0, -62, 11, 0, 2 * Math.PI); ctx.fillStyle = '#fff'; ctx.fill();
+  if (ring > 0) { ctx.beginPath(); ctx.arc(0, 0, 26 + 40 * ring, 0, 2 * Math.PI); ctx.lineWidth = 4; ctx.strokeStyle = `rgba(255,255,255,${1 - ring})`; ctx.stroke(); }
+  ctx.shadowColor = 'rgba(0,0,0,.6)'; ctx.shadowBlur = 10;
+  ctx.beginPath(); ctx.arc(0, 0, 22, 0, 2 * Math.PI); ctx.fillStyle = color; ctx.fill();
+  ctx.shadowColor = 'transparent'; ctx.lineWidth = 5; ctx.strokeStyle = '#000'; ctx.stroke();
+  ctx.beginPath(); ctx.arc(0, 0, 8, 0, 2 * Math.PI); ctx.fillStyle = '#000'; ctx.fill();
   ctx.restore();
 }
 
-function sticker(x, y, text, s, rot, bg) {  // marker-font label on a tilted sticker
-  if (s <= 0) return;
-  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(s, s);
-  ctx.font = '76px Marker'; const w = ctx.measureText(text).width + 64, h = 110;
-  ctx.shadowColor = 'rgba(0,0,0,.35)'; ctx.shadowBlur = 20; ctx.shadowOffsetY = 10;
-  ctx.fillStyle = bg; ctx.beginPath(); ctx.roundRect(-w / 2, -h / 2, w, h, 18); ctx.fill();
-  ctx.shadowColor = 'transparent'; ctx.lineWidth = 6; ctx.strokeStyle = INK; ctx.stroke();
-  ctx.fillStyle = INK; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 0, 6);
+function label(x, y, text, a) {
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha = a; ctx.font = '58px Anton'; ctx.textAlign = 'center'; ctx.letterSpacing = '6px';
+  ctx.shadowColor = 'rgba(0,0,0,.9)'; ctx.shadowBlur = 14; ctx.fillStyle = '#fff'; ctx.fillText(text, x, y); ctx.restore();
+}
+
+function plane(x, y, ang) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(ang); ctx.scale(1.1, 1.1); ctx.translate(-50, -50);
+  const p = new Path2D('M50 0 L58 6 L58 34 L100 58 L100 68 L58 54 L56 82 L70 94 L70 100 L50 94 L30 100 L30 94 L44 82 L42 54 L0 68 L0 58 L42 34 L42 6 Z');
+  ctx.shadowColor = ROUTE; ctx.shadowBlur = 30; ctx.fillStyle = '#fff'; ctx.fill(p);
+  ctx.shadowColor = 'transparent'; ctx.lineWidth = 4; ctx.strokeStyle = '#000'; ctx.stroke(p); ctx.restore();
+}
+
+function objective(t) {  // bottom-centre mission-style line
+  const a = clamp((t - 2.7) / 0.25) * (1 - clamp((t - 4.9) / 0.25));
+  if (a <= 0) return;
+  ctx.save(); ctx.globalAlpha = a; ctx.font = 'bold 50px "Liberation Sans", Arial, sans-serif'; ctx.textBaseline = 'alphabetic';
+  ctx.shadowColor = '#000'; ctx.shadowBlur = 6; ctx.shadowOffsetX = 3; ctx.shadowOffsetY = 3;
+  const parts = [['Fly to ', '#fff'], ['New York City', WAYPT], ['.', '#fff']];
+  const total = parts.reduce((w, [s]) => w + ctx.measureText(s).width, 0);
+  let x = (W - total) / 2;
+  for (const [s, col] of parts) { ctx.fillStyle = col; ctx.fillText(s, x, H - 90); x += ctx.measureText(s).width; }
   ctx.restore();
 }
 
 function render(t) {
-  const proj = camera(t), path = d3.geoPath(proj, ctx);
-  ctx.fillStyle = OCEAN; ctx.fillRect(0, 0, W, H);
-  // land with a soft paper shadow, then lakes, then state/province lines
-  ctx.save(); ctx.shadowColor = 'rgba(30,60,90,.35)'; ctx.shadowBlur = 30; ctx.shadowOffsetY = 12;
-  ctx.beginPath(); path(GEO.land); ctx.fillStyle = LAND; ctx.fill(); ctx.restore();
-  ctx.beginPath(); path(GEO.land); ctx.lineWidth = 3; ctx.strokeStyle = EDGE; ctx.stroke();
-  ctx.beginPath(); path(GEO.lakes); ctx.fillStyle = OCEAN; ctx.fill(); ctx.lineWidth = 2.5; ctx.strokeStyle = '#8fb9d6'; ctx.stroke();
-  ctx.save(); ctx.setLineDash([10, 12]); ctx.beginPath(); path(GEO.borders); ctx.lineWidth = 2.5; ctx.strokeStyle = EDGE; ctx.stroke(); ctx.restore();
-
-  // route draws on, plane rides its tip
-  const k = ease((t - 0.55) / 2.4);
-  const pts = d3.range(0, 1.0001, 1 / 200).filter(u => u <= k).map(u => proj(route(u)));
-  if (pts.length > 1) {
-    ctx.save(); ctx.setLineDash([26, 18]); ctx.lineCap = 'round';
-    ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
-    ctx.lineWidth = 16; ctx.strokeStyle = '#fff'; ctx.stroke();
-    ctx.lineWidth = 9; ctx.strokeStyle = ROUTE; ctx.stroke(); ctx.restore();
+  const proj = camera(t), path = d3.geoPath(proj, ctx), R = proj.scale(), [cx, cy] = proj.translate();
+  ctx.fillStyle = SPACE; ctx.fillRect(0, 0, W, H);
+  for (const [x, y, r, tw] of STARS) { ctx.globalAlpha = 0.35 + 0.65 * Math.abs(Math.sin(t * 2 + tw * 9)); ctx.fillStyle = '#fff'; ctx.fillRect(x, y, r, r); }
+  ctx.globalAlpha = 1;
+  // atmosphere + ocean sphere
+  if (R < 4000) { const g = ctx.createRadialGradient(cx, cy, R * 0.98, cx, cy, R * 1.18);
+    g.addColorStop(0, 'rgba(90,170,255,.55)'); g.addColorStop(1, 'rgba(90,170,255,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, W, H); }
+  ctx.beginPath(); path({ type: 'Sphere' });
+  const sea = ctx.createRadialGradient(cx - R * 0.3, cy - R * 0.35, R * 0.1, cx, cy, R);
+  sea.addColorStop(0, '#16314d'); sea.addColorStop(1, SEA); ctx.fillStyle = sea; ctx.fill();
+  ctx.beginPath(); path(d3.geoGraticule10()); ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(80,140,200,.12)'; ctx.stroke();
+  // land: world outline from orbit, detailed region once close
+  ctx.beginPath(); path(R > 1800 ? GEO.land : WORLD); ctx.fillStyle = LAND; ctx.fill();
+  ctx.lineWidth = 2; ctx.strokeStyle = EDGE; ctx.stroke();
+  if (R > 1800) {
+    ctx.beginPath(); path(GEO.lakes); ctx.fillStyle = SEA; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = EDGE; ctx.stroke();
+    ctx.save(); ctx.setLineDash([8, 10]); ctx.beginPath(); path(GEO.borders); ctx.lineWidth = 1.5; ctx.strokeStyle = 'rgba(120,170,210,.35)'; ctx.stroke(); ctx.restore();
   }
+  // city lights
   const [ax, ay] = proj(YTZ), [bx, by] = proj(NYC);
-  pin(ax, ay, pop(t, 0.15)); pin(bx, by, pop(t, 2.85));
-  if (k > 0 && k < 1) {
-    const [px, py] = proj(route(k)), [qx, qy] = proj(route(Math.min(1, k + 0.01)));
-    plane(px, py, Math.atan2(qy - py, qx - px) + Math.PI / 2, 120 + 40 * Math.sin(k * Math.PI));
-  }
-  sticker(ax, ay - 160, 'TORONTO', pop(t, 0.3) * (1 - clamp((t - 1.6) / 0.3)), -0.06, '#fff');
-  sticker(bx, by - 165, 'NEW YORK CITY', pop(t, 3.0), 0.05, '#ffd84d');
+  glow(ax, ay, Math.min(70, Math.max(14, R / 80)), 'rgba(255,200,90,A)', 0.8); glow(bx, by, Math.min(90, Math.max(18, R / 60)), 'rgba(255,200,90,A)', 0.9);
 
-  // title strip + fade from/to white for the cut
-  ctx.font = '54px Anton'; ctx.fillStyle = 'rgba(29,29,31,.85)'; ctx.textAlign = 'left';
-  ctx.fillText('YTZ  →  NYC', 70, 110);
-  const wa = Math.max(1 - t / 0.2, (t - (DUR - 0.12)) / 0.12);
-  if (wa > 0) { ctx.fillStyle = `rgba(255,255,255,${clamp(wa)})`; ctx.fillRect(0, 0, W, H); }
+  // GPS route with glow, plane on its tip
+  const k = ease((t - 2.55) / 1.9);
+  const pts = d3.range(0, 1.0001, 1 / 240).filter(u => u <= k).map(u => proj(route(u)));
+  if (pts.length > 1) {
+    ctx.save(); ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); pts.forEach(([x, y], i) => i ? ctx.lineTo(x, y) : ctx.moveTo(x, y));
+    ctx.shadowColor = ROUTE; ctx.shadowBlur = 28; ctx.lineWidth = 16; ctx.strokeStyle = ROUTE; ctx.stroke();
+    ctx.shadowBlur = 0; ctx.lineWidth = 6; ctx.strokeStyle = '#f0d4ff'; ctx.stroke(); ctx.restore();
+  }
+  blip(ax, ay, pop(t, 2.05), '#5fb4ff', clamp((t - 2.05) % 0.9 / 0.9));
+  blip(bx, by, pop(t, 2.55) * (t > 2.55 ? 1 : 0), WAYPT, t > 2.55 ? clamp((t - 2.55) % 0.8 / 0.8) : 0);
+  if (k > 0.02 && k < 1) { const [px, py] = proj(route(k)), [qx, qy] = proj(route(Math.min(1, k + 0.01))); plane(px, py, Math.atan2(qy - py, qx - px) + Math.PI / 2); }
+  label(ax, ay - 70, 'TORONTO', clamp((t - 2.15) / 0.3) * (1 - clamp((t - 3.4) / 0.3)));
+  label(bx, by - 70, 'NEW YORK CITY', clamp((t - 4.35) / 0.3) * (1 - clamp((t - 5.1) / 0.25)));
+  objective(t);
+
+  // vignette, fade in from black, flash out to white
+  const v = ctx.createRadialGradient(W / 2, H / 2, H * 0.45, W / 2, H / 2, H * 1.05);
+  v.addColorStop(0, 'rgba(0,0,0,0)'); v.addColorStop(1, 'rgba(0,0,0,.6)'); ctx.fillStyle = v; ctx.fillRect(0, 0, W, H);
+  if (t < 0.3) { ctx.fillStyle = `rgba(0,0,0,${1 - t / 0.3})`; ctx.fillRect(0, 0, W, H); }
+  const wa = clamp((t - (DUR - 0.18)) / 0.18); if (wa > 0) { ctx.fillStyle = `rgba(255,255,255,${wa})`; ctx.fillRect(0, 0, W, H); }
 }
 
-window.ready = fetch('region.json').then(r => r.json()).then(g => { GEO = g; return document.fonts.load('76px Marker'); })
-  .then(() => document.fonts.load('54px Anton')).then(() => true);
+window.ready = Promise.all([fetch('world.json').then(r => r.json()), fetch('region.json').then(r => r.json())])
+  .then(([w, g]) => { WORLD = w; GEO = g; return document.fonts.load('58px Anton'); }).then(() => true);
 window.frame = t => { render(t); return document.getElementById('c').toDataURL('image/png'); };
 window.DUR = DUR;
 </script>
