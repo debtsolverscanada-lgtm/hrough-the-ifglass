@@ -187,8 +187,8 @@
   {
    "type": "scenes",
    "music": {
-    "song": "space-junk.mp3",
-    "from": 14.3,
+    "song": "someday.mp3",
+    "from": 0.0,
     "gain": 0.45
    },
    "clips": [
@@ -408,7 +408,7 @@
    "type": "scenes",
    "music": {
     "song": "someday.mp3",
-    "from": 0.0,
+    "from": 60.0,
     "gain": 0.6
    },
    "clips": [
