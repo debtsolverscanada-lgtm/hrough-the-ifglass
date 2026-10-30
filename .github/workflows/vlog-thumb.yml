@@ -8,6 +8,10 @@ on:
       name:
         description: 'Vlog id (folder under vlog/ holding thumb.json)'
         required: true
+      probe:
+        description: 'Optional CLIP:START-END[:STEP] specs: only make exact-time frame grids (no thumbnails)'
+        required: false
+        default: ''
       urls:
         description: 'Optional space-separated NAME|URL pairs (e.g. Zapier-hydrated Drive files); bypasses the public-link download limit'
         required: false
@@ -50,9 +54,13 @@ jobs:
           fi
           ls -la raw; file raw/* | head
       - name: Build thumbnails
-        run: python3 vlog/thumb/make.py "vlog/${{ github.event.inputs.name }}"
+        env:
+          PROBE: ${{ github.event.inputs.probe }}
+        run: |
+          if [ -n "$PROBE" ]; then vlog/thumb/probe.sh "vlog/${{ github.event.inputs.name }}/probe" $PROBE
+          else python3 vlog/thumb/make.py "vlog/${{ github.event.inputs.name }}"; fi
       - name: Commit
         run: |
           git config user.name "vlog-bot" && git config user.email "vlog-bot@users.noreply.github.com"
-          git add vlog/${{ github.event.inputs.name }}/thumb-*.jpg
+          git add vlog/${{ github.event.inputs.name }}/thumb-*.jpg vlog/${{ github.event.inputs.name }}/probe 2>/dev/null; git add -A vlog/${{ github.event.inputs.name }}
           git commit -m "Vlog thumbnails: ${{ github.event.inputs.name }}" && git pull --rebase && git push
