@@ -10,8 +10,8 @@ body[data-v=A] #A, body[data-v=B] #B{display:block}
 #A .cut{position:absolute;bottom:-10px;filter:drop-shadow(0 0 0 #fff) drop-shadow(7px 0 0 #fff) drop-shadow(-7px 0 0 #fff) drop-shadow(0 7px 0 #fff) drop-shadow(0 -7px 0 #fff) drop-shadow(0 14px 18px rgba(0,0,0,.55))}
 #A .title{position:absolute;left:44px;top:26px;font:120px/1 'Permanent Marker';color:#fff;transform:rotate(-5deg);
   text-shadow:0 6px 0 #111,0 0 22px rgba(0,0,0,.35);-webkit-text-stroke:3px #111;letter-spacing:2px}
-#A .sticker{position:absolute;right:40px;top:40px;background:#FFD400;color:#111;font:800 34px/1 Inter;padding:14px 22px;border-radius:14px;
-  transform:rotate(6deg);box-shadow:0 8px 0 #111;border:4px solid #111}
+#A .sticker{position:absolute;left:52px;bottom:48px;background:#FFD400;color:#111;font:800 34px/1 Inter;padding:14px 22px;border-radius:14px;
+  transform:rotate(-4deg);box-shadow:0 8px 0 #111;border:4px solid #111}
 #A .arrow{position:absolute;width:150px;height:110px}
 /* ---------- B: aesthetic collage ---------- */
 #B{background:#F4EDE2}
@@ -42,7 +42,7 @@ function build(c){
     if(a.sticker===null)Asticker.remove();else if(a.sticker)Asticker.textContent=a.sticker;
     Acuts.innerHTML=(a.cuts||[]).map(k=>`<img class="cut" src="${k.src}" style="left:${k.x}px;height:${k.h}px">`).join('');}
   if(c.B){const b=c.B;
-    Bphotos.innerHTML=b.photos.map(p=>`<div class="ph" style="left:${p.x}px;top:${p.y}px;width:${p.w}px;height:${p.h}px;transform:rotate(${p.rot||0}deg);background-image:url(${p.src})"></div>`+(p.tape?`<div class="tape" style="left:${p.x+p.w/2-60}px;top:${p.y-14}px"></div>`:'')).join('');
+    Bphotos.innerHTML=b.photos.map(p=>`<div class="ph" style="left:${p.x}px;top:${p.y}px;width:${p.w}px;height:${p.h}px;transform:rotate(${p.rot||0}deg);background-image:url(${p.src});background-position:${p.pos||'center'}"></div>`+(p.tape?`<div class="tape" style="left:${p.x+p.w/2-60}px;top:${p.y-14}px"></div>`:'')).join('');
     Object.assign(Bt1.style,{left:b.t1.x+'px',top:b.t1.y+'px'});Bt1.textContent=b.t1.text;
     Object.assign(Bt2.style,{left:b.t2.x+'px',top:b.t2.y+'px'});Bt2.textContent=b.t2.text;}
 }
