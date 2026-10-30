@@ -237,45 +237,85 @@ S.text = (t, d, p) => {
     ${p.sub ? `<text x="960" y="${1120 + (lines.length - 1) * 95}" text-anchor="middle" font-family="Marker" font-size="${fit(p.sub, 60)}" fill="#c9c2bb" opacity="${a}">${p.sub}</text>` : ''}
     ${p.eyes ? watcher(960, 1500, 0.8, ease((t - 0.8) / 1.2), { noeyes: false }) : ''}`;
 };
-// Thumbnail: saturated colour, your terrified face lit cyan from below, the creature looming right behind you
-// (glowing eyes, too-wide grin, long fingers curling round your head), one or two huge words on top.
+// Thumbnail, "3D" look: sphere-shaded head with specular highlight and cast shadow, glossy veined eyes,
+// a solid rim-lit creature looming close (bloodshot glowing eyes, jagged shaded grin), fog + light rays for depth,
+// extruded lettering. tint/tint2 set the colour of the scene.
 S.thumb = (t, d, p) => {
   const tint = p.tint || '#ff1a3c', tint2 = p.tint2 || '#5a00ff';
-  const grin = `<path d="M-120 40 Q0 150 120 40 Q0 95 -120 40Z" fill="#fff"/>` +
-    [...Array(9)].map((_, k) => `<path d="M${-108 + k * 27} ${46 + Math.sin(k / 8 * Math.PI) * 52} l13 ${k % 2 ? 22 : -14} l13 ${k % 2 ? -22 : 14}" fill="#000"/>`).join('');
+  const txt = p.text || "DON'T LOOK.";
+  const size = fit(txt, p.size || 250, 0.94);
+  // grin: dark mouth, two rows of shaded uneven teeth
+  const teeth = (n, y0, h, dir) => [...Array(n)].map((_, k) => {
+    const x = -150 + k * (300 / (n - 1)), w = 20 + (k * 37 % 11), hh = h * (0.7 + (k * 53 % 7) / 10);
+    return `<path d="M${x - w / 2} ${y0} L${x} ${y0 + dir * hh} L${x + w / 2} ${y0}Z" fill="url(#tooth)" stroke="#2a1a10" stroke-width="2"/>`; }).join('');
+  const mouth = `<path d="M-185 0 Q0 175 185 0 Q0 80 -185 0Z" fill="#160004"/>${teeth(11, 14, 46, 1)}${teeth(10, 118, 40, -1)}
+    <path d="M-185 0 Q0 175 185 0" fill="none" stroke="${tint}" stroke-width="3" opacity=".5"/>`;
+  const eye3d = (cx, cy) => `<g transform="translate(${cx},${cy})">
+      <circle r="150" fill="url(#eyeGlow)"/>
+      <ellipse rx="58" ry="40" fill="url(#bloodEye)"/>
+      ${[0, 1, 2, 3, 4].map((k) => `<path d="M${-56 + k * 6} ${-12 + k * 6} q${18 + k * 4} ${-8 + k * 3} ${30} ${4}" stroke="#7a0010" stroke-width="2.5" fill="none"/>`).join('')}
+      <ellipse rx="14" ry="30" fill="#000"/><ellipse cx="-18" cy="-14" rx="10" ry="6" fill="#fff" opacity=".85"/>
+    </g>`;
+  const rays = [...Array(7)].map((_, k) => `<path d="M${1330 + (k - 3) * 40} 0 L${980 + (k - 3) * 260} 1920 L${1060 + (k - 3) * 260} 1920Z" fill="${tint}" opacity=".05"/>`).join('');
   return `
-    <rect width="1920" height="1920" fill="#06000a"/>
-    <radialGradient id="bgA" cx="70%" cy="45%" r="55%"><stop offset="0" stop-color="${tint}" stop-opacity=".85"/><stop offset=".55" stop-color="${tint2}" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
-    <rect width="1920" height="1920" fill="url(#bgA)"/>
-    <g transform="translate(1330,930)">
-      <path d="M-330 600 Q-380 -150 -60 -330 Q0 -360 60 -330 Q380 -150 330 600Z" fill="#000"/>
-      <circle cx="-95" cy="-150" r="105" fill="url(#eyeGlow)"/><circle cx="95" cy="-150" r="105" fill="url(#eyeGlow)"/>
-      <ellipse cx="-95" cy="-150" rx="34" ry="22" fill="#fff"/><ellipse cx="95" cy="-150" rx="34" ry="22" fill="#fff"/>
-      <circle cx="-95" cy="-150" r="9" fill="#000"/><circle cx="95" cy="-150" r="9" fill="#000"/>
-      <g transform="translate(0,-10) scale(1.6)">${grin}</g>
+    <defs>
+      <radialGradient id="bgA" cx="70%" cy="42%" r="58%"><stop offset="0" stop-color="${tint}" stop-opacity=".95"/><stop offset=".5" stop-color="${tint2}" stop-opacity=".45"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+      <radialGradient id="head3d" cx="36%" cy="30%" r="78%"><stop offset="0" stop-color="#fffaf2"/><stop offset=".18" stop-color="#f1e2d0"/><stop offset=".55" stop-color="#c9ae94"/><stop offset=".85" stop-color="#6f5644"/><stop offset="1" stop-color="#2a1d14"/></radialGradient>
+      <radialGradient id="spec" r="50%"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+      <radialGradient id="eyeball" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#ffffff"/><stop offset=".7" stop-color="#f0e6dc"/><stop offset="1" stop-color="#b89c8a"/></radialGradient>
+      <radialGradient id="bloodEye" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#fff2c8"/><stop offset=".35" stop-color="#ffea6a"/><stop offset=".75" stop-color="#ff2a00"/><stop offset="1" stop-color="#5a0000"/></radialGradient>
+      <linearGradient id="beast" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000"/><stop offset=".7" stop-color="#0a0410"/><stop offset=".93" stop-color="#2a0a2e"/><stop offset="1" stop-color="${tint}"/></linearGradient>
+      <linearGradient id="tooth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#b8a27a"/></linearGradient>
+      <linearGradient id="finger" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a0c1c"/><stop offset="1" stop-color="#000"/></linearGradient>
+      <radialGradient id="cyan3d" r="50%"><stop offset="0" stop-color="#00f6ff" stop-opacity=".65"/><stop offset=".55" stop-color="#0090ff" stop-opacity=".18"/><stop offset="1" stop-color="#001a40" stop-opacity="0"/></radialGradient>
+      <radialGradient id="aoShadow" r="50%"><stop offset="0" stop-color="#000" stop-opacity=".85"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+      <filter id="fog"><feTurbulence type="fractalNoise" baseFrequency=".004 .012" numOctaves="3" seed="7"/><feColorMatrix values="0 0 0 0 .55  0 0 0 0 .4  0 0 0 0 .8  0 0 0 .55 -.1"/></filter>
+    </defs>
+    <rect width="1920" height="1920" fill="#05000a"/>
+    <rect width="1920" height="1920" fill="url(#bgA)"/>${rays}
+    <g transform="translate(1340,930)">
+      <path d="M-420 700 Q-470 -170 -90 -380 Q0 -420 90 -380 Q470 -170 420 700Z" fill="url(#beast)"/>
+      <path d="M380 -120 Q470 200 420 700" stroke="${tint}" stroke-width="10" fill="none" opacity=".75" style="filter:drop-shadow(0 0 12px ${tint})"/>
+      <path d="M-60 -372 Q-200 -330 -300 -200" stroke="${tint}" stroke-width="5" fill="none" opacity=".35"/>
+      ${eye3d(-120, -150)}${eye3d(120, -150)}
+      <g transform="translate(0,-10) scale(1.3)">${mouth}</g>
     </g>
-    <radialGradient id="cyanGlow" r="50%"><stop offset="0" stop-color="#00f0ff" stop-opacity=".55"/><stop offset=".5" stop-color="#00a8ff" stop-opacity=".18"/><stop offset="1" stop-color="#003a7a" stop-opacity="0"/></radialGradient><circle cx="760" cy="1260" r="720" fill="url(#cyanGlow)"/>
-    <g transform="translate(760,1080) scale(2.3)">
-      <circle r="130" fill="url(#skin)" stroke="#000" stroke-width="7"/>
-      <circle r="130" fill="#00d9ff" opacity=".16"/>
-      <path d="M84 -99 A130 130 0 0 1 126 33" stroke="${tint}" stroke-width="7" fill="none" opacity=".95" style="filter:drop-shadow(0 0 6px ${tint})"/>
-      <path d="M-96 -78 q20 -26 46 -10 M96 -78 q-20 -26 -46 -10" stroke="#000" stroke-width="8" stroke-linecap="round" fill="none"/>
-      ${[-46, 46].map((ex) => `<g transform="translate(${ex},-8)"><ellipse rx="48" ry="54" fill="#2a0d14" opacity=".45" transform="translate(0,12)"/><ellipse rx="42" ry="48" fill="#fffdf8" stroke="#000" stroke-width="5"/><circle cx="${ex < 0 ? 16 : 12}" cy="0" r="5.5" fill="#000"/></g>`).join('')}
-      <ellipse cx="0" cy="74" rx="22" ry="34" fill="#300" stroke="#000" stroke-width="6"/>
-      <path d="M118 -40 c10 16 12 30 0 38 c-12 -8 -10 -22 0 -38z" fill="#bff6ff" stroke="#000" stroke-width="3"/>
-      <path d="M-128 10 c-14 30 -10 60 4 70 M-118 -30 c-18 22 -18 50 -8 64" stroke="#000" stroke-width="5" fill="none" opacity=".25"/>
+    <rect width="1920" height="1920" filter="url(#fog)" opacity=".55"/>
+    <circle cx="760" cy="1260" r="760" fill="url(#cyan3d)"/>
+    <ellipse cx="800" cy="1420" rx="380" ry="80" fill="url(#aoShadow)"/>
+    <g transform="translate(760,1080) scale(2.35)">
+      <circle r="130" fill="url(#head3d)" stroke="#000" stroke-width="6"/>
+      <circle r="130" fill="#00e1ff" opacity=".12"/>
+      <path d="M-128 20 A130 130 0 0 0 60 116" stroke="#00f0ff" stroke-width="7" fill="none" opacity=".6"/>
+      <path d="M86 -97 A130 130 0 0 1 127 28" stroke="${tint}" stroke-width="7" fill="none" style="filter:drop-shadow(0 0 7px ${tint})"/>
+      <ellipse cx="-52" cy="-70" rx="40" ry="24" fill="url(#spec)" transform="rotate(-25 -52 -70)"/>
+      <path d="M-100 -80 q22 -30 52 -12 M100 -80 q-22 -30 -52 -12" stroke="#000" stroke-width="9" stroke-linecap="round" fill="none"/>
+      ${[-46, 46].map((ex) => `<g transform="translate(${ex},-6)">
+          <ellipse rx="52" ry="58" fill="#3a1218" opacity=".55" transform="translate(0,10)"/>
+          <ellipse rx="44" ry="50" fill="url(#eyeball)" stroke="#000" stroke-width="5"/>
+          ${[[-40, -10, -18, -2], [-36, 18, -16, 8], [38, -14, 18, -4], [34, 20, 16, 8]].map(([x0, y0, x1, y1]) => `<path d="M${x0} ${y0} Q${(x0 + x1) / 2} ${(y0 + y1) / 2 - 6} ${x1} ${y1}" stroke="#d0303a" stroke-width="1.8" fill="none" opacity=".8"/>`).join('')}
+          <circle cx="${ex < 0 ? 15 : 11}" cy="0" r="6" fill="#000"/><circle cx="${ex < 0 ? 12 : 8}" cy="-4" r="2.2" fill="#fff"/>
+          <ellipse cx="-14" cy="-24" rx="12" ry="7" fill="#fff" opacity=".7"/>
+        </g>`).join('')}
+      <ellipse cx="0" cy="76" rx="24" ry="38" fill="#2a0006" stroke="#000" stroke-width="6"/><ellipse cx="0" cy="96" rx="12" ry="10" fill="#6a1020"/>
+      <path d="M-46 46 q-4 30 -10 56" stroke="#9fe8ff" stroke-width="5" fill="none" opacity=".7"/>
+      <path d="M118 -40 c10 16 12 30 0 38 c-12 -8 -10 -22 0 -38z" fill="#c8f6ff" stroke="#000" stroke-width="3"/>
     </g>
     <path d="M150 1460 Q760 1330 1400 1480 L1500 1920 L60 1920Z" fill="#0d1030" stroke="#000" stroke-width="8"/>
+    <path d="M300 1500 Q760 1400 1250 1510" stroke="#2a3a7a" stroke-width="10" fill="none" opacity=".6"/>
     <g transform="translate(1180,1360)">
-      <path d="M-40 -60 Q120 -90 200 40 L120 160 Q-20 60 -60 20Z" fill="#000"/>
-      ${[[-60, -50, -150, -70, -230, -10, -250, 50], [-60, -10, -160, -10, -230, 50, -240, 110], [-50, 20, -140, 50, -200, 110, -200, 170], [-30, 50, -100, 100, -140, 160, -130, 215]].map(([x0, y0, x1, y1, x2, y2, x3, y3]) =>
-        `<path d="M${x0} ${y0} L${x1} ${y1}" stroke="#000" stroke-width="34" stroke-linecap="round"/>
-         <path d="M${x1} ${y1} L${x2} ${y2}" stroke="#000" stroke-width="28" stroke-linecap="round"/>
-         <path d="M${x2} ${y2} L${x3} ${y3}" stroke="#000" stroke-width="21" stroke-linecap="round"/>
-         <path d="M${x3} ${y3} l${(x3 - x2) * 0.5} ${(y3 - y2) * 0.6}" stroke="#e8dccb" stroke-width="10" stroke-linecap="round"/>`).join('')}
+      <path d="M-40 -60 Q120 -90 220 40 L130 170 Q-20 60 -60 20Z" fill="#000"/>
+      ${[[-60, -50, -160, -80, -250, -20, -275, 50], [-60, -10, -175, -15, -250, 50, -262, 120], [-50, 20, -150, 55, -215, 120, -215, 190], [-30, 50, -105, 110, -150, 175, -138, 235]].map(([x0, y0, x1, y1, x2, y2, x3, y3]) =>
+        `<path d="M${x0} ${y0} L${x1} ${y1}" stroke="#000" stroke-width="36" stroke-linecap="round"/>
+         <path d="M${x1} ${y1} L${x2} ${y2}" stroke="#000" stroke-width="29" stroke-linecap="round"/>
+         <path d="M${x2} ${y2} L${x3} ${y3}" stroke="#000" stroke-width="22" stroke-linecap="round"/>
+         <path d="M${x0} ${y0 - 10} L${x1} ${y1 - 10}" stroke="${tint}" stroke-width="4" opacity=".55" stroke-linecap="round"/>
+         <circle cx="${x1}" cy="${y1}" r="20" fill="#000"/><circle cx="${x2}" cy="${y2}" r="16" fill="#000"/>
+         <path d="M${x3} ${y3} l${(x3 - x2) * 0.55} ${(y3 - y2) * 0.65}" stroke="#efe4d2" stroke-width="11" stroke-linecap="round"/>`).join('')}
     </g>
     <rect width="1920" height="1920" fill="url(#vig)"/>
-    <text x="960" y="${p.textY || 640}" text-anchor="middle" font-family="Marker" font-size="${fit(p.text || "DON'T LOOK.", p.size || 240, 0.94)}" fill="#fff" stroke="#000" stroke-width="14" paint-order="stroke" style="filter:drop-shadow(0 0 30px ${tint})">${p.text || "DON'T LOOK."}</text>`;
+    ${[14, 11, 8, 5, 2].map((o) => `<text x="${960 + o}" y="${(p.textY || 650) + o}" text-anchor="middle" font-family="Marker" font-size="${size}" fill="${o > 3 ? '#3a0008' : '#7a0014'}">${txt}</text>`).join('')}
+    <text x="960" y="${p.textY || 650}" text-anchor="middle" font-family="Marker" font-size="${size}" fill="#fff" stroke="#000" stroke-width="10" paint-order="stroke" style="filter:drop-shadow(0 0 34px ${tint})">${txt}</text>`;
 };
 
 // wrap: camera drift, vignette, film grain (seed changes per frame so the grain moves)
