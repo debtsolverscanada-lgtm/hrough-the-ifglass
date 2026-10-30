@@ -41,7 +41,7 @@
   ]},
 
   {"type": "scenes", "music": {"song": "big-talk.mp3", "from": 45.0, "gain": 0.75}, "clips": [
-    {"clip": "C0027.MP4", "s": 0.0, "e": 176.0, "titles": [{"text": "PHO TIME"}]},
+    {"clip": "C0027.MP4", "s": 0.0, "e": 176.0, "loc": "pho-house"},
     {"clip": "C0028.MP4", "s": 0.0, "e": 224.0},
     {"clip": "C0029.MP4", "s": 0.0, "e": 60.0, "titles": [{"text": "NIGHT FOOD RUN"}]},
     {"clip": "C0029.MP4", "s": 70.0, "e": 135.0},

@@ -3,6 +3,7 @@
  "ytz":       {"name": "Billy Bishop Airport","sub": "Toronto Island, ON"},
  "times-sq":  {"name": "Times Square",        "sub": "Midtown Manhattan"},
  "leons":     {"name": "Leon's Bagels",       "sub": "1235 Broadway · NoMad"},
+ "pho-house": {"name": "The Pho House",     "sub": "32-05 36th Ave · Astoria, Queens"},
  "central-park": {"name": "Central Park",     "sub": "Manhattan, NYC"},
  "broadway":  {"name": "Broadway",            "sub": "Theater District"},
  "chinatown": {"name": "Chinatown",           "sub": "Lower Manhattan"},
