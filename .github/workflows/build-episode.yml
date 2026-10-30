@@ -13,6 +13,10 @@ on:
         description: 'Only render + queue the vertical Part series (episode already posted/queued)'
         required: false
         default: ''
+      video_only:
+        description: 'Only re-render the main video and re-upload it into its existing queue row (file was deleted)'
+        required: false
+        default: ''
       test_seconds:
         description: 'Test only: render just the first N seconds and do NOT queue it for posting'
         required: false
@@ -46,6 +50,7 @@ jobs:
         run: |
           if [ -n "${{ github.event.inputs.test_seconds }}" ]; then EXTRA="--seconds ${{ github.event.inputs.test_seconds }}"; fi
           if [ -n "${{ github.event.inputs.parts_only }}" ]; then EXTRA="$EXTRA --parts-only"; fi
+          if [ -n "${{ github.event.inputs.video_only }}" ]; then EXTRA="$EXTRA --no-clips"; fi
           python3 pipeline/build.py "${{ steps.ep.outputs.dir }}" --workers 4 $EXTRA
       - name: Upload to Drive & queue
         env:
@@ -56,6 +61,7 @@ jobs:
           if [ -n "${{ github.event.inputs.test_seconds }}" ]; then EXTRA="--test"; fi
           if [ -n "${{ github.event.inputs.parts_only }}" ]; then EXTRA="$EXTRA --parts-only"; fi
           if [ -n "${{ github.event.inputs.thumb_only }}" ]; then EXTRA="$EXTRA --thumb-only"; fi
+          if [ -n "${{ github.event.inputs.video_only }}" ]; then EXTRA="$EXTRA --video-only"; fi
           python3 pipeline/drive_upload.py "${{ steps.ep.outputs.dir }}" $EXTRA
       - uses: actions/upload-artifact@v4
         if: always()

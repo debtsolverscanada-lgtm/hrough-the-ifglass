@@ -9,6 +9,7 @@ import json, os, sys, datetime, requests
 EP = os.path.abspath(sys.argv[1]); name = os.path.basename(EP)
 TEST = '--test' in sys.argv  # upload to a Test folder, never queue
 PARTS_ONLY = '--parts-only' in sys.argv
+VIDEO_ONLY = '--video-only' in sys.argv  # re-upload the main video (file was deleted) and point the queued row at the new file
 THUMB_ONLY = '--thumb-only' in sys.argv  # replace this episode's queued thumbnail in place (same Drive file id)  # only the vertical Part series (main video already queued)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 META = json.load(open(f'{EP}/meta.json')); OUT = f'{ROOT}/build/{name}/out'
@@ -87,6 +88,14 @@ if THUMB_ONLY:
     # readable by link so the YouTube thumbnail can be swapped from a URL once the video is live
     ok(requests.post(f'{API}/{tid}/permissions', headers=H, json={'role': 'reader', 'type': 'anyone'}))
     print(f'thumbnail replaced: {tid}  https://drive.google.com/uc?export=download&id={tid}'); sys.exit(0)
+if VIDEO_ONLY:
+    SHEET = find('Ifglass Queue', top, 'application/vnd.google-apps.spreadsheet')
+    rows = ok(requests.get(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Sheet1!A:A', headers=H)).get('values', [])
+    n = next((i + 1 for i, r in enumerate(rows) if i and r and r[0] == META['episode']), None)
+    if not n: raise SystemExit(f'episode {META["episode"]} is not in the queue')
+    vid = upload(f'{OUT}/{name}.mp4', f'{name}.mp4', ready, 'video/mp4')
+    ok(requests.put(f'https://sheets.googleapis.com/v4/spreadsheets/{SHEET}/values/Sheet1!E{n}?valueInputOption=RAW', headers=H, json={'values': [[vid]]}))
+    print(f'video re-uploaded: {vid} -> Sheet1!E{n}'); sys.exit(0)
 clips_dir = folder(name, folder('Clips', top))
 vid = th = None
 if not PARTS_ONLY:
