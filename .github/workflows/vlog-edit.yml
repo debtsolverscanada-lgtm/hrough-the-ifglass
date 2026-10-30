@@ -27,15 +27,13 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu
-          pip install faster-whisper requests
+          pip install faster-whisper requests gdown
           mkdir -p ~/.fonts && cp vlog/fonts/*.ttf ~/.fonts/ && fc-cache -f
       - name: Download raw footage
         env:
           URLS: ${{ github.event.inputs.urls }}
         run: |
-          mkdir -p raw
-          for p in $URLS; do n="${p%%|*}"; u="${p#*|}"; (cd raw && curl -sSL --retry 5 --retry-all-errors -o "$n" "$u") || echo "FAILED $n"; done
-          ls -la raw; df -h /
+          vlog/fetch_clips.sh vlog/${{ github.event.inputs.name }} "$URLS"
           for f in raw/*; do echo "$f: $(ffprobe -v error -show_entries stream=codec_type,r_frame_rate -of csv=p=0 "$f" | tr '\n' ' ')"; done
       - name: Render
         env:

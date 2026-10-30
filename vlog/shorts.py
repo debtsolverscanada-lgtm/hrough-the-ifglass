@@ -127,5 +127,7 @@ if __name__ == '__main__':
         model = WhisperModel('small.en', device='cpu', compute_type='int8')
     want = {a for a in sys.argv[2:] if not a.startswith('--')}
     for sh in CFG['shorts']:
-        if not want or sh['slug'] in want: make(sh, model)
+        if want and sh['slug'] not in want: continue
+        try: make(sh, model)
+        except SystemExit as e: print('FAILED short', sh['slug'], e, flush=True)  # keep going with the rest
     (OUT / 'titles.txt').write_text(''.join(f"{s['slug']}: {s['title']}\n" for s in CFG['shorts']))
