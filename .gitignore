@@ -9,3 +9,9 @@ vlog/*/work/
 vlog/map/frames/
 !vlog/map/map.mp4
 vlog/*/shorts/work/
+vlog/music/*.mp3
+vlog/*/clips.json
+vlog/*/review/
+vlog/*/ingest/
+vlog/*/probe/
+vlog/*/thumb-*.jpg

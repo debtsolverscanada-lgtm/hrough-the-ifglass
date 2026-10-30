@@ -31,8 +31,12 @@ jobs:
           mkdir -p ~/.fonts && cp vlog/fonts/*.ttf ~/.fonts/ && fc-cache -f
       - name: Download raw footage
         env:
-          URLS: ${{ github.event.inputs.urls }}
+          VLOG_KEY: ${{ secrets.VLOG_KEY }}
         run: |
+          vlog/unlock.sh
+          # read the links from the event file (not the step env) and mask them, so public logs never show them
+          URLS=$(jq -r '.inputs.urls' "$GITHUB_EVENT_PATH")
+          for p in $URLS; do echo "::add-mask::${p#*|}"; done
           vlog/fetch_clips.sh vlog/${{ github.event.inputs.name }} "$URLS"
           for f in raw/*; do echo "$f: $(ffprobe -v error -show_entries stream=codec_type,r_frame_rate -of csv=p=0 "$f" | tr '\n' ' ')"; done
       - name: Render
@@ -43,7 +47,7 @@ jobs:
           if [ -n "$PREVIEW" ]; then python3 vlog/edit.py $D --preview $PREVIEW; else python3 vlog/edit.py $D; fi
           OUT=$(ls $D/vlog.mp4 $D/preview.mp4 2>/dev/null | head -1); echo "OUT=$OUT" >> $GITHUB_ENV
           mkdir -p $D/review && ffmpeg -v error -y -i $OUT -vf "fps=1/8,scale=320:-1,tile=8x8" $D/review/sheet%02d.jpg
-          cp $D/work/caps.ass $D/review/caps.ass
+          cp $D/work/caps.ass $D/review/caps.ass; mkdir -p $D/review
           rm -rf raw
       - name: Upload to Drive (Vlog Edits)
         env:
@@ -51,8 +55,10 @@ jobs:
           GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
           GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
         run: set -o pipefail; python3 vlog/drive_put.py "$OUT" "${{ github.event.inputs.name }} - $(basename $OUT .mp4) - $(date -u +%Y%m%d-%H%M).mp4" | tee vlog/${{ github.event.inputs.name }}/review/drive.txt
-      - name: Commit review frames
+      - name: Commit sealed review
         run: |
+          D=vlog/${{ github.event.inputs.name }}; mkdir -p $D/sealed
+          vlog/seal.sh $D/review $D/sealed/${{ github.run_id }}-edit
           git config user.name "vlog-bot" && git config user.email "vlog-bot@users.noreply.github.com"
-          git add vlog/${{ github.event.inputs.name }}/review
-          git commit -m "Vlog edit review: ${{ github.event.inputs.name }}" && git pull --rebase && git push
+          git add $D/sealed
+          git commit -m "Vlog edit review (sealed): ${{ github.event.inputs.name }}" && git pull --rebase && git push

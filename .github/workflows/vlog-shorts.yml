@@ -31,8 +31,12 @@ jobs:
           mkdir -p ~/.fonts && cp vlog/fonts/*.ttf ~/.fonts/ && fc-cache -f
       - name: Download raw footage
         env:
-          URLS: ${{ github.event.inputs.urls }}
+          VLOG_KEY: ${{ secrets.VLOG_KEY }}
         run: |
+          vlog/unlock.sh
+          # read the links from the event file (not the step env) and mask them, so public logs never show them
+          URLS=$(jq -r '.inputs.urls' "$GITHUB_EVENT_PATH")
+          for p in $URLS; do echo "::add-mask::${p#*|}"; done
           vlog/fetch_clips.sh vlog/${{ github.event.inputs.name }} "$URLS"
       - name: Render shorts
         env:
@@ -42,6 +46,7 @@ jobs:
           python3 vlog/shorts.py $D $ONLY
           mkdir -p $D/review
           for f in $D/shorts/*.mp4; do ffmpeg -v error -y -i "$f" -vf "fps=1/2,scale=216:-1,tile=8x1" -frames:v 1 "$D/review/short-$(basename $f .mp4).jpg"; done
+          cp $D/shorts/titles.txt $D/review/ 2>/dev/null || true
           rm -rf raw
       - name: Upload to Drive (Vlog Edits/<id> Shorts)
         env:
@@ -51,8 +56,10 @@ jobs:
         run: |
           set -o pipefail; D=vlog/${{ github.event.inputs.name }}
           for f in $D/shorts/*.mp4; do python3 vlog/drive_put.py "$f" "$(basename $f)" "${{ github.event.inputs.name }} Shorts" || exit 1; done | tee $D/review/shorts-drive.txt
-      - name: Commit review frames
+      - name: Commit sealed review
         run: |
+          D=vlog/${{ github.event.inputs.name }}; mkdir -p $D/sealed
+          vlog/seal.sh $D/review $D/sealed/${{ github.run_id }}-shorts
           git config user.name "vlog-bot" && git config user.email "vlog-bot@users.noreply.github.com"
-          git add vlog/${{ github.event.inputs.name }}/review vlog/${{ github.event.inputs.name }}/shorts/titles.txt
-          git commit -m "Vlog shorts review: ${{ github.event.inputs.name }}" && git pull --rebase && git push
+          git add $D/sealed
+          git commit -m "Vlog shorts review (sealed): ${{ github.event.inputs.name }}" && git pull --rebase && git push
