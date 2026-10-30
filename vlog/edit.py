@@ -209,18 +209,37 @@ def expand(edl):
                 cues.append({'song': m['song'], 'at': t, 'from': frm, 'dur': None, 'gain': m.get('gain', 0.35), 'tag': 'bed'})
             for p in sec['clips']:
                 p = dict(p)
+                parts = [p]
                 if p.get('clip'):
                     cam = camera_speed(p['clip'])
-                    if cam != 1.0:  # slow-motion camera clip: real speed, no sound, cut to the song's bar
+                    if cam != 1.0:  # slow-motion camera clip: real speed, no sound
                         p['speed'] = round(p.get('speed', 1.0) * cam, 3); p['_silent'] = True
                         if sec.get('music'):
-                            bar = 4 * 60 / BEATS[sec['music']['song']]['bpm']
-                            n = max(2, round((p['e'] - p['s']) / p['speed'] / bar))
-                            p['e'] = min(p['s'] + n * bar * p['speed'], clip_len(p['clip']) - 0.1)
-                if p.get('loc'): sfx.append(('pin', t + p.get('loc_at', 0.3)))
-                add(p)
+                            parts = montage(p, 60 / BEATS[sec['music']['song']]['bpm'], sec.get('broll_beats', 2))
+                for q in parts:
+                    if q.get('loc'): sfx.append(('pin', t + q.get('loc_at', 0.3)))
+                    add(q)
             if sec.get('music'): cues[-1]['dur'] = t - cues[-1]['at']
     return pieces, cues, sfx, t
+
+
+def montage(p, beat, per):
+    """Chop a silent b-roll shot into quick on-beat cuts spread across its range (every other slice, so it moves),
+    alternating a slight punch-in. The first cut stays long enough for its location tag or title to play out."""
+    sp, end = p['speed'], min(p['e'], clip_len(p['clip']) - 0.1)
+    cut = per * beat
+    if p.get('photos'):  # photos are timed against the whole shot: keep it in one piece, just land it on the beat
+        n = max(2, round((end - p['s']) / sp / cut)); return [dict(p, e=min(p['s'] + n * cut * sp, end))]
+    first = cut * max(1, -(-(4.2 if p.get('loc') else 3.4 if p.get('titles') else 0) // cut))
+    real = (end - p['s']) / sp
+    n = max(1, min(10, round((real - first) / (2 * cut)))) if real > first + cut else 0
+    out = [dict(p, e=p['s'] + first * sp)]
+    gap = (real - first - n * cut) / max(1, n)
+    for k in range(n):
+        a = p['s'] + (first + gap * (k + 1) + cut * k) * sp
+        out.append({'clip': p['clip'], 's': a, 'e': a + cut * sp, 'speed': sp, '_silent': True, 'mute': p.get('mute'),
+                    'letterbox': p.get('letterbox'), 'zoom': 1.08 if k % 2 == 0 else None})
+    return [{k: v for k, v in q.items() if v is not None} for q in out]
 
 
 def synth_sfx(kind, out, opt=None):
