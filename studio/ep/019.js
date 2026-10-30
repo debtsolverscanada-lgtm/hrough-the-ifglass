@@ -216,7 +216,7 @@ antRules(t,d,p,g){
     ${glint({x:1660,y:560,s:.7,t:g,pose:'point',dir:-1,mouth:'o',brows:'raised',blink:BL(g)})}`;
   const gal=AT(t,p.gal??6.89), sh=AT(t,p.shr??10.44), cu=AT(t,p.cube??14.2);
   return `${card('cardDark',g)}${T(960,150,'THE SQUARE-CUBE LAW',{size:100,fill:P.gold,sc:pop(t,sq)})}
-   ${gal&&!sh?`<g transform="translate(960,560) scale(${pop(t,p.gal??6.89)})">${paper(0,0,1,5,'GALILEO',-4)}</g>${a19_pill(t,960,880,'GALILEO · 1638 · TWO NEW SCIENCES',(p.gal??6.89)+.6,P.mint,40)}`:''}
+   ${!gal?`${glint({x:960,y:520,s:1,t:g,pose:'up',mouth:'grin',brows:'raised',blink:BL(g)})}${a19_iso(560,860,220,'#6FD3F7',1)}${a19_iso(1400,860,110,'#6FD3F7',1)}`:''}${gal&&!sh?`<g transform="translate(960,560) scale(${pop(t,p.gal??6.89)})">${paper(0,0,1,5,'GALILEO',-4)}</g>${a19_pill(t,960,880,'GALILEO · 1638 · TWO NEW SCIENCES',(p.gal??6.89)+.6,P.mint,40)}`:''}
    ${sh?`${a19_iso(560,800,360,'#6FD3F7',2)}${a19_iso(1360,760,180,'#6FD3F7',1)}<path d="M820 560 L1150 600" stroke="${P.gold}" stroke-width="10" stroke-dasharray="20 14"/>${T(980,540,'SHRINK',{size:56,fill:P.gold,stroke:10})}
      ${a19_pill(t,960,340,'SURFACE & CROSS-SECTION: ÷ SQUARE',(p.shr??10.44)+1.2,P.mint,42)}${cu?a19_pill(t,960,440,'VOLUME & WEIGHT: ÷ CUBE',p.cube??14.2,P.coral,42):''}`:''}`;
 },
@@ -227,11 +227,11 @@ antScale(t,d,p,g){
      ${T(560,900,'BIG: HEAVY FOR ITS MUSCLE',{size:46,fill:P.coral,stroke:9})}
      <g transform="translate(1360,700)">${a19_beetle(0,0,.5,g*2)}<g transform="translate(0,${(-150+Math.sin(g*3)*10).toFixed(0)})"><path d="M-130 0 h260" stroke="${INK}" stroke-width="16"/><circle cx="-150" r="60" fill="#5D6A82" stroke="${INK}" stroke-width="8"/><circle cx="150" r="60" fill="#5D6A82" stroke="${INK}" stroke-width="8"/></g></g>
      ${T(1360,900,'SMALL: STRONG FOR ITS WEIGHT',{size:46,fill:P.mint,stroke:9})}`;}
-  const bar=(y,lab,f,col,txt,a)=>`<g transform="translate(760,${y})" opacity="${a}"><rect x="0" y="-40" width="900" height="80" rx="16" fill="#1A2142" stroke="${INK}" stroke-width="6"/><rect x="6" y="-34" width="${Math.max(10,888*f).toFixed(0)}" height="68" rx="12" fill="${col}"/>${T(-24,18,lab,{size:46,fill:P.white,anchor:'end',stroke:9})}${T(920,18,txt,{size:52,fill:col,anchor:'start',stroke:10})}</g>`;
+  const bar=(y,lab,f,col,txt,a)=>`<g transform="translate(860,${y})" opacity="${a}"><rect x="0" y="-40" width="640" height="80" rx="16" fill="#1A2142" stroke="${INK}" stroke-width="6"/><rect x="6" y="-34" width="${Math.max(10,628*f).toFixed(0)}" height="68" rx="12" fill="${col}"/>${T(-24,18,lab,{size:46,fill:P.white,anchor:'end',stroke:9})}${T(320,120,txt,{size:60,fill:col,stroke:11})}</g>`;
   const k1=mu?1-eout(prog(t,(p.mus??3.01)+1,(p.mus??3.01)+3))*.9:1, k2=wt?1-eout(prog(t,(p.wt??9.43)+.5,(p.wt??9.43)+2.5))*.995:1;
   return `${card('cardDark',g)}${T(960,150,'90 TIMES SHORTER',{size:100,fill:P.gold,sc:IN(t,.1)})}
    <g opacity="${mu?.35:1}">${glint({x:400,y:440,s:1.15,t:g,mouth:'smile',blink:BL(g)})}<path d="M640 120 V800" stroke="${P.gold}" stroke-width="6" stroke-dasharray="14 10"/>${a19_tg(760,800,.013*90/10,g)}</g>
-   ${mu?bar(470,'MUSCLE',k1,P.mint,'÷ ~8,000',1):''}${wt?bar(640,'WEIGHT',k2,P.coral,'÷ 700,000+',pop(t,p.wt??9.43)):''}`;
+   ${mu?bar(400,'MUSCLE',k1,P.mint,'÷ ~8,000',1):''}${wt?bar(640,'WEIGHT',k2,P.coral,'÷ 700,000+',pop(t,p.wt??9.43)):''}`;
 },
 antRules2(t,d,p,g){
   const c=[['AIR',' > GRAVITY',0,P.ice],['WATER',' = GLUE',p.water??2.56,a19_TEA],['SQUEAKY VOICE','',p.voice??4.95,P.gold],['BRAIN WORKS','',p.fic??12.73,P.violet]];
@@ -241,16 +241,16 @@ antRules2(t,d,p,g){
     if(i===1)ic=`<g transform="translate(-230,40)">${a19_drop(0,0,60,g)}</g>`;
     if(i===2)ic=a19_wave(-300,0,130,26,22,g*14,P.gold,5);
     if(i===3)ic=`<g transform="translate(-230,0)">${brain(0,0,.32,1,g)}</g>`;
-    s+=`<g transform="translate(${x},${y}) scale(${k.toFixed(3)})"><rect x="-370" y="-110" width="740" height="220" rx="24" fill="#120E24" stroke="${col}" stroke-width="8"/>${ic}${T(70,b?-4:20,a,{size:58,fill:col})}${b?T(70,60,b.trim(),{size:50,fill:P.white}):''}</g>`;});
+    ic=`<g transform="translate(-230,0) scale(1.5) translate(230,0)">${ic}</g>`;s+=`<g transform="translate(${x},${y}) scale(${k.toFixed(3)})"><rect x="-370" y="-110" width="740" height="220" rx="24" fill="#120E24" stroke="${col}" stroke-width="8"/>${ic}${T(70,b?-4:20,a,{size:58,fill:col})}${b?T(70,60,b.trim(),{size:50,fill:P.white}):''}</g>`;});
   const real=AT(t,p.real??6.58), fic=AT(t,p.pure??14.75);
-  return `${card('cardDark',g)}${s}${real?`<g transform="translate(1100,640) rotate(-8) scale(${pop(t,p.real??6.58)})">${labelPill(0,0,'REAL',P.mint,44)}</g>`:''}
+  return `${card('cardDark',g)}${s}${real?`<g transform="translate(820,610) rotate(-8) scale(${pop(t,p.real??6.58)})">${labelPill(0,0,'REAL',P.mint,44)}</g>`:''}
    ${fic?stamp(1430,710,.7,'FICTION',P.coral,-10):AT(t,p.fic??12.73)?`<g transform="translate(1440,780)">${labelPill(0,0,'IN THIS WORLD',P.coral,34)}</g>`:''}
    ${T(960,150,AT(t,p.voice??4.95)&&!AT(t,p.fic??12.73)?'SMALLER CORDS = HIGHER PITCH':'MORE RULES',{size:84,fill:P.white,sc:pop(t,AT(t,p.voice??4.95)&&!AT(t,p.fic??12.73)?p.voice+2:.1)})}`;
 },
 antStrength(t,d,p,g){
   const cb=p.cube??5.23, ants=p.ants??14.12, ch=p.cheer??23, bw=p.bow??24.46, dr=p.drop??26;
   if(t<cb) return `${a19_kitchen(g,{heat:0,nanOn:0})}${person({x:960,y:560,s:1,t:g,who:'kai',legs:'walk',pose:'hold',mouth:'grin',blink:BL(g)})}${a19_matchbox(1020,630,.5)}${a19_tg(1000,602,.05,g,{mark:1})}
-    ${a19_pill(t,960,250,'HOME IN A MATCHBOX',p.kai??2.43,P.gold,46)}${a19_pm(t,'plus','STRENGTH')}`;
+    ${a19_pill(t,1060,250,'HOME IN A MATCHBOX',p.kai??2.43,P.gold,46)}${a19_pm(t,'plus','STRENGTH')}`;
   if(t<ants||t>=ch){const lift=AT(t,cb+1.2)?eout(prog(t,cb+1.2,cb+2.6)):0, drop=AT(t,dr)?eout(prog(t,dr,dr+.35)):0;
     const cy=t>=ch?lerp(380,640,drop):lerp(640,330,lift);const bow=t>=bw&&!AT(t,dr);
     return `${a19_counterTop(g)}${t>=ch?`<g transform="translate(1560,380)">${person({x:0,y:0,s:2.4,t:g,who:'kai',pose:'up',mouth:'laugh',brows:'raised',blink:BL(g)})}</g>`:''}
@@ -269,7 +269,7 @@ antWater(t,d,p,g){
   if(t<ts){const tc=AT(t,p.touch??6.8), gr=AT(t,p.grab??7.92);const gx=tc?900:lerp(420,860,prog(t,2.3,6.5));
     return `${a19_counterTop(g)}${gr?`<g transform="translate(${gx},${560+Math.sin(g*3)*6})">${glint({x:0,y:0,s:.85,t:g,pose:'up',mouth:'o',brows:'raised',legs:'wobble',blink:0})}</g>`:''}
      ${a19_drop(1100,760,gr?300:260,g,{wob:gr?1:0})}${!gr?glint({x:gx,y:520,s:.85,t:g,legs:tc?'stand':'walk',pose:tc?'reach':'down',mouth:'smile',blink:BL(g)}):''}
-     ${gr?T(960,250,'IT GRABS HIM',{size:96,fill:P.red,sc:pop(t,p.grab??7.92)}):AT(t,2.4)?T(960,250,'A DROP OF SPILLED TEA',{size:84,fill:P.gold,sc:pop(t,2.4)}):''}${a19_pm(t,'minus','WATER')}`;}
+     ${gr?T(1060,250,'IT GRABS HIM',{size:96,fill:P.red,sc:pop(t,p.grab??7.92)}):AT(t,2.4)?T(1060,250,'A DROP OF SPILLED TEA',{size:84,fill:P.gold,sc:pop(t,2.4)}):''}${a19_pm(t,'minus','WATER')}`;}
   const yo=AT(t,p.you??14.7), hr=AT(t,p.hairs??20.6), kai=AT(t,p.kai??25.85), dk=AT(t,p.drink??29.28);
   if(kai){const wick=prog(t,(p.kai??25.85)+.6,(p.kai??25.85)+2.4);
     if(dk)return `${a19_counterTop(g)}${[0,1,2,3,4].map(i=>a19_drop(700+i*130,770,26+(i%2)*8,g+i)).join('')}${glint({x:1100,y:520,s:.85,t:g,pose:'reach',mouth:'smile',blink:BL(g)})}<circle cx="980" cy="560" r="20" fill="${a19_TEA}" fill-opacity=".8" stroke="${INK}" stroke-width="5"/>
@@ -277,7 +277,7 @@ antWater(t,d,p,g){
     return `${a19_counterTop(g)}${a19_drop(1100,760,300*(1-wick*.7),g)}<g transform="translate(${lerp(1900,1250,eout(prog(t,p.kai??25.85,(p.kai??25.85)+.6)))},300) rotate(20)"><path d="M0 0 L-260 460 L260 460Z" fill="#FFF6EA" stroke="${INK}" stroke-width="9" stroke-linejoin="round"/><path d="M-260 460 L260 460 L${-260+520*.5} ${460-460*wick*.5}Z" fill="${a19_TEA}" opacity=".5"/>${[0,1,2,3].map(i=>`<circle cx="${-120+i*80}" cy="380" r="8" fill="#D8D2C8"/>`).join('')}</g>
      ${glint({x:wick>.6?760:1060,y:wick>.6?520:560,s:.85,t:g,pose:wick>.6?'shrug':'up',mouth:wick>.6?'grin':'o',brows:'raised',blink:BL(g)})}${T(960,180,'PAPER TOWEL RESCUE',{size:92,fill:P.gold,sc:pop(t,p.kai??25.85)})}`;}
   if(hr){const sc=AT(t,p.scarf??24.07);let hairs='';for(let i=0;i<14;i++)hairs+=`<path d="M${-180+i*26} -20 l${8} -36" stroke="${INK}" stroke-width="5"/>`;
-    return `${card('cardIce',g)}<g transform="translate(540,600)"><path d="M-220 0 Q0 -60 220 0 L220 40 Q0 0 -220 40Z" fill="#3A2A2A" stroke="${INK}" stroke-width="8"/>${hairs}${[0,1,2].map(i=>a19_drop(-120+i*120,-80-Math.abs(Math.sin(g*2+i))*30,30,g)).join('')}</g>
+    return `${card('cardIce',g)}<g transform="translate(540,620) scale(1.5)"><path d="M-220 0 Q0 -60 220 0 L220 40 Q0 0 -220 40Z" fill="#3A2A2A" stroke="${INK}" stroke-width="8"/>${hairs}${[0,1,2].map(i=>a19_drop(-120+i*120,-80-Math.abs(Math.sin(g*2+i))*30,30,g)).join('')}</g>
      ${T(540,840,'WATER-REPELLENT HAIRS',{size:52,fill:P.mint,stroke:10})}
      ${sc?`${glint({x:1380,y:500,s:.85,t:g,mouth:'flat',brows:'sad',pose:'shrug',blink:BL(g)})}<path d="M1420 540 q10 40 0 60" stroke="${a19_TEA}" stroke-width="10" fill="none"/>${T(1380,840,'GLINT: A SCARF',{size:56,fill:P.coral,sc:pop(t,p.scarf??24.07)})}`:''}
      ${T(960,150,'HOW INSECTS SURVIVE',{size:96,fill:P.white,sc:pop(t,hr)})}`;}
@@ -322,7 +322,7 @@ antVoices(t,d,p,g){
    ${a19_pill(t,1150,330,'FLICKERS PER SECOND',p.flies??6.77,P.white,40)}
    ${wd?`<rect width="1920" height="1080" fill="#05030C" opacity=".6"/><g transform="translate(960,560) scale(${pop(t,p.world??11.51)})">${brain(0,0,.9,1,g*6)}</g>${[0,1,2].map(i=>`<circle cx="960" cy="560" r="${200+i*40}" fill="none" stroke="${P.violet}" stroke-width="6" stroke-dasharray="20 20" transform="rotate(${(g*400*(i%2?1:-1)).toFixed(0)} 960 560)"/>`).join('')}
      <g transform="translate(960,860)">${labelPill(0,0,'IN THIS WORLD: HIS BRAIN SPEEDS UP',P.coral,40)}</g>`:''}
-   ${T(960,150,'SMALL = FASTER TIME',{size:100,fill:P.gold,sc:pop(t,p.small??2.71)})}${a19_pm(t,'minus','VOICES')}`;
+   ${T(1120,150,'SMALL = FASTER TIME',{size:90,fill:P.gold,sc:pop(t,p.small??2.71)})}${a19_pm(t,'minus','VOICES')}`;
 },
 antWaves(t,d,p,g){
   const wh=AT(t,p.whale??4.4), own=AT(t,p.own??7.88);
@@ -336,7 +336,7 @@ antWaves(t,d,p,g){
 antHearing(t,d,p,g){
   const ol=AT(t,p.older??2.36), ln=AT(t,p.lean??8.55), sh=AT(t,p.shout??14.48), ct=AT(t,p.cant??15.67);
   if(ln){return `${a19_counterTop(g)}<g transform="translate(1250,360)">${person({x:0,y:0,s:2.6,t:g,who:'nan',mouth:ct?'flat':'o',brows:ct?'sad':'raised',look:-1,blink:BL(g)})}</g>
-     ${a19_matchbox(560,800,1.4)}${glint({x:560,y:420,s:.6,t:g,pose:sh?'up':'down',mouth:sh?'o':'smile',brows:sh?'angry':'calm',blink:BL(g)})}${sh?a19_squeak(640,430,g,1,1,.6):''}
+     ${a19_matchbox(560,800,1.4)}${glint({x:540,y:536,s:.6,t:g,pose:sh?'up':'down',mouth:sh?'o':'smile',brows:sh?'angry':'calm',blink:BL(g)})}${sh?a19_squeak(620,560,g,1,1,.6):''}
      ${!sh?a19_bubble(1000,200,700,'"GLINT, LOVE?','ARE YOU TALKING?"',{tail:'right',size:48}):''}${ct?T(960,180,"SHE CAN'T HEAR HIM AT ALL",{size:84,fill:P.red,sc:pop(t,p.cant??15.67)}):sh?T(960,180,"HE'S SHOUTING",{size:96,fill:P.gold,sc:pop(t,p.shout??14.48)}):''}`;}
   return `${card('cardDark',g)}${!ol?`<g transform="translate(560,560)">${person({x:0,y:0,s:1.1,t:g,who:'kai',mouth:'o',brows:'raised',pose:'hips',blink:BL(g)})}</g>${a19_squeak(1100,420,g,1,-1,1)}${glint({x:1250,y:500,s:.5,t:g,mouth:'o',blink:BL(g)})}${T(960,150,'KAI CAN HEAR IT. JUST.',{size:92,fill:P.mint,sc:pop(t,.1)})}`
     :`${T(960,150,'THE HIGHEST SOUNDS GO FIRST',{size:84,fill:P.white,sc:pop(t,p.older??2.36)})}${T(1100,320,'LOW → HIGH PITCH',{size:44,fill:P.ice,stroke:9})}
@@ -358,10 +358,10 @@ antPickles(t,d,p,g){
   const ct=AT(t,p.cats??1.78), hn=AT(t,p.hunt??5.69), er=AT(t,p.ears??9.36);
   const sp=er&&Math.sin(g*1.3)>0;const ears=er?(sp?-1:0):0;
   return `${a19_counterTop(g,{wall:'#1C1838',top:'#3E3352'})}${a19_catFace(1250,560,1.25,g,{ears,slit:!sp})}
-   ${glint({x:360,y:520,s:.7,t:g,mouth:sp?'o':'flat',brows:'raised',look:1,blink:BL(g)})}${er&&sp?a19_squeak(440,480,g,1,1,1.4):''}
-   ${ct&&!er?`<rect x="60" y="230" width="760" height="260" rx="20" fill="#0B1026" fill-opacity=".85" stroke="${P.mint}" stroke-width="6"/>${a19_range(330,310,440,.31,P.white,'HUMAN')}${a19_range(330,410,440,1,a19_FUR,'CAT')}${T(440,470,'~20 kHz vs ~64 kHz',{size:36,fill:P.ice,stroke:7})}`:''}
+   ${glint({x:380,y:600,s:.55,t:g,mouth:sp?'o':'flat',brows:'raised',look:1,blink:BL(g)})}${er&&sp?a19_squeak(440,560,g,1,1,1.4):''}
+   ${ct&&!er?`<rect x="60" y="220" width="760" height="240" rx="20" fill="#0B1026" fill-opacity=".85" stroke="${P.mint}" stroke-width="6"/>${a19_range(330,290,440,.31,P.white,'HUMAN')}${a19_range(330,380,440,1,a19_FUR,'CAT')}${T(440,440,'~20 kHz vs ~64 kHz',{size:36,fill:P.ice,stroke:7})}`:''}
    ${hn&&!er?`<g transform="translate(560,820) scale(${pop(t,p.hunt??5.69)})">${icon('rat',0,0,.8)}</g>${T(780,830,'SQUEAK!',{size:56,fill:P.gold,sc:pop(t,(p.hunt??5.69)+.4)})}`:''}
-   ${er?`<g transform="translate(1250,140)">${labelPill(0,0,sp?'EARS SWIVEL STRAIGHT AT HIM':'...',P.coral,44)}</g>`:T(960,150,ct?'CATS HEAR HIGHER':'MR. PICKLES',{size:100,fill:ct?P.gold:a19_FUR,sc:pop(t,ct?p.cats??1.78:.1)})}`;
+   ${T(960,150,er?'EARS SWIVEL TOWARD HIM':ct?'CATS HEAR HIGHER':'MR. PICKLES',{size:96,fill:er?P.coral:ct?P.gold:a19_FUR,sc:pop(t,er?p.ears??9.36:ct?p.cats??1.78:.1)})}`;
 },
 antFridge(t,d,p,g){
   const pu=AT(t,p.puts??4.84), nn=AT(t,p.nan??8.61), bk=AT(t,p.bakes??13.25);
@@ -436,7 +436,7 @@ antJump(t,d,p,g){
   const k=ld?1:eout(prog(t,.4,9.76)*1)*.92;const fy=lerp(200,820,ld?1:prog(t,.4,9.76)), fx=lerp(470,640,prog(t,.4,9.76));
   const gx=rn?lerp(640,1100,prog(t,p.runs??13.3,d)):fx;
   return `${a19_kitchen(g,{smoke:1,th:.9,nan:'doze',nanOn:1})}<rect width="1920" height="1080" fill="#05030C" opacity=".3"/>${pickles(1200,880,1.3,g,{mood:'happy'})}
-   ${a19_ruler(80,820,640,'',{})}${T(170,560,'2 M',{size:70,fill:P.gold,anchor:'start',stroke:14})}
+   ${a19_ruler(80,820,640,'',{})}${T(270,150,'2 M',{size:64,fill:P.gold,stroke:13})}
    ${a19_tg(gx,fy,.16,g,{pose:'up',mouth:rn?'teeth':'o',brows:'raised',legs:rn?'walk':'stand',blink:0})}
    ${!ld?[-30,0,30].map(dx=>`<path d="M${fx+dx} ${fy+40} v-40" stroke="${P.ice}" stroke-width="8" stroke-linecap="round" opacity="${(.5+.5*Math.sin(g*8+dx)).toFixed(2)}"/>`).join(''):''}
    ${ld&&!rn?T(700,880,'SOFT BUMP',{size:56,fill:P.gold,stroke:10}):''}
@@ -489,8 +489,8 @@ antTwist(t,d,p,g){
      ${T(960,150,pu?'...AND STARTS TO PURR':"INTO NAN'S PALM",{size:96,fill:pu?P.gold:P.white,sc:pop(t,pu?p.purr??16.5:p.drops??13.29)})}`;}
   const cx=1060, cy=700, s=2.4, mx=cx-70*s, my=cy-6*s;
   return `${lap}${pickles(cx,cy,s,g,{mood:'happy'})}
-   ${mo?`<g transform="translate(${mx},${my})"><path d="M0 0 V40" stroke="${INK}" stroke-width="6"/>${glint({x:0,y:110,s:.28,t:g,mouth:'smile',brows:'raised',pose:'down',blink:BL(g),rot:6})}</g>`:''}
-   ${mo?a19_pill(t,960,920,'HELD BY HIS SCARF, LIKE A KITTEN',(p.mouth??4.23)+1,P.gold,40):''}${sc?`<g transform="translate(560,500) scale(${pop(t,p.scratch??11.82)})">${icon('check',0,0,1)}</g>${T(560,660,'NOT A SCRATCH',{size:60,fill:P.mint,stroke:12})}`:''}
+   ${mo?`<g transform="translate(${mx},${my})">${glint({x:-40,y:20,s:.42,t:g,mouth:'smile',brows:'raised',pose:'down',blink:BL(g),rot:6})}</g>`:''}
+   ${mo?a19_pill(t,960,265,'HELD BY HIS SCARF, LIKE A KITTEN',(p.mouth??4.23)+1,P.gold,40):''}${sc?`<g transform="translate(560,500) scale(${pop(t,p.scratch??11.82)})">${icon('check',0,0,1)}</g>${T(560,660,'NOT A SCRATCH',{size:60,fill:P.mint,stroke:12})}`:''}
    ${T(960,150,mo?'IN HIS MOUTH... GENTLY':'MR. PICKLES IS THERE',{size:96,fill:mo?P.gold:a19_FUR,sc:pop(t,mo?p.mouth??4.23:.1)})}`;
 },
 antGuard(t,d,p,g){

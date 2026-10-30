@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/cast.js"></script><script src="../../studio/thumbkit.js"></script><script src="../../studio/ep/019.js"></script><script>
+let th_g=1.7;
+let th_far=`<g transform="translate(-260,-120) scale(1.35)" opacity=".85">${a19_kitchen(th_g,{smoke:1,th:.9,nan:'doze'})}</g>`;
+let th_hero=`<g transform="translate(1470,400) rotate(-10) scale(1.95)">${glint({t:.35,mouth:'o',brows:'raised',pose:'reach',legs:'walk',blink:0})}</g>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ ${th_far}
+ <rect width="1920" height="1080" fill="#05030C" opacity=".55"/>
+ ${TK.glowBlob(1240,240,420,'#FF8A3D',.55)}${TK.rays(1240,240,'#FFB13B',16,1600,.10)}
+ ${TK.glowBlob(1180,960,420,'#3DF58A',.35)}
+ <g transform="translate(1180,1010)">${a19_catFace(0,0,1.15,0,{ears:0,slit:1})}</g>
+ <path d="M1600 860 L1980 820 L1980 1100 L1600 1100Z" fill="#E8EEF4" opacity="0"/>
+ ${[-40,0,40].map(dx=>`<path d="M${1470+dx} 1000 v-70" stroke="#BFEFFF" stroke-width="10" stroke-linecap="round" opacity=".7"/>`).join('')}
+ ${TK.rim(th_hero,'#FF9F43',30)}
+ ${TK.text(70,300,"SHE CAN'T HEAR",{size:112,fill:'#fff',rot:-3})}
+ ${TK.text(55,590,"I'M TINY",{size:250,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(330,830,'HEIGHT','2 CM','#7CF5FF',-3)}
+`,'#0B1026');
+</script></body></html>
