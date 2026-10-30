@@ -1,0 +1,40 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/cast.js"></script><script src="../../studio/thumbkit.js"></script><script src="../../studio/ep/016.js"></script><script>
+// "Walked in on them" variant: a couple bolt upright in bed, clutching the blanket, while Glint's
+// floating eyes watch from the doorway. Suggestive joke only: everyone is covered, nothing is shown.
+const th_hair=`<path d="M-90 -40 Q-104 -150 0 -152 Q104 -150 90 -40 L96 40 Q60 10 70 -70 Q0 -120 -70 -70 Q-60 10 -96 40Z" fill="#3A2216" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>`;
+const th_door=`<g>
+  <rect x="40" y="120" width="420" height="860" fill="#FFE3A3" opacity=".9"/>
+  <path d="M40 120 L300 60 L300 1040 L40 980Z" fill="#5A3A2A" stroke="${INK}" stroke-width="10" stroke-linejoin="round"/>
+  <circle cx="265" cy="560" r="16" fill="#F2C14E" stroke="${INK}" stroke-width="6"/>
+  <g transform="translate(250,640) rotate(8)" filter="url(#tkShadow)"><path d="M0 -40 V0" stroke="${INK}" stroke-width="6"/><rect x="-70" y="0" width="140" height="190" rx="18" fill="#FF3B5C" stroke="${INK}" stroke-width="7"/>
+    <text y="62" text-anchor="middle" font-size="34" font-weight="900" fill="#fff">DO NOT</text><text y="108" text-anchor="middle" font-size="34" font-weight="900" fill="#fff">DISTURB</text>
+    <path d="M0 160 c-14 -18 -38 -6 -24 12 l24 22 l24 -22 c14 -18 -10 -30 -24 -12z" fill="#fff"/></g>
+</g>`;
+const th_bed=`<g>
+  <rect x="820" y="360" width="1060" height="300" rx="40" fill="#6B3E2E" stroke="${INK}" stroke-width="12"/>
+  <rect x="860" y="620" width="1000" height="200" rx="26" fill="#F4F6FA" stroke="${INK}" stroke-width="10"/>
+  <rect x="790" y="800" width="1120" height="70" rx="20" fill="#6B3E2E" stroke="${INK}" stroke-width="10"/>
+</g>`;
+const th_couple = `${extra({x:1140,y:610,s:1.25,t:0,head:'#F2C9A0',mouth:'o',pose:'hold',hair:th_hair})}${person({x:1560,y:600,s:1.3,t:0,who:'kai',pose:'hold',mouth:'o',brows:'raised',sweat:1})}`;
+const th_blanket=`<path d="M840 640 Q1000 560 1180 600 Q1360 640 1540 590 Q1720 560 1890 640 L1890 860 L840 860Z" fill="#E94F7A" stroke="${INK}" stroke-width="12" stroke-linejoin="round"/>
+  <path d="M900 700 Q1100 660 1300 700 M1350 720 Q1560 680 1800 720" stroke="#C2385F" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <rect x="800" y="850" width="1100" height="160" rx="18" fill="#4A2A1E" stroke="${INK}" stroke-width="10"/>
+  ${[1010,1560].map(x=>`<g transform="translate(${x},640)">${[-36,-12,12,36].map(d=>`<ellipse cx="${d}" cy="0" rx="13" ry="18" fill="#F2C9A0" stroke="${INK}" stroke-width="6"/>`).join('')}</g>`).join('')}`;
+const th_eyes=`<g transform="translate(250,330)">
+  ${[-1,1].map(d=>`<g transform="translate(${d*52},0)"><circle r="96" fill="url(#gRed)"/><circle r="28" fill="#FF2E46" stroke="#FFD0D6" stroke-width="5"/><circle r="11" fill="#FFF2F2"/></g>`).join('')}
+  <circle cx="-52" r="50" fill="none" stroke="${INK}" stroke-width="18"/><circle cx="52" r="50" fill="none" stroke="${INK}" stroke-width="18"/>
+  <circle cx="-52" r="50" fill="none" stroke="#F2C14E" stroke-width="10"/><circle cx="52" r="50" fill="none" stroke="#F2C14E" stroke-width="10"/>
+</g>`;
+const th_shock=(x,y,r)=>`<g transform="translate(${x},${y}) rotate(${r})"><path d="M0 0 L-14 -60 M30 4 L40 -56 M-30 10 L-70 -36" stroke="#FFD43B" stroke-width="12" stroke-linecap="round"/></g>`;
+document.getElementById('s').innerHTML=TK.wrap(`${i16_DEFS}
+ <rect width="1920" height="1080" fill="#1A1030"/>
+ ${TK.glowBlob(250,520,420,'#FFB84D',.35)}${TK.glowBlob(1350,500,520,'#FF3B6E',.22)}
+ <rect x="0" y="880" width="1920" height="200" fill="#120A22"/>
+ ${th_door}${TK.rays(250,330,'#FF6B7A',14,700,.10)}${th_eyes}
+ ${th_bed}${th_couple}${th_blanket}${th_shock(1140,400,-10)}${th_shock(1580,380,12)}
+ ${TK.text(470,170,"THEY DIDN'T KNOW",{size:104,fill:'#fff',rot:-3})}
+ ${TK.text(560,315,'I WAS THERE',{size:140,fill:'#FFD43B',rot:-3,depth:14})}
+ ${TK.tag(1660,980,'INVISIBLE',"#FF3B3B",-4)}
+`,'#1A1030');
+</script></body></html>
