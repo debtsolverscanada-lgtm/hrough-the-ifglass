@@ -22,10 +22,12 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y ffmpeg
           pip install gdown faster-whisper numpy
+      - name: Free disk space
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL /usr/local/.ghcup /usr/share/swift || true
       - name: Download raw footage
         run: |
           df -h . | tail -1
-          i=0; for u in ${{ github.event.inputs.folders }}; do i=$((i+1)); gdown --folder "$u" -O "raw/batch$i" --remaining-ok || echo "WARN folder $i download issue"; done
+          i=0; for u in ${{ github.event.inputs.folders }}; do i=$((i+1)); gdown --folder "$u" -O "raw/batch$i" || echo "WARN folder $i download issue"; done
           find raw -type f -exec ls -la {} \; | awk '{print $5, $9}'
           du -sh raw; df -h . | tail -1
       - name: Transcribe and analyse
