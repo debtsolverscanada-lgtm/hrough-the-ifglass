@@ -30,13 +30,6 @@ const th_bed=`
   <radialGradient id="gIris" cx="50%" cy="35%" r="70%"><stop offset="0" stop-color="#E8A0FF"/><stop offset=".55" stop-color="#8A3BD8"/><stop offset="1" stop-color="#3A0F66"/></radialGradient>
   <linearGradient id="gSkin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE3CC"/><stop offset="1" stop-color="#EDB48C"/></linearGradient>
  </defs>
- <!-- him: shadow stickman lying on the pillow, smirking at the door -->
- <g transform="translate(1790,650)">
-  <circle r="90" fill="#07040D" stroke="${W_}" stroke-width="6" style="filter:drop-shadow(0 0 12px ${W_})"/>
-  <path d="M-62 -4 Q-34 -30 -10 -8 Q-34 6 -62 -4Z M54 -4 Q28 -28 4 -8 Q28 6 54 -4Z" fill="#fff"/>
-  <circle cx="-38" cy="-8" r="7" fill="#07040D"/><circle cx="16" cy="-8" r="7" fill="#07040D"/>
-  <path d="M-36 40 Q0 56 34 30" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
- </g>
 
  <!-- her: Japanese anime style. Thin warm line art, cel shading, big half-lidded eyes, spiky bangs + shine band -->
  <defs>
@@ -46,13 +39,23 @@ const th_bed=`
  </defs>
  <!-- body lying on her stomach across the bed: bare back, thin black bra band -->
  <g stroke="#6A4426" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
-  <path d="M1360 712 Q1470 646 1620 656 Q1760 668 1870 716 L1870 800 L1360 800Z" fill="url(#aSkin)"/>
-  <path d="M1470 690 Q1600 676 1760 700 Q1620 704 1470 712Z" fill="#E9B79C" stroke="none" opacity=".55"/>
-  <path d="M1540 664 Q1600 694 1660 690" fill="none" opacity=".6"/>
-  <path d="M1500 678 Q1600 662 1720 690 L1722 708 Q1600 684 1498 698Z" fill="#17121C"/>
-  <path d="M1532 676 L1508 616 M1660 688 L1632 624" fill="none" stroke="#17121C" stroke-width="6"/>
+  <path d="M1360 712 Q1470 610 1620 596 Q1760 590 1890 650 L1890 700 Q1760 660 1620 690 Q1500 720 1360 800Z" fill="url(#aSkin)"/>
+  <path d="M1470 664 Q1600 630 1780 640 Q1620 660 1470 690Z" fill="#E9B79C" stroke="none" opacity=".55"/>
+  <path d="M1540 620 Q1600 646 1660 640" fill="none" opacity=".6"/>
+  <path d="M1500 640 Q1600 618 1730 634 L1732 652 Q1600 640 1498 660Z" fill="#17121C"/>
+  <path d="M1532 636 L1508 590 M1670 634 L1640 586" fill="none" stroke="#17121C" stroke-width="6"/>
   <path d="M1300 724 Q1360 690 1440 700 Q1470 716 1430 734 Q1360 742 1300 740Z" fill="url(#aSkin)"/>
  </g>
+ <!-- him: shadow stickman lying on the pillow, smirking at the door -->
+ <g transform="translate(1730,742) scale(.92) rotate(-10)">
+  <circle r="90" fill="#07040D" stroke="${W_}" stroke-width="6" style="filter:drop-shadow(0 0 12px ${W_})"/>
+  <path d="M-62 -4 Q-34 -30 -10 -8 Q-34 6 -62 -4Z M54 -4 Q28 -28 4 -8 Q28 6 54 -4Z" fill="#fff"/>
+  <circle cx="-38" cy="-8" r="7" fill="#07040D"/><circle cx="16" cy="-8" r="7" fill="#07040D"/>
+  <path d="M-36 40 Q0 56 34 30" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
+ </g>
+
+ <path d="M1520 690 Q1620 700 1700 712 Q1760 720 1790 744" fill="none" stroke="#6A4426" stroke-width="40" stroke-linecap="round"/>
+ <path d="M1520 690 Q1620 700 1700 712 Q1760 720 1790 744" fill="none" stroke="url(#aSkin)" stroke-width="32" stroke-linecap="round"/>
  <!-- head: three-quarter view, chin resting toward her hand -->
  <g transform="translate(1415,560) rotate(-8)" stroke="#6A4426" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
   <path d="M-120 -60 Q-150 -190 0 -200 Q150 -192 130 -60 Q150 30 210 120 Q170 110 140 70 Q150 150 210 210 Q130 200 100 120 Q90 190 40 230 Q20 160 30 100 Q-10 170 -70 200 Q-50 140 -60 90 Q-120 160 -200 180 Q-130 100 -120 -60Z" fill="url(#aHair)"/>
@@ -73,7 +76,7 @@ const th_bed=`
   <path d="M-10 66 Q2 74 16 64" fill="none" stroke="#B4404F" stroke-width="4"/>
   ${[-1,1].map(d=>`<g transform="translate(${d*54},44)" stroke="#FF7F98" stroke-width="3" opacity=".8"><path d="M-14 4 l6 -10 M-4 4 l6 -10 M6 4 l6 -10"/></g>`).join('')}
  </g>
- <path d="M1060 800 Q1240 760 1420 770 Q1600 740 1700 730 Q1800 728 1910 760 L1910 960 L1060 960Z" fill="url(#thSheet)" stroke="${INK}" stroke-width="12" stroke-linejoin="round"/>
+ <path d="M1060 800 Q1240 760 1420 770 Q1560 780 1640 812 Q1780 840 1910 836 L1910 960 L1060 960Z" fill="url(#thSheet)" stroke="${INK}" stroke-width="12" stroke-linejoin="round"/>
  <path d="M1120 820 Q1320 790 1500 830 M1560 830 Q1740 800 1880 840" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="10" fill="none" stroke-linecap="round"/>
  <rect x="1040" y="930" width="880" height="110" rx="16" fill="#5A2412" stroke="${INK}" stroke-width="10"/>`;
 const th_door=`
