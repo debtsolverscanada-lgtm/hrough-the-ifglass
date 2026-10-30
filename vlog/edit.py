@@ -339,8 +339,8 @@ def main():
     ins, parts = [], []
     for k, c in enumerate([c for c in cues if c['at'] < total]):
         dur = min(c['dur'], total - c['at'])
-        ins += ['-ss', f"{c['from']:.3f}", '-t', f'{dur:.3f}', '-i', str(MUSIC / c['song'])]
-        parts.append(f"[{k}:a]aresample=48000,aformat=channel_layouts=stereo,volume={c['gain']},afade=t=in:d=0.3,"
+        ins += ['-stream_loop', '-1', '-ss', f"{c['from']:.3f}", '-i', str(MUSIC / c['song'])]  # loops if the scene outlasts the song
+        parts.append(f"[{k}:a]asetpts=N/SR/TB,atrim=duration={dur:.3f},aresample=48000,aformat=channel_layouts=stereo,volume={c['gain']},afade=t=in:d=0.3,"
                      f"afade=t=out:st={max(0, dur - 0.8):.3f}:d=0.8,adelay={int(c['at']*1000)}|{int(c['at']*1000)}[m{k}]")
     n = len(parts)
     for k, (kind, at, *opt) in enumerate(s for s in sfx if s[1] < total):
