@@ -1,0 +1,21 @@
+name: Vlog frame sheets
+on:
+  workflow_dispatch:
+    inputs:
+      folders: { description: 'Space-separated public Google Drive folder URLs', required: true }
+      name: { description: 'Vlog id', required: true }
+permissions:
+  contents: write
+jobs:
+  frames:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y ffmpeg && pip install gdown
+      - run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL || true
+      - run: i=0; for u in ${{ github.event.inputs.folders }}; do i=$((i+1)); gdown -q --folder "$u" -O "raw/batch$i"; done
+      - run: vlog/frames.sh raw "vlog/${{ github.event.inputs.name }}/frames" | tee "vlog/${{ github.event.inputs.name }}/durations.txt"
+      - run: |
+          git config user.name "vlog-bot" && git config user.email "vlog-bot@users.noreply.github.com"
+          git add vlog/${{ github.event.inputs.name }}
+          git commit -m "Vlog frame sheets: ${{ github.event.inputs.name }}" && git pull --rebase && git push
