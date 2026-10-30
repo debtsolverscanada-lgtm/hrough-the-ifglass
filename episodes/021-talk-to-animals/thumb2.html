@@ -1,0 +1,21 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/cast.js"></script><script src="../../studio/thumbkit.js"></script><script src="../../studio/ep/021.js"></script><script>
+let th_g=2.2;
+let th_crows='';[[1560,150,1],[1700,120,-1],[1820,200,-1],[1620,270,1],[1760,320,-1],[1880,380,-1],[1540,380,1]].forEach(([x,y,d],i)=>{th_crows+=t21_crow(x,y,.5,th_g+i*.3,{call:1,angry:1,dir:d,ph:i});});
+let th_tree=`<path d="M1730 1080 L1720 60" stroke="#0A0612" stroke-width="54" stroke-linecap="round"/><path d="M1730 1080 L1720 60" stroke="#7A7288" stroke-width="36" stroke-linecap="round"/>${[[180,-1,240],[180,1,200],[300,-1,260],[300,1,200],[420,-1,220]].map(([y,s,l])=>`<path d="M1725 ${y+60} L${1725+s*l} ${y}" stroke="#0A0612" stroke-width="26" stroke-linecap="round"/><path d="M1725 ${y+60} L${1725+s*l} ${y}" stroke="#7A7288" stroke-width="14" stroke-linecap="round"/>`).join('')}`;
+let th_hero=`<g transform="translate(1290,560) scale(2.0)">${glint({t:.3,mouth:'o',brows:'raised',pose:'reach',look:1,blink:0})}${t21_hp(0,0,1,.3,{mode:'neck'})}</g>`;
+let th_pick=`<g transform="translate(760,840)"><circle r="120" fill="#4A3358" stroke="#0A0612" stroke-width="10"/><clipPath id="thpc"><circle r="114"/></clipPath><g clip-path="url(#thpc)">${pickles(55,45,.82,0,{mood:'happy',blink:1})}</g><circle r="120" fill="none" stroke="#FFD43B" stroke-width="6"/></g>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ ${t21_woods(th_g,{dusk:.68,near:1,sunX:620})}
+ ${TK.rays(620,640,'#FFB070',16,1600,.08)}${TK.glowBlob(1700,260,420,'#FF5E5B',.35)}
+ ${th_tree}${th_crows}
+ ${t21_tb(1240,110,'“DANGER FACE! DOWN!”',{size:44,col:'#FF5E5B',tag:'CROW',tail:290})}
+ <path d="M1460 900 Q1640 820 1860 900 L1860 940 H1460Z" fill="#1A1430" stroke="#0A0612" stroke-width="6"/><circle cx="1650" cy="890" r="70" fill="${t21_Y}" opacity=".35"/><path d="M1600 895 q50 -40 100 0 q-50 24 -100 0Z" fill="${t21_Y}" stroke="#0A0612" stroke-width="6"/><path d="M1560 880 q90 -50 180 0" stroke="#EEF2FF" stroke-width="18" fill="none"/>
+ ${TK.rim(th_hero,'#3DF5C2',28)}
+ ${t21_flakes(th_g,.9,80)}
+ ${th_pick}
+ ${TK.text(70,330,'I SPEAK',{size:130,fill:'#fff',rot:-3})}
+ ${TK.text(55,640,'CROW',{size:320,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.badge(300,880,'DAYLIGHT LEFT','40:00','#FFB13B',-3)}
+`,'#0B1026');
+</script></body></html>

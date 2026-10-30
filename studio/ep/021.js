@@ -16,7 +16,7 @@ function t21_pm(t,kind,sub){const plus=kind==='plus',col=plus?P.mint:P.red,k=eou
 function t21_tb(x,y,str,o={}){const {size=52,tail=0,sc=1,col=P.mint,op=1,tag='TRANSLATION',hi=-1,minw=330}=o;const L=Array.isArray(str)?str:[str];
   const w=Math.max(minw,Math.max(...L.map(l=>l.length))*size*.64+90),h=L.length*size*1.18+58,tx=clamp(tail,-w/2+50,w/2-50);
   return `<g transform="translate(${x},${y}) scale(${sc.toFixed?sc.toFixed(3):sc})" opacity="${op}"><path d="M${-w/2} ${-h/2} H${w/2} V${h/2} H${tx+24} L${tx} ${h/2+44} L${tx-24} ${h/2} H${-w/2}Z" fill="#0A1B24" fill-opacity=".94" stroke="${col}" stroke-width="7" stroke-linejoin="round"/>
-   <g transform="translate(${-w/2+24},${-h/2})"><rect y="-21" width="${tag.length*17+78}" height="42" rx="14" fill="${col}" stroke="${INK}" stroke-width="5"/><circle cx="24" cy="0" r="9" fill="none" stroke="${INK}" stroke-width="4"/><circle cx="46" cy="0" r="9" fill="none" stroke="${INK}" stroke-width="4"/><text x="64" y="9" font-size="25" font-weight="900" letter-spacing="2" fill="${INK}">${tag}</text></g>
+   <g transform="translate(${-w/2+24},${-h/2})"><rect y="-21" width="${tag.length*19+90}" height="42" rx="14" fill="${col}" stroke="${INK}" stroke-width="5"/><circle cx="24" cy="0" r="9" fill="none" stroke="${INK}" stroke-width="4"/><circle cx="46" cy="0" r="9" fill="none" stroke="${INK}" stroke-width="4"/><text x="64" y="9" font-size="25" font-weight="900" letter-spacing="2" fill="${INK}">${tag}</text></g>
    ${L.map((l,i)=>`<text y="${((i-(L.length-1)/2)*size*1.18+size*.36+6).toFixed(1)}" text-anchor="middle" font-size="${size}" font-weight="900" font-style="italic" fill="${hi===i?col:'#fff'}">${l}</text>`).join('')}</g>`;}
 // plain cream speech bubble for people
 function t21_bub(x,y,w,l1,l2,o={}){const {size=46,tail='left',sc=1}=o;const h=l2?size*2.7:size*1.8,tx=tail==='left'?-w/2+60:tail==='right'?w/2-60:0;
@@ -277,22 +277,22 @@ aniPickles(t,d,p,g){
 aniPickTalk(t,d,p,g){
   const steps=[[p.f1??1.83,'FOOD.'],[p.d1??2.8,'DOOR.'],[p.wf??3.7,'WRONG FOOD.'],[p.d2??4.8,'DOOR AGAIN.'],[p.why??5.95,'WHY IS THE DOOR LIKE THIS.']];
   const na=AT(t,p.nan??8.01),pk=AT(t,p.pk??12.92);let n=steps.filter(s=>AT(t,s[0])).length;
-  const list=n&&!pk?t21_tb(560,330,steps.slice(0,n).map(s=>s[1]),{size:46,hi:n-1,minw:560,tail:-60}):'';
-  return `${t21_kitchen(g)}${pickles(500,770,1,g,{mood:'grump'})}${glint({x:960,y:540,s:.85,t:g,pose:'point',mouth:na?'flat':'smile',brows:na?'sad':'calm',blink:BL(g),look:-1})}
-   ${person({x:1460,y:540,s:.95,t:g,who:'nan',mouth:na&&!pk?'o':pk?'flat':'smile',brows:na?'raised':'calm',pose:na&&!pk?'hips':'down',blink:BL(g+1)})}${list}
-   ${na&&!pk?t21_bub(1300,200,760,'“FOURTEEN YEARS, AND THAT’S','ALL HE’S GOT TO SAY?”',{size:44,tail:'right'}):''}
+  const list=n&&!pk?t21_tb(500,300,steps.slice(0,n).map(s=>s[1]),{size:46,hi:n-1,minw:560,tail:-60}):'';
+  return `${t21_kitchen(g)}${pickles(500,770,1,g,{mood:'grump'})}${glint({x:1100,y:540,s:.85,t:g,pose:'point',dir:-1,mouth:na?'flat':'smile',brows:na?'sad':'calm',blink:BL(g),look:-1})}
+   ${person({x:1600,y:540,s:.95,t:g,who:'nan',mouth:na&&!pk?'o':pk?'flat':'smile',brows:na?'raised':'calm',pose:na&&!pk?'hips':'down',blink:BL(g+1)})}${list}
+   ${na&&!pk?t21_bub(1400,200,760,'“FOURTEEN YEARS, AND THAT’S','ALL HE’S GOT TO SAY?”',{size:44,tail:'right'}):''}
    ${pk?t21_tb(560,420,'“FOOD.”',{size:96,sc:pop(t,p.pk??12.92)}):''}${!n?T(960,150,'GLINT TRANSLATES',{size:96,fill:P.mint,sc:IN(t,.1)}):''}`;
 },
 aniZoo(t,d,p,g){
   const ho=AT(t,p.hood??5.17),po=AT(t,p.pop??8.67),tr=AT(t,p.tr??12.1),jo=AT(t,p.joy??17.08),nm=AT(t,p.name??18.97);
   const wx=po?0:lerp(-300,0,eout(prog(t,0,3.5)));const L=[];if(AT(t,p.tall??13.67))L.push('TALL HUMAN.');if(AT(t,p.yel??14.82))L.push('YELLOW.');if(AT(t,p.fast??15.58))L.push('COMING FAST.');
   const rise=po?eout(prog(t,p.pop??8.67,(p.pop??8.67)+.5)):0;
-  return `${t21_zoo(g)}<g transform="translate(330,520)">${labelPill(0,0,'PRAIRIE DOGS',P.gold,36)}</g>
+  return `${t21_zoo(g)}<g transform="translate(1450,880)">${labelPill(0,0,'PRAIRIE DOGS',P.gold,32)}</g>
    ${t21_mound(1450,830,320)}<clipPath id="t21zc"><rect x="1200" y="400" width="500" height="380"/></clipPath><g clip-path="url(#t21zc)">${t21_pdog(1450,780+(1-rise)*260,1,g,{call:tr?1:0,dir:-1,look:-1})}</g>${t21_mound(1450,830,320).replace(/<ellipse[^>]*\/>/,'')}
    <g transform="translate(${wx.toFixed(0)},0)">${glint({x:520,y:530,s:.85,t:g,legs:po?'stand':'walk',pose:'reach',mouth:jo?'smile':'o',blink:BL(g)})}${t21_kai({x:860,y:520,s:.95,t:g,legs:po?'stand':'walk',pose:jo?'up':'reach',mouth:jo?'laugh':'grin',brows:'raised',blink:BL(g+1)})}</g>
    ${nm?`<g transform="translate(860,620) rotate(-4) scale(${pop(t,p.name??18.97).toFixed(3)})"><rect x="-130" y="-60" width="260" height="120" rx="14" fill="#fff" stroke="${INK}" stroke-width="6"/><rect x="-130" y="-60" width="260" height="40" rx="14" fill="${P.red}"/><text y="-30" text-anchor="middle" font-size="22" font-weight="900" fill="#fff">MY NAME IS</text><text y="10" text-anchor="middle" font-size="30" font-weight="900" fill="${INK}">TALL YELLOW</text><text y="44" text-anchor="middle" font-size="30" font-weight="900" fill="${INK}">HUMAN</text></g>`:''}
    ${ho&&!po?`<g transform="translate(860,250) scale(${pop(t,p.hood??5.17).toFixed(3)})">${labelPill(0,0,'BANANA-YELLOW HOODIE',t21_Y,46)}</g><path d="M860 300 V340" stroke="${t21_Y}" stroke-width="10"/>`:''}
-   ${L.length?t21_tb(1300,250,L,{size:50,tail:150,hi:L.length-1}):''}${nm?T(960,150,'A NAME IN PRAIRIE DOG',{size:90,fill:P.white,sc:pop(t,p.name??18.97)}):''}
+   ${L.length?t21_tb(1300,250,L,{size:50,tail:150,hi:L.length-1}):''}${nm?T(1120,150,'A NAME IN PRAIRIE DOG',{size:84,fill:P.white,sc:pop(t,p.name??18.97)}):''}
    ${t21_pm(t,'plus','THE ZOO')}`;
 },
 aniBaby(t,d,p,g){
@@ -373,7 +373,7 @@ aniWhales(t,d,p,g){
   return `${t21_sea(g)}${t21_whale(co?520:900,co?560:520,co?.95:1.2,g)}
    ${co?`${bars(1060,360,640,[40,40,40,130,40],P.mint,'CODA: CLICK PATTERN')}${cl?bars(1060,620,640,[90,90,40,40,40],P.gold,ac?'OTHER CLAN: OTHER ACCENT':'ANOTHER CLAN'):''}`:''}
    ${!co?`<g transform="translate(960,280) scale(${pop(t,p.feed??2.12).toFixed(3)})">${labelPill(0,0,'LIVE FEED · CARIBBEAN',P.mint,44)}</g>`:''}
-   ${T(960,150,co?'SPERM WHALES TALK IN CODAS':'SPERM WHALES',{size:90,fill:P.white,sc:pop(t,co?p.codas??7.67:.1)})}${t21_pm(t,'plus','THE WHALES')}`;
+   ${T(1150,150,co?'SPERM WHALES TALK IN CODAS':'SPERM WHALES',{size:76,fill:P.white,sc:pop(t,co?p.codas??7.67:.1)})}${t21_pm(t,'plus','THE WHALES')}`;
 },
 aniNoise(t,d,p,g){
   const ev=AT(t,p.every??3.74),sl=AT(t,p.sleep??10.72),bu=AT(t,p.buys??12.28);
@@ -382,8 +382,8 @@ aniNoise(t,d,p,g){
   return `${bgRoom(g)}${t21_bed(960,760)}${glint({x:900,y:560,s:.85,t:g,legs:'sit',mouth:bu?'smile':'wavy',brows:bu?'calm':'sad',blink:0,lid:bu?.4:0,shiver:bu?0:.5})}${bu?t21_hp(900,560,.85,g,{col:'#3A3F58'}):''}
    ${t21_pigeon(1600,180,.5,g,{dir:-1})}${dog(1500,760,.7,g)}${bx}
    ${!ev?`<g transform="translate(960,420) scale(${pop(t,p.off??2.01).toFixed(3)})"><rect x="-80" y="-130" width="160" height="260" rx="24" fill="#FFF6EA" stroke="${INK}" stroke-width="9"/><rect x="-40" y="-90" width="80" height="80" rx="14" fill="${P.red}" stroke="${INK}" stroke-width="6"/>${icon('cross',0,70,.5)}</g>${T(960,700,'NO OFF SWITCH',{size:80,fill:P.white,sc:pop(t,p.off??2.01)})}`:''}
-   ${sl&&!bu?`<g transform="translate(1660,820)">${clockP(0,0,70,0)}</g>${T(960,900,"CAN'T SLEEP",{size:70,fill:P.coral,sc:pop(t,p.sleep??10.72)})}`:''}
-   ${bu?T(960,150,'NOISE-CANCELLING. EVERYWHERE.',{size:76,fill:P.mint,sc:pop(t,p.buys??12.28)}):''}${t21_pm(t,'minus','THE NOISE')}`;
+   ${sl&&!bu?`<g transform="translate(1660,820)">${clockP(0,0,70,0)}</g>${T(960,860,"CAN'T SLEEP",{size:70,fill:P.coral,sc:pop(t,p.sleep??10.72)})}`:''}
+   ${bu?T(1120,150,'NOISE-CANCELLING. EVERYWHERE.',{size:66,fill:P.mint,sc:pop(t,p.buys??12.28)}):''}${t21_pm(t,'minus','THE NOISE')}`;
 },
 aniVoicemail(t,d,p,g){
   const fv=AT(t,p.five??4.42),ms=AT(t,p.msg??11.99),ha=AT(t,p.harrow??13.93),bk=AT(t,p.back??16.16),cr=AT(t,p.crack??17.71),ye=AT(t,p.yell??18.72),si=AT(t,p.sil??19.77);
@@ -392,9 +392,9 @@ aniVoicemail(t,d,p,g){
     ${T(960,150,'SATURDAY AFTERNOON',{size:90,fill:P.white,sc:IN(t,.1)})}${AT(t,p.ring??2.4)?`<g transform="translate(1300,860) scale(${pop(t,p.ring??2.4).toFixed(3)})">${labelPill(0,0,'MISSED CALL',P.red,44)}</g>`:''}`;}
   let wave='';const flat=si;for(let i=0;i<40;i++){const h=flat?4:(10+Math.abs(Math.sin(i*1.7+g*9))*60)*(cr&&!ye?2:1);wave+=`<rect x="${-200+i*10}" y="${(-h/2).toFixed(0)}" width="6" height="${h.toFixed(0)}" rx="3" fill="${cr&&!si?P.red:P.mint}"/>`;}
   const lines=[];if(ms)lines.push('“GOING TO MAKE PEACE','WITH THE CROWS.');if(ha)lines.push('HARROW WOODS,','BY THE OLD QUARRY.');if(bk)lines.push('BACK BY FOUR.”');
-  return `${t21_card('cardDark',g)}<g transform="translate(560,540)">${t21_phone(0,0,1.25,`<circle cy="-120" r="44" fill="${t21_Y}" stroke="${INK}" stroke-width="5"/>${T(0,-40,'VOICEMAIL',{size:30,fill:P.mint})}${T(0,0,'KAI · 16:07',{size:26,fill:'#fff'})}<g transform="translate(0,90) scale(.45)">${wave}</g>`)}</g>
+  return `${t21_card('cardDark',g)}<g transform="translate(560,540)">${t21_phone(0,0,1.25,`<circle cy="-120" r="44" fill="${t21_Y}" stroke="${INK}" stroke-width="5"/>${T(0,-40,'VOICEMAIL',{size:30,fill:P.mint})}${T(0,0,'KAI · 14:07',{size:26,fill:'#fff'})}<g transform="translate(0,90) scale(.45)">${wave}</g>`)}</g>
    ${AT(t,p.wind??9.22)&&!cr?[0,1,2].map(i=>`<path d="M${200+((g*400+i*300)%800)} ${300+i*40} q40 -20 80 0 t80 0" stroke="${P.ice}" stroke-width="6" fill="none" opacity=".6"/>`).join(''):''}
-   ${lines.length&&!cr?`<g>${lines.map((l,i)=>T(1290,330+i*90,l,{size:52,fill:i===lines.length-1?P.gold:P.white,anchor:'middle'})).join('')}</g>`:''}
+   ${!ms?glint({x:1290,y:560,s:.9,t:g,pose:'point',dir:-1,mouth:AT(t,p.kai??8)?'o':'flat',brows:'raised',blink:BL(g)}):''}${lines.length&&!cr?`<g>${lines.map((l,i)=>T(1290,330+i*90,l,{size:52,fill:i===lines.length-1?P.gold:P.white,anchor:'middle'})).join('')}</g>`:''}
    ${cr&&!si?T(1290,470,ye?'CRACK! A YELL.':'CRACK!',{size:130,fill:P.red,sc:pop(t,p.crack??17.71)}):''}${si?T(1290,470,'… SILENCE.',{size:110,fill:P.ice,sc:pop(t,p.sil??19.77)}):''}
    ${T(1290,160,'AT TEN TO FIVE',{size:84,fill:P.white,sc:pop(t,p.five??4.42)})}`;
 },
@@ -441,9 +441,9 @@ aniMobbing(t,d,p,g){
      ${T(960,150,le?(ha?'EVERY CROW HATES IT':'EVERY CROW KNOWS HIS FACE'):'THE CROWS',{size:96,fill:ha?P.red:P.gold,sc:pop(t,ha?p.hate??6.74:le?p.learn??3.3:p.crows??1.85)})}`}`;}
   // mobbing diagram
   const n=!ga?1:!on?6:!ot?6:sa?18:12;let cr='';const r=rng(17);
-  for(let i=0;i<n;i++){const a=r()*Math.PI*2,R=170+r()*170,fx=960+Math.cos(a)*R,fy=520+Math.sin(a)*R*.62;const fl=i>=6&&ot?eout(prog(t,(p.others??19.57)+(i-6)*.15,(p.others??19.57)+(i-6)*.15+1)):1;
-    const sx=960+Math.cos(a)*1300,sy=520+Math.sin(a)*900;cr+=t21_crow(lerp(sx,fx,fl),lerp(sy,fy,fl),.42,g,{call:1,angry:1,fly:fl<1?1:0,dir:Math.cos(a)>0?-1:1,ph:i});}
-  return `${t21_card('cardDark',g)}<circle cx="960" cy="520" r="${(120+Math.sin(g*6)*8).toFixed(0)}" fill="url(#gRed)" opacity=".6"/>${t21_kai({x:960,y:470,s:.42,t:g,mouth:'frown',brows:'sad',blink:BL(g)})}${cr}
+  for(let i=0;i<n;i++){const a=r()*Math.PI*2,R=170+r()*170,fx=960+Math.cos(a)*R*1.5,fy=520+Math.sin(a)*R*.75;const fl=i>=6&&ot?eout(prog(t,(p.others??19.57)+(i-6)*.15,(p.others??19.57)+(i-6)*.15+1)):1;
+    const sx=960+Math.cos(a)*1300,sy=520+Math.sin(a)*900;cr+=t21_crow(lerp(sx,fx,fl),lerp(sy,fy,fl),.6,g,{call:1,angry:1,fly:fl<1?1:0,dir:Math.cos(a)>0?-1:1,ph:i});}
+  return `${t21_card('cardDark',g)}<circle cx="960" cy="520" r="${(120+Math.sin(g*6)*8).toFixed(0)}" fill="url(#gRed)" opacity=".6"/>${t21_kai({x:960,y:450,s:.55,t:g,mouth:'frown',brows:'sad',blink:BL(g)})}${cr}
    ${mo?`<g transform="translate(960,150) scale(${pop(t,p.mob??15.84).toFixed(3)})">${T(0,0,'MOBBING',{size:150,fill:P.red})}</g>`:T(960,150,ga?'THEY GATHER AND SCREAM':"THEY DON'T KEEP QUIET",{size:88,fill:P.white,sc:pop(t,ga?p.gather??12.98:p.spot??8.82)})}
    ${on?`<g transform="translate(260,860) scale(${pop(t,p.one??18.26).toFixed(3)})">${labelPill(0,0,'1 CROW CALLS',P.gold,40)}</g>`:''}${ot?`<g transform="translate(960,860) scale(${pop(t,p.others??19.57).toFixed(3)})">${labelPill(0,0,'OTHERS FLY IN',P.gold,40)}</g>`:''}${sa?`<g transform="translate(1640,860) scale(${pop(t,p.same??22.9).toFixed(3)})">${labelPill(0,0,'ALL AT ONE SPOT',P.red,40)}</g>`:''}`;
 },
@@ -491,10 +491,10 @@ aniChase(t,d,p,g){
 aniPine(t,d,p,g){
   const ov=AT(t,p.over??1.36),th=AT(t,p.thirty??3.9),gu=AT(t,p.gully??8.45),bo=AT(t,p.bottom??11.03),fl=AT(t,p.flash??13.65);
   const r=rng(44);let crows='';const N=th?30:ov?10:4;const spots=[];for(let i=0;i<30;i++){const lvl=Math.floor(i/6),x=1040+(r()-.5)*(520-lvl*60),y=200+lvl*80+r()*30;spots.push([x,y]);}
-  for(let i=0;i<N;i++){const [x,y]=spots[i];crows+=t21_crow(x,y,.32,g,{call:1,angry:1,ph:i*.37,dir:x<1040?1:-1});}
+  for(let i=0;i<N;i++){const [x,y]=spots[i];crows+=t21_crow(x,y,.42,g,{call:1,angry:1,ph:i*.37,dir:x<1040?1:-1});}
   const tree=`<path d="M1040 900 L1030 160" stroke="${INK}" stroke-width="44" stroke-linecap="round"/><path d="M1040 900 L1030 160" stroke="#8A8296" stroke-width="30" stroke-linecap="round"/>${[[260,-1,240],[260,1,250],[340,-1,280],[340,1,270],[420,-1,250],[420,1,260],[500,-1,220],[500,1,230],[580,-1,180],[580,1,190]].map(([y,s,l])=>`<path d="M1035 ${y+60} L${1035+s*l} ${y}" stroke="${INK}" stroke-width="22" stroke-linecap="round"/><path d="M1035 ${y+60} L${1035+s*l} ${y}" stroke="#8A8296" stroke-width="12" stroke-linecap="round"/>`).join('')}`;
   const gully=`<path d="M300 760 Q560 960 860 780 L860 900 H300Z" fill="#1A1430"/><path d="M280 760 Q560 980 880 770" stroke="${INK}" stroke-width="10" fill="none"/>${[...Array(9)].map((_,i)=>`<path d="M${330+i*60} ${840-Math.sin(i)*30} q30 -60 60 0 q20 -50 40 0" stroke="#3A2A3A" stroke-width="8" fill="none"/>`).join('')}`;
-  return `${t21_woods(g,{dusk:.88,near:0})}${gully}${tree}${crows}${t21_flakes(g,1,120,8)}
+  return `${t21_woods(g,{dusk:.88,near:0})}<circle cx="1040" cy="420" r="460" fill="url(#gIce)" opacity=".35"/>${gully}${tree}${crows}${t21_flakes(g,1,120,8)}
    ${fl?`<circle cx="580" cy="860" r="${(60+Math.sin(g*8)*14).toFixed(0)}" fill="${t21_Y}" opacity=".35"/><path d="M540 860 q40 -30 80 0 q-40 20 -80 0Z" fill="${t21_Y}" stroke="${INK}" stroke-width="6"/><path d="M500 850 q80 -40 160 0" stroke="#EEF2FF" stroke-width="16" fill="none"/>`:''}
    ${gu?`<path d="M1000 ${(400+Math.sin(g*6)*20).toFixed(0)} L700 760" stroke="${P.red}" stroke-width="8" stroke-dasharray="18 14"/><path d="M690 730 L700 770 L730 740" stroke="${P.red}" stroke-width="8" fill="none"/>`:''}
    ${th?`<g transform="translate(1540,560) scale(${pop(t,p.thirty??3.9).toFixed(3)})">${labelPill(0,0,'30 CROWS',P.red,56)}</g>`:''}
@@ -514,7 +514,7 @@ aniFound(t,d,p,g){
    <path d="M560 880 Q900 760 1260 880" fill="#EEF2FF" stroke="${INK}" stroke-width="6"/>${t21_flakes(g,1,80)}
    ${[[0,'FREEZING',P.ice,300],[p.pale??2.36,'PALE',P.ice,520],[p.awake??3.49,'BUT AWAKE',P.mint,740]].map(([a,s,c,y])=>!sq&&AT(t,a)?`<g transform="translate(1520,${y}) scale(${pop(t,a).toFixed(3)})">${labelPill(0,0,s,c,52)}</g>`:'').join('')}
    ${st?t21_bub(1380,420,640,'“ARE THEY STILL','YELLING AT ME?”',{size:50,tail:'left'}):''}
-   ${fo?`${glint({x:300,y:330,s:.7,t:g,pose:'reach',mouth:'smile',brows:'sad',blink:BL(g)})}${t21_bub(560,140,500,'“THEY FOUND YOU.”','',{size:46,tail:'left'})}`:''}`;
+   ${fo?`<path d="M0 540 H560 Q640 560 600 600 H0Z" fill="#E8EEFF" stroke="${INK}" stroke-width="6"/>${glint({x:300,y:330,s:.7,t:g,pose:'reach',mouth:'smile',brows:'sad',blink:BL(g)})}${t21_bub(560,140,500,'“THEY FOUND YOU.”','',{size:46,tail:'left'})}`:''}`;
 },
 aniPeanut(t,d,p,g){
   const ou=AT(t,p.out??9.59);
