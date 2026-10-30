@@ -1,0 +1,96 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Marker;src:url(PermanentMarker-Regular.ttf)}
+html,body{margin:0;background:#000}svg{display:block}
+</style></head><body><div id="s"></div><script>
+// 3 AM Stories brand art. ?mode=avatar (800x800) or banner (2560x1440).
+// Look: pure black, one scared round-headed "you" lit only by a phone, something with glowing eyes in the dark.
+const MODE = new URLSearchParams(location.search).get('mode') || 'avatar';
+const INK = '#1a1410';
+const defs = `<defs>
+  <radialGradient id="skin" cx="45%" cy="38%" r="70%"><stop offset="0" stop-color="#f3e7da"/><stop offset=".65" stop-color="#d9c6b2"/><stop offset="1" stop-color="#9c8672"/></radialGradient>
+  <radialGradient id="phoneGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#bfe3ff" stop-opacity=".75"/><stop offset=".45" stop-color="#5aa8ff" stop-opacity=".25"/><stop offset="1" stop-color="#0a2a55" stop-opacity="0"/></radialGradient>
+  <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff2f2"/><stop offset=".25" stop-color="#ff3b3b"/><stop offset=".6" stop-color="#b00000" stop-opacity=".45"/><stop offset="1" stop-color="#600" stop-opacity="0"/></radialGradient>
+  <radialGradient id="lamp" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffe9b0" stop-opacity=".55"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+  <linearGradient id="blanket" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b3550"/><stop offset="1" stop-color="#0b0f1c"/></linearGradient>
+  <linearGradient id="faceLight" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#9fd2ff" stop-opacity=".55"/><stop offset=".55" stop-color="#9fd2ff" stop-opacity="0"/></linearGradient>
+  <filter id="soft"><feGaussianBlur stdDeviation="6"/></filter>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .06 0"/><feComposite in2="SourceGraphic" operator="in"/></filter>
+</defs>`;
+
+// "You": a bald round head peeking over the blanket, eyes wide, phone in both hands lighting the face from below.
+function you(x, y, s) {
+  const eye = (ex) => `<g transform="translate(${ex},-8)">
+      <ellipse rx="40" ry="44" fill="#1b0f0c" opacity=".35" transform="translate(0,14)"/>
+      <ellipse rx="34" ry="38" fill="#fffdf8" stroke="${INK}" stroke-width="5"/>
+      <circle cx="${ex < 0 ? 9 : 5}" cy="2" r="7.5" fill="#120a08"/><circle cx="${ex < 0 ? 11 : 7}" cy="-1" r="2.4" fill="#fff"/>
+      <path d="M-26 -30 q8 -5 18 -6" stroke="#c96b5a" stroke-width="2" opacity=".5" fill="none"/>
+    </g>`;
+  return `<g transform="translate(${x},${y}) scale(${s})">
+    <circle cx="0" cy="120" r="230" fill="url(#phoneGlow)"/>
+    <circle r="130" fill="url(#skin)" stroke="${INK}" stroke-width="7"/>
+    <circle r="130" fill="url(#faceLight)"/><ellipse cx="0" cy="70" rx="120" ry="70" fill="#8fd0ff" opacity=".22" filter="url(#soft)"/>
+    <path d="M-96 -70 q20 -16 46 -8 M96 -70 q-20 -16 -46 -8" stroke="${INK}" stroke-width="7" stroke-linecap="round" fill="none"/>
+    ${eye(-46)}${eye(46)}
+    <path d="M-14 62 q14 -12 28 0" stroke="${INK}" stroke-width="6" stroke-linecap="round" fill="none"/>
+    <path d="M118 -40 c10 16 12 30 0 38 c-12 -8 -10 -22 0 -38z" fill="#bfe6ff" stroke="${INK}" stroke-width="3"/>
+    <path d="M-330 120 Q-170 70 0 92 Q170 70 330 120 L360 330 L-360 330Z" fill="url(#blanket)" stroke="#000" stroke-width="6"/>
+    <path d="M-250 150 q90 -26 170 -6 M90 146 q90 -24 170 4" stroke="#465578" stroke-width="7" fill="none" stroke-linecap="round" opacity=".7"/>
+    <g transform="translate(0,78)">
+      <rect x="-46" y="-6" width="92" height="56" rx="10" fill="#0c0c0c" stroke="#d8eeff" stroke-width="4"/>
+      <rect x="-38" y="0" width="76" height="40" rx="5" fill="#dff1ff"/>
+      ${[-58, -40, 40, 58].map((fx) => `<ellipse cx="${fx}" cy="18" rx="15" ry="20" fill="url(#skin)" stroke="${INK}" stroke-width="5"/>`).join('')}
+    </g>
+  </g>`;
+}
+
+// Something standing in the dark: no body you can see, just two eyes and a hint of a tall shape.
+function watcher(x, y, s, alpha = 1) {
+  return `<g transform="translate(${x},${y}) scale(${s})" opacity="${alpha}">
+    <path d="M-70 -40 Q-80 -150 0 -160 Q80 -150 70 -40 L95 420 L-95 420Z" fill="#050505"/>
+    <circle cx="-26" cy="-80" r="38" fill="url(#eyeGlow)"/><circle cx="26" cy="-80" r="38" fill="url(#eyeGlow)"/>
+    <ellipse cx="-26" cy="-80" rx="9" ry="6" fill="#fff"/><ellipse cx="26" cy="-80" rx="9" ry="6" fill="#fff"/>
+  </g>`;
+}
+
+function clock(x, y, s, t = '3:00') {
+  return `<g transform="translate(${x},${y}) scale(${s})">
+    <rect x="-120" y="-56" width="240" height="112" rx="18" fill="#0b0b0b" stroke="#2a2a2a" stroke-width="6"/>
+    <text x="0" y="30" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="92" fill="#ff2a2a" style="filter:drop-shadow(0 0 10px #ff0000)">${t}</text>
+  </g>`;
+}
+
+const grain = (w, h) => `<rect width="${w}" height="${h}" fill="#fff" filter="url(#grain)" opacity=".5"/>`;
+const vignette = (w, h) => `<radialGradient id="vig" cx="50%" cy="50%" r="70%"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".85"/></radialGradient><rect width="${w}" height="${h}" fill="url(#vig)"/>`;
+
+let svg;
+if (MODE === 'avatar') {
+  const W = 800;
+  svg = `<svg width="${W}" height="${W}" viewBox="0 0 ${W} ${W}">${defs}
+    <rect width="${W}" height="${W}" fill="#000"/>
+    ${watcher(560, 250, .85, .95)}
+    ${you(370, 470, 1.05)}
+    ${clock(400, 145, .78)}
+    ${vignette(W, W)}${grain(W, W)}
+  </svg>`;
+} else {
+  const W = 2560, H = 1440;  // desktop and phones only show the centre strip: y 508-931 (and x 507-2053 on phones)
+  svg = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${defs}
+    <rect width="${W}" height="${H}" fill="#000"/>
+    <g transform="translate(110,-110)">
+      <rect x="1790" y="560" width="230" height="480" fill="#1a1206"/>
+      <rect x="1805" y="575" width="200" height="465" fill="#ffd27a" opacity=".16"/>
+      <path d="M1805 575 L1905 615 L1905 1080 L1805 1040Z" fill="#0d0a05" stroke="#2a1d0a" stroke-width="5"/>
+      ${watcher(1960, 790, .8)}
+      <circle cx="1905" cy="800" r="330" fill="url(#lamp)" opacity=".4"/>
+    </g>
+    ${you(650, 745, .7)}
+    ${clock(650, 575, .38, '3:17')}
+    <text x="1330" y="690" text-anchor="middle" font-family="Marker" font-size="132" fill="#fff" style="filter:drop-shadow(0 6px 0 #000) drop-shadow(0 0 26px rgba(255,40,40,.35))">3 AM STORIES.</text>
+    <text x="1330" y="775" text-anchor="middle" font-family="Marker" font-size="46" fill="#c9c2bb">scary stories where YOU are in the story</text>
+    <text x="1330" y="845" text-anchor="middle" font-family="Marker" font-size="40" fill="#ff3b3b">new story every night. don't watch alone.</text>
+    ${vignette(W, H)}${grain(W, H)}
+  </svg>`;
+}
+document.getElementById('s').innerHTML = svg;
+window.ready = document.fonts.ready.then(() => true);
+</script></body></html>
