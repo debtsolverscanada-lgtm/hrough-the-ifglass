@@ -1,88 +1,429 @@
 {
  "raw": "raw",
  "shorts": [
-  {"slug": "toronto-vs-nyc", "layout": "full", "tight": true,
-   "hook": "TORONTO|VS NEW YORK", "title": "toronto vs new york: who wins? 🇨🇦🗽 #toronto #nyc #shorts",
-   "music": {"song": "big-talk.mp3", "from": 0.0, "gain": 0.12},
-   "board": {"title": "TORONTO VS NYC", "items": [
-     {"seg": 1, "at": 3.0, "text": "AIRPORT: NYC WINS"},
-     {"seg": 3, "at": 7.0, "text": "BAGELS: NYC WINS"},
-     {"seg": 4, "text": "VIBES: ...TORONTO??", "color": "white"}]},
+  {
+   "slug": "toronto-vs-nyc",
+   "layout": "full",
+   "tight": true,
+   "hook": "NYC BEAT TORONTO...|UNTIL THIS HAPPENED",
+   "title": "NYC beat Toronto at everything… until THIS 😳 #toronto #nyc #shorts",
+   "music": {
+    "song": "big-talk.mp3",
+    "from": 0.0,
+    "gain": 0.12
+   },
+   "board": {
+    "title": "TORONTO VS NYC",
+    "items": [
+     {
+      "seg": 1,
+      "at": 3.0,
+      "text": "AIRPORT: NYC WINS"
+     },
+     {
+      "seg": 3,
+      "at": 7.0,
+      "text": "BAGELS: NYC WINS"
+     },
+     {
+      "seg": 4,
+      "text": "VIBES: ...TORONTO??",
+      "color": "white"
+     }
+    ]
+   },
    "segs": [
-    {"clip": "C0015.MP4", "s": 0.1, "e": 8.1, "tag": "TORONTO"},
-    {"clip": "C0015.MP4", "s": 11.0, "e": 15.4, "boom": true, "tag": "AIRPORT RATING: 0/1"},
-    {"clip": "C0016.MP4", "s": 0.0, "e": 4.5, "tag": "NEW YORK"},
-    {"clip": "C0018.MP4", "s": 9.6, "e": 21.2, "tag": "NYC BAGELS"},
-    {"clip": "C0018.MP4", "s": 21.2, "e": 22.9, "keep": true, "zoom": 1.3, "boom": true, "freeze": 0.6, "tag": "...WAIT WHAT"},
-    {"clip": "C0017.MP4", "s": 8.0, "e": 11.0, "mute": true, "tag": "WHO WINS? COMMENT"}]},
-
-  {"slug": "no-bags", "layout": "full", "tight": true,
-   "hook": "WE WENT TO NYC|WITH NO BAGS", "title": "we went to NYC with no bags 😭 (fit check) #nyc #fitcheck #shorts",
-   "music": {"song": "reverse-psychology.mp3", "from": 0.6, "gain": 0.12},
+    {
+     "clip": "C0015.MP4",
+     "s": 0.1,
+     "e": 8.1,
+     "tag": "TORONTO"
+    },
+    {
+     "clip": "C0015.MP4",
+     "s": 11.0,
+     "e": 15.4,
+     "boom": true,
+     "tag": "AIRPORT RATING: 0/1"
+    },
+    {
+     "clip": "C0016.MP4",
+     "s": 0.0,
+     "e": 4.5,
+     "tag": "NEW YORK"
+    },
+    {
+     "clip": "C0018.MP4",
+     "s": 9.6,
+     "e": 21.2,
+     "tag": "NYC BAGELS"
+    },
+    {
+     "clip": "C0018.MP4",
+     "s": 21.2,
+     "e": 22.9,
+     "keep": true,
+     "zoom": 1.3,
+     "boom": true,
+     "freeze": 0.6,
+     "tag": "...WAIT WHAT"
+    },
+    {
+     "clip": "C0017.MP4",
+     "s": 8.0,
+     "e": 11.0,
+     "mute": true,
+     "tag": "WHO WINS? COMMENT"
+    }
+   ]
+  },
+  {
+   "slug": "no-bags",
+   "layout": "full",
+   "tight": true,
+   "hook": "THEY TOOK ALL|OUR BAGS",
+   "title": "they took ALL our bags before our NYC trip 😭 #nyc #travel #shorts",
+   "music": {
+    "song": "reverse-psychology.mp3",
+    "from": 0.6,
+    "gain": 0.12
+   },
    "segs": [
-    {"clip": "C0015.MP4", "s": 17.5, "e": 25.6, "tag": "THEY TOOK OUR BAGS"},
-    {"clip": "C0016.MP4", "s": 0.0, "e": 4.5, "tag": "NYC. DAY 1."},
-    {"clip": "C0016.MP4", "s": 5.0, "e": 15.2, "tag": "FIT CHECK"},
-    {"clip": "C0016.MP4", "s": 15.2, "e": 17.1, "keep": true, "zoom": 1.3, "boom": true, "freeze": 0.7, "tag": "I LOOK HOME"}]},
-
-  {"slug": "4-days-in-nyc", "layout": "full",
-   "hook": "4 DAYS IN NYC|IN 40 SECONDS", "title": "4 days in NYC in 40 seconds 🗽 #nyc #newyork #travel #shorts",
-   "music": {"song": "big-talk.mp3", "from": 15.7, "gain": 0.9}, "beats": "big-talk.mp3",
+    {
+     "clip": "C0015.MP4",
+     "s": 17.5,
+     "e": 25.6,
+     "tag": "THEY TOOK OUR BAGS"
+    },
+    {
+     "clip": "C0016.MP4",
+     "s": 0.0,
+     "e": 4.5,
+     "tag": "NYC. DAY 1."
+    },
+    {
+     "clip": "C0016.MP4",
+     "s": 5.0,
+     "e": 15.2,
+     "tag": "FIT CHECK"
+    },
+    {
+     "clip": "C0016.MP4",
+     "s": 15.2,
+     "e": 17.1,
+     "keep": true,
+     "zoom": 1.3,
+     "boom": true,
+     "freeze": 0.7,
+     "tag": "I LOOK HOME"
+    }
+   ]
+  },
+  {
+   "slug": "4-days-in-nyc",
+   "layout": "full",
+   "hook": "NYC IN 40 SECONDS|(DAY 3 WENT WRONG)",
+   "title": "we did NYC in 4 days… day 3 went wrong ☔ #nyc #newyork #shorts",
+   "music": {
+    "song": "big-talk.mp3",
+    "from": 15.7,
+    "gain": 0.9
+   },
+   "beats": "big-talk.mp3",
    "segs": [
-    {"clip": "C0015.MP4", "s": 1.0, "mute": true, "tag": "TORONTO"},
-    {"clip": "C0016.MP4", "s": 0.5, "mute": true, "tag": "NEW YORK"},
-    {"clip": "C0017.MP4", "s": 8.0, "mute": true},
-    {"clip": "C0018.MP4", "s": 1.0, "mute": true, "tag": "DAY 1"},
-    {"clip": "C0019.MP4", "s": 9.0, "mute": true, "beats": 2},
-    {"clip": "C0020.MP4", "s": 14.0, "mute": true, "beats": 2},
-    {"clip": "C0021.MP4", "s": 3.0, "mute": true},
-    {"clip": "C0023.MP4", "s": 14.0, "mute": true, "beats": 2},
-    {"clip": "C0025.MP4", "s": 2.0, "mute": true, "beats": 2},
-    {"clip": "C0027.MP4", "s": 20.0, "mute": true, "beats": 2},
-    {"clip": "C0030.MP4", "s": 92.6, "mute": true, "boom": true},
-    {"clip": "C0031.MP4", "s": 2.0, "mute": true},
-    {"clip": "C0033.MP4", "s": 5.0, "mute": true, "tag": "DAY 2"},
-    {"clip": "C0034.MP4", "s": 6.0, "mute": true, "beats": 2},
-    {"clip": "C0037.MP4", "s": 10.0, "mute": true, "beats": 2},
-    {"clip": "C0041.MP4", "s": 60.0, "mute": true},
-    {"clip": "C0043.MP4", "s": 2.0, "mute": true},
-    {"clip": "C0048.MP4", "s": 1.0, "mute": true, "tag": "DAY 3"},
-    {"clip": "C0052.MP4", "s": 60.5, "mute": true},
-    {"clip": "C0042.MP4", "s": 3.0, "mute": true, "tag": "BYE NYC"}]},
-
-  {"slug": "hi-kids-counter", "layout": "full",
-   "hook": "WE SAY THIS IN|EVERY VIDEO", "title": "we say this in every video 😭 #nyc #vlog #shorts",
-   "music": {"song": "cool-kids.mp3", "from": 8.6, "gain": 0.2},
+    {
+     "clip": "C0015.MP4",
+     "s": 1.0,
+     "mute": true,
+     "tag": "TORONTO"
+    },
+    {
+     "clip": "C0016.MP4",
+     "s": 0.5,
+     "mute": true,
+     "tag": "NEW YORK"
+    },
+    {
+     "clip": "C0017.MP4",
+     "s": 8.0,
+     "mute": true
+    },
+    {
+     "clip": "C0018.MP4",
+     "s": 1.0,
+     "mute": true,
+     "tag": "DAY 1"
+    },
+    {
+     "clip": "C0019.MP4",
+     "s": 9.0,
+     "mute": true,
+     "beats": 2
+    },
+    {
+     "clip": "C0020.MP4",
+     "s": 14.0,
+     "mute": true,
+     "beats": 2
+    },
+    {
+     "clip": "C0021.MP4",
+     "s": 3.0,
+     "mute": true
+    },
+    {
+     "clip": "C0023.MP4",
+     "s": 14.0,
+     "mute": true,
+     "beats": 2
+    },
+    {
+     "clip": "C0025.MP4",
+     "s": 2.0,
+     "mute": true,
+     "beats": 2
+    },
+    {
+     "clip": "C0027.MP4",
+     "s": 20.0,
+     "mute": true,
+     "beats": 2
+    },
+    {
+     "clip": "C0030.MP4",
+     "s": 92.6,
+     "mute": true,
+     "boom": true
+    },
+    {
+     "clip": "C0031.MP4",
+     "s": 2.0,
+     "mute": true
+    },
+    {
+     "clip": "C0033.MP4",
+     "s": 5.0,
+     "mute": true,
+     "tag": "DAY 2"
+    },
+    {
+     "clip": "C0034.MP4",
+     "s": 6.0,
+     "mute": true,
+     "beats": 2
+    },
+    {
+     "clip": "C0037.MP4",
+     "s": 10.0,
+     "mute": true,
+     "beats": 2
+    },
+    {
+     "clip": "C0041.MP4",
+     "s": 60.0,
+     "mute": true
+    },
+    {
+     "clip": "C0043.MP4",
+     "s": 2.0,
+     "mute": true
+    },
+    {
+     "clip": "C0048.MP4",
+     "s": 1.0,
+     "mute": true,
+     "tag": "DAY 3"
+    },
+    {
+     "clip": "C0052.MP4",
+     "s": 60.5,
+     "mute": true
+    },
+    {
+     "clip": "C0042.MP4",
+     "s": 3.0,
+     "mute": true,
+     "tag": "BYE NYC"
+    }
+   ]
+  },
+  {
+   "slug": "hi-kids-counter",
+   "layout": "full",
+   "hook": "WE CAN'T STOP|SAYING THIS",
+   "title": "we can't stop saying this 😭 (count how many times) #nyc #vlog #shorts",
+   "music": {
+    "song": "cool-kids.mp3",
+    "from": 8.6,
+    "gain": 0.2
+   },
    "segs": [
-    {"clip": "C0014.MP4", "s": 0.95, "e": 1.85, "tag": "HI KIDS x1"},
-    {"clip": "C0014.MP4", "s": 12.6, "e": 13.5, "tag": "HI KIDS x2", "zoom": 1.15},
-    {"clip": "C0015.MP4", "s": 0.0, "e": 1.0, "tag": "HI KIDS x3"},
-    {"clip": "C0016.MP4", "s": 1.55, "e": 2.4, "tag": "HI KIDS x4", "zoom": 1.15},
-    {"clip": "C0048.MP4", "s": 0.6, "e": 1.75, "tag": "HI KIDS x5"},
-    {"clip": "C0045.MP4", "s": 109.6, "e": 110.9, "tag": "HI KIDS x6", "zoom": 1.15},
-    {"clip": "C0015.MP4", "s": 27.3, "e": 28.7, "tag": "BYE KIDS"},
-    {"clip": "C0016.MP4", "s": 25.0, "e": 27.8, "tag": "BYE KIDS"},
-    {"clip": "C0020.MP4", "s": 46.6, "e": 51.2, "boom": true, "tag": "...BYE CATS??", "zoom": 1.15}]},
-
-  {"slug": "rating-everything-we-ate", "layout": "full", "tight": true,
-   "hook": "RATING EVERYTHING|WE ATE IN NYC", "title": "rating everything we ate in NYC 🍕🥯🍪 #nycfood #nyc #shorts",
-   "music": {"song": "cool-kids.mp3", "from": 8.6, "gain": 0.1},
-   "board": {"title": "NYC FOOD RATINGS", "items": [
-     {"seg": 0, "at": 6.0, "text": "LEON'S BAGELS  9.5"},
-     {"seg": 1, "at": 2.0, "text": "FANCY YOGURT  8"},
-     {"seg": 2, "at": 9.0, "text": "MISO LATTE  9 / 8"},
-     {"seg": 3, "at": 3.0, "text": "NYC PIZZA  SPEECHLESS"},
-     {"seg": 4, "at": 9.0, "text": "THIN COOKIES  8"},
-     {"seg": 7, "at": 6.0, "text": "BAGEL PUB  9"}]},
+    {
+     "clip": "C0014.MP4",
+     "s": 0.95,
+     "e": 1.85,
+     "tag": "HI KIDS x1"
+    },
+    {
+     "clip": "C0014.MP4",
+     "s": 12.6,
+     "e": 13.5,
+     "tag": "HI KIDS x2",
+     "zoom": 1.15
+    },
+    {
+     "clip": "C0015.MP4",
+     "s": 0.0,
+     "e": 1.0,
+     "tag": "HI KIDS x3"
+    },
+    {
+     "clip": "C0016.MP4",
+     "s": 1.55,
+     "e": 2.4,
+     "tag": "HI KIDS x4",
+     "zoom": 1.15
+    },
+    {
+     "clip": "C0048.MP4",
+     "s": 0.6,
+     "e": 1.75,
+     "tag": "HI KIDS x5"
+    },
+    {
+     "clip": "C0045.MP4",
+     "s": 109.6,
+     "e": 110.9,
+     "tag": "HI KIDS x6",
+     "zoom": 1.15
+    },
+    {
+     "clip": "C0015.MP4",
+     "s": 27.3,
+     "e": 28.7,
+     "tag": "BYE KIDS"
+    },
+    {
+     "clip": "C0016.MP4",
+     "s": 25.0,
+     "e": 27.8,
+     "tag": "BYE KIDS"
+    },
+    {
+     "clip": "C0020.MP4",
+     "s": 46.6,
+     "e": 51.2,
+     "boom": true,
+     "tag": "...BYE CATS??",
+     "zoom": 1.15
+    }
+   ]
+  },
+  {
+   "slug": "rating-everything-we-ate",
+   "layout": "full",
+   "tight": true,
+   "hook": "RATING ALL NYC FOOD|#1 ISN'T PIZZA",
+   "title": "rating everything we ate in NYC… #1 isn't pizza 😳🍕 #nycfood #shorts",
+   "music": {
+    "song": "cool-kids.mp3",
+    "from": 8.6,
+    "gain": 0.1
+   },
+   "board": {
+    "title": "NYC FOOD RATINGS",
+    "items": [
+     {
+      "seg": 0,
+      "at": 6.0,
+      "text": "LEON'S BAGELS  9.5"
+     },
+     {
+      "seg": 1,
+      "at": 2.0,
+      "text": "FANCY YOGURT  8"
+     },
+     {
+      "seg": 2,
+      "at": 9.0,
+      "text": "MISO LATTE  9 / 8"
+     },
+     {
+      "seg": 3,
+      "at": 3.0,
+      "text": "NYC PIZZA  SPEECHLESS"
+     },
+     {
+      "seg": 4,
+      "at": 9.0,
+      "text": "THIN COOKIES  8"
+     },
+     {
+      "seg": 7,
+      "at": 6.0,
+      "text": "BAGEL PUB  9"
+     }
+    ]
+   },
    "segs": [
-    {"clip": "C0018.MP4", "s": 9.6, "e": 19.3, "tag": "LEON'S BAGELS"},
-    {"clip": "C0019.MP4", "s": 20.5, "e": 39.3, "tag": "FANCY YOGURT"},
-    {"clip": "C0020.MP4", "s": 7.6, "e": 28.0, "tag": "MISO LATTE"},
-    {"clip": "C0030.MP4", "s": 89.0, "e": 100.0, "keep": true, "tag": "NYC PIZZA"},
-    {"clip": "C0047.MP4", "s": 55.0, "e": 70.3, "tag": "THIN COOKIES"},
-    {"clip": "C0047.MP4", "s": 84.3, "e": 90.4, "keep": true, "boom": true, "tag": "BETTER AT HOME?"},
-    {"clip": "C0051.MP4", "s": 215.0, "e": 217.6, "tag": "BAGEL PUB"},
-    {"clip": "C0051.MP4", "s": 236.0, "e": 247.0},
-    {"clip": "C0052.MP4", "s": 60.5, "e": 63.5, "mute": true, "tag": "WHICH ONE WOULD YOU TRY?"}]}
+    {
+     "clip": "C0018.MP4",
+     "s": 9.6,
+     "e": 19.3,
+     "tag": "LEON'S BAGELS"
+    },
+    {
+     "clip": "C0019.MP4",
+     "s": 20.5,
+     "e": 39.3,
+     "tag": "FANCY YOGURT"
+    },
+    {
+     "clip": "C0020.MP4",
+     "s": 7.6,
+     "e": 28.0,
+     "tag": "MISO LATTE"
+    },
+    {
+     "clip": "C0030.MP4",
+     "s": 89.0,
+     "e": 100.0,
+     "keep": true,
+     "tag": "NYC PIZZA"
+    },
+    {
+     "clip": "C0047.MP4",
+     "s": 55.0,
+     "e": 70.3,
+     "tag": "THIN COOKIES"
+    },
+    {
+     "clip": "C0047.MP4",
+     "s": 84.3,
+     "e": 90.4,
+     "keep": true,
+     "boom": true,
+     "tag": "BETTER AT HOME?"
+    },
+    {
+     "clip": "C0051.MP4",
+     "s": 215.0,
+     "e": 217.6,
+     "tag": "BAGEL PUB"
+    },
+    {
+     "clip": "C0051.MP4",
+     "s": 236.0,
+     "e": 247.0
+    },
+    {
+     "clip": "C0052.MP4",
+     "s": 60.5,
+     "e": 63.5,
+     "mute": true,
+     "tag": "WHICH ONE WOULD YOU TRY?"
+    }
+   ]
+  }
  ]
 }
