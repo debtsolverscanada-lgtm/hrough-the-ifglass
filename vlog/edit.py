@@ -151,7 +151,7 @@ def expand(edl):
             beat = 60 / BEATS[INTRO['song']]['bpm'] if INTRO else None
             for k, (c, s, e) in enumerate(sec['clips']):
                 sp = sec.get('speed_from', 1.5) + (sec.get('speed_to', 2.6) - sec.get('speed_from', 1.5)) * k / max(1, n - 1)
-                if beat: sp = max(sp, (e - s) / (beat * max(1, round((e - s) / sp / beat))))  # land each cut on a beat
+                if beat: sp = (e - s) / (beat * max(1, round((e - s) / sp / beat)))  # each cut lasts whole beats: 2 beats early, 1 beat at the end
                 sfx.append(('whoosh', t)); add({'clip': c, 's': s, 'e': e, 'speed': round(sp, 3), 'zoom': 1.0 + 0.12 * (k % 2), 'flash': True})
         elif kind == 'teaser':  # beat-cut highlights on a song drop, letterboxed, ends on a freeze
             per = sec.get('beats_per_cut', 2); t0 = t
