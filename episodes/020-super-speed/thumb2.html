@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/cast.js"></script><script src="../../studio/thumbkit.js"></script><script src="../../studio/ep/020.js"></script><script>
+let th_g=2.2;
+let th_hero=`<g transform="translate(1490,560) scale(2.1)">${glint({x:0,y:0,s:1,t:.3,mouth:'o',brows:'raised',pose:'reach',look:-1,blink:0})}</g>`;
+let th_shoe=`<g transform="translate(1795,560) rotate(-18)">${s20_shoe(0,0,.62,{melt:.7,heat:.8,g:th_g,sm:1,col:'#F4F6FA'})}</g>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ ${s20_street(th_g,{frozen:1,heap:0,cars:0,beacons:1})}
+ <rect width="1920" height="1080" fill="#05030C" opacity=".5"/>
+ ${TK.glowBlob(1440,470,520,'#FFC83D',.5)}${TK.rays(1440,470,'#FFE9A8',16,1600,.12)}
+ ${TK.glowBlob(300,240,320,'#5BA8FF',.3)}
+ ${s20_rain(th_g,{frozen:1,n:140,seed:21,big:1.5})}
+ <g transform="translate(930,375) rotate(20.66)">${s20_lorry(0,0,.78,0,th_g)}</g>${s20_lines(1720,620,th_g,{dir:1,len:300,h:420,n:7,op:.8})}${s20_nan(880,740,.6,th_g,{hiss:1})}
+ ${TK.rim(th_hero,'#FFC83D',30)}${th_shoe}
+ ${TK.tag(1560,110,'WORLD: FROZEN','#3FA9FF',4)}
+ ${TK.text(70,330,'I HAVE',{size:120,fill:'#fff',rot:-3})}
+ ${TK.text(55,620,'15',{size:320,fill:'#FFD43B',rot:-3,depth:18})}
+ ${TK.text(440,600,'MINUTES',{size:140,fill:'#FFD43B',rot:-3,depth:14})}
+ ${TK.badge(330,850,'REAL TIME','9 SECONDS','#7CF5FF',-3)}
+`,'#0B1026');
+</script></body></html>

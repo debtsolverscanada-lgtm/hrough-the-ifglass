@@ -222,7 +222,7 @@ spdHook(t,d,p,g){
   const X=lerp(300,410,t/d), lo=AT(t,p.lorry??2.3), ice=AT(t,p.ice??5.6), nan=AT(t,p.nan??8.3), pk=AT(t,p.pick??11.7), bn=AT(t,p.buns??13.3), nine=AT(t,p.nine??15.9);
   return `${s20_street(g,{frozen:0})}${s20_lorryAt(X,.72,g)}${s20_nan(1540,630,.72,g,{frozen:0,hiss:pk?1:0,look:1})}${s20_streetFx(g,{frozen:0})}
    ${nan?`<circle cx="1560" cy="680" r="${(190+Math.sin(g*5)*8).toFixed(0)}" fill="none" stroke="${P.gold}" stroke-width="8" stroke-dasharray="20 14"/>${s20_pill(1540,420,'NAN',P.gold,44,pop(t,p.nan??8.3))}`:''}
-   ${pk?s20_pill(1790,640,'MR. PICKLES',P.coral,34,pop(t,p.pick??11.7)):''}${bn?s20_pill(1300,620,'CINNAMON BUNS',P.gold,34,pop(t,p.buns??13.3)):''}
+   ${pk?s20_pill(1740,640,'MR. PICKLES',P.coral,34,pop(t,p.pick??11.7)):''}${bn?s20_pill(1300,620,'CINNAMON BUNS',P.gold,34,pop(t,p.buns??13.3)):''}
    ${lo?s20_pill(X+40,s20_hy(X)+110,'NO BRAKES',P.red,40,pop(t,(p.brakes??5.2))):''}${ice?s20_pill(760,780,'ICY HILL STREET',P.ice,40,pop(t,p.ice??5.6)):''}
    ${T(960,150,'NAN HAS 9 SECONDS',{size:100,fill:P.white,sc:IN(t,.1)})}
    ${nine?`<g transform="translate(960,330) scale(${pop(t,p.nine??15.9)})"><rect x="-190" y="-90" width="380" height="180" rx="22" fill="#120610" fill-opacity=".92" stroke="${P.red}" stroke-width="8"/><text y="-32" text-anchor="middle" font-size="32" font-weight="900" letter-spacing="3" fill="${P.red}">TIME LEFT</text><text y="62" text-anchor="middle" font-size="100" font-weight="900" fill="#fff">9.0 s</text></g>`:''}`;
@@ -378,7 +378,7 @@ spdHunger(t,d,p,g){
     return `${card('cardWarm',g)}${pile}${s20_gl({x:620,y:560,s:.9,t:g,mouth:'grin',pose:'reach',brows:'raised'})}${s20_bun(760,560,0)}
      <g transform="translate(1600,330)">${T(0,0,String(n),{size:200,fill:P.gold})}${T(0,80,'SANDWICHES',{size:46,fill:P.white})}</g>${T(760,160,'LUNCH',{size:100,fill:P.white,sc:pop(t,sa)})}`;}
   const ca=AT(t,p.cal??2.25), bu=AT(t,p.but??6.39), hr=AT(t,p.hour??9.6);
-  let pile='';if(hr){const k=prog(t,p.hour??9.6,(p.hour??9.6)+3.2);const r=rng(5);for(let i=0;i<Math.round(60*k);i++){const x=1360+(r()-.5)*820*(1-i/90),y=820-i*7.5-r()*20;pile+=r()>.5?s20_bun(x,y,.55,r()*40-20):s20_sand(x,y,.5,r()*30-15);}}
+  let pile='';if(hr){const k=prog(t,p.hour??9.6,(p.hour??9.6)+3.2);const r=rng(5);for(let i=0;i<Math.round(110*k);i++){const x=1300+(r()-.5)*1100*(1-i/130),y=840-i*5.2-r()*24;pile+=r()>.5?s20_bun(x,y,.85,r()*40-20):s20_sand(x,y,.8,r()*30-15);}}
   return `${card('cardWarm',g)}${s20_DEFS}${pile}${s20_gl({x:hr?420:700,y:560,s:.9,t:g,mouth:hr?'o':'smile',brows:hr?'raised':'calm',pose:hr?'shrug':'down'})}
    ${ca&&!hr?`<g transform="translate(1320,520) scale(${pop(t,p.cal??2.25)})"><rect x="-300" y="-170" width="600" height="340" rx="22" fill="#FFF6EA" stroke="${INK}" stroke-width="10"/><text y="-80" text-anchor="middle" font-size="44" font-weight="900" fill="${INK}">NORMAL DAY</text><text y="40" text-anchor="middle" font-size="110" font-weight="900" fill="${P.red}">~2,500</text><text y="120" text-anchor="middle" font-size="44" font-weight="900" fill="${INK}">CALORIES</text></g>`:''}
    ${bu&&!hr?s20_pill(1320,800,'GLINT: RUNNING 100x FASTER',P.gold,40,pop(t,p.but??6.39)):''}
@@ -406,10 +406,10 @@ spdBoom(t,d,p,g){
   else gl=s20_gl({x:1000,y:560,s:.85,t:g,mouth:pa?'flat':'o',brows:pa?'sad':'raised',pose:pa?'reach':'shrug'});
   const rings=AT(t,bo)?[0,1,2].map(i=>{const k=clamp((t-bo)/1.6-i*.15);return k>0&&k<1?`<circle cx="1100" cy="520" r="${(80+k*900).toFixed(0)}" fill="none" stroke="#fff" stroke-width="${(26*(1-k)).toFixed(1)}" opacity="${(1-k).toFixed(2)}"/>`:'';}).join(''):'';
   return `${s20_park(g,{shat,flash:fl*.8})}${person({x:420,y:540,s:.9,t:g,who:'kai',pose:be?'up':sa?'point':'wave',mouth:'laugh',brows:'raised',blink:BL(g+1)})}${gl}${rings}
-   ${sa&&!AT(t,sp)?s20_bub(540,200,560,'ONE PROPER SPRINT.','FOR SCIENCE.',{size:44}):''}
+   ${sa&&!AT(t,sp)?s20_bub(740,280,560,'ONE PROPER SPRINT.','FOR SCIENCE.',{size:44}):''}
    ${so&&!AT(t,bo)?T(960,160,'SPEED OF SOUND',{size:96,fill:P.white,sc:pop(t,p.sound??13.52)}):''}
    ${AT(t,bo)&&!hu?T(960,240,'BOOM!',{size:260,fill:P.gold,stroke:56,rot:-6,sc:pop(t,bo)}):''}${shat>0&&!hu?s20_pill(1560,780,'EVERY WINDOW',P.red,44,pop(t,wi+.3)):''}
-   ${hu&&!be?s20_pill(960,180,'NOBODY HURT',P.mint,54,pop(t,p.hurt??23.34)):''}${be&&!pa?s20_bub(560,200,600,'BEST NIGHT','OF MY LIFE!',{size:50}):''}
+   ${hu&&!be?s20_pill(960,180,'NOBODY HURT',P.mint,54,pop(t,p.hurt??23.34)):''}${be&&!pa?s20_bub(740,280,600,'BEST NIGHT','OF MY LIFE!',{size:50}):''}
    ${pa?`${coinStack(1180,700,Math.min(8,1+Math.floor((t-(p.pays??27.75))*4)),.8)}${s20_pill(960,180,'GLINT PAYS FOR THE WINDOWS',P.gold,46,pop(t,p.pays??27.75))}`:''}
    ${s20_pm(t,'minus','THE BOOM')}`;
 },
@@ -521,7 +521,7 @@ spdBuns(t,d,p,g){
    ${s20_fuel(330,280,.7,v,g)}${!stv?s20_flicker(g,.8,1):''}
    ${AT(t,tn)?`<g transform="translate(1720,330)">${T(0,0,String(Math.max(0,eaten)),{size:150,fill:P.gold})}${T(0,70,'BUNS EATEN',{size:40,fill:P.white})}</g>`:''}
    ${so&&!kc?s20_pill(1080,520,'SORRY, NAN',P.coral,48,pop(t,p.sorry??5.32)):''}${stv&&!kc?s20_pill(330,520,'FLICKER STEADIES',P.mint,40,pop(t,p.steady??8.16)):''}
-   ${kc?s20_pill(960,840,'6 BUNS ≈ 2,000 CALORIES',P.gold,48,pop(t,p.kcal??9.93)):''}${en?s20_pill(1080,520,ju?'JUST ENOUGH':'15 MIN OF WORK (HIS TIME)',ju?P.mint:P.white,42,pop(t,ju?p.just??18.56:p.enough??13.3)):''}
+   ${kc?s20_pill(960,840,'6 BUNS ≈ 2,000 CALORIES',P.gold,48,pop(t,p.kcal??9.93)):''}${en?s20_pill(1100,300,ju?'JUST ENOUGH':'15 MIN OF WORK (HIS TIME)',ju?P.mint:P.white,42,pop(t,ju?p.just??18.56:p.enough??13.3)):''}
    ${s20_hud(g)}${T(620,150,'FIRST: FUEL',{size:110,fill:P.gold,sc:IN(t,.1)})}`;
 },
 spdShovel(t,d,p,g){
@@ -533,7 +533,7 @@ spdShovel(t,d,p,g){
   return `${s20_street(g,{frozen:1,heap:1-bed*.75,bed})}${s20_lorryAt(480,.72,g)}${s20_nan(1540,630,.72,g)}${s20_streetFx(g)}
    ${ghosts}${s20_gl({x:gx,y:gy-190,s:.6,t:g,pose:'reach',mouth:ar?'teeth':'grin',brows:ar?'angry':'raised',legs:'walk',sweat:ar?1:0})}${shov}
    ${sm?s20_smoke(gx-20,gy-10,g,1,1)+s20_smoke(gx+30,gy-10,g+.4,1,1):''}${ar?`<circle cx="${gx}" cy="${gy-150}" r="110" fill="url(#gRed)" opacity="${(.4+.3*Math.sin(g*6)).toFixed(2)}"/>`:''}
-   ${s20_map(260,330,.75,bed,g)}${wk?s20_pill(620,880-40,'WALK, NEVER SPRINT',P.mint,40,pop(t,p.walk??2.85)):''}
+   ${s20_map(1150,340,.75,bed,g)}${wk?s20_pill(620,880-40,'WALK, NEVER SPRINT',P.mint,40,pop(t,p.walk??2.85)):''}
    ${sm?s20_pill(1060,470,ar?'ARMS BURN':'SHOES SMOKE',P.red,40,pop(t,ar?p.arms??16.69:p.smoke??15.27)):''}
    ${s20_hud(g)}${T(760,150,'SHOVEL AFTER SHOVEL',{size:80,fill:P.white,sc:IN(t,.1)})}`;
 },
@@ -548,7 +548,7 @@ spdSteer(t,d,p,g){
      ${s20_pill(960,920-60,'SLOWLY... TOWARD THE GRAVEL',P.gold,44,IN(t,1.2))}${s20_map(1660,330,.6,1,g,{steer:k})}${s20_hud(g)}${T(700,150,'HE TURNS THE WHEEL',{size:80,fill:P.white,sc:IN(t,.1)})}`;}
   const ng=AT(t,p.nograb??6.89), ar=p.arm??8.25, wo=AT(t,p.world??13.6);
   const k=AT(t,ar)?eout(prog(t,ar+.3,(p.world??13.6)+1.5)):0, nx=lerp(1080,1500,k);
-  return `<g transform="translate(-1700,-760) scale(1.9)">${s20_street(g,{frozen:1,heap:.25,bed:1,cars:0})}</g>${s20_rain(g,{frozen:1,n:60,seed:31,big:1.6})}
+  return `<g transform="translate(-1700,-760) scale(1.9)">${s20_street(g,{frozen:1,heap:0,bed:1,cars:0})}</g>${s20_rain(g,{frozen:1,n:60,seed:31,big:1.6})}
    ${person({x:nx,y:520,s:1.2,t:0,who:'nan',pose:'hold',look:1,mouth:'smile',blink:0,rot:-4*k})}${s20_carrier(nx+62*1.1,520+90*1.1,.55*1.1,{hiss:1})}${s20_tin(nx-10*1.1,520+105*1.1,.42*1.1)}
    ${s20_gl({x:nx-280,y:540,s:1,t:g,pose:AT(t,ar)?'reach':'down',mouth:'flat',brows:'raised',look:1,rot:AT(t,ar)?10:0})}
    ${!AT(t,ar)&&ng?s20_pill(700,330,"HE DOESN'T GRAB HER",P.red,44,pop(t,p.nograb??6.89)):''}${AT(t,ar)?s20_pill(700,330,'GENTLY... 3 MINUTES (HIS TIME)',P.gold,40,pop(t,ar)):''}
@@ -571,13 +571,13 @@ spdCrash(t,d,p,g){
 spdKerb(t,d,p,g){
   const em=AT(t,p.empty??2.12), sh=AT(t,p.shaking??2.95), ba=AT(t,p.bare??3.84), go=AT(t,p.gone??4.94), si=p.sits??8.5, mi=AT(t,p.miss??11.64), sa=p.says??15.3, fr=AT(t,p.fridge??18.26), no=AT(t,p.notice??20.18);
   const ns=AT(t,si);
-  return `<g transform="translate(-260,-260) scale(1.3)">${s20_street(g,{frozen:0,heap:.25,bed:1,rain:1})}${s20_lorryAt(1262,.72,g,{panic:0,brake:0})}</g>${s20_rain(g,{frozen:0,n:50,op:.5})}
+  return `<g transform="translate(0,-260) scale(1.3)">${s20_street(g,{frozen:0,heap:.25,bed:1,rain:1})}${s20_lorryAt(1262,.72,g,{panic:0,brake:0})}</g>${s20_rain(g,{frozen:0,n:50,op:.5})}
    <rect x="0" y="780" width="1920" height="120" fill="#7A8096" stroke="${INK}" stroke-width="7"/>
    ${s20_gl({x:760,y:520,s:1,t:g,legs:'sit',mouth:ns?'o':'flat',brows:ns?'raised':'sad',pose:'down',lid:ns?0:.35,shiver:sh&&!ns?.6:0,look:ns?1:0})}
    ${[0,1].map(i=>s20_shoe(470+i*90,800,.32,{melt:1,col:'#C9C2B8',g,sm:.6,rot:-6+i*10})).join('')}
    ${ns?`${person({x:1150,y:520,s:.95,t:g,who:'nan',legs:'sit',pose:'hold',mouth:AT(t,sa)?'grin':'smile',brows:'calm',look:-1,blink:BL(g)})}${s20_tin(1170,690,.6,{open:1,n:0})}`:''}
-   ${!ns&&em?s20_pill(1300,380,'EMPTY',P.coral,46,pop(t,p.empty??2.12)):''}${!ns&&sh?s20_pill(1300,490,'SHAKING',P.coral,46,pop(t,p.shaking??2.95)):''}${!ns&&ba?s20_pill(1300,600,'BAREFOOT',P.coral,46,pop(t,p.bare??3.84)):''}
-   ${go&&!ns?`<g transform="translate(1640,500) scale(${pop(t,p.gone??4.94)})">${s20_switch(0,0,.7,false,'')}</g>${T(960,170,'POWER: GONE FOR GOOD?',{size:80,fill:P.white,sc:pop(t,p.gone??4.94)})}`:''}
+   ${!ns&&!go&&em?s20_pill(1130,380,'EMPTY',P.coral,46,pop(t,p.empty??2.12)):''}${!ns&&!go&&sh?s20_pill(1130,490,'SHAKING',P.coral,46,pop(t,p.shaking??2.95)):''}${!ns&&!go&&ba?s20_pill(1130,600,'BAREFOOT',P.coral,46,pop(t,p.bare??3.84)):''}
+   ${go&&!ns?`<g transform="translate(1130,520) scale(${pop(t,p.gone??4.94)})">${s20_switch(0,0,.7,false,'')}</g>${T(960,170,'POWER: GONE FOR GOOD?',{size:80,fill:P.white,sc:pop(t,p.gone??4.94)})}`:''}
    ${mi&&!AT(t,sa)?s20_pill(1170,860-40,'6 BUNS MISSING',P.red,44,pop(t,p.miss??11.64)):''}${AT(t,p.nos??13.55)&&!AT(t,sa)?T(960,170,"SHE DOESN'T LOOK SURPRISED",{size:76,fill:P.gold,sc:pop(t,p.nos??13.55)}):''}
    ${AT(t,sa)?s20_bub(1300,210,820,no?"YOU THINK I":fr?'AN EMPTY FRIDGE':'MELTED SHOES',no?"DIDN'T NOTICE?":fr?'EVERY MORNING.':'EVERY NIGHT.',{size:54,tail:'left'}):''}`;
 },
@@ -589,7 +589,7 @@ spdTwist(t,d,p,g){
      ${kn?s20_pill(1560,460,'SHE KNEW',P.gold,64,pop(t,p.knew??4.04)):''}${fu?`<g transform="translate(1560,700) scale(${pop(t,p.fuel??5.55)})">${s20_fuel(0,0,.7,.95,g,{label:'GLINT FUEL'})}</g>`:''}
      ${T(960,150,'BAKING ALL WEEK',{size:96,fill:P.white,sc:IN(t,.1)})}`;}
   const ph=`<circle cx="0" cy="-70" r="60" fill="#E8C9A0" stroke="${INK}" stroke-width="6"/><circle cx="-22" cy="-74" r="18" fill="none" stroke="${INK}" stroke-width="5"/><circle cx="22" cy="-74" r="18" fill="none" stroke="${INK}" stroke-width="5"/><path d="M-16 -46 Q0 -34 16 -46" stroke="${INK}" stroke-width="5" fill="none"/><path d="M-30 -10 Q0 0 30 -10 L36 10 Q0 22 -36 10Z" fill="#2E8A6A" stroke="${INK}" stroke-width="4"/><path d="M-60 40 H60 V170 H-60Z" fill="#8A7A6A" stroke="${INK}" stroke-width="5"/>${[0,1,2,3,4].map(i=>`<ellipse cx="80" cy="${150-i*16}" rx="46" ry="9" fill="#fff" stroke="${INK}" stroke-width="4"/>`).join('')}`;
-  return `<g transform="translate(-260,-260) scale(1.3)">${s20_street(g,{frozen:0,heap:.25,bed:1})}</g>${s20_rain(g,{frozen:0,n:40,op:.5})}<rect x="0" y="780" width="1920" height="120" fill="#7A8096" stroke="${INK}" stroke-width="7"/>
+  return `<g transform="translate(0,-260) scale(1.3)">${s20_street(g,{frozen:0,heap:.25,bed:1})}</g>${s20_rain(g,{frozen:0,n:40,op:.5})}<rect x="0" y="780" width="1920" height="120" fill="#7A8096" stroke="${INK}" stroke-width="7"/>
    ${s20_gl({x:620,y:520,s:1,t:g,legs:'sit',mouth:'o',brows:'raised',look:1,pose:'reach'})}${person({x:1000,y:520,s:.95,t:g,who:'nan',legs:'sit',pose:'reach',mouth:'smile',look:-1,blink:BL(g)})}
    <g transform="translate(1520,420) rotate(6) scale(${pop(t,gd+3)})">${s20_frame(0,0,1,ph)}</g>${AT(t,gd+3)?T(1520,700,'GRANDAD',{size:56,fill:P.gold}):''}
    ${s20_bub(800,190,940,'YOUR GRANDAD USED TO','EAT LIKE THAT TOO, YOU KNOW.',{size:44})}`;
