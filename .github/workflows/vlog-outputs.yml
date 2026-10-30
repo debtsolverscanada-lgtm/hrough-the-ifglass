@@ -1,0 +1,26 @@
+name: Vlog outputs to branch
+on:
+  workflow_dispatch:
+    inputs:
+      folder:
+        description: 'Subfolder of Vlog Edits to publish (e.g. "vlog01 Shorts"); files must be under 100 MB'
+        required: true
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install requests
+      - name: Download from Drive
+        env:
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+        run: python3 vlog/drive_get.py "${{ github.event.inputs.folder }}" /tmp/out && ls -la /tmp/out
+      - name: Push to the vlog-outputs branch (replaced each time)
+        run: |
+          cd /tmp/out && git init -q -b vlog-outputs && git add -A
+          git -c user.name=vlog-bot -c user.email=vlog-bot@users.noreply.github.com commit -qm "Outputs: ${{ github.event.inputs.folder }}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" vlog-outputs
