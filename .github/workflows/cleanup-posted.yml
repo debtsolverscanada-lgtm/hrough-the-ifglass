@@ -1,0 +1,23 @@
+name: Clean up posted videos
+on:
+  schedule:
+    - cron: '17 9 * * *'   # daily, after the overnight Shorts
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'List what would be trashed without touching anything'
+        required: false
+        default: ''
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install requests
+      - env:
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+        run: python3 pipeline/cleanup_posted.py ${{ github.event.inputs.dry_run && '--dry-run' || '' }}
