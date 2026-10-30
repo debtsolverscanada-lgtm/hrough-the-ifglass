@@ -2,6 +2,7 @@
  "raw": "raw",
  "norotate": ["C0048.MP4"],
  "slowmo_fallback": 4,
+ "captions": false,
  "intro": {"song": "campus.mp3", "from": 0.0, "gain": 0.85},
  "sections": [
   {"type": "hikids", "speed_from": 1.5, "speed_to": 2.6, "clips": [

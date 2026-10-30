@@ -227,8 +227,8 @@ def make(sh, model):
 
 
 if __name__ == '__main__':
-    model = None  # --no-captions: local smoke tests without the whisper model
-    if '--no-captions' not in sys.argv:
+    model = None  # --no-captions (or "captions": false in shorts.json): no word-by-word subtitles
+    if '--no-captions' not in sys.argv and CFG.get('captions', True):
         from faster_whisper import WhisperModel
         model = WhisperModel('small.en', device='cpu', compute_type='int8')
     want = {a for a in sys.argv[2:] if not a.startswith('--')}

@@ -363,11 +363,13 @@ def main():
          '[1:a]asplit[d1][d2];[0:a][d1]sidechaincompress=threshold=0.02:ratio=12:attack=15:release=350[duck];'
          '[duck][d2][2:a]amix=inputs=3:normalize=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.0:LRA=11[out]',
          '-map', '[out]', '-ar', '48000', str(W / 'mix.wav')])
-    captions(W / 'dialogue.wav', W / 'caps.ass')
+    subs = EDL.get('captions', True)  # word-by-word subtitles; "captions": false in the EDL leaves them out
+    if subs: captions(W / 'dialogue.wav', W / 'caps.ass')
+    else: (W / 'caps.ass').write_text('')
     out = D / ('preview.mp4' if PREVIEW else 'vlog.mp4')
     vb = int(min(12e6, 940e6 * 8 / total - 200e3))  # keep the file under ~950 MB so the YouTube upload step accepts it
     run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'cut.mp4'), '-i', str(W / 'mix.wav'), '-map', '0:v', '-map', '1:a',
-         '-vf', f"subtitles={W / 'caps.ass'}:fontsdir={FONTS}", '-c:v', 'libx264', '-preset', 'fast', '-b:v', f'{vb}', '-maxrate', f'{int(vb * 1.5)}', '-bufsize', f'{vb * 2}',
+         '-vf', f"subtitles={W / 'caps.ass'}:fontsdir={FONTS}" if subs else 'null', '-c:v', 'libx264', '-preset', 'fast', '-b:v', f'{vb}', '-maxrate', f'{int(vb * 1.5)}', '-bufsize', f'{vb * 2}',
          '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', str(out)])
     print('done', out, f'{out.stat().st_size/1e6:.0f} MB')
 
