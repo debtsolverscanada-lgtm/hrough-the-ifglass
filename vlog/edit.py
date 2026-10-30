@@ -107,9 +107,15 @@ def title_filter(text, style='lower', start=0.25, dur=3.2):
             f"x=70-500*max(0\\,1-(t-{start})/0.3):y=h-250:enable='between(t,{start},{e})'")
 
 
+def frames(sec):
+    """Round a length to whole video frames. Every piece is a whole number of frames long with exactly that much
+    sound, so nothing creeps out of sync when 180 pieces are joined."""
+    return max(1, round(sec * FPS)) / FPS
+
+
 def piece(i, p):
-    """Render one normalised piece -> work/pNNN.mp4. Returns its duration."""
-    out = W / f'p{i:03d}.mp4'
+    """Render one normalised piece -> work/pNNN.mov. Returns its duration."""
+    out = W / f'p{i:03d}.mov'  # PCM sound: no AAC padding added per piece
     src = HERE / p['asset'] if p.get('asset') else clip(p['clip']); s, e = p['s'], p['e']; speed = p.get('speed', 1.0)
     dur_src = e - s
     vf = [  # fit any orientation onto a blurred 16:9 background
@@ -135,8 +141,8 @@ def piece(i, p):
     for tt in p.get('titles', []): vf.append(title_filter(tt['text'], tt.get('style', 'lower'), tt.get('at', 0.25), tt.get('dur', 3.2)))
     pics = [o for o in p.get('photos', []) if photo(o['file'])]
     if p.get('freeze'): vf.append(f"tpad=stop_mode=clone:stop_duration={p['freeze']}")
-    vf.append('format=yuv420p')
-    out_dur = dur_src / speed + p.get('freeze', 0)
+    vf += ['tpad=stop_mode=clone:stop_duration=3', 'format=yuv420p']  # never let the picture run short of the sound
+    out_dur = frames(dur_src / speed + p.get('freeze', 0))
     af = ['aresample=48000', 'aformat=channel_layouts=stereo']
     if p.get('reverse'): af.append('areverse')
     if speed != 1.0:
@@ -146,7 +152,7 @@ def piece(i, p):
     af.append(f"volume={p.get('vol', 1.0)}")
     if p.get('mute'): af.append('volume=0')
     if p.get('freeze'): af.append(f"apad=pad_dur={p['freeze']}")
-    af += [f'atrim=0:{out_dur:.3f}', 'afade=t=in:d=0.02', f'afade=t=out:st={max(0, out_dur - 0.03):.3f}:d=0.03']
+    af += ['apad', f'atrim=0:{out_dur:.3f}', 'afade=t=in:d=0.02', f'afade=t=out:st={max(0, out_dur - 0.03):.3f}:d=0.03']
     inputs = (['-noautorotate'] if p.get('clip') in NOROTATE else []) + ['-ss', f'{s:.3f}', '-t', f'{dur_src:.3f}', '-i', str(src)]
     vout, extra = '[v]', ''
     for k, o in enumerate(pics):  # a photo pops in over the shot ("look at this picture")
@@ -170,7 +176,9 @@ def piece(i, p):
         amap = ['-map', vout, '-map', f'{na}:a']
     run(['ffmpeg', '-v', 'error', '-y', *inputs, '-filter_complex', graph, *amap,
          '-t', f'{out_dur:.3f}', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-r', str(FPS),
-         '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', str(out)])
+         '-c:a', 'pcm_s16le', '-ar', '48000', str(out)])
+    lens = [float(x) for x in run(['ffprobe', '-v', 'error', '-show_entries', 'stream=duration', '-of', 'csv=p=0', str(out)]).stdout.split()]
+    if max(lens) - min(lens) > 0.05: print(f'WARNING piece {i}: picture/sound lengths differ {lens}', flush=True)
     return out_dur
 
 
@@ -180,7 +188,7 @@ def expand(edl):
     def add(p):
         nonlocal t
         p['_t'] = t; pieces.append(p)
-        t += (p['e'] - p['s']) / p.get('speed', 1.0) + p.get('freeze', 0)
+        t += frames((p['e'] - p['s']) / p.get('speed', 1.0) + p.get('freeze', 0))
     if INTRO: cues.append({'song': INTRO['song'], 'at': 0.0, 'from': INTRO.get('from', 0.0), 'dur': None, 'gain': INTRO.get('gain', 0.9), 'tag': 'intro'})
     for sec in edl['sections']:
         kind = sec['type']
@@ -332,9 +340,9 @@ def main():
     print(f'{len(pieces)} pieces, {total/60:.1f} min')
     for i, p in enumerate(pieces):
         piece(i, p); print('piece', i, p.get('clip', p.get('asset')), p['s'], flush=True)
-    lst = W / 'list.txt'; lst.write_text(''.join(f"file 'p{i:03d}.mp4'\n" for i in range(len(pieces))))
-    run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', str(lst), '-c', 'copy', str(W / 'cut.mp4')])
-    run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'cut.mp4'), '-vn', '-ac', '2', '-ar', '48000', str(W / 'dialogue.wav')])
+    lst = W / 'list.txt'; lst.write_text(''.join(f"file 'p{i:03d}.mov'\n" for i in range(len(pieces))))
+    run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', str(lst), '-c', 'copy', str(W / 'cut.mov')])
+    run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'cut.mov'), '-vn', '-ac', '2', '-ar', '48000', str(W / 'dialogue.wav')])
     # music bed
     ins, parts = [], []
     for k, c in enumerate([c for c in cues if c['at'] < total]):
@@ -368,7 +376,7 @@ def main():
     else: (W / 'caps.ass').write_text('')
     out = D / ('preview.mp4' if PREVIEW else 'vlog.mp4')
     vb = int(min(12e6, 940e6 * 8 / total - 200e3))  # keep the file under ~950 MB so the YouTube upload step accepts it
-    run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'cut.mp4'), '-i', str(W / 'mix.wav'), '-map', '0:v', '-map', '1:a',
+    run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'cut.mov'), '-i', str(W / 'mix.wav'), '-map', '0:v', '-map', '1:a',
          '-vf', f"subtitles={W / 'caps.ass'}:fontsdir={FONTS}" if subs else 'null', '-c:v', 'libx264', '-preset', 'fast', '-b:v', f'{vb}', '-maxrate', f'{int(vb * 1.5)}', '-bufsize', f'{vb * 2}',
          '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', str(out)])
     print('done', out, f'{out.stat().st_size/1e6:.0f} MB')

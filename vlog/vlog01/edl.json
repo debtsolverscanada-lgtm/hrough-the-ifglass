@@ -144,17 +144,7 @@
       }
      ],
      "loc": "ytz"
-    }
-   ]
-  },
-  {
-   "type": "scenes",
-   "music": {
-    "song": "reverse-psychology.mp3",
-    "from": 0.6,
-    "gain": 0.3
-   },
-   "clips": [
+    },
     {
      "asset": "map/map.mp4",
      "s": 0.0,
@@ -429,12 +419,7 @@
      "e": 18.0,
      "letterbox": true,
      "loc": "liberty"
-    }
-   ]
-  },
-  {
-   "type": "scenes",
-   "clips": [
+    },
     {
      "clip": "C0045.MP4",
      "s": 50.0,
@@ -466,12 +451,7 @@
      "s": 236.0,
      "e": 260.0
     }
-   ],
-   "music": {
-    "song": "reverse-psychology.mp3",
-    "from": 30.0,
-    "gain": 0.45
-   }
+   ]
   },
   {
    "type": "scenes",
