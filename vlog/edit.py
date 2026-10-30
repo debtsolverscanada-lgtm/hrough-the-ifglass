@@ -21,6 +21,8 @@ FPS, BEATS = 30, json.load(open(MUSIC / 'beats.json'))
 NOROTATE = set(EDL.get('norotate', []))  # clips whose camera rotation tag is wrong (footage is already upright)
 SPEEDFIX = EDL.get('speedfix', {})  # manual override for camera_speed, e.g. {"C0024.MP4": 4}
 _CAM = {}
+INTRO = EDL.get('intro') if EDL.get('intro') and (MUSIC / EDL['intro']['song']).exists() and EDL['intro']['song'] in BEATS else None  # song from the first frame
+if EDL.get('intro') and not INTRO: print('intro song missing, using the teaser song instead:', EDL['intro']['song'], flush=True)
 GRADE = 'eq=contrast=1.06:saturation=1.14:gamma=0.98,colorbalance=rs=0.03:bs=-0.03:rh=0.02:bh=-0.02,vignette=PI/5'
 GRAIN = 'noise=alls=7:allf=t'
 LETTERBOX = 'drawbox=y=0:w=iw:h=132:color=black:t=fill,drawbox=y=ih-132:w=iw:h=132:color=black:t=fill'
@@ -141,17 +143,24 @@ def expand(edl):
         nonlocal t
         p['_t'] = t; pieces.append(p)
         t += (p['e'] - p['s']) / p.get('speed', 1.0) + p.get('freeze', 0)
+    if INTRO: cues.append({'song': INTRO['song'], 'at': 0.0, 'from': INTRO.get('from', 0.0), 'dur': None, 'gain': INTRO.get('gain', 0.9), 'tag': 'intro'})
     for sec in edl['sections']:
         kind = sec['type']
-        if kind == 'hikids':  # accelerating supercut with punch-ins and flashes
+        if kind == 'hikids':  # rapid accelerating supercut with punch-ins and flashes, one cut per beat of the intro song
             n = len(sec['clips'])
+            beat = 60 / BEATS[INTRO['song']]['bpm'] if INTRO else None
             for k, (c, s, e) in enumerate(sec['clips']):
-                sp = 1.0 + 0.6 * k / max(1, n - 1)
+                sp = sec.get('speed_from', 1.5) + (sec.get('speed_to', 2.6) - sec.get('speed_from', 1.5)) * k / max(1, n - 1)
+                if beat: sp = max(sp, (e - s) / (beat * max(1, round((e - s) / sp / beat))))  # land each cut on a beat
                 sfx.append(('whoosh', t)); add({'clip': c, 's': s, 'e': e, 'speed': round(sp, 3), 'zoom': 1.0 + 0.12 * (k % 2), 'flash': True})
         elif kind == 'teaser':  # beat-cut highlights on a song drop, letterboxed, ends on a freeze
-            song = sec['song']; beats = [b for b in BEATS[song]['beats'] if b >= sec['song_from']]
             per = sec.get('beats_per_cut', 2); t0 = t
-            cues.append({'song': song, 'at': t0, 'from': beats[0], 'dur': None, 'gain': sec.get('gain', 0.9), 'tag': 'teaser'})
+            if INTRO:  # the intro song keeps playing under the teaser; cut on its beats from where it has got to
+                song = INTRO['song']; beats = [b for b in BEATS[song]['beats'] if b >= INTRO.get('from', 0.0) + t0]
+                cues[0]['from'] = beats[0] - t0  # nudge the song start so a beat lands exactly on the first teaser cut
+            else:
+                song = sec['song']; beats = [b for b in BEATS[song]['beats'] if b >= sec['song_from']]
+                cues.append({'song': song, 'at': t0, 'from': beats[0], 'dur': None, 'gain': sec.get('gain', 0.9), 'tag': 'teaser'})
             sec['_pieces'] = []
             for k, (c, s) in enumerate(sec['clips']):
                 d = beats[(k + 1) * per] - beats[k * per]
@@ -159,13 +168,15 @@ def expand(edl):
                 p = {'clip': c, 's': s, 'e': s + d * cam, 'speed': cam, 'letterbox': True, 'mute': True}
                 if k == len(sec['clips']) - 1: p['freeze'] = sec.get('freeze', 0.7)
                 add(p); sec['_pieces'].append(dict(p))
-            cues[-1]['dur'] = t - t0
+            cues[-1]['dur'] = t - cues[-1]['at']
+            sec['_song'] = (song, cues[-1]['from'] + cues[-1]['dur'] - sec.get('freeze', 0.7))
             sfx.append(('scratch', t - sec.get('freeze', 0.7)))
         elif kind == 'rewind':  # replay the teaser backwards, fast, VHS
             teaser = next(s for s in edl['sections'] if s['type'] == 'teaser')
-            sfx.append(('rewind', t))
+            t0 = t
             for p in reversed(teaser['_pieces']):
                 add({'clip': p['clip'], 's': p['s'], 'e': p['e'], 'reverse': True, 'speed': sec.get('speed', 3.0) * p['speed'], 'vhs': True, 'mute': True})
+            sfx.append(('rewind', t0, {'song': teaser['_song'][0], 'end': teaser['_song'][1], 'dur': t - t0}))
         elif kind == 'scenes':
             if sec.get('music'):
                 m = sec['music']; bt = BEATS[m['song']]['beats']
@@ -186,7 +197,15 @@ def expand(edl):
     return pieces, cues, sfx, t
 
 
-def synth_sfx(kind, out):
+def synth_sfx(kind, out, opt=None):
+    if kind == 'rewind' and opt and (MUSIC / opt['song']).exists():
+        # tape rewind: the teaser's song runs backwards, sped up and pitched up with wow/flutter, over a motor whir
+        sp, d = 3.0, opt['dur']; a = max(0.0, opt['end'] - d * sp)
+        g = (f"[0:a]atrim={a:.3f}:{opt['end']:.3f},asetpts=PTS-STARTPTS,areverse,aresample=48000,asetrate=48000*{sp},aresample=48000,"
+             f"vibrato=f=7:d=0.35,lowpass=f=7000,highpass=f=180,volume=0.8,atrim=0:{d:.3f}[m];"
+             f"anoisesrc=d={d:.3f}:c=pink:a=0.12,bandpass=f=2200:w=1800,tremolo=f=14:d=0.5[w];"
+             f"[m][w]amix=inputs=2:normalize=0,afade=t=in:d=0.08,afade=t=out:st={max(0, d - 0.35):.3f}:d=0.35[o]")
+        run(['ffmpeg', '-v', 'error', '-y', '-i', str(MUSIC / opt['song']), '-filter_complex', g, '-map', '[o]', '-ar', '48000', '-ac', '2', str(out)]); return
     if kind == 'whoosh':
         g = "anoisesrc=d=0.45:c=pink:a=0.6,highpass=f=300,lowpass=f=6000,afade=t=in:d=0.2,afade=t=out:st=0.2:d=0.25,volume=0.5"
     elif kind == 'scratch':
@@ -264,9 +283,9 @@ def main():
         parts.append(f"[{k}:a]aresample=48000,aformat=channel_layouts=stereo,volume={c['gain']},afade=t=in:d=0.3,"
                      f"afade=t=out:st={max(0, dur - 0.8):.3f}:d=0.8,adelay={int(c['at']*1000)}|{int(c['at']*1000)}[m{k}]")
     n = len(parts)
-    for k, (kind, at) in enumerate(s for s in sfx if s[1] < total):
+    for k, (kind, at, *opt) in enumerate(s for s in sfx if s[1] < total):
         f = W / f'sfx_{kind}.wav'
-        if not f.exists(): synth_sfx(kind, f)
+        if not f.exists(): synth_sfx(kind, f, opt[0] if opt else None)
         ins += ['-i', str(f)]; parts.append(f"[{n + k}:a]adelay={int(at*1000)}|{int(at*1000)}[s{k}]")
     ns = len(parts) - n
     def bed(prefix, k0, cnt, out):  # mix a set of delayed inputs into one track (silence if none)
