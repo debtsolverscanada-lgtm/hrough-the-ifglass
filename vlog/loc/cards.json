@@ -9,5 +9,6 @@
  "chinatown": {"name": "Chinatown",           "sub": "Lower Manhattan"},
  "ferry":     {"name": "Staten Island Ferry", "sub": "New York Harbor"},
  "liberty":   {"name": "Statue of Liberty",   "sub": "Liberty Island"},
+ "bagel-pub": {"name": "Bagel Pub",         "sub": "Brooklyn, NY"},
  "apollo":    {"name": "Apollo Bagels",       "sub": "41 John St · Financial District"}
 }
