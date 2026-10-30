@@ -153,10 +153,17 @@ def synth_sfx(kind, out):
     run(['ffmpeg', '-v', 'error', '-y', '-f', 'lavfi', '-i', g, '-ar', '48000', '-ac', '2', str(out)])
 
 
+def load_audio(path):
+    """16 kHz mono float samples via ffmpeg (faster-whisper's own PyAV decoder breaks on some av versions)."""
+    import numpy as np
+    raw = subprocess.run(['ffmpeg', '-v', 'error', '-i', str(path), '-f', 'f32le', '-ac', '1', '-ar', '16000', '-'], capture_output=True, check=True).stdout
+    return np.frombuffer(raw, np.float32)
+
+
 def captions(dialogue_wav, ass_out):
     from faster_whisper import WhisperModel
     m = WhisperModel('small.en', device='cpu', compute_type='int8')
-    segs, _ = m.transcribe(str(dialogue_wav), word_timestamps=True, vad_filter=True, language='en',
+    segs, _ = m.transcribe(load_audio(dialogue_wav), word_timestamps=True, vad_filter=True, language='en',
                            initial_prompt='hi kids. Hi kids! New York, NYC. Bye kids.')
     words = [w for s in segs for w in (s.words or []) if w.probability > 0.35]
     def ts(x): h = int(x // 3600); m_ = int(x % 3600 // 60); return f'{h}:{m_:02d}:{x % 60:05.2f}'

@@ -19,7 +19,7 @@ BEATS = json.load(open(MUSIC / 'beats.json'))
 GRADE = 'eq=contrast=1.06:saturation=1.16:gamma=0.98,colorbalance=rs=0.03:bs=-0.03'
 PANEL_Y, PANEL_H = 500, 810  # 4:3 panel 1080x810
 
-from edit import run, clip, has_audio  # same helpers as the long-form editor
+from edit import run, clip, has_audio, load_audio  # same helpers as the long-form editor
 
 
 def seg(i, p, slug):
@@ -31,7 +31,7 @@ def seg(i, p, slug):
         fg = f"scale=-2:{int(1920 * z)},crop=1080:1920:(iw-1080)*{cx}:(ih-1920)/2"
         lay = f'[b][f]overlay=0:0'
     else:
-        fg = f"crop=ih*4/3/{z}:ih/{z}:(iw-ow)*{cx}:(ih-oh)/2,scale=1080:{PANEL_H}"
+        fg = f"crop='min(iw,ih*4/3)/{z}':'min(iw,ih*4/3)*3/4/{z}':(iw-ow)*{cx}:(ih-oh)/2,scale=1080:{PANEL_H}"
         lay = f'[b][f]overlay=0:{PANEL_Y}'
     v = (f"[0:v]fps=30,split[x][y];[x]{bg}[b];[y]{fg},{GRADE}[f];{lay},noise=alls=6:allf=t"
          + (",fade=t=in:st=0:d=0.1:color=white" if p.get('boom') else '')
@@ -49,7 +49,7 @@ def seg(i, p, slug):
 
 
 def captions(wav, ass, model):
-    segs, _ = ([], None) if model is None else model.transcribe(str(wav), word_timestamps=True, vad_filter=True, language='en',
+    segs, _ = ([], None) if model is None else model.transcribe(load_audio(wav), word_timestamps=True, vad_filter=True, language='en',
                                initial_prompt='hi kids. Bye kids. Bye cats. New York, NYC.')
     words = [w for s_ in segs for w in (s_.words or []) if w.probability > 0.35]
     ts = lambda x: f'{int(x // 3600)}:{int(x % 3600 // 60):02d}:{x % 60:05.2f}'
