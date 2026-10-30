@@ -31,7 +31,7 @@ cfg = {}
 if 'A' in spec:
     a = spec['A']
     cfg['A'] = {'bg': 'file://' + str(frame(*a['bg'])), 'title': a.get('title', 'hi kids'), 'sticker': a.get('sticker', 'NYC'),
-                'cuts': [{'src': 'file://' + str(cutout(frame(c['clip'], c['t'], c.get('crop')))), 'x': c['x'], 'h': c['h']} for c in a['cuts']]}
+                'cuts': [{**c, 'src': 'file://' + str(frame(c['clip'], c['t'], c.get('crop')) if c.get('card') else cutout(frame(c['clip'], c['t'], c.get('crop'))))} for c in a['cuts']]}
 if 'B' in spec:
     b = spec['B']
     cfg['B'] = {'photos': [{**p, 'src': 'file://' + str(frame(p['clip'], p['t'], p.get('crop')))} for p in b['photos']],

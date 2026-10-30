@@ -8,6 +8,7 @@ body[data-v=A] #A, body[data-v=B] #B{display:block}
 #A .bg{position:absolute;inset:-20px;background-size:cover;background-position:center;filter:saturate(1.35) contrast(1.08) brightness(1.05) blur(1.5px)}
 #A .tint{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,transparent 30%,rgba(0,0,0,.45) 100%)}
 #A .cut{position:absolute;bottom:-10px;filter:drop-shadow(0 0 0 #fff) drop-shadow(7px 0 0 #fff) drop-shadow(-7px 0 0 #fff) drop-shadow(0 7px 0 #fff) drop-shadow(0 -7px 0 #fff) drop-shadow(0 14px 18px rgba(0,0,0,.55))}
+#A .acard{position:absolute;background-size:cover;border:12px solid #fff;border-radius:22px;box-shadow:0 0 0 4px #111,0 22px 40px rgba(0,0,0,.6);filter:saturate(1.15) contrast(1.05)}
 #A .title{position:absolute;left:44px;top:26px;font:120px/1 'Permanent Marker';color:#fff;transform:rotate(-5deg);
   text-shadow:0 6px 0 #111,0 0 22px rgba(0,0,0,.35);-webkit-text-stroke:3px #111;letter-spacing:2px}
 #A .sticker{position:absolute;left:52px;bottom:48px;background:#FFD400;color:#111;font:800 34px/1 Inter;padding:14px 22px;border-radius:14px;
@@ -40,7 +41,7 @@ function build(c){
   document.body.dataset.v=c.v;
   if(c.A){const a=c.A;Abg.style.backgroundImage=`url(${a.bg})`;Atitle.textContent=a.title||'hi kids';
     if(a.sticker===null)Asticker.remove();else if(a.sticker)Asticker.textContent=a.sticker;
-    Acuts.innerHTML=(a.cuts||[]).map(k=>`<img class="cut" src="${k.src}" style="left:${k.x}px;height:${k.h}px">`).join('');}
+    Acuts.innerHTML=(a.cuts||[]).map(k=>k.card?`<div class="acard" style="left:${k.x}px;top:${k.y}px;width:${k.w}px;height:${k.h}px;transform:rotate(${k.rot||0}deg);background-image:url(${k.src});background-position:${k.pos||'center'}"></div>`:`<img class="cut" src="${k.src}" style="left:${k.x}px;height:${k.h}px">`).join('');}
   if(c.B){const b=c.B;
     Bphotos.innerHTML=b.photos.map(p=>`<div class="ph" style="left:${p.x}px;top:${p.y}px;width:${p.w}px;height:${p.h}px;transform:rotate(${p.rot||0}deg);background-image:url(${p.src});background-position:${p.pos||'center'}"></div>`+(p.tape?`<div class="tape" style="left:${p.x+p.w/2-60}px;top:${p.y-14}px"></div>`:'')).join('');
     Object.assign(Bt1.style,{left:b.t1.x+'px',top:b.t1.y+'px'});Bt1.textContent=b.t1.text;
