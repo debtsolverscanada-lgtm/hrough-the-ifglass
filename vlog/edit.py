@@ -60,6 +60,11 @@ def clip_len(name):
     return float(run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(clip(name))]).stdout)
 
 
+def photo(pattern):
+    """A still from vlog/<id>/photos (kept in the encrypted private inputs) or the raw footage folder."""
+    return next((D / 'photos').glob(pattern), None) or next(RAW.rglob(pattern), None)
+
+
 def has_audio(p):
     out = run(['ffprobe', '-v', 'error', '-select_streams', 'a', '-show_entries', 'stream=index', '-of', 'csv=p=0', str(p)]).stdout
     return bool(out.strip())
@@ -100,7 +105,7 @@ def piece(i, p):
                f"drawtext=fontfile={BOLD}:text='%{{pts\\:hms}}':fontsize=56:fontcolor=white:x=w-tw-80:y=h-120"]
     if p.get('flash'): vf.append('fade=t=in:st=0:d=0.12:color=white')
     for tt in p.get('titles', []): vf.append(title_filter(tt['text'], tt.get('style', 'lower'), tt.get('at', 0.25), tt.get('dur', 3.2)))
-    pics = [o for o in p.get('photos', []) if next(RAW.rglob(o['file']), None)]
+    pics = [o for o in p.get('photos', []) if photo(o['file'])]
     if p.get('freeze'): vf.append(f"tpad=stop_mode=clone:stop_duration={p['freeze']}")
     vf.append('format=yuv420p')
     out_dur = dur_src / speed + p.get('freeze', 0)
@@ -117,7 +122,7 @@ def piece(i, p):
     inputs = (['-noautorotate'] if p.get('clip') in NOROTATE else []) + ['-ss', f'{s:.3f}', '-t', f'{dur_src:.3f}', '-i', str(src)]
     vout, extra = '[v]', ''
     for k, o in enumerate(pics):  # a photo pops in over the shot ("look at this picture")
-        inputs += ['-loop', '1', '-t', f'{out_dur:.3f}', '-i', str(clip(o['file']))]
+        inputs += ['-loop', '1', '-t', f'{out_dur:.3f}', '-i', str(photo(o['file']))]
         a, b = o.get('at', 0.5), o.get('at', 0.5) + o.get('dur', 4.0)
         extra += (f";[{k + 1}:v]scale=-2:{o.get('h', 760)},pad=iw+24:ih+24:12:12:white,format=rgba,rotate={o.get('rot', -3)}*PI/180:c=none:ow=rotw(iw):oh=roth(ih),format=rgba[ph{k}]"
                   f";{vout}[ph{k}]overlay=x={o.get('x', 'W-w-90')}:y=(H-h)/2+H*max(0\\,1-(t-{a})/0.25):enable='between(t,{a},{b})'[pv{k}]")
