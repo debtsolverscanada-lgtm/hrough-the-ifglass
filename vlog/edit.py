@@ -51,8 +51,12 @@ def camera_speed(name):
             head = fh.read(4 << 20); fh.seek(max(0, f.stat().st_size - (4 << 20))); blob = head + fh.read()
         cap = re.search(rb'captureFps="([0-9.]+)', blob); fmt = re.search(rb'formatFps="([0-9.]+)', blob)
         if cap and fmt and float(cap.group(1)) > float(fmt.group(1)) * 1.05: sp = float(cap.group(1)) / float(fmt.group(1))
+        how = f"captureFps {cap.group(1).decode()}" if cap else ''
+        if sp == 1.0 and not cap and EDL.get('slowmo_fallback'):  # no camera tag: a silent 29.97 fps clip from this camera is slow & quick
+            rate = run(['ffprobe', '-v', 'error', '-select_streams', 'v:0', '-show_entries', 'stream=r_frame_rate', '-of', 'csv=p=0', str(f)]).stdout.strip()
+            if rate == '30000/1001' and audio_peak(f) < -60: sp, how = float(EDL['slowmo_fallback']), 'no camera tag; silent 29.97 fps clip'
         _CAM[name] = round(sp, 3)
-        if sp != 1.0: print(f'{name}: camera slow-motion x{sp:.2f} (captureFps {cap.group(1).decode()}), playing at real speed;'
+        if sp != 1.0: print(f'{name}: camera slow-motion x{sp:.2f} ({how}), playing at real speed;'
                             f' loudest sound in the file {audio_peak(f):.0f} dB', flush=True)
     return _CAM[name]
 
@@ -111,6 +115,11 @@ def piece(i, p):
         z = p['zoom']; vf.append(f'scale={int(1920*z)}:{int(1080*z)},crop=1920:1080')
     if p.get('reverse'): vf.append('reverse')
     if speed != 1.0: vf.append(f'setpts=PTS/{speed}')
+    if p.get('push'):  # cinematic slow push-in (or pull-out when negative) across the shot, with a teal/orange grade
+        d, k = max(0.1, dur_src / speed), p['push']
+        z = f"(1+{k:.3f}*t/{d:.3f})" if k > 0 else f"(1+{-k:.3f}*(1-t/{d:.3f}))"
+        vf += [f"scale=w='2*trunc(960*{z})':h='2*trunc(540*{z})':eval=frame", 'crop=1920:1080',
+               'colorbalance=rs=-0.04:bs=0.06:rh=0.05:bh=-0.05,eq=saturation=1.06:contrast=1.04']
     vf += [GRADE, GRAIN]
     if p.get('letterbox'): vf.append(LETTERBOX)
     if p.get('vhs'):
@@ -233,12 +242,12 @@ def montage(p, beat, per):
     first = cut * max(1, -(-(4.2 if p.get('loc') else 3.4 if p.get('titles') else 0) // cut))
     real = (end - p['s']) / sp
     n = max(1, min(10, round((real - first) / (2 * cut)))) if real > first + cut else 0
-    out = [dict(p, e=p['s'] + first * sp)]
+    out = [dict(p, e=p['s'] + first * sp, letterbox=True, push=0.05)]
     gap = (real - first - n * cut) / max(1, n)
     for k in range(n):
         a = p['s'] + (first + gap * (k + 1) + cut * k) * sp
         out.append({'clip': p['clip'], 's': a, 'e': a + cut * sp, 'speed': sp, '_silent': True, 'mute': p.get('mute'),
-                    'letterbox': p.get('letterbox'), 'zoom': 1.08 if k % 2 == 0 else None})
+                    'letterbox': True, 'push': 0.07 if k % 2 == 0 else -0.07})
     return [{k: v for k, v in q.items() if v is not None} for q in out]
 
 
