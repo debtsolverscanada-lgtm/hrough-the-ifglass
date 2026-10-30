@@ -23,7 +23,7 @@ GRADE = 'eq=contrast=1.06:saturation=1.16:gamma=0.98,colorbalance=rs=0.03:bs=-0.
 PANEL_Y, PANEL_H = 500, 810  # 4:3 panel 1080x810
 CAP_Y = {'panel': PANEL_Y + PANEL_H + 60, 'full': 1240}  # top of the caption line
 
-from edit import run, clip, has_audio, load_audio, NOROTATE  # same helpers as the long-form editor
+from edit import run, clip, has_audio, load_audio, camera_speed, NOROTATE  # same helpers as the long-form editor
 
 
 def esc(t):
@@ -72,7 +72,7 @@ def speech_spans(src, s, e, pad=0.12, gap=0.35):
 def seg(i, p, slug, layout):
     out = W / f'{slug}-{i:02d}.mp4'
     src = clip(p['clip'])
-    s, e = p['s'], p['e']; dur = e - s; z = p.get('zoom', 1.0); cx = p.get('cx', 0.5)
+    s, e = p['s'], p['e']; cam = camera_speed(p['clip']); dur = (e - s) / cam; z = p.get('zoom', 1.0); cx = p.get('cx', 0.5)
     bg = 'scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,boxblur=30:2,eq=brightness=-0.12'
     if layout == 'full' or p.get('full'):  # 9:16 crop of the frame, positioned on the faces
         fg = f"crop='min(iw,ih*9/16)/{z}':'min(ih,iw*16/9)/{z}':(iw-ow)*{cx}:(ih-oh)/2,scale=1080:1920"
@@ -86,14 +86,14 @@ def seg(i, p, slug, layout):
         tag = (f",drawtext=fontfile={MARKER}:text='{esc(p['tag'])}':fontsize={p.get('tag_size', 84)}:fontcolor=black:"
                f"box=1:boxcolor={col}:boxborderw=22:x=(w-text_w)/2:y={p.get('tag_y', 1040)}:"
                f"alpha='min(1,t/0.12)'")
-    v = (f"[0:v]fps=30,split[x][y];[x]{bg}[b];[y]{fg},{GRADE}[f];{lay},noise=alls=6:allf=t{tag}"
+    v = (f"[0:v]setpts=PTS/{cam},fps=30,split[x][y];[x]{bg}[b];[y]{fg},{GRADE}[f];{lay},noise=alls=6:allf=t{tag}"
          + (",fade=t=in:st=0:d=0.1:color=white" if p.get('boom') else '')
          + (f",tpad=stop_mode=clone:stop_duration={p['freeze']}" if p.get('freeze') else '') + ',format=yuv420p[v]')
     out_dur = dur + p.get('freeze', 0)
     af = f"aresample=48000,aformat=channel_layouts=stereo,volume={0 if p.get('mute') else p.get('vol', 1.0)}" \
          + (f",apad=pad_dur={p['freeze']}" if p.get('freeze') else '') + f",atrim=0:{out_dur:.3f},afade=t=in:d=0.02[a]"
-    ins = (['-noautorotate'] if p['clip'] in NOROTATE else []) + ['-ss', f'{s:.3f}', '-t', f'{dur:.3f}', '-i', str(src)]
-    if has_audio(src): graph = f'{v};[0:a:0]{af}'
+    ins = (['-noautorotate'] if p['clip'] in NOROTATE else []) + ['-ss', f'{s:.3f}', '-t', f'{e - s:.3f}', '-i', str(src)]
+    if has_audio(src) and cam == 1.0: graph = f'{v};[0:a:0]{af}'
     else:
         ins += ['-f', 'lavfi', '-t', f'{out_dur:.3f}', '-i', 'anullsrc=r=48000:cl=stereo']; graph = f'{v};[1:a]{af}'
     run(['ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', graph, '-map', '[v]', '-map', '[a]', '-t', f'{out_dur:.3f}',
@@ -139,11 +139,12 @@ def expand(sh, segs):
         n = 0
         for p in segs:
             k = p.get('beats', 4)
-            if 'e' not in p: p['e'] = p['s'] + bt[n + k] - bt[n]
+            if 'e' not in p: p['e'] = p['s'] + (bt[n + k] - bt[n]) * camera_speed(p['clip'])
             n += k
     out, idx = [], []
     for i, p in enumerate(segs):
         src = clip(p['clip']); nr = p['clip'] in NOROTATE
+        if camera_speed(p['clip']) != 1.0: p['mute'] = True  # slow-motion camera clip: no sound, played at real speed
         if layout == 'full' and 'cx' not in p and not p.get('full'):
             p['cx'] = face_cx(src, p['s'], p['e'], nr)
         spans = speech_spans(src, p['s'], p['e']) if sh.get('tight') and not p.get('mute') and not p.get('keep') and has_audio(src) else [(p['s'], p['e'])]

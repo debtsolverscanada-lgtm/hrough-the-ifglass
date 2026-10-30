@@ -6,7 +6,7 @@ synth SFX are added, then word-by-word captions (transcribed from the cut) are b
 
 usage: python3 vlog/edit.py vlog/vlog01 [--preview SECONDS]
 """
-import json, os, subprocess, sys, pathlib, random, shutil
+import json, os, re, subprocess, sys, pathlib, random, shutil
 
 D = pathlib.Path(sys.argv[1]).resolve()
 EDL = json.load(open(D / 'edl.json'))
@@ -19,6 +19,8 @@ MARKER, BOLD = FONTS / 'PermanentMarker-Regular.ttf', FONTS / 'Anton-Regular.ttf
 PREVIEW = float(sys.argv[sys.argv.index('--preview') + 1]) if '--preview' in sys.argv else None
 FPS, BEATS = 30, json.load(open(MUSIC / 'beats.json'))
 NOROTATE = set(EDL.get('norotate', []))  # clips whose camera rotation tag is wrong (footage is already upright)
+SPEEDFIX = EDL.get('speedfix', {})  # manual override for camera_speed, e.g. {"C0024.MP4": 4}
+_CAM = {}
 GRADE = 'eq=contrast=1.06:saturation=1.14:gamma=0.98,colorbalance=rs=0.03:bs=-0.03:rh=0.02:bh=-0.02,vignette=PI/5'
 GRAIN = 'noise=alls=7:allf=t'
 LETTERBOX = 'drawbox=y=0:w=iw:h=132:color=black:t=fill,drawbox=y=ih-132:w=iw:h=132:color=black:t=fill'
@@ -35,6 +37,25 @@ def clip(name):
     p = next(RAW.rglob(name), None)
     if not p: raise SystemExit(f'missing clip {name}')
     return p
+
+
+def camera_speed(name):
+    """How much faster than the file plays the scene really happened. Sony slow & quick clips store e.g. 120 fps
+    footage as a 29.97 fps file with no sound; the camera's XML (captureFps vs formatFps) says so. 1.0 for normal clips."""
+    if name in SPEEDFIX: return float(SPEEDFIX[name])
+    if name not in _CAM:
+        f, sp = clip(name), 1.0
+        with open(f, 'rb') as fh:
+            head = fh.read(4 << 20); fh.seek(max(0, f.stat().st_size - (4 << 20))); blob = head + fh.read()
+        cap = re.search(rb'captureFps="([0-9.]+)', blob); fmt = re.search(rb'formatFps="([0-9.]+)', blob)
+        if cap and fmt and float(cap.group(1)) > float(fmt.group(1)) * 1.05: sp = float(cap.group(1)) / float(fmt.group(1))
+        _CAM[name] = round(sp, 3)
+        if sp != 1.0: print(f'{name}: camera slow-motion x{sp:.2f}, playing at real speed', flush=True)
+    return _CAM[name]
+
+
+def clip_len(name):
+    return float(run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(clip(name))]).stdout)
 
 
 def has_audio(p):
@@ -77,6 +98,7 @@ def piece(i, p):
                f"drawtext=fontfile={BOLD}:text='%{{pts\\:hms}}':fontsize=56:fontcolor=white:x=w-tw-80:y=h-120"]
     if p.get('flash'): vf.append('fade=t=in:st=0:d=0.12:color=white')
     for tt in p.get('titles', []): vf.append(title_filter(tt['text'], tt.get('style', 'lower'), tt.get('at', 0.25), tt.get('dur', 3.2)))
+    pics = [o for o in p.get('photos', []) if next(RAW.rglob(o['file']), None)]
     if p.get('freeze'): vf.append(f"tpad=stop_mode=clone:stop_duration={p['freeze']}")
     vf.append('format=yuv420p')
     out_dur = dur_src / speed + p.get('freeze', 0)
@@ -91,13 +113,21 @@ def piece(i, p):
     if p.get('freeze'): af.append(f"apad=pad_dur={p['freeze']}")
     af += [f'atrim=0:{out_dur:.3f}', 'afade=t=in:d=0.02', f'afade=t=out:st={max(0, out_dur - 0.03):.3f}:d=0.03']
     inputs = (['-noautorotate'] if p.get('clip') in NOROTATE else []) + ['-ss', f'{s:.3f}', '-t', f'{dur_src:.3f}', '-i', str(src)]
-    if has_audio(src):
-        graph = f"[0:v]{vf[0]}[v0];[v0]{','.join(vf[1:])}[v];[0:a:0]{','.join(af)}[a]"
-        amap = ['-map', '[v]', '-map', '[a]']
+    vout, extra = '[v]', ''
+    for k, o in enumerate(pics):  # a photo pops in over the shot ("look at this picture")
+        inputs += ['-loop', '1', '-t', f'{out_dur:.3f}', '-i', str(clip(o['file']))]
+        a, b = o.get('at', 0.5), o.get('at', 0.5) + o.get('dur', 4.0)
+        extra += (f";[{k + 1}:v]scale=-2:{o.get('h', 760)},pad=iw+24:ih+24:12:12:white,format=rgba,rotate={o.get('rot', -3)}*PI/180:c=none:ow=rotw(iw):oh=roth(ih),format=rgba[ph{k}]"
+                  f";{vout}[ph{k}]overlay=x={o.get('x', 'W-w-90')}:y=(H-h)/2+H*max(0\\,1-(t-{a})/0.25):enable='between(t,{a},{b})'[pv{k}]")
+        vout = f'[pv{k}]'
+    na = 1 + len(pics)
+    if has_audio(src) and not p.get('_silent'):
+        graph = f"[0:v]{vf[0]}[v0];[v0]{','.join(vf[1:])}[v];[0:a:0]{','.join(af)}[a]{extra}"
+        amap = ['-map', vout, '-map', '[a]']
     else:
         inputs += ['-f', 'lavfi', '-t', f'{out_dur:.3f}', '-i', 'anullsrc=r=48000:cl=stereo']
-        graph = f"[0:v]{vf[0]}[v0];[v0]{','.join(vf[1:])}[v]"
-        amap = ['-map', '[v]', '-map', '1:a']
+        graph = f"[0:v]{vf[0]}[v0];[v0]{','.join(vf[1:])}[v]{extra}"
+        amap = ['-map', vout, '-map', f'{na}:a']
     run(['ffmpeg', '-v', 'error', '-y', *inputs, '-filter_complex', graph, *amap,
          '-t', f'{out_dur:.3f}', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-r', str(FPS),
          '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', str(out)])
@@ -125,7 +155,8 @@ def expand(edl):
             sec['_pieces'] = []
             for k, (c, s) in enumerate(sec['clips']):
                 d = beats[(k + 1) * per] - beats[k * per]
-                p = {'clip': c, 's': s, 'e': s + d, 'letterbox': True, 'mute': True}
+                cam = camera_speed(c)
+                p = {'clip': c, 's': s, 'e': s + d * cam, 'speed': cam, 'letterbox': True, 'mute': True}
                 if k == len(sec['clips']) - 1: p['freeze'] = sec.get('freeze', 0.7)
                 add(p); sec['_pieces'].append(dict(p))
             cues[-1]['dur'] = t - t0
@@ -134,12 +165,23 @@ def expand(edl):
             teaser = next(s for s in edl['sections'] if s['type'] == 'teaser')
             sfx.append(('rewind', t))
             for p in reversed(teaser['_pieces']):
-                add({'clip': p['clip'], 's': p['s'], 'e': p['e'], 'reverse': True, 'speed': sec.get('speed', 3.0), 'vhs': True, 'mute': True})
+                add({'clip': p['clip'], 's': p['s'], 'e': p['e'], 'reverse': True, 'speed': sec.get('speed', 3.0) * p['speed'], 'vhs': True, 'mute': True})
         elif kind == 'scenes':
             if sec.get('music'):
-                m = sec['music']; cues.append({'song': m['song'], 'at': t, 'from': m.get('from', 0), 'dur': None, 'gain': m.get('gain', 0.35), 'tag': 'bed'})
+                m = sec['music']; bt = BEATS[m['song']]['beats']
+                frm = min(bt, key=lambda b: abs(b - m.get('from', 0)))  # start the song on a beat
+                cues.append({'song': m['song'], 'at': t, 'from': frm, 'dur': None, 'gain': m.get('gain', 0.35), 'tag': 'bed'})
             for p in sec['clips']:
-                add(dict(p))
+                p = dict(p)
+                if p.get('clip'):
+                    cam = camera_speed(p['clip'])
+                    if cam != 1.0:  # slow-motion camera clip: real speed, no sound, cut to the song's bar
+                        p['speed'] = round(p.get('speed', 1.0) * cam, 3); p['_silent'] = True
+                        if sec.get('music'):
+                            bar = 4 * 60 / BEATS[sec['music']['song']]['bpm']
+                            n = max(2, round((p['e'] - p['s']) / p['speed'] / bar))
+                            p['e'] = min(p['s'] + n * bar * p['speed'], clip_len(p['clip']) - 0.1)
+                add(p)
             if sec.get('music'): cues[-1]['dur'] = t - cues[-1]['at']
     return pieces, cues, sfx, t
 

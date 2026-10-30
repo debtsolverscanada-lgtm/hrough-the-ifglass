@@ -25,12 +25,12 @@
   ]},
 
   {"type": "scenes", "clips": [
-    {"clip": "C0018.MP4", "s": 0.0, "e": 22.5, "titles": [{"text": "DAY 1", "style": "big", "at": 0.1, "dur": 1.8}, {"text": "LEON'S BAGELS", "at": 2.0}]},
+    {"clip": "C0018.MP4", "s": 0.0, "e": 22.5, "photos": [{"file": "leons-1.*", "at": 3.0, "dur": 5.0}, {"file": "leons-2.*", "at": 11.0, "dur": 4.5, "rot": 3}], "titles": [{"text": "DAY 1", "style": "big", "at": 0.1, "dur": 1.8}, {"text": "LEON'S BAGELS", "at": 2.0}]},
     {"clip": "C0019.MP4", "s": 0.0, "e": 39.2, "titles": [{"text": "YOGURT TASTE TEST"}]},
     {"clip": "C0020.MP4", "s": 7.4, "e": 46.0, "titles": [{"text": "MISO BLONDIE LATTE"}]}
   ]},
 
-  {"type": "scenes", "music": {"song": "space-junk.mp3", "from": 14.3, "gain": 0.4}, "clips": [
+  {"type": "scenes", "music": {"song": "space-junk.mp3", "from": 14.3, "gain": 0.45}, "clips": [
     {"clip": "C0021.MP4", "s": 0.0, "e": 21.0, "titles": [{"text": "CENTRAL PARK"}]},
     {"clip": "C0022.MP4", "s": 0.5, "e": 12.0},
     {"clip": "C0023.MP4", "s": 7.0, "e": 24.5},
@@ -39,7 +39,7 @@
     {"clip": "C0024.MP4", "s": 0.0, "e": 30.0}
   ]},
 
-  {"type": "scenes", "clips": [
+  {"type": "scenes", "music": {"song": "big-talk.mp3", "from": 45.0, "gain": 0.75}, "clips": [
     {"clip": "C0027.MP4", "s": 0.0, "e": 45.0, "titles": [{"text": "PHO TIME"}]},
     {"clip": "C0028.MP4", "s": 30.0, "e": 75.0},
     {"clip": "C0029.MP4", "s": 0.0, "e": 60.0, "titles": [{"text": "NIGHT FOOD RUN"}]},
@@ -47,11 +47,11 @@
     {"clip": "C0030.MP4", "s": 66.0, "e": 108.0, "titles": [{"text": "NEW YORK PIZZA"}]}
   ]},
 
-  {"type": "scenes", "music": {"song": "reverse-psychology.mp3", "from": 30.0, "gain": 0.5}, "clips": [
+  {"type": "scenes", "music": {"song": "reverse-psychology.mp3", "from": 30.0, "gain": 0.75}, "clips": [
     {"clip": "C0031.MP4", "s": 0.0, "e": 30.0, "letterbox": true, "titles": [{"text": "BROADWAY"}]}
   ]},
 
-  {"type": "scenes", "clips": [
+  {"type": "scenes", "music": {"song": "cool-kids.mp3", "from": 60.0, "gain": 0.75}, "clips": [
     {"clip": "C0032.MP4", "s": 40.0, "e": 100.0, "titles": [{"text": "DAY 2", "style": "big", "at": 0.1, "dur": 1.8}]},
     {"clip": "C0033.MP4", "s": 0.0, "e": 40.0, "titles": [{"text": "CHINATOWN"}]},
     {"clip": "C0034.MP4", "s": 0.0, "e": 66.0, "titles": [{"text": "SALTED BROWN BUTTER OAT LATTE"}]},
@@ -59,7 +59,7 @@
     {"clip": "C0037.MP4", "s": 0.0, "e": 45.0}
   ]},
 
-  {"type": "scenes", "music": {"song": "someday.mp3", "from": 0.0, "gain": 0.4}, "clips": [
+  {"type": "scenes", "music": {"song": "someday.mp3", "from": 0.0, "gain": 0.6}, "clips": [
     {"clip": "C0041.MP4", "s": 50.0, "e": 100.0, "titles": [{"text": "STATEN ISLAND FERRY"}]},
     {"clip": "C0042.MP4", "s": 0.0, "e": 20.0, "letterbox": true},
     {"clip": "C0043.MP4", "s": 0.0, "e": 18.0, "letterbox": true, "titles": [{"text": "HI LADY LIBERTY"}]}
