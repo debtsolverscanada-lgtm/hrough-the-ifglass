@@ -8,8 +8,8 @@
    "hook": "NYC BEAT TORONTO...|UNTIL THIS HAPPENED",
    "title": "NYC beat Toronto at everything… until THIS 😳 #toronto #nyc #shorts",
    "music": {
-    "song": "big-talk.mp3",
-    "from": 0.0,
+    "song": "reverse-psychology.mp3",
+    "from": 0.6,
     "gain": 0.12
    },
    "board": {
@@ -125,11 +125,11 @@
    "hook": "NYC IN 40 SECONDS|(DAY 3 WENT WRONG)",
    "title": "we did NYC in 4 days… day 3 went wrong ☔ #nyc #newyork #shorts",
    "music": {
-    "song": "big-talk.mp3",
-    "from": 15.7,
+    "song": "campus.mp3",
+    "from": 34.0,
     "gain": 0.9
    },
-   "beats": "big-talk.mp3",
+   "beats": "campus.mp3",
    "segs": [
     {
      "clip": "C0015.MP4",

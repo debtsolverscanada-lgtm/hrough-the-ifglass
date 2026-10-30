@@ -7,7 +7,7 @@
     ["C0014.MP4", 0.95, 1.85], ["C0015.MP4", 0.0, 1.0], ["C0016.MP4", 1.55, 2.4],
     ["C0045.MP4", 109.6, 110.9], ["C0048.MP4", 0.6, 1.75], ["C0014.MP4", 12.6, 13.5]]},
 
-  {"type": "teaser", "song": "big-talk.mp3", "song_from": 15.7, "beats_per_cut": 2, "freeze": 0.8, "clips": [
+  {"type": "teaser", "song": "campus.mp3", "song_from": 0.0, "beats_per_cut": 2, "freeze": 0.8, "clips": [
     ["C0030.MP4", 93.4], ["C0016.MP4", 19.9], ["C0021.MP4", 2.0], ["C0017.MP4", 7.0],
     ["C0015.MP4", 25.6], ["C0043.MP4", 3.0], ["C0016.MP4", 21.2], ["C0052.MP4", 60.8],
     ["C0034.MP4", 6.0], ["C0021.MP4", 9.0], ["C0047.MP4", 172.0], ["C0030.MP4", 102.6]]},
@@ -40,7 +40,7 @@
     {"clip": "C0024.MP4", "s": 0.0, "e": 77.0}
   ]},
 
-  {"type": "scenes", "music": {"song": "big-talk.mp3", "from": 45.0, "gain": 0.75}, "clips": [
+  {"type": "scenes", "music": {"song": "campus.mp3", "from": 34.0, "gain": 0.75}, "clips": [
     {"clip": "C0027.MP4", "s": 0.0, "e": 176.0, "loc": "pho-house"},
     {"clip": "C0028.MP4", "s": 0.0, "e": 224.0},
     {"clip": "C0029.MP4", "s": 0.0, "e": 60.0, "titles": [{"text": "NIGHT FOOD RUN"}]},
