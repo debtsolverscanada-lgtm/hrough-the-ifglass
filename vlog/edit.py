@@ -186,7 +186,23 @@ def captions(dialogue_wav, ass_out):
     open(ass_out, 'w').write(head + '\n'.join(lines) + '\n')
 
 
+def drop_missing(edl):
+    """Leave out clips that failed to download, so a draft still renders; report what was skipped."""
+    have = lambda c: next(RAW.rglob(c), None) is not None
+    gone = set()
+    for sec in edl['sections']:
+        keep = []
+        for c in sec.get('clips', []):
+            name = c[0] if isinstance(c, list) else c.get('clip')
+            if name is None or have(name): keep.append(c)
+            else: gone.add(name)
+        if 'clips' in sec: sec['clips'] = keep
+    edl['sections'] = [s for s in edl['sections'] if s['type'] == 'rewind' or s.get('clips')]
+    if gone: print('SKIPPED (not downloaded):', ', '.join(sorted(gone)), flush=True)
+
+
 def main():
+    drop_missing(EDL)
     pieces, cues, sfx, total = expand(EDL)
     if PREVIEW:
         keep = [p for p in pieces if p['_t'] < PREVIEW]; pieces = keep

@@ -11,6 +11,10 @@ for p in $*; do
     echo "hydrate link failed for $n: $(head -c 200 "raw/$n" 2>/dev/null)"; rm -f "raw/$n"
     id=$(python3 -c "import json,sys; print(json.load(open('$D/clips.json')).get('$n',''))")
     for t in 1 2 3; do [ -n "$id" ] && (cd raw && gdown -q -O "$n" "$id") && break; sleep 20; done
+    if [ ! -s "raw/$n" ] && [ -n "$id" ]; then  # Drive's direct endpoint sometimes works when gdown is refused
+      curl -sSL --retry 3 -o "raw/$n" "https://drive.usercontent.google.com/download?id=$id&export=download&confirm=t"
+      [ "$(stat -c %s "raw/$n" 2>/dev/null || echo 0)" -lt 1000000 ] && { echo "direct link failed for $n: $(head -c 300 "raw/$n" | tr '\n' ' ')"; rm -f "raw/$n"; }
+    fi
     [ -s "raw/$n" ] || echo "FAILED $n"
   fi
 done
