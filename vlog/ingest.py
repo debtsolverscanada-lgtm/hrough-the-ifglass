@@ -44,7 +44,7 @@ for i, p in enumerate(clips, 1):
         a = np.fromfile(wav, dtype=np.int16)[22:].astype(np.float32) / 32768
         hop = 1600  # 0.1 s
         loud = [round(float(20 * np.log10(np.sqrt(np.mean(a[k:k + hop] ** 2)) + 1e-6)), 1) for k in range(0, len(a), hop)]
-        s_iter, _ = model.transcribe(str(wav), word_timestamps=True, vad_filter=True, language='en',
+        s_iter, _ = model.transcribe(a, word_timestamps=True, vad_filter=True, language='en',
                                      initial_prompt='hi kids. Hi kids! New York, NYC.')
         for s in s_iter:
             segs.append({'s': round(s.start, 2), 'e': round(s.end, 2), 't': s.text.strip()})
