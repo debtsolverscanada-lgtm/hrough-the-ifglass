@@ -4,7 +4,7 @@ Reads the script named in meta.json ("script"), sends it to ElevenLabs in a few 
 <break> lines, stitched with request ids so the voice flows across chunks) and writes the MP3 named in
 meta.json ("voice"). Does nothing if that MP3 already exists, so hand-recorded episodes are never touched.
 
-needs: ELEVENLABS_API_KEY, and the voice id in ELEVENLABS_VOICE_ID (or "voice_id" in meta.json)
+needs: ELEVENLABS_API_KEY, and the voice id or name in ELEVENLABS_VOICE_ID (or "voice_id" in meta.json)
 usage: python3 pipeline/tts.py episodes/022-...
 """
 import json, os, re, subprocess, sys, tempfile
@@ -24,6 +24,13 @@ MODEL = TTS.get('model', os.environ.get('ELEVENLABS_MODEL') or 'eleven_multiling
 SETTINGS = {'stability': TTS.get('stability', 0.5), 'similarity_boost': TTS.get('similarity', 0.75),
             'style': TTS.get('style', 0.0), 'use_speaker_boost': True, 'speed': TTS.get('speed', 1.0)}
 LIMIT = 4000  # characters per request, well inside the model's limit
+
+if not re.fullmatch(r'[A-Za-z0-9]{20}', VOICE):  # a voice name ("Adam") instead of an id: look it up
+    vs = requests.get('https://api.elevenlabs.io/v1/voices', headers={'xi-api-key': KEY}, timeout=60).json().get('voices', [])
+    hit = [v for v in vs if v['name'].strip().lower() == VOICE.strip().lower()] or \
+          [v for v in vs if v['name'].strip().lower().startswith(VOICE.strip().lower())]
+    if not hit: sys.exit(f'no voice called {VOICE!r}; your voices: ' + ', '.join(v['name'] for v in vs))
+    print(f'voice {VOICE!r} -> {hit[0]["name"]} ({hit[0]["voice_id"]})'); VOICE = hit[0]['voice_id']
 
 text = open(f'{EP}/{META["script"]}').read().strip()
 paras, chunks, cur = re.split(r'\n\s*\n', text), [], ''
