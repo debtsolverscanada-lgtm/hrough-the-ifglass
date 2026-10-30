@@ -1,0 +1,60 @@
+name: Vlog edit
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Vlog id (folder under vlog/ holding edl.json)'
+        required: true
+      urls:
+        description: 'Space-separated NAME|URL pairs (Zapier-hydrated Drive files) for the raw clips'
+        required: true
+      preview:
+        description: 'Optional: only render the first N seconds'
+        required: false
+        default: ''
+permissions:
+  contents: write
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Free disk space
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL /usr/local/share/boost || true; df -h /
+      - name: Install tools
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg fonts-dejavu
+          pip install faster-whisper requests
+          mkdir -p ~/.fonts && cp vlog/fonts/*.ttf ~/.fonts/ && fc-cache -f
+      - name: Download raw footage
+        env:
+          URLS: ${{ github.event.inputs.urls }}
+        run: |
+          mkdir -p raw
+          for p in $URLS; do n="${p%%|*}"; u="${p#*|}"; (cd raw && curl -sSL --retry 5 --retry-all-errors -o "$n" "$u") || echo "FAILED $n"; done
+          ls -la raw; df -h /
+          for f in raw/*; do echo "$f: $(ffprobe -v error -show_entries stream=codec_type,r_frame_rate -of csv=p=0 "$f" | tr '\n' ' ')"; done
+      - name: Render
+        env:
+          PREVIEW: ${{ github.event.inputs.preview }}
+        run: |
+          D=vlog/${{ github.event.inputs.name }}
+          if [ -n "$PREVIEW" ]; then python3 vlog/edit.py $D --preview $PREVIEW; else python3 vlog/edit.py $D; fi
+          OUT=$(ls $D/vlog.mp4 $D/preview.mp4 2>/dev/null | head -1); echo "OUT=$OUT" >> $GITHUB_ENV
+          mkdir -p $D/review && ffmpeg -v error -y -i $OUT -vf "fps=1/8,scale=320:-1,tile=8x8" $D/review/sheet%02d.jpg
+          cp $D/work/caps.ass $D/review/caps.ass
+          rm -rf raw
+      - name: Upload to Drive (Vlog Edits)
+        env:
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+        run: python3 vlog/drive_put.py "$OUT" "${{ github.event.inputs.name }} - $(basename $OUT .mp4) - $(date -u +%Y%m%d-%H%M).mp4" | tee vlog/${{ github.event.inputs.name }}/review/drive.txt
+      - name: Commit review frames
+        run: |
+          git config user.name "vlog-bot" && git config user.email "vlog-bot@users.noreply.github.com"
+          git add vlog/${{ github.event.inputs.name }}/review
+          git commit -m "Vlog edit review: ${{ github.event.inputs.name }}" && git pull --rebase && git push
