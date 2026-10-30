@@ -1,0 +1,72 @@
+{
+ "raw": "raw",
+ "shorts": [
+  {"slug": "hi-kids", "hook": "WE SAY THIS IN|EVERY VIDEO", "title": "we say this in every vlog 😭 #nyc #vlog #shorts",
+   "music": {"song": "cool-kids.mp3", "from": 8.6, "gain": 0.18}, "segs": [
+    {"clip": "C0014.MP4", "s": 0.95, "e": 1.85, "boom": true}, {"clip": "C0015.MP4", "s": 0.0, "e": 1.0, "zoom": 1.15},
+    {"clip": "C0016.MP4", "s": 1.55, "e": 2.4}, {"clip": "C0048.MP4", "s": 0.6, "e": 1.75, "zoom": 1.15},
+    {"clip": "C0045.MP4", "s": 109.6, "e": 110.9}, {"clip": "C0014.MP4", "s": 12.6, "e": 13.5, "zoom": 1.15},
+    {"clip": "C0015.MP4", "s": 27.3, "e": 28.7, "boom": true}, {"clip": "C0047.MP4", "s": 258.0, "e": 259.9},
+    {"clip": "C0020.MP4", "s": 46.6, "e": 51.2, "zoom": 1.2}]},
+
+  {"slug": "airport-rating", "hook": "RATING TORONTO'S|BILLY BISHOP AIRPORT", "title": "rating Toronto's airport ✈️ 0/1 #toronto #nyc #shorts",
+   "music": {"song": "big-talk.mp3", "from": 0.0, "gain": 0.12}, "segs": [
+    {"clip": "C0015.MP4", "s": 11.0, "e": 14.0}, {"clip": "C0015.MP4", "s": 14.0, "e": 15.4, "zoom": 1.3, "boom": true},
+    {"clip": "C0015.MP4", "s": 17.5, "e": 25.6}]},
+
+  {"slug": "fit-check", "hook": "NYC SUBWAY|FIT CHECK", "title": "nyc subway fit check (we tried) 😭 #nyc #fitcheck #shorts",
+   "music": {"song": "cool-kids.mp3", "from": 30.0, "gain": 0.12}, "segs": [
+    {"clip": "C0016.MP4", "s": 5.0, "e": 15.2}, {"clip": "C0016.MP4", "s": 15.2, "e": 17.1, "zoom": 1.3, "boom": true, "freeze": 0.6}]},
+
+  {"slug": "better-cookies-at-home", "hook": "WHO MAKES|BETTER COOKIES?", "title": "my answer will ALWAYS be yes 🍪 #cookies #nyc #shorts",
+   "music": {"song": "someday.mp3", "from": 0.0, "gain": 0.12}, "segs": [
+    {"clip": "C0047.MP4", "s": 64.5, "e": 70.3}, {"clip": "C0047.MP4", "s": 84.3, "e": 87.4},
+    {"clip": "C0047.MP4", "s": 87.4, "e": 90.4, "zoom": 1.25, "boom": true}]},
+
+  {"slug": "better-than-crumbl", "hook": "NYC COOKIES|BETTER THAN CRUMBL?", "title": "nyc cookies better than Crumbl? honest review 🍪 #nycfood #shorts",
+   "music": {"song": "cool-kids.mp3", "from": 8.6, "gain": 0.1}, "segs": [
+    {"clip": "C0047.MP4", "s": 0.8, "e": 6.5}, {"clip": "C0047.MP4", "s": 36.5, "e": 41.5, "zoom": 1.15},
+    {"clip": "C0047.MP4", "s": 58.0, "e": 64.6}, {"clip": "C0047.MP4", "s": 243.0, "e": 250.8, "boom": true}]},
+
+  {"slug": "central-park-swings", "hook": "CENTRAL PARK|BUT WE'RE 5", "title": "central park but we're 5 years old 🛝 #centralpark #nyc #shorts",
+   "music": {"song": "space-junk.mp3", "from": 14.3, "gain": 0.25}, "segs": [
+    {"clip": "C0021.MP4", "s": 0.0, "e": 14.5}]},
+
+  {"slug": "first-nyc-pizza", "hook": "FIRST BITE OF|NYC PIZZA", "title": "first bite of real NYC pizza 🍕 #nycpizza #shorts",
+   "music": {"song": "big-talk.mp3", "from": 15.7, "gain": 0.5}, "segs": [
+    {"clip": "C0030.MP4", "s": 89.0, "e": 93.3}, {"clip": "C0030.MP4", "s": 93.3, "e": 104.0, "zoom": 1.15, "boom": true, "freeze": 0.6}]},
+
+  {"slug": "cream-cheese", "hook": "1.5 POUNDS OF|CREAM CHEESE", "title": "1.5 POUNDS of cream cheese 😳 brooklyn bagels #bagels #nyc #shorts",
+   "music": {"song": "big-talk.mp3", "from": 15.7, "gain": 0.12}, "segs": [
+    {"clip": "C0052.MP4", "s": 41.8, "e": 47.0, "zoom": 1.15, "boom": true}, {"clip": "C0051.MP4", "s": 131.4, "e": 136.2},
+    {"clip": "C0052.MP4", "s": 47.0, "e": 63.3}]},
+
+  {"slug": "miso-latte", "hook": "HONEST NYC|LATTE REVIEW", "title": "honest NYC latte review ☕ (where's the miso?) #nyc #coffee #shorts",
+   "music": {"song": "someday.mp3", "from": 0.0, "gain": 0.12}, "segs": [
+    {"clip": "C0020.MP4", "s": 7.6, "e": 13.3}, {"clip": "C0020.MP4", "s": 17.8, "e": 28.0},
+    {"clip": "C0020.MP4", "s": 41.0, "e": 46.0, "zoom": 1.2, "boom": true}]},
+
+  {"slug": "yogurt-review", "hook": "FANCY NYC|YOGURT REVIEW", "title": "fancy NYC yogurt review: it tastes like yogurt 😭 #nycfood #shorts",
+   "music": {"song": "cool-kids.mp3", "from": 30.0, "gain": 0.12}, "segs": [
+    {"clip": "C0019.MP4", "s": 20.5, "e": 31.0}, {"clip": "C0019.MP4", "s": 33.3, "e": 39.3, "zoom": 1.25, "boom": true}]},
+
+  {"slug": "looks-like-toronto", "hook": "TORONTO PEOPLE|IN NYC BE LIKE", "title": "torontonians in NYC be like 😭 #toronto #nyc #shorts",
+   "music": {"song": "big-talk.mp3", "from": 0.0, "gain": 0.12}, "segs": [
+    {"clip": "C0018.MP4", "s": 9.6, "e": 21.2}, {"clip": "C0018.MP4", "s": 21.2, "e": 22.9, "zoom": 1.3, "boom": true, "freeze": 0.7}]},
+
+  {"slug": "rain-umbrella", "hook": "NYC SAID|NO", "title": "day 3 in NYC: rain + a broken umbrella ☔ #nyc #shorts",
+   "music": {"song": "reverse-psychology.mp3", "from": 0.6, "gain": 0.15}, "segs": [
+    {"clip": "C0048.MP4", "s": 0.6, "e": 18.3, "full": true}]},
+
+  {"slug": "first-time-nyc", "hook": "POV: YOUR FIRST|TIME IN NYC", "title": "pov: your first time in NYC 🗽 #nyc #newyork #shorts",
+   "music": {"song": "big-talk.mp3", "from": 15.7, "gain": 0.9}, "beats": "big-talk.mp3", "segs": [
+    {"clip": "C0042.MP4", "s": 3.0, "mute": true}, {"clip": "C0017.MP4", "s": 8.0, "mute": true},
+    {"clip": "C0031.MP4", "s": 2.0, "mute": true}, {"clip": "C0043.MP4", "s": 2.0, "mute": true},
+    {"clip": "C0041.MP4", "s": 60.0, "mute": true}, {"clip": "C0021.MP4", "s": 3.0, "mute": true},
+    {"clip": "C0025.MP4", "s": 2.0, "mute": true}, {"clip": "C0033.MP4", "s": 5.0, "mute": true}]},
+
+  {"slug": "halloween-brownstones", "hook": "NYC ON HALLOWEEN|HITS DIFFERENT", "title": "NYC brownstones on halloween hit different 🎃 #halloween #nyc #shorts",
+   "music": {"song": "space-junk.mp3", "from": 14.3, "gain": 0.9}, "segs": [
+    {"clip": "C0025.MP4", "s": 0.0, "e": 9.0, "mute": true}, {"clip": "C0026.MP4", "s": 3.0, "e": 12.0, "mute": true}]}
+ ]
+}
