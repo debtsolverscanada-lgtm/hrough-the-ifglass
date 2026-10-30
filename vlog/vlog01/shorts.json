@@ -5,7 +5,6 @@
    "slug": "toronto-vs-nyc",
    "layout": "full",
    "tight": true,
-   "hook": "NYC BEAT TORONTO...|UNTIL THIS HAPPENED",
    "title": "NYC beat Toronto at everything… until THIS 😳 #toronto #nyc #shorts",
    "music": {
     "song": "reverse-psychology.mp3",
@@ -75,13 +74,13 @@
      "mute": true,
      "tag": "WHO WINS? COMMENT"
     }
-   ]
+   ],
+   "captions": false
   },
   {
    "slug": "no-bags",
    "layout": "full",
    "tight": true,
-   "hook": "THEY TOOK ALL|OUR BAGS",
    "title": "they took ALL our bags before our NYC trip 😭 #nyc #travel #shorts",
    "music": {
     "song": "reverse-psychology.mp3",
@@ -117,12 +116,12 @@
      "freeze": 0.7,
      "tag": "I LOOK HOME"
     }
-   ]
+   ],
+   "captions": false
   },
   {
    "slug": "4-days-in-nyc",
    "layout": "full",
-   "hook": "NYC IN 40 SECONDS|(DAY 3 WENT WRONG)",
    "title": "we did NYC in 4 days… day 3 went wrong ☔ #nyc #newyork #shorts",
    "music": {
     "song": "campus.mp3",
@@ -245,12 +244,12 @@
      "mute": true,
      "tag": "BYE NYC"
     }
-   ]
+   ],
+   "captions": false
   },
   {
    "slug": "hi-kids-counter",
    "layout": "full",
-   "hook": "WE CAN'T STOP|SAYING THIS",
    "title": "we can't stop saying this 😭 (count how many times) #nyc #vlog #shorts",
    "music": {
     "song": "cool-kids.mp3",
@@ -317,13 +316,13 @@
      "tag": "...BYE CATS??",
      "zoom": 1.15
     }
-   ]
+   ],
+   "captions": false
   },
   {
    "slug": "rating-everything-we-ate",
    "layout": "full",
    "tight": true,
-   "hook": "RATING ALL NYC FOOD|#1 ISN'T PIZZA",
    "title": "rating everything we ate in NYC… #1 isn't pizza 😳🍕 #nycfood #shorts",
    "music": {
     "song": "cool-kids.mp3",
@@ -336,17 +335,17 @@
      {
       "seg": 0,
       "at": 6.0,
-      "text": "LEON'S BAGELS  9.5"
+      "text": "LEON'S BAGELS  9.5/10"
      },
      {
       "seg": 1,
       "at": 2.0,
-      "text": "FANCY YOGURT  8"
+      "text": "FANCY YOGURT  8/10"
      },
      {
       "seg": 2,
       "at": 9.0,
-      "text": "MISO LATTE  9 / 8"
+      "text": "MISO LATTE  9/10"
      },
      {
       "seg": 3,
@@ -356,12 +355,12 @@
      {
       "seg": 4,
       "at": 9.0,
-      "text": "THIN COOKIES  8"
+      "text": "THIN COOKIES  8/10"
      },
      {
       "seg": 7,
       "at": 6.0,
-      "text": "BAGEL PUB  9"
+      "text": "APOLLO BAGELS  9/10"
      }
     ]
    },
@@ -409,7 +408,7 @@
      "clip": "C0051.MP4",
      "s": 215.0,
      "e": 217.6,
-     "tag": "BAGEL PUB"
+     "tag": "APOLLO BAGELS"
     },
     {
      "clip": "C0051.MP4",
@@ -423,7 +422,8 @@
      "mute": true,
      "tag": "WHICH ONE WOULD YOU TRY?"
     }
-   ]
+   ],
+   "captions": false
   }
  ]
 }

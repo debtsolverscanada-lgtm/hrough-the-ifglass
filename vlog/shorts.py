@@ -201,16 +201,16 @@ def make(sh, model):
     g.append(f'{mix}amix=inputs={2 + len(hits)}:normalize=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.0[out]')
     mixed = W / f'{slug}-mix.wav'
     run(['ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', ';'.join(g), '-map', '[out]', '-t', f'{total:.3f}', '-ar', '48000', str(mixed)])
-    ass = W / f'{slug}.ass'; captions(dia, ass, model, layout)
+    ass = W / f'{slug}.ass'; captions(dia, ass, model if sh.get('captions', True) else None, layout)
     vf = []
-    if layout == 'full':  # dark band behind the hook so it reads over any footage
+    if layout == 'full' and sh.get('hook'):  # dark band behind the hook so it reads over any footage
         vf.append('drawbox=x=0:y=150:w=iw:h=300:color=black@0.35:t=fill')
-    for k, line in enumerate(sh['hook'].split('|')):  # hook: up to two lines, marker font, slight pop-in
+    for k, line in enumerate(sh['hook'].split('|') if sh.get('hook') else []):  # hook: up to two lines, marker font, slight pop-in
         y = 190 + k * 130; size = min(108, int(990 / (0.66 * max(1, len(line)))))  # shrink long lines to fit
         vf.append(f"drawtext=fontfile={MARKER}:text='{esc(line)}':fontsize={size}:fontcolor={'white' if k == 0 else '0xFFD84D'}:"
                   f"borderw=9:bordercolor=black:x=(w-text_w)/2:y={y}+30*max(0\\,1-t/0.25)")
     if board:  # scoreboard: title + lines that appear on their segment and stay
-        x0, y0 = board.get('x', 60), board.get('y', 470)
+        x0, y0 = board.get('x', 60), board.get('y', 470 if sh.get('hook') else 180)
         vf.append(f"drawtext=fontfile={BOLD}:text='{esc(board['title'])}':fontsize=54:fontcolor=white:box=1:boxcolor=black@0.6:"
                   f"boxborderw=14:x={x0}:y={y0}:enable='gte(t,{board.get('from', 0)})'")
         for n, item in enumerate(board['items']):
