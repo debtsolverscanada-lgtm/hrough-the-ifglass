@@ -24,13 +24,15 @@ on:
   push:
     branches: [main]
     paths: ['episodes/*/READY']   # commit an empty READY file in an episode folder to build it
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 340
     steps:
       - uses: actions/checkout@v4
-        with: { fetch-depth: 2 }
+        with: { fetch-depth: 0 }
       - name: Pick episode
         id: ep
         run: |
@@ -45,6 +47,18 @@ jobs:
           sudo apt-get update && sudo apt-get install -y ffmpeg fonts-inter
           npm install --no-save playwright@1.48.2 && npx playwright install --with-deps chromium
           pip install pocketsphinx requests
+      - name: Voice with ElevenLabs (only if the episode has no recording)
+        if: ${{ !github.event.inputs.thumb_only }}
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          ELEVENLABS_VOICE_ID: ${{ secrets.ELEVENLABS_VOICE_ID }}
+        run: |
+          D="${{ steps.ep.outputs.dir }}"; V="$D/$(jq -r .voice "$D/meta.json")"
+          if [ ! -f "$V" ]; then
+            python3 pipeline/tts.py "$D"
+            git config user.name "ifglass-bot" && git config user.email "ifglass-bot@users.noreply.github.com"
+            git add "$V" && git commit -m "Voiceover for $(basename $D) (ElevenLabs)" && git pull --rebase --autostash && git push
+          fi
       - name: Build video, thumbnail, clips
         if: ${{ !github.event.inputs.thumb_only }}
         run: |
