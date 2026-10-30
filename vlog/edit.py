@@ -197,7 +197,8 @@ def expand(edl):
             beat = 60 / BEATS[INTRO['song']]['bpm'] if INTRO else None
             for k, (c, s, e) in enumerate(sec['clips']):
                 sp = sec.get('speed_from', 1.5) + (sec.get('speed_to', 2.6) - sec.get('speed_from', 1.5)) * k / max(1, n - 1)
-                if beat: sp = (e - s) / (beat * max(1, round((e - s) / sp / beat)))  # each cut lasts whole beats: 2 beats early, 1 beat at the end
+                if beat and sec.get('beats_each'): sp = (e - s) / (beat * sec['beats_each'])  # every cut the same length
+                elif beat: sp = (e - s) / (beat * max(1, round((e - s) / sp / beat)))  # each cut lasts whole beats: 2 beats early, 1 beat at the end
                 sfx.append(('whoosh', t)); add({'clip': c, 's': s, 'e': e, 'speed': round(sp, 3), 'zoom': 1.0 + 0.12 * (k % 2), 'flash': True, '_duck': 0.55})
         elif kind == 'teaser':  # beat-cut highlights on a song drop, letterboxed, ends on a freeze
             per = sec.get('beats_per_cut', 2); t0 = t
@@ -216,7 +217,7 @@ def expand(edl):
                 add(p); sec['_pieces'].append(dict(p))
             cues[-1]['dur'] = t - cues[-1]['at']
             sec['_song'] = (song, cues[-1]['from'] + cues[-1]['dur'] - sec.get('freeze', 0.7))
-            sfx.append(('scratch', t - sec.get('freeze', 0.7)))
+            if any(x['type'] == 'rewind' for x in edl['sections']): sfx.append(('scratch', t - sec.get('freeze', 0.7)))
         elif kind == 'rewind':  # replay the teaser backwards, fast, VHS
             teaser = next(s for s in edl['sections'] if s['type'] == 'teaser')
             t0 = t
