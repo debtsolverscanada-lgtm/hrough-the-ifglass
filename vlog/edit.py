@@ -52,7 +52,8 @@ def camera_speed(name):
         cap = re.search(rb'captureFps="([0-9.]+)', blob); fmt = re.search(rb'formatFps="([0-9.]+)', blob)
         if cap and fmt and float(cap.group(1)) > float(fmt.group(1)) * 1.05: sp = float(cap.group(1)) / float(fmt.group(1))
         _CAM[name] = round(sp, 3)
-        if sp != 1.0: print(f'{name}: camera slow-motion x{sp:.2f}, playing at real speed', flush=True)
+        if sp != 1.0: print(f'{name}: camera slow-motion x{sp:.2f} (captureFps {cap.group(1).decode()}), playing at real speed;'
+                            f' loudest sound in the file {audio_peak(f):.0f} dB', flush=True)
     return _CAM[name]
 
 
@@ -63,6 +64,20 @@ def clip_len(name):
 def photo(pattern):
     """A still from vlog/<id>/photos (kept in the encrypted private inputs) or the raw footage folder."""
     return next((D / 'photos').glob(pattern), None) or next(RAW.rglob(pattern), None)
+
+
+def audio_peak(p):
+    """Peak level of the clip's sound in dB (-91 = silent or no sound track)."""
+    if not has_audio(p): return -91.0
+    err = subprocess.run(['ffmpeg', '-v', 'info', '-t', '60', '-i', str(p), '-vn', '-af', 'volumedetect', '-f', 'null', '-'], capture_output=True, text=True).stderr
+    m = re.search(r'max_volume: (-?[0-9.]+|-inf) dB', err)
+    return float(m.group(1)) if m and m.group(1) != '-inf' else -91.0
+
+
+def talking(p):
+    """Pieces where we hear people: the music drops right down under these."""
+    if p.get('mute') or p.get('_silent') or p.get('reverse') or p.get('asset') or p.get('vol', 1.0) == 0: return False
+    return has_audio(clip(p['clip']))
 
 
 def has_audio(p):
@@ -157,7 +172,7 @@ def expand(edl):
             for k, (c, s, e) in enumerate(sec['clips']):
                 sp = sec.get('speed_from', 1.5) + (sec.get('speed_to', 2.6) - sec.get('speed_from', 1.5)) * k / max(1, n - 1)
                 if beat: sp = (e - s) / (beat * max(1, round((e - s) / sp / beat)))  # each cut lasts whole beats: 2 beats early, 1 beat at the end
-                sfx.append(('whoosh', t)); add({'clip': c, 's': s, 'e': e, 'speed': round(sp, 3), 'zoom': 1.0 + 0.12 * (k % 2), 'flash': True})
+                sfx.append(('whoosh', t)); add({'clip': c, 's': s, 'e': e, 'speed': round(sp, 3), 'zoom': 1.0 + 0.12 * (k % 2), 'flash': True, '_duck': 0.55})
         elif kind == 'teaser':  # beat-cut highlights on a song drop, letterboxed, ends on a freeze
             per = sec.get('beats_per_cut', 2); t0 = t
             if INTRO:  # the intro song keeps playing under the teaser; cut on its beats from where it has got to
@@ -296,12 +311,16 @@ def main():
     def bed(prefix, k0, cnt, out):  # mix a set of delayed inputs into one track (silence if none)
         if not cnt:
             run(['ffmpeg', '-v', 'error', '-y', '-f', 'lavfi', '-t', f'{total:.3f}', '-i', 'anullsrc=r=48000:cl=stereo', str(out)]); return
-        g = ';'.join(parts[k0:k0 + cnt]) + ';' + ''.join(f'[{prefix}{k}]' for k in range(cnt)) + f'amix=inputs={cnt}:normalize=0,apad[o]'
+        env = ''.join(f",volume={f}:enable='between(t,{a:.3f},{b:.3f})'" for a, b, f in (talk if prefix == 'm' else []))
+        g = ';'.join(parts[k0:k0 + cnt]) + ';' + ''.join(f'[{prefix}{k}]' for k in range(cnt)) + f'amix=inputs={cnt}:normalize=0,apad{env}[o]'
         run(['ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', g, '-map', '[o]', '-t', f'{total:.3f}', '-ar', '48000', '-ac', '2', str(out)])
+    # while people talk the song sits far underneath them (EDL "talk_music", default 18% volume)
+    duck = EDL.get('talk_music', 0.18)
+    talk = [(p['_t'], p['_t'] + (p['e'] - p['s']) / p.get('speed', 1.0), p.get('_duck', duck)) for p in pieces if talking(p)]
     bed('m', 0, n, W / 'music.wav'); bed('s', n, ns, W / 'sfx.wav')
     # duck music under dialogue, then mix
     run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'music.wav'), '-i', str(W / 'dialogue.wav'), '-i', str(W / 'sfx.wav'), '-filter_complex',
-         '[1:a]asplit[d1][d2];[0:a][d1]sidechaincompress=threshold=0.03:ratio=8:attack=20:release=400[duck];'
+         '[1:a]asplit[d1][d2];[0:a][d1]sidechaincompress=threshold=0.02:ratio=12:attack=15:release=350[duck];'
          '[duck][d2][2:a]amix=inputs=3:normalize=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.0:LRA=11[out]',
          '-map', '[out]', '-ar', '48000', str(W / 'mix.wav')])
     captions(W / 'dialogue.wav', W / 'caps.ass')
