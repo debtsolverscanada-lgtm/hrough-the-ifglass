@@ -1,0 +1,20 @@
+name: Vlog private inputs to Drive
+# One-off: copy the songs and per-vlog clip lists into Drive "Vlog Edits/_private" so they can leave the repo.
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install requests
+      - name: Upload
+        env:
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+        run: |
+          set -e
+          for f in vlog/music/*.mp3; do python3 vlog/drive_put.py "$f" "$(basename $f)" _private > /dev/null; echo "uploaded $(basename $f)"; done
+          for c in vlog/*/clips.json; do id=$(basename $(dirname $c)); python3 vlog/drive_put.py "$c" "$id-clips.json" _private > /dev/null; echo "uploaded $id-clips.json"; done
