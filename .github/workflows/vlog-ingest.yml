@@ -27,7 +27,7 @@ jobs:
       - name: Download raw footage
         run: |
           df -h . | tail -1
-          i=0; for u in ${{ github.event.inputs.folders }}; do i=$((i+1)); gdown --folder "$u" -O "raw/batch$i" || echo "WARN folder $i download issue"; done
+          vlog/fetch.sh ${{ github.event.inputs.folders }}
           find raw -type f -exec ls -la {} \; | awk '{print $5, $9}'
           du -sh raw; df -h . | tail -1
       - name: Transcribe and analyse

@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y ffmpeg && pip install gdown
       - run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL || true
-      - run: i=0; for u in ${{ github.event.inputs.folders }}; do i=$((i+1)); gdown -q --folder "$u" -O "raw/batch$i"; done
+      - run: vlog/fetch.sh ${{ github.event.inputs.folders }}
       - run: vlog/frames.sh raw "vlog/${{ github.event.inputs.name }}/frames" | tee "vlog/${{ github.event.inputs.name }}/durations.txt"
       - run: |
           git config user.name "vlog-bot" && git config user.email "vlog-bot@users.noreply.github.com"

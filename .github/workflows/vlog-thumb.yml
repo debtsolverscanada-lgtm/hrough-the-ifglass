@@ -27,7 +27,7 @@ jobs:
       - name: Free disk space
         run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL || true
       - name: Download raw footage
-        run: i=0; for u in ${{ github.event.inputs.folders }}; do i=$((i+1)); gdown --folder "$u" -O "raw/batch$i"; done
+        run: vlog/fetch.sh ${{ github.event.inputs.folders }}
       - name: Build thumbnails
         run: python3 vlog/thumb/make.py "vlog/${{ github.event.inputs.name }}"
       - name: Commit
