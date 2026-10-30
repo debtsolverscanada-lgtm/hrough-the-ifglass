@@ -6,6 +6,7 @@ const W_='#FF9A3C', B_='#3FA0FF', HOOD='#FFC21A', HOOD2='#E09A00';
 const th_defs=`<defs>
  <linearGradient id="thWall" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4A1680"/><stop offset=".55" stop-color="#7A1F8C"/><stop offset="1" stop-color="#2A0E4A"/></linearGradient>
  <linearGradient id="thSheet" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FF4FA3"/><stop offset="1" stop-color="#A05CFF"/></linearGradient>
+ <radialGradient id="thWarm" cx="35%" cy="55%" r="70%"><stop offset="0" stop-color="#FF9A3C" stop-opacity=".45"/><stop offset=".6" stop-color="#FF5E8A" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
  <linearGradient id="thSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0A1E5C"/><stop offset="1" stop-color="#1E7BFF"/></linearGradient>
 </defs>`;
 const th_room=`
@@ -33,12 +34,12 @@ const th_bed=`
 
  <!-- her: Japanese anime style. Thin warm line art, cel shading, big half-lidded eyes, spiky bangs + shine band -->
  <defs>
-  <linearGradient id="aHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF0A8"/><stop offset=".45" stop-color="#F6D36A"/><stop offset="1" stop-color="#D9A23E"/></linearGradient>
+  <linearGradient id="aHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE27A"/><stop offset=".45" stop-color="#F2B83C"/><stop offset="1" stop-color="#C47F1E"/></linearGradient>
   <linearGradient id="aSkin" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFEBDD"/><stop offset="1" stop-color="#FFD3BC"/></linearGradient>
   <linearGradient id="aIris" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3A1460"/><stop offset=".5" stop-color="#8E44D8"/><stop offset="1" stop-color="#F0B8FF"/></linearGradient>
  </defs>
  <!-- body lying on her stomach across the bed: bare back, thin black bra band -->
- <g stroke="#6A4426" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+ <g stroke="#6A4426" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" style="filter:drop-shadow(0 0 8px #FF9A3C)">
   <path d="M1360 712 Q1470 610 1620 596 Q1760 590 1890 650 L1890 700 Q1760 660 1620 690 Q1500 720 1360 800Z" fill="url(#aSkin)"/>
   <path d="M1470 664 Q1600 630 1780 640 Q1620 660 1470 690Z" fill="#E9B79C" stroke="none" opacity=".55"/>
   <path d="M1540 620 Q1600 646 1660 640" fill="none" opacity=".6"/>
@@ -57,7 +58,7 @@ const th_bed=`
  <path d="M1520 690 Q1620 700 1700 712 Q1760 720 1790 744" fill="none" stroke="#6A4426" stroke-width="40" stroke-linecap="round"/>
  <path d="M1520 690 Q1620 700 1700 712 Q1760 720 1790 744" fill="none" stroke="url(#aSkin)" stroke-width="32" stroke-linecap="round"/>
  <!-- head: three-quarter view, chin resting toward her hand -->
- <g transform="translate(1415,560) rotate(-8)" stroke="#6A4426" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
+ <g transform="translate(1415,560) rotate(-8)" style="filter:drop-shadow(0 0 10px #FF9A3C)" stroke="#6A4426" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
   <path d="M-120 -60 Q-150 -190 0 -200 Q150 -192 130 -60 Q150 30 210 120 Q170 110 140 70 Q150 150 210 210 Q130 200 100 120 Q90 190 40 230 Q20 160 30 100 Q-10 170 -70 200 Q-50 140 -60 90 Q-120 160 -200 180 Q-130 100 -120 -60Z" fill="url(#aHair)"/>
   <path d="M-82 -40 Q-86 30 -40 76 Q-10 104 0 108 Q14 100 44 74 Q88 28 84 -40 Q70 -110 0 -112 Q-70 -110 -82 -40Z" fill="url(#aSkin)"/>
   <path d="M-80 -30 Q0 -6 82 -30 Q70 -60 0 -64 Q-70 -60 -80 -30Z" fill="#F4C6AE" stroke="none" opacity=".6"/>
@@ -73,7 +74,7 @@ const th_bed=`
      <path d="M-22 26 Q0 32 22 24" fill="none" stroke="#6A4426" stroke-width="2.5"/>
      <path d="M-24 -30 Q0 -38 26 -30" fill="none" stroke="#C99036" stroke-width="4"/></g>`).join('')}
   <path d="M2 40 L-2 46" fill="none" stroke="#C9846A" stroke-width="3"/>
-  <path d="M-10 66 Q2 74 16 64" fill="none" stroke="#B4404F" stroke-width="4"/>
+  <path d="M-14 64 Q-4 58 2 62 Q8 58 18 63 Q6 76 -14 64Z" fill="#E2456A" stroke="#A8304E" stroke-width="2.5"/><path d="M-4 66 Q2 68 8 66" stroke="#FFD0DC" stroke-width="2.5" fill="none"/>
   ${[-1,1].map(d=>`<g transform="translate(${d*54},44)" stroke="#FF7F98" stroke-width="3" opacity=".8"><path d="M-14 4 l6 -10 M-4 4 l6 -10 M6 4 l6 -10"/></g>`).join('')}
  </g>
  <path d="M1060 800 Q1240 760 1420 770 Q1560 780 1640 812 Q1780 840 1910 836 L1910 960 L1060 960Z" fill="url(#thSheet)" stroke="${INK}" stroke-width="12" stroke-linejoin="round"/>
@@ -101,7 +102,11 @@ const th_glint=`<g transform="translate(320,500)">
  <g transform="translate(560,610)"><path d="M-70 -70 Q20 -100 50 -40 Q70 20 40 90 Q-20 120 -70 80Z" fill="#07040D" stroke="${W_}" stroke-width="10" style="filter:drop-shadow(0 0 14px ${W_})"/></g>`;
 const th_leaves=`<g fill="#071A10">${[[40,1010,200,-30],[170,1070,180,12],[-30,870,170,-62],[290,1090,150,34],[470,1100,120,50]].map(([x,y,r,a])=>`<ellipse cx="${x}" cy="${y}" rx="${r*.45}" ry="${r}" transform="rotate(${a} ${x} ${y})"/>`).join('')}</g>`;
 document.getElementById('s').innerHTML=TK.wrap(`${i16_DEFS}${th_defs}
- ${th_room}${th_bed}
+ ${th_room}
+ <rect x="560" y="0" width="1360" height="1080" fill="url(#thWarm)" style="mix-blend-mode:screen"/>
+ ${TK.bokeh(21,['#FFB15C','#FFD27A','#FF8FB8'],26,560).replace(/cx="(\d+(\.\d+)?)"/g,(m,x)=>`cx="${560+(+x)*0.7}"`)}
+ ${th_bed}
+
  ${th_door}${th_glint}${th_leaves}
  ${TK.text(690,175,'I SEE',{size:150,fill:'#fff',rot:-2})}
  ${TK.text(670,345,'EVERYTHING',{size:160,fill:'#FFF03B',rot:-2,depth:16})}
