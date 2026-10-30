@@ -55,7 +55,20 @@
      "clip": "C0018.MP4",
      "s": 9.6,
      "e": 21.2,
-     "tag": "NYC BAGELS"
+     "tag": "NYC BAGELS",
+     "photos": [
+      {
+       "file": "07-leons-everything-bagel.jpg",
+       "at": 0.3,
+       "dur": 3.0
+      },
+      {
+       "file": "01-leons-awning.jpg",
+       "at": 3.5,
+       "dur": 2.5,
+       "rot": 3
+      }
+     ]
     },
     {
      "clip": "C0018.MP4",
@@ -114,7 +127,7 @@
      "zoom": 1.3,
      "boom": true,
      "freeze": 0.7,
-     "tag": "I LOOK HOME"
+     "tag": "(A MAN WAS STARING AT ME)"
     }
    ],
    "captions": false
@@ -369,7 +382,20 @@
      "clip": "C0018.MP4",
      "s": 9.6,
      "e": 19.3,
-     "tag": "LEON'S BAGELS"
+     "tag": "LEON'S BAGELS",
+     "photos": [
+      {
+       "file": "07-leons-everything-bagel.jpg",
+       "at": 0.3,
+       "dur": 3.0
+      },
+      {
+       "file": "01-leons-awning.jpg",
+       "at": 3.5,
+       "dur": 2.5,
+       "rot": 3
+      }
+     ]
     },
     {
      "clip": "C0019.MP4",

@@ -23,7 +23,7 @@ GRADE = 'eq=contrast=1.06:saturation=1.16:gamma=0.98,colorbalance=rs=0.03:bs=-0.
 PANEL_Y, PANEL_H = 500, 810  # 4:3 panel 1080x810
 CAP_Y = {'panel': PANEL_Y + PANEL_H + 60, 'full': 1240}  # top of the caption line
 
-from edit import run, clip, has_audio, load_audio, camera_speed, NOROTATE  # same helpers as the long-form editor
+from edit import run, clip, has_audio, load_audio, camera_speed, photo, NOROTATE  # same helpers as the long-form editor
 
 
 def esc(t):
@@ -88,14 +88,23 @@ def seg(i, p, slug, layout):
                f"alpha='min(1,t/0.12)'")
     v = (f"[0:v]setpts=PTS/{cam},fps=30,split[x][y];[x]{bg}[b];[y]{fg},{GRADE}[f];{lay},noise=alls=6:allf=t{tag}"
          + (",fade=t=in:st=0:d=0.1:color=white" if p.get('boom') else '')
-         + (f",tpad=stop_mode=clone:stop_duration={p['freeze']}" if p.get('freeze') else '') + ',format=yuv420p[v]')
+         + (f",tpad=stop_mode=clone:stop_duration={p['freeze']}" if p.get('freeze') else '') + ',format=yuv420p[v0]')
+    pics = [o for o in p.get('photos', []) if photo(o['file'])]
+    vout = '[v0]'
+    for k, o in enumerate(pics):  # a photo pops up from the bottom in the middle of the frame
+        a, b = o.get('at', 0.5), o.get('at', 0.5) + o.get('dur', 3.0)
+        v += (f";[{k + 1}:v]scale={o.get('w', 760)}:-2,pad=iw+24:ih+24:12:12:white,format=rgba,rotate={o.get('rot', -3)}*PI/180:c=none:ow=rotw(iw):oh=roth(ih)[ph{k}]"
+              f";{vout}[ph{k}]overlay=x=(W-w)/2:y=(H-h)/2+120+H*max(0\\,1-(t-{a})/0.25):enable='between(t,{a},{b})'[pv{k}]")
+        vout = f'[pv{k}]'
+    v += f';{vout}null[v]'
     out_dur = dur + p.get('freeze', 0)
     af = f"aresample=48000,aformat=channel_layouts=stereo,volume={0 if p.get('mute') else p.get('vol', 1.0)}" \
          + (f",apad=pad_dur={p['freeze']}" if p.get('freeze') else '') + f",atrim=0:{out_dur:.3f},afade=t=in:d=0.02[a]"
     ins = (['-noautorotate'] if p['clip'] in NOROTATE else []) + ['-ss', f'{s:.3f}', '-t', f'{e - s:.3f}', '-i', str(src)]
+    for o in pics: ins += ['-loop', '1', '-t', f'{out_dur:.3f}', '-i', str(photo(o['file']))]
     if has_audio(src) and cam == 1.0: graph = f'{v};[0:a:0]{af}'
     else:
-        ins += ['-f', 'lavfi', '-t', f'{out_dur:.3f}', '-i', 'anullsrc=r=48000:cl=stereo']; graph = f'{v};[1:a]{af}'
+        ins += ['-f', 'lavfi', '-t', f'{out_dur:.3f}', '-i', 'anullsrc=r=48000:cl=stereo']; graph = f'{v};[{1 + len(pics)}:a]{af}'
     run(['ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', graph, '-map', '[v]', '-map', '[a]', '-t', f'{out_dur:.3f}',
          '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '18', '-r', '30', '-c:a', 'aac', '-b:a', '192k', str(out)])
     return out, out_dur
@@ -151,6 +160,10 @@ def expand(sh, segs):
         for k, (a, b) in enumerate(spans):
             q = dict(p, s=a, e=b)
             if k: q.pop('boom', None); q.pop('tag_pop', None)
+            if p.get('photos'):  # photo pop-ins are timed from the segment start: keep the ones that land in this span
+                off = a - p['s']
+                q['photos'] = [dict(o, at=max(0.0, o.get('at', 0.5) - off), dur=min(o.get('dur', 3.0), o.get('at', 0.5) + o.get('dur', 3.0) - off))
+                               for o in p['photos'] if o.get('at', 0.5) + o.get('dur', 3.0) > off and o.get('at', 0.5) < off + (b - a)]
             if k < len(spans) - 1: q.pop('freeze', None)
             if len(spans) > 1 and 'zoom' not in p: q['zoom'] = 1.0 if k % 2 == 0 else 1.1  # jump-cut punch-ins
             out.append(q); idx.append(i)
