@@ -62,5 +62,5 @@ jobs:
       - name: Commit
         run: |
           git config user.name "vlog-bot" && git config user.email "vlog-bot@users.noreply.github.com"
-          git add vlog/${{ github.event.inputs.name }}/thumb-*.jpg vlog/${{ github.event.inputs.name }}/probe 2>/dev/null; git add -A vlog/${{ github.event.inputs.name }}
+          git add -A vlog/${{ github.event.inputs.name }}
           git commit -m "Vlog thumbnails: ${{ github.event.inputs.name }}" && git pull --rebase && git push
