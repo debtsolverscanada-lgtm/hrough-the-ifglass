@@ -23,8 +23,25 @@ const th_bed=`
  <rect x="1080" y="460" width="820" height="270" rx="40" fill="#8A3A1E" stroke="${INK}" stroke-width="12"/>
  <rect x="1110" y="490" width="760" height="40" rx="16" fill="#B5552E" opacity=".7"/>
  <ellipse cx="1690" cy="700" rx="160" ry="54" fill="#FFF6FB" stroke="${INK}" stroke-width="8"/>
- ${person({x:1690,y:740,s:1.05,t:0,who:'kai',pose:'down',mouth:'grin',brows:'raised',look:-1})}
- <g transform="translate(1500,640) rotate(-18)">${extra({x:0,y:0,s:1.1,t:0,head:'#F6CDA4',mouth:'smile',pose:'hold',hair:th_hair,look:1})}</g>
+
+ <!-- him: black shadow stickman with white sneaky eyes, lying on the pillow -->
+ <g transform="translate(1700,650)">
+  <circle r="92" fill="#07040D" stroke="${W_}" stroke-width="6" style="filter:drop-shadow(0 0 12px ${W_})"/>
+  <path d="M-58 -6 Q-30 -32 -6 -10 Q-30 4 -58 -6Z M58 -6 Q30 -32 6 -10 Q30 4 58 -6Z" fill="#fff"/>
+  <circle cx="-26" cy="-12" r="7" fill="#07040D"/><circle cx="26" cy="-12" r="7" fill="#07040D"/>
+  <path d="M-30 40 Q6 58 40 30" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
+ </g>
+ <!-- her: anime style, long flowing hair, leaning over him on her elbows -->
+ <g transform="translate(1470,560) rotate(-8)">
+  <path d="M-120 -40 Q-150 -170 0 -180 Q150 -170 128 -40 Q150 80 200 170 Q120 150 90 60 Q60 160 -20 220 Q-60 160 -90 60 Q-130 150 -210 170 Q-150 80 -120 -40Z" fill="#3A1C14" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M-60 90 Q0 70 160 120 L230 210 Q120 230 -10 200Z" fill="#FF6FA8" stroke="${INK}" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M120 150 Q190 150 240 200" stroke="#F6CDA4" stroke-width="34" fill="none" stroke-linecap="round"/><path d="M120 150 Q190 150 240 200" stroke="${INK}" stroke-width="44" fill="none" stroke-linecap="round" opacity="0"/>
+  <ellipse cx="0" cy="-20" rx="96" ry="104" fill="#F6CDA4" stroke="${INK}" stroke-width="8"/>
+  <path d="M-100 -50 Q-90 -150 0 -150 Q90 -150 104 -50 Q70 -100 40 -96 Q30 -60 10 -50 Q0 -90 -30 -96 Q-60 -90 -100 -50Z" fill="#3A1C14" stroke="${INK}" stroke-width="6" stroke-linejoin="round"/>
+  ${[-1,1].map(d=>`<g transform="translate(${d*38},-6)"><ellipse rx="20" ry="26" fill="#fff" stroke="${INK}" stroke-width="5"/><ellipse cx="${d*2}" cy="4" rx="14" ry="20" fill="#5A2E1E"/><circle cx="${d*-4}" cy="-6" r="6" fill="#fff"/><path d="M-24 -22 Q0 -36 24 -20" stroke="${INK}" stroke-width="6" fill="none" stroke-linecap="round"/></g>`).join('')}
+  <ellipse cx="-56" cy="30" rx="18" ry="10" fill="#FF7FA0" opacity=".55"/><ellipse cx="56" cy="30" rx="18" ry="10" fill="#FF7FA0" opacity=".55"/>
+  <path d="M-18 42 Q2 56 22 40" stroke="${INK}" stroke-width="6" fill="none" stroke-linecap="round"/>
+ </g>
  <path d="M1060 790 Q1200 740 1340 730 Q1460 712 1560 728 Q1650 745 1730 760 Q1820 765 1910 775 L1910 960 L1060 960Z" fill="url(#thSheet)" stroke="${INK}" stroke-width="12" stroke-linejoin="round"/>
  <path d="M1120 820 Q1320 790 1500 830 M1560 830 Q1740 800 1880 840" stroke="#FFFFFF" stroke-opacity=".35" stroke-width="10" fill="none" stroke-linecap="round"/>
  <rect x="1040" y="930" width="880" height="110" rx="16" fill="#5A2412" stroke="${INK}" stroke-width="10"/>`;
