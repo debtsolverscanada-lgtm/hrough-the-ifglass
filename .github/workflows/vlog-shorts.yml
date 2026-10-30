@@ -49,8 +49,8 @@ jobs:
           GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
           GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
         run: |
-          D=vlog/${{ github.event.inputs.name }}
-          for f in $D/shorts/*.mp4; do python3 vlog/drive_put.py "$f" "$(basename $f)" "${{ github.event.inputs.name }} Shorts"; done | tee $D/review/shorts-drive.txt
+          set -o pipefail; D=vlog/${{ github.event.inputs.name }}
+          for f in $D/shorts/*.mp4; do python3 vlog/drive_put.py "$f" "$(basename $f)" "${{ github.event.inputs.name }} Shorts" || exit 1; done | tee $D/review/shorts-drive.txt
       - name: Commit review frames
         run: |
           git config user.name "vlog-bot" && git config user.email "vlog-bot@users.noreply.github.com"

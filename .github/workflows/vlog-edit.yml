@@ -50,7 +50,7 @@ jobs:
           GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
           GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
           GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
-        run: python3 vlog/drive_put.py "$OUT" "${{ github.event.inputs.name }} - $(basename $OUT .mp4) - $(date -u +%Y%m%d-%H%M).mp4" | tee vlog/${{ github.event.inputs.name }}/review/drive.txt
+        run: set -o pipefail; python3 vlog/drive_put.py "$OUT" "${{ github.event.inputs.name }} - $(basename $OUT .mp4) - $(date -u +%Y%m%d-%H%M).mp4" | tee vlog/${{ github.event.inputs.name }}/review/drive.txt
       - name: Commit review frames
         run: |
           git config user.name "vlog-bot" && git config user.email "vlog-bot@users.noreply.github.com"
