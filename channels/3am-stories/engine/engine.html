@@ -1,10 +1,14 @@
 <!doctype html><html><head><meta charset="utf-8"><style>
-@font-face{font-family:Marker;src:url(PermanentMarker-Regular.ttf)}@font-face{font-family:Hand;src:url(AmaticSC-Bold.ttf)}
+@font-face{font-family:Marker;src:url(PermanentMarker-Regular.ttf)}@font-face{font-family:Hand;src:url(AmaticSC-Bold.ttf)}@font-face{font-family:Anton;src:url(Anton-Regular.ttf)}
 html,body{margin:0;background:#000;overflow:hidden}svg{display:block}#s svg{width:100vw;height:100vh}
-</style></head><body><div id="s"></div><script src="scenes.js"></script><script>
+</style></head><body><div id="s"></div><script src="scenes.js"></script><script src="ya.js"></script><script>
 // window.setup(timeline, view) then window.frame(seconds, frameNo) draws that moment of the video.
 let TL = [], VIEW = [0, 420, 1920, 1080];
-window.setup = (tl, view) => { TL = tl; VIEW = view; return document.fonts.ready.then(() => true); };
+window.setup = (tl, view) => {
+  TL = tl; VIEW = view;
+  const urls = [...new Set(tl.flatMap((x) => [x.p?.img, ...(x.p?.imgs || [])].filter(Boolean)))];  // decode photos once up front
+  return Promise.all([document.fonts.ready, ...urls.map((u) => { const im = new Image(); im.src = u; return im.decode().catch(() => 0); })]).then(() => true);
+};
 window.frame = (T, n) => {
   let k = TL.findIndex((s) => T < s.start + s.dur); if (k < 0) k = TL.length - 1;
   const s = TL[k], t = T - s.start;
@@ -12,6 +16,8 @@ window.frame = (T, n) => {
   const fadeIn = s.fade ?? 0.25, out = Math.min(0.25, s.dur / 4);   // quick dip to black between scenes
   const a = Math.max(t < fadeIn ? 1 - t / fadeIn : 0, t > s.dur - out ? (t - (s.dur - out)) / out : 0);
   document.getElementById('s').innerHTML = svg + (a > 0 ? `<div style="position:fixed;inset:0;background:#000;opacity:${a}"></div>` : '');
+  const ims = [...document.querySelectorAll('#s image')];
+  return ims.length ? Promise.all(ims.map((i) => i.decode ? i.decode().catch(() => 0) : 0)) : undefined;
 };
 window.ready = true;
 </script></body></html>

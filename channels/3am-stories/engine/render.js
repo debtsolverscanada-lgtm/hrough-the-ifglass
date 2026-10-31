@@ -2,6 +2,9 @@
 const { chromium } = require('playwright'); const fs = require('fs'); const path = require('path');
 const [tlFile, out, fmt, wk = '0', n = '1'] = process.argv.slice(2);
 const TL = JSON.parse(fs.readFileSync(tlFile)); const FPS = 30;
+const ROOT = path.resolve(__dirname, '../../..');  // photo paths in story.json are relative to the repo root
+const dataUrl = (f) => (f.startsWith('data:') ? f : `data:image/${f.endsWith('.png') ? 'png' : 'jpeg'};base64,` + fs.readFileSync(path.resolve(ROOT, f)).toString('base64'));
+for (const s of TL) { if (s.p?.img) s.p.img = dataUrl(s.p.img); if (s.p?.imgs) s.p.imgs = s.p.imgs.map(dataUrl); }
 const view = fmt === 'short' ? [480, 250, 960, 1707] : [0, 420, 1920, 1080];  // Shorts frame a little tighter
 const size = fmt === 'short' ? { width: 1080, height: 1920 } : { width: 1920, height: 1080 };
 const total = Math.round(TL.reduce((m, s) => Math.max(m, s.start + s.dur), 0) * FPS);

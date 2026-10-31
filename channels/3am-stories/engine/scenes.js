@@ -35,6 +35,9 @@ const skHatch = (x, y, w, h, n, sl = 0.35) => [...Array(n)].map((_, k) => `<path
 const D3 = `<defs>
   <radialGradient id="k3skin" cx="40%" cy="32%" r="75%"><stop offset="0" stop-color="#ffe3cc"/><stop offset=".55" stop-color="#f2b896"/><stop offset=".85" stop-color="#d48d6c"/><stop offset="1" stop-color="#a8624a"/></radialGradient>
   <radialGradient id="k3old" cx="40%" cy="32%" r="75%"><stop offset="0" stop-color="#ffe9da"/><stop offset=".6" stop-color="#e8bea6"/><stop offset="1" stop-color="#a87a66"/></radialGradient>
+  <radialGradient id="k3tan" cx="40%" cy="32%" r="75%"><stop offset="0" stop-color="#e8b48c"/><stop offset=".55" stop-color="#c88a60"/><stop offset=".85" stop-color="#a06842"/><stop offset="1" stop-color="#744628"/></radialGradient>
+  <radialGradient id="k3earTan" cx="40%" cy="40%" r="70%"><stop offset="0" stop-color="#c88a60"/><stop offset="1" stop-color="#7a4a2c"/></radialGradient>
+  <radialGradient id="k3fair" cx="40%" cy="32%" r="75%"><stop offset="0" stop-color="#fff0e4"/><stop offset=".55" stop-color="#f8d4bc"/><stop offset=".85" stop-color="#e2ae92"/><stop offset="1" stop-color="#bc8268"/></radialGradient>
   <radialGradient id="k3ear" cx="40%" cy="40%" r="70%"><stop offset="0" stop-color="#f6c0a0"/><stop offset="1" stop-color="#b86c52"/></radialGradient>
   <linearGradient id="k3hair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a3a24"/><stop offset=".6" stop-color="#2e1c10"/><stop offset="1" stop-color="#160c06"/></linearGradient>
   <radialGradient id="k3sclera" cx="45%" cy="35%" r="70%"><stop offset="0" stop-color="#ffffff"/><stop offset=".7" stop-color="#f1ece8"/><stop offset="1" stop-color="#c9bcb6"/></radialGradient>
@@ -49,7 +52,7 @@ const D3 = `<defs>
 let K3ID = 0;
 function k3Head(o) {
   const look = o.look || 0, eyes = o.eyes || 'normal', ink = '#3a1a10';
-  const skin = o.skin === 'url(#skinOld)' ? 'url(#k3old)' : o.skin && o.skin.startsWith('#') ? o.skin : 'url(#k3skin)';
+  const skin = o.skin === 'url(#skinOld)' ? 'url(#k3old)' : o.skin && (o.skin.startsWith('#') || o.skin.startsWith('url(#k3')) ? o.skin : 'url(#k3skin)';
   const open = o.blink || eyes === 'closed' ? 0 : eyes === 'wide' ? 1.25 : eyes === 'tired' ? 0.5 : 1;
   const face = 'M-122 -20 Q-128 -150 0 -152 Q128 -150 122 -20 Q124 70 86 118 Q44 160 0 160 Q-44 160 -86 118 Q-124 70 -122 -20Z';
   if (o.back) return `<ellipse cy="175" rx="120" ry="26" fill="url(#k3shadow)"/>
@@ -76,7 +79,9 @@ function k3Head(o) {
     </g>`;
   };
   const browY = eyes === 'wide' ? -78 : -64, bt = eyes === 'wide' ? -12 : eyes === 'tired' ? 4 : -4;
-  const mouth = o.smile
+  const mouth = o.happy
+    ? `<path d="M-44 70 Q0 ${70 + 60 * o.happy} 44 70 Q0 82 -44 70Z" fill="url(#k3mouth)" stroke="${ink}" stroke-width="4"/><path d="M-36 73 Q0 80 36 73" stroke="#fff" stroke-width="8" fill="none"/><ellipse cy="${78 + 34 * o.happy}" rx="18" ry="8" fill="#e06a6a"/>`
+    : o.smile
     ? `<path d="M-70 58 Q0 ${58 + 80 * o.smile} 70 58 Q0 ${74 + 20 * o.smile} -70 58Z" fill="url(#k3mouth)" stroke="${ink}" stroke-width="4"/>${[...Array(10)].map((_, k) => `<path d="M${-55 + k * 12} ${63 + 2 * Math.sin(k)} l6 13 l6 -13" fill="#fff8ec" stroke="#5a3a2a" stroke-width="1.5"/>`).join('')}`
     : o.mouth === 'o' ? `<ellipse cx="0" cy="84" rx="20" ry="26" fill="url(#k3mouth)" stroke="${ink}" stroke-width="4"/><ellipse cx="0" cy="98" rx="10" ry="6" fill="#d05050" opacity=".7"/>`
     : eyes === 'wide' ? `<path d="M-30 80 Q0 68 30 80 Q0 98 -30 80Z" fill="url(#k3mouth)" stroke="${ink}" stroke-width="4"/>`
@@ -86,8 +91,8 @@ function k3Head(o) {
     <path d="M-80 -150 Q-20 -176 50 -160" stroke="#9a6a44" stroke-width="12" fill="none" stroke-linecap="round" opacity=".55"/>
     <path d="M-40 -164 Q10 -176 40 -168" stroke="#d8a878" stroke-width="5" fill="none" stroke-linecap="round" opacity=".6"/>`;
   return `<ellipse cy="182" rx="130" ry="26" fill="url(#k3shadow)"/>
-    <path d="M-52 110 L-56 200 L56 200 L52 110Z" fill="#c07a5c"/><ellipse cy="130" rx="60" ry="20" fill="#7a3a28" opacity=".5" filter="url(#k3blur)"/>
-    <ellipse cx="-124" cy="10" rx="22" ry="34" fill="url(#k3ear)"/><ellipse cx="124" cy="10" rx="22" ry="34" fill="url(#k3ear)"/>
+    <path d="M-52 110 L-56 200 L56 200 L52 110Z" fill="${o.neck || '#c07a5c'}"/><ellipse cy="130" rx="60" ry="20" fill="#7a3a28" opacity=".5" filter="url(#k3blur)"/>
+    <ellipse cx="-124" cy="10" rx="22" ry="34" fill="${o.ear || 'url(#k3ear)'}"/><ellipse cx="124" cy="10" rx="22" ry="34" fill="${o.ear || 'url(#k3ear)'}"/>
     <path d="M-126 12 q8 -14 0 -26 M126 12 q-8 -14 0 -26" stroke="#9a5440" stroke-width="5" fill="none"/>
     <path d="${face}" fill="${skin}"/>
     ${o.light ? `<path d="${face}" fill="${o.light}" opacity=".22"/><path d="M-118 -10 Q-118 80 -60 135" stroke="${o.light}" stroke-width="10" fill="none" opacity=".5" stroke-linecap="round"/>` : ''}
@@ -246,7 +251,7 @@ function person(x, y, s, o = {}) {
   if (STYLE === '3d') {
     const tint = o.body && !o.body.startsWith('url') ? o.body : null, rx = o.reach ? 230 : 150, ry = o.reach ? 300 : 430;
     const fill = tint || 'url(#k3hood)', sl = tint || '#2e3a5e';
-    const hand = (hx, hy) => `<g transform="translate(${hx},${hy})"><ellipse rx="32" ry="36" fill="url(#k3skin)"/><path d="M-20 -6 q-4 24 6 30 M-4 -4 q-2 26 6 32 M12 -4 q0 26 6 28" stroke="#a8624a" stroke-width="4" fill="none" opacity=".7"/><ellipse cx="-8" cy="-14" rx="10" ry="6" fill="#fff" opacity=".35"/></g>`;
+    const hand = (hx, hy) => `<g transform="translate(${hx},${hy})"><ellipse rx="32" ry="36" fill="${o.skin && o.skin.startsWith('url(#k3') ? o.skin : 'url(#k3skin)'}"/><path d="M-20 -6 q-4 24 6 30 M-4 -4 q-2 26 6 32 M12 -4 q0 26 6 28" stroke="#a8624a" stroke-width="4" fill="none" opacity=".7"/><ellipse cx="-8" cy="-14" rx="10" ry="6" fill="#fff" opacity=".35"/></g>`;
     return `<g transform="translate(${x},${y + bob}) scale(${s})">
       <ellipse cy="530" rx="200" ry="40" fill="url(#k3shadow)"/>
       <path d="M-110 70 Q0 -10 110 70 L70 120 Q0 90 -70 120Z" fill="${sl}"/>

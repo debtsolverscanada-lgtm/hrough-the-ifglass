@@ -1,0 +1,462 @@
+{
+ "format": "long",
+ "style": "3d",
+ "voice": "Adam",
+ "tts": {
+  "stability": 0.5,
+  "similarity": 0.8,
+  "style": 0.25,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "yaThumb",
+  "style": "3d",
+  "img": "channels/youtube-afterlife/stories/001-wolfieraps/photos/udBgnu1hbLU.jpg",
+  "crop": "right",
+  "title": "WHAT HAPPENED",
+  "sub": "TO WOLFIE?",
+  "name": "WOLFIE",
+  "years": "2013-2020",
+  "cap": "7 MILLION SUBS"
+ },
+ "yt": {
+  "title": "What Happened to WolfieRaps? (The Scandal, The Silence, and Where He Is Now)",
+  "description": "WolfieRaps had 7 million subscribers and videos with 25 million views. Then in May 2018, an Instagram post accused him of cheating on Sylvia Gani. He denied it, the couple split, and his main channel was never the same. His last upload was in October 2020.\n\nSo what happened to Wolfie? This is the full story, and where he and Sylvia are now.\n\nThe claims covered in this video are allegations that were never proven, and Wolfie denied them.\n\nSources:\nThe Daily Dot: https://www.dailydot.com/upstream/wolfieraps-cheating/\nYouTube Wiki: https://youtube.fandom.com/wiki/Wolfie\nWolfie channel and video stats (YouTube, Oct 2026)\nMoreWolfie channel (YouTube)\nSylvia Gani channel (YouTube)\n\nPhotos are shown for commentary and criticism under fair use.\n\n#wolfieraps #youtubeafterlife #whathappened #sylviagani #youtubedrama",
+  "tags": [
+   "wolfieraps",
+   "what happened to wolfieraps",
+   "wolfie",
+   "sylvia gani",
+   "charles and sylvia",
+   "morewolfie",
+   "youtube afterlife",
+   "youtubers who disappeared",
+   "youtube drama",
+   "youtuber fell off",
+   "where are they now"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "yaCard",
+   "text": "In May 2018, one of the biggest couples on YouTube went silent overnight.",
+   "p": {
+    "text": "MAY 2018",
+    "sub": "one of YouTube's biggest couples goes silent"
+   },
+   "pause": 0.3,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaCouple",
+   "text": "Seven million subscribers. Millions of views on almost every upload. And then, one Instagram post changed everything.",
+   "p": {
+    "mood": "happy",
+    "cam": true
+   },
+   "pause": 0.1
+  },
+  {
+   "scene": "yaCouple",
+   "p": {
+    "mood": "happy",
+    "crack": true
+   },
+   "dur": 1.2,
+   "sfx": [
+    [
+     "boom",
+     0.05
+    ]
+   ]
+  },
+  {
+   "scene": "yaTitle",
+   "text": "This is the story of WolfieRaps. And what happened to the channel that seven million people subscribed to.",
+   "p": {
+    "name": "WOLFIERAPS",
+    "years": "2013 - 2020",
+    "sub": "WHAT HAPPENED?"
+   },
+   "pause": 0.5,
+   "sfx": [
+    [
+     "sting",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "yaWolfie",
+   "text": "Before the drama, there was Charles. He started his channel back in 2013, rapping, vlogging, and trying basically anything that might stick.",
+   "p": {
+    "prop": "mic"
+   },
+   "pause": 0.2
+  },
+  {
+   "scene": "yaPhoto",
+   "text": "And in 2016, something stuck. Crazy science tricks. Impossible challenges. Big reactions. This water to ice magic trick alone has almost twenty five million views.",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/001-wolfieraps/photos/udBgnu1hbLU.jpg",
+    "cap": "24.8 MILLION VIEWS",
+    "src": "Wolfie, YouTube, July 2016",
+    "tilt": -3
+   },
+   "pause": 0.2
+  },
+  {
+   "scene": "yaPhotos",
+   "text": "Then came the girlfriend pranks. Pranks on Sylvia Gani, his girlfriend, who had her own channel too. A bathroom revenge prank. Duct taping the pool. Ten million views, fifteen million views.",
+   "p": {
+    "imgs": [
+     "channels/youtube-afterlife/stories/001-wolfieraps/photos/Phwt16FKkCk.jpg",
+     "channels/youtube-afterlife/stories/001-wolfieraps/photos/I68qd3Qn-Vc.jpg"
+    ],
+    "caps": [
+     "12.5M VIEWS (2016)",
+     "14.5M VIEWS (2017)"
+    ],
+    "src": "Wolfie, YouTube"
+   },
+   "pause": 0.2
+  },
+  {
+   "scene": "yaCounter",
+   "text": "Fans didn't just watch the videos. They watched the relationship. They were invested in them. And the subscriber count just kept climbing.",
+   "p": {
+    "from": 0,
+    "to": 7050000,
+    "mode": "rise",
+    "src": "YouTube channel stats, Oct 2026"
+   },
+   "pause": 0.4
+  },
+  {
+   "scene": "yaCouple",
+   "text": "Which is exactly why what happened next hit so hard.",
+   "p": {
+    "mood": "happy"
+   },
+   "pause": 0.6,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "yaTimeline",
+   "text": "May 2018.",
+   "p": {
+    "items": [
+     [
+      "SEP 2017",
+      "pool prank"
+     ],
+     [
+      "MAY 2018",
+      "the post"
+     ],
+     [
+      "JUN 2018",
+      "breakup"
+     ],
+     [
+      "NOV 2018",
+      "On Me"
+     ],
+     [
+      "OCT 2020",
+      "last upload"
+     ]
+    ],
+    "hi": 1
+   },
+   "pause": 0.4
+  },
+  {
+   "scene": "yaPost",
+   "text": "A girl on Instagram started posting about Wolfie. She claimed the two of them had been involved since September 2017, and that she'd met him at another YouTuber's party. She called herself his side chick.",
+   "p": {
+    "photo": true
+   },
+   "pause": 0.2
+  },
+  {
+   "scene": "yaPost",
+   "text": "She shared what she said were flirty messages from him, with his contact saved as daddy.",
+   "p": {
+    "contact": "Daddy",
+    "msgs": [
+     [
+      "them",
+      "x"
+     ],
+     [
+      "me",
+      "x"
+     ],
+     [
+      "them",
+      "x"
+     ]
+    ]
+   },
+   "pause": 0.2,
+   "sfx": [
+    [
+     "buzzphone",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "yaCard",
+   "text": "And this is the part that turned gossip into a scandal. Reports at the time said she was still in high school. Her exact age was disputed online. But either way, the internet exploded.",
+   "p": {
+    "text": "SHE WAS REPORTED|TO BE IN HIGH SCHOOL",
+    "sub": "her exact age was disputed online",
+    "color": "#ff3a4a",
+    "src": "The Daily Dot, May 2018"
+   },
+   "pause": 0.3,
+   "sfx": [
+    [
+     "sting",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaNews",
+   "text": "Drama channels picked it up. The Daily Dot wrote about it. And when the couple was asked for a comment... they said nothing.",
+   "p": {
+    "headline": "YOUTUBER CALLED OUT ON INSTAGRAM",
+    "ticker": "Couple says they have no comment"
+   },
+   "pause": 0.4
+  },
+  {
+   "scene": "yaPost",
+   "text": "To be clear: these were allegations. They were never proven.",
+   "p": {
+    "contact": "",
+    "photo": true,
+    "stamp": "ALLEGED"
+   },
+   "pause": 0.4
+  },
+  {
+   "scene": "yaCard",
+   "text": "About a week later, Wolfie gave his side on Twitter. He denied cheating.",
+   "p": {
+    "text": "HE DENIED IT.",
+    "sub": "Wolfie gave his side on Twitter about a week later",
+    "color": "#ffd86a"
+   },
+   "pause": 0.4
+  },
+  {
+   "scene": "yaWolfie",
+   "text": "But by then, the story was everywhere. And for a channel that made fake cheating pranks and fake breakups, a real cheating accusation was a nightmare. Comment sections filled up with the same question. Was any of it ever real?",
+   "p": {
+    "prop": "phone",
+    "eyes": "tired",
+    "look": 0.8
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "yaCouple",
+   "text": "Then, on June tenth, Sylvia posted a video called How to Survive Heartbreak. She didn't go into detail. But fans read between the lines. The couple that built an empire on fake breakups had actually broken up.",
+   "p": {
+    "mood": "apart",
+    "rain": true
+   },
+   "pause": 0.5,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "yaPhoto",
+   "text": "And here's what most people missed. Look at Wolfie's uploads. May 27th, 2018: Saltiest Drink in the World. Then nothing. For almost six months.",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/001-wolfieraps/photos/DtUqWKhMbKk.jpg",
+    "cap": "LAST UPLOAD BEFORE THE SILENCE",
+    "src": "Wolfie, YouTube, May 27 2018",
+    "tilt": 3
+   },
+   "pause": 0.4
+  },
+  {
+   "scene": "yaPhoto",
+   "text": "When he finally came back in November, it wasn't with a challenge. It was a music video. Charles, On Me. And the girl in the video? Sylvia.",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/001-wolfieraps/photos/5q_cbIyE8uY.jpg",
+    "cap": "ON ME, NOVEMBER 2018",
+    "src": "Wolfie, YouTube, Nov 21 2018",
+    "tilt": -2,
+    "crop": "right"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "yaPhoto",
+   "text": "By late 2019, Sylvia was answering fans' assumptions about her, including one that they never actually broke up. They were back together.",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/001-wolfieraps/photos/GpPnAD3C3oY.jpg",
+    "cap": "OCTOBER 2019",
+    "src": "Sylvia Gani, YouTube, Oct 2019",
+    "tilt": 2
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "yaChart",
+   "text": "But the main channel never came back the same. Before the scandal, his big videos pulled ten, fifteen, twenty five million views. After it, most uploads struggled to break one million.",
+   "p": {
+    "title": "VIEWS PER VIDEO",
+    "bars": [
+     [
+      "Water to Ice (2016)",
+      24.8,
+      "24.8M"
+     ],
+     [
+      "Pool Prank (2017)",
+      14.5,
+      "14.5M"
+     ],
+     [
+      "Saltiest Drink (May 2018)",
+      2.6,
+      "2.6M"
+     ],
+     [
+      "Helmet (2019)",
+      0.97,
+      "968K"
+     ],
+     [
+      "Truth or Drink (2020)",
+      0.5,
+      "495K"
+     ],
+     [
+      "Among Us (2020)",
+      0.62,
+      "616K"
+     ]
+    ],
+    "hi": 2,
+    "src": "YouTube view counts, Oct 2026"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "yaPhoto",
+   "text": "And on October 17th, 2020, he posted this. A giant Among Us impostor. It's the last video on the WolfieRaps channel. Six years later, it's still the last one.",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/001-wolfieraps/photos/4PuGb2S8D54.jpg",
+    "cap": "THE LAST VIDEO, OCT 2020",
+    "src": "Wolfie, YouTube, Oct 17 2020",
+    "tilt": -3
+   },
+   "pause": 0.4,
+   "sfx": [
+    [
+     "silence_hit",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "yaCounter",
+   "text": "Seven million subscribers. Zero new videos.",
+   "p": {
+    "from": 7050000,
+    "to": 7050000,
+    "mode": "freeze",
+    "label": "SUBSCRIBERS, 0 NEW VIDEOS",
+    "src": "YouTube channel stats, Oct 2026"
+   },
+   "pause": 0.5
+  },
+  {
+   "scene": "yaCard",
+   "text": "Was it the scandal? Or was it the end of the prank era? Probably both. The audience grew up, the algorithm changed, and a lot of channels from that time quietly faded away. Wolfie's just had a scandal attached to the fade.",
+   "p": {
+    "text": "THE SCANDAL?|OR THE END OF AN ERA?",
+    "color": "#fff"
+   },
+   "pause": 0.4
+  },
+  {
+   "scene": "yaTitle",
+   "text": "But here's the twist. Wolfie didn't actually disappear.",
+   "p": {
+    "name": "WOLFIERAPS",
+    "years": "2013 - 2020"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "yaPhotos",
+   "text": "He and Sylvia moved to a different channel. MoreWolfie, now Charles and Sylvia. Short couples comedy videos, almost every single day. That channel has five million subscribers and over two billion views.",
+   "p": {
+    "imgs": [
+     "channels/youtube-afterlife/stories/001-wolfieraps/photos/aYP1qP9cOxs.jpg",
+     "channels/youtube-afterlife/stories/001-wolfieraps/photos/pLerkMcTqj0.jpg"
+    ],
+    "caps": [
+     "CHARLES & SYLVIA",
+     "OCTOBER 2026"
+    ],
+    "src": "MoreWolfie, YouTube"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "yaPhoto",
+   "text": "And now, they're expecting a baby. Just this week, they posted about the perfect pregnancy Halloween costume.",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/001-wolfieraps/photos/AiJKsn-lGAM.jpg",
+    "cap": "OCTOBER 30, 2026",
+    "src": "MoreWolfie, YouTube, Oct 30 2026",
+    "tilt": 2
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "yaCouple",
+   "text": "The guy who used to fake breakups for views now just posts his real life. With the same person.",
+   "p": {
+    "mood": "happy",
+    "bump": 1,
+    "icecream": true
+   },
+   "pause": 0.4
+  },
+  {
+   "scene": "yaTitle",
+   "text": "So, did WolfieRaps fall off? The channel did. Charles didn't. Let us know in the comments: was it the scandal, or the end of an era? And tell us which YouTuber we should bring back from the afterlife next.",
+   "p": {
+    "name": "WOLFIERAPS",
+    "years": "2013 - 2020",
+    "sub": "SUBSCRIBE"
+   },
+   "pause": 1.0
+  }
+ ]
+}
