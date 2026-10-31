@@ -274,7 +274,7 @@ S.face = (t, d, p) => {
 };
 // near-black screen (the viewer sees their own reflection), with an optional small line of text
 S.black = (t, d, p) => `${room('#000')}
-    ${p.text ? `<text x="960" y="${p.y || 1700}" text-anchor="middle" font-family="Marker" font-size="${fit(p.text, p.size || 70)}" fill="${p.color || '#6a6a6a'}" opacity="${ease((t - (p.at || 0)) / 0.5)}">${p.text}</text>` : ''}`;
+    ${p.text ? String(p.text).split('|').map((ln, i, all) => `<text x="960" y="${(p.y || 1700) + (i - (all.length - 1) / 2) * (p.size || 70) * 1.25}" text-anchor="middle" font-family="Marker" font-size="${fit(ln, p.size || 70)}" fill="${p.color || '#6a6a6a'}" opacity="${ease((t - (p.at || 0)) / 0.5)}">${ln}</text>`).join('') : ''}`;
 
 // Thumbnail, "3D" look: sphere-shaded head with specular highlight and cast shadow, glossy veined eyes,
 // a solid rim-lit creature looming close (bloodshot glowing eyes, jagged shaded grin), fog + light rays for depth,

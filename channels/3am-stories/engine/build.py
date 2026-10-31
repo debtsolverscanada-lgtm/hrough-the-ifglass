@@ -82,7 +82,7 @@ for i, s in enumerate(ST['scenes']):
         lead = 0.25
         dur = lead + dur_of(mp3) + s.get('pause', 0.45)
         voices.append((mp3, t + lead, s.get('fx')))
-        if s['scene'] == 'text': words = []  # the words are already on screen
+        if s['scene'] in ('text', 'black'): words = []  # the words are already on screen
         caps += [(w, t + lead + a0, t + lead + b0) for w, a0, b0 in words]
     else:
         dur = s.get('dur', 2.5)
