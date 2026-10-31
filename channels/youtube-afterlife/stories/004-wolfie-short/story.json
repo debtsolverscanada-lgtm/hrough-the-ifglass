@@ -1,0 +1,236 @@
+{
+ "format": "short",
+ "style": "3d",
+ "voice": "Adam",
+ "tts": {
+  "stability": 0.45,
+  "similarity": 0.8,
+  "style": 0.35,
+  "speed": 1.08
+ },
+ "thumb": {
+  "scene": "yaThumb",
+  "style": "3d",
+  "img": "channels/youtube-afterlife/stories/001-wolfieraps/photos/udBgnu1hbLU.jpg",
+  "crop": "right",
+  "title": "WHAT HAPPENED",
+  "sub": "TO WOLFIE?",
+  "name": "WOLFIE",
+  "years": "2013-2020",
+  "cap": "7 MILLION SUBS"
+ },
+ "yt": {
+  "title": "7 million subscribers. No videos in 6 years. What happened to WolfieRaps? \ud83d\udc40 #wolfieraps #shorts",
+  "description": "WolfieRaps had 25 million views on one video. Then in May 2018 an Instagram post accused him of cheating on Sylvia Gani (he denied it, and it was never proven), they split, and his views fell off a cliff. His last upload was October 2020.\n\nPlot twist: they're back together and expecting a baby.\n\nPhotos from Wolfie's YouTube channel, shown for commentary under fair use.\n\n#wolfieraps #sylviagani #youtubeafterlife #whathappened #shorts",
+  "tags": [
+   "wolfieraps",
+   "wolfie",
+   "sylvia gani",
+   "what happened to wolfieraps",
+   "youtuber fell off",
+   "youtube afterlife",
+   "youtube drama",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "yaCounter",
+   "p": {
+    "from": 7050000,
+    "to": 7050000,
+    "mode": "freeze",
+    "label": "SUBSCRIBERS",
+    "snap": {
+     "at": 2.0,
+     "to": [
+      960,
+      800
+     ],
+     "z": 1.6
+    },
+    "shake": 0.3
+   },
+   "text": "This YouTuber has seven million subscribers. And he hasn't posted in six years.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "sting",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/001-wolfieraps/photos/udBgnu1hbLU.jpg",
+    "cap": "24.8M VIEWS",
+    "tilt": -3,
+    "snap": {
+     "at": 2.4,
+     "to": [
+      1010,
+      860
+     ],
+     "z": 1.5
+    }
+   },
+   "text": "In 2016, WolfieRaps was everywhere. This one magic trick got twenty five million views.",
+   "pause": 0.1
+  },
+  {
+   "scene": "yaPhotos",
+   "p": {
+    "imgs": [
+     "channels/youtube-afterlife/stories/001-wolfieraps/photos/Phwt16FKkCk.jpg",
+     "channels/youtube-afterlife/stories/001-wolfieraps/photos/I68qd3Qn-Vc.jpg"
+    ],
+    "caps": [
+     "12.5M",
+     "14.5M"
+    ]
+   },
+   "text": "Then came the girlfriend pranks with Sylvia. Fifteen million views.",
+   "pause": 0.1
+  },
+  {
+   "scene": "yaPost",
+   "p": {
+    "contact": "",
+    "photo": true,
+    "snap": {
+     "at": 1.8,
+     "to": [
+      960,
+      800
+     ],
+     "z": 1.5
+    },
+    "shake": 0.4
+   },
+   "text": "Then, in May 2018, a girl on Instagram claimed she'd been involved with him. Reports said she was in high school.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "ALLEGED.",
+    "sub": "Wolfie denied it. It was never proven.",
+    "color": "#ffd86a",
+    "size": 200
+   },
+   "text": "He denied it. It was never proven.",
+   "pause": 0.2
+  },
+  {
+   "scene": "yaCouple",
+   "p": {
+    "mood": "sad",
+    "rain": true
+   },
+   "text": "Weeks later, Sylvia posted a video called How to Survive Heartbreak. They split.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "yaChart",
+   "p": {
+    "title": "VIEWS",
+    "bars": [
+     [
+      "2016",
+      24.8,
+      "24.8M"
+     ],
+     [
+      "2017",
+      14.5,
+      "14.5M"
+     ],
+     [
+      "May 2018",
+      2.6,
+      "2.6M"
+     ],
+     [
+      "2019",
+      0.97,
+      "968K"
+     ],
+     [
+      "2020",
+      0.62,
+      "616K"
+     ]
+    ],
+    "hi": 2
+   },
+   "text": "After that, his views fell off a cliff.",
+   "pause": 0.2
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/001-wolfieraps/photos/4PuGb2S8D54.jpg",
+    "cap": "LAST VIDEO",
+    "tilt": 2,
+    "snap": {
+     "at": 1.5,
+     "to": [
+      960,
+      860
+     ],
+     "z": 1.5
+    }
+   },
+   "text": "October 2020, he posted this. Six years later, it's still his last video.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "silence_hit",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaCouple",
+   "p": {
+    "mood": "happy",
+    "bump": 1,
+    "icecream": true,
+    "snap": {
+     "at": 2.6,
+     "to": [
+      1180,
+      1250
+     ],
+     "z": 1.8
+    }
+   },
+   "text": "Plot twist. He and Sylvia got back together. And now, they're expecting a baby.",
+   "pause": 0.2
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "FULL STORY?",
+    "sub": "comment YES",
+    "color": "#ff3a4a",
+    "size": 200
+   },
+   "text": "So did WolfieRaps fall off? The channel did. Charles didn't. Should we post the full story?",
+   "pause": 0.6
+  }
+ ]
+}
