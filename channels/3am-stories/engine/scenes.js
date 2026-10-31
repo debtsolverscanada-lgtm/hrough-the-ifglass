@@ -468,6 +468,7 @@ S.bedroomdoor = (t, d, p) => {
     <rect x="660" y="1430" width="600" height="18" fill="#ffd88a" opacity=".95"/>
     ${p.feet === 'many' ? [690, 770, 860, 945, 1035, 1120, 1190].map((fx, k) => `<rect x="${fx + 6 * Math.sin(t * 1.7 + k)}" y="1430" width="${50 + k * 7 % 20}" height="18" fill="#050505"/>`).join('')
       : p.feet ? '<rect x="840" y="1430" width="90" height="18" fill="#050505"/><rect x="990" y="1430" width="90" height="18" fill="#050505"/>' : ''}
+    ${p.marks ? [...Array(p.marks)].map((_, k) => k === 4 ? '<path d="M760 560 L1010 700" stroke="#d8c8a8" stroke-width="9" stroke-linecap="round" opacity=".85"/>' : `<path d="M${780 + k * 60} 540 l${(k % 2) * 8 - 4} 190" stroke="#d8c8a8" stroke-width="9" stroke-linecap="round" opacity=".85"/>`).join('') : ''}
     ${p.handle ? `<g transform="rotate(${-40 * ease(t / d)} 1190 940)"><rect x="1100" y="928" width="96" height="24" rx="12" fill="#b8a46a" stroke="#3a2e14" stroke-width="5"/></g>` : ''}
     <path d="M660 1448 L1260 1448 L1700 1920 L220 1920Z" fill="#ffcc66" opacity=".07"/>`;
 };

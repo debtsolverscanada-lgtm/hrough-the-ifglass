@@ -1,0 +1,756 @@
+{
+ "format": "long",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.42,
+  "similarity": 0.8,
+  "style": 0.35,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "thumbSketch",
+  "title": "COUNT THEM",
+  "sub": "3AM STORY",
+  "pose": "shh",
+  "wall": "#3a2c2c",
+  "accent": "#ff4a4a"
+ },
+ "yt": {
+  "title": "My Nan's Rule: If Something Knocks at 3 AM, COUNT the Knocks | Scary Story Animated",
+  "description": "My nan had one rule. If something knocks on your door after 3 AM, count the knocks. It knocks once for every soul in the house. If the number is right, it's only checking. If it's wrong... something is counting itself in.\n\nThe night my little brother got sick, it knocked four times. There were three of us. Then my mom texted me from the hospital.\n\nIf you hear knocking tonight, count. And if the number is wrong... pretend you're asleep.\n\n#scarystories #horrorstories #3amstories #animatedhorror #creepy",
+  "tags": [
+   "scary stories",
+   "horror stories",
+   "3am stories",
+   "count the knocks",
+   "knocking at 3am",
+   "jinn stories",
+   "animated horror",
+   "anime horror",
+   "pov horror",
+   "creepy stories",
+   "scary story animated",
+   "true scary stories"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "black",
+   "p": {
+    "text": "my nan had one rule.",
+    "color": "#e8e8e8",
+    "size": 100
+   },
+   "text": "My nan had one rule. Just one.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "COUNT|THE KNOCKS.",
+    "color": "#ff2a2a"
+   },
+   "text": "If something knocks on your door after three A.M... count the knocks.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "knock",
+     0.2
+    ],
+    [
+     "boom",
+     2.5
+    ]
+   ]
+  },
+  {
+   "scene": "nan",
+   "text": "When I was little, I used to stay at my nan's house every summer. She had a chair by the lamp, and every night before bed, she'd make me say the rule back to her.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "nan",
+   "text": "Count the knocks. It knocks once for every soul in the house. If the number is right, it's only checking. Let it check.",
+   "voice": [
+    "Dorothy",
+    "Matilda",
+    "Alice",
+    "Lily",
+    "Charlotte"
+   ],
+   "pause": 0.4
+  },
+  {
+   "scene": "nan",
+   "p": {
+    "focus": 1000
+   },
+   "text": "And if the number's wrong?",
+   "pause": 0.3
+  },
+  {
+   "scene": "nan",
+   "text": "Then something is counting itself in. You don't open the door. You don't answer. You close your eyes, and you pretend you're asleep. Whatever you hear.",
+   "voice": [
+    "Dorothy",
+    "Matilda",
+    "Alice",
+    "Lily",
+    "Charlotte"
+   ],
+   "pause": 0.5,
+   "sfx": [
+    [
+     "heart",
+     3
+    ]
+   ]
+  },
+  {
+   "scene": "nan",
+   "text": "I asked her how she knew. She didn't answer for a long time. Then she said, when she was a girl, there were five people in her house.",
+   "pause": 0.2
+  },
+  {
+   "scene": "nan",
+   "text": "One night it knocked six times. In the morning... it was just me.",
+   "voice": [
+    "Dorothy",
+    "Matilda",
+    "Alice",
+    "Lily",
+    "Charlotte"
+   ],
+   "pause": 0.8,
+   "sfx": [
+    [
+     "sting",
+     1.0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "last winter.",
+    "color": "#8a8a8a",
+    "size": 90
+   },
+   "text": "Nan died last winter. And I forgot about the rule.",
+   "pause": 0.6
+  },
+  {
+   "scene": "morning",
+   "p": {
+    "kid": true
+   },
+   "text": "Now it's just three of us. Me, my mom, and my little brother, Adam. He's seven.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "fridge",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "morning",
+   "p": {
+    "kid": true
+   },
+   "text": "Who were you talking to last night?",
+   "voice": [
+    "Lily",
+    "Jessica",
+    "Laura"
+   ],
+   "pause": 0.3
+  },
+  {
+   "scene": "morning",
+   "p": {
+    "kid": true,
+    "eyes": "normal"
+   },
+   "text": "I wasn't talking to anyone.",
+   "voice": [
+    "Liam",
+    "Will",
+    "Chris",
+    "Eric",
+    "Josh"
+   ],
+   "pause": 0.2
+  },
+  {
+   "scene": "morning",
+   "p": {
+    "kid": true
+   },
+   "text": "Yes you were. At your door. You were counting.",
+   "voice": [
+    "Lily",
+    "Jessica",
+    "Laura"
+   ],
+   "fx": "wrong",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "silence_hit",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "bathroom",
+    "walk": 0.5
+   },
+   "text": "That night Adam got a fever. A bad one. Mom kept walking up and down the hall, checking on him. I went to bed around eleven.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "steps",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:07",
+    "eyes": "tired",
+    "look": 0
+   },
+   "text": "I woke up and the house was completely silent. The clock said three oh seven.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "text": "Then...",
+   "pause": 1.6,
+   "sfx": [
+    [
+     "knock",
+     0.5
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:07",
+    "eyes": "wide",
+    "look": 1
+   },
+   "text": "Three knocks. My heart was going crazy, but I counted. Three. Me, Mom, Adam. That's right. It's only checking. Let it check.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "text": "I lay there, waiting for it to leave. And then...",
+   "pause": 1.8,
+   "sfx": [
+    [
+     "silence_hit",
+     0.4
+    ],
+    [
+     "knock1",
+     1.6
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "FOUR.",
+    "color": "#ff2a2a"
+   },
+   "text": "Four.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:08",
+    "eyes": "wide",
+    "look": 0.5,
+    "phone": true,
+    "sweat": true
+   },
+   "text": "I didn't breathe. Maybe I miscounted. Maybe it was the pipes. Then my phone lit up.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "buzzphone",
+     1.5
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:08",
+    "msgs": [
+     [
+      "Mom",
+      "are you awake?",
+      0.3
+     ]
+    ]
+   },
+   "text": "It was my mom.",
+   "pause": 0.2
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:08",
+    "msgs": [
+     [
+      "Mom",
+      "are you awake?",
+      0
+     ],
+     [
+      "Mom",
+      "adam's fever got worse. we're at the hospital. we left at midnight. didn't want to wake you",
+      0.3
+     ]
+    ]
+   },
+   "text": "Adam's fever got worse. We're at the hospital. We left at midnight. You were asleep, I didn't want to wake you.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:08",
+    "eyes": "wide",
+    "look": 1,
+    "phone": true,
+    "sweat": true
+   },
+   "text": "So there was only one soul in the house. Me.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "so who were|the other three?",
+    "color": "#e8e8e8",
+    "size": 100
+   },
+   "text": "Which means the first three knocks weren't counting my family.",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "sting",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": "many"
+   },
+   "text": "There was light coming from under the door. And in the light... feet. Not two. Not four. I stopped counting at seven.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "steps",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": "many"
+   },
+   "text": "Then I heard Adam.",
+   "pause": 0.2
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": "many"
+   },
+   "text": "Can I sleep in your room? I had a bad dream.",
+   "voice": [
+    "Lily",
+    "Jessica",
+    "Laura"
+   ],
+   "fx": "wrong",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "whisper",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:09",
+    "eyes": "wide",
+    "look": 1,
+    "sweat": true
+   },
+   "text": "Adam was in the hospital.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": "many"
+   },
+   "text": "Sweetie? It's Mom. We came home early. Open the door.",
+   "voice": [
+    "Sarah",
+    "Laura",
+    "Jessica",
+    "Rachel",
+    "Charlotte"
+   ],
+   "fx": "wrong",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "whisper",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:09",
+    "msgs": [
+     [
+      "Mom",
+      "still at the hospital. adam's sleeping",
+      0.3
+     ]
+    ]
+   },
+   "text": "My phone buzzed again.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "buzzphone",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:09",
+    "msgs": [
+     [
+      "Mom",
+      "still at the hospital. adam's sleeping",
+      0
+     ],
+     [
+      "Mom",
+      "why are you awake? is everything ok?",
+      0.3
+     ]
+    ]
+   },
+   "text": "Why are you awake? Is everything okay?",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": "many",
+    "handle": true
+   },
+   "text": "The voice outside my door laughed. Exactly like my mom. And then the handle started to turn.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "creak",
+     0.8
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:10",
+    "eyes": "closed"
+   },
+   "text": "And I remembered Nan. You close your eyes. You pretend you're asleep. Whatever you hear.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "breath",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:10",
+    "eyes": "closed",
+    "watcher": "fade",
+    "watcherX": 1450
+   },
+   "text": "The door opened. I heard them come in. All of them. Standing around my bed. Breathing.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "breath",
+     0
+    ],
+    [
+     "drone",
+     0.5
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:11",
+    "eyes": "closed",
+    "watcher": 1,
+    "watcherX": 1050
+   },
+   "text": "Something leaned down, right next to my ear.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "text": "It's sleeping.",
+   "voice": [
+    "Sarah",
+    "Laura",
+    "Jessica",
+    "Rachel",
+    "Charlotte"
+   ],
+   "fx": "whisper",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "whisper",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "morning.",
+    "color": "#8a8a8a",
+    "size": 90
+   },
+   "text": "I don't know how long I lay there. When I opened my eyes, it was morning.",
+   "pause": 0.4
+  },
+  {
+   "scene": "morning",
+   "p": {
+    "kid": true,
+    "eyes": "tired"
+   },
+   "text": "Mom and Adam came home around nine. Adam was fine. I told Mom everything. She didn't say I was crazy. She just went very quiet, and walked to my door.",
+   "pause": 0.4
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "marks": 4
+   },
+   "text": "On the outside of my door, scratched into the wood, there were marks. Four of them.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "sting",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "marks": 4
+   },
+   "text": "Nan's door had those too. She never painted over them. There were six.",
+   "voice": [
+    "Sarah",
+    "Laura",
+    "Jessica",
+    "Rachel",
+    "Charlotte"
+   ],
+   "pause": 0.8
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "marks": 5
+   },
+   "text": "Last night, there's a fifth one.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "silence_hit",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "face",
+   "text": "It's not counting the people in my house anymore. It's counting how many times it's come back.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "COUNT|THE KNOCKS.",
+    "color": "#ff2a2a"
+   },
+   "text": "So if something knocks on your door tonight... count.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "and if the number is wrong...|pretend you're asleep.",
+    "size": 80,
+    "color": "#8a8a8a"
+   },
+   "text": "And if the number is wrong... pretend you're asleep. Whatever you hear.",
+   "pause": 0.5
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "how many people are|in your house right now?",
+    "size": 90,
+    "color": "#e8e8e8"
+   },
+   "text": "How many people are in your house right now?",
+   "pause": 0.6
+  },
+  {
+   "scene": "black",
+   "dur": 4.2,
+   "sfx": [
+    [
+     "knock",
+     0.8
+    ],
+    [
+     "knock1",
+     2.0
+    ],
+    [
+     "knock1",
+     3.0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "...count again.",
+    "color": "#ff1a1a",
+    "size": 110
+   },
+   "dur": 3.0,
+   "sfx": [
+    [
+     "silence_hit",
+     0.1
+    ]
+   ]
+  }
+ ]
+}
