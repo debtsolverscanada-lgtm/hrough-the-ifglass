@@ -767,9 +767,10 @@ function frameSVG(name, t, d, p, view, frameNo) {
 // Each Short gets its own frame, colour and layout so the channel page doesn't look like one thumbnail repeated.
 S.thumbOver = (t, d, p) => {
   const base = (S[p.base] || S.black)(p.bt ?? 1.5, 3, { ...(p.bp || {}), style: STYLE });
+  const zb = p.zoom ? `<g transform="translate(${p.zoom[0]},${p.zoom[1]}) scale(${p.zoom[2]}) translate(${-p.zoom[0]},${-p.zoom[1]})">${base}</g>` : base;
   const lines = p.lines || [];
   const y0 = p.y ?? 560, step = p.step ?? 190;
-  return `${base}
+  return `${zb}
     ${p.tint ? `<rect width="1920" height="1920" fill="${p.tint}" opacity=".22"/>` : ''}
     <rect x="0" y="${y0 - 200}" width="1920" height="${lines.length * step + 120}" fill="url(#thVig)" opacity="${p.band ?? 0.6}"/>
     <defs><linearGradient id="thVig" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".5" stop-color="#000"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient></defs>
@@ -847,4 +848,37 @@ S.thumbCeiling = (t, d, p) => {
     ${p.badge !== false ? `<g transform="translate(1660,1370) rotate(6)"><rect x="-200" y="-62" width="400" height="124" rx="22" fill="#ff1a1a" stroke="#0a0606" stroke-width="8"/>
       <text y="26" text-anchor="middle" font-family="Anton" font-size="72" fill="#fff" letter-spacing="4">🎧 8D AUDIO</text></g>` : ''}
     <rect width="1920" height="1920" fill="url(#vig)" opacity=".6"/>`;
+};
+
+// your closet door from bed, open a crack. The gap widens over the scene (p.gap -> p.gapTo, 0..1); inside is black.
+// p.eyes (0..1) two eyes in the gap, p.fingers: long grey fingers curled round the door edge, p.knob shaking
+S.closet = (t, d, p) => {
+  const g = (p.gap ?? 0.08) + ((p.gapTo ?? p.gap ?? 0.08) - (p.gap ?? 0.08)) * ease(t / d);
+  const X0 = 700, X1 = 1220, Y0 = 420, Y1 = 1500, edge = X1 - (X1 - X0) * g * 0.9;
+  const shake = p.knob ? Math.sin(t * 40) * 4 : 0;
+  const fingers = p.fingers ? [0, 1, 2, 3].map((k) => { const y = 840 + k * 58, L = 120 + (k % 2) * 30;
+      return `<path d="M${edge + 10} ${y} q-${L * 0.5} -18 -${L * 0.75} 8 q-${L * 0.2} 12 -${L * 0.25} 34" stroke="#060404" stroke-width="30" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M${edge + 10} ${y} q-${L * 0.5} -18 -${L * 0.75} 8 q-${L * 0.2} 12 -${L * 0.25} 34" stroke="#c9c3b6" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M${edge - L * 0.75} ${y + 8} m-${L * 0.25} 34 l-4 10" stroke="#3a0808" stroke-width="10" stroke-linecap="round"/>
+      <path d="M${edge - L * 0.35} ${y - 6} h10 M${edge - L * 0.6} ${y + 2} h8" stroke="#6a645a" stroke-width="3"/>`; }).join('') : '';
+  const fx = edge + 100, fy = 780, blink = p.blink && t % 2 > 1.85;
+  const eyes = p.eyes ? `<g opacity="${p.eyes}">
+      ${[...Array(18)].map((_, k) => { const sx = k < 9 ? fx - 170 + k * 12 : fx + 70 + (k - 9) * 12;
+        return `<path d="M${sx} ${fy - 200} q${(k % 3 - 1) * 16} 260 ${(k % 4 - 1.5) * 14} ${520 + (k * 37 % 140)}" stroke="#050404" stroke-width="${8 + k % 3 * 4}" fill="none" stroke-linecap="round"/>`; }).join('')}
+      <path d="M${fx - 150} ${fy - 40} Q${fx - 160} ${fy - 230} ${fx} ${fy - 240} Q${fx + 160} ${fy - 230} ${fx + 150} ${fy - 40} Q${fx + 140} ${fy + 160} ${fx + 70} ${fy + 240} Q${fx} ${fy + 290} ${fx - 70} ${fy + 240} Q${fx - 140} ${fy + 160} ${fx - 150} ${fy - 40}Z" fill="#d8d2c6"/>
+      <path d="M${fx - 150} ${fy - 40} Q${fx - 160} ${fy - 230} ${fx} ${fy - 240} Q${fx + 70} ${fy - 236} ${fx + 120} ${fy - 190} Q${fx + 20} ${fy - 210} ${fx - 40} ${fy - 150} Q${fx - 110} ${fy - 100} ${fx - 150} ${fy - 40}Z" fill="#050404"/>
+      <path d="M${fx - 120} ${fy + 40} q30 120 100 190 M${fx + 120} ${fy + 40} q-30 120 -100 190" stroke="#8a8478" stroke-width="16" fill="none" opacity=".6"/>
+      ${[-58, 58].map((dx) => `<ellipse cx="${fx + dx}" cy="${fy}" rx="46" ry="${blink ? 3 : 56}" fill="#050303"/>${blink ? '' : `<circle cx="${fx + dx}" cy="${fy + 6}" r="10" fill="#ff2a2a"/><circle cx="${fx + dx}" cy="${fy + 6}" r="28" fill="#ff2a2a" opacity=".3"/>`}`).join('')}
+      ${p.grin ? `<path d="M${fx - 120} ${fy + 120} Q${fx} ${fy + 250} ${fx + 120} ${fy + 120} Q${fx} ${fy + 165} ${fx - 120} ${fy + 120}Z" fill="#1a0303"/>${[...Array(13)].map((_, k) => `<path d="M${fx - 108 + k * 18} ${fy + 128 + Math.abs(k - 6) * -2 + 12} l9 24 l9 -24" fill="#efe9d8"/>`).join('')}` : ''}
+    </g>` : '';
+  return `${room('#07080c')}
+    <rect x="${X0 - 30}" y="${Y0 - 30}" width="${X1 - X0 + 60}" height="${Y1 - Y0 + 30}" fill="#1a1c24" stroke="#0a0b10" stroke-width="12"/>
+    <rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="#000"/>
+    ${eyes}
+    <path d="M${X0} ${Y0} L${edge} ${Y0 - 20 * g} L${edge} ${Y1 + 20 * g} L${X0} ${Y1}Z" fill="#2c2620" stroke="#120e0a" stroke-width="10"/>
+    <rect x="${X0 + 50}" y="${Y0 + 60}" width="${(edge - X0) - 100}" height="420" fill="none" stroke="#3a3228" stroke-width="8"/>
+    <rect x="${X0 + 50}" y="${Y0 + 560}" width="${(edge - X0) - 100}" height="420" fill="none" stroke="#3a3228" stroke-width="8"/>
+    <circle cx="${edge - 50 + shake}" cy="980" r="20" fill="#9a8a5a"/>
+    ${fingers}
+    <rect width="1920" height="1920" fill="#203060" opacity=".12"/>`;
 };

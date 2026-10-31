@@ -1,0 +1,270 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.38,
+  "similarity": 0.8,
+  "style": 0.45,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "closet",
+  "bp": {
+   "gap": 0.42,
+   "eyes": 1,
+   "fingers": true,
+   "grin": true
+  },
+  "lines": [
+   [
+    "CLOSE YOUR",
+    "#fff"
+   ],
+   [
+    "CLOSET",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 470,
+  "y": 800,
+  "step": 200,
+  "size": 190,
+  "band": 0,
+  "circle": [
+   1128,
+   850,
+   300
+  ],
+  "tint": "#002060",
+  "zoom": [
+   1150,
+   860,
+   1.5
+  ]
+ },
+ "yt": {
+  "title": "Is your closet door open right now? Don't blink \ud83d\ude28 #scary #horror #shorts",
+  "description": "They can't come out of the closet. They can only watch through the gap. Every night it opens a little wider...\n\n\ud83c\udfa7 Headphones on.\n\n#scarystories #horrorstories #3amstories #8daudio #creepy #shorts",
+  "tags": [
+   "scary stories",
+   "horror shorts",
+   "3am",
+   "closet door",
+   "dont blink",
+   "8d audio",
+   "headphones horror",
+   "animated horror",
+   "anime horror",
+   "pov horror",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "black",
+   "p": {
+    "text": "headphones in.|look at your closet door.",
+    "color": "#e8e8e8",
+    "size": 90
+   },
+   "text": "Headphones in. Now look at your closet door.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "closet",
+   "p": {
+    "gap": 0.08
+   },
+   "text": "Is it open? Even a little?",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "closet",
+   "p": {
+    "gap": 0.08,
+    "gapTo": 0.12
+   },
+   "text": "My grandma said they can't come out of a closet. They can only watch. Through the gap.",
+   "pause": 0.3
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "10:58",
+    "eyes": "tired"
+   },
+   "text": "So every night, I closed it. Every single night.",
+   "pause": 0.2
+  },
+  {
+   "scene": "closet",
+   "p": {
+    "gap": 0.12,
+    "gapTo": 0.22
+   },
+   "text": "But every morning, it was open again. A little wider than before.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "creak",
+     0.4,
+     "right"
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:33",
+    "eyes": "wide",
+    "look": 1
+   },
+   "text": "Last night, I woke up at three thirty three.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "closet",
+   "p": {
+    "gap": 0.3,
+    "gapTo": 0.45,
+    "eyes": 1
+   },
+   "text": "The door was open. And something was standing inside. Perfectly still.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "creak",
+     0.2,
+     "right"
+    ],
+    [
+     "heart",
+     1.2
+    ]
+   ]
+  },
+  {
+   "scene": "closet",
+   "p": {
+    "gap": 0.45,
+    "eyes": 1,
+    "fingers": true,
+    "grin": true,
+    "blink": false
+   },
+   "text": "Watching me. Not blinking. Like it was waiting... for me to blink first.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "breath",
+     0.4,
+     "right+close"
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "DON'T|BLINK.",
+    "color": "#ff2a2a"
+   },
+   "text": "Don't blink.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "silence_hit",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "dur": 1.4
+  },
+  {
+   "scene": "face",
+   "p": {},
+   "text": "You blinked.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "wrong+left",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "now look at your closet.",
+    "color": "#8a8a8a",
+    "size": 90
+   },
+   "text": "Now. Look at your closet.",
+   "pause": 0.4
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "dur": 3.2,
+   "sfx": [
+    [
+     "creak",
+     0.6,
+     "right"
+    ],
+    [
+     "breath",
+     2.0,
+     "behind"
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "you left it open.",
+    "color": "#ff1a1a",
+    "size": 120
+   },
+   "dur": 2.6,
+   "sfx": [
+    [
+     "silence_hit",
+     0.1
+    ]
+   ]
+  }
+ ]
+}
