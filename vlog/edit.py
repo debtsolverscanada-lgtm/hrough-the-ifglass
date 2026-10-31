@@ -61,6 +61,10 @@ def camera_speed(name):
     return _CAM[name]
 
 
+def frames_of(f):
+    return int(run(['ffprobe', '-v', 'error', '-count_packets', '-select_streams', 'v:0', '-show_entries', 'stream=nb_read_packets', '-of', 'csv=p=0', str(f)]).stdout.strip() or 0)
+
+
 def clip_len(name):
     return float(run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(clip(name))]).stdout)
 
@@ -144,6 +148,7 @@ def piece(i, p):
     if p.get('freeze'): vf.append(f"tpad=stop_mode=clone:stop_duration={p['freeze']}")
     vf += ['tpad=stop_mode=clone:stop_duration=3', 'format=yuv420p']  # never let the picture run short of the sound
     out_dur = frames(dur_src / speed + p.get('freeze', 0))
+    nf = round(out_dur * FPS)  # exact frame count; the sound gets exactly 48000/FPS samples per frame to match
     af = ['aresample=48000', 'aformat=channel_layouts=stereo']
     if p.get('reverse'): af.append('areverse')
     if speed != 1.0:
@@ -153,7 +158,7 @@ def piece(i, p):
     af.append(f"volume={p.get('vol', 1.0)}")
     if p.get('mute'): af.append('volume=0')
     if p.get('freeze'): af.append(f"apad=pad_dur={p['freeze']}")
-    af += ['apad', f'atrim=0:{out_dur:.3f}', 'afade=t=in:d=0.02', f'afade=t=out:st={max(0, out_dur - 0.03):.3f}:d=0.03']
+    af += ['apad', f'atrim=end_sample={nf * 48000 // FPS}', 'asetpts=N/SR/TB', 'afade=t=in:d=0.02', f'afade=t=out:st={max(0, out_dur - 0.03):.3f}:d=0.03']
     inputs = (['-noautorotate'] if p.get('clip') in NOROTATE else []) + ['-ss', f'{s:.3f}', '-t', f'{dur_src:.3f}', '-i', str(src)]
     vout, extra = '[v]', ''
     for k, o in enumerate(pics):  # a photo pops in over the shot ("look at this picture")
@@ -176,10 +181,10 @@ def piece(i, p):
         graph = f"[0:v]{vf[0]}[v0];[v0]{','.join(vf[1:])}[v]{extra}"
         amap = ['-map', vout, '-map', f'{na}:a']
     run(['ffmpeg', '-v', 'error', '-y', *inputs, '-filter_complex', graph, *amap,
-         '-t', f'{out_dur:.3f}', '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-r', str(FPS),
+         '-frames:v', str(nf), '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '19', '-r', str(FPS),
          '-c:a', 'pcm_s16le', '-ar', '48000', str(out)])
-    lens = [float(x) for x in run(['ffprobe', '-v', 'error', '-show_entries', 'stream=duration', '-of', 'csv=p=0', str(out)]).stdout.split()]
-    if max(lens) - min(lens) > 0.05: print(f'WARNING piece {i}: picture/sound lengths differ {lens}', flush=True)
+    got_v = int(run(['ffprobe', '-v', 'error', '-count_packets', '-select_streams', 'v:0', '-show_entries', 'stream=nb_read_packets', '-of', 'csv=p=0', str(out)]).stdout.strip() or 0)
+    if got_v != nf: print(f'WARNING piece {i}: {got_v} frames, wanted {nf}', flush=True)
     return out_dur
 
 
@@ -343,8 +348,18 @@ def main():
     for i, p in enumerate(pieces):
         piece(i, p); print('piece', i, p.get('clip', p.get('asset')), p['s'], flush=True)
     lst = W / 'list.txt'; lst.write_text(''.join(f"file 'p{i:03d}.mov'\n" for i in range(len(pieces))))
-    run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', str(lst), '-c', 'copy', str(W / 'cut.mov')])
-    run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'cut.mov'), '-vn', '-ac', '2', '-ar', '48000', str(W / 'dialogue.wav')])
+    # Picture: join the pieces' video only. Sound: lay every piece's samples end to end, each exactly as long as its
+    # picture (frames x 1600 samples). Nothing relies on container timestamps, so lips stay on the words to the last cut.
+    run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0', '-i', str(lst), '-map', '0:v', '-c', 'copy', str(W / 'cut.mov')])
+    with open(W / 'dialogue.pcm', 'wb') as fh:
+        for i in range(len(pieces)):
+            pcm = subprocess.run(['ffmpeg', '-v', 'error', '-i', str(W / f'p{i:03d}.mov'), '-vn', '-f', 's16le', '-ac', '2', '-ar', '48000', '-'], capture_output=True, check=True).stdout
+            want = round(frames_of(W / f'p{i:03d}.mov')) * (48000 // FPS) * 4
+            fh.write(pcm[:want].ljust(want, b'\0'))
+    run(['ffmpeg', '-v', 'error', '-y', '-f', 's16le', '-ar', '48000', '-ac', '2', '-i', str(W / 'dialogue.pcm'), str(W / 'dialogue.wav')])
+    vlen = float(run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(W / 'cut.mov')]).stdout)
+    alen = float(run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(W / 'dialogue.wav')]).stdout)
+    print(f'sync check: picture {vlen:.3f}s, sound {alen:.3f}s, difference {abs(vlen - alen) * 1000:.0f} ms', flush=True)
     # music bed
     ins, parts = [], []
     for k, c in enumerate([c for c in cues if c['at'] < total]):
