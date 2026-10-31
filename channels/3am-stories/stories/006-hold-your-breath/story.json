@@ -1,0 +1,253 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.38,
+  "similarity": 0.8,
+  "style": 0.45,
+  "speed": 1.0
+ },
+ "thumb": {
+  "text": "HOLD YOUR BREATH.",
+  "tint": "#ff1a3c",
+  "tint2": "#3a00ff"
+ },
+ "yt": {
+  "title": "Hold your breath at 3 AM. If you still hear breathing... \ud83d\ude28 #scary #horror #shorts",
+  "description": "If you wake up at 3 AM, hold your breath and listen. If you can still hear breathing... it isn't yours.\n\nTry it while you watch. Use headphones.\n\n#scarystories #horrorstories #3amstories #creepy #shorts",
+  "tags": [
+   "scary stories",
+   "horror shorts",
+   "3am",
+   "hold your breath",
+   "breathing at night",
+   "sleep paralysis",
+   "jinn",
+   "animated horror",
+   "anime horror",
+   "pov horror",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "black",
+   "p": {
+    "text": "hold your breath.",
+    "color": "#e8e8e8",
+    "size": 110
+   },
+   "text": "Do this right now. Hold your breath.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:03",
+    "eyes": "wide",
+    "look": 0
+   },
+   "text": "It's three A.M. You wake up, and the house is silent. Too silent.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:03",
+    "eyes": "wide",
+    "look": 1,
+    "sweat": true
+   },
+   "text": "So you hold your breath to listen. And you can still hear breathing.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "breath",
+     0.8
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "IT ISN'T|YOURS.",
+    "color": "#ff2a2a"
+   },
+   "text": "It isn't yours.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:04",
+    "eyes": "closed"
+   },
+   "text": "It's slow. Wet. Right beside the bed. And every time you breathe in... it breathes in.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "breath",
+     0
+    ],
+    [
+     "breath",
+     2.6
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:04",
+    "eyes": "closed",
+    "watcher": "fade",
+    "watcherX": 1180
+   },
+   "text": "It's learning your rhythm. So that one night, when it lies down next to you... you won't notice.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "your turn.|hold your breath. now.",
+    "color": "#e8e8e8",
+    "size": 90
+   },
+   "text": "Your turn. Hold your breath. Now.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "silence_hit",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "dur": 5.0,
+   "sfx": [
+    [
+     "breath",
+     0.8
+    ],
+    [
+     "breath",
+     3.0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "...you heard that too, right?",
+    "color": "#8a8a8a",
+    "size": 90
+   },
+   "text": "You heard that too, right?",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "face",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "wrong",
+   "text": "You can breathe now.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "IT BREATHES|WITH YOU.",
+    "color": "#ff2a2a"
+   },
+   "text": "It breathes with you.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "tonight, don't hold your breath.|it'll know you're awake.",
+    "size": 80,
+    "color": "#8a8a8a"
+   },
+   "text": "Tonight, don't hold your breath. It'll know you're awake.",
+   "pause": 0.5
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "dur": 2.4,
+   "sfx": [
+    [
+     "breath",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "it's already synced.",
+    "color": "#ff1a1a",
+    "size": 110
+   },
+   "dur": 2.6,
+   "sfx": [
+    [
+     "silence_hit",
+     0.1
+    ]
+   ]
+  }
+ ]
+}
