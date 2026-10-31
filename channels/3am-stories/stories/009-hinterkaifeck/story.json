@@ -1,0 +1,238 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.42,
+  "similarity": 0.8,
+  "style": 0.35,
+  "speed": 1.04
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "snow",
+  "bp": {
+   "prints": 1,
+   "light": true
+  },
+  "lines": [
+   [
+    "FOOTPRINTS IN.",
+    "#fff"
+   ],
+   [
+    "NONE OUT.",
+    "#ff2a2a"
+   ]
+  ],
+  "y": 620,
+  "step": 190,
+  "size": 170,
+  "band": 0.45,
+  "arrow": [
+   600,
+   1000,
+   440,
+   1180
+  ],
+  "tint": "#001040",
+  "x": 760
+ },
+ "yt": {
+  "title": "Footprints went INTO the farm... none came out. (TRUE STORY, 1922) \ud83d\ude28 #truecrime #scary #shorts",
+  "description": "Hinterkaifeck, Germany, 1922. Footprints in the snow led from the forest to the farmhouse, with none leading back. Keys went missing. Footsteps in the attic. Days later, all six people on the farm were killed, and someone stayed in the house afterwards. The case was never solved.\n\nBased on the real, unsolved Hinterkaifeck murders.\n\n#hinterkaifeck #truecrime #unsolved #scarystories #3amstories #shorts",
+  "tags": [
+   "hinterkaifeck",
+   "true story",
+   "true crime",
+   "unsolved mysteries",
+   "scary true stories",
+   "attic",
+   "footprints in the snow",
+   "3am stories",
+   "animated horror",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "text",
+   "p": {
+    "text": "THIS REALLY|HAPPENED.",
+    "color": "#fff"
+   },
+   "text": "This really happened.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 0,
+    "light": true
+   },
+   "text": "Germany, 1922. A family of six lives on a lonely farm called Hinterkaifeck, right at the edge of a forest.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 1,
+    "grow": true
+   },
+   "text": "One morning, the father finds footprints in the fresh snow. Coming out of the forest. Leading to the farmhouse.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "steps",
+     0.5,
+     "orbit"
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 1
+   },
+   "text": "But there were no footprints leading back out.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "sting",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "",
+    "eyes": "wide",
+    "look": 0
+   },
+   "text": "Then the house keys went missing. They found a newspaper from Munich that nobody in the family ever bought. And at night... they heard footsteps. Above them. In the attic.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "steps",
+     1.5,
+     "behind"
+    ],
+    [
+     "creak",
+     4.0,
+     "right"
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "THE MAID QUIT.",
+    "color": "#ff2a2a"
+   },
+   "text": "The maid had already quit. She said the house was haunted.",
+   "pause": 0.3
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 1
+   },
+   "text": "The father searched the attic. He found nothing. Nobody was there.",
+   "pause": 0.3
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "march 31, 1922.",
+    "color": "#8a8a8a",
+    "size": 110
+   },
+   "text": "A few days later, on March thirty first, all six people on the farm were killed. Including a new maid, on her very first day.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "silence_hit",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 1,
+    "smoke": true
+   },
+   "text": "But the scariest part came after. For days, neighbours saw smoke coming from the chimney. Someone had been feeding the animals. Eating the food in the kitchen.",
+   "pause": 0.3
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "SOMEONE|STAYED.",
+    "color": "#ff2a2a"
+   },
+   "text": "Someone stayed in the house.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "face",
+   "p": {},
+   "text": "Police believe the killer was living in that attic... for days, maybe months, before the family ever knew.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "never solved.",
+    "color": "#e8e8e8",
+    "size": 110
+   },
+   "text": "The case was never solved.",
+   "pause": 0.4
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "when did you last|check your attic?",
+    "color": "#ff1a1a",
+    "size": 100
+   },
+   "text": "When did you last check your attic?",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "steps",
+     0.4,
+     "behind"
+    ]
+   ]
+  }
+ ]
+}

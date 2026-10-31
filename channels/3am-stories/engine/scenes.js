@@ -882,3 +882,29 @@ S.closet = (t, d, p) => {
     ${fingers}
     <rect width="1920" height="1920" fill="#203060" opacity=".12"/>`;
 };
+
+// lonely farmhouse at night in snow, a dark forest behind, footprints coming out of the trees to the door, none going back.
+// p.prints (0..1 how far the trail is drawn), p.smoke (chimney smoke), p.light (one window lit)
+S.snow = (t, d, p) => {
+  const n = 18, k = Math.round(n * (p.prints ?? 1) * (p.grow ? ease(t / d) : 1));
+  const prints = [...Array(k)].map((_, i) => { const u = i / (n - 1), x = 280 + u * 720 + (i % 2 ? 18 : -18), y = 1120 + u * 260;
+    return `<ellipse cx="${x}" cy="${y}" rx="${10 + u * 8}" ry="${5 + u * 4}" fill="#5a6a88" opacity=".85"/>`; }).join('');
+  const flakes = [...Array(60)].map((_, i) => `<circle cx="${(i * 331 + t * 30 * (1 + i % 3)) % 1920}" cy="${420 + ((i * 197 + t * 80 * (1 + i % 2)) % 1080)}" r="${1.5 + i % 3}" fill="#fff" opacity=".7"/>`).join('');
+  return `<rect width="1920" height="1920" fill="#0a0e1a"/>
+    <circle cx="1500" cy="560" r="70" fill="#e8eef8" opacity=".85"/>
+    ${[...Array(22)].map((_, i) => `<path d="M${i * 92} 1080 l46 -${220 + (i * 53 % 120)} l46 ${220 + (i * 53 % 120)}Z" fill="#05070c"/>`).join('')}
+    <rect x="0" y="1060" width="1920" height="860" fill="#b8c4dc"/>
+    <path d="M0 1060 Q960 1020 1920 1070 V1100 H0Z" fill="#cdd6ea"/>
+    <g transform="translate(1180,980)">
+      <path d="M-260 0 L0 -200 L260 0Z" fill="#1a1210" stroke="#05070c" stroke-width="8"/><path d="M-250 -6 L0 -196 L250 -6" stroke="#e8eef8" stroke-width="16" fill="none"/>
+      <rect x="-230" y="0" width="460" height="300" fill="#2a2018" stroke="#05070c" stroke-width="8"/>
+      <rect x="120" y="-170" width="40" height="90" fill="#1a1210"/>
+      ${p.smoke ? [0, 1, 2].map((i) => `<circle cx="${140 + Math.sin(t + i) * 20}" cy="${-200 - i * 60 - (t * 30) % 60}" r="${24 + i * 10}" fill="#8a94a8" opacity="${0.35 - i * 0.1}"/>`).join('') : ''}
+      <rect x="-170" y="70" width="90" height="80" fill="${p.light ? '#ffd88a' : '#0a0a0e'}" stroke="#05070c" stroke-width="6"/>
+      <rect x="80" y="70" width="90" height="80" fill="#0a0a0e" stroke="#05070c" stroke-width="6"/>
+      <rect x="-40" y="140" width="80" height="160" fill="#140e0a" stroke="#05070c" stroke-width="6"/>
+      <path d="M-230 0 h460" stroke="#e8eef8" stroke-width="10"/>
+    </g>
+    ${prints}${flakes}
+    <rect width="1920" height="1920" fill="#203060" opacity=".15"/>`;
+};
