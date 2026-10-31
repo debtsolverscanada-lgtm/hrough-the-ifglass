@@ -209,3 +209,26 @@ S.yaThumb = (t, d, p) => `${yaBg('#3a1670', '#0b0618')}
     </g>
     <text x="1440" y="600" text-anchor="middle" font-family="Anton" font-size="${fit(p.title, 170, 0.5)}" fill="#fff" letter-spacing="2" style="filter:drop-shadow(0 8px 0 #000)">${esc(p.title)}</text>
     <text x="1440" y="760" text-anchor="middle" font-family="Anton" font-size="${fit(p.sub || '', 170, 0.5)}" fill="${YA.red}" letter-spacing="2" style="filter:drop-shadow(0 8px 0 #000)">${esc(p.sub || '')}</text>`;
+
+// Drama thumbnail: two real photos split by a jagged crack, a mystery silhouette with a "?" between them, big title.
+// p: imgs [left, right], lx/rx (0..1 horizontal focus in each photo), title, sub
+S.yaThumbSplit = (t, d, p) => {
+  const crack = 'M1000 420 L940 600 L1010 720 L930 880 L1020 1010 L950 1160 L1000 1290 L960 1500';
+  const focus = (f) => `x${f < 0.34 ? 'Min' : f > 0.66 ? 'Max' : 'Mid'}YMid slice`;
+  return `<defs><clipPath id="ysL"><path d="M0 420 H1000 L940 600 L1010 720 L930 880 L1020 1010 L950 1160 L1000 1290 L960 1500 H0Z"/></clipPath>
+      <clipPath id="ysR"><path d="M1920 420 H1000 L940 600 L1010 720 L930 880 L1020 1010 L950 1160 L1000 1290 L960 1500 H1920Z"/></clipPath>
+      <radialGradient id="ysG" r="50%"><stop offset="0" stop-color="#ff1a3c" stop-opacity=".55"/><stop offset="1" stop-color="#ff1a3c" stop-opacity="0"/></radialGradient></defs>
+    <rect width="1920" height="1920" fill="#0b0618"/>
+    <g clip-path="url(#ysL)"><image href="${p.imgs[0]}" x="0" y="420" width="1000" height="1080" preserveAspectRatio="${focus(p.lx ?? 0.5)}"/><rect x="0" y="420" width="1000" height="1080" fill="#3a0010" opacity=".25"/></g>
+    <g clip-path="url(#ysR)"><image href="${p.imgs[1]}" x="960" y="420" width="960" height="1080" preserveAspectRatio="${focus(p.rx ?? 0.5)}"/><rect x="960" y="420" width="960" height="1080" fill="#00103a" opacity=".2"/></g>
+    <path d="${crack}" stroke="#000" stroke-width="40" fill="none"/><path d="${crack}" stroke="#ff2a3c" stroke-width="14" fill="none" style="filter:drop-shadow(0 0 16px #ff0020)"/>
+    <circle cx="975" cy="1080" r="300" fill="url(#ysG)"/>
+    <g transform="translate(975,1140)">
+      <path d="M-170 340 Q-180 150 -90 110 Q-150 40 -140 -60 Q-130 -190 0 -200 Q130 -190 140 -60 Q150 40 90 110 Q180 150 170 340Z" fill="#050208" stroke="#ff2a3c" stroke-width="8"/>
+      <path d="M-140 -60 Q-170 120 -200 260 M140 -60 Q170 120 200 260" stroke="#050208" stroke-width="60" stroke-linecap="round" fill="none"/>
+      <text y="20" text-anchor="middle" font-family="Anton" font-size="230" fill="#ff2a3c" stroke="#000" stroke-width="10" paint-order="stroke">?</text>
+    </g>
+    <text x="960" y="580" text-anchor="middle" font-family="Anton" font-size="${fit(p.title, 170, 0.92)}" fill="#fff" stroke="#000" stroke-width="18" paint-order="stroke" letter-spacing="3">${esc(p.title)}</text>
+    ${p.sub ? `<g transform="translate(960,1420) rotate(-2)"><rect x="-430" y="-78" width="860" height="120" rx="16" fill="#ff1a3c" stroke="#000" stroke-width="8"/>
+      <text y="16" text-anchor="middle" font-family="Anton" font-size="84" fill="#fff" letter-spacing="4">${esc(p.sub)}</text></g>` : ''}`;
+};

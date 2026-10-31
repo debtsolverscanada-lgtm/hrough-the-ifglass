@@ -9,18 +9,19 @@
   "speed": 1.0
  },
  "thumb": {
-  "scene": "yaThumb",
+  "scene": "yaThumbSplit",
   "style": "3d",
-  "img": "channels/youtube-afterlife/stories/002-ethan-klein/photos/Dkm8Hteeh6M.jpg",
-  "crop": "right",
-  "title": "WHAT HAPPENED",
-  "sub": "TO H3?",
-  "name": "H3",
-  "years": "2017-2026",
-  "cap": "VAPE NATION, 2016"
+  "imgs": [
+   "channels/youtube-afterlife/stories/002-ethan-klein/photos/qRIt7he0woM.jpg",
+   "channels/youtube-afterlife/stories/002-ethan-klein/photos/QyyGT9AgKdM.jpg"
+  ],
+  "lx": 0.0,
+  "rx": 0.5,
+  "title": "HIS CHEATING SCANDAL",
+  "sub": "H3 ENDED IN 48 HOURS"
  },
  "yt": {
-  "title": "What Happened to Ethan Klein? (How the H3 Podcast Ended in 48 Hours)",
+  "title": "Ethan Klein's Cheating Scandal: How the H3 Podcast Ended in 48 Hours",
   "description": "On October 21, 2026, the H3 Podcast uploaded its last episode. The next day it went on indefinite hiatus, and Hila Klein said on Instagram that Ethan had admitted to an affair lasting over six months. The crew cut ties, and Ethan said he would give up his ownership of the podcast and their businesses.\n\nThis video covers what was publicly said by Hila, Ethan and the H3 crew. We do not name anyone who hasn't been confirmed.\n\nSources:\nVariety: https://variety.com/2026/digital/news/hila-ethan-klein-affair-h3-podcast-cuts-ties-1236925732/\nVariety: https://variety.com/2026/digital/news/ethan-klein-reacts-hila-klein-cheating-allegations-h3-1236929836/\nRolling Stone: https://www.rollingstone.com/culture/culture-news/ethan-klein-remove-ownership-h3-podcast-wife-accused-affair-1235647518/\nH3 Podcast and h3h3Productions channels (YouTube)\n\nPhotos are shown for commentary and criticism under fair use.\n\n#h3podcast #ethanklein #hilaklein #youtubeafterlife #whathappened",
   "tags": [
    "ethan klein",
