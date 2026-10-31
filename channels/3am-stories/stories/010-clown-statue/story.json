@@ -205,8 +205,8 @@
     "msgs": [
      [
       "Mr. Hale",
-      "\ud83d\udcde incoming call",
-      0.3
+      "incoming call...",
+      0
      ]
     ]
    },
@@ -224,8 +224,18 @@
    ]
   },
   {
-   "scene": "black",
-   "p": {},
+   "scene": "phone",
+   "p": {
+    "time": "9:42",
+    "msgs": [
+     [
+      "Mr. Hale",
+      "incoming call...",
+      0
+     ]
+    ],
+    "shake": 0.3
+   },
    "text": "Listen to me. Get the kids. Go next door. Call the police. Right now.",
    "voice": [
     "Bill",
@@ -237,8 +247,18 @@
    "pause": 0.5
   },
   {
-   "scene": "black",
-   "p": {},
+   "scene": "phone",
+   "p": {
+    "time": "9:42",
+    "msgs": [
+     [
+      "Mr. Hale",
+      "incoming call...",
+      0
+     ]
+    ],
+    "shake": 0.3
+   },
    "text": "We don't own a clown statue.",
    "voice": [
     "Bill",
@@ -353,7 +373,8 @@
       640
      ],
      "z": 2.0
-    }
+    },
+    "focus": 1150
    },
    "text": "And standing over the little girl's bed, with its head tilted, is the clown. Watching her sleep.",
    "pause": 0.4,
@@ -370,7 +391,8 @@
     "where": "kids",
     "tilt": 16,
     "shh": true,
-    "glow": true
+    "glow": true,
+    "focus": 1150
    },
    "text": "It sees you. And it slowly raises one finger to its lips.",
    "pause": 0.2

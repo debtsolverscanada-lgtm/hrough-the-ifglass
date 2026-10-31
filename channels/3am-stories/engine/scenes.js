@@ -738,7 +738,7 @@ S.thumbSketch = (t, d, p) => {
 
 // wrap: camera drift, vignette, film grain (seed changes per frame so the grain moves)
 // Where the action is in each scene (world x). Vertical Shorts/TikToks centre their narrow window on it.
-const FOCUS = { bed: 790, reflection: 960, face: 960, door: 800, nan: 1040, kitchen: 1000, morning: 960 };
+const FOCUS = { clown: 1240, bed: 790, reflection: 960, face: 960, door: 800, nan: 1040, kitchen: 1000, morning: 960 };
 // ---------- camera (anime / 3d styles) ----------
 // Every scene whips in sideways with motion blur instead of a dip to black, the frame breathes like a handheld shot,
 // and a scene can snap-zoom onto something: p.snap = { at: seconds, to: [x, y], z: 2.2, back: seconds (optional) }.

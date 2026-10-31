@@ -101,8 +101,18 @@
    ]
   },
   {
-   "scene": "black",
-   "p": {},
+   "scene": "phone",
+   "p": {
+    "time": "9:42",
+    "msgs": [
+     [
+      "Mr. Hale",
+      "incoming call...",
+      0
+     ]
+    ],
+    "shake": 0.3
+   },
    "text": "Get the kids. Go next door. We don't own a clown statue.",
    "voice": [
     "Bill",
