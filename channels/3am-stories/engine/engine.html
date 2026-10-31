@@ -12,8 +12,11 @@ window.setup = (tl, view) => {
 window.frame = (T, n) => {
   let k = TL.findIndex((s) => T < s.start + s.dur); if (k < 0) k = TL.length - 1;
   const s = TL[k], t = T - s.start;
-  let svg = frameSVG(s.scene, t, s.dur, s.p || {}, VIEW, n);
-  const fadeIn = s.fade ?? 0.25, out = Math.min(0.25, s.dur / 4);   // quick dip to black between scenes
+  const p = { ...(s.p || {}), _i: k };
+  let svg = frameSVG(s.scene, t, s.dur, p, VIEW, n);
+  // anime / 3d scenes whip in from the side instead of dipping to black (text and black cards still fade)
+  const whips = (sc) => sc && ['anime', '3d'].includes(sc.p?.style) && !['text', 'black'].includes(sc.scene) && sc.p?.whip !== false && !sc.p?.still;
+  const fadeIn = whips(s) ? 0 : (s.fade ?? 0.25), out = whips(TL[k + 1]) ? 0 : Math.min(0.25, s.dur / 4);
   const a = Math.max(t < fadeIn ? 1 - t / fadeIn : 0, t > s.dur - out ? (t - (s.dur - out)) / out : 0);
   document.getElementById('s').innerHTML = svg + (a > 0 ? `<div style="position:fixed;inset:0;background:#000;opacity:${a}"></div>` : '');
   const ims = [...document.querySelectorAll('#s image')];

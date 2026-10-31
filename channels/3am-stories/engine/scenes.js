@@ -739,6 +739,36 @@ S.thumbSketch = (t, d, p) => {
 // wrap: camera drift, vignette, film grain (seed changes per frame so the grain moves)
 // Where the action is in each scene (world x). Vertical Shorts/TikToks centre their narrow window on it.
 const FOCUS = { bed: 790, reflection: 960, face: 960, door: 800, nan: 1040, kitchen: 1000, morning: 960 };
+// ---------- camera (anime / 3d styles) ----------
+// Every scene whips in sideways with motion blur instead of a dip to black, the frame breathes like a handheld shot,
+// and a scene can snap-zoom onto something: p.snap = { at: seconds, to: [x, y], z: 2.2, back: seconds (optional) }.
+// p.shake: extra handheld shake (0..1). p.whip === false turns the whip-in off for that scene.
+const WHIP = 0.3, SNAP = 0.22;
+const eio = (x) => { x = clamp(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+function camAt(name, t, d, p, vc, drift) {
+  let cx = vc[0], cy = vc[1], z = drift;
+  const moving = (STYLE === 'anime' || STYLE === '3d') && !p.still && !['text', 'black'].includes(name);
+  if (!moving) return { cx, cy, z };
+  if (p.whip !== false && t < WHIP) cx += ((p._i || 0) % 2 ? -1 : 1) * 900 * Math.pow(1 - clamp(t / WHIP), 3);
+  if (p.snap) {
+    const sn = p.snap, k = eio((t - sn.at) / SNAP) - (sn.back != null ? eio((t - sn.back) / SNAP) : 0);
+    cx += (sn.to[0] - cx) * k; cy += (sn.to[1] - cy) * k; z += ((sn.z || 2.2) - z) * k;
+  }
+  const hs = 1 + 3 * (p.shake || 0);  // handheld: slow breathing drift plus a little jitter when shaking
+  cx += hs * (6 * Math.sin(t * 0.9) + (p.shake ? 5 * noise(Math.floor(t * 24)) : 0));
+  cy += hs * (4 * Math.sin(t * 1.3 + 1) + (p.shake ? 5 * noise(Math.floor(t * 24) + 7) : 0));
+  return { cx, cy, z };
+}
+
+function camWrap(body, name, t, d, p, view, drift) {
+  const vc = [view[0] + view[2] / 2, view[1] + view[3] / 2];
+  const a = camAt(name, t, d, p, vc, drift), b = camAt(name, Math.max(0, t - 1 / 30), d, p, vc, drift);
+  const bx = Math.min(40, Math.abs(a.cx - b.cx) * a.z * 0.45), by = Math.min(40, Math.abs(a.cy - b.cy) * a.z * 0.45);
+  const bz = Math.min(10, Math.abs(a.z - b.z) * 60), blur = Math.max(bx, by, bz) > 0.6;
+  return `${blur ? `<defs><filter id="camBlur" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="${(bx + bz).toFixed(1)} ${(by + bz).toFixed(1)}"/></filter></defs>` : ''}
+    <g ${blur ? 'filter="url(#camBlur)"' : ''}><g transform="translate(${vc[0]},${vc[1]}) scale(${a.z}) translate(${-a.cx},${-a.cy})" ${STYLE === 'sketch' ? 'filter="url(#boil)"' : ''}>${body}</g></g>`;
+}
+
 function frameSVG(name, t, d, p, view, frameNo) {
   if (view[2] < view[3]) {  // vertical: slide the window so the subject sits in the middle
     const fx = p.focus ?? FOCUS[name] ?? 960;
@@ -754,7 +784,7 @@ function frameSVG(name, t, d, p, view, frameNo) {
     ${STYLE === 'anime' ? '<defs><linearGradient id="anIris" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1430"/><stop offset=".55" stop-color="#2a4aa8"/><stop offset="1" stop-color="#8ab4ff"/></linearGradient></defs>' : ''}
     ${STYLE === 'sketch' ? `<defs><filter id="boil" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="2" seed="${Math.floor(frameNo / 3) % 6 + 1}"/><feDisplacementMap in="SourceGraphic" scale="7"/></filter>
       <filter id="paper"><feTurbulence type="fractalNoise" baseFrequency=".6 .015" numOctaves="3" seed="2"/><feColorMatrix values="0 0 0 0 .9  0 0 0 0 .85  0 0 0 0 .75  0 0 0 .18 -.04"/></filter></defs>` : ''}
-    <g transform="translate(960,960) scale(${drift}) translate(-960,-960)" ${STYLE === 'sketch' ? 'filter="url(#boil)"' : ''}>${body}</g>
+    ${camWrap(body, name, t, d, p, view, drift)}
     ${STYLE === 'sketch' ? '<rect width="1920" height="1920" filter="url(#paper)"/>' : ''}
     ${STYLE === 'anime' ? '<rect width="1920" height="1920" fill="#2030a0" opacity=".08"/>' : ''}
     <rect width="1920" height="1920" fill="url(#vig)"/>
