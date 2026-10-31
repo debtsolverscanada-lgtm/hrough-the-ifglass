@@ -8,13 +8,34 @@
   "speed": 0.9
  },
  "thumb": {
-  "text": "DON'T LOOK UP.",
-  "tint": "#00ff9c",
-  "tint2": "#3a00ff"
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "mirror",
+  "bp": {
+   "state": "smile"
+  },
+  "bt": 1.4,
+  "lines": [
+   [
+    "IT SMILED",
+    "#ffe14a"
+   ],
+   [
+    "BACK.",
+    "#fff"
+   ]
+  ],
+  "x": 1340,
+  "y": 700,
+  "size": 190,
+  "anchor": "middle",
+  "rot": -4,
+  "tint": "#ff2000",
+  "band": 0
  },
  "yt": {
-  "title": "Never forget to say this before the bathroom at 3 AM 😨 #scary #horror #shorts",
-  "description": "Your grandmother had one rule: say bismillah before you step into the bathroom at night. Tonight, you forgot.\n\nWould you have looked up? 👇\n\n#scarystories #horrorstories #3amstories #jinn #shorts",
+  "title": "Never forget to say this before the bathroom at 3 AM \ud83d\ude28 #scary #horror #shorts",
+  "description": "Your grandmother had one rule: say bismillah before you step into the bathroom at night. Tonight, you forgot.\n\nWould you have looked up? \ud83d\udc47\n\n#scarystories #horrorstories #3amstories #jinn #shorts",
   "tags": [
    "scary stories",
    "horror shorts",

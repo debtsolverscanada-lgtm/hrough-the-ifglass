@@ -9,12 +9,33 @@
   "speed": 1.0
  },
  "thumb": {
-  "scene": "thumbSketch",
-  "title": "4 KNOCKS",
-  "sub": "3AM STORY",
-  "pose": "reach",
-  "wall": "#2c3340",
-  "accent": "#ff4a4a"
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "bedroomdoor",
+  "bp": {
+   "feet": "many"
+  },
+  "lines": [
+   [
+    "4 KNOCKS",
+    "#fff"
+   ],
+   [
+    "3 PEOPLE",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 960,
+  "y": 620,
+  "size": 200,
+  "arrow": [
+   1500,
+   1060,
+   1260,
+   1380
+  ],
+  "band": 0.5,
+  "tint": "#ff6a00"
  },
  "yt": {
   "title": "If something knocks on your door at 3 AM, COUNT the knocks \ud83d\ude28 #scary #horror #shorts",

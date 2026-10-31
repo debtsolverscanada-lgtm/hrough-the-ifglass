@@ -761,3 +761,20 @@ function frameSVG(name, t, d, p, view, frameNo) {
     <rect width="1920" height="1920" fill="#fff" filter="url(#grain)" opacity=".55"/>
   </svg>`;
 }
+
+// Thumbnail built from a real frame of the story: any scene underneath (p.base with p.bp), then huge outlined words
+// (p.lines: [[text, colour], ...]), an optional red circle (p.circle: [x, y, r]) and arrow (p.arrow: [x1, y1, x2, y2]).
+// Each Short gets its own frame, colour and layout so the channel page doesn't look like one thumbnail repeated.
+S.thumbOver = (t, d, p) => {
+  const base = (S[p.base] || S.black)(p.bt ?? 1.5, 3, { ...(p.bp || {}), style: STYLE });
+  const lines = p.lines || [];
+  const y0 = p.y ?? 560, step = p.step ?? 190;
+  return `${base}
+    ${p.tint ? `<rect width="1920" height="1920" fill="${p.tint}" opacity=".22"/>` : ''}
+    <rect x="0" y="${y0 - 200}" width="1920" height="${lines.length * step + 120}" fill="url(#thVig)" opacity="${p.band ?? 0.6}"/>
+    <defs><linearGradient id="thVig" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".5" stop-color="#000"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient></defs>
+    ${p.circle ? `<circle cx="${p.circle[0]}" cy="${p.circle[1]}" r="${p.circle[2]}" fill="none" stroke="#ff1a1a" stroke-width="22" style="filter:drop-shadow(0 0 18px #ff0000)"/>` : ''}
+    ${p.arrow ? `<g stroke="#ff1a1a" stroke-width="30" stroke-linecap="round" fill="none" style="filter:drop-shadow(0 6px 0 #000)"><path d="M${p.arrow[0]} ${p.arrow[1]} L${p.arrow[2]} ${p.arrow[3]}"/>
+      <path d="M${p.arrow[2]} ${p.arrow[3]} l${-70 * Math.cos(Math.atan2(p.arrow[3] - p.arrow[1], p.arrow[2] - p.arrow[0]) - 0.5)} ${-70 * Math.sin(Math.atan2(p.arrow[3] - p.arrow[1], p.arrow[2] - p.arrow[0]) - 0.5)} M${p.arrow[2]} ${p.arrow[3]} l${-70 * Math.cos(Math.atan2(p.arrow[3] - p.arrow[1], p.arrow[2] - p.arrow[0]) + 0.5)} ${-70 * Math.sin(Math.atan2(p.arrow[3] - p.arrow[1], p.arrow[2] - p.arrow[0]) + 0.5)}"/></g>` : ''}
+    ${lines.map(([txt, col], i) => `<text x="${p.x ?? 960}" y="${y0 + i * step}" text-anchor="${p.anchor || 'middle'}" font-family="Anton" font-size="${p.size || 200}" fill="${col || '#fff'}" stroke="#000" stroke-width="16" paint-order="stroke" letter-spacing="3" transform="rotate(${p.rot ?? 0} ${p.x ?? 960} ${y0 + i * step})">${txt}</text>`).join('')}`;
+};

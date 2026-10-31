@@ -9,9 +9,34 @@
   "speed": 1.0
  },
  "thumb": {
-  "text": "HOLD YOUR BREATH.",
-  "tint": "#ff1a3c",
-  "tint2": "#3a00ff"
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "bed",
+  "bp": {
+   "time": "3:03",
+   "eyes": "wide",
+   "look": 1,
+   "watcher": 1,
+   "watcherX": 1400,
+   "sweat": true
+  },
+  "lines": [
+   [
+    "HOLD YOUR",
+    "#9fd8ff"
+   ],
+   [
+    "BREATH",
+    "#fff"
+   ]
+  ],
+  "x": 560,
+  "y": 640,
+  "size": 170,
+  "anchor": "middle",
+  "rot": -3,
+  "tint": "#0040ff",
+  "band": 0
  },
  "yt": {
   "title": "Hold your breath at 3 AM. If you still hear breathing... \ud83d\ude28 #scary #horror #shorts",

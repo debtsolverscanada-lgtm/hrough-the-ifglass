@@ -8,12 +8,40 @@
   "speed": 1.0
  },
  "thumb": {
-  "scene": "thumbPhone",
-  "text": "IT'S|BEHIND|YOU.",
-  "tint": "#ff0030"
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "reflection",
+  "bp": {
+   "face": 1
+  },
+  "lines": [
+   [
+    "LOOK",
+    "#fff"
+   ],
+   [
+    "BEHIND",
+    "#ff2a2a"
+   ],
+   [
+    "YOU",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 430,
+  "y": 720,
+  "step": 170,
+  "size": 170,
+  "band": 0,
+  "circle": [
+   1090,
+   700,
+   250
+  ],
+  "tint": "#400000"
  },
  "yt": {
-  "title": "Don't look at your phone screen when it goes black at 3 AM 😨 #scary #horror #shorts",
+  "title": "Don't look at your phone screen when it goes black at 3 AM \ud83d\ude28 #scary #horror #shorts",
   "description": "It's 3:33 AM. You're on your phone, just like right now. Then you get a text... from your own number.\n\nWatch until the end. Then look at your screen when it goes black.\n\n#scarystories #horrorstories #3amstories #creepy #shorts",
   "tags": [
    "scary stories",
