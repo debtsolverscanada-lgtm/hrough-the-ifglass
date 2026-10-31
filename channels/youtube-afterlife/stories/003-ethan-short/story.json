@@ -1,0 +1,171 @@
+{
+ "format": "short",
+ "style": "3d",
+ "voice": "Adam",
+ "tts": {
+  "stability": 0.45,
+  "similarity": 0.8,
+  "style": 0.35,
+  "speed": 1.08
+ },
+ "thumb": {
+  "scene": "yaThumbSplit",
+  "style": "3d",
+  "imgs": [
+   "channels/youtube-afterlife/stories/002-ethan-klein/photos/qRIt7he0woM.jpg",
+   "channels/youtube-afterlife/stories/002-ethan-klein/photos/QyyGT9AgKdM.jpg"
+  ],
+  "lx": 0.0,
+  "rx": 0.5,
+  "title": "HIS CHEATING SCANDAL",
+  "sub": "H3 ENDED IN 48 HOURS"
+ },
+ "yt": {
+  "title": "Ethan Klein's affair ended H3 in 48 hours \ud83d\ude33 #h3podcast #ethanklein #shorts",
+  "description": "Oct 21: a normal H3 episode. Oct 22: indefinite hiatus, and Hila Klein says Ethan admitted to an affair lasting over 6 months. The crew cuts ties. 15 years, gone in 2 days.\n\nFull story on the channel.\n\nSources: Variety, Rolling Stone (Oct 2026). Photos shown for commentary under fair use.\n\n#h3podcast #ethanklein #hilaklein #youtubedrama #shorts",
+  "tags": [
+   "ethan klein",
+   "hila klein",
+   "h3 podcast",
+   "ethan klein affair",
+   "ethan klein cheating",
+   "h3 podcast ended",
+   "youtube drama",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "OCT 21, 2026",
+    "sub": "H3 Show #320",
+    "size": 170
+   },
+   "text": "On October twenty first, the H3 Podcast posted a totally normal episode.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzzphone",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/002-ethan-klein/photos/qRIt7he0woM.jpg",
+    "cap": "THE LAST EPISODE",
+    "src": "H3 Podcast, YouTube",
+    "tilt": -2
+   },
+   "text": "The crew gave Ethan a makeover. Nobody knew it was the last episode ever.",
+   "pause": 0.1
+  },
+  {
+   "scene": "yaWolfie",
+   "p": {
+    "pair": "ek",
+    "prop": "phone",
+    "eyes": "tired"
+   },
+   "text": "The next day, Ethan put the show on indefinite hiatus. No reason.",
+   "pause": 0.1
+  },
+  {
+   "scene": "yaPost",
+   "p": {
+    "contact": "Hila Klein",
+    "photo": true
+   },
+   "text": "A few hours later, Hila posted on Instagram.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "6 MONTHS",
+    "sub": "Hila Klein, Instagram",
+    "color": "#ff3a4a",
+    "size": 200
+   },
+   "text": "She said he finally admitted to an affair. For over six months.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "sting",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaCouple",
+   "p": {
+    "pair": "ek",
+    "mood": "sad",
+    "rain": true
+   },
+   "text": "First he said it was just a kiss. Then emotional cheating. Then the affair.",
+   "pause": 0.1
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "THE CREW|QUIT",
+    "color": "#fff",
+    "size": 180
+   },
+   "text": "Then the entire crew said they're done working with him.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "boom",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/002-ethan-klein/photos/L65RJqFZrfk.jpg",
+    "cap": "2022",
+    "src": "H3 Podcast, YouTube, 2022",
+    "tilt": 3
+   },
+   "text": "Which is wild, because back in 2022, when the Try Guys scandal hit, Ethan called cheating despicable.",
+   "pause": 0.2
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "15 YEARS|GONE IN 2 DAYS",
+    "color": "#ff3a4a",
+    "size": 160
+   },
+   "text": "Fifteen years of YouTube. Gone in two days.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "silence_hit",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "FULL STORY|ON THE CHANNEL",
+    "color": "#ffd86a",
+    "size": 150
+   },
+   "text": "Full story on our channel.",
+   "pause": 0.6
+  }
+ ]
+}
