@@ -1,0 +1,169 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.4,
+  "similarity": 0.8,
+  "style": 0.4,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "clown",
+  "bp": {
+   "where": "corner"
+  },
+  "zoom": [
+   1420,
+   860,
+   1.4
+  ],
+  "lines": [
+   [
+    "WE DON'T OWN",
+    "#fff"
+   ],
+   [
+    "A CLOWN",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 560,
+  "y": 700,
+  "step": 190,
+  "size": 180,
+  "band": 0,
+  "arrow": [
+   700,
+   1250,
+   1180,
+   1000
+  ],
+  "tint": "#200010"
+ },
+ "yt": {
+  "title": "\"We don't own a clown statue.\" \ud83e\udd21 #scary #horror #shorts",
+  "description": "Never babysit in a house with a clown statue.\n\n\ud83c\udfa7 headphones on. Full story on the channel.\n\n#scarystories #clown #3amstories #8daudio #shorts",
+  "tags": [
+   "scary stories",
+   "clown statue",
+   "babysitter",
+   "clown horror",
+   "8d audio",
+   "3am stories",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "clown",
+   "p": {
+    "where": "corner",
+    "snap": {
+     "at": 2.2,
+     "to": [
+      1420,
+      700
+     ],
+     "z": 1.8
+    }
+   },
+   "text": "You're babysitting. And there's a clown statue in the corner of the guest room.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "sting",
+     2.0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "9:41",
+    "msgs": [
+     [
+      "Me",
+      "can i cover the clown statue? it's creeping me out lol",
+      0.3
+     ]
+    ]
+   },
+   "text": "It creeps you out, so you text the parents.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzzphone",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Get the kids. Go next door. We don't own a clown statue.",
+   "voice": [
+    "Bill",
+    "George",
+    "Daniel",
+    "Callum"
+   ],
+   "fx": "far+left",
+   "pause": 0.6
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "corner",
+    "gone": true,
+    "shake": 0.5
+   },
+   "text": "You look up. The corner is empty.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Then, from upstairs...",
+   "pause": 0.1
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Hee hee hee.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "wrong+orbit",
+   "pause": 0.4
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "close",
+    "smile": "grow",
+    "glow": true
+   },
+   "text": "Full story on the channel. Ask them if they own it.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  }
+ ]
+}

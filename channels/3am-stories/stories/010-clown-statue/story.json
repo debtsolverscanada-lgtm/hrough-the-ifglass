@@ -1,0 +1,556 @@
+{
+ "format": "long",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.4,
+  "similarity": 0.8,
+  "style": 0.4,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "clown",
+  "bp": {
+   "where": "kids",
+   "tilt": 16,
+   "shh": true,
+   "glow": true
+  },
+  "zoom": [
+   1300,
+   900,
+   1.35
+  ],
+  "lines": [
+   [
+    "WE DON'T OWN A",
+    "#fff"
+   ],
+   [
+    "CLOWN STATUE",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 560,
+  "y": 700,
+  "step": 190,
+  "size": 170,
+  "band": 0,
+  "circle": [
+   1380,
+   640,
+   230
+  ],
+  "tint": "#200010"
+ },
+ "yt": {
+  "title": "\"We Don't Own A Clown Statue\" - The Babysitter Story That Will Ruin Your Night \ud83e\udd21 (8D AUDIO)",
+  "description": "\ud83c\udfa7 WEAR HEADPHONES - 8D audio.\n\nYou're babysitting for a rich family. Kids asleep by nine. In the corner of the guest room there's a life-size clown statue, and every time you look away, you feel it watching you. So you text the parents...\n\n\"Get the kids. Go next door. Call the police. We don't own a clown statue.\"\n\n#scarystories #horrorstories #3amstories #clown #8daudio #babysitter #animatedhorror",
+  "tags": [
+   "scary stories",
+   "horror stories",
+   "clown statue",
+   "babysitter story",
+   "clown horror",
+   "8d audio",
+   "3am stories",
+   "animated horror",
+   "anime horror",
+   "creepy stories",
+   "scary story animated"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "black",
+   "p": {
+    "text": "headphones in. 8D audio.",
+    "color": "#e8e8e8",
+    "size": 90
+   },
+   "text": "Headphones in. This one is eight D audio. And if you've ever babysat... you need to hear this.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "9:04",
+    "eyes": "normal",
+    "phone": true,
+    "snap": {
+     "at": 3.5,
+     "to": [
+      1150,
+      1000
+     ],
+     "z": 2.2,
+     "back": 5.0
+    }
+   },
+   "text": "You got a babysitting job. A huge house at the edge of town. Rich family. Two kids, both asleep by nine. Easiest money you'll ever make.",
+   "pause": 0.2
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "9:06",
+    "msgs": [
+     [
+      "Mrs. Hale",
+      "kids are asleep. don't wake them",
+      0.3
+     ],
+     [
+      "Mrs. Hale",
+      "help yourself to anything. TV is in the guest room",
+      1.0
+     ]
+    ]
+   },
+   "text": "Before they left, the parents texted you their rules.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "bathroom",
+    "walk": 0.6
+   },
+   "text": "The house is silent. Not quiet. Silent. You walk down the hall to the guest room to watch some TV.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "steps",
+     0,
+     "orbit"
+    ]
+   ]
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "corner",
+    "snap": {
+     "at": 3.0,
+     "to": [
+      1420,
+      700
+     ],
+     "z": 2.0
+    }
+   },
+   "text": "And in the corner of the guest room... there's a clown statue. Life size. Painted grin. Black diamond eyes.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "sting",
+     2.8
+    ]
+   ]
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "corner",
+    "tilt": 0
+   },
+   "text": "You try to watch TV. But every time you look away... you feel it watching you.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "9:41",
+    "msgs": [
+     [
+      "Me",
+      "lol is it ok if i put a blanket over the clown statue? it's kinda creeping me out",
+      0.3
+     ]
+    ]
+   },
+   "text": "So you text the parents.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "buzzphone",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "9:42",
+    "msgs": [
+     [
+      "Mr. Hale",
+      "\ud83d\udcde incoming call",
+      0.3
+     ]
+    ]
+   },
+   "text": "No reply. Then your phone starts ringing. It's the dad.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ],
+    [
+     "buzzphone",
+     1.4
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Listen to me. Get the kids. Go next door. Call the police. Right now.",
+   "voice": [
+    "Bill",
+    "George",
+    "Daniel",
+    "Callum"
+   ],
+   "fx": "far+left",
+   "pause": 0.5
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "We don't own a clown statue.",
+   "voice": [
+    "Bill",
+    "George",
+    "Daniel",
+    "Callum"
+   ],
+   "fx": "far+left",
+   "pause": 1.0,
+   "sfx": [
+    [
+     "silence_hit",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "WE DON'T OWN|A CLOWN STATUE.",
+    "color": "#ff2a2a"
+   },
+   "text": "We don't own a clown statue.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "corner",
+    "gone": true,
+    "snap": {
+     "at": 0.6,
+     "to": [
+      1420,
+      1100
+     ],
+     "z": 1.8
+    },
+    "shake": 0.4
+   },
+   "text": "You look up. The corner is empty.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Then, from upstairs... you hear something giggling.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "steps",
+     1.4,
+     "behind"
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Hee hee hee hee.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "wrong+orbit",
+   "pause": 0.8
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "none",
+    "walk": 0.5,
+    "shake": 0.5
+   },
+   "text": "The kids' room is at the end of the hall. The door is open.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "steps",
+     0
+    ],
+    [
+     "heart",
+     0.5
+    ]
+   ]
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "kids",
+    "tilt": 16,
+    "snap": {
+     "at": 2.8,
+     "to": [
+      1380,
+      640
+     ],
+     "z": 2.0
+    }
+   },
+   "text": "And standing over the little girl's bed, with its head tilted, is the clown. Watching her sleep.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "sting",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "kids",
+    "tilt": 16,
+    "shh": true,
+    "glow": true
+   },
+   "text": "It sees you. And it slowly raises one finger to its lips.",
+   "pause": 0.2
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Shhhh.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "whisper+right+close",
+   "pause": 1.0
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "",
+    "eyes": "wide",
+    "look": 1,
+    "sweat": true,
+    "shake": 0.6
+   },
+   "text": "You don't remember running. You remember the little girl's arms around your neck, her brother screaming, and the neighbour's porch light.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "steps",
+     0,
+     "orbitfast"
+    ],
+    [
+     "heart",
+     1
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 0,
+    "light": true
+   },
+   "text": "The police searched the whole house. Every room. Every closet. They found nothing.",
+   "pause": 0.2
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "the attic.",
+    "color": "#8a8a8a",
+    "size": 110
+   },
+   "text": "Except a hatch in the ceiling of the guest room, open just a crack. And in the attic: a sleeping bag. Empty food cans. And a box of face paint.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "creak",
+     0.3,
+     "behind"
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "FOR|WEEKS.",
+    "color": "#ff2a2a"
+   },
+   "text": "He'd been living up there for weeks.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "",
+    "eyes": "tired"
+   },
+   "text": "They never found him. And the next morning, the little girl said something that made her mom start crying.",
+   "pause": 0.2
+  },
+  {
+   "scene": "brother",
+   "p": {
+    "eyes": "normal"
+   },
+   "text": "The clown plays with us every night. He said you'd come.",
+   "voice": [
+    "Lily",
+    "Jessica",
+    "Laura"
+   ],
+   "fx": "wrong",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "silence_hit",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "close",
+    "smile": "grow",
+    "glow": true
+   },
+   "text": "He said you'd come.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "wrong+left",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "jump",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "if you ever see a clown statue|in someone's house...",
+    "color": "#e8e8e8",
+    "size": 80
+   },
+   "text": "So if you ever see a clown statue in someone's house...",
+   "pause": 0.4
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "ask them if they own it.",
+    "color": "#ff1a1a",
+    "size": 100
+   },
+   "text": "ask them if they own it.",
+   "pause": 0.8
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "dur": 3.0,
+   "sfx": [
+    [
+     "steps",
+     0.3,
+     "orbit"
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Hee hee hee.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "wrong+left+close",
+   "pause": 1.2
+  }
+ ]
+}

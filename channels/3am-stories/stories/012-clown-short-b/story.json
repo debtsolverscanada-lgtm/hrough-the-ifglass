@@ -1,0 +1,172 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.4,
+  "similarity": 0.8,
+  "style": 0.4,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "clown",
+  "bp": {
+   "where": "close",
+   "smile": 0.9,
+   "glow": true
+  },
+  "lines": [
+   [
+    "HE SAID",
+    "#fff"
+   ],
+   [
+    "YOU'D COME",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 960,
+  "y": 1380,
+  "step": 170,
+  "size": 170,
+  "band": 0.5,
+  "tint": "#300000"
+ },
+ "yt": {
+  "title": "The clown plays with them every night... \ud83e\udd21 #scary #horror #shorts",
+  "description": "If you see a clown standing over a child's bed... don't scream.\n\n\ud83c\udfa7 headphones on. Full story on the channel.\n\n#scarystories #clown #3amstories #8daudio #shorts",
+  "tags": [
+   "scary stories",
+   "clown",
+   "clown horror",
+   "babysitter",
+   "8d audio",
+   "3am stories",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "black",
+   "p": {
+    "text": "don't scream.",
+    "color": "#e8e8e8",
+    "size": 120
+   },
+   "text": "If you see a clown standing over a child's bed... don't scream.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "none",
+    "walk": 0.5,
+    "shake": 0.4
+   },
+   "text": "You hear giggling from the kids' room. The door is open.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "steps",
+     0,
+     "orbit"
+    ]
+   ]
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "kids",
+    "tilt": 16,
+    "snap": {
+     "at": 1.6,
+     "to": [
+      1380,
+      640
+     ],
+     "z": 2.0
+    }
+   },
+   "text": "There's a clown standing over the little girl's bed. Head tilted. Watching her sleep.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "sting",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "kids",
+    "tilt": 16,
+    "shh": true,
+    "glow": true
+   },
+   "text": "It sees you. And it puts one finger to its lips.",
+   "pause": 0.1
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Shhhh.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "whisper+right+close",
+   "pause": 0.6
+  },
+  {
+   "scene": "brother",
+   "p": {
+    "eyes": "normal"
+   },
+   "text": "The clown plays with us every night. He said you'd come.",
+   "voice": [
+    "Lily",
+    "Jessica",
+    "Laura"
+   ],
+   "fx": "wrong",
+   "pause": 0.3
+  },
+  {
+   "scene": "clown",
+   "p": {
+    "where": "close",
+    "smile": "grow",
+    "glow": true
+   },
+   "dur": 1.6,
+   "sfx": [
+    [
+     "jump",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "full story on the channel.",
+    "color": "#ff1a1a",
+    "size": 90
+   },
+   "text": "Full story on the channel.",
+   "pause": 0.4
+  }
+ ]
+}

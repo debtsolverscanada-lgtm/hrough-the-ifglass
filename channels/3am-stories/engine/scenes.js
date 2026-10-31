@@ -939,3 +939,62 @@ S.snow = (t, d, p) => {
     ${prints}${flakes}
     <rect width="1920" height="1920" fill="#203060" opacity=".15"/>`;
 };
+
+// ---------- the clown ----------
+// Cel-shaded clown: chalk-white face, black diamond eyes with tiny red pupils, a painted grin far wider than the mouth
+// under it, a red nose, wild orange hair, a striped suit. o.tilt (deg), o.shh (finger to lips), o.smile (real mouth
+// opening under the paint, 0..1), o.wave (arm raised, slow), o.eyesGlow
+function clown(x, y, s, o = {}) {
+  const ink = '#0a0608', t = o.t || 0, tilt = o.tilt || 0;
+  const hair = [...Array(14)].map((_, k) => { const a = -2.6 + k * 0.4, r = 150 + (k % 3) * 22;
+    return `<circle cx="${Math.cos(a) * r}" cy="${-40 + Math.sin(a) * r * 0.8}" r="${58 - (k % 2) * 10}" fill="${k % 2 ? '#e2561a' : '#c23e0e'}" stroke="${ink}" stroke-width="6"/>`; }).join('');
+  const arm = o.wave ? `<path d="M120 180 Q230 ${80 - 30 * Math.sin(t * 1.4)} 230 ${-60 - 30 * Math.sin(t * 1.4)}" stroke="${ink}" stroke-width="64" stroke-linecap="round" fill="none"/><path d="M120 180 Q230 ${80 - 30 * Math.sin(t * 1.4)} 230 ${-60 - 30 * Math.sin(t * 1.4)}" stroke="#f2f2f2" stroke-width="50" stroke-linecap="round" fill="none"/><circle cx="230" cy="${-80 - 30 * Math.sin(t * 1.4)}" r="34" fill="#f8f8f8" stroke="${ink}" stroke-width="6"/>`
+    : `<path d="M120 180 Q170 320 150 460" stroke="${ink}" stroke-width="64" stroke-linecap="round" fill="none"/><path d="M120 180 Q170 320 150 460" stroke="#f2f2f2" stroke-width="50" stroke-linecap="round" fill="none"/><circle cx="150" cy="480" r="34" fill="#f8f8f8" stroke="${ink}" stroke-width="6"/>`;
+  const shh = o.shh ? `<path d="M-60 400 Q-40 200 -6 96" stroke="${ink}" stroke-width="58" stroke-linecap="round" fill="none"/><path d="M-60 400 Q-40 200 -6 96" stroke="#f2f2f2" stroke-width="44" stroke-linecap="round" fill="none"/>
+      <path d="M-8 110 L-4 30" stroke="${ink}" stroke-width="26" stroke-linecap="round"/><path d="M-8 110 L-4 30" stroke="#f8f8f8" stroke-width="16" stroke-linecap="round"/>` : `<path d="M-120 180 Q-170 320 -150 460" stroke="${ink}" stroke-width="64" stroke-linecap="round" fill="none"/><path d="M-120 180 Q-170 320 -150 460" stroke="#f2f2f2" stroke-width="50" stroke-linecap="round" fill="none"/><circle cx="-150" cy="480" r="34" fill="#f8f8f8" stroke="${ink}" stroke-width="6"/>`;
+  const sm = o.smile || 0;
+  return `<g transform="translate(${x},${y}) scale(${s})">
+    <ellipse cy="640" rx="190" ry="34" fill="#000" opacity=".45"/>
+    <path d="M-150 160 Q-160 60 -60 50 L60 50 Q160 60 150 160 L170 620 L-170 620Z" fill="#e8e4f0" stroke="${ink}" stroke-width="8"/>
+    ${[...Array(6)].map((_, k) => `<path d="M${-150 + k * 60} 120 L${-170 + k * 66} 620" stroke="#c0182a" stroke-width="22"/>`).join('')}
+    <path d="M40 50 Q150 60 150 160 L170 620 L60 620Z" fill="#000" opacity=".22"/>
+    ${[0, 1, 2].map((k) => `<circle cx="0" cy="${200 + k * 110}" r="22" fill="#1a1a2a" stroke="${ink}" stroke-width="5"/>`).join('')}
+    <path d="M-150 60 Q-80 140 0 90 Q80 140 150 60 Q80 30 0 50 Q-80 30 -150 60Z" fill="#f4f0e6" stroke="${ink}" stroke-width="7"/>
+    ${arm}
+    <g transform="rotate(${tilt}) translate(0,-100)">
+      ${hair}
+      <path d="M-120 -30 Q-130 -170 0 -178 Q130 -170 120 -30 Q122 80 84 130 Q40 172 0 172 Q-40 172 -84 130 Q-122 80 -120 -30Z" fill="#f6f4ee" stroke="${ink}" stroke-width="8"/>
+      <path d="M50 -170 Q130 -150 120 -30 Q122 80 84 130 Q130 30 90 -100Z" fill="#c8c4be" opacity=".6"/>
+      ${[-48, 48].map((dx) => `<path d="M${dx} -90 L${dx + 26} -30 L${dx} 30 L${dx - 26} -30Z" fill="#0a0a1e" stroke="${ink}" stroke-width="5"/>
+        <path d="M${dx - 26} -36 h52" stroke="#0a0a1e" stroke-width="5"/>
+        <circle cx="${dx}" cy="-30" r="${o.eyesGlow ? 9 : 6}" fill="#ff1a1a"/>${o.eyesGlow ? `<circle cx="${dx}" cy="-30" r="26" fill="#ff1a1a" opacity=".3"/>` : ''}`).join('')}
+      <path d="M-104 50 Q0 ${170 + 30 * sm} 104 50 Q90 70 70 62 Q0 ${130 + 20 * sm} -70 62 Q-90 70 -104 50Z" fill="#c0101e" stroke="${ink}" stroke-width="6"/>
+      ${sm ? `<path d="M-46 74 Q0 ${110 + 70 * sm} 46 74 Q0 ${92 + 10 * sm} -46 74Z" fill="#1a0204" stroke="${ink}" stroke-width="5"/>${[...Array(7)].map((_, k) => `<path d="M${-38 + k * 12} 80 l6 ${10 + 8 * sm} l6 ${-10 - 8 * sm}" fill="#e8e0c8"/>`).join('')}` : ''}
+      <circle cx="0" cy="20" r="30" fill="#e8101e" stroke="${ink}" stroke-width="6"/><circle cx="-9" cy="10" r="9" fill="#fff" opacity=".7"/>
+      ${shh}
+    </g>
+  </g>`;
+}
+// p.where: 'corner' (statue in the guest-room corner, or empty when p.gone), 'kids' (standing over a kid's bed),
+// 'hall' (at the far end of a dark hallway), 'door' (half behind a door frame), 'close' (face fills the frame)
+S.clown = (t, d, p) => {
+  const w = p.where || 'corner', o = { t, tilt: p.tilt || 0, shh: p.shh, smile: p.smile === 'grow' ? ease(t / d) : p.smile, wave: p.wave, eyesGlow: p.glow };
+  if (w === 'close') return `${room('#000')}<rect width="1920" height="1920" fill="#0a0204"/>${clown(960, 1250, 3.6, { ...o, tilt: (p.tilt || 0) + 3 * Math.sin(t * 2) })}`;
+  if (w === 'hall') return `${room('#050507')}<path d="M0 0 L760 500 L760 1040 L0 1920Z" fill="#0d0c0b"/><path d="M1920 0 L1160 500 L1160 1040 L1920 1920Z" fill="#0b0a09"/>
+      <rect x="760" y="500" width="400" height="540" fill="#070707"/><path d="M760 1040 L1160 1040 L1920 1920 L0 1920Z" fill="#0a0908"/>
+      ${clown(960, 780, 0.42 + (p.approach ? 0.3 * ease(t / d) : 0), o)}
+      ${p.you !== false ? person(960, 1560, 1.1, { back: true, body: '#1a1e29' }) : ''}`;
+  if (w === 'door') return `${room('#060608')}<rect x="560" y="320" width="800" height="1380" fill="#0a0a10" stroke="#1a1a22" stroke-width="20"/>
+      <g clip-path="url(#doorClip)">${clown(1240, 940, 1.1, { ...o, tilt: 18 })}</g>
+      <defs><clipPath id="doorClip"><rect x="1040" y="320" width="320" height="1380"/></clipPath></defs>
+      <rect x="560" y="320" width="480" height="1380" fill="#2a2018" stroke="#120c06" stroke-width="10"/><circle cx="1000" cy="1000" r="18" fill="#9a8a5a"/>`;
+  if (w === 'kids') return `${room('#0b0c14')}
+      <rect x="420" y="1160" width="760" height="220" rx="30" fill="#4a5a8a"/><rect x="440" y="1100" width="240" height="110" rx="40" fill="#e8e2d4"/>
+      ${kid(560, 1130, 0.55, { eyes: 'closed' })}<path d="M600 1180 Q900 1120 1180 1170 L1180 1380 L420 1380Z" fill="#6a7ab0" stroke="#000" stroke-width="6"/>
+      ${clown(1380, 760, 1.0, o)}`;
+  // corner of the guest room (statue), or the same corner empty
+  return `${room('#0a0a10')}
+    <rect x="300" y="1060" width="760" height="260" rx="40" fill="#3a3348"/><rect x="300" y="980" width="760" height="120" rx="40" fill="#4a4258"/>
+    <rect x="460" y="760" width="420" height="260" fill="#0c0c14" stroke="#1a1a24" stroke-width="12"/><rect x="480" y="780" width="380" height="220" fill="#2a3a5a" opacity="${0.5 + 0.2 * Math.sin(t * 6)}"/>
+    ${p.gone ? '<ellipse cx="1420" cy="1400" rx="190" ry="34" fill="#000" opacity=".25"/>' : clown(1420, 760, 1.0, { ...o, tilt: p.tilt || 0 })}`;
+};
