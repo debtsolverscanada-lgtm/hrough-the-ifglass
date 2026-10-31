@@ -1,0 +1,374 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.4,
+  "similarity": 0.8,
+  "style": 0.4,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "thumbSketch",
+  "title": "4 KNOCKS",
+  "sub": "3AM STORY",
+  "pose": "reach",
+  "wall": "#2c3340",
+  "accent": "#ff4a4a"
+ },
+ "yt": {
+  "title": "If something knocks on your door at 3 AM, COUNT the knocks \ud83d\ude28 #scary #horror #shorts",
+  "description": "My nan had one rule: if something knocks on your door after 3 AM, count the knocks. It knocks once for every soul in the house.\n\nThere are three people in your house. Tonight it knocked four times.\n\nIf you hear knocking tonight... count.\n\n#scarystories #horrorstories #3amstories #creepy #shorts",
+  "tags": [
+   "scary stories",
+   "horror shorts",
+   "3am",
+   "knocking at 3am",
+   "count the knocks",
+   "jinn",
+   "animated horror",
+   "anime horror",
+   "pov horror",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "nan",
+   "text": "My nan had one rule.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "nan",
+   "voice": [
+    "Dorothy",
+    "Matilda",
+    "Alice",
+    "Lily",
+    "Charlotte"
+   ],
+   "text": "If something knocks on your door after three A.M., count the knocks. It knocks once... for every soul in the house.",
+   "pause": 0.3
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:07",
+    "eyes": "tired",
+    "look": 0
+   },
+   "text": "Three people live in your house. You. Your mom. Your little brother.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "knock": true
+   },
+   "text": "Then, at three oh seven...",
+   "pause": 1.4,
+   "sfx": [
+    [
+     "knock",
+     1.6
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:07",
+    "eyes": "wide",
+    "look": 1
+   },
+   "text": "Three knocks. Okay. That's everyone.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "breath",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {},
+   "text": "And then...",
+   "pause": 1.3,
+   "sfx": [
+    [
+     "silence_hit",
+     0.5
+    ],
+    [
+     "knock1",
+     1.3
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "FOUR.",
+    "color": "#ff2a2a"
+   },
+   "text": "Four.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:08",
+    "msgs": [
+     [
+      "Mom",
+      "are you awake?",
+      0.6
+     ]
+    ]
+   },
+   "text": "Your phone lights up. It's your mom.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzzphone",
+     0.5
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:08",
+    "msgs": [
+     [
+      "Mom",
+      "are you awake?",
+      0
+     ],
+     [
+      "Mom",
+      "we're at the hospital with your brother. we left at midnight. you were asleep.",
+      0.3
+     ]
+    ]
+   },
+   "text": "We're at the hospital with your brother. We left at midnight.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ],
+    [
+     "heart",
+     1.5
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:08",
+    "eyes": "wide",
+    "look": 1,
+    "sweat": true,
+    "phone": true
+   },
+   "text": "So there's only one soul in this house. Yours.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "so who are|the other three?",
+    "size": 110,
+    "color": "#e8e8e8"
+   },
+   "text": "So who are the other three?",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "sting",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": "many"
+   },
+   "text": "Under the door... you see feet. A lot of feet.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "steps",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": "many"
+   },
+   "voice": [
+    "Sarah",
+    "Laura",
+    "Jessica",
+    "Rachel",
+    "Charlotte"
+   ],
+   "fx": "wrong",
+   "text": "Sweetie? It's mom. Open the door.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "whisper",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:09",
+    "msgs": [
+     [
+      "Mom",
+      "whatever is using my voice",
+      0.2
+     ],
+     [
+      "Mom",
+      "DO NOT open the door",
+      0.9
+     ]
+    ]
+   },
+   "text": "Whatever is using my voice... do not open the door.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "buzzphone",
+     0.1
+    ],
+    [
+     "heart",
+     1.0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": "many",
+    "handle": true
+   },
+   "text": "The handle starts to turn. Slowly. From the outside.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "creak",
+     0.6
+    ],
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "face",
+   "text": "It doesn't need you to open it.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "COUNT|THE KNOCKS.",
+    "color": "#ff2a2a"
+   },
+   "text": "If you hear knocking tonight, count the knocks.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "and if the number is wrong...|pretend you're asleep.",
+    "size": 80,
+    "color": "#8a8a8a"
+   },
+   "text": "And if the number is wrong... pretend you're asleep.",
+   "pause": 0.4
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "dur": 3.4,
+   "sfx": [
+    [
+     "knock",
+     0.6
+    ],
+    [
+     "knock1",
+     2.3
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "...that was four.",
+    "color": "#ff1a1a",
+    "size": 110
+   },
+   "dur": 2.6,
+   "sfx": [
+    [
+     "silence_hit",
+     0.1
+    ]
+   ]
+  }
+ ]
+}

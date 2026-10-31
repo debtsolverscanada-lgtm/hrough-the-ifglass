@@ -109,6 +109,7 @@ SFX = {  # kind: (lavfi graph, seconds, gain)
     'sting': ("aevalsrc='(0.4*sin(2*PI*1480*t)+0.4*sin(2*PI*1571*t)+0.3*sin(2*PI*2217*t)+0.4*sin(2*PI*97*t))*exp(-2.2*t)':d=2.4", 2.4, 1.1),
     'boom': ("aevalsrc='0.9*sin(2*PI*(62-26*t)*t)*exp(-2.6*t)':d=2.5,lowpass=f=300", 2.5, 1.2),
     'knock': ("aevalsrc='0.9*sin(2*PI*170*t)*exp(-45*mod(t\\,0.3))*lt(t\\,0.88)':d=1.2,lowpass=f=900", 1.2, 1.0),
+    'knock1': ("aevalsrc='1.0*sin(2*PI*150*t)*exp(-40*t)':d=0.6,lowpass=f=800", 0.6, 1.1),
     'buzzphone': ("aevalsrc='0.35*sin(2*PI*165*t)*lt(mod(t\\,0.55)\\,0.38)':d=1.1", 1.1, 0.7),
     'fridge': ("aevalsrc='0.05*sin(2*PI*60*t)+0.03*sin(2*PI*120*t)':d=9", 9, 0.7),
     'snore': ("anoisesrc=d=4:c=brown:a=0.6,bandpass=f=220:w=160,tremolo=f=0.3:d=0.95", 4, 0.45),
