@@ -237,6 +237,45 @@ S.text = (t, d, p) => {
     ${p.sub ? `<text x="960" y="${1120 + (lines.length - 1) * 95}" text-anchor="middle" font-family="Marker" font-size="${fit(p.sub, 60)}" fill="#c9c2bb" opacity="${a}">${p.sub}</text>` : ''}
     ${p.eyes ? watcher(960, 1500, 0.8, ease((t - 0.8) / 1.2), { noeyes: false }) : ''}`;
 };
+// Shared "creature face" defs: bloodshot glowing eyes and shaded teeth.
+const BEAST_DEFS = `<defs>
+  <radialGradient id="bloodEye2" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#fff2c8"/><stop offset=".35" stop-color="#ffea6a"/><stop offset=".75" stop-color="#ff2a00"/><stop offset="1" stop-color="#5a0000"/></radialGradient>
+  <linearGradient id="tooth2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fffbe8"/><stop offset="1" stop-color="#b8a27a"/></linearGradient>
+</defs>`;
+function beastFace(open = 1) {
+  const teeth = (n, y0, h, dir) => [...Array(n)].map((_, k) => {
+    const x = -150 + k * (300 / (n - 1)), w = 20 + (k * 37 % 11), hh = h * (0.7 + (k * 53 % 7) / 10);
+    return `<path d="M${x - w / 2} ${y0} L${x} ${y0 + dir * hh} L${x + w / 2} ${y0}Z" fill="url(#tooth2)" stroke="#2a1a10" stroke-width="2"/>`; }).join('');
+  const eye = (cx) => `<g transform="translate(${cx},-150)"><circle r="150" fill="url(#eyeGlow)"/><ellipse rx="58" ry="${40 * open}" fill="url(#bloodEye2)"/>
+      <ellipse rx="14" ry="${30 * open}" fill="#000"/><ellipse cx="-18" cy="-14" rx="10" ry="6" fill="#fff" opacity=".85"/></g>`;
+  return `${BEAST_DEFS}<path d="M-420 700 Q-470 -170 -90 -380 Q0 -420 90 -380 Q470 -170 420 700Z" fill="#030004"/>
+    ${eye(-120)}${eye(120)}
+    <g transform="translate(0,-10) scale(1.3)"><path d="M-185 0 Q0 ${175 * open} 185 0 Q0 80 -185 0Z" fill="#160004"/>${teeth(11, 14, 46 * open, 1)}${teeth(10, 14 + 104 * open, 40 * open, -1)}</g>`;
+}
+// your phone screen gone black: in the glass, your reflection... and the face behind your shoulder. p: face (0..1 fade-in, or 'grow')
+S.reflection = (t, d, p) => {
+  const a = p.face === 'grow' ? ease(t / d) : (p.face ?? 0);
+  return `${room('#000')}
+    <rect x="560" y="140" width="800" height="1640" rx="90" fill="#050506" stroke="#1c1c22" stroke-width="18"/>
+    <g transform="translate(${1120 - 30 * a},${820 - 30 * a}) scale(${0.5 + 0.12 * a})" opacity="${0.85 * a}">${beastFace(1)}</g>
+    <g opacity=".5">${head(860, 1060, 1.7, { eyes: 'wide', look: 0, mouth: 'o', skin: '#8a8a90' })}</g>
+    <path d="M610 1500 Q860 1300 1110 1500 L1150 1760 L570 1760Z" fill="#141418" opacity=".9"/>
+    <path d="M600 180 L1000 180 L640 1100Z" fill="#fff" opacity=".05"/>
+    <rect x="560" y="140" width="800" height="1640" rx="90" fill="#0a0a10" opacity=".25"/>`;
+};
+// jump scare: the creature's face fills the frame, shaking, with a white flash on the cut
+S.face = (t, d, p) => {
+  const sh = (k) => (Math.sin(t * 91 + k) + Math.sin(t * 57 + k * 2)) * 14;
+  const z = 2.1 + 0.25 * ease(t / 0.4);
+  return `${room('#0a0004')}
+    <rect width="1920" height="1920" fill="#ff0022" opacity="${0.18 + 0.1 * Math.sin(t * 30)}"/>
+    <g transform="translate(${960 + sh(1)},${1080 + sh(2)}) scale(${z})">${beastFace(1)}</g>
+    <rect width="1920" height="1920" fill="#fff" opacity="${Math.max(0, 1 - t / 0.12)}"/>`;
+};
+// near-black screen (the viewer sees their own reflection), with an optional small line of text
+S.black = (t, d, p) => `${room('#000')}
+    ${p.text ? `<text x="960" y="${p.y || 1700}" text-anchor="middle" font-family="Marker" font-size="${fit(p.text, p.size || 70)}" fill="${p.color || '#6a6a6a'}" opacity="${ease((t - (p.at || 0)) / 0.5)}">${p.text}</text>` : ''}`;
+
 // Thumbnail, "3D" look: sphere-shaded head with specular highlight and cast shadow, glossy veined eyes,
 // a solid rim-lit creature looming close (bloodshot glowing eyes, jagged shaded grin), fog + light rays for depth,
 // extruded lettering. tint/tint2 set the colour of the scene.
@@ -320,7 +359,7 @@ S.thumb = (t, d, p) => {
 
 // wrap: camera drift, vignette, film grain (seed changes per frame so the grain moves)
 // Where the action is in each scene (world x). Vertical Shorts/TikToks centre their narrow window on it.
-const FOCUS = { bed: 790, door: 800, nan: 1040, kitchen: 1000, morning: 960 };
+const FOCUS = { bed: 790, reflection: 960, face: 960, door: 800, nan: 1040, kitchen: 1000, morning: 960 };
 function frameSVG(name, t, d, p, view, frameNo) {
   if (view[2] < view[3]) {  // vertical: slide the window so the subject sits in the middle
     const fx = p.focus ?? FOCUS[name] ?? 960;

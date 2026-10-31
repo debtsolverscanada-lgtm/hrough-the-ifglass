@@ -112,6 +112,9 @@ SFX = {  # kind: (lavfi graph, seconds, gain)
     'buzzphone': ("aevalsrc='0.35*sin(2*PI*165*t)*lt(mod(t\\,0.55)\\,0.38)':d=1.1", 1.1, 0.7),
     'fridge': ("aevalsrc='0.05*sin(2*PI*60*t)+0.03*sin(2*PI*120*t)':d=9", 9, 0.7),
     'snore': ("anoisesrc=d=4:c=brown:a=0.6,bandpass=f=220:w=160,tremolo=f=0.3:d=0.95", 4, 0.45),
+    'jump': ("aevalsrc='(0.5*sin(2*PI*1480*t)+0.5*sin(2*PI*1571*t)+0.4*sin(2*PI*2217*t)+0.6*sin(2*PI*(80-40*t)*t))*exp(-1.6*t)+0.5*(random(0)-0.5)*exp(-6*t)':d=2.2", 2.2, 1.6),
+    'static': ("anoisesrc=d=1.2:c=white:a=0.5,highpass=f=1500,tremolo=f=22:d=0.9,afade=t=out:st=0.8:d=0.4", 1.2, 0.5),
+    'silence_hit': ("aevalsrc='0.8*sin(2*PI*45*t)*exp(-1.2*t)':d=3,lowpass=f=120", 3, 1.3),
 }
 ins, parts = [], []
 FX = {'far': 'highpass=f=250,lowpass=f=2600,aecho=0.8:0.7:120|260:0.35|0.22,volume=0.9',     # a voice from another room
