@@ -1,0 +1,498 @@
+{
+ "format": "long",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.4,
+  "similarity": 0.8,
+  "style": 0.4,
+  "speed": 0.98
+ },
+ "thumb": {
+  "scene": "thumbCeiling",
+  "title": "I RECORDED|MYSELF SLEEPING"
+ },
+ "yt": {
+  "title": "I Recorded Myself Sleeping. At 3:17 AM, Something Asked To Come In \ud83d\ude28 (8D AUDIO - Headphones)",
+  "description": "\ud83c\udfa7 WEAR HEADPHONES. This video uses 8D audio.\n\nFor three weeks I woke up at 3:17 AM with a sore throat, like I'd been talking all night. So I recorded myself sleeping. At 3:17, footsteps start walking around my bed. Then something leans down and whispers in my ear... and in my sleep, I answer.\n\nDon't record yourself sleeping.\n\n#scarystories #horrorstories #3amstories #8daudio #paranormal #animatedhorror",
+  "tags": [
+   "scary stories",
+   "horror stories",
+   "3am stories",
+   "8d audio",
+   "8d horror",
+   "headphones horror",
+   "recorded myself sleeping",
+   "paranormal",
+   "sleep talking",
+   "animated horror",
+   "anime horror",
+   "creepy stories",
+   "scary story animated"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "black",
+   "p": {
+    "text": "\ud83c\udfa7 put your headphones in.|this video uses 8D audio.",
+    "color": "#e8e8e8",
+    "size": 80
+   },
+   "text": "Before we start, put your headphones in. Both of them. This video uses eight D audio, so everything you hear will come from where it really was in the room.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "now turn the lights off.",
+    "color": "#8a8a8a",
+    "size": 90
+   },
+   "text": "Good. Now turn the lights off.",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "silence_hit",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:17",
+    "eyes": "wide",
+    "look": 0
+   },
+   "text": "For three weeks, I woke up at exactly three seventeen every night. Every time, my throat was sore. Like I'd been talking for hours.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "11:48",
+    "eyes": "tired",
+    "phone": true
+   },
+   "text": "So one night, I put my phone on the nightstand, opened the voice recorder, and pressed record. Just to see if I talk in my sleep.",
+   "pause": 0.3
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "00:00:00",
+    "label": "Sleep recording",
+    "note": "7h 12m",
+    "rec": false,
+    "spike": 0.05
+   },
+   "text": "The next morning, I played it back. Seven hours and twelve minutes.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "static",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "01:42:10",
+    "label": "Sleep recording",
+    "rec": false,
+    "spike": 0.08
+   },
+   "text": "For hours, nothing. Just me, breathing.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "breath",
+     0
+    ],
+    [
+     "breath",
+     2.4
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "03:17:02",
+    "label": "Sleep recording",
+    "rec": false,
+    "spike": 0.5
+   },
+   "text": "Then, at three seventeen... footsteps.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "steps",
+     0.4,
+     "orbit"
+    ],
+    [
+     "steps",
+     3.4,
+     "orbit"
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Slow footsteps. Walking around my bed. Around... and around.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "steps",
+     0,
+     "orbit"
+    ],
+    [
+     "steps",
+     3.1,
+     "orbit"
+    ],
+    [
+     "heart",
+     1.0
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "03:17:41",
+    "label": "Sleep recording",
+    "rec": false,
+    "spike": 0.7
+   },
+   "text": "And then something leaned down. Right next to my left ear.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "breath",
+     0.6,
+     "left"
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Are you awake?",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "whisper+left+close",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "breath",
+     0.2,
+     "left"
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "03:17:49",
+    "label": "Sleep recording",
+    "rec": false,
+    "spike": 0.4
+   },
+   "text": "And on the recording, in my sleep... I answered.",
+   "pause": 0.3
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "No.",
+   "voice": [
+    "Liam",
+    "Will",
+    "Chris",
+    "Eric",
+    "Josh"
+   ],
+   "fx": "far",
+   "pause": 1.0
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Can I come in?",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "whisper+right+close",
+   "pause": 1.0,
+   "sfx": [
+    [
+     "breath",
+     0,
+     "right"
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Yes.",
+   "voice": [
+    "Liam",
+    "Will",
+    "Chris",
+    "Eric",
+    "Josh"
+   ],
+   "fx": "far",
+   "pause": 1.2,
+   "sfx": [
+    [
+     "silence_hit",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "I SAID|YES.",
+    "color": "#ff2a2a"
+   },
+   "text": "I said yes.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "03:21:10",
+    "label": "Sleep recording",
+    "rec": false,
+    "spike": 0.35
+   },
+   "text": "For the next three hours, the recording is just... breathing. Two people breathing. One of them is me. The other one is lying right next to me. On the pillow.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "breath",
+     0
+    ],
+    [
+     "breath",
+     0.9,
+     "behind"
+    ],
+    [
+     "breath",
+     3.4
+    ],
+    [
+     "breath",
+     4.3,
+     "behind"
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:17",
+    "eyes": "wide",
+    "look": 1,
+    "phone": true,
+    "sweat": true
+   },
+   "text": "That night I didn't sleep. I sat up in bed with every light on, holding my phone, recording again. At three seventeen, the room was empty. Nothing moved. I heard nothing.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "03:17:00",
+    "label": "Sleep recording 2",
+    "rec": false,
+    "spike": 0.1
+   },
+   "text": "But in the morning, I played it back.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "static",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "On the recording, there's a voice. Whispering right into the microphone. Right next to my hand. While I was sitting there awake.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "You don't have to stay awake. I'm already in.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "whisper+orbit+close",
+   "pause": 1.0,
+   "sfx": [
+    [
+     "breath",
+     0,
+     "orbitfast"
+    ]
+   ]
+  },
+  {
+   "scene": "face",
+   "p": {},
+   "text": "You let me in.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "wrong",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "DON'T RECORD|YOURSELF SLEEPING.",
+    "color": "#ff2a2a"
+   },
+   "text": "Don't record yourself sleeping.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "if something asks you a question tonight...|you might already have answered.",
+    "size": 70,
+    "color": "#8a8a8a"
+   },
+   "text": "Because if something asks you a question tonight... you might already know the answer.",
+   "pause": 0.6
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "still got your headphones in?",
+    "size": 90,
+    "color": "#e8e8e8"
+   },
+   "text": "Still got your headphones in?",
+   "pause": 0.8
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "dur": 4.0,
+   "sfx": [
+    [
+     "steps",
+     0.3,
+     "orbit"
+    ],
+    [
+     "breath",
+     2.0,
+     "left"
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Are you awake?",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "whisper+left+close",
+   "pause": 1.4
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "don't answer.",
+    "color": "#ff1a1a",
+    "size": 120
+   },
+   "dur": 3.0,
+   "sfx": [
+    [
+     "silence_hit",
+     0.1
+    ]
+   ]
+  }
+ ]
+}

@@ -120,15 +120,23 @@ SFX = {  # kind: (lavfi graph, seconds, gain)
 ins, parts = [], []
 FX = {'far': 'highpass=f=250,lowpass=f=2600,aecho=0.8:0.7:120|260:0.35|0.22,volume=0.9',     # a voice from another room
       'whisper': 'highpass=f=400,aecho=0.8:0.6:90:0.3,volume=1.2',
-      'wrong': 'asetrate=48000*0.88,aresample=48000,aecho=0.8:0.6:70|150:0.4|0.3,volume=1.1'}   # something pretending to be human
+      'wrong': 'asetrate=48000*0.88,aresample=48000,aecho=0.8:0.6:70|150:0.4|0.3,volume=1.1',   # something pretending to be human
+      # 8D / headphone placement. Combine with '+', e.g. "whisper+left" or "wrong+orbit".
+      'left': 'pan=stereo|c0=c0|c1=0.06*c1',                      # right up against your left ear
+      'right': 'pan=stereo|c0=0.06*c0|c1=c1',
+      'orbit': 'apulsator=mode=sine:hz=0.22:amount=1:offset_l=0:offset_r=0.5',   # circles around your head
+      'orbitfast': 'apulsator=mode=sine:hz=0.7:amount=1:offset_l=0:offset_r=0.5',
+      'behind': 'lowpass=f=3200,pan=stereo|c0=c0|c1=-1*c1,volume=0.9',          # out-of-phase: sounds inside / behind your head
+      'close': 'highpass=f=150,volume=1.5'}                         # breath-on-the-mic close
+fxchain = lambda fx: ''.join(FX[f] + ',' for f in (fx or '').split('+') if f in FX)
 for k, (mp3, at, fx) in enumerate(voices):
-    if at < TOTAL: ins += ['-i', mp3]; parts.append(f'[{len(ins) // 2 - 1}:a]aresample=48000,aformat=channel_layouts=stereo,{FX[fx] + "," if fx in FX else ""}adelay={int(at * 1000)}:all=1[v{k}]')
+    if at < TOTAL: ins += ['-i', mp3]; parts.append(f'[{len(ins) // 2 - 1}:a]aresample=48000,aformat=channel_layouts=stereo,{fxchain(fx)}adelay={int(at * 1000)}:all=1[v{k}]')
 nv = len(parts)
-for k, (kind, at) in enumerate((x, s['start'] + off) for s in tl for x, off in s['sfx']):
+for k, (kind, at, pan) in enumerate((x[0], s['start'] + x[1], x[2] if len(x) > 2 else None) for s in tl for x in s['sfx']):
     if at >= TOTAL or kind not in SFX: continue
     f = f'{WK}/sfx-{kind}.wav'
     if not os.path.exists(f): run('ffmpeg', '-v', 'error', '-y', '-f', 'lavfi', '-i', SFX[kind][0], '-ar', '48000', '-ac', '2', f)
-    ins += ['-i', f]; parts.append(f'[{len(ins) // 2 - 1}:a]volume={SFX[kind][2]},adelay={int(at * 1000)}:all=1[s{k}]')
+    ins += ['-i', f]; parts.append(f'[{len(ins) // 2 - 1}:a]volume={SFX[kind][2]},{fxchain(pan)}adelay={int(at * 1000)}:all=1[s{k}]')
 amb = f"anoisesrc=d={TOTAL + 1}:c=brown:a=0.4,lowpass=f=180,volume=0.12[amb]"
 labels = ''.join(p[p.rindex('['):] for p in parts)
 graph = ';'.join(parts + [amb]) + f";{labels}[amb]amix=inputs={len(parts) + 1}:normalize=0,alimiter=limit=0.95,loudnorm=I=-15:TP=-1.5[mix]"

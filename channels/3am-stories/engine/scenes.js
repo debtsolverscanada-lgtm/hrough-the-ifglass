@@ -778,3 +778,73 @@ S.thumbOver = (t, d, p) => {
       <path d="M${p.arrow[2]} ${p.arrow[3]} l${-70 * Math.cos(Math.atan2(p.arrow[3] - p.arrow[1], p.arrow[2] - p.arrow[0]) - 0.5)} ${-70 * Math.sin(Math.atan2(p.arrow[3] - p.arrow[1], p.arrow[2] - p.arrow[0]) - 0.5)} M${p.arrow[2]} ${p.arrow[3]} l${-70 * Math.cos(Math.atan2(p.arrow[3] - p.arrow[1], p.arrow[2] - p.arrow[0]) + 0.5)} ${-70 * Math.sin(Math.atan2(p.arrow[3] - p.arrow[1], p.arrow[2] - p.arrow[0]) + 0.5)}"/></g>` : ''}
     ${lines.map(([txt, col], i) => `<text x="${p.x ?? 960}" y="${y0 + i * step}" text-anchor="${p.anchor || 'middle'}" font-family="Anton" font-size="${p.size || 200}" fill="${col || '#fff'}" stroke="#000" stroke-width="16" paint-order="stroke" letter-spacing="3" transform="rotate(${p.rot ?? 0} ${p.x ?? 960} ${y0 + i * step})">${txt}</text>`).join('')}`;
 };
+
+// voice-memo app on your phone: waveform scrolling, a clock, a red REC dot. p: clock, label, spike (0..1 loudness), rec
+S.memo = (t, d, p) => {
+  const spike = p.spike ?? 0.1;
+  const bars = [...Array(46)].map((_, i) => { const n = Math.abs(Math.sin(i * 1.7 + t * 9) * Math.sin(i * 0.37 + t * 3.1));
+    const h = 8 + n * 40 + (i > 30 ? spike * 260 * Math.abs(Math.sin(i * 2.3 + t * 14)) : 0);
+    return `<rect x="${672 + i * 13}" y="${960 - h / 2}" width="7" height="${h}" rx="3" fill="${i > 30 && spike > 0.3 ? '#ff3a3a' : '#e8eef8'}"/>`; }).join('');
+  return `${room('#020203')}
+    <circle cx="960" cy="960" r="900" fill="url(#cold)" opacity=".35"/>
+    <rect x="610" y="260" width="700" height="1400" rx="80" fill="#0a0a0a" stroke="#2a2a2a" stroke-width="14"/>
+    <rect x="640" y="300" width="640" height="1320" rx="56" fill="#111318"/>
+    <text x="960" y="490" text-anchor="middle" font-family="Inter, sans-serif" font-size="44" font-weight="800" fill="#e8eef8">${p.label || 'Recording 1'}</text>
+    <text x="960" y="700" text-anchor="middle" font-family="Courier New, monospace" font-size="92" font-weight="700" fill="${spike > 0.3 ? '#ff3a3a' : '#e8eef8'}">${p.clock || '03:17:00'}</text>
+    <path d="M660 960 H1260" stroke="#2a2e38" stroke-width="2"/>${bars}
+    <rect x="1000" y="800" width="4" height="320" fill="#ff3a3a"/>
+    ${p.rec !== false ? `<circle cx="960" cy="1400" r="70" fill="none" stroke="#e8eef8" stroke-width="8"/><circle cx="960" cy="1400" r="${50 - 6 * (Math.sin(t * 4) > 0)}" fill="#ff2a2a"/>` : `<path d="M935 1360 L1000 1400 L935 1440Z" fill="#e8eef8"/>`}
+    ${p.note ? `<text x="960" y="1250" text-anchor="middle" font-family="Inter, sans-serif" font-size="36" font-weight="700" fill="#8a93a8">${p.note}</text>` : ''}`;
+};
+
+// Fourth thumbnail layout ("ceiling"): hand-inked bedroom seen from the doorway, someone asleep, and the thing crawling
+// upside-down across the ceiling right above them, hair hanging down, jaw open. A phone on the nightstand is recording.
+S.thumbCeiling = (t, d, p) => {
+  const ink = '#0e0c0b', skin = '#d9d2c3', skinD = '#a99f8c';
+  const limb = (x1, y1, x2, y2, x3, y3) => `<path d="M${x1} ${y1} L${x2} ${y2} L${x3} ${y3}" stroke="${ink}" stroke-width="30" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M${x1} ${y1} L${x2} ${y2} L${x3} ${y3}" stroke="${skin}" stroke-width="18" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+    ${[-1, 0, 1].map((k) => `<path d="M${x3} ${y3} l${k * 26} -46" stroke="${ink}" stroke-width="9" stroke-linecap="round"/>`).join('')}`;
+  const hair = [...Array(26)].map((_, k) => { const x = 1180 + (k - 13) * 13, len = 260 + (k * 53 % 140);
+    return `<path d="M${x} 640 q${(k % 3 - 1) * 24} ${len * 0.5} ${(k % 5 - 2) * 20} ${len}" stroke="${ink}" stroke-width="${7 + k % 3 * 3}" fill="none" stroke-linecap="round"/>`; }).join('');
+  const T = p.title || 'I RECORDED|MYSELF SLEEPING';
+  const lines = T.split('|');
+  return `
+    <defs><filter id="ink2"><feTurbulence type="fractalNoise" baseFrequency=".02" numOctaves="2" seed="11"/><feDisplacementMap in="SourceGraphic" scale="8"/></filter>
+      <filter id="grime2"><feTurbulence type="fractalNoise" baseFrequency=".8 .03" numOctaves="3" seed="5"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 -.12"/></filter>
+      <radialGradient id="moon2" cx="30%" cy="60%" r="60%"><stop offset="0" stop-color="#9ab0e0" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+    <rect width="1920" height="1920" fill="${p.wall || '#1c2230'}"/>
+    <g filter="url(#ink2)">
+      <path d="M0 420 L1920 420 L1700 600 L220 600Z" fill="#141924" stroke="${ink}" stroke-width="8"/>
+      <path d="M220 600 L1700 600 L1700 1240 L220 1240Z" fill="#232b3c" stroke="${ink}" stroke-width="8"/>
+      <path d="M0 420 L220 600 L220 1240 L0 1500Z M1920 420 L1700 600 L1700 1240 L1920 1500Z" fill="#161b27" stroke="${ink}" stroke-width="8"/>
+      <path d="M220 1240 L1700 1240 L1920 1500 L0 1500Z" fill="#1a1612" stroke="${ink}" stroke-width="8"/>
+      <rect x="300" y="700" width="220" height="300" fill="#7f9ad8" opacity=".5" stroke="${ink}" stroke-width="10"/><path d="M410 700 V1000 M300 850 H520" stroke="${ink}" stroke-width="8"/>
+      <path d="M520 1080 L1440 1080 L1520 1300 L440 1300Z" fill="#3a4258" stroke="${ink}" stroke-width="8"/>
+      <path d="M560 1060 Q980 1000 1420 1060 L1500 1290 L460 1290Z" fill="#6a7390" stroke="${ink}" stroke-width="8"/>
+      ${[0, 1, 2, 3, 4, 5, 6, 7].map((k) => `<path d="M${520 + k * 110} 1090 l40 180" stroke="${ink}" stroke-width="3" opacity=".4"/>`).join('')}
+      <ellipse cx="640" cy="1070" rx="110" ry="50" fill="#e8e2d4" stroke="${ink}" stroke-width="7"/>
+      <ellipse cx="700" cy="1048" rx="56" ry="46" fill="${skin}" stroke="${ink}" stroke-width="7"/><path d="M676 1046 q10 6 20 0 M710 1046 q10 6 20 0" stroke="${ink}" stroke-width="5" fill="none"/>
+      <path d="M650 1020 q50 -40 100 -4" stroke="#1d1510" stroke-width="22" fill="none" stroke-linecap="round"/>
+      <rect x="1540" y="1100" width="150" height="160" fill="#2a2018" stroke="${ink}" stroke-width="7"/>
+      <rect x="1575" y="1070" width="80" height="40" rx="8" fill="#0c0c0c" stroke="#d8eeff" stroke-width="4"/><circle cx="1615" cy="1090" r="9" fill="#ff2a2a"/>
+      <circle cx="1615" cy="1090" r="34" fill="#ff2a2a" opacity=".25"/>
+      <g transform="translate(1330,640) scale(1.3) translate(-1180,-560)">
+        <path d="M940 470 Q1180 430 1400 480 Q1420 560 1180 600 Q980 580 940 470Z" fill="#2a2228" stroke="${ink}" stroke-width="9"/>
+        ${limb(980, 500, 900, 430, 820, 470)}${limb(1040, 560, 960, 640, 880, 610)}${limb(1340, 500, 1460, 430, 1540, 470)}${limb(1320, 560, 1420, 640, 1520, 600)}
+        ${hair}
+        <g transform="translate(1180,700) rotate(180)">
+          <path d="M-120 -40 Q-130 -190 0 -200 Q130 -190 120 -40 Q110 80 60 140 Q0 180 -60 140 Q-110 80 -120 -40Z" fill="${skin}" stroke="${ink}" stroke-width="9"/>
+          ${[-1, 1].map((sd) => `<ellipse cx="${sd * 52}" cy="-80" rx="42" ry="54" fill="#050404" stroke="${ink}" stroke-width="5"/><circle cx="${sd * 52}" cy="-74" r="8" fill="#ff2a2a"/><circle cx="${sd * 52}" cy="-74" r="20" fill="#ff2a2a" opacity=".3"/>`).join('')}
+          <path d="M-70 30 Q0 210 70 30 Q0 60 -70 30Z" fill="#160303" stroke="${ink}" stroke-width="7"/>
+          ${[...Array(9)].map((_, k) => `<path d="M${-60 + k * 15} 36 l7 26 l7 -26" fill="#efe9d8" stroke="${ink}" stroke-width="2"/>`).join('')}
+          <path d="M-100 -10 q20 60 50 110 M100 -10 q-20 60 -50 110" stroke="${skinD}" stroke-width="14" fill="none" opacity=".7"/>
+        </g>
+      </g>
+    </g>
+    <rect width="1920" height="1920" filter="url(#grime2)"/>
+    <rect width="1920" height="1920" fill="url(#moon2)"/>
+    <g transform="rotate(-3 560 560)">${lines.map((ln, i) => `<text x="${p.titleX || 520}" y="${(p.titleY || 660) + i * 170}" text-anchor="middle" font-family="Hand" font-size="${p.size || 190}" fill="${i ? '#ff3a3a' : '#f2ede2'}" stroke="#0a0606" stroke-width="12" paint-order="stroke" letter-spacing="3">${ln}</text>`).join('')}</g>
+    ${p.badge !== false ? `<g transform="translate(1660,1370) rotate(6)"><rect x="-200" y="-62" width="400" height="124" rx="22" fill="#ff1a1a" stroke="#0a0606" stroke-width="8"/>
+      <text y="26" text-anchor="middle" font-family="Anton" font-size="72" fill="#fff" letter-spacing="4">🎧 8D AUDIO</text></g>` : ''}
+    <rect width="1920" height="1920" fill="url(#vig)" opacity=".6"/>`;
+};
