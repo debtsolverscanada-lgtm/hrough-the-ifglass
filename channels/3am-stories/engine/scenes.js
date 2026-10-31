@@ -319,8 +319,53 @@ function clock(x, y, s, txt) {
     <text x="0" y="32" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="96" fill="#ff2a2a" style="filter:drop-shadow(0 0 12px #ff0000)">${txt}</text>
   </g>`;
 }
-const room = (c = '#0a0908') => `<rect width="1920" height="1920" fill="${c}"/>`;
-const floor = (y) => `<rect y="${y}" width="1920" height="${1920 - y}" fill="url(#floor)"/>`;
+// Depth rooms (anime / 3d styles): a real perspective box instead of a flat colour. Back wall, side walls, ceiling and a
+// plank floor all run to one vanishing point; corners get soft shadow, moonlight comes through a side window with a
+// beam and drifting dust, and the whole room is slightly out of focus and zooms slower than the people (parallax).
+let CUR_T = 0, CUR_DRIFT = 1, CUR_SCENE = '';
+const FLAT_SCENES = ['phone', 'face', 'reflection', 'black', 'text'];  // close-ups stay plain dark
+const DEPTH = () => (STYLE === 'anime' || STYLE === '3d') && !FLAT_SCENES.includes(CUR_SCENE);
+const mix = (a, b, k) => '#' + [1, 3, 5].map((i) => Math.round(parseInt(a.substr(i, 2), 16) * (1 - k) + parseInt(b.substr(i, 2), 16) * k).toString(16).padStart(2, '0')).join('');
+function room3d(c) {
+  const base = mix(c.length === 7 ? c : '#0a0908', '#2e3866', 0.7), wall = mix(base, '#000', 0.1), side = mix(base, '#000', 0.4), far = mix(base, '#9fb4ff', 0.08);
+  const ceil = mix(base, '#000', 0.6), flo = mix(base, '#3a2a1e', 0.45);
+  const BX0 = 520, BX1 = 1400, BY0 = 380, BY1 = 1180;
+  const planks = [...Array(15)].map((_, k) => { const fx = BX0 + (BX1 - BX0) * k / 14, bx = -900 + 3720 * k / 14;
+    return `<path d="M${fx} ${BY1} L${bx} 1920" stroke="#000" stroke-width="3" opacity=".35"/>`; }).join('')
+    + [1235, 1310, 1420, 1590, 1850].map((y) => `<path d="M0 ${y} H1920" stroke="#000" stroke-width="2" opacity=".18"/>`).join('');
+  const dust = [...Array(18)].map((_, k) => { const ph = (CUR_T * 0.05 + k * 0.137) % 1;
+    return `<circle cx="${250 + k * 23 + 60 * Math.sin(CUR_T * 0.4 + k)}" cy="${500 + ph * 900}" r="${2 + k % 3}" fill="#dfe8ff" opacity="${0.35 * Math.sin(ph * Math.PI)}"/>`; }).join('');
+  const z = 1 / Math.pow(CUR_DRIFT, 0.65), pan = 18 * Math.sin(CUR_T * 0.15);
+  return `<defs>
+      <linearGradient id="rmL" x1="0" x2="1"><stop offset="0" stop-color="${mix(side, '#000', 0.5)}"/><stop offset="1" stop-color="${side}"/></linearGradient>
+      <linearGradient id="rmR" x1="1" x2="0"><stop offset="0" stop-color="${mix(side, '#000', 0.55)}"/><stop offset="1" stop-color="${side}"/></linearGradient>
+      <linearGradient id="rmF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${flo}"/><stop offset="1" stop-color="${mix(flo, '#000', 0.6)}"/></linearGradient>
+      <linearGradient id="rmC" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="${ceil}"/><stop offset="1" stop-color="#000"/></linearGradient>
+      <radialGradient id="rmB" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="${far}"/><stop offset="1" stop-color="${wall}"/></radialGradient>
+      <linearGradient id="rmBeam" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#bcd0ff" stop-opacity=".3"/><stop offset="1" stop-color="#bcd0ff" stop-opacity="0"/></linearGradient>
+      <filter id="rmDof"><feGaussianBlur stdDeviation="1.6"/></filter><filter id="rmAO"><feGaussianBlur stdDeviation="22"/></filter>
+    </defs>
+    <rect width="1920" height="1920" fill="#000"/>
+    <g transform="translate(${960 + pan},820) scale(${z}) translate(-960,-820)" filter="url(#rmDof)">
+      <path d="M-200 -200 L2120 -200 L${BX1} ${BY0} L${BX0} ${BY0}Z" fill="url(#rmC)"/>
+      <path d="M-200 -200 L${BX0} ${BY0} L${BX0} ${BY1} L-200 2120Z" fill="url(#rmL)"/>
+      <path d="M2120 -200 L${BX1} ${BY0} L${BX1} ${BY1} L2120 2120Z" fill="url(#rmR)"/>
+      <rect x="${BX0}" y="${BY0}" width="${BX1 - BX0}" height="${BY1 - BY0}" fill="url(#rmB)"/>
+      <path d="M${BX0} ${BY1} L${BX1} ${BY1} L2600 1920 L-680 1920Z" fill="url(#rmF)"/>${planks}
+      <path d="M${BX0} ${BY1 - 26} H${BX1} V${BY1} H${BX0}Z M${BX0} ${BY1 - 26} L-200 ${2120 - 120} V2120 L${BX0} ${BY1}Z M${BX1} ${BY1 - 26} L2120 ${2120 - 120} V2120 L${BX1} ${BY1}Z" fill="#000" opacity=".25"/>
+      <path d="M${BX0} ${BY0} V${BY1} M${BX1} ${BY0} V${BY1} M${BX0} ${BY0} H${BX1} M${BX0} ${BY1} H${BX1}" stroke="#000" stroke-width="40" opacity=".55" filter="url(#rmAO)"/>
+      <g ${[...CUR_SCENE].reduce((h, ch) => h + ch.charCodeAt(0), 0) % 2 ? 'transform="translate(1920,0) scale(-1,1)"' : ''}>
+      <path d="M120 360 L360 470 L360 900 L120 960Z" fill="#0c1426" stroke="#05070c" stroke-width="16"/>
+      <path d="M140 380 L340 474 L340 890 L140 940Z" fill="#7f9ad8" opacity=".55"/><path d="M240 420 V915 M140 660 L340 682" stroke="#05070c" stroke-width="10"/>
+      <circle cx="210" cy="520" r="38" fill="#eef3ff" opacity=".85"/>
+      <path d="M140 380 L340 474 L1500 1920 L300 1920Z" fill="url(#rmBeam)"/>
+            </g>
+      ${dust}
+      <rect x="0" y="0" width="1920" height="1920" fill="${c}" opacity=".18"/>
+    </g>`;
+}
+const room = (c = '#0a0908') => DEPTH() ? room3d(c) : `<rect width="1920" height="1920" fill="${c}"/>`;
+const floor = (y) => DEPTH() ? '' : `<rect y="${y}" width="1920" height="${1920 - y}" fill="url(#floor)"/>`;
 
 // ---------- scenes ----------
 const S = {};
@@ -329,7 +374,7 @@ S.bed = (t, d, p) => {
   const breathe = t * 2;
   const w = p.watcher ? `${watcher(p.watcherX || 1420, 760, 1.2, (p.watcher === 'fade' ? ease(t / d) : p.watcher) * 0.95, { blink: (t % 3.1) > 3 })}` : '';
   return `${room('#06070b')}
-    <rect x="200" y="420" width="1520" height="760" fill="#0b0d14"/>
+    ${DEPTH() ? '' : '<rect x="200" y="420" width="1520" height="760" fill="#0b0d14"/>'}
     <rect x="1240" y="520" width="240" height="420" fill="#101522" stroke="#1c2233" stroke-width="10"/>
     <path d="M1250 530 h220 v400 h-220z" fill="#1b2a44" opacity=".35"/>
     ${w}
@@ -693,7 +738,8 @@ function frameSVG(name, t, d, p, view, frameNo) {
   }
   VW = view[2];
   STYLE = p.style || 'cartoon';
-  const drift = p.still ? 1 : 1 + 0.04 * (t / Math.max(d, 1));
+  const drift = p.still ? 1 : 1 + (DEPTH() ? 0.08 : 0.04) * (t / Math.max(d, 1));
+  CUR_T = t; CUR_DRIFT = drift; CUR_SCENE = name;
   const body = (S[name] || S.text)(t, d, p);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${view[2]}" height="${view[3]}" viewBox="${view.join(' ')}">${DEFS.replace('SEED', frameNo % 7)}
     ${STYLE === '3d' ? D3 : ''}
