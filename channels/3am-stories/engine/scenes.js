@@ -400,6 +400,63 @@ S.thumbPhone = (t, d, p) => {
         `<text x="110" y="${y}" font-family="Marker" font-size="${sz}" fill="${i === lines.length - 1 ? tint : '#fff'}" stroke="#000" stroke-width="10" paint-order="stroke" style="filter:drop-shadow(0 0 26px ${tint})">${ln}</text>`; }).join('')}`;
 };
 
+// Third thumbnail layout ("sketch"): hand-inked horror-illustration look. Muted, grimy background; a gaunt pale figure
+// drawn in wobbly ink with cross-hatched shadows, hollow black eyes and a too-wide grin; a tall thin hand-lettered title
+// with a letter-spaced line under it. p: title, sub, pose ('shh' | 'phone' | 'reach'), wall (colour), accent (title colour)
+S.thumbSketch = (t, d, p) => {
+  const wall = p.wall || '#3f4a44', acc = p.accent || '#ff6a4a', ink = '#0e0c0b';
+  const skin = '#d9d2c3', skinD = '#a99f8c';
+  const hair = [...Array(34)].map((_, k) => { const a = -1.25 + k * 0.075, r = 300 + (k * 37 % 60);
+    const x0 = Math.cos(a - Math.PI / 2) * 250, y0 = -40 + Math.sin(a - Math.PI / 2) * 290;
+    return `<path d="M${x0} ${y0} C${x0 * 1.25} ${y0 + 160} ${x0 * 1.45 + (k % 3 - 1) * 30} ${y0 + 420} ${x0 * 1.3 + (k % 5 - 2) * 40} ${y0 + 700 + (k * 53 % 120)}" stroke="${ink}" stroke-width="${10 + k % 4 * 3}" fill="none" stroke-linecap="round"/>`; }).join('');
+  const hatch = (x, y, w, h, n, ang = 1) => [...Array(n)].map((_, k) => `<path d="M${x + k * w / n} ${y} l${ang * h * 0.4} ${h}" stroke="${ink}" stroke-width="3" opacity=".55"/>`).join('');
+  const teeth = [...Array(15)].map((_, k) => `<path d="M${-170 + k * 24} 0 l12 ${k % 2 ? 46 : 38} l12 ${k % 2 ? -46 : -38}" fill="#efe9d8" stroke="${ink}" stroke-width="3"/>`).join('');
+  const finger = (x, y, ang, len) => `<g transform="translate(${x},${y}) rotate(${ang})"><path d="M0 0 C10 ${-len * .35} -6 ${-len * .7} 4 ${-len}" stroke="${ink}" stroke-width="34" stroke-linecap="round" fill="none"/>
+     <path d="M0 0 C10 ${-len * .35} -6 ${-len * .7} 4 ${-len}" stroke="${skin}" stroke-width="24" stroke-linecap="round" fill="none"/>
+     <path d="M-10 ${-len * .38} h20 M-8 ${-len * .7} h18" stroke="${ink}" stroke-width="3"/><path d="M-2 ${-len - 6} l8 -26" stroke="#6a1010" stroke-width="12" stroke-linecap="round"/></g>`;
+  const pose = p.pose || 'shh';
+  const hand = pose === 'phone'
+    ? `<g transform="translate(-60,560)"><rect x="-150" y="-260" width="300" height="520" rx="40" fill="#111" stroke="${ink}" stroke-width="8"/><rect x="-128" y="-236" width="256" height="470" rx="26" fill="#cfe8ff"/>
+         <rect x="-110" y="-170" width="220" height="70" rx="18" fill="#2a3a52"/><text x="-96" y="-124" font-family="Inter, sans-serif" font-size="30" font-weight="800" fill="#fff">don't look up.</text>
+         ${[-110, -40, 30, 100].map((fx, i) => finger(fx, 220, -10 + i * 4, 210)).join('')}</g>`
+    : pose === 'shh'
+    ? `<g transform="translate(40,330)">${finger(0, 120, -4, 330)}${[60, 110, 150].map((fx, i) => `<path d="M${fx} 120 q30 -70 -10 -110" stroke="${ink}" stroke-width="30" stroke-linecap="round" fill="none"/><path d="M${fx} 120 q30 -70 -10 -110" stroke="${skin}" stroke-width="20" stroke-linecap="round" fill="none"/>`).join('')}
+         <path d="M-60 130 Q60 250 190 140 L230 420 L-70 420Z" fill="${skin}" stroke="${ink}" stroke-width="7"/>${hatch(-40, 230, 220, 160, 14)}</g>`
+    : `<g transform="translate(-260,420)">${[-60, -10, 40, 90].map((fx, i) => finger(fx, 0, -30 + i * 9, 260)).join('')}</g>`;
+  const T = String(p.title || 'DON\'T ANSWER');
+  const titleSize = Math.min(560, 1150 / (0.42 * T.length));
+  return `
+    <defs>
+      <filter id="ink"><feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="9"/></filter>
+      <filter id="grime"><feTurbulence type="fractalNoise" baseFrequency=".9 .02" numOctaves="3" seed="9"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .5 -.12"/></filter>
+      <radialGradient id="sketchLight" cx="72%" cy="40%" r="55%"><stop offset="0" stop-color="#fff3d0" stop-opacity=".22"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    </defs>
+    <rect width="1920" height="1920" fill="${wall}"/>
+    <rect width="1920" height="1920" filter="url(#grime)"/>
+    <rect width="1920" height="1920" fill="url(#sketchLight)"/>
+    <rect x="0" y="1360" width="1920" height="560" fill="#1a1712" opacity=".6"/>
+    <g filter="url(#ink)" transform="translate(1430,960)">
+      <path d="M-330 470 Q-300 260 -150 230 L150 230 Q300 260 330 470 L360 760 L-360 760Z" fill="#7a2230" stroke="${ink}" stroke-width="8"/>
+      ${hatch(-330, 300, 200, 420, 12)}${hatch(140, 300, 200, 420, 12, -1)}
+      <g>${hair}</g>
+      <path d="M-200 -90 Q-210 -330 0 -350 Q210 -330 200 -90 Q190 120 110 230 Q0 300 -110 230 Q-190 120 -200 -90Z" fill="${skin}" stroke="${ink}" stroke-width="9"/>
+      <path d="M-170 0 Q-150 150 -80 220 M170 0 Q150 150 80 220" stroke="${skinD}" stroke-width="26" fill="none" opacity=".8"/>
+      ${hatch(-180, -20, 70, 200, 7)}${hatch(115, -20, 70, 200, 7, -1)}
+      <path d="M-150 -200 q60 -40 120 -10 M150 -200 q-60 -40 -120 -10" stroke="${ink}" stroke-width="7" fill="none"/>
+      ${[-80, 80].map((ex) => `<ellipse cx="${ex}" cy="-110" rx="66" ry="82" fill="#050404" stroke="${ink}" stroke-width="6"/><ellipse cx="${ex}" cy="-110" rx="86" ry="100" fill="none" stroke="${skinD}" stroke-width="16" opacity=".7"/>
+        <circle cx="${ex + 8}" cy="-104" r="9" fill="#ff2a2a"/><circle cx="${ex + 8}" cy="-104" r="20" fill="#ff2a2a" opacity=".25"/>`).join('')}
+      <path d="M-14 -40 l-14 70 q14 10 28 0" stroke="${ink}" stroke-width="5" fill="none"/>
+      <g transform="translate(0,90)"><path d="M-190 0 Q0 150 190 0 Q0 60 -190 0Z" fill="#1a0505" stroke="${ink}" stroke-width="7"/>${teeth}
+        <path d="M-190 0 q-30 -10 -40 -40 M190 0 q30 -10 40 -40" stroke="${ink}" stroke-width="6" fill="none"/></g>
+      ${hand}
+    </g>
+    <g transform="rotate(-2 520 900)">
+      <text x="${p.titleX || 500}" y="${p.titleY || 900}" text-anchor="middle" font-family="Hand" font-size="${titleSize}" fill="${acc}" stroke="#1a0d08" stroke-width="10" paint-order="stroke" letter-spacing="4" ${T.length > 6 ? 'textLength="860" lengthAdjust="spacingAndGlyphs"' : ''}>${T}</text>
+      <text x="${p.titleX || 500}" y="${(p.titleY || 900) + 230}" text-anchor="middle" font-family="Hand" font-size="170" fill="#f2ede2" stroke="#1a0d08" stroke-width="8" paint-order="stroke" textLength="760" lengthAdjust="spacing">${p.sub || 'STORIES'}</text>
+    </g>
+    <rect width="1920" height="1920" fill="url(#vig)" opacity=".55"/>`;
+};
+
 // wrap: camera drift, vignette, film grain (seed changes per frame so the grain moves)
 // Where the action is in each scene (world x). Vertical Shorts/TikToks centre their narrow window on it.
 const FOCUS = { bed: 790, reflection: 960, face: 960, door: 800, nan: 1040, kitchen: 1000, morning: 960 };
