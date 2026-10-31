@@ -26,6 +26,51 @@ const DEFS = `<defs>
 </defs>`;
 
 // ---------- characters ----------
+// STYLE 'sketch' (story.json "style": "sketch") swaps the round cartoon heads for drawn people: hair, ears, nose,
+// almond eyes, lips, inked shading, and a "line boil" wobble so it reads as hand-drawn animation.
+let STYLE = 'cartoon';
+const SK = { ink: '#16100c', skin: '#e6cdb4', skinD: '#b8977a', hair: '#1d1510', iris: '#4a2f1e' };
+const skHatch = (x, y, w, h, n, sl = 0.35) => [...Array(n)].map((_, k) => `<path d="M${x + k * w / n} ${y} l${sl * h} ${h}" stroke="${SK.ink}" stroke-width="2.5" opacity=".35"/>`).join('');
+function skHead(o) {
+  const look = o.look || 0, eyes = o.eyes || 'normal', ink = SK.ink;
+  const skin = o.skin === 'url(#skinOld)' ? '#e3cbb6' : SK.skin;
+  const open = o.blink || eyes === 'closed' ? 0 : eyes === 'wide' ? 1.45 : eyes === 'tired' ? 0.55 : 1;
+  const face = 'M-108 -40 Q-114 85 -52 132 Q0 158 52 132 Q114 85 108 -40 Q104 -142 0 -146 Q-104 -142 -108 -40Z';
+  if (o.back) return `<path d="M-110 120 L-60 150 h120 L110 120" fill="${skin}" stroke="${ink}" stroke-width="5"/>
+    <ellipse cx="-112" cy="0" rx="16" ry="28" fill="${skin}" stroke="${ink}" stroke-width="5"/><ellipse cx="112" cy="0" rx="16" ry="28" fill="${skin}" stroke="${ink}" stroke-width="5"/>
+    <path d="M-120 40 Q-140 -160 0 -165 Q140 -160 120 40 Q110 120 60 135 Q0 120 -60 135 Q-110 120 -120 40Z" fill="${SK.hair}" stroke="${ink}" stroke-width="5"/>
+    ${[...Array(12)].map((_, k) => `<path d="M${-90 + k * 16} -140 q${k % 2 ? 10 : -8} 120 ${k % 3 - 1} 260" stroke="#3a2c22" stroke-width="3" fill="none"/>`).join('')}`;
+  const eye = (ex, side) => {
+    if (!open) return `<path d="M${ex - 30} -6 q30 12 60 0" stroke="${ink}" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M${ex - 26} 8 q26 8 52 0" stroke="${SK.skinD}" stroke-width="3" fill="none"/>`;
+    const h = 15 * open;
+    return `<g transform="translate(${ex},-8)">
+      <path d="M-32 0 Q0 ${-h * 1.5} 32 0 Q0 ${h * 1.1} -32 0Z" fill="${o.black ? '#050505' : '#f8f3ea'}" stroke="${ink}" stroke-width="4"/>
+      ${o.black ? `<circle cx="${look * 8}" r="3.5" fill="#fff" opacity=".8"/>` : `<clipPath id="ec${side}"><path d="M-32 0 Q0 ${-h * 1.5} 32 0 Q0 ${h * 1.1} -32 0Z"/></clipPath>
+        <g clip-path="url(#ec${side})"><circle cx="${look * 12}" cy="-1" r="${eyes === 'wide' ? 9 : 12}" fill="${SK.iris}" stroke="${ink}" stroke-width="2"/><circle cx="${look * 12}" cy="-1" r="${eyes === 'wide' ? 3.5 : 5.5}" fill="#050302"/><circle cx="${look * 12 + 4}" cy="-5" r="2.6" fill="#fff"/></g>`}
+      <path d="M-34 ${-2} Q0 ${-h * 1.5 - 4} 34 -2" stroke="${ink}" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <path d="M-24 ${h + 8} q24 ${eyes === 'tired' ? 12 : 7} 48 0" stroke="${SK.skinD}" stroke-width="3" fill="none"/>
+    </g>`;
+  };
+  const browY = eyes === 'wide' ? -62 : -52, browT = eyes === 'wide' ? -14 : eyes === 'tired' ? 6 : -4;
+  const mouth = o.smile
+    ? `<path d="M-62 56 Q0 ${56 + 70 * o.smile} 62 56 Q0 ${70 + 20 * o.smile} -62 56Z" fill="#2a0707" stroke="${ink}" stroke-width="4"/>${[...Array(9)].map((_, k) => `<path d="M${-48 + k * 12} ${60 + 3 * Math.sin(k)} l6 12 l6 -12" fill="#efe6d4" stroke="${ink}" stroke-width="1.5"/>`).join('')}`
+    : o.mouth === 'o' ? `<ellipse cx="0" cy="74" rx="15" ry="20" fill="#2a0707" stroke="${ink}" stroke-width="4"/><path d="M-20 98 q20 8 40 0" stroke="${SK.skinD}" stroke-width="3" fill="none"/>`
+    : eyes === 'wide' ? `<path d="M-26 70 Q0 62 26 70 Q0 84 -26 70Z" fill="#3a1010" stroke="${ink}" stroke-width="4"/><path d="M-18 92 q18 6 36 0" stroke="${SK.skinD}" stroke-width="3" fill="none"/>`
+    : `<path d="M-28 70 Q-8 64 0 67 Q8 64 28 70" stroke="${ink}" stroke-width="4.5" fill="none" stroke-linecap="round"/><path d="M-18 86 q18 7 36 0" stroke="#b07a6a" stroke-width="5" fill="none" stroke-linecap="round"/>`;
+  const hair = o.hair || `<path d="M-122 -10 Q-142 -158 -10 -172 Q128 -176 126 -20 L112 -70 L100 -52 L90 -98 L66 -72 L52 -112 L28 -80 L4 -118 L-20 -84 L-46 -114 L-62 -78 L-88 -104 L-98 -64 L-112 -80Z" fill="${SK.hair}" stroke="${ink}" stroke-width="5" stroke-linejoin="round"/>
+    ${[...Array(9)].map((_, k) => `<path d="M${-96 + k * 22} -150 q${8 - k % 3 * 6} 30 ${-4 + k % 2 * 8} 64" stroke="#3d2e24" stroke-width="3" fill="none"/>`).join('')}`;
+  return `<path d="M-46 100 L-50 190 L50 190 L46 100Z" fill="${SK.skinD}" stroke="${ink}" stroke-width="5"/>
+    <ellipse cx="-110" cy="0" rx="17" ry="30" fill="${skin}" stroke="${ink}" stroke-width="5"/><ellipse cx="110" cy="0" rx="17" ry="30" fill="${skin}" stroke="${ink}" stroke-width="5"/>
+    <path d="${face}" fill="${skin}" stroke="${ink}" stroke-width="6"/>
+    <path d="M-104 -10 Q-100 90 -46 128 Q-80 80 -84 -10Z" fill="${SK.skinD}" opacity=".55"/>${skHatch(-100, 10, 40, 90, 6)}
+    ${o.light ? `<path d="${face}" fill="${o.light}" opacity=".2"/>` : ''}
+    ${hair}
+    <path d="M-80 ${browY} q30 ${browT - 10} 62 ${-browT / 2} M80 ${browY} q-30 ${browT - 10} -62 ${-browT / 2}" stroke="${SK.hair}" stroke-width="9" fill="none" stroke-linecap="round"/>
+    ${eye(-44, 'L' + Math.round(Math.random() * 1e6))}${eye(44, 'R' + Math.round(Math.random() * 1e6))}
+    <path d="M-2 -4 Q-14 34 -12 42 Q-2 52 14 44" stroke="${ink}" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M-10 46 q-6 -4 -12 2 M14 44 q6 -4 12 2" stroke="${SK.skinD}" stroke-width="3" fill="none"/>
+    ${mouth}`;
+}
+
 // "You": bald round head, huge round eyes. eyes: 'normal' | 'wide' | 'closed' | 'tired'. look: pupil offset (-1..1).
 function head(x, y, s, o = {}) {
   const look = o.look || 0, eyes = o.eyes || 'normal', skin = o.skin || 'url(#skin)';
@@ -42,6 +87,7 @@ function head(x, y, s, o = {}) {
     ? `<path d="M-70 52 Q0 ${52 + 60 * o.smile} 70 52" stroke="${INK}" stroke-width="6" fill="#2a0a0a"/>`
     : o.mouth === 'o' ? `<ellipse cx="0" cy="66" rx="13" ry="17" fill="#2a0a0a" stroke="${INK}" stroke-width="5"/>`
     : `<path d="M-14 62 q14 ${eyes === 'wide' ? -12 : 0} 28 0" stroke="${INK}" stroke-width="6" stroke-linecap="round" fill="none"/>`;
+  if (STYLE === 'sketch') return `<g transform="translate(${x},${y}) scale(${s})">${o.glow ? `<circle cy="60" r="260" fill="url(#${o.glow})"/>` : ''}${skHead(o)}${o.sweat ? '<path d="M118 -40 c10 16 12 30 0 38 c-12 -8 -10 -22 0 -38z" fill="#bfe6ff" stroke="#120d0a" stroke-width="3"/>' : ''}</g>`;
   if (o.back) return `<g transform="translate(${x},${y}) scale(${s})"><circle r="130" fill="url(#skin)" stroke="${INK}" stroke-width="7"/><ellipse cx="-128" cy="10" rx="18" ry="30" fill="#cdb9a5" stroke="${INK}" stroke-width="5"/><ellipse cx="128" cy="10" rx="18" ry="30" fill="#cdb9a5" stroke="${INK}" stroke-width="5"/><path d="M-60 90 q60 20 120 0" stroke="#9c8672" stroke-width="6" fill="none" opacity=".5"/></g>`;
   return `<g transform="translate(${x},${y}) scale(${s})">
     ${o.glow ? `<circle cy="60" r="260" fill="url(#${o.glow})"/>` : ''}
@@ -56,6 +102,22 @@ function head(x, y, s, o = {}) {
 // standing figure: head on a dark hoodie body. walk: phase (radians) for a gentle bob.
 function person(x, y, s, o = {}) {
   const bob = o.walk ? Math.sin(o.walk) * 6 : (o.breathe ? Math.sin(o.breathe) * 3 : 0);
+  if (STYLE === 'sketch') {
+    const col = o.body && !o.body.startsWith('url') ? o.body : '#2b3142', ink = SK.ink, rx = o.reach ? 230 : 150, ry = o.reach ? 300 : 430;
+    const hand = (hx, hy) => `<g transform="translate(${hx},${hy})"><ellipse rx="26" ry="30" fill="${SK.skin}" stroke="${ink}" stroke-width="5"/>${[-14, -4, 6, 15].map((f) => `<path d="M${f} 18 v22" stroke="${ink}" stroke-width="13" stroke-linecap="round"/><path d="M${f} 18 v22" stroke="${SK.skin}" stroke-width="7" stroke-linecap="round"/>`).join('')}</g>`;
+    return `<g transform="translate(${x},${y + bob}) scale(${s})">
+      <path d="M-100 60 Q0 0 100 60 L60 110 Q0 80 -60 110Z" fill="${col}" stroke="${ink}" stroke-width="6" opacity=".9"/>
+      <path d="M-128 150 Q-134 50 -40 40 L40 40 Q134 50 128 150 L146 520 L-146 520Z" fill="${col}" stroke="${ink}" stroke-width="7"/>
+      <path d="M-40 40 Q0 120 40 40" fill="none" stroke="${ink}" stroke-width="5"/><path d="M-14 90 v90 M14 90 v80" stroke="#d8d4cc" stroke-width="5"/>
+      <path d="M-70 330 h140 v110 h-140z" fill="none" stroke="${ink}" stroke-width="4" opacity=".6"/>
+      ${skHatch(-140, 200, 70, 300, 8)}${skHatch(80, 200, 60, 300, 7, -0.2)}
+      <path d="M-122 160 Q-176 300 -150 430" stroke="${ink}" stroke-width="66" stroke-linecap="round" fill="none"/><path d="M-122 160 Q-176 300 -150 430" stroke="${col}" stroke-width="54" stroke-linecap="round" fill="none"/>
+      <path d="M122 160 Q176 300 ${rx} ${ry}" stroke="${ink}" stroke-width="66" stroke-linecap="round" fill="none"/><path d="M122 160 Q176 300 ${rx} ${ry}" stroke="${col}" stroke-width="54" stroke-linecap="round" fill="none"/>
+      <path d="M-160 300 q14 10 28 2 M150 300 q14 10 28 2" stroke="${ink}" stroke-width="3" fill="none" opacity=".6"/>
+      ${hand(-150, 450)}${hand(rx, ry + 20)}
+      ${head(0, -110, 1, o)}
+    </g>`;
+  }
   return `<g transform="translate(${x},${y + bob}) scale(${s})">
     <path d="M-120 140 Q-130 40 0 30 Q130 40 120 140 L140 520 L-140 520Z" fill="${o.body || 'url(#hoodie)'}" stroke="#000" stroke-width="6"/>
     <path d="M-120 160 Q-170 300 -150 430" stroke="${o.arm || '#1d212c'}" stroke-width="56" stroke-linecap="round" fill="none"/>
@@ -82,6 +144,7 @@ function watcher(x, y, s, a = 1, o = {}) {
   const h = o.tall || 1;
   return `<g transform="translate(${x},${y}) scale(${s})" opacity="${a}">
     <path d="M-80 -40 Q-90 -170 0 -180 Q90 -170 80 -40 L${110 * h} ${520 * h} L${-110 * h} ${520 * h}Z" fill="#030303"/>
+    ${STYLE === 'sketch' ? [...Array(16)].map((_, k) => `<path d="M${-80 + k * 10.6} -150 q${(k % 3 - 1) * 16} 160 ${(k % 4 - 1.5) * 18} ${300 + (k * 37 % 120)}" stroke="#0a0807" stroke-width="${6 + k % 3 * 3}" fill="none" stroke-linecap="round"/>`).join('') + '<path d="M-100 140 q-50 160 -40 330 M100 140 q50 160 40 330" stroke="#050404" stroke-width="30" fill="none" stroke-linecap="round"/>' + [-1, 1].map((sd) => [0, 1, 2, 3].map((f) => `<path d="M${sd * (140 + f * 6)} 460 q${sd * 6} 50 ${sd * (f * 8 - 10)} 100" stroke="#050404" stroke-width="9" fill="none" stroke-linecap="round"/>`).join('')).join('') : ''}
     ${o.fingers ? '<path d="M80 60 q60 10 90 -20 M80 80 q70 20 100 -6 M80 100 q60 26 96 10" stroke="#030303" stroke-width="12" fill="none" stroke-linecap="round"/>' : ''}
     ${o.noeyes ? '' : `<circle cx="-30" cy="-90" r="42" fill="url(#eyeGlow)"/><circle cx="30" cy="-90" r="42" fill="url(#eyeGlow)"/>
     <ellipse cx="-30" cy="-90" rx="10" ry="${o.blink ? 1 : 7}" fill="#fff"/><ellipse cx="30" cy="-90" rx="10" ry="${o.blink ? 1 : 7}" fill="#fff"/>`}
@@ -466,10 +529,14 @@ function frameSVG(name, t, d, p, view, frameNo) {
     view = [Math.max(0, Math.min(1920 - view[2], fx - view[2] / 2)), view[1], view[2], view[3]];
   }
   VW = view[2];
+  STYLE = p.style || 'cartoon';
   const drift = p.still ? 1 : 1 + 0.04 * (t / Math.max(d, 1));
   const body = (S[name] || S.text)(t, d, p);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${view[2]}" height="${view[3]}" viewBox="${view.join(' ')}">${DEFS.replace('SEED', frameNo % 7)}
-    <g transform="translate(960,960) scale(${drift}) translate(-960,-960)">${body}</g>
+    ${STYLE === 'sketch' ? `<defs><filter id="boil" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="2" seed="${Math.floor(frameNo / 3) % 6 + 1}"/><feDisplacementMap in="SourceGraphic" scale="7"/></filter>
+      <filter id="paper"><feTurbulence type="fractalNoise" baseFrequency=".6 .015" numOctaves="3" seed="2"/><feColorMatrix values="0 0 0 0 .9  0 0 0 0 .85  0 0 0 0 .75  0 0 0 .18 -.04"/></filter></defs>` : ''}
+    <g transform="translate(960,960) scale(${drift}) translate(-960,-960)" ${STYLE === 'sketch' ? 'filter="url(#boil)"' : ''}>${body}</g>
+    ${STYLE === 'sketch' ? '<rect width="1920" height="1920" filter="url(#paper)"/>' : ''}
     <rect width="1920" height="1920" fill="url(#vig)"/>
     <rect width="1920" height="1920" fill="#fff" filter="url(#grain)" opacity=".55"/>
   </svg>`;

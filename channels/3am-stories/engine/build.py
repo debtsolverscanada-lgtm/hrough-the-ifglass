@@ -86,7 +86,7 @@ for i, s in enumerate(ST['scenes']):
         caps += [(w, t + lead + a0, t + lead + b0) for w, a0, b0 in words]
     else:
         dur = s.get('dur', 2.5)
-    tl.append({'scene': s['scene'], 'p': s.get('p', {}), 'start': round(t, 3), 'dur': round(dur, 3), 'sfx': s.get('sfx', []),
+    tl.append({'scene': s['scene'], 'p': {**s.get('p', {}), **({'style': ST['style']} if ST.get('style') else {})}, 'start': round(t, 3), 'dur': round(dur, 3), 'sfx': s.get('sfx', []),
                'fade': 0.0 if i == 0 else 0.25})
     t += dur
 TOTAL = min(t, a.seconds or 1e9)
