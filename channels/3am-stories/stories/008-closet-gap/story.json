@@ -15,143 +15,155 @@
   "bp": {
    "gap": 0.42,
    "eyes": 1,
-   "fingers": true,
-   "grin": true
+   "eyesOnly": true
   },
-  "lines": [
-   [
-    "CLOSE YOUR",
-    "#fff"
-   ],
-   [
-    "CLOSET",
-    "#ff2a2a"
-   ]
-  ],
-  "x": 470,
-  "y": 800,
-  "step": 200,
-  "size": 190,
-  "band": 0,
-  "circle": [
-   1128,
-   850,
-   300
-  ],
-  "tint": "#002060",
   "zoom": [
    1150,
    860,
    1.5
-  ]
+  ],
+  "lines": [
+   [
+    "SHE LIVED IN",
+    "#fff"
+   ],
+   [
+    "HIS CLOSET",
+    "#ff2a2a"
+   ],
+   [
+    "FOR 1 YEAR",
+    "#fff"
+   ]
+  ],
+  "x": 470,
+  "y": 680,
+  "step": 180,
+  "size": 160,
+  "band": 0,
+  "circle": [
+   1090,
+   780,
+   170
+  ],
+  "tint": "#002060"
  },
  "yt": {
-  "title": "Is your closet door open right now? Don't blink \ud83d\ude28 #scary #horror #shorts",
-  "description": "They can't come out of the closet. They can only watch through the gap. Every night it opens a little wider...\n\n\ud83c\udfa7 Headphones on.\n\n#scarystories #horrorstories #3amstories #8daudio #creepy #shorts",
+  "title": "A woman secretly lived in his closet for a YEAR (true story) \ud83d\ude28 #truestory #scary #shorts",
+  "description": "Japan, 2008. A man who lived alone noticed food going missing, so he set up a camera. It caught someone in his kitchen while he was at work. Police searched the house and found a woman living on the top shelf of his closet. She'd been there about a year.\n\nBased on a real case reported in 2008.\n\n\ud83c\udfa7 Headphones on for the ending.\n\n#truestory #scarystories #3amstories #creepy #closet #shorts",
   "tags": [
-   "scary stories",
-   "horror shorts",
-   "3am",
-   "closet door",
-   "dont blink",
-   "8d audio",
-   "headphones horror",
+   "true story",
+   "scary true stories",
+   "woman lived in closet",
+   "japan closet woman",
+   "phrogging",
+   "creepy true stories",
+   "3am stories",
    "animated horror",
-   "anime horror",
-   "pov horror",
-   "creepy",
+   "8d audio",
    "shorts"
   ]
  },
  "scenes": [
   {
-   "scene": "black",
+   "scene": "text",
    "p": {
-    "text": "headphones in.|look at your closet door.",
-    "color": "#e8e8e8",
-    "size": 90
+    "text": "THIS REALLY|HAPPENED.",
+    "color": "#fff"
    },
-   "text": "Headphones in. Now look at your closet door.",
-   "pause": 0.4,
-   "sfx": [
-    [
-     "heart",
-     0
-    ]
-   ]
-  },
-  {
-   "scene": "closet",
-   "p": {
-    "gap": 0.08
-   },
-   "text": "Is it open? Even a little?",
-   "pause": 0.5,
-   "sfx": [
-    [
-     "drone",
-     0
-    ]
-   ]
-  },
-  {
-   "scene": "closet",
-   "p": {
-    "gap": 0.08,
-    "gapTo": 0.12
-   },
-   "text": "My grandma said they can't come out of a closet. They can only watch. Through the gap.",
-   "pause": 0.3
-  },
-  {
-   "scene": "bed",
-   "p": {
-    "time": "10:58",
-    "eyes": "tired"
-   },
-   "text": "So every night, I closed it. Every single night.",
-   "pause": 0.2
-  },
-  {
-   "scene": "closet",
-   "p": {
-    "gap": 0.12,
-    "gapTo": 0.22
-   },
-   "text": "But every morning, it was open again. A little wider than before.",
-   "pause": 0.3,
-   "sfx": [
-    [
-     "creak",
-     0.4,
-     "right"
-    ]
-   ]
-  },
-  {
-   "scene": "bed",
-   "p": {
-    "time": "3:33",
-    "eyes": "wide",
-    "look": 1
-   },
-   "text": "Last night, I woke up at three thirty three.",
+   "text": "This really happened.",
    "pause": 0.2,
    "sfx": [
     [
-     "tick",
+     "boom",
      0
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "fridge": true,
+    "watcher": 0
+   },
+   "text": "Japan, 2008. A man who lives alone starts noticing food going missing from his fridge. Little things. Some yogurt. A bit of rice.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "fridge",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "7:40",
+    "eyes": "tired",
+    "phone": true
+   },
+   "text": "He thinks he's losing his mind. So he sets up a security camera that sends pictures to his phone while he's at work.",
+   "pause": 0.2
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "2:14 PM",
+    "msgs": [
+     [
+      "Home Camera",
+      "Motion detected: kitchen",
+      0.6
+     ]
+    ]
+   },
+   "text": "One afternoon, his phone buzzes. Motion detected. In his kitchen.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "buzzphone",
+     0.5
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "HE LIVES|ALONE.",
+    "color": "#ff2a2a"
+   },
+   "text": "He lives alone.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "none",
+    "walk": 0.5
+   },
+   "text": "He calls the police. They search every room. The doors are locked. No broken windows. Nobody there.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "steps",
+     0,
+     "orbit"
     ]
    ]
   },
   {
    "scene": "closet",
    "p": {
-    "gap": 0.3,
-    "gapTo": 0.45,
-    "eyes": 1
+    "gap": 0.05,
+    "gapTo": 0.45
    },
-   "text": "The door was open. And something was standing inside. Perfectly still.",
+   "text": "Then an officer slides open the top shelf of his closet.",
    "pause": 0.3,
    "sfx": [
     [
@@ -170,27 +182,24 @@
    "p": {
     "gap": 0.45,
     "eyes": 1,
-    "fingers": true,
-    "grin": true,
-    "blink": false
+    "eyesOnly": true
    },
-   "text": "Watching me. Not blinking. Like it was waiting... for me to blink first.",
-   "pause": 0.3,
+   "text": "And there she was. A woman. Curled up on her side.",
+   "pause": 0.4,
    "sfx": [
     [
-     "breath",
-     0.4,
-     "right+close"
+     "sting",
+     0.1
     ]
    ]
   },
   {
    "scene": "text",
    "p": {
-    "text": "DON'T|BLINK.",
+    "text": "ONE|YEAR.",
     "color": "#ff2a2a"
    },
-   "text": "Don't blink.",
+   "text": "She'd been living in his closet for about a year.",
    "pause": 0.4,
    "sfx": [
     [
@@ -200,39 +209,42 @@
    ]
   },
   {
-   "scene": "black",
-   "p": {},
-   "dur": 1.4
-  },
-  {
-   "scene": "face",
-   "p": {},
-   "text": "You blinked.",
-   "voice": [
-    "Callum",
-    "Clyde",
-    "Bill",
-    "George",
-    "Daniel"
-   ],
-   "fx": "wrong+left",
-   "pause": 0.2,
+   "scene": "bed",
+   "p": {
+    "time": "3:00",
+    "eyes": "closed",
+    "watcher": 1,
+    "watcherX": 1460
+   },
+   "text": "Sleeping a few feet away from him. Every single night. Coming out when he left for work.",
+   "pause": 0.3,
    "sfx": [
     [
-     "jump",
-     0
+     "breath",
+     0.4,
+     "behind"
     ]
    ]
   },
   {
    "scene": "black",
    "p": {
-    "text": "now look at your closet.",
+    "text": "she had nowhere else to go.",
     "color": "#8a8a8a",
     "size": 90
    },
-   "text": "Now. Look at your closet.",
-   "pause": 0.4
+   "text": "She told police she had nowhere else to go.",
+   "pause": 0.5
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "when did you last|check your closet?",
+    "color": "#e8e8e8",
+    "size": 90
+   },
+   "text": "So. When's the last time you checked your closet? Headphones in. Listen.",
+   "pause": 0.3
   },
   {
    "scene": "black",

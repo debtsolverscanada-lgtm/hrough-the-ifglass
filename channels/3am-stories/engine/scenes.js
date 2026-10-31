@@ -862,7 +862,8 @@ S.closet = (t, d, p) => {
       <path d="M${edge - L * 0.75} ${y + 8} m-${L * 0.25} 34 l-4 10" stroke="#3a0808" stroke-width="10" stroke-linecap="round"/>
       <path d="M${edge - L * 0.35} ${y - 6} h10 M${edge - L * 0.6} ${y + 2} h8" stroke="#6a645a" stroke-width="3"/>`; }).join('') : '';
   const fx = edge + 100, fy = 780, blink = p.blink && t % 2 > 1.85;
-  const eyes = p.eyes ? `<g opacity="${p.eyes}">
+  const eyes = p.eyes && p.eyesOnly ? `<g opacity="${p.eyes}">${[-34, 34].map((dx) => `<ellipse cx="${fx - 40 + dx}" cy="${fy}" rx="22" ry="${blink ? 2 : 13}" fill="#f4efe6"/><circle cx="${fx - 40 + dx}" cy="${fy + 2}" r="7" fill="#080404"/><circle cx="${fx - 40 + dx}" cy="${fy}" r="44" fill="#fff" opacity=".05"/>`).join('')}</g>`
+    : p.eyes ? `<g opacity="${p.eyes}">
       ${[...Array(18)].map((_, k) => { const sx = k < 9 ? fx - 170 + k * 12 : fx + 70 + (k - 9) * 12;
         return `<path d="M${sx} ${fy - 200} q${(k % 3 - 1) * 16} 260 ${(k % 4 - 1.5) * 14} ${520 + (k * 37 % 140)}" stroke="#050404" stroke-width="${8 + k % 3 * 4}" fill="none" stroke-linecap="round"/>`; }).join('')}
       <path d="M${fx - 150} ${fy - 40} Q${fx - 160} ${fy - 230} ${fx} ${fy - 240} Q${fx + 160} ${fy - 230} ${fx + 150} ${fy - 40} Q${fx + 140} ${fy + 160} ${fx + 70} ${fy + 240} Q${fx} ${fy + 290} ${fx - 70} ${fy + 240} Q${fx - 140} ${fy + 160} ${fx - 150} ${fy - 40}Z" fill="#d8d2c6"/>
