@@ -14,14 +14,17 @@ function yaWolfie(x, y, s, o = {}) {
   const hair = o.cap
     ? `<path d="M-130 -36 Q-134 -178 0 -182 Q134 -178 130 -36 Q64 -70 0 -72 Q-64 -70 -130 -36Z" fill="${o.cap === true ? '#e9e4da' : o.cap}"/>
        <path d="M-130 -36 Q-64 -70 0 -72 Q64 -70 130 -36" stroke="#000" stroke-width="5" fill="none" opacity=".25"/>
-       <path d="M-46 -60 Q0 -100 46 -60 L46 -70 Q0 -112 -46 -70Z" fill="#1a120c"/><path d="M-46 -62 Q0 -96 46 -62" stroke="#8a847a" stroke-width="6" fill="none"/>
+       <path d="M-46 -60 Q0 -100 46 -60 L46 -70 Q0 -112 -46 -70Z" fill="${o.hairCol || '#1a120c'}"/><path d="M-46 -62 Q0 -96 46 -62" stroke="#8a847a" stroke-width="6" fill="none"/>
        <path d="M-100 -150 Q-40 -176 30 -168" stroke="#fff" stroke-width="10" fill="none" opacity=".35" stroke-linecap="round"/>`
-    : `<path d="M-126 -26 Q-138 -164 0 -170 Q138 -164 126 -26 Q118 -100 60 -118 Q0 -128 -60 -118 Q-118 -100 -126 -26Z" fill="#17100b"/>
-       <path d="M-70 -150 Q0 -166 70 -150" stroke="#4a3626" stroke-width="10" fill="none" opacity=".7" stroke-linecap="round"/>`;
-  return `<g>${person(x, y, s, { ...o, body: '#24242c', skin: 'url(#k3tan)', ear: 'url(#k3earTan)', neck: '#9a6440', hair })}
+    : `<path d="M-126 -26 Q-138 -164 0 -170 Q138 -164 126 -26 Q118 -100 60 -118 Q0 -128 -60 -118 Q-118 -100 -126 -26Z" fill="${o.hairCol || '#17100b'}"/>
+       <path d="M-70 -150 Q0 -166 70 -150" stroke="${o.hairHi || '#4a3626'}" stroke-width="10" fill="none" opacity=".7" stroke-linecap="round"/>`;
+  const extra = (o.beard ? `<path d="M-112 10 Q-110 120 -50 160 Q0 186 50 160 Q110 120 112 10 Q100 90 60 110 Q0 96 -60 110 Q-100 90 -112 10Z" fill="${o.beard}"/>
+      <path d="M-48 52 Q0 40 48 52 Q30 64 0 60 Q-30 64 -48 52Z" fill="${o.beard}"/>` : '')
+    + (o.glasses ? `<g fill="none" stroke="#111" stroke-width="9"><circle cx="-48" cy="-10" r="50"/><circle cx="48" cy="-10" r="50"/><path d="M-2 -14 h4 M-98 -16 l-26 -6 M98 -16 l26 -6"/></g>` : '');
+  return `<g>${person(x, y, s, { ...o, body: o.body || '#24242c', skin: o.skinT || 'url(#k3tan)', ear: o.earT || 'url(#k3earTan)', neck: o.neckT || '#9a6440', hair: hair + extra })}
     <g transform="translate(${x},${y}) scale(${s})">
-      <path d="M-58 70 Q0 150 58 70" stroke="#f0c040" stroke-width="9" fill="none"/><path d="M-58 70 Q0 150 58 70" stroke="#fff3b0" stroke-width="3" fill="none" stroke-dasharray="6 8"/>
-      <circle cx="-124" cy="-76" r="8" fill="#fff6d0"/><circle cx="124" cy="-76" r="8" fill="#fff6d0"/>
+      ${o.chain === false ? '' : '<path d="M-58 70 Q0 150 58 70" stroke="#f0c040" stroke-width="9" fill="none"/><path d="M-58 70 Q0 150 58 70" stroke="#fff3b0" stroke-width="3" fill="none" stroke-dasharray="6 8"/>'}
+      ${o.earrings === false ? '' : '<circle cx="-124" cy="-76" r="8" fill="#fff6d0"/><circle cx="124" cy="-76" r="8" fill="#fff6d0"/>'}
     </g></g>`;
 }
 // Sylvia: fair skin, long wavy blonde hair, lashes, light top. o.bump: pregnant.
@@ -36,8 +39,9 @@ function yaSylvia(x, y, s, o = {}) {
     <path d="M-92 -38 l-14 -10 M-88 -48 l-10 -14 M92 -38 l14 -10 M88 -48 l10 -14" stroke="#2a160c" stroke-width="4" stroke-linecap="round"/>`;
   const bump = o.bump ? `<g transform="translate(${x},${y}) scale(${s})"><ellipse cx="10" cy="350" rx="${130 * o.bump}" ry="${120 * o.bump}" fill="${o.top || '#efe6dc'}"/>
       <ellipse cx="-30" cy="320" rx="${60 * o.bump}" ry="${40 * o.bump}" fill="#fff" opacity=".35"/><ellipse cx="40" cy="390" rx="${90 * o.bump}" ry="${50 * o.bump}" fill="#000" opacity=".08"/></g>` : '';
-  return `<defs><linearGradient id="yaBlonde" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6dc9a"/><stop offset=".6" stop-color="#d9b06a"/><stop offset="1" stop-color="#a87a3c"/></linearGradient></defs>
-    ${back}${person(x, y, s, { ...o, body: o.top || '#efe6dc', skin: 'url(#k3fair)', neck: '#d8a088', hair: front })}${bump}`;
+  const hc = o.hairCols || ['#f6dc9a', '#d9b06a', '#a87a3c'];
+  return `<defs><linearGradient id="yaBlonde" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${hc[0]}"/><stop offset=".6" stop-color="${hc[1]}"/><stop offset="1" stop-color="${hc[2]}"/></linearGradient></defs>
+    ${back}${person(x, y, s, { ...o, body: o.top || '#efe6dc', skin: o.skinT || 'url(#k3fair)', neck: o.neckT || '#d8a088', hair: front })}${bump}`;
 }
 
 // ---------- scenes ----------
@@ -168,19 +172,23 @@ S.yaCard = (t, d, p) => {
 S.yaCouple = (t, d, p) => {
   const m = p.mood || 'happy', b = t * 2, apart = m === 'apart' ? 1 : 0;
   const wx = 760 - 220 * apart, sx = 1180 + 220 * apart;
+  const P = p.pair === 'ek' ? YA_EK : { man: {}, woman: {} };
   const wEyes = m === 'sad' || m === 'apart' ? 'tired' : m === 'shock' ? 'wide' : 'normal';
   return `${room('#1a1428')}
     ${p.rain ? `<rect x="1300" y="560" width="360" height="460" fill="#203050" stroke="#0a0a14" stroke-width="16"/>${[...Array(18)].map((_, k) => `<path d="M${1310 + (k * 37) % 340} ${560 + ((t * 600 + k * 97) % 460)} l-6 30" stroke="#9ab8ff" stroke-width="3" opacity=".6"/>`).join('')}` : ''}
     ${p.couch !== false ? `<rect x="420" y="1180" width="1080" height="200" rx="60" fill="#5a3a6a"/><rect x="380" y="1100" width="140" height="300" rx="60" fill="#4a2e5a"/><rect x="1400" y="1100" width="140" height="300" rx="60" fill="#4a2e5a"/>` : ''}
-    ${p.only !== 'sylvia' ? yaWolfie(wx, 900, 0.95, { eyes: wEyes, look: apart ? -0.6 : 0.6, breathe: b, cap: p.cap ?? true, happy: m === 'happy' ? 0.5 : 0, mouth: m === 'shock' ? 'o' : undefined }) : ''}
-    ${p.only !== 'wolfie' ? yaSylvia(sx, 910, 0.92, { eyes: m === 'sad' || m === 'apart' ? 'tired' : m === 'shock' ? 'wide' : 'normal', look: apart ? 0.6 : -0.6, breathe: b + 1, bump: p.bump || 0, happy: m === 'happy' ? 0.45 : 0 }) : ''}
+    ${p.only !== 'sylvia' ? yaWolfie(wx, 900, 0.95, { ...P.man, eyes: wEyes, look: apart ? -0.6 : 0.6, breathe: b, cap: p.cap ?? (p.pair === 'ek' ? false : true), happy: m === 'happy' ? 0.5 : 0, mouth: m === 'shock' ? 'o' : undefined }) : ''}
+    ${p.only !== 'wolfie' ? yaSylvia(sx, 910, 0.92, { ...P.woman, eyes: m === 'sad' || m === 'apart' ? 'tired' : m === 'shock' ? 'wide' : 'normal', look: apart ? 0.6 : -0.6, breathe: b + 1, bump: p.bump || 0, happy: m === 'happy' ? 0.45 : 0 }) : ''}
     ${p.icecream ? `<g transform="translate(${wx - 170},1010)"><rect x="-60" y="-70" width="120" height="140" rx="16" fill="#f4f0ff" stroke="#8a7ab0" stroke-width="6"/><ellipse cy="-70" rx="60" ry="18" fill="#ffb8d0"/><text y="20" text-anchor="middle" font-family="Anton" font-size="34" fill="#8a3a6a">ICE CREAM</text></g>` : ''}
     ${p.cam ? `<g transform="translate(${wx - 230},880) rotate(-8)"><rect x="-70" y="-46" width="140" height="92" rx="14" fill="#1c1c28"/><circle r="32" fill="#0a0a14" stroke="#6a6aa0" stroke-width="7"/><circle cx="46" cy="-28" r="9" fill="${YA.red}" opacity="${0.5 + 0.5 * Math.sin(t * 6)}"/></g>` : ''}
     ${p.crack ? `<path d="M960 420 L920 700 L1010 860 L940 1100 L990 1500" stroke="#fff" stroke-width="8" fill="none" opacity="${ease(t / 0.3)}"/><path d="M920 700 L780 760 M1010 860 L1180 900 M940 1100 L800 1180" stroke="#fff" stroke-width="5" fill="none" opacity="${ease(t / 0.3)}"/>` : ''}`;
 };
+// Ethan & Hila presets for the same two figures: grey hair and beard, glasses, big black tee; long dark hair.
+const YA_EK = { man: { cap: false, hairCol: '#8a8a8e', hairHi: '#c8c8cc', beard: '#7a7a80', glasses: true, skinT: 'url(#k3skin)', earT: 'url(#k3ear)', neckT: '#d8a088', body: '#18181e', chain: false, earrings: false },
+  woman: { hairCols: ['#4a3022', '#2a1810', '#140a06'], skinT: 'url(#k3skin)', top: '#2a2a34' } };
 // Wolfie alone. p: prop ('phone'|'mic'|'sign'), eyes, sign
 S.yaWolfie = (t, d, p) => `${room('#141024')}
-    ${yaWolfie(960, 900, 1.05, { eyes: p.eyes || 'normal', look: p.look ?? 0, breathe: t * 2, cap: p.cap ?? true, glow: p.prop === 'phone' ? 'phoneGlow' : null, light: p.prop === 'phone' ? '#9fd2ff' : null, mouth: p.mouth })}
+    ${yaWolfie(960, 900, 1.05, { ...(p.pair === 'ek' ? YA_EK.man : {}), eyes: p.eyes || 'normal', look: p.look ?? 0, breathe: t * 2, cap: p.cap ?? (p.pair === 'ek' ? false : true), glow: p.prop === 'phone' ? 'phoneGlow' : null, light: p.prop === 'phone' ? '#9fd2ff' : null, mouth: p.mouth })}
     ${p.prop === 'phone' ? `<g transform="translate(1110,1170) rotate(-10)"><rect x="-50" y="-90" width="100" height="180" rx="16" fill="#0c0c0c" stroke="#d8eeff" stroke-width="5"/><rect x="-40" y="-78" width="80" height="150" rx="8" fill="#dff1ff"/></g>` : ''}
     ${p.prop === 'mic' ? `<g transform="translate(1180,960)"><rect x="-12" y="0" width="24" height="380" fill="#2a2a34"/><rect x="-46" y="-110" width="92" height="140" rx="46" fill="#3a3a48"/>${[...Array(5)].map((_, k) => `<path d="M-40 ${-90 + k * 22} H40" stroke="#5a5a6a" stroke-width="4"/>`).join('')}</g>
       <text x="1400" y="${700 - (t * 40) % 120}" font-family="Anton" font-size="90" fill="${YA.gold}" opacity=".8">♪</text><text x="1500" y="${820 - (t * 50) % 140}" font-family="Anton" font-size="70" fill="${YA.lilac}" opacity=".7">♫</text>` : ''}`;

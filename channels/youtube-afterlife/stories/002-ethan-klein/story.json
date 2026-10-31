@@ -1,0 +1,343 @@
+{
+ "format": "long",
+ "style": "3d",
+ "voice": "Adam",
+ "tts": {
+  "stability": 0.5,
+  "similarity": 0.8,
+  "style": 0.25,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "yaThumb",
+  "style": "3d",
+  "img": "channels/youtube-afterlife/stories/002-ethan-klein/photos/Dkm8Hteeh6M.jpg",
+  "crop": "right",
+  "title": "WHAT HAPPENED",
+  "sub": "TO H3?",
+  "name": "H3",
+  "years": "2017-2026",
+  "cap": "OCTOBER 2026"
+ },
+ "yt": {
+  "title": "What Happened to Ethan Klein? (How the H3 Podcast Ended in 48 Hours)",
+  "description": "On October 21, 2026, the H3 Podcast uploaded its last episode. The next day it went on indefinite hiatus, and Hila Klein said on Instagram that Ethan had admitted to an affair lasting over six months. The crew cut ties, and Ethan said he would give up his ownership of the podcast and their businesses.\n\nThis video covers what was publicly said by Hila, Ethan and the H3 crew. We do not name anyone who hasn't been confirmed.\n\nSources:\nVariety: https://variety.com/2026/digital/news/hila-ethan-klein-affair-h3-podcast-cuts-ties-1236925732/\nVariety: https://variety.com/2026/digital/news/ethan-klein-reacts-hila-klein-cheating-allegations-h3-1236929836/\nRolling Stone: https://www.rollingstone.com/culture/culture-news/ethan-klein-remove-ownership-h3-podcast-wife-accused-affair-1235647518/\nH3 Podcast and h3h3Productions channels (YouTube)\n\nPhotos are shown for commentary and criticism under fair use.\n\n#h3podcast #ethanklein #hilaklein #youtubeafterlife #whathappened",
+  "tags": [
+   "ethan klein",
+   "hila klein",
+   "h3 podcast",
+   "h3h3productions",
+   "ethan klein affair",
+   "h3 podcast ended",
+   "what happened to h3",
+   "youtube afterlife",
+   "youtube drama",
+   "teddy fresh"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "OCTOBER 21, 2026",
+    "sub": "H3 Show #320: The Crew Gives Ethan A Makeover"
+   },
+   "text": "On October 21st, 2026, the H3 Podcast uploaded episode three twenty. The crew gave Ethan a makeover. Everyone was laughing.",
+   "pause": 0.2
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/002-ethan-klein/photos/qRIt7he0woM.jpg",
+    "cap": "THE LAST EPISODE",
+    "src": "H3 Podcast, YouTube, Oct 21 2026",
+    "tilt": -2
+   },
+   "text": "It would be the last episode.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "silence_hit",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "yaTitle",
+   "p": {
+    "name": "H3",
+    "years": "2017 - 2026",
+    "sub": "WHAT HAPPENED TO ETHAN KLEIN?"
+   },
+   "text": "This is the story of how one of the biggest podcasts on YouTube ended in less than forty eight hours.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "sting",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/002-ethan-klein/photos/Dkm8Hteeh6M.jpg",
+    "cap": "VAPE NATION, 30M VIEWS",
+    "src": "h3h3Productions, YouTube, 2016",
+    "tilt": 3
+   },
+   "text": "Ethan and Hila Klein started h3h3Productions back in 2011. Reaction videos, absurd sketches, and memes that took over the internet. Vape Nation alone has over thirty million views.",
+   "pause": 0.2
+  },
+  {
+   "scene": "yaCouple",
+   "p": {
+    "pair": "ek",
+    "mood": "happy"
+   },
+   "text": "Then came the H3 Podcast. Two and a half million subscribers. A full crew. A merch company, Teddy Fresh, run by Hila. And at the center of it all, the couple. Ethan and Hila. Married since 2012. Parents.",
+   "pause": 0.3
+  },
+  {
+   "scene": "yaCounter",
+   "p": {
+    "from": 0,
+    "to": 1652958778,
+    "mode": "rise",
+    "label": "H3 PODCAST VIEWS",
+    "src": "YouTube channel stats, Oct 2026"
+   },
+   "text": "The podcast channel alone has more than one and a half billion views.",
+   "pause": 0.3
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/002-ethan-klein/photos/L65RJqFZrfk.jpg",
+    "cap": "SEPTEMBER 2022",
+    "src": "H3 Podcast, YouTube, Sep 2022 (2022 clip resurfaced in Oct 2026 coverage)",
+    "tilt": -3
+   },
+   "text": "And Ethan was never shy about cheating. Back in 2022, when the Try Guys cheating scandal broke, the H3 Podcast covered it. And in a clip that resurfaced this month, Ethan called cheating despicable, especially with kids involved, and said if you fall in love with someone else, you should get a divorce.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "REMEMBER THAT.",
+    "color": "#ffd86a"
+   },
+   "text": "Remember that.",
+   "pause": 0.6
+  },
+  {
+   "scene": "yaTimeline",
+   "p": {
+    "items": [
+     [
+      "SEP 2022",
+      "'cheating is despicable'"
+     ],
+     [
+      "OCT 21",
+      "last episode"
+     ],
+     [
+      "OCT 22",
+      "hiatus + Hila's post"
+     ],
+     [
+      "OCT 23",
+      "Ethan responds"
+     ]
+    ],
+    "hi": 2
+   },
+   "text": "October 22nd, 2026.",
+   "pause": 0.3
+  },
+  {
+   "scene": "yaWolfie",
+   "p": {
+    "pair": "ek",
+    "prop": "phone",
+    "eyes": "tired"
+   },
+   "text": "Ethan announced the H3 Podcast was going on indefinite hiatus. No reason. No return date.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaPost",
+   "p": {
+    "contact": "Hila Klein",
+    "photo": true
+   },
+   "text": "A few hours later, Hila posted on Instagram.",
+   "pause": 0.2
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "\"AN AFFAIR FOR|OVER 6 MONTHS\"",
+    "sub": "Hila Klein, Instagram, October 2026",
+    "color": "#ff3a4a",
+    "src": "Hila Klein's Instagram, as reported by Variety and others"
+   },
+   "text": "She said she'd been fed lie after lie for months. That her concerns were dismissed, until she pressed him. And then, in her words, he finally admitted he'd been in an affair for over six months.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "sting",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaCouple",
+   "p": {
+    "pair": "ek",
+    "mood": "apart",
+    "rain": true
+   },
+   "text": "According to her post, his story kept changing. First it was a kiss. Then it was emotional cheating. Then it was an affair. She said they had separated, and called it a painful betrayal.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "yaNews",
+   "p": {
+    "headline": "H3 CREW: WE WILL NO LONGER WORK WITH ETHAN",
+    "ticker": "\"Shocked, angry, and heartbroken\" - \"We stand with Hila\""
+   },
+   "text": "And then the crew spoke.",
+   "pause": 0.2
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "\"WE STAND|WITH HILA\"",
+    "sub": "H3 crew statement, October 2026",
+    "color": "#fff",
+    "src": "H3 crew statement, as reported by Variety"
+   },
+   "text": "In a joint statement, the H3 crew said they were shocked, angry, and heartbroken. They said they stand with Hila. And they said they had unanimously agreed they would no longer work with Ethan.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaWolfie",
+   "p": {
+    "pair": "ek",
+    "eyes": "tired",
+    "look": 0.6
+   },
+   "text": "The next day, Ethan responded. He didn't address the affair directly. He asked people to respect his family's privacy. And he said he was working with Hila to urgently remove his ownership and financial stakes in the podcasts, Teddy Fresh, and every joint business he would profit from.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "15 YEARS.|GONE IN 2 DAYS.",
+    "color": "#ff3a4a"
+   },
+   "text": "Fifteen years. A YouTube empire. Gone in about two days.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "boom",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaPost",
+   "p": {
+    "contact": "r/h3h3productions",
+    "msgs": [
+     [
+      "them",
+      "x"
+     ],
+     [
+      "them",
+      "x"
+     ],
+     [
+      "me",
+      "x"
+     ],
+     [
+      "them",
+      "x"
+     ]
+    ]
+   },
+   "text": "So, what about the clues? The moment it broke, fans started digging. Reddit threads, TikTok edits, side by side clips, every joke from the last six months pulled apart.",
+   "pause": 0.3
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "NO ONE HAS BEEN|CONFIRMED",
+    "sub": "so we're not naming anyone",
+    "color": "#ffd86a"
+   },
+   "text": "And a lot of that speculation pointed at specific people. But here's the truth: as of right now, neither Ethan nor Hila has named anyone. So neither will we. Old clips and unfollows aren't proof. And the person who made the choice here, according to Hila, is Ethan.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/002-ethan-klein/photos/qRIt7he0woM.jpg",
+    "cap": "OCTOBER 21, 2026",
+    "src": "H3 Podcast, YouTube",
+    "tilt": 2
+   },
+   "text": "What we do have is the timeline. And looking back at that last episode now, with the whole crew laughing around him, it hits different.",
+   "pause": 0.3
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/002-ethan-klein/photos/QyyGT9AgKdM.jpg",
+    "cap": "\"TRUST YOUR INSTINCTS\"",
+    "src": "H3 Podcast, YouTube, Feb 2026",
+    "tilt": -2
+   },
+   "text": "As for Hila, the messages of support from fans have been pouring in. And her final words in that post were simple. Trust your instincts.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaCounter",
+   "p": {
+    "from": 2490000,
+    "to": 2490000,
+    "mode": "freeze",
+    "label": "SUBSCRIBERS, NO NEW EPISODES",
+    "src": "YouTube channel stats, Oct 2026"
+   },
+   "text": "The H3 Podcast channel is still up. Two and a half million subscribers. No new episodes since October 21st.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaTitle",
+   "p": {
+    "name": "H3",
+    "years": "2017 - 2026",
+    "sub": "SUBSCRIBE"
+   },
+   "text": "Will H3 come back without Ethan? Will Ethan come back at all? Let us know what you think in the comments. And tell us who we should cover next on YouTube Afterlife.",
+   "pause": 1.0
+  }
+ ]
+}
