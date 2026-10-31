@@ -357,6 +357,49 @@ S.thumb = (t, d, p) => {
     <text x="960" y="${p.textY || 650}" text-anchor="middle" font-family="Marker" font-size="${size}" fill="#fff" stroke="#000" stroke-width="10" paint-order="stroke" style="filter:drop-shadow(0 0 34px ${tint})">${txt}</text>`;
 };
 
+// Second thumbnail layout ("phone"): a giant tilted phone whose black screen reflects your terrified face and the
+// grinning thing behind you, a text bubble from your own number, glitch-red background, stacked headline on the left.
+S.thumbPhone = (t, d, p) => {
+  const tint = p.tint || '#ff0030';
+  const lines = String(p.text || "IT'S|BEHIND|YOU.").split('|');
+  const scan = [...Array(48)].map((_, k) => `<rect y="${k * 40}" width="1920" height="3" fill="#000" opacity=".25"/>`).join('');
+  const glitch = [[300, 560, 380], [1180, 1340, 220], [760, 900, 640]].map(([y, h, x]) => `<rect x="${x}" y="${y}" width="${560}" height="${h / 30}" fill="${tint}" opacity=".35"/>`).join('');
+  return `
+    <defs>
+      <radialGradient id="bgP" cx="62%" cy="48%" r="60%"><stop offset="0" stop-color="${tint}" stop-opacity=".95"/><stop offset=".45" stop-color="#5a0018" stop-opacity=".8"/><stop offset="1" stop-color="#000"/></radialGradient>
+      <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a1a22"/><stop offset=".5" stop-color="#050507"/><stop offset="1" stop-color="#0d0d12"/></linearGradient>
+      <linearGradient id="bezel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5a5a66"/><stop offset=".5" stop-color="#1c1c22"/><stop offset="1" stop-color="#8a8a96"/></linearGradient>
+      <radialGradient id="skinCold" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#e8f4ff"/><stop offset=".6" stop-color="#8fa6bd"/><stop offset="1" stop-color="#2a3a4a"/></radialGradient>
+    </defs>
+    <rect width="1920" height="1920" fill="url(#bgP)"/>${scan}${glitch}
+    <g transform="translate(1240,1000) rotate(-8)">
+      <rect x="-430" y="-760" width="860" height="1520" rx="110" fill="#000" opacity=".55" transform="translate(40,50)"/>
+      <rect x="-430" y="-760" width="860" height="1520" rx="110" fill="url(#bezel)"/>
+      <rect x="-400" y="-730" width="800" height="1460" rx="86" fill="url(#glass)"/>
+      <clipPath id="scr"><rect x="-400" y="-730" width="800" height="1460" rx="86"/></clipPath>
+      <g clip-path="url(#scr)">
+        <g transform="translate(150,-230) scale(.62)" opacity=".95">${beastFace(1)}</g>
+        <g transform="translate(-60,90) scale(1.9)">
+          <circle r="130" fill="url(#skinCold)" stroke="#000" stroke-width="6" opacity=".9"/>
+          <path d="M-96 -80 q20 -28 48 -12 M96 -80 q-20 -28 -48 -12" stroke="#000" stroke-width="8" stroke-linecap="round" fill="none"/>
+          ${[-46, 46].map((ex) => `<g transform="translate(${ex},-6)"><ellipse rx="44" ry="50" fill="#f4f8ff" stroke="#000" stroke-width="5"/><circle cx="${ex < 0 ? -10 : -14}" r="5" fill="#000"/></g>`).join('')}
+          <ellipse cx="0" cy="74" rx="22" ry="36" fill="#1a0006" stroke="#000" stroke-width="6"/>
+        </g>
+        <path d="M-400 -730 L60 -730 L-400 300Z" fill="#fff" opacity=".07"/>
+      </g>
+      <g transform="translate(-330,-560)">
+        <rect width="520" height="150" rx="40" fill="#1e2a3a" stroke="#000" stroke-width="5"/>
+        <text x="34" y="56" font-family="Inter, sans-serif" font-size="38" font-weight="800" fill="#8fb4e8">Me</text>
+        <text x="34" y="116" font-family="Inter, sans-serif" font-size="50" font-weight="700" fill="#fff">don't look up.</text>
+      </g>
+      <rect x="-90" y="-712" width="180" height="34" rx="17" fill="#000"/>
+    </g>
+    <rect width="1920" height="1920" fill="url(#vig)" opacity=".7"/>
+    ${lines.map((ln, i) => { const y = 690 + i * 240, sz = 230;
+      return [12, 8, 4].map((o) => `<text x="${110 + o}" y="${y + o}" font-family="Marker" font-size="${sz}" fill="#2a0006">${ln}</text>`).join('') +
+        `<text x="110" y="${y}" font-family="Marker" font-size="${sz}" fill="${i === lines.length - 1 ? tint : '#fff'}" stroke="#000" stroke-width="10" paint-order="stroke" style="filter:drop-shadow(0 0 26px ${tint})">${ln}</text>`; }).join('')}`;
+};
+
 // wrap: camera drift, vignette, film grain (seed changes per frame so the grain moves)
 // Where the action is in each scene (world x). Vertical Shorts/TikToks centre their narrow window on it.
 const FOCUS = { bed: 790, reflection: 960, face: 960, door: 800, nan: 1040, kitchen: 1000, morning: 960 };

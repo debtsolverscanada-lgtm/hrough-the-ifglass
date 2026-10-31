@@ -167,7 +167,7 @@ run('ffmpeg', '-v', 'error', '-y', '-framerate', 30, '-i', f'{FR}/f%05d.jpg', '-
     '-c:v', 'libx264', '-preset', 'medium', '-crf', 19, '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', f'{OUT}/video.mp4')
 
 # ---------- thumbnail (Day One style) ----------
-json.dump([{'scene': 'thumb', 'p': {**ST.get('thumb', {}), 'still': True}, 'start': 0, 'dur': 1, 'fade': 0}], open(f'{WK}/thumb.json', 'w'))
+json.dump([{'scene': ST.get('thumb', {}).get('scene', 'thumb'), 'p': {**ST.get('thumb', {}), 'still': True}, 'start': 0, 'dur': 1, 'fade': 0}], open(f'{WK}/thumb.json', 'w'))
 subprocess.run(['rm', '-rf', f'{WK}/thumbf'])
 run('node', f'{HERE}/render.js', f'{WK}/thumb.json', f'{WK}/thumbf', 'long', 0, 1000)
 run('ffmpeg', '-v', 'error', '-y', '-i', f'{WK}/thumbf/f00000.jpg', '-vf', 'scale=1280:720', '-q:v', 2, f'{OUT}/thumb.jpg')

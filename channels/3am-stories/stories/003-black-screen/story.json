@@ -1,25 +1,234 @@
 {
  "format": "short",
  "voice": "Brian",
- "tts": {"stability": 0.45, "similarity": 0.8, "style": 0.35, "speed": 1.0},
- "thumb": {"text": "DON'T TURN AROUND.", "tint": "#ff0040", "tint2": "#00c8ff"},
+ "tts": {
+  "stability": 0.45,
+  "similarity": 0.8,
+  "style": 0.35,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "thumbPhone",
+  "text": "IT'S|BEHIND|YOU.",
+  "tint": "#ff0030"
+ },
  "yt": {
   "title": "Don't look at your phone screen when it goes black at 3 AM 😨 #scary #horror #shorts",
   "description": "It's 3:33 AM. You're on your phone, just like right now. Then you get a text... from your own number.\n\nWatch until the end. Then look at your screen when it goes black.\n\n#scarystories #horrorstories #3amstories #creepy #shorts",
-  "tags": ["scary stories", "horror shorts", "3am", "dont look at your screen", "phone horror", "reflection", "jinn", "animated horror", "pov horror", "creepy", "shorts"]
+  "tags": [
+   "scary stories",
+   "horror shorts",
+   "3am",
+   "dont look at your screen",
+   "phone horror",
+   "reflection",
+   "jinn",
+   "animated horror",
+   "pov horror",
+   "creepy",
+   "shorts"
+  ]
  },
  "scenes": [
-  {"scene": "bed", "p": {"time": "3:33", "phone": true, "eyes": "normal", "look": 0}, "text": "Three thirty three A.M. You're in bed, on your phone. Scrolling. Just like you are right now.", "pause": 0.2, "sfx": [["tick", 0]]},
-  {"scene": "phone", "p": {"time": "3:33", "msgs": [["Me", "don't look up.", 0.9]]}, "text": "A text comes in. From your own number.", "pause": 0.1, "sfx": [["buzzphone", 0.8]]},
-  {"scene": "phone", "p": {"time": "3:33", "msgs": [["Me", "don't look up.", 0]]}, "text": "Don't look up.", "pause": 0.3, "sfx": [["heart", 0]]},
-  {"scene": "bed", "p": {"time": "3:33", "phone": true, "eyes": "wide", "look": 1, "sweat": true}, "text": "You look up. The room is empty.", "pause": 0.2, "sfx": [["breath", 0]]},
-  {"scene": "phone", "p": {"time": "3:34", "msgs": [["Me", "don't look up.", 0], ["Me", "not the room. the screen.", 0.5]]}, "text": "Another text. Not the room. The screen.", "pause": 0.2, "sfx": [["buzzphone", 0.4], ["static", 2.2]]},
-  {"scene": "reflection", "p": {"face": 0}, "text": "Your screen goes black. And in the glass, you see your own face.", "pause": 0.1, "sfx": [["drone", 0]]},
-  {"scene": "reflection", "p": {"face": "grow"}, "text": "And right behind your shoulder... something is smiling back at you.", "pause": 0.1, "sfx": [["heart", 0]]},
-  {"scene": "face", "text": "It's been there all night.", "pause": 0.2, "sfx": [["jump", 0]]},
-  {"scene": "text", "p": {"text": "DON'T|TURN AROUND.", "color": "#ff2a2a"}, "text": "Don't turn around.", "pause": 0.5, "sfx": [["boom", 0]]},
-  {"scene": "black", "p": {"text": "look at your screen|when it goes black.", "y": 960, "size": 90, "color": "#8a8a8a"}, "text": "Now... look at your screen when it goes black.", "pause": 0.3, "sfx": []},
-  {"scene": "black", "p": {}, "dur": 2.8, "sfx": [["silence_hit", 2.0]]},
-  {"scene": "black", "p": {"text": "it's behind you.", "color": "#ff1a1a", "size": 120, "y": 980}, "dur": 2.6, "sfx": [["jump", 0]]}
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:33",
+    "phone": true,
+    "eyes": "normal",
+    "look": 0
+   },
+   "text": "Three thirty three A.M. You're in bed, on your phone. Scrolling. Just like you are right now.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:33",
+    "msgs": [
+     [
+      "Me",
+      "don't look up.",
+      0.9
+     ]
+    ]
+   },
+   "text": "A text comes in. From your own number.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzzphone",
+     0.8
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:33",
+    "msgs": [
+     [
+      "Me",
+      "don't look up.",
+      0
+     ]
+    ]
+   },
+   "text": "Don't look up.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:33",
+    "phone": true,
+    "eyes": "wide",
+    "look": 1,
+    "sweat": true
+   },
+   "text": "You look up. The room is empty.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "breath",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:34",
+    "msgs": [
+     [
+      "Me",
+      "don't look up.",
+      0
+     ],
+     [
+      "Me",
+      "not the room. the screen.",
+      0.5
+     ]
+    ]
+   },
+   "text": "Another text. Not the room. The screen.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "buzzphone",
+     0.4
+    ],
+    [
+     "static",
+     2.2
+    ]
+   ]
+  },
+  {
+   "scene": "reflection",
+   "p": {
+    "face": 0
+   },
+   "text": "Your screen goes black. And in the glass, you see your own face.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "reflection",
+   "p": {
+    "face": "grow"
+   },
+   "text": "And right behind your shoulder... something is smiling back at you.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "face",
+   "text": "It's been there all night.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "DON'T|TURN AROUND.",
+    "color": "#ff2a2a"
+   },
+   "text": "Don't turn around.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "look at your screen|when it goes black.",
+    "y": 960,
+    "size": 90,
+    "color": "#8a8a8a"
+   },
+   "text": "Now... look at your screen when it goes black.",
+   "pause": 0.3,
+   "sfx": []
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "dur": 2.8,
+   "sfx": [
+    [
+     "silence_hit",
+     2.0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "it's behind you.",
+    "color": "#ff1a1a",
+    "size": 120,
+    "y": 980
+   },
+   "dur": 2.6,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  }
  ]
 }
