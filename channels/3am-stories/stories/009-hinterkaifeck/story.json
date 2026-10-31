@@ -90,7 +90,15 @@
    "scene": "snow",
    "p": {
     "prints": 1,
-    "grow": true
+    "grow": true,
+    "snap": {
+     "at": 2.2,
+     "to": [
+      640,
+      1250
+     ],
+     "z": 2.2
+    }
    },
    "text": "One morning, the father finds footprints in the fresh snow. Coming out of the forest. Leading to the farmhouse.",
    "pause": 0.2,
@@ -105,7 +113,16 @@
   {
    "scene": "snow",
    "p": {
-    "prints": 1
+    "prints": 1,
+    "snap": {
+     "at": 0.4,
+     "to": [
+      1180,
+      1180
+     ],
+     "z": 1.8
+    },
+    "shake": 0.3
    },
    "text": "But there were no footprints leading back out.",
    "pause": 0.6,
@@ -121,7 +138,8 @@
    "p": {
     "time": "",
     "eyes": "wide",
-    "look": 0
+    "look": 0,
+    "shake": 0.4
    },
    "text": "Then the house keys went missing. They found a newspaper from Munich that nobody in the family ever bought. And at night... they heard footsteps. Above them. In the attic.",
    "pause": 0.3,
@@ -150,7 +168,15 @@
   {
    "scene": "snow",
    "p": {
-    "prints": 1
+    "prints": 1,
+    "snap": {
+     "at": 0.8,
+     "to": [
+      1180,
+      1050
+     ],
+     "z": 1.7
+    }
    },
    "text": "The father searched the attic. He found nothing. Nobody was there.",
    "pause": 0.3
@@ -175,7 +201,15 @@
    "scene": "snow",
    "p": {
     "prints": 1,
-    "smoke": true
+    "smoke": true,
+    "snap": {
+     "at": 2.0,
+     "to": [
+      1320,
+      820
+     ],
+     "z": 2.4
+    }
    },
    "text": "But the scariest part came after. For days, neighbours saw smoke coming from the chimney. Someone had been feeding the animals. Eating the food in the kitchen.",
    "pause": 0.3

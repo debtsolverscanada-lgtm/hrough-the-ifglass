@@ -84,7 +84,15 @@
    "scene": "kitchen",
    "p": {
     "fridge": true,
-    "watcher": 0
+    "watcher": 0,
+    "snap": {
+     "at": 3.0,
+     "to": [
+      1170,
+      960
+     ],
+     "z": 1.8
+    }
    },
    "text": "Japan, 2008. A man who lives alone starts noticing food going missing from his fridge. Little things. Some yogurt. A bit of rice.",
    "pause": 0.2,
@@ -115,7 +123,15 @@
       "Motion detected: kitchen",
       0.6
      ]
-    ]
+    ],
+    "snap": {
+     "at": 1.2,
+     "to": [
+      960,
+      620
+     ],
+     "z": 1.9
+    }
    },
    "text": "One afternoon, his phone buzzes. Motion detected. In his kitchen.",
    "pause": 0.2,
@@ -161,7 +177,8 @@
    "scene": "closet",
    "p": {
     "gap": 0.05,
-    "gapTo": 0.45
+    "gapTo": 0.45,
+    "shake": 0.4
    },
    "text": "Then an officer slides open the top shelf of his closet.",
    "pause": 0.3,
@@ -182,7 +199,16 @@
    "p": {
     "gap": 0.45,
     "eyes": 1,
-    "eyesOnly": true
+    "eyesOnly": true,
+    "snap": {
+     "at": 0.5,
+     "to": [
+      1190,
+      790
+     ],
+     "z": 2.4
+    },
+    "shake": 0.5
    },
    "text": "And there she was. A woman. Curled up on her side.",
    "pause": 0.4,
@@ -214,7 +240,15 @@
     "time": "3:00",
     "eyes": "closed",
     "watcher": 1,
-    "watcherX": 1460
+    "watcherX": 1460,
+    "snap": {
+     "at": 2.5,
+     "to": [
+      1460,
+      800
+     ],
+     "z": 2.0
+    }
    },
    "text": "Sleeping a few feet away from him. Every single night. Coming out when he left for work.",
    "pause": 0.3,
