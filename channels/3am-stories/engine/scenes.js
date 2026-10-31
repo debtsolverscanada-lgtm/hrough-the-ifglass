@@ -319,7 +319,13 @@ S.thumb = (t, d, p) => {
 };
 
 // wrap: camera drift, vignette, film grain (seed changes per frame so the grain moves)
+// Where the action is in each scene (world x). Vertical Shorts/TikToks centre their narrow window on it.
+const FOCUS = { bed: 790, door: 800, nan: 1040, kitchen: 1000, morning: 960 };
 function frameSVG(name, t, d, p, view, frameNo) {
+  if (view[2] < view[3]) {  // vertical: slide the window so the subject sits in the middle
+    const fx = p.focus ?? FOCUS[name] ?? 960;
+    view = [Math.max(0, Math.min(1920 - view[2], fx - view[2] / 2)), view[1], view[2], view[3]];
+  }
   VW = view[2];
   const drift = p.still ? 1 : 1 + 0.04 * (t / Math.max(d, 1));
   const body = (S[name] || S.text)(t, d, p);
