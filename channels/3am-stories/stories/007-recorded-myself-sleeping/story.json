@@ -153,8 +153,13 @@
    ]
   },
   {
-   "scene": "black",
-   "p": {},
+   "scene": "bed",
+   "p": {
+    "time": "3:17",
+    "eyes": "closed",
+    "watcher": "fade",
+    "watcherX": 1500
+   },
    "text": "Slow footsteps. Walking around my bed. Around... and around.",
    "pause": 0.6,
    "sfx": [
@@ -193,8 +198,13 @@
    ]
   },
   {
-   "scene": "black",
-   "p": {},
+   "scene": "bed",
+   "p": {
+    "time": "3:17",
+    "eyes": "closed",
+    "watcher": 1,
+    "watcherX": 1080
+   },
    "text": "Are you awake?",
    "voice": [
     "Callum",
@@ -225,8 +235,13 @@
    "pause": 0.3
   },
   {
-   "scene": "black",
-   "p": {},
+   "scene": "bed",
+   "p": {
+    "time": "3:17",
+    "eyes": "closed",
+    "watcher": 1,
+    "watcherX": 1180
+   },
    "text": "No.",
    "voice": [
     "Liam",
@@ -239,8 +254,13 @@
    "pause": 1.0
   },
   {
-   "scene": "black",
-   "p": {},
+   "scene": "bed",
+   "p": {
+    "time": "3:17",
+    "eyes": "closed",
+    "watcher": 1,
+    "watcherX": 1400
+   },
    "text": "Can I come in?",
    "voice": [
     "Callum",
@@ -260,8 +280,13 @@
    ]
   },
   {
-   "scene": "black",
-   "p": {},
+   "scene": "bed",
+   "p": {
+    "time": "3:17",
+    "eyes": "closed",
+    "watcher": 1,
+    "watcherX": 1180
+   },
    "text": "Yes.",
    "voice": [
     "Liam",
@@ -328,6 +353,140 @@
   {
    "scene": "bed",
    "p": {
+    "time": "7:02",
+    "eyes": "tired",
+    "look": 0,
+    "phone": true
+   },
+   "text": "I told myself it was a dream. That I was talking in my sleep, and my brain filled in the other voice. Then I opened my voice recorder again.",
+   "pause": 0.3
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "00:00:41",
+    "label": "New Recording 14",
+    "note": "14 recordings  \u2022  all at 3:17 AM",
+    "rec": false,
+    "spike": 0.2
+   },
+   "text": "There were fourteen new recordings. I didn't make a single one of them. Every one of them started at three seventeen. Every one was exactly forty one seconds long.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "static",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "00:00:12",
+    "label": "New Recording 1",
+    "rec": false,
+    "spike": 0.6
+   },
+   "text": "I played the first one. Breathing. Right up against the microphone.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "breath",
+     0.2,
+     "left+close"
+    ],
+    [
+     "breath",
+     2.6,
+     "left+close"
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "voice": [
+    "Callum",
+    "Clyde",
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "whisper+left+close",
+   "text": "I know you can hear me.",
+   "pause": 1.0
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "00:00:30",
+    "label": "New Recording 14",
+    "rec": false,
+    "spike": 0.5
+   },
+   "text": "I skipped to the last one. It wasn't breathing this time. It was my mom. Calling me from downstairs.",
+   "pause": 0.3
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "kitchen",
+    "walk": 0.4
+   },
+   "voice": [
+    "Sarah",
+    "Laura",
+    "Jessica",
+    "Rachel",
+    "Charlotte"
+   ],
+   "fx": "far+orbit",
+   "text": "Sweetie? Come downstairs. I need to show you something.",
+   "pause": 0.5
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "7:06",
+    "msgs": [
+     [
+      "Mom",
+      "night shift ran late, home at 9 \ud83d\ude34",
+      0.4
+     ]
+    ]
+   },
+   "text": "My mom works night shifts. She hasn't been home at three in the morning in two years.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "buzzphone",
+     0.3
+    ],
+    [
+     "heart",
+     1.6
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "IT'S LEARNING|VOICES.",
+    "color": "#ff2a2a"
+   },
+   "text": "It wasn't just listening to me. It was learning voices.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
     "time": "3:17",
     "eyes": "wide",
     "look": 1,
@@ -361,8 +520,13 @@
    ]
   },
   {
-   "scene": "black",
-   "p": {},
+   "scene": "memo",
+   "p": {
+    "clock": "03:17:00",
+    "label": "Sleep recording 2",
+    "rec": false,
+    "spike": 0.9
+   },
    "text": "On the recording, there's a voice. Whispering right into the microphone. Right next to my hand. While I was sitting there awake.",
    "pause": 0.4,
    "sfx": [
@@ -373,8 +537,16 @@
    ]
   },
   {
-   "scene": "black",
-   "p": {},
+   "scene": "bed",
+   "p": {
+    "time": "3:17",
+    "eyes": "wide",
+    "look": 1,
+    "phone": true,
+    "sweat": true,
+    "watcher": 1,
+    "watcherX": 1000
+   },
    "text": "You don't have to stay awake. I'm already in.",
    "voice": [
     "Callum",
