@@ -41,14 +41,6 @@
     "to": 7050000,
     "mode": "freeze",
     "label": "SUBSCRIBERS",
-    "snap": {
-     "at": 2.0,
-     "to": [
-      960,
-      800
-     ],
-     "z": 1.6
-    },
     "shake": 0.3
    },
    "text": "This YouTuber has seven million subscribers. And he hasn't posted in six years.",
@@ -98,14 +90,6 @@
    "p": {
     "contact": "",
     "photo": true,
-    "snap": {
-     "at": 1.8,
-     "to": [
-      960,
-      800
-     ],
-     "z": 1.5
-    },
     "shake": 0.4
    },
    "text": "Then, in May 2018, a girl on Instagram claimed she'd been involved with him. Reports said she was in high school.",

@@ -102,7 +102,7 @@ S.yaCounter = (t, d, p) => {
     return `${460 + u * 1000},${1360 - h * 220}`; });
   const shown = Math.max(2, Math.round(pts.length * Math.min(1, t / (d * 0.75))));
   return `${yaBg()}
-    <text x="${960 + shake}" y="860" text-anchor="middle" font-family="Anton" font-size="230" fill="${col}" letter-spacing="6" style="filter:drop-shadow(0 8px 0 #000)">${v.toLocaleString('en-US')}</text>
+    <text x="${960 + shake}" y="860" text-anchor="middle" font-family="Anton" font-size="${fit(v.toLocaleString('en-US'), 230, 0.95)}" fill="${col}" letter-spacing="6" style="filter:drop-shadow(0 8px 0 #000)">${v.toLocaleString('en-US')}</text>
     <text x="960" y="950" text-anchor="middle" font-family="Anton" font-size="60" fill="${YA.lilac}" letter-spacing="10">${esc(p.label || 'SUBSCRIBERS')}</text>
     <polyline points="${pts.slice(0, shown).join(' ')}" fill="none" stroke="${p.mode === 'drop' ? YA.red : YA.gold}" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
     <path d="M460 1360 H1460" stroke="#fff" stroke-width="3" opacity=".3"/>
@@ -112,13 +112,14 @@ S.yaCounter = (t, d, p) => {
 // horizontal bar chart. p: title, bars [[label, value, unit]], src
 S.yaChart = (t, d, p) => {
   const max = Math.max(...p.bars.map((b) => b[1])), n = p.bars.length, rowH = Math.min(150, 860 / n);
+  const narrow = VW < 1200, LX = narrow ? 700 : 760, BX = narrow ? 720 : 790, BW = narrow ? 620 : 900;
   return `${yaBg()}
     <text x="960" y="560" text-anchor="middle" font-family="Anton" font-size="78" fill="#fff" letter-spacing="4">${esc(p.title)}</text>
     ${p.bars.map((b, i) => {
-      const y = 640 + i * rowH, a = ease((t - i * 0.35) / 0.8), w = 900 * (b[1] / max) * a, hot = i === p.hi;
-      return `<text x="760" y="${y + rowH * 0.55}" text-anchor="end" font-family="Anton" font-size="${Math.min(46, rowH * 0.36)}" fill="${hot ? YA.gold : YA.lilac}">${esc(b[0])}</text>
-        <rect x="790" y="${y + rowH * 0.18}" width="${Math.max(4, w)}" height="${rowH * 0.56}" rx="10" fill="${hot ? YA.red : '#8a6aff'}"/>
-        <text x="${810 + w}" y="${y + rowH * 0.58}" font-family="Anton" font-size="${Math.min(44, rowH * 0.34)}" fill="#fff" opacity="${a}">${esc(b[2] || '')}</text>`;
+      const y = 640 + i * rowH, a = ease((t - i * 0.35) / 0.8), w = BW * (b[1] / max) * a, hot = i === p.hi;
+      return `<text x="${LX}" y="${y + rowH * 0.55}" text-anchor="end" font-family="Anton" font-size="${Math.min(46, rowH * 0.36)}" fill="${hot ? YA.gold : YA.lilac}">${esc(b[0])}</text>
+        <rect x="${BX}" y="${y + rowH * 0.18}" width="${Math.max(4, w)}" height="${rowH * 0.56}" rx="10" fill="${hot ? YA.red : '#8a6aff'}"/>
+        <text x="${BX + 20 + w}" y="${y + rowH * 0.58}" font-family="Anton" font-size="${Math.min(44, rowH * 0.34)}" fill="#fff" opacity="${a}">${esc(b[2] || '')}</text>`;
     }).join('')}
     ${yaSrc(p.src)}`;
 };
