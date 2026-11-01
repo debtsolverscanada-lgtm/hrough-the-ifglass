@@ -126,8 +126,11 @@ def piece(i, p):
     vf = [  # fit any orientation onto a blurred 16:9 background
         f"split[fa][fb];[fb]scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,boxblur=28:2[bg];"
         f"[fa]scale=1920:1080:force_original_aspect_ratio=decrease[fg];[bg][fg]overlay=(W-w)/2:(H-h)/2", f'fps={FPS}']
-    if p.get('zoom'):  # punch-in
-        z = p['zoom']; vf.append(f'scale={int(1920*z)}:{int(1080*z)},crop=1920:1080')
+    if p.get('zoom'):  # punch-in; zx/zy pick where the crop sits (0..1), so alternating framings read as new angles
+        z = p['zoom']; zx, zy = p.get('zx', 0.5), p.get('zy', 0.5)
+        vf.append(f'scale={2*int(960*z)}:{2*int(540*z)},crop=1920:1080:(iw-1920)*{zx}:(ih-1080)*{zy}')
+    if p.get('shake'):  # handheld energy: small fast jitter, scaled up a touch so the edges never show
+        a = p['shake']; vf.append(f"scale=2016:1134,crop=1920:1080:48+{a}*30*sin(t*23):27+{a}*20*sin(t*31+1)")
     if p.get('reverse'): vf.append('reverse')
     if speed != 1.0: vf.append(f'setpts=PTS/{speed}')
     if p.get('push'):  # cinematic slow push-in (or pull-out when negative) across the shot, with a teal/orange grade
@@ -143,6 +146,7 @@ def piece(i, p):
                f"drawtext=fontfile={BOLD}:text='<< REWIND':fontsize=72:fontcolor=white:x=80:y=70:alpha='if(lt(mod(t,0.5),0.3),1,0)'",
                f"drawtext=fontfile={BOLD}:text='%{{pts\\:hms}}':fontsize=56:fontcolor=white:x=w-tw-80:y=h-120"]
     if p.get('flash'): vf.append('fade=t=in:st=0:d=0.12:color=white')
+    if p.get('whip'): vf.append("avgblur=sizeX=60:sizeY=1:enable='lt(t,0.07)',avgblur=sizeX=24:sizeY=1:enable='between(t,0.07,0.14)'")
     for tt in p.get('titles', []): vf.append(title_filter(tt['text'], tt.get('style', 'lower'), tt.get('at', 0.25), tt.get('dur', 3.2)))
     pics = [o for o in p.get('photos', []) if photo(o['file'])]
     if p.get('freeze'): vf.append(f"tpad=stop_mode=clone:stop_duration={p['freeze']}")
@@ -243,12 +247,52 @@ def expand(edl):
                     if cam != 1.0:  # slow-motion camera clip: real speed, no sound
                         p['speed'] = round(p.get('speed', 1.0) * cam, 3); p['_silent'] = True
                         if sec.get('music'):
-                            parts = montage(p, 60 / BEATS[sec['music']['song']]['bpm'], sec.get('broll_beats', 2))
-                for q in parts:
+                            parts = montage(p, 60 / BEATS[sec['music']['song']]['bpm'], sec.get('broll_beats', 1 if DOBRIK else 2))
+                if DOBRIK and len(parts) == 1: parts = jumpcut(parts[0], len(pieces))
+                for j, q in enumerate(parts):
                     if q.get('loc'): sfx.append(('pin', t + q.get('loc_at', 0.3)))
+                    if DOBRIK and j == 0 and pieces: q['whip'] = True; sfx.append(('whoosh', max(0, t - 0.12)))  # new scene: whip-pan in
                     add(q)
             if sec.get('music'): cues[-1]['dur'] = t - cues[-1]['at']
     return pieces, cues, sfx, t
+
+
+DOBRIK = (os.environ.get('VLOG_STYLE') or EDL.get('style')) == 'dobrik'
+ANGLES = [(1.0, 0.5, 0.5), (1.22, 0.38, 0.32), (1.4, 0.6, 0.3), (1.12, 0.62, 0.45)]  # (zoom, x, y): wide, tight-left, close, medium-right
+
+
+def speech_spans(name, s, e):
+    """Where people actually talk inside [s, e] of a clip: silencedetect on its sound, with a little air kept round
+    each phrase. Falls back to the whole range if the street is too loud to find pauses."""
+    err = subprocess.run(['ffmpeg', '-v', 'info', '-ss', f'{s:.3f}', '-t', f'{e - s:.3f}', '-i', str(clip(name)), '-vn',
+                          '-af', f"silencedetect=noise={EDL.get('silence_db', -33)}dB:d={EDL.get('min_pause', 0.38)}", '-f', 'null', '-'],
+                         capture_output=True, text=True).stderr
+    st = [float(x) for x in re.findall(r'silence_start: ([0-9.]+)', err)]; en = [float(x) for x in re.findall(r'silence_end: ([0-9.]+)', err)]
+    gaps = list(zip(st, en + [e - s] * (len(st) - len(en))))
+    spans, cur = [], 0.0
+    for a, b in gaps:
+        if a - cur > 0.25: spans.append((s + max(0, cur - 0.06), s + a + 0.1))
+        cur = b
+    if (e - s) - cur > 0.25: spans.append((s + max(0, cur - 0.06), e))
+    return spans or [(s, e)]
+
+
+def jumpcut(p, k0=0):
+    """David Dobrik-style: every phrase is its own shot, pauses gone, framing changes on every cut,
+    and a long ramble gets trimmed (max_phrase_run seconds per shot, the rest of a long phrase is kept)."""
+    if not p.get('clip') or p.get('_silent') or not talking(p): return [p]
+    hold = max([0] + [t.get('at', 0.25) + t.get('dur', 3.2) for t in p.get('titles', [])] + [o.get('at', 0.5) + o.get('dur', 4) for o in p.get('photos', [])]
+               + ([p.get('loc_at', 0.3) + 4.2] if p.get('loc') else []))
+    out = []
+    first_end = p['s'] + hold * p.get('speed', 1.0)
+    if hold: out.append(dict(p, e=min(p['e'], first_end + 0.01)))
+    rest = {k: v for k, v in p.items() if k not in ('titles', 'photos', 'loc', 'loc_at', 'freeze')}
+    if first_end < p['e'] - 0.4:
+        for k, (a, b) in enumerate(speech_spans(p['clip'], max(p['s'], first_end), p['e'])):
+            z, x, y = ANGLES[(k0 + k) % len(ANGLES)]
+            out.append(dict(rest, s=a, e=b, zoom=z, zx=x, zy=y, letterbox=False, _cut=True))
+    if p.get('freeze') and out: out[-1]['freeze'] = p['freeze']
+    return out or [p]
 
 
 def montage(p, beat, per):
@@ -283,6 +327,8 @@ def synth_sfx(kind, out, opt=None):
         run(['ffmpeg', '-v', 'error', '-y', '-i', str(MUSIC / opt['song']), '-filter_complex', g, '-map', '[o]', '-ar', '48000', '-ac', '2', str(out)]); return
     if kind == 'whoosh':
         g = "anoisesrc=d=0.45:c=pink:a=0.6,highpass=f=300,lowpass=f=6000,afade=t=in:d=0.2,afade=t=out:st=0.2:d=0.25,volume=0.5"
+    elif kind == 'boom':  # sub drop + snap under a pop-up word
+        g = "aevalsrc='0.8*sin(2*PI*(90-55*t)*t)*exp(-5*t)+0.25*random(0)*exp(-60*t)':d=0.6,lowpass=f=1800,volume=0.9"
     elif kind == 'scratch':
         g = "anoisesrc=d=0.35:c=brown:a=0.8,vibrato=f=18:d=1,bandpass=f=900:w=600,afade=t=out:st=0.1:d=0.25,volume=1.2"
     else:  # rewind
@@ -323,6 +369,48 @@ def captions(dialogue_wav, ass_out):
     open(ass_out, 'w').write(head + '\n'.join(lines) + '\n')
 
 
+HYPE = set('no way what wow yo bro dude insane crazy oh god omg wait stop yes no dollars bucks free huge best worst never literally actually ' 
+           'nyc new york times square pizza bagel liberty broadway chinatown amazing sick fire love hate scared help run'.split())
+
+
+def pop_words(dialogue_wav):
+    """Words worth a motion-graphic pop: hype words, numbers and money, and the loudest shouted words."""
+    from faster_whisper import WhisperModel
+    import numpy as np
+    m = WhisperModel('small.en', device='cpu', compute_type='int8')
+    audio = load_audio(dialogue_wav)
+    segs, _ = m.transcribe(audio, word_timestamps=True, vad_filter=True, language='en', initial_prompt='hi kids. Hi kids! New York, NYC. Bye kids.')
+    words = [w for sg in segs for w in (sg.words or []) if w.probability > 0.45]
+    loud = []
+    for w in words:
+        a, b = int(w.start * 16000), int(max(w.end, w.start + 0.05) * 16000)
+        loud.append(float(np.sqrt(np.mean(audio[a:b] ** 2))) if b > a else 0.0)
+    cut = sorted(loud)[int(len(loud) * 0.97)] if loud else 1
+    picks, last = [], -9
+    for w, l in zip(words, loud):
+        clean = re.sub(r"[^a-z0-9$']", '', w.word.lower())
+        if not clean or w.start - last < EDL.get('pop_gap', 4.0): continue
+        if clean in HYPE or re.search(r'[0-9$]', clean) or (l >= cut and len(clean) > 2):
+            picks.append((w.start, w.word.strip().upper().strip('.,!?') + ('!' if l >= cut else ''))); last = w.start
+    print(f'{len(picks)} pop-up words', flush=True)
+    return picks
+
+
+def pop_ass(picks, ass_out):
+    head = ('[Script Info]\nScriptType: v4.00+\nPlayResX: 1920\nPlayResY: 1080\n\n[V4+ Styles]\n'
+            'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\n'
+            'Style: Pop,Anton,170,&H0000E5FF,&H00FFFFFF,&H00000000,&H96000000,0,0,0,0,100,100,2,0,1,12,6,5,0,0,0,1\n\n'
+            '[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n')
+    def ts(x): return f'{int(x // 3600)}:{int(x % 3600 // 60):02d}:{x % 60:05.2f}'
+    rnd = random.Random(7); lines = []
+    for at, word in picks:
+        x, y, rot = rnd.choice([560, 960, 1360]), rnd.choice([300, 360, 780]), rnd.choice([-9, -6, 5, 8])
+        col = rnd.choice(['&H0000E5FF&', '&H00FFFFFF&', '&H004A4AFF&'])
+        lines.append(f'Dialogue: 1,{ts(at)},{ts(at + 0.75)},Pop,,0,0,0,,{{\\an5\\pos({x},{y})\\frz{rot}\\c{col}\\fscx30\\fscy30'
+                     f'\\t(0,110,\\fscx130\\fscy130)\\t(110,200,\\fscx100\\fscy100)\\t(560,750,\\alpha&HFF&)}}{word}')
+    open(ass_out, 'w').write(head + '\n'.join(lines) + '\n')
+
+
 def drop_missing(edl):
     """Leave out clips that failed to download, so a draft still renders; report what was skipped."""
     have = lambda c: next(RAW.rglob(c), None) is not None
@@ -360,6 +448,8 @@ def main():
     vlen = float(run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(W / 'cut.mov')]).stdout)
     alen = float(run(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', str(W / 'dialogue.wav')]).stdout)
     print(f'sync check: picture {vlen:.3f}s, sound {alen:.3f}s, difference {abs(vlen - alen) * 1000:.0f} ms', flush=True)
+    picks = pop_words(W / 'dialogue.wav') if DOBRIK else []
+    for at, _ in picks: sfx.append(('boom', at))
     # music bed
     ins, parts = [], []
     for k, c in enumerate([c for c in cues if c['at'] < total]):
@@ -391,10 +481,15 @@ def main():
     subs = EDL.get('captions', True)  # word-by-word subtitles; "captions": false in the EDL leaves them out
     if subs: captions(W / 'dialogue.wav', W / 'caps.ass')
     else: (W / 'caps.ass').write_text('')
+    vf_final = [f"subtitles={W / 'caps.ass'}:fontsdir={FONTS}"] if subs else []
+    if picks:  # each pop-up word: a quick punch-zoom on the picture and the word slams in
+        pop_ass(picks, W / 'pops.ass')
+        on = '+'.join(f'between(t,{a:.2f},{a + 0.45:.2f})' for a, _ in picks)
+        vf_final = [f"scale=w='2*trunc(960*(1+0.14*({on})))':h='2*trunc(540*(1+0.14*({on})))':eval=frame,crop=1920:1080"] + vf_final + [f"subtitles={W / 'pops.ass'}:fontsdir={FONTS}"]
     out = D / ('preview.mp4' if PREVIEW else 'vlog.mp4')
     vb = int(min(12e6, 940e6 * 8 / total - 200e3))  # keep the file under ~950 MB so the YouTube upload step accepts it
     run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'cut.mov'), '-i', str(W / 'mix.wav'), '-map', '0:v', '-map', '1:a',
-         '-vf', f"subtitles={W / 'caps.ass'}:fontsdir={FONTS}" if subs else 'null', '-c:v', 'libx264', '-preset', 'fast', '-b:v', f'{vb}', '-maxrate', f'{int(vb * 1.5)}', '-bufsize', f'{vb * 2}',
+         '-vf', ','.join(vf_final) or 'null', '-c:v', 'libx264', '-preset', 'fast', '-b:v', f'{vb}', '-maxrate', f'{int(vb * 1.5)}', '-bufsize', f'{vb * 2}',
          '-c:a', 'aac', '-b:a', '192k', '-movflags', '+faststart', str(out)])
     print('done', out, f'{out.stat().st_size/1e6:.0f} MB')
 

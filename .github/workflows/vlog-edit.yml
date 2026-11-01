@@ -8,6 +8,10 @@ on:
       urls:
         description: 'Space-separated NAME|URL pairs (Zapier-hydrated Drive files) for the raw clips'
         required: true
+      style:
+        description: "Optional edit style: 'dobrik' = fast jump cuts, angle changes, whip pans, pop-up words"
+        required: false
+        default: ''
       preview:
         description: 'Optional: only render the first N seconds'
         required: false
@@ -42,6 +46,7 @@ jobs:
       - name: Render
         env:
           PREVIEW: ${{ github.event.inputs.preview }}
+          VLOG_STYLE: ${{ github.event.inputs.style }}
         run: |
           D=vlog/${{ github.event.inputs.name }}
           if [ -n "$PREVIEW" ]; then python3 vlog/edit.py $D --preview $PREVIEW; else python3 vlog/edit.py $D; fi
@@ -54,7 +59,7 @@ jobs:
           GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
           GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
           GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
-        run: set -o pipefail; python3 vlog/drive_put.py "$OUT" "${{ github.event.inputs.name }} - $(basename $OUT .mp4) - $(date -u +%Y%m%d-%H%M).mp4" | tee vlog/${{ github.event.inputs.name }}/review/drive.txt
+        run: set -o pipefail; python3 vlog/drive_put.py "$OUT" "${{ github.event.inputs.name }} - $(basename $OUT .mp4)${{ github.event.inputs.style && format(' {0}', github.event.inputs.style) || '' }} - $(date -u +%Y%m%d-%H%M).mp4" | tee vlog/${{ github.event.inputs.name }}/review/drive.txt
       - name: Commit sealed review
         run: |
           D=vlog/${{ github.event.inputs.name }}; mkdir -p $D/sealed
