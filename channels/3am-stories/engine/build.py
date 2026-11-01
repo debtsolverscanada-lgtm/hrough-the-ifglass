@@ -122,11 +122,11 @@ FX = {'far': 'highpass=f=250,lowpass=f=2600,aecho=0.8:0.7:120|260:0.35|0.22,volu
       'whisper': 'highpass=f=400,aecho=0.8:0.6:90:0.3,volume=1.2',
       'wrong': 'asetrate=48000*0.88,aresample=48000,aecho=0.8:0.6:70|150:0.4|0.3,volume=1.1',   # something pretending to be human
       # 8D / headphone placement. Combine with '+', e.g. "whisper+left" or "wrong+orbit".
-      'left': 'pan=stereo|c0=c0|c1=0.06*c1',                      # right up against your left ear
-      'right': 'pan=stereo|c0=0.06*c0|c1=c1',
+      'left': 'pan=stereo|c0=c0|c1=0.3*c1',                      # right up against your left ear
+      'right': 'pan=stereo|c0=0.3*c0|c1=c1',
       'orbit': 'apulsator=mode=sine:hz=0.22:amount=1:offset_l=0:offset_r=0.5',   # circles around your head
       'orbitfast': 'apulsator=mode=sine:hz=0.7:amount=1:offset_l=0:offset_r=0.5',
-      'behind': 'lowpass=f=3200,pan=stereo|c0=c0|c1=-1*c1,volume=0.9',          # out-of-phase: sounds inside / behind your head
+      'behind': 'lowpass=f=3200,adelay=0|12,aecho=0.8:0.5:40:0.25,volume=1.1',          # behind you: muffled + a hair late on the right (no phase flip: it vanished on mono phone speakers)
       'close': 'highpass=f=150,volume=1.5'}                         # breath-on-the-mic close
 fxchain = lambda fx: ''.join(FX[f] + ',' for f in (fx or '').split('+') if f in FX)
 for k, (mp3, at, fx) in enumerate(voices):
