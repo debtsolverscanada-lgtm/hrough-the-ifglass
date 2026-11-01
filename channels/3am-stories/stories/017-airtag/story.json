@@ -1,0 +1,290 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.38,
+  "similarity": 0.8,
+  "style": 0.5,
+  "speed": 1.12
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "phone",
+  "bp": {
+   "time": "3:07",
+   "msgs": [
+    [
+     "Find My",
+     "AirTag Found Moving With You",
+     0
+    ]
+   ]
+  },
+  "lines": [
+   [
+    "IT'S BEEN",
+    "#fff"
+   ],
+   [
+    "UNDER MY BED",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 960,
+  "y": 1230,
+  "step": 150,
+  "size": 130,
+  "band": 0.5,
+  "tint": "#200008"
+ },
+ "yt": {
+  "title": "My phone found an AirTag moving with me... it was under my bed 😨 #scary #horror #shorts",
+  "description": "3:07 AM. \"AirTag Found Moving With You.\" You check where it's been. Every night, the same place. Your bedroom.\n\n🎧 headphones on. Check under your bed.\n\n#scarystories #horror #3amstories #airtag #shorts",
+  "tags": [
+   "scary stories",
+   "airtag horror",
+   "find my",
+   "horror short",
+   "3am",
+   "3am stories",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:07",
+    "msgs": [
+     [
+      "Find My",
+      "AirTag Found Moving With You",
+      0
+     ]
+    ],
+    "snap": {
+     "at": 0.5,
+     "to": [
+      960,
+      640
+     ],
+     "z": 1.9
+    },
+    "shake": 0.4
+   },
+   "text": "3:07 AM. Your phone says an AirTag has been moving with you.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "buzzphone",
+     0
+    ],
+    [
+     "sting",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "wide",
+    "phone": true,
+    "snap": {
+     "at": 0.2,
+     "to": [
+      720,
+      960
+     ],
+     "z": 1.9
+    }
+   },
+   "text": "It's not yours.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "heart",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:08",
+    "msgs": [
+     [
+      "Find My",
+      "Seen with you: 9 days",
+      0.2
+     ],
+     [
+      "Find My",
+      "Every night: your address",
+      0.8
+     ]
+    ],
+    "snap": {
+     "at": 1.0,
+     "to": [
+      960,
+      860
+     ],
+     "z": 1.8
+    }
+   },
+   "text": "It's been with you for nine days. And every single night, it's been at your house.",
+   "pause": 0.1
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "wide",
+    "phone": true,
+    "sweat": true
+   },
+   "text": "So you tap Play Sound.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "tick",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "beep. beep. beep.",
+    "color": "#9fd2ff",
+    "size": 140
+   },
+   "text": "It starts beeping.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "wide",
+    "sweat": true,
+    "snap": {
+     "at": 0.3,
+     "to": [
+      960,
+      1300
+     ],
+     "z": 2.0
+    },
+    "shake": 0.5
+   },
+   "text": "From under your bed.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "silence_hit",
+     0.1
+    ],
+    [
+     "tick",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "wide",
+    "sweat": true,
+    "shake": 0.3
+   },
+   "text": "You don't move. You just lie there, listening to it beep, right under you.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "tick",
+     0
+    ],
+    [
+     "heart",
+     0.5
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Then the beeping stops.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "silence_hit",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:09",
+    "msgs": [
+     [
+      "Find My",
+      "Sound stopped",
+      0.2
+     ]
+    ],
+    "snap": {
+     "at": 0.5,
+     "to": [
+      960,
+      640
+     ],
+     "z": 1.9
+    },
+    "shake": 0.6
+   },
+   "text": "Not because it finished. Because something under there... turned it off.",
+   "pause": 0.1
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Shhh.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "George"
+   ],
+   "fx": "whisper+close",
+   "pause": 0.1
+  },
+  {
+   "scene": "face",
+   "dur": 1.2,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "check under your bed.",
+    "color": "#ff2a2a",
+    "size": 120
+   },
+   "text": "Check under your bed.",
+   "pause": 0.8
+  }
+ ]
+}
