@@ -1,0 +1,73 @@
+name: Real me (talking photo)
+# A photo of a real person + a script -> a video of that face speaking it (SadTalker, CPU, open source).
+# The photo comes from a private Drive link and the result goes back to Drive only; neither is kept in this public repo.
+on:
+  workflow_dispatch:
+    inputs:
+      photo:
+        description: 'Zapier-hydrated Drive link to the photo (blank = SadTalker sample face, for testing)'
+        required: false
+        default: ''
+      text:
+        description: 'What the face says'
+        required: true
+      voice:
+        description: 'ElevenLabs voice name or id'
+        required: false
+        default: 'Adam'
+      name:
+        description: 'Output file name (no extension)'
+        required: false
+        default: 'realme-test'
+      enhance:
+        description: 'Sharpen the face with GFPGAN (slower)'
+        required: false
+        default: 'yes'
+permissions:
+  contents: read
+jobs:
+  talk:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.10' }
+      - name: Install SadTalker (CPU)
+        run: |
+          sudo apt-get update && sudo apt-get install -y ffmpeg
+          git clone --depth 1 https://github.com/OpenTalker/SadTalker st
+          pip install torch==2.0.1 torchvision==0.15.2 torchaudio==2.0.2 --index-url https://download.pytorch.org/whl/cpu
+          grep -v -E '^(gradio|torch|torchvision)' st/requirements.txt > req.txt
+          pip install -r req.txt requests
+          # basicsr imports a module newer torchvision renamed; patch it if present
+          F=$(python -c "import basicsr,os;print(os.path.dirname(basicsr.__file__))")/data/degradations.py
+          sed -i 's/torchvision.transforms.functional_tensor/torchvision.transforms.functional/' "$F" || true
+          cd st && bash scripts/download_models.sh && ls -la checkpoints gfpgan/weights || true
+      - name: Get the photo
+        run: |
+          mkdir -p in
+          URL=$(jq -r '.inputs.photo' "$GITHUB_EVENT_PATH")
+          if [ -n "$URL" ]; then echo "::add-mask::$URL"; curl -sSL --retry 5 -o in/face.jpg "$URL"; else cp st/examples/source_image/full_body_1.png in/face.jpg; fi
+          python -c "from PIL import Image; im=Image.open('in/face.jpg'); print('photo', im.size)"
+      - name: Voice
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          jq -r '.inputs.text' "$GITHUB_EVENT_PATH" > in/text.txt
+          python realme/tts.py "$(cat in/text.txt)" "${{ github.event.inputs.voice }}" in/voice.wav
+          ffprobe -v error -show_entries format=duration -of csv=p=0 in/voice.wav
+      - name: Animate the face
+        run: |
+          cd st
+          E=""; [ "${{ github.event.inputs.enhance }}" = "yes" ] && E="--enhancer gfpgan"
+          time python inference.py --driven_audio ../in/voice.wav --source_image ../in/face.jpg --result_dir ../out --still --preprocess full $E --cpu
+          cd .. && V=$(ls -t out/*.mp4 out/*/*.mp4 2>/dev/null | head -1) && echo "V=$V" >> $GITHUB_ENV && ffprobe -v error -show_entries stream=width,height,duration -of csv=p=0 "$V"
+      - name: Upload to Drive (Vlog Edits/Real Me)
+        env:
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+        run: |
+          pip install requests
+          python3 vlog/drive_put.py "$V" "${{ github.event.inputs.name }}.mp4" "Real Me"
