@@ -263,19 +263,45 @@ ANGLES = [(1.0, 0.5, 0.5), (1.22, 0.38, 0.32), (1.4, 0.6, 0.3), (1.12, 0.62, 0.4
 
 
 def speech_spans(name, s, e):
-    """Where people actually talk inside [s, e] of a clip: silencedetect on its sound, with a little air kept round
-    each phrase. Falls back to the whole range if the street is too loud to find pauses."""
-    err = subprocess.run(['ffmpeg', '-v', 'info', '-ss', f'{s:.3f}', '-t', f'{e - s:.3f}', '-i', str(clip(name)), '-vn',
-                          '-af', f"silencedetect=noise={EDL.get('silence_db', -33)}dB:d={EDL.get('min_pause', 0.38)}", '-f', 'null', '-'],
-                         capture_output=True, text=True).stderr
-    st = [float(x) for x in re.findall(r'silence_start: ([0-9.]+)', err)]; en = [float(x) for x in re.findall(r'silence_end: ([0-9.]+)', err)]
-    gaps = list(zip(st, en + [e - s] * (len(st) - len(en))))
-    spans, cur = [], 0.0
-    for a, b in gaps:
-        if a - cur > 0.25: spans.append((s + max(0, cur - 0.06), s + a + 0.1))
-        cur = b
-    if (e - s) - cur > 0.25: spans.append((s + max(0, cur - 0.06), e))
-    return spans or [(s, e)]
+    """Where people talk inside [s, e] of a clip. The silence threshold adapts to each clip's own background noise
+    (restaurants and streets never go quiet), pauses longer than min_pause are cut out, and any phrase run longer
+    than angle_every seconds is split at its quietest moment so the framing still changes every few seconds."""
+    import numpy as np
+    raw = subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{s:.3f}', '-t', f'{e - s:.3f}', '-i', str(clip(name)), '-vn', '-ac', '1', '-ar', '8000',
+                          '-f', 's16le', '-'], capture_output=True).stdout
+    a = np.frombuffer(raw, np.int16).astype(np.float32)
+    win = 400  # 50 ms
+    n = len(a) // win
+    if n < 10: return [(s, e)]
+    rms = np.sqrt((a[:n * win].reshape(n, win) ** 2).mean(1)) + 1e-3
+    floor, loud = np.percentile(rms, 12), np.percentile(rms, 70)
+    thr = floor * 10 ** (EDL.get('gap_db', 5) / 20) if loud > floor * 2.2 else 0  # no usable contrast: don't drop anything
+    quiet = rms < thr
+    minp = int(EDL.get('min_pause', 0.35) / 0.05)
+    spans, k, start = [], 0, None
+    while k < n:
+        if not quiet[k]:
+            if start is None: start = k
+            k += 1; continue
+        r = k
+        while r < n and quiet[r]: r += 1
+        if r - k >= minp:  # a real pause: close the phrase run (keep 80 ms of air each side)
+            if start is not None: spans.append((start, k))
+            start = None
+        elif start is None: start = k
+        k = r
+    if start is not None: spans.append((start, n))
+    out, every = [], int(EDL.get('angle_every', 3.2) / 0.05)
+    for a0, b0 in spans:
+        first = a0
+        while b0 - a0 > every * 1.4:  # long run: cut at the quietest 50 ms between 2.4 s and 4 s in
+            lo, hi = a0 + int(every * 0.75), min(b0 - 10, a0 + int(every * 1.25))
+            c = lo + int(np.argmin(rms[lo:hi])) if hi > lo else a0 + every
+            out.append((a0, c, a0 == first, False)); a0 = c
+        out.append((a0, b0, a0 == first, True))
+    # air only at real pauses; an angle-change split joins frame-exact so no sound repeats
+    res = [(s + max(0, x * 0.05 - (0.08 if pa else 0)), s + min(n, y) * 0.05 + (0.08 if pb else 0)) for x, y, pa, pb in out if (y - x) * 0.05 > 0.25]
+    return res or [(s, e)]
 
 
 def jumpcut(p, k0=0):
