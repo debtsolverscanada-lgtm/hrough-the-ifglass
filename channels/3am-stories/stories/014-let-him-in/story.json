@@ -1,0 +1,317 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.4,
+  "similarity": 0.8,
+  "style": 0.45,
+  "speed": 1.05
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "bed",
+  "bp": {
+   "time": "3:01",
+   "eyes": "wide",
+   "watcher": 1,
+   "watcherX": 1420
+  },
+  "lines": [
+   [
+    "\"OKAY. I'LL",
+    "#fff"
+   ],
+   [
+    "LET HIM IN.\"",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 960,
+  "y": 1230,
+  "step": 150,
+  "size": 140,
+  "band": 0.5,
+  "tint": "#200008"
+ },
+ "yt": {
+  "title": "My smart speaker said \"Okay, I'll let him in.\" I live alone. 😨 #scary #horror #shorts",
+  "description": "At 3:01 AM your smart speaker unlocks the front door. You never asked it to. So you check the voice history...\n\n🎧 headphones on. Unplug it.\n\n#scarystories #horror #3amstories #smartspeaker #shorts",
+  "tags": [
+   "scary stories",
+   "smart speaker horror",
+   "3am",
+   "horror short",
+   "creepy",
+   "8d audio",
+   "3am stories",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:01",
+    "eyes": "wide",
+    "shake": 0.3
+   },
+   "text": "3:01 AM. You wake up because your smart speaker is talking.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "\"okay. unlocking|the front door.\"",
+    "color": "#9fd2ff",
+    "size": 120
+   },
+   "text": "Okay. Unlocking the front door.",
+   "voice": [
+    "Alice",
+    "Matilda",
+    "Sarah"
+   ],
+   "pause": 0.2,
+   "sfx": [
+    [
+     "knock1",
+     1.6
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "wide",
+    "phone": true,
+    "snap": {
+     "at": 0.8,
+     "to": [
+      720,
+      960
+     ],
+     "z": 1.8
+    }
+   },
+   "text": "You didn't say anything. You live alone.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "heart",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:02",
+    "msgs": [
+     [
+      "Voice History",
+      "3:01 AM  |  Bedroom: \"unlock the front door\"",
+      0.5
+     ]
+    ],
+    "snap": {
+     "at": 1.4,
+     "to": [
+      960,
+      680
+     ],
+     "z": 1.7
+    }
+   },
+   "text": "You open the app. There's a recording. From your bedroom. One minute ago.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzzphone",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:01",
+    "label": "Bedroom",
+    "spike": 0.4
+   },
+   "text": "You press play.",
+   "pause": 0.4
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:01",
+    "label": "Bedroom",
+    "spike": 0.7,
+    "shake": 0.3
+   },
+   "text": "Unlock the front door.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "George"
+   ],
+   "fx": "whisper",
+   "pause": 0.5
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:01",
+    "label": "Bedroom",
+    "spike": 1,
+    "shake": 0.6
+   },
+   "text": "Thank you.",
+   "voice": [
+    "Clyde",
+    "Callum",
+    "George"
+   ],
+   "fx": "wrong",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "silence_hit",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "wide",
+    "sweat": true,
+    "snap": {
+     "at": 0.4,
+     "to": [
+      720,
+      960
+     ],
+     "z": 2.0
+    }
+   },
+   "text": "That was your voice. And the second voice... was right next to your bed.",
+   "pause": 0.2
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "none",
+    "you": false,
+    "shake": 0.4
+   },
+   "text": "Downstairs, the front door creaks open.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "creak",
+     0.2
+    ],
+    [
+     "steps",
+     1.4,
+     "orbit"
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true
+   },
+   "text": "Footsteps. Up the stairs. And they stop right outside your door.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "steps",
+     0
+    ],
+    [
+     "heart",
+     1.2
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:04",
+    "msgs": [
+     [
+      "Voice History",
+      "3:01 AM  |  Bedroom: \"unlock the front door\"",
+      0
+     ],
+     [
+      "Voice History",
+      "JUST NOW  |  Bedroom: \"they're awake\"",
+      0.8
+     ]
+    ],
+    "snap": {
+     "at": 1.2,
+     "to": [
+      960,
+      860
+     ],
+     "z": 1.9
+    },
+    "shake": 0.5
+   },
+   "text": "Your phone buzzes. A new recording. From your bedroom. Just now.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "buzzphone",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "They're awake.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "George"
+   ],
+   "fx": "whisper+close",
+   "pause": 0.1
+  },
+  {
+   "scene": "face",
+   "p": {},
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ],
+   "dur": 1.3
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "unplug it.",
+    "color": "#ff2a2a",
+    "size": 150
+   },
+   "text": "Unplug it.",
+   "pause": 1.0
+  }
+ ]
+}
