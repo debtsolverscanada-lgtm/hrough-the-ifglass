@@ -52,7 +52,7 @@ const D3 = `<defs>
 let K3ID = 0;
 function k3Head(o) {
   const look = o.look || 0, eyes = o.eyes || 'normal', ink = '#3a1a10';
-  const skin = o.skin === 'url(#skinOld)' ? 'url(#k3old)' : o.skin && (o.skin.startsWith('#') || o.skin.startsWith('url(#k3')) ? o.skin : 'url(#k3skin)';
+  const skin = o.skin === 'url(#skinOld)' ? 'url(#k3old)' : o.skin && (o.skin.startsWith('#') || o.skin.startsWith('url(#k3') || o.skin.startsWith('url(#me')) ? o.skin : 'url(#k3skin)';
   const open = o.blink || eyes === 'closed' ? 0 : eyes === 'wide' ? 1.25 : eyes === 'tired' ? 0.5 : 1;
   const face = 'M-122 -20 Q-128 -150 0 -152 Q128 -150 122 -20 Q124 70 86 118 Q44 160 0 160 Q-44 160 -86 118 Q-124 70 -122 -20Z';
   if (o.back) return `<ellipse cy="175" rx="120" ry="26" fill="url(#k3shadow)"/>
@@ -83,6 +83,8 @@ function k3Head(o) {
     ? `<path d="M-44 70 Q0 ${70 + 60 * o.happy} 44 70 Q0 82 -44 70Z" fill="url(#k3mouth)" stroke="${ink}" stroke-width="4"/><path d="M-36 73 Q0 80 36 73" stroke="#fff" stroke-width="8" fill="none"/><ellipse cy="${78 + 34 * o.happy}" rx="18" ry="8" fill="#e06a6a"/>`
     : o.smile
     ? `<path d="M-70 58 Q0 ${58 + 80 * o.smile} 70 58 Q0 ${74 + 20 * o.smile} -70 58Z" fill="url(#k3mouth)" stroke="${ink}" stroke-width="4"/>${[...Array(10)].map((_, k) => `<path d="M${-55 + k * 12} ${63 + 2 * Math.sin(k)} l6 13 l6 -13" fill="#fff8ec" stroke="#5a3a2a" stroke-width="1.5"/>`).join('')}`
+    : o.mouth === 'pout' ? `<path d="M-46 80 Q-22 66 0 74 Q22 66 46 80 Q0 88 -46 80Z" fill="#7a3e3a" stroke="${ink}" stroke-width="3"/><path d="M-44 81 Q0 112 44 81 Q0 90 -44 81Z" fill="#a8605a" stroke="${ink}" stroke-width="3"/><ellipse cx="-6" cy="94" rx="16" ry="4" fill="#fff" opacity=".35"/>`
+    : o.mouth === 'talk' ? `<path d="M-44 78 Q-20 66 0 72 Q20 66 44 78 Q24 ${84 + 16 * (o.open ?? 1)} 0 ${86 + 22 * (o.open ?? 1)} Q-24 ${84 + 16 * (o.open ?? 1)} -44 78Z" fill="#3a0e0e" stroke="${ink}" stroke-width="4"/><path d="M-30 76 Q0 72 30 76 L28 82 Q0 79 -28 82Z" fill="#fff8ec"/><path d="M-40 80 Q-20 68 0 74 Q20 68 40 80" stroke="#7a3e3a" stroke-width="8" fill="none"/><path d="M-36 ${84 + 18 * (o.open ?? 1)} Q0 ${100 + 28 * (o.open ?? 1)} 36 ${84 + 18 * (o.open ?? 1)}" stroke="#a8605a" stroke-width="10" fill="none" stroke-linecap="round"/>`
     : o.mouth === 'o' ? `<ellipse cx="0" cy="84" rx="20" ry="26" fill="url(#k3mouth)" stroke="${ink}" stroke-width="4"/><ellipse cx="0" cy="98" rx="10" ry="6" fill="#d05050" opacity=".7"/>`
     : eyes === 'wide' ? `<path d="M-30 80 Q0 68 30 80 Q0 98 -30 80Z" fill="url(#k3mouth)" stroke="${ink}" stroke-width="4"/>`
     : `<path d="M-30 80 Q0 ${eyes === 'tired' ? 76 : 88} 30 80" stroke="${ink}" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-16 96 q16 6 32 0" stroke="#c97a62" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>`;
@@ -251,7 +253,7 @@ function person(x, y, s, o = {}) {
   if (STYLE === '3d') {
     const tint = o.body && !o.body.startsWith('url') ? o.body : null, rx = o.reach ? 230 : 150, ry = o.reach ? 300 : 430;
     const fill = tint || 'url(#k3hood)', sl = tint || '#2e3a5e';
-    const hand = (hx, hy) => `<g transform="translate(${hx},${hy})"><ellipse rx="32" ry="36" fill="${o.skin && o.skin.startsWith('url(#k3') ? o.skin : 'url(#k3skin)'}"/><path d="M-20 -6 q-4 24 6 30 M-4 -4 q-2 26 6 32 M12 -4 q0 26 6 28" stroke="#a8624a" stroke-width="4" fill="none" opacity=".7"/><ellipse cx="-8" cy="-14" rx="10" ry="6" fill="#fff" opacity=".35"/></g>`;
+    const hand = (hx, hy) => `<g transform="translate(${hx},${hy})"><ellipse rx="32" ry="36" fill="${o.skin && (o.skin.startsWith('url(#k3') || o.skin.startsWith('url(#me')) ? o.skin : 'url(#k3skin)'}"/><path d="M-20 -6 q-4 24 6 30 M-4 -4 q-2 26 6 32 M12 -4 q0 26 6 28" stroke="#a8624a" stroke-width="4" fill="none" opacity=".7"/><ellipse cx="-8" cy="-14" rx="10" ry="6" fill="#fff" opacity=".35"/></g>`;
     return `<g transform="translate(${x},${y + bob}) scale(${s})">
       <ellipse cy="530" rx="200" ry="40" fill="url(#k3shadow)"/>
       <path d="M-110 70 Q0 -10 110 70 L70 120 Q0 90 -70 120Z" fill="${sl}"/>

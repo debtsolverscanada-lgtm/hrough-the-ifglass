@@ -233,3 +233,55 @@ S.yaThumbSplit = (t, d, p) => {
     ${p.sub ? `<g transform="translate(960,1420) rotate(-2)"><rect x="-430" y="-78" width="860" height="120" rx="16" fill="#ff1a3c" stroke="#000" stroke-width="8"/>
       <text y="16" text-anchor="middle" font-family="Anton" font-size="84" fill="#fff" letter-spacing="4">${esc(p.sub)}</text></g>` : ''}`;
 };
+
+// ---------- the channel owner (drawn from his photos) ----------
+// Brown skin, big curly black hair with curls over the forehead, gold hexagon glasses with a dark top rim,
+// moustache + goatee, silver chain. o.outfit: 'hoodie' (grey, default) | 'black' | 'suit' (black suit, red tie). o.hood: hood up.
+function yaMe(x, y, s, o = {}) {
+  // hair: one big soft mass with a lumpy wavy edge, wave strands on top, and loose S-shaped locks falling over the forehead
+  const bumps = (cx, cy, rx, ry, n, a0, a1, amp) => { const P = (a, r) => `${(cx + Math.cos(a) * rx * r).toFixed(1)} ${(cy + Math.sin(a) * ry * r).toFixed(1)}`;
+    let d = `M${P(a0, 1)}`; for (let k = 0; k < n; k++) { const a = a0 + (a1 - a0) * k / n, b = a0 + (a1 - a0) * (k + 1) / n;
+      d += ` Q${P((a + b) / 2, 1 + amp * (k % 3 === 1 ? 1.4 : 1))} ${P(b, 1)}`; } return d; };
+  const mass = `<path d="${bumps(0, -76, 146, 150, 13, Math.PI * 0.93, Math.PI * 2.07, 0.13)} Q128 -60 120 -30 Q100 -110 0 -118 Q-100 -110 -120 -30 Q-128 -60 -138 -10Z" fill="url(#meHair)" stroke="#05030a" stroke-width="3" stroke-linejoin="round"/>`;
+  const waves = [[-96, -170, 1], [-40, -200, -1], [20, -204, 1], [76, -180, -1], [-70, -136, -1], [50, -146, 1]].map(([wx, wy, dd]) => `<path d="M${wx} ${wy} q${18 * dd} -14 30 4 q12 18 30 6" stroke="#3c3e58" stroke-width="6" fill="none" stroke-linecap="round" opacity=".6"/>`).join('');
+  const lock = (lx, ly, len, dir) => `<path d="M${lx} ${ly} q${-14 * dir} ${len * 0.35} ${4 * dir} ${len * 0.6} q${16 * dir} ${len * 0.25} ${-6 * dir} ${len * 0.5}" stroke="#0b0b10" stroke-width="16" fill="none" stroke-linecap="round"/>
+      <path d="M${lx} ${ly} q${-14 * dir} ${len * 0.35} ${4 * dir} ${len * 0.6}" stroke="#3c3e58" stroke-width="4" fill="none" stroke-linecap="round" opacity=".7"/>`;
+  const locks = lock(-60, -128, 56, 1) + lock(-18, -132, 66, -1) + lock(28, -126, 54, 1) + lock(74, -118, 44, -1) + lock(-104, -100, 40, 1) + lock(110, -96, 36, -1);
+  const hair = o.hood ? `<path d="M-122 -40 Q-118 -150 0 -158 Q118 -150 122 -40 Q100 -112 0 -116 Q-100 -112 -122 -40Z" fill="url(#meHair)"/>${lock(-40, -126, 50, 1) + lock(10, -130, 60, -1) + lock(56, -120, 44, 1)}`
+    : mass + waves + locks;
+  // glasses: gold hexagon frames, flat top with a dark rim, wider at the brow and tapering to the bottom
+  const hex = (cx) => `M${cx - 40} -50 L${cx + 40} -50 L${cx + 54} -20 L${cx + 46} 22 L${cx + 22} 38 L${cx - 22} 38 L${cx - 46} 22 L${cx - 54} -20Z`;
+  const glasses = `<g fill="none" stroke-linejoin="round"><path d="${hex(-58)}" fill="#cfe6ff" fill-opacity=".1" stroke="#d6a94a" stroke-width="6"/><path d="${hex(58)}" fill="#cfe6ff" fill-opacity=".1" stroke="#d6a94a" stroke-width="6"/>
+      <path d="M-112 -20 L-98 -50 L-18 -50 L-4 -20 M112 -20 L98 -50 L18 -50 L4 -20" stroke="#24140e" stroke-width="8"/>
+      <path d="M-4 -26 Q0 -34 4 -26 M-18 -44 H18" stroke="#e8c060" stroke-width="5"/><path d="M-112 -22 L-130 -26 M112 -22 L130 -26" stroke="#d6a94a" stroke-width="6"/>
+      <path d="M-92 -32 L-74 -42 M24 -32 L42 -42" stroke="#fff" stroke-width="5" opacity=".5" stroke-linecap="round"/></g>`;
+  // moustache that runs down past the lip corners into a goatee; light stubble on the jaw
+  const beard = `<path d="M-114 30 Q-110 112 -62 150 Q0 182 62 150 Q110 112 114 30 Q98 116 0 128 Q-98 116 -114 30Z" fill="#1a0f0c" opacity=".22"/>
+      <path d="M-50 76 Q-28 58 0 66 Q28 58 50 76 L46 104 Q48 140 26 166 Q0 180 -26 166 Q-48 140 -46 104Z" fill="#140c0a"/>
+      <path d="M-34 100 Q0 112 34 100 L30 92 Q0 98 -30 92Z" fill="url(#meSkin)"/>
+      ${[...Array(7)].map((_, k) => `<path d="M${-30 + k * 10} ${126 + (k % 3) * 8} l${k % 2 ? 3 : -3} 14" stroke="#3a2a24" stroke-width="3" opacity=".6"/>`).join('')}`;
+  const outfit = o.outfit || 'hoodie';
+  const body = outfit === 'suit' ? '#14151c' : outfit === 'black' ? '#1b1b22' : '#a4a6ae';
+  // hood up: a soft grey hood that frames the face (drawn over the head, with a face-shaped hole)
+  const hood = o.hood ? `<g transform="translate(${x},${y - 110 * s}) scale(${s})"><path fill-rule="evenodd" d="M-178 60 Q-196 -220 0 -236 Q196 -220 178 60 Q170 150 110 176 L-110 176 Q-170 150 -178 60Z M-132 10 Q-140 -172 0 -180 Q140 -172 132 10 Q128 120 0 168 Q-128 120 -132 10Z" fill="#b2b4bc"/>
+      <path d="M-132 10 Q-140 -172 0 -180 Q140 -172 132 10" stroke="#8a8c94" stroke-width="10" fill="none"/><path d="M-150 -120 Q-110 -200 -20 -212" stroke="#d4d6dc" stroke-width="10" fill="none" opacity=".7" stroke-linecap="round"/></g>` : '';
+  const chest = `<g transform="translate(${x},${y + (o.breathe ? Math.sin(o.breathe) * 3 : 0)}) scale(${s})">
+      ${outfit === 'suit' ? `<path d="M-48 38 L0 150 L48 38Z" fill="#f4f2ee"/><path d="M-14 50 L14 50 L8 70 L22 230 L0 260 L-22 230 L-8 70Z" fill="#8a1428"/><path d="M-14 50 L14 50 L8 70 L-8 70Z" fill="#6a0e1e"/>
+        <path d="M-48 38 L-70 160 L-10 250 M48 38 L70 160 L10 250" stroke="#05050a" stroke-width="10" fill="none"/>`
+      : `<path d="M-54 66 Q0 146 54 66" stroke="#c8ccd4" stroke-width="7" fill="none"/><path d="M-54 66 Q0 146 54 66" stroke="#fff" stroke-width="2" fill="none" stroke-dasharray="5 7"/>`}
+    </g>`;
+  return `<defs><radialGradient id="meSkin" cx="40%" cy="32%" r="75%"><stop offset="0" stop-color="#c88a5e"/><stop offset=".55" stop-color="#a46640"/><stop offset=".85" stop-color="#84502e"/><stop offset="1" stop-color="#5a341e"/></radialGradient>
+      <radialGradient id="meEar" cx="40%" cy="40%" r="70%"><stop offset="0" stop-color="#a46640"/><stop offset="1" stop-color="#5a341e"/></radialGradient>
+      <linearGradient id="meHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#26283a"/><stop offset=".5" stop-color="#121218"/><stop offset="1" stop-color="#07070a"/></linearGradient></defs>
+    ${person(x, y, s, { ...o, body, skin: 'url(#meSkin)', ear: 'url(#meEar)', neck: '#7a4428', hair: hair + beard + glasses, mouth: o.mouth || 'pout' })}${hood}${chest}`;
+}
+// him alone, talking to camera. p: outfit, hood, mouth ('talk' animates with t unless p.still), eyes, look, bg
+S.yaMe = (t, d, p) => {
+  const talk = p.mouth === 'talk' ? { mouth: 'talk', open: 0.25 + 0.75 * Math.abs(Math.sin(t * 9) * Math.sin(t * 3.7 + 1)) } : { mouth: p.mouth };
+  return `${p.bg === 'room' ? room('#141024') : yaBg('#3a1670', '#0b0618')}${yaMe(960, 900, 1.05, { outfit: p.outfit, hood: p.hood, eyes: p.eyes || 'normal', look: p.look ?? 0, breathe: t * 2, happy: p.happy, ...talk })}`;
+};
+// character sheet: four looks side by side
+S.yaMeSheet = (t, d, p) => `${yaBg('#3a1670', '#0b0618')}
+  ${yaMe(300, 980, 0.72, { outfit: 'hoodie', mouth: 'pout', eyes: 'tired' })}${yaMe(740, 980, 0.72, { outfit: 'hoodie', hood: true, mouth: 'talk', open: 0.8, look: 0.4 })}
+  ${yaMe(1180, 980, 0.72, { outfit: 'black', happy: 0.6 })}${yaMe(1620, 980, 0.72, { outfit: 'suit', mouth: 'pout', look: -0.3 })}
+  ${['HOODIE', 'HOOD UP · TALKING', 'BLACK TEE · SMILE', 'SUIT'].map((l, i) => `<text x="${300 + i * 440}" y="1440" text-anchor="middle" font-family="Anton" font-size="40" fill="${YA.gold}">${l}</text>`).join('')}`;
