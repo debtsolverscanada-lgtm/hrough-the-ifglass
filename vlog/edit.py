@@ -512,7 +512,7 @@ def main():
     if picks:  # each pop-up word: a quick punch-zoom on the picture and the word slams in
         pop_ass(picks, W / 'pops.ass')
         on = '+'.join(f'between(t,{a:.2f},{a + 0.45:.2f})' for a, _ in picks)
-        vf_final = [f"scale=w='2*trunc(960*(1+0.14*({on})))':h='2*trunc(540*(1+0.14*({on})))':eval=frame,crop=1920:1080"] + vf_final + [f"subtitles={W / 'pops.ass'}:fontsdir={FONTS}"]
+        vf_final = [f"scale=w='2*trunc(960*(1+0.14*({on})))':h='2*trunc(540*(1+0.14*({on})))':eval=frame,crop=1920:1080"] + vf_final + ([f"subtitles={W / 'pops.ass'}:fontsdir={FONTS}"] if EDL.get('pop_text', True) else [])
     out = D / ('preview.mp4' if PREVIEW else 'vlog.mp4')
     vb = int(min(12e6, 940e6 * 8 / total - 200e3))  # keep the file under ~950 MB so the YouTube upload step accepts it
     run(['ffmpeg', '-v', 'error', '-y', '-i', str(W / 'cut.mov'), '-i', str(W / 'mix.wav'), '-map', '0:v', '-map', '1:a',
