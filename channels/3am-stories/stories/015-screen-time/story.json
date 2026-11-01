@@ -1,0 +1,255 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.38,
+  "similarity": 0.8,
+  "style": 0.5,
+  "speed": 1.12
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "bed",
+  "bp": {
+   "eyes": "wide",
+   "watcher": 1,
+   "watcherX": 1100
+  },
+  "lines": [
+   [
+    "214 PHOTOS",
+    "#fff"
+   ],
+   [
+    "OF ME ASLEEP",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 960,
+  "y": 1230,
+  "step": 150,
+  "size": 140,
+  "band": 0.5,
+  "tint": "#200008"
+ },
+ "yt": {
+  "title": "My phone says I used it for 4 hours last night. I was asleep. 😨 #scary #horror #shorts",
+  "description": "Your Screen Time says you were on your phone from 2 AM to 6 AM. Then you open your photos...\n\n🎧 headphones on. Check your camera roll.\n\n#scarystories #horror #3amstories #creepy #shorts",
+  "tags": [
+   "scary stories",
+   "screen time",
+   "creepy phone",
+   "horror short",
+   "3am",
+   "3am stories",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "phone",
+   "p": {
+    "time": "7:02",
+    "msgs": [
+     [
+      "Screen Time",
+      "Last night: 4 hr 12 min  (2:03 AM - 6:15 AM)",
+      0
+     ]
+    ],
+    "snap": {
+     "at": 0.5,
+     "to": [
+      960,
+      640
+     ],
+     "z": 1.9
+    },
+    "shake": 0.4
+   },
+   "text": "Your phone says you used it for four hours last night.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "sting",
+     0
+    ],
+    [
+     "buzzphone",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "wide",
+    "phone": true,
+    "snap": {
+     "at": 0.2,
+     "to": [
+      720,
+      960
+     ],
+     "z": 1.9
+    }
+   },
+   "text": "You were asleep the whole time.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "heart",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "7:03",
+    "msgs": [
+     [
+      "Photos",
+      "214 new items",
+      0.3
+     ]
+    ],
+    "snap": {
+     "at": 0.6,
+     "to": [
+      960,
+      640
+     ],
+     "z": 1.8
+    }
+   },
+   "text": "So you open your photos. Two hundred and fourteen new pictures.",
+   "pause": 0.1
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "closed",
+    "watcher": 0.5,
+    "watcherX": 1500,
+    "shake": 0.2
+   },
+   "text": "Every single one is of you. Sleeping.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "silence_hit",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "closed",
+    "watcher": 0.8,
+    "watcherX": 1250
+   },
+   "text": "The first one is from the doorway. Then the next one is a little closer.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "steps",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "closed",
+    "watcher": 1,
+    "watcherX": 1000,
+    "shake": 0.4
+   },
+   "text": "And closer.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "steps",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "closed",
+    "watcher": 1,
+    "watcherX": 860,
+    "snap": {
+     "at": 0.3,
+     "to": [
+      860,
+      780
+     ],
+     "z": 2.2
+    },
+    "shake": 0.6
+   },
+   "text": "In the last few, it's right next to your face.",
+   "pause": 0.15,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "7:04",
+    "msgs": [
+     [
+      "Photos",
+      "6:14 AM  |  front camera",
+      0.2
+     ]
+    ],
+    "snap": {
+     "at": 0.5,
+     "to": [
+      960,
+      640
+     ],
+     "z": 1.9
+    },
+    "shake": 0.6
+   },
+   "text": "The last photo was taken at 6:14. With the front camera.",
+   "pause": 0.1
+  },
+  {
+   "scene": "reflection",
+   "p": {
+    "face": "grow"
+   },
+   "text": "It's a selfie. Of you asleep... and the thing smiling right next to you.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "jump",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "check your photos.",
+    "color": "#ff2a2a",
+    "size": 140
+   },
+   "text": "Check your photos.",
+   "pause": 0.8
+  }
+ ]
+}

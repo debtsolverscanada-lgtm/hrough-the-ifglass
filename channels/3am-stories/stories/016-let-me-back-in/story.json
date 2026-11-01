@@ -1,0 +1,238 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.38,
+  "similarity": 0.8,
+  "style": 0.5,
+  "speed": 1.12
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "bedroomdoor",
+  "bp": {
+   "feet": true
+  },
+  "lines": [
+   [
+    "\"LET ME",
+    "#fff"
+   ],
+   [
+    "BACK IN.\"",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 960,
+  "y": 1230,
+  "step": 150,
+  "size": 140,
+  "band": 0.5,
+  "tint": "#200008"
+ },
+ "yt": {
+  "title": "My doorbell camera showed ME at the front door. I was in bed. 😨 #scary #horror #shorts",
+  "description": "3:12 AM. Your doorbell camera says someone is at your front door. You open the live view. It's you.\n\n🎧 headphones on. Which one are you?\n\n#scarystories #horror #3amstories #doorbellcamera #shorts",
+  "tags": [
+   "scary stories",
+   "doorbell camera horror",
+   "ring camera",
+   "horror short",
+   "3am",
+   "3am stories",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:12",
+    "msgs": [
+     [
+      "Doorbell",
+      "Someone is at your Front Door",
+      0
+     ]
+    ],
+    "snap": {
+     "at": 0.5,
+     "to": [
+      960,
+      640
+     ],
+     "z": 1.9
+    },
+    "shake": 0.4
+   },
+   "text": "3:12 AM. Your doorbell camera says someone's at your front door.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "buzzphone",
+     0
+    ],
+    [
+     "sting",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "it's you.",
+    "color": "#ff2a2a",
+    "size": 170
+   },
+   "text": "You open the live view. It's you.",
+   "pause": 0.15,
+   "sfx": [
+    [
+     "silence_hit",
+     0.9
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "eyes": "wide",
+    "phone": true,
+    "sweat": true,
+    "snap": {
+     "at": 0.2,
+     "to": [
+      720,
+      960
+     ],
+     "z": 1.9
+    }
+   },
+   "text": "Same hoodie. Same face. Standing on your porch, staring up at the camera. But you're in bed.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "heart",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "it waves.",
+    "color": "#e8e8e8",
+    "size": 150
+   },
+   "text": "Then the you on the porch smiles. And waves.",
+   "pause": 0.15
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:13",
+    "msgs": [
+     [
+      "Doorbell",
+      "Someone is at your Front Door",
+      0
+     ],
+     [
+      "Indoor Cam",
+      "Motion detected: Hallway",
+      0.6
+     ]
+    ],
+    "snap": {
+     "at": 0.9,
+     "to": [
+      960,
+      860
+     ],
+     "z": 1.9
+    },
+    "shake": 0.5
+   },
+   "text": "Your phone buzzes again. Motion detected. Hallway.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "buzzphone",
+     0.5
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true
+   },
+   "text": "Footsteps come up the stairs. Your footsteps. You'd know them anywhere.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "steps",
+     0
+    ],
+    [
+     "heart",
+     1.0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true,
+    "knock": true
+   },
+   "text": "Then your own voice whispers through the door.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "knock",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true,
+    "handle": true,
+    "shake": 0.5
+   },
+   "text": "Let me back in. That's my bed.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "George"
+   ],
+   "fx": "whisper+close",
+   "pause": 0.3
+  },
+  {
+   "scene": "face",
+   "dur": 1.2,
+   "sfx": [
+    [
+     "jump",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "which one are you?",
+    "color": "#ff2a2a",
+    "size": 130
+   },
+   "text": "So... which one are you?",
+   "pause": 0.8
+  }
+ ]
+}
