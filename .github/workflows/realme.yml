@@ -47,7 +47,7 @@ jobs:
       - name: Get the photo
         run: |
           mkdir -p in
-          URL=$(jq -r '.inputs.photo' "$GITHUB_EVENT_PATH")
+          URL=$(jq -r '.inputs.photo // ""' "$GITHUB_EVENT_PATH")
           if [ -n "$URL" ]; then echo "::add-mask::$URL"; curl -sSL --retry 5 -o in/face.jpg "$URL"; else cp st/examples/source_image/full_body_1.png in/face.jpg; fi
           python -c "from PIL import Image; im=Image.open('in/face.jpg'); print('photo', im.size)"
       - name: Voice
