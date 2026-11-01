@@ -210,9 +210,10 @@ def expand(edl):
                 if beat and sec.get('beats_each'): sp = (e - s) / (beat * sec['beats_each'])  # every cut the same length
                 elif beat: sp = (e - s) / (beat * max(1, round((e - s) / sp / beat)))  # each cut lasts whole beats: 2 beats early, 1 beat at the end
                 sfx.append(('whoosh', t)); add({'clip': c, 's': s, 'e': e, 'speed': round(sp, 3), 'zoom': 1.0 + 0.12 * (k % 2), 'flash': True, '_duck': 0.55})
+            if INTRO: cues[0]['dur'] = t + 1.2  # the intro song rings out under the first scene (a teaser right after can extend it)
         elif kind == 'teaser':  # beat-cut highlights on a song drop, letterboxed, ends on a freeze
             per = sec.get('beats_per_cut', 2); t0 = t
-            if INTRO:  # the intro song keeps playing under the teaser; cut on its beats from where it has got to
+            if INTRO and not sec.get('own_song'):  # the intro song keeps playing under the teaser; cut on its beats from where it has got to
                 song = INTRO['song']; beats = [b for b in BEATS[song]['beats'] if b >= INTRO.get('from', 0.0) + t0]
                 cues[0]['from'] = beats[0] - t0  # nudge the song start so a beat lands exactly on the first teaser cut
             else:

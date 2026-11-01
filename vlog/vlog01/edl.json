@@ -48,11 +48,230 @@
    "beats_each": 2
   },
   {
+   "type": "scenes",
+   "music": {
+    "song": "someday.mp3",
+    "from": 0.0,
+    "gain": 0.4
+   },
+   "clips": [
+    {
+     "clip": "C0018.MP4",
+     "s": 0.0,
+     "e": 23.5,
+     "photos": [
+      {
+       "file": "07-leons-everything-bagel.jpg",
+       "at": 3.5,
+       "dur": 5.0
+      },
+      {
+       "file": "01-leons-awning.jpg",
+       "at": 9.8,
+       "dur": 2.6,
+       "rot": 3
+      },
+      {
+       "file": "02-leons-storefront.jpg",
+       "at": 12.4,
+       "dur": 3.0
+      },
+      {
+       "file": "08-eating-bagels-1.jpg",
+       "at": 15.6,
+       "dur": 2.4,
+       "rot": 3
+      },
+      {
+       "file": "09-eating-bagels-2.jpg",
+       "at": 18.2,
+       "dur": 2.6
+      }
+     ],
+     "loc": "leons",
+     "loc_at": 2.0,
+     "titles": [
+      {
+       "text": "LEON'S BAGELS",
+       "at": 0.3
+      }
+     ]
+    },
+    {
+     "clip": "C0019.MP4",
+     "s": 0.0,
+     "e": 39.2,
+     "titles": [
+      {
+       "text": "YOGURT TASTE TEST"
+      }
+     ]
+    },
+    {
+     "clip": "C0020.MP4",
+     "s": 7.4,
+     "e": 51.3,
+     "titles": [
+      {
+       "text": "MISO BLONDIE LATTE"
+      }
+     ]
+    },
+    {
+     "clip": "C0045.MP4",
+     "s": 0.0,
+     "e": 192.5,
+     "titles": [
+      {
+       "text": "CHIRASHI AT THE BAR",
+       "at": 60.0
+      }
+     ]
+    },
+    {
+     "clip": "C0047.MP4",
+     "s": 0.0,
+     "e": 261.5,
+     "titles": [
+      {
+       "text": "COOKIE TASTE TEST"
+      }
+     ]
+    },
+    {
+     "clip": "C0051.MP4",
+     "s": 0.0,
+     "e": 262.0,
+     "loc": "bagel-pub",
+     "titles": [
+      {
+       "text": "BAGEL PUB TASTE TEST",
+       "at": 0.3
+      }
+     ]
+    },
+    {
+     "clip": "C0051.MP4",
+     "s": 473.0,
+     "e": 581.0
+    },
+    {
+     "clip": "C0052.MP4",
+     "s": 0.0,
+     "e": 80.5,
+     "titles": [
+      {
+       "text": "ROUND 2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "type": "scenes",
+   "music": {
+    "song": "cool-kids.mp3",
+    "from": 8.6,
+    "gain": 0.35
+   },
+   "clips": [
+    {
+     "clip": "C0014.MP4",
+     "s": 0.0,
+     "e": 27.6,
+     "titles": [
+      {
+       "text": "hi kids, nyc",
+       "style": "big",
+       "at": 0.2,
+       "dur": 2.6
+      }
+     ],
+     "loc": "toronto",
+     "loc_at": 3.2
+    },
+    {
+     "clip": "C0015.MP4",
+     "s": 0.0,
+     "e": 30.8,
+     "photos": [
+      {
+       "file": "12-airport-selfie.jpg",
+       "at": 4.5,
+       "dur": 3.5
+      }
+     ],
+     "loc": "ytz"
+    },
+    {
+     "asset": "map/map.mp4",
+     "s": 0.0,
+     "e": 5.6,
+     "vol": 0.5
+    },
+    {
+     "clip": "C0016.MP4",
+     "s": 0.0,
+     "e": 27.8,
+     "titles": [
+      {
+       "text": "WELCOME TO NEW YORK",
+       "style": "big",
+       "at": 0.1,
+       "dur": 2.2
+      },
+      {
+       "text": "(there was a homeless man right next to me)",
+       "style": "note",
+       "at": 15.0,
+       "dur": 3.5
+      }
+     ]
+    },
+    {
+     "clip": "C0017.MP4",
+     "s": 0.0,
+     "e": 17.5,
+     "letterbox": true,
+     "loc": "times-sq"
+    },
+    {
+     "clip": "C0021.MP4",
+     "s": 0.0,
+     "e": 21.0,
+     "loc": "central-park"
+    },
+    {
+     "clip": "C0022.MP4",
+     "s": 0.5,
+     "e": 12.0
+    },
+    {
+     "clip": "C0023.MP4",
+     "s": 7.0,
+     "e": 24.5
+    },
+    {
+     "clip": "C0048.MP4",
+     "s": 0.0,
+     "e": 26.0,
+     "titles": [
+      {
+       "text": "RAIN + A BROKEN UMBRELLA",
+       "at": 2.0
+      }
+     ]
+    }
+   ]
+  },
+  {
    "type": "teaser",
    "song": "campus.mp3",
-   "song_from": 0.0,
-   "beats_per_cut": 4,
+   "song_from": 34.0,
+   "own_song": true,
+   "beats_per_cut": 2,
    "freeze": 0.8,
+   "gain": 0.9,
    "clips": [
     [
      "C0016.MP4",
@@ -117,416 +336,104 @@
     [
      "C0030.MP4",
      102.6
+    ],
+    [
+     "C0024.MP4",
+     8
+    ],
+    [
+     "C0024.MP4",
+     40
+    ],
+    [
+     "C0025.MP4",
+     6
+    ],
+    [
+     "C0026.MP4",
+     6
+    ],
+    [
+     "C0027.MP4",
+     20
+    ],
+    [
+     "C0027.MP4",
+     90
+    ],
+    [
+     "C0028.MP4",
+     30
+    ],
+    [
+     "C0028.MP4",
+     150
+    ],
+    [
+     "C0029.MP4",
+     15
+    ],
+    [
+     "C0029.MP4",
+     90
+    ],
+    [
+     "C0030.MP4",
+     75
+    ],
+    [
+     "C0031.MP4",
+     8
+    ],
+    [
+     "C0032.MP4",
+     60
+    ],
+    [
+     "C0033.MP4",
+     30
+    ],
+    [
+     "C0033.MP4",
+     160
+    ],
+    [
+     "C0034.MP4",
+     10
+    ],
+    [
+     "C0036.MP4",
+     8
+    ],
+    [
+     "C0037.MP4",
+     30
+    ],
+    [
+     "C0037.MP4",
+     100
+    ],
+    [
+     "C0041.MP4",
+     30
+    ],
+    [
+     "C0041.MP4",
+     100
+    ],
+    [
+     "C0042.MP4",
+     6
+    ],
+    [
+     "C0043.MP4",
+     5
+    ],
+    [
+     "C0046.MP4",
+     3
     ]
    ]
-  },
-  {
-   "type": "scenes",
-   "music": {
-    "song": "cool-kids.mp3",
-    "from": 8.6,
-    "gain": 0.32
-   },
-   "clips": [
-    {
-     "clip": "C0014.MP4",
-     "s": 0.0,
-     "e": 27.6,
-     "titles": [
-      {
-       "text": "hi kids, nyc",
-       "style": "big",
-       "at": 0.2,
-       "dur": 2.6
-      }
-     ],
-     "loc": "toronto",
-     "loc_at": 3.2
-    },
-    {
-     "clip": "C0015.MP4",
-     "s": 0.0,
-     "e": 30.8,
-     "photos": [
-      {
-       "file": "12-airport-selfie.jpg",
-       "at": 4.5,
-       "dur": 3.5
-      }
-     ],
-     "loc": "ytz"
-    },
-    {
-     "asset": "map/map.mp4",
-     "s": 0.0,
-     "e": 5.6,
-     "vol": 0.5
-    },
-    {
-     "clip": "C0016.MP4",
-     "s": 0.0,
-     "e": 27.8,
-     "titles": [
-      {
-       "text": "WELCOME TO NEW YORK",
-       "style": "big",
-       "at": 0.1,
-       "dur": 2.2
-      },
-      {
-       "text": "(there was a homeless man right next to me)",
-       "style": "note",
-       "at": 15.0,
-       "dur": 3.5
-      }
-     ]
-    },
-    {
-     "clip": "C0017.MP4",
-     "s": 0.0,
-     "e": 17.5,
-     "letterbox": true,
-     "loc": "times-sq"
-    }
-   ]
-  },
-  {
-   "type": "scenes",
-   "music": {
-    "song": "someday.mp3",
-    "from": 0.0,
-    "gain": 0.45
-   },
-   "clips": [
-    {
-     "clip": "C0018.MP4",
-     "s": 0.0,
-     "e": 22.5,
-     "photos": [
-      {
-       "file": "07-leons-everything-bagel.jpg",
-       "at": 3.5,
-       "dur": 5.0
-      },
-      {
-       "file": "01-leons-awning.jpg",
-       "at": 9.8,
-       "dur": 2.6,
-       "rot": 3
-      },
-      {
-       "file": "02-leons-storefront.jpg",
-       "at": 12.4,
-       "dur": 3.0
-      },
-      {
-       "file": "08-eating-bagels-1.jpg",
-       "at": 15.6,
-       "dur": 2.4,
-       "rot": 3
-      },
-      {
-       "file": "09-eating-bagels-2.jpg",
-       "at": 18.2,
-       "dur": 2.6
-      }
-     ],
-     "titles": [
-      {
-       "text": "DAY 1",
-       "style": "big",
-       "at": 0.1,
-       "dur": 1.8
-      }
-     ],
-     "loc": "leons",
-     "loc_at": 2.0
-    },
-    {
-     "clip": "C0019.MP4",
-     "s": 0.0,
-     "e": 39.2,
-     "titles": [
-      {
-       "text": "YOGURT TASTE TEST"
-      }
-     ]
-    },
-    {
-     "clip": "C0020.MP4",
-     "s": 7.4,
-     "e": 46.0,
-     "titles": [
-      {
-       "text": "MISO BLONDIE LATTE"
-      }
-     ]
-    },
-    {
-     "clip": "C0021.MP4",
-     "s": 0.0,
-     "e": 21.0,
-     "loc": "central-park"
-    },
-    {
-     "clip": "C0022.MP4",
-     "s": 0.5,
-     "e": 12.0
-    },
-    {
-     "clip": "C0023.MP4",
-     "s": 7.0,
-     "e": 24.5
-    },
-    {
-     "clip": "C0025.MP4",
-     "s": 0.0,
-     "e": 29.0,
-     "letterbox": true,
-     "titles": [
-      {
-       "text": "SPOOKY SEASON"
-      },
-      {
-       "text": "our audio went missing for this part... so enjoy the vibes",
-       "style": "note",
-       "at": 0.6,
-       "dur": 3.4
-      }
-     ]
-    },
-    {
-     "clip": "C0026.MP4",
-     "s": 3.0,
-     "e": 19.0,
-     "letterbox": true
-    },
-    {
-     "clip": "C0024.MP4",
-     "s": 0.0,
-     "e": 77.0
-    }
-   ]
-  },
-  {
-   "type": "scenes",
-   "music": {
-    "song": "campus.mp3",
-    "from": 34.0,
-    "gain": 0.75
-   },
-   "clips": [
-    {
-     "clip": "C0027.MP4",
-     "s": 0.0,
-     "e": 176.0,
-     "loc": "pho-house"
-    },
-    {
-     "clip": "C0028.MP4",
-     "s": 0.0,
-     "e": 224.0
-    },
-    {
-     "clip": "C0029.MP4",
-     "s": 0.0,
-     "e": 60.0,
-     "titles": [
-      {
-       "text": "NIGHT FOOD RUN"
-      }
-     ]
-    },
-    {
-     "clip": "C0029.MP4",
-     "s": 70.0,
-     "e": 135.0
-    },
-    {
-     "clip": "C0030.MP4",
-     "s": 66.0,
-     "e": 108.0,
-     "titles": [
-      {
-       "text": "NEW YORK PIZZA"
-      }
-     ]
-    },
-    {
-     "clip": "C0031.MP4",
-     "s": 0.0,
-     "e": 36.0,
-     "letterbox": true,
-     "loc": "broadway"
-    }
-   ]
-  },
-  {
-   "type": "scenes",
-   "music": {
-    "song": "cool-kids.mp3",
-    "from": 60.0,
-    "gain": 0.75
-   },
-   "clips": [
-    {
-     "clip": "C0032.MP4",
-     "s": 40.0,
-     "e": 100.0,
-     "titles": [
-      {
-       "text": "DAY 2",
-       "style": "big",
-       "at": 0.1,
-       "dur": 1.8
-      }
-     ]
-    },
-    {
-     "clip": "C0033.MP4",
-     "s": 0.0,
-     "e": 254.0,
-     "loc": "chinatown"
-    },
-    {
-     "clip": "C0034.MP4",
-     "s": 0.0,
-     "e": 72.0,
-     "titles": [
-      {
-       "text": "SALTED BROWN BUTTER OAT LATTE"
-      }
-     ]
-    },
-    {
-     "clip": "C0036.MP4",
-     "s": 0.0,
-     "e": 30.0
-    },
-    {
-     "clip": "C0037.MP4",
-     "s": 0.0,
-     "e": 147.0
-    }
-   ]
-  },
-  {
-   "type": "scenes",
-   "music": {
-    "song": "someday.mp3",
-    "from": 60.0,
-    "gain": 0.6
-   },
-   "clips": [
-    {
-     "clip": "C0041.MP4",
-     "s": 0.0,
-     "e": 139.0,
-     "loc": "ferry"
-    },
-    {
-     "clip": "C0042.MP4",
-     "s": 0.0,
-     "e": 20.0,
-     "letterbox": true
-    },
-    {
-     "clip": "C0043.MP4",
-     "s": 0.0,
-     "e": 18.0,
-     "letterbox": true,
-     "loc": "liberty"
-    },
-    {
-     "clip": "C0045.MP4",
-     "s": 50.0,
-     "e": 186.0,
-     "titles": [
-      {
-       "text": "CHIRASHI AT THE BAR",
-       "at": 60.0
-      }
-     ]
-    },
-    {
-     "clip": "C0046.MP4",
-     "s": 0.0,
-     "e": 6.0
-    },
-    {
-     "clip": "C0047.MP4",
-     "s": 0.0,
-     "e": 72.0,
-     "titles": [
-      {
-       "text": "COOKIE TASTE TEST"
-      }
-     ]
-    },
-    {
-     "clip": "C0047.MP4",
-     "s": 236.0,
-     "e": 260.0
-    }
-   ]
-  },
-  {
-   "type": "scenes",
-   "clips": [
-    {
-     "clip": "C0048.MP4",
-     "s": 0.0,
-     "e": 26.0,
-     "titles": [
-      {
-       "text": "DAY 3",
-       "style": "big",
-       "at": 0.1,
-       "dur": 1.8
-      },
-      {
-       "text": "RAIN + A BROKEN UMBRELLA",
-       "at": 2.0
-      }
-     ]
-    },
-    {
-     "clip": "C0051.MP4",
-     "s": 0.0,
-     "e": 57.0,
-     "loc": "bagel-pub"
-    },
-    {
-     "clip": "C0051.MP4",
-     "s": 74.0,
-     "e": 103.0
-    },
-    {
-     "clip": "C0051.MP4",
-     "s": 131.0,
-     "e": 144.0
-    },
-    {
-     "clip": "C0051.MP4",
-     "s": 215.0,
-     "e": 262.0
-    },
-    {
-     "clip": "C0052.MP4",
-     "s": 0.0,
-     "e": 72.0,
-     "titles": [
-      {
-       "text": "ROUND 2"
-      }
-     ]
-    }
-   ],
-   "music": {
-    "song": "cool-kids.mp3",
-    "from": 0.0,
-    "gain": 0.45
-   }
   },
   {
    "type": "scenes",
