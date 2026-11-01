@@ -4,17 +4,21 @@ name: Real me (talking photo)
 on:
   workflow_dispatch:
     inputs:
+      key:
+        description: 'Key that unlocks realme/private/me.tar.enc (his photo + voice memos). Blank = no private inputs'
+        required: false
+        default: ''
       photo:
-        description: 'Zapier-hydrated Drive link to the photo (blank = SadTalker sample face, for testing)'
+        description: 'Zapier-hydrated Drive link to the photo (blank = his photo from the private bundle, else the sample face)'
         required: false
         default: ''
       text:
         description: 'What the face says'
         required: true
       voice:
-        description: 'ElevenLabs voice name or id'
+        description: "ElevenLabs voice name or id; 'me' = his cloned voice (made from the memos on first use)"
         required: false
-        default: 'Adam'
+        default: 'me'
       name:
         description: 'Output file name (no extension)'
         required: false
@@ -44,18 +48,24 @@ jobs:
           F=$(python -c "import basicsr,os;print(os.path.dirname(basicsr.__file__))")/data/degradations.py
           sed -i 's/torchvision.transforms.functional_tensor/torchvision.transforms.functional/' "$F" || true
           cd st && bash scripts/download_models.sh && ls -la checkpoints gfpgan/weights || true
-      - name: Get the photo
+      - name: Unlock private inputs
         run: |
           mkdir -p in
+          K=$(jq -r '.inputs.key // ""' "$GITHUB_EVENT_PATH")
+          if [ -n "$K" ]; then echo "::add-mask::$K"; openssl enc -d -aes-256-cbc -pbkdf2 -pass pass:"$K" -in realme/private/me.tar.enc | tar xzf - -C in; ls in; fi
+      - name: Get the photo
+        run: |
           URL=$(jq -r '.inputs.photo // ""' "$GITHUB_EVENT_PATH")
-          if [ -n "$URL" ]; then echo "::add-mask::$URL"; curl -sSL --retry 5 -o in/face.jpg "$URL"; else cp st/examples/source_image/full_body_1.png in/face.jpg; fi
+          if [ -n "$URL" ]; then echo "::add-mask::$URL"; curl -sSL --retry 5 -o in/face.jpg "$URL"; elif [ ! -f in/face.jpg ]; then cp st/examples/source_image/full_body_1.png in/face.jpg; fi
           python -c "from PIL import Image; im=Image.open('in/face.jpg'); print('photo', im.size)"
       - name: Voice
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
         run: |
           jq -r '.inputs.text' "$GITHUB_EVENT_PATH" > in/text.txt
-          python realme/tts.py "$(cat in/text.txt)" "${{ github.event.inputs.voice }}" in/voice.wav
+          V="${{ github.event.inputs.voice }}"
+          if [ "$V" = "me" ]; then V=$(python realme/clone.py "Real Me" in/memo*.ogg | tail -1); echo "::add-mask::$V"; fi
+          python realme/tts.py "$(cat in/text.txt)" "$V" in/voice.wav
           ffprobe -v error -show_entries format=duration -of csv=p=0 in/voice.wav
       - name: Animate the face
         run: |
