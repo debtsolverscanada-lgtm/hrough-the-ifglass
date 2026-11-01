@@ -1,0 +1,419 @@
+{
+ "format": "long",
+ "style": "3d",
+ "voice": "Adam",
+ "tts": {
+  "stability": 0.5,
+  "similarity": 0.8,
+  "style": 0.25,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "yaThumb",
+  "style": "3d",
+  "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/JWukx3HGBKI.jpg",
+  "crop": "right",
+  "title": "WHAT HAPPENED",
+  "sub": "TO SHANE DAWSON?",
+  "name": "SHANE",
+  "years": "2008-2020",
+  "cap": "KING OF YOUTUBE"
+ },
+ "yt": {
+  "title": "What Happened to Shane Dawson? How the King of YouTube Lost Everything",
+  "description": "In 2019 Shane Dawson was the king of YouTube: documentary series with tens of millions of views and a makeup collection with Jeffree Star that crashed its website. In June 2020 his old videos resurfaced, he posted \"Taking Accountability\", YouTube demonetized his channels and he lost over a million subscribers. This is what happened, and where he is now.\n\nSources:\nNBC News: https://www.nbcnews.com/news/us-news/shane-dawson-demonetized-youtube-amid-reckoning-racist-videos-beauty-guru-n1232584\nComplex: https://www.complex.com/pop-culture/2020/06/youtube-suspends-monetization-shane-dawson-channels\nTubefilter: https://tubefilter.com/2019/11/01/shane-dawson-jeffree-star-shopify-crash/\nTubefilter: https://www.tubefilter.com/2019/11/25/shane-dawson-jeffree-star-views/\nNBC News: https://www.nbcnews.com/tech/internet/shane-dawson-baby-babies-twins-ryland-adams-video-birth-post-drama-rcna129098\nView and subscriber counts: YouTube, November 2026\n\nThumbnails are shown for commentary and criticism under fair use.\n\n#shanedawson #youtubeafterlife #whathappened #jeffreestar #youtubedrama",
+  "tags": [
+   "shane dawson",
+   "what happened to shane dawson",
+   "shane dawson cancelled",
+   "shane dawson 2026",
+   "jeffree star",
+   "conspiracy palette",
+   "youtube afterlife",
+   "youtube drama",
+   "fall from grace",
+   "taking accountability"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "NOVEMBER 1, 2019",
+    "sub": "The Conspiracy Collection launch"
+   },
+   "text": "In 2019, one YouTuber launched a makeup palette with Jeffree Star. It sold out so fast, it crashed the website in minutes.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/9MoDGIkAudI.jpg",
+    "cap": "THE CONSPIRACY COLLECTION",
+    "src": "shane, YouTube, Oct 2019",
+    "tilt": -2
+   },
+   "text": "His documentary series were pulling tens of millions of views per episode. People called him the king of YouTube.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "sting",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "8 MONTHS LATER...",
+    "color": "#ff3a4a"
+   },
+   "text": "Eight months later, it was all gone.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "boom",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaTitle",
+   "p": {
+    "name": "SHANE DAWSON",
+    "years": "2008 - 2020",
+    "sub": "WHAT HAPPENED?"
+   },
+   "text": "This is the story of Shane Dawson. How the king of YouTube lost his crown, and where he is now.",
+   "pause": 0.5
+  },
+  {
+   "scene": "yaWolfie",
+   "p": {
+    "pair": "sd",
+    "eyes": "normal",
+    "look": 0.3
+   },
+   "text": "Shane started making YouTube videos in 2008. Sketches, characters, shock comedy. The kind of stuff that got views back then. A lot of it would come back to haunt him.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/JWukx3HGBKI.jpg",
+    "cap": "54 MILLION VIEWS",
+    "src": "shane, YouTube, 2018-2019",
+    "tilt": 3
+   },
+   "text": "Then, around 2017, he reinvented himself. Long documentary series about other YouTubers. In 2018, The Secret World of Jeffree Star.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/9bpkr91p2xY.jpg",
+    "cap": "THE MIND OF JAKE PAUL",
+    "src": "shane, YouTube, Sep 2018",
+    "tilt": -3
+   },
+   "text": "Then The Mind of Jake Paul. Eight episodes, millions of views each.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/BHLBaOASC74.jpg",
+    "cap": "51.9M VIEWS",
+    "src": "shane, YouTube, Jan 2019",
+    "tilt": 2
+   },
+   "text": "And his conspiracy theory videos were even bigger. One of them has more than fifty one million views.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaCounter",
+   "p": {
+    "from": 0,
+    "to": 20000000,
+    "mode": "rise",
+    "label": "SUBSCRIBERS",
+    "src": "YouTube channel stats"
+   },
+   "text": "By 2020, Shane was one of the biggest creators on the planet. More than twenty million subscribers on his main channel alone.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/OTCOoVApM_U.jpg",
+    "cap": "\"1 MILLION PALETTES\"",
+    "src": "Jeffree Star, as reported by Tubefilter, Nov 2019",
+    "tilt": -2
+   },
+   "text": "And in 2019 came the peak. A seven part series with Jeffree Star, and a makeup collection. Jeffree said a million palettes sold in about thirty minutes.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "SUMMER 2020",
+    "color": "#ffd86a"
+   },
+   "text": "Then came the summer of 2020.",
+   "pause": 0.5
+  },
+  {
+   "scene": "yaNews",
+   "p": {
+    "headline": "OLD SHANE DAWSON VIDEOS RESURFACE",
+    "ticker": "Blackface - slurs - jokes about minors"
+   },
+   "text": "People started digging through his old videos. And what they found was bad.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaWolfie",
+   "p": {
+    "pair": "sd",
+    "eyes": "tired",
+    "prop": "phone"
+   },
+   "text": "Blackface. Racial slurs. And jokes that crossed a line, including some about kids. Content he'd made years earlier, that was still out there.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "\"TAKING|ACCOUNTABILITY\"",
+    "sub": "shane, YouTube, June 26 2020",
+    "color": "#fff",
+    "src": "reported by NBC News, Complex and others"
+   },
+   "text": "On June 26th, 2020, Shane posted a twenty minute video called Taking Accountability. He apologized for the blackface, the slurs, and the offensive content from his past.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "THE NEXT DAY",
+    "color": "#ff3a4a"
+   },
+   "text": "It didn't work. The next day, a clip resurfaced of a sexual joke he made about a poster of Willow Smith, who was eleven at the time.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "sting",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaPost",
+   "p": {
+    "contact": "Jada Pinkett Smith",
+    "photo": false
+   },
+   "text": "Jaden Smith and Jada Pinkett Smith both called him out publicly.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaNews",
+   "p": {
+    "headline": "YOUTUBE DEMONETIZES SHANE DAWSON",
+    "ticker": "All three channels - indefinitely"
+   },
+   "text": "Then YouTube stepped in. It suspended monetization on all three of his channels. No more ad money.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "boom",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaCounter",
+   "p": {
+    "from": 0,
+    "to": 1000000,
+    "mode": "drop",
+    "label": "SUBSCRIBERS LOST",
+    "src": "reported by Insider and Yahoo, July 2020"
+   },
+   "text": "His subscriber count started falling. More than a million subscribers gone in just over a week.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaWolfie",
+   "p": {
+    "pair": "sd",
+    "eyes": "closed"
+   },
+   "text": "And then Shane went silent.",
+   "pause": 0.6
+  },
+  {
+   "scene": "yaTimeline",
+   "p": {
+    "items": [
+     [
+      "JUN 2020",
+      "apology"
+     ],
+     [
+      "JUN 2020",
+      "demonetized"
+     ],
+     [
+      "OCT 2021",
+      "first video back"
+     ],
+     [
+      "NOV 2022",
+      "new Jeffree series"
+     ],
+     [
+      "DEC 2023",
+      "twin sons"
+     ]
+    ],
+    "hi": 1
+   },
+   "text": "For more than a year, nothing.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/CYB64F5UMCY.jpg",
+    "cap": "OCTOBER 2021",
+    "src": "shane, YouTube",
+    "tilt": -2
+   },
+   "text": "In October 2021, he came back. Ghost hunting, like the old days. The video did five point seven million views.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaChart",
+   "p": {
+    "title": "VIEWS PER VIDEO",
+    "bars": [
+     [
+      "Secret World of Jeffree Star (2018)",
+      54.3,
+      "54.3M"
+     ],
+     [
+      "Conspiracy Theories (2019)",
+      51.9,
+      "51.9M"
+     ],
+     [
+      "Beautiful World of Jeffree (2019)",
+      31.6,
+      "31.6M"
+     ],
+     [
+      "Ghost Hunting (2021)",
+      5.7,
+      "5.7M"
+     ],
+     [
+      "Cancelled World of Jeffree (2022)",
+      4.9,
+      "4.9M"
+     ],
+     [
+      "Conspiracy Theories (2024)",
+      3.9,
+      "3.9M"
+     ]
+    ],
+    "hi": 3,
+    "src": "YouTube view counts, Nov 2026"
+   },
+   "text": "That sounds like a lot. Until you put it next to what he used to do.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/5rJyBAkQUTA.jpg",
+    "cap": "\"THE CANCELLED WORLD\"",
+    "src": "shane, YouTube, Nov 2022",
+    "tilt": 3
+   },
+   "text": "In 2022 he even reunited with Jeffree Star for a new series. He called it The Cancelled World of Jeffree Star and Shane Dawson. It didn't come close to the old numbers.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaWolfie",
+   "p": {
+    "pair": "sd",
+    "eyes": "normal",
+    "happy": 0.6
+   },
+   "text": "Off camera, his life changed completely. He married Ryland Adams, they moved to Colorado, and in December 2023 they welcomed twin boys through a surrogate.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "THE PAST NEVER LEFT",
+    "color": "#ffd86a",
+    "sub": "reaction to the twins announcement, Dec 2023",
+    "src": "reported by NBC News"
+   },
+   "text": "Even that brought backlash. Critics pointed straight back at the jokes from his past.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/5c7eY6PHx0I.jpg",
+    "cap": "2024",
+    "src": "shane, YouTube, Nov 2024",
+    "tilt": -2
+   },
+   "text": "And the uploads? They slowed to a trickle. A few conspiracy videos a year. Millions of views, but nothing like the king of YouTube.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaCounter",
+   "p": {
+    "from": 18400000,
+    "to": 18400000,
+    "mode": "freeze",
+    "label": "SUBSCRIBERS TODAY",
+    "src": "YouTube channel stats, Nov 2026"
+   },
+   "text": "Today his channel still has eighteen point four million subscribers. On paper, that's huge. But most of them haven't seen a new Shane Dawson video in a very long time.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "CANCELLED?|OR JUST OVER?",
+    "color": "#ff3a4a"
+   },
+   "text": "So did Shane Dawson die off because of the controversy? The things he made in the past caught up with him. The money stopped. The audience moved on. And the version of YouTube he ruled doesn't exist anymore.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaTitle",
+   "p": {
+    "name": "SHANE DAWSON",
+    "years": "2008 - 2020",
+    "sub": "SUBSCRIBE"
+   },
+   "text": "What do you think? Should he have been given a second chance? Let us know in the comments. And tell us which YouTuber we should bring back from the afterlife next.",
+   "pause": 0.8
+  }
+ ]
+}

@@ -187,9 +187,12 @@ S.yaCouple = (t, d, p) => {
 // Ethan & Hila presets for the same two figures: grey hair and beard, glasses, big black tee; long dark hair.
 const YA_EK = { man: { cap: false, hairCol: '#8a8a8e', hairHi: '#c8c8cc', beard: '#7a7a80', glasses: true, skinT: 'url(#k3skin)', earT: 'url(#k3ear)', neckT: '#d8a088', body: '#18181e', chain: false, earrings: false },
   woman: { hairCols: ['#4a3022', '#2a1810', '#140a06'], skinT: 'url(#k3skin)', top: '#2a2a34' } };
+// Shane Dawson preset: messy brown hair, stubble, fair skin, black hoodie, no jewellery.
+const YA_SD = { cap: false, hairCol: '#4a2e1a', hairHi: '#8a5a34', beard: 'rgba(74,46,26,.55)', skinT: 'url(#k3fair)', earT: 'url(#k3ear)', neckT: '#e2ae92', body: '#16161c', chain: false, earrings: false };
+const YA_PAIRS = { ek: YA_EK.man, sd: YA_SD };
 // Wolfie alone. p: prop ('phone'|'mic'|'sign'), eyes, sign
 S.yaWolfie = (t, d, p) => `${room('#141024')}
-    ${yaWolfie(960, 900, 1.05, { ...(p.pair === 'ek' ? YA_EK.man : {}), eyes: p.eyes || 'normal', look: p.look ?? 0, breathe: t * 2, cap: p.cap ?? (p.pair === 'ek' ? false : true), glow: p.prop === 'phone' ? 'phoneGlow' : null, light: p.prop === 'phone' ? '#9fd2ff' : null, mouth: p.mouth })}
+    ${yaWolfie(960, 900, 1.05, { ...(YA_PAIRS[p.pair] || {}), eyes: p.eyes || 'normal', look: p.look ?? 0, breathe: t * 2, cap: p.cap ?? (p.pair ? false : true), happy: p.happy, glow: p.prop === 'phone' ? 'phoneGlow' : null, light: p.prop === 'phone' ? '#9fd2ff' : null, mouth: p.mouth })}
     ${p.prop === 'phone' ? `<g transform="translate(1110,1170) rotate(-10)"><rect x="-50" y="-90" width="100" height="180" rx="16" fill="#0c0c0c" stroke="#d8eeff" stroke-width="5"/><rect x="-40" y="-78" width="80" height="150" rx="8" fill="#dff1ff"/></g>` : ''}
     ${p.prop === 'mic' ? `<g transform="translate(1180,960)"><rect x="-12" y="0" width="24" height="380" fill="#2a2a34"/><rect x="-46" y="-110" width="92" height="140" rx="46" fill="#3a3a48"/>${[...Array(5)].map((_, k) => `<path d="M-40 ${-90 + k * 22} H40" stroke="#5a5a6a" stroke-width="4"/>`).join('')}</g>
       <text x="1400" y="${700 - (t * 40) % 120}" font-family="Anton" font-size="90" fill="${YA.gold}" opacity=".8">♪</text><text x="1500" y="${820 - (t * 50) % 140}" font-family="Anton" font-size="70" fill="${YA.lilac}" opacity=".7">♫</text>` : ''}`;
