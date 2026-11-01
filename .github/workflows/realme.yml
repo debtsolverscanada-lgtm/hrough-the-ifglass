@@ -72,7 +72,13 @@ jobs:
           cd st
           E=""; [ "${{ github.event.inputs.enhance }}" = "yes" ] && E="--enhancer gfpgan"
           time python inference.py --driven_audio ../in/voice.wav --source_image ../in/face.jpg --result_dir ../out --still --preprocess full $E --cpu
-          cd .. && V=$(ls -t out/*.mp4 out/*/*.mp4 2>/dev/null | head -1) && echo "V=$V" >> $GITHUB_ENV && ffprobe -v error -show_entries stream=width,height,duration -of csv=p=0 "$V"
+          cd .. && V=$(ls -t out/*.mp4 out/*/*.mp4 2>/dev/null | head -1) && ffprobe -v error -show_entries stream=width,height,duration -of csv=p=0 "$V"
+          cp "$V" out/raw.mp4 && echo "RAW=out/raw.mp4" >> $GITHUB_ENV
+      - name: Camera moves (push-ins, punch-zooms, pans, cuts, handheld)
+        run: |
+          pip install opencv-python-headless
+          python realme/camera.py out/raw.mp4 out/final.mp4 in/voice.words.json 1080x1920
+          echo "V=out/final.mp4" >> $GITHUB_ENV
       - name: Upload to Drive (Vlog Edits/Real Me)
         env:
           GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
@@ -81,3 +87,4 @@ jobs:
         run: |
           pip install requests
           python3 vlog/drive_put.py "$V" "${{ github.event.inputs.name }}.mp4" "Real Me"
+          python3 vlog/drive_put.py "$RAW" "${{ github.event.inputs.name }}-raw.mp4" "Real Me"
