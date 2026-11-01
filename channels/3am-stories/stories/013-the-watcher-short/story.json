@@ -1,0 +1,38 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {"stability": 0.4, "similarity": 0.8, "style": 0.4, "speed": 1.0},
+ "thumb": {
+  "scene": "thumbOver", "style": "anime", "base": "house", "bp": {"lit": "top", "watcher": 1},
+  "lines": [["I AM", "#fff"], ["THE WATCHER", "#ff2a2a"]],
+  "x": 960, "y": 1230, "step": 150, "size": 140, "band": 0.5, "tint": "#200008"
+ },
+ "yt": {
+  "title": "\"I am The Watcher.\" The letters this family got were real 😨 #scary #truestory #shorts",
+  "description": "In 2014 a family bought their dream house in Westfield, New Jersey. Three days later the first letter arrived. They never spent a single night there, and The Watcher was never identified.\n\n🎧 headphones on.\n\n#scarystories #truecrime #thewatcher #3amstories #8daudio #shorts",
+  "tags": ["the watcher", "657 boulevard", "true scary stories", "scary stories", "true story", "8d audio", "3am stories", "shorts"]
+ },
+ "scenes": [
+  {"scene": "black", "p": {"text": "this really happened.", "color": "#e8e8e8", "size": 110},
+   "text": "This really happened.", "pause": 0.2, "sfx": [["drone", 0]]},
+  {"scene": "house", "p": {"lit": "all", "van": true, "zoom": 0.15},
+   "text": "In 2014, a family bought their dream house in New Jersey. Six bedrooms. A quiet street.", "pause": 0.1},
+  {"scene": "house", "p": {"lit": "none", "zoom": 0.3},
+   "text": "Three days later, a letter came. Addressed to: the new owner.", "pause": 0.2, "sfx": [["sting", 1.2]]},
+  {"scene": "letter", "p": {"to": "Dear new neighbor,", "lines": ["657 Boulevard has been the", "subject of my family", "for decades."]},
+   "text": "657 Boulevard has been the subject of my family for decades.", "voice": ["Callum", "Clyde", "Bill", "George"], "fx": "whisper+left+close", "pause": 0.2},
+  {"scene": "letter", "p": {"lines": ["Who am I?"], "sign": "The Watcher", "shake": 0.5},
+   "text": "Who am I? I am The Watcher.", "voice": ["Callum", "Clyde", "Bill", "George"], "fx": "wrong+right", "pause": 0.4, "sfx": [["boom", 1.0]]},
+  {"scene": "house", "p": {"lit": "top", "watcher": 1, "zoom": 0.2},
+   "text": "More letters came. The Watcher knew they had kids. And it wanted their names.", "pause": 0.1, "sfx": [["steps", 0, "orbit"]]},
+  {"scene": "letter", "p": {"lines": ["Once I know their names", "I will call to them", "and draw them to me."], "red": 2, "shake": 0.3},
+   "text": "Once I know their names, I will call to them, and draw them to me.", "voice": ["Callum", "Clyde", "Bill", "George"], "fx": "whisper+orbit+close", "pause": 0.3},
+  {"scene": "letter", "p": {"lines": ["Have they found out", "what is in the walls yet?"], "red": 1, "shake": 0.8},
+   "text": "Have they found out what is in the walls yet?", "voice": ["Callum", "Clyde", "Bill", "George"], "fx": "whisper+behind+close", "pause": 0.5, "sfx": [["silence_hit", 0.4]]},
+  {"scene": "house", "p": {"lit": "none", "zoom": 0.1},
+   "text": "The family never spent a single night in that house. And The Watcher was never caught.", "pause": 0.3},
+  {"scene": "text", "p": {"text": "check your mailbox.", "color": "#ff2a2a", "size": 130},
+   "text": "So... when did you last check your mailbox?", "pause": 0.8, "sfx": [["sting", 0.3]]}
+ ]
+}

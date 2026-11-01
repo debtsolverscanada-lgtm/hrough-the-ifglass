@@ -1000,3 +1000,61 @@ S.clown = (t, d, p) => {
     <rect x="460" y="760" width="420" height="260" fill="#0c0c14" stroke="#1a1a24" stroke-width="12"/><rect x="480" y="780" width="380" height="220" fill="#2a3a5a" opacity="${0.5 + 0.2 * Math.sin(t * 6)}"/>
     ${p.gone ? '<ellipse cx="1420" cy="1400" rx="190" ry="34" fill="#000" opacity=".25"/>' : clown(1420, 760, 1.0, { ...o, tilt: p.tilt || 0 })}`;
 };
+
+// ---------- The Watcher (true story, Westfield NJ, 2014) ----------
+// handwritten letter on a desk under a lamp; the lines write themselves in. p: lines [..], sign, to (heading), shake, red (index of a line drawn in red)
+S.letter = (t, d, p) => {
+  const lines = p.lines || [], n = lines.length, per = Math.max(0.6, (d * 0.8) / Math.max(1, n));
+  const sh = p.shake ? Math.sin(t * 31) * 3 * p.shake : 0;
+  const ln = (s, i) => {
+    const u = ease((t - 0.2 - i * per) / per), k = Math.round(s.length * u);
+    return `<text x="570" y="${700 + i * 120}" font-family="Hand" font-size="${Math.min(100, 800 / (0.42 * s.length))}" fill="${p.red === i ? '#8a0a0a' : '#1c1612'}" font-weight="700">${esc3(s.slice(0, k))}</text>`;
+  };
+  return `<rect width="1920" height="1920" fill="#0d0805"/>
+    <radialGradient id="lamp" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#ffcf8a" stop-opacity=".55"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <rect width="1920" height="1920" fill="#2a1a10"/><rect width="1920" height="1920" fill="url(#lamp)"/>
+    <g transform="translate(${sh},${sh / 2}) rotate(-2 960 1000)">
+      <rect x="520" y="420" width="880" height="1260" fill="#000" opacity=".45" transform="translate(18,24)"/>
+      <rect x="520" y="420" width="880" height="1260" fill="#efe6d2"/>
+      ${[...Array(8)].map((_, i) => `<path d="M560 ${720 + i * 120} H1360" stroke="#9fb4c8" stroke-width="2" opacity=".5"/>`).join('')}
+      <path d="M520 420 h880 v1260 h-880z" fill="none" stroke="#c9bca0" stroke-width="6"/>
+      ${p.to ? `<text x="570" y="560" font-family="Hand" font-size="96" fill="#1c1612" font-weight="700">${esc3(p.to)}</text>` : ''}
+      ${lines.map(ln).join('')}
+      ${p.sign ? `<text x="1350" y="${760 + n * 120}" text-anchor="end" font-family="Hand" font-size="120" fill="#1c1612" font-weight="700" opacity="${ease((t - 0.2 - n * per) / 0.5)}">${esc3(p.sign)}</text>` : ''}
+    </g>
+    <rect width="1920" height="1920" fill="#000" opacity="${0.15 + 0.05 * Math.sin(t * 2)}"/>`;
+};
+const esc3 = (x) => String(x).replace(/&/g, '&amp;').replace(/</g, '&lt;');
+// the big old house at night, seen from the street. p: lit (which window glows: 'none'|'top'|'all'), watcher (0..1: a figure
+// standing on the sidewalk across the street, back to us), van (moving van in the drive), zoom
+S.house = (t, d, p) => {
+  const z = 1 + (p.zoom || 0) * ease(t / d), fl = flick(t, 0.7);
+  const win = (x, y, on) => `<rect x="${x}" y="${y}" width="86" height="130" fill="${on ? '#ffcf7a' : '#0c0f18'}" opacity="${on ? 0.85 * fl : 1}" stroke="#1a1410" stroke-width="10"/>
+    <path d="M${x + 43} ${y} v130 M${x} ${y + 65} h86" stroke="#1a1410" stroke-width="6"/>`;
+  const lit = p.lit || 'none';
+  return `<rect width="1920" height="1920" fill="#070a14"/>
+    ${[...Array(50)].map((_, i) => `<circle cx="${(i * 733) % 1920}" cy="${430 + (i * 197) % 360}" r="${1 + i % 2}" fill="#fff" opacity=".5"/>`).join('')}
+    <g transform="translate(960,1000) scale(${z}) translate(-960,-1000)">
+      ${[...Array(9)].map((_, i) => `<ellipse cx="${i * 240}" cy="${880 + (i % 3) * 30}" rx="190" ry="${260 + (i % 2) * 60}" fill="#05070c"/>`).join('')}
+      <path d="M520 760 L960 470 L1400 760Z" fill="#14100e" stroke="#05070c" stroke-width="10"/>
+      <rect x="560" y="760" width="800" height="520" fill="#2b2620" stroke="#05070c" stroke-width="10"/>
+      ${[...Array(12)].map((_, i) => `<path d="M560 ${790 + i * 42} H1360" stroke="#211c17" stroke-width="5"/>`).join('')}
+      <path d="M520 760 H1400" stroke="#3a332a" stroke-width="14"/>
+      ${win(620, 830, lit === 'all')}${win(760, 830, lit === 'all')}${win(1074, 830, lit === 'top' || lit === 'all')}${win(1214, 830, lit === 'all')}
+      <circle cx="960" cy="640" r="44" fill="${lit === 'top' ? '#ffcf7a' : '#0c0f18'}" opacity="${lit === 'top' ? fl : 1}" stroke="#1a1410" stroke-width="8"/>
+      ${win(620, 1060, lit === 'all')}${win(1214, 1060, lit === 'all')}
+      <rect x="890" y="1080" width="140" height="200" fill="#120c08" stroke="#05070c" stroke-width="8"/><circle cx="1010" cy="1185" r="8" fill="#c9a24a"/>
+      <path d="M860 1080 H1060 L1040 1040 H880Z" fill="#1d1813"/>
+      <rect x="0" y="1280" width="1920" height="640" fill="#0b0d10"/><path d="M890 1280 L1030 1280 L1300 1920 L620 1920Z" fill="#14161a"/>
+      <rect x="0" y="1560" width="1920" height="30" fill="#1c1f24"/>
+      ${p.van ? `<g transform="translate(1100,1300) scale(.85)"><rect x="0" y="0" width="300" height="140" rx="16" fill="#cfd2d6"/><rect x="200" y="20" width="80" height="50" fill="#20242c"/><circle cx="60" cy="140" r="30" fill="#0a0a0a"/><circle cx="240" cy="140" r="30" fill="#0a0a0a"/></g>` : ''}
+      <g transform="translate(1660,560)"><rect x="-8" y="0" width="16" height="1040" fill="#15171c"/><path d="M0 0 h-90" stroke="#15171c" stroke-width="12"/>
+        <ellipse cx="-90" cy="16" rx="30" ry="14" fill="#ffe6b0" opacity="${0.9 * fl}"/>
+        <path d="M-90 20 L-300 1040 L120 1040Z" fill="#ffe6b0" opacity="${0.08 * fl}"/></g>
+    </g>
+    ${p.watcher ? `<g opacity="${ease(p.watcher)}" transform="translate(1330,1760) scale(.85)">
+      <path d="M-70 -420 Q-80 -520 0 -526 Q80 -520 70 -420 L96 -120 Q100 0 60 40 L-60 40 Q-100 0 -96 -120Z" fill="#010102"/>
+      <ellipse cx="0" cy="-560" rx="58" ry="66" fill="#010102"/><path d="M-60 40 L-50 260 M60 40 L50 260" stroke="#010102" stroke-width="44"/></g>` : ''}
+    <rect width="1920" height="1920" fill="#203060" opacity=".12"/>`;
+};
+FOCUS.letter = 960; FOCUS.house = 1000;
