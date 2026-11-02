@@ -18,9 +18,23 @@
 
 | Story | Grade | Hero |
 |---|---|---|
-| 023 floor thirteen | sickGreen at 0.32 (fluorescent elevator green, reds kept) | night-shift nurse: hair bun, teal scrubs |
+| 023 floor thirteen | sickGreen at 0.32 (fluorescent elevator green, reds kept) | night-shift nurse: hair bun, teal scrubs; narrator Sarah (female, first person) |
 | 022 closet tenant | sodiumNight (warm orange street-light night) | 57-year-old office worker: greying side-parted hair, glasses, age lines, white shirt + navy tie |
 
 ## Sound (owner's rule, Nov 2026)
 - Effects sit under the voice: no sharp "bing" stings, no loud booms. Loud hits make people scroll away.
 - Measured target: loudest moment no more than ~7 dB above the typical level (022: was 11 dB, now 6.7 dB).
+
+## Voices and turns rotate (owner's rule, Nov 2026)
+- The narrator fits who tells the story: first-person stories use a voice matching the lead (age, gender);
+  third-person/true stories rotate between narrators. Never the same narrator more than 2 Shorts in a row.
+  Pool: Brian (deep male), Sarah (female 30s), Bill (older male), Matilda (warm female), Callum (young male), Dorothy (older female).
+- The middle turn rotates; never the same pair twice in a row. Pool: "Wait..." / "Here's the thing about ___." /
+  "That's when I noticed..." / "Except..." / "But here's what nobody tells you:" / "The weird part?" / a silent beat
+  with one image and no line / "You see," (max once every 4 Shorts).
+- Hook formula rotates (PLAYBOOK F1-F15), never the same one twice in a row.
+
+| Story | Narrator | Hook | Turn |
+|---|---|---|---|
+| 022 closet tenant | Brian | "This guy..." intro (true story) | Wait / You see |
+| 023 floor thirteen | Sarah | F2 impossible premise + F15 loop | (no Wait) / Here's the thing about elevators |

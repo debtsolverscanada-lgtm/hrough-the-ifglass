@@ -1,12 +1,12 @@
 {
  "format": "short",
  "style": "anime",
- "voice": "Brian",
+ "voice": "Sarah",
  "tts": {
-  "stability": 0.38,
+  "stability": 0.42,
   "similarity": 0.8,
-  "style": 0.5,
-  "speed": 1.12
+  "style": 0.45,
+  "speed": 1.08
  },
  "grade": {
   "preset": "sickGreen",
@@ -234,7 +234,7 @@
     "lights": true,
     "focus": 820
    },
-   "text": "Wait. I live alone.",
+   "text": "I live alone.",
    "pause": 0.05,
    "sfx": [
     [
@@ -325,7 +325,7 @@
     "sweat": true,
     "lead": true
    },
-   "text": "You see, you trust the number on an elevator the way you trust the stairs in the dark. You never check.",
+   "text": "Here's the thing about elevators. You trust the number the way you trust the stairs in the dark. You never check.",
    "pause": 0.05
   },
   {
