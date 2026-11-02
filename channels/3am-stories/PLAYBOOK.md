@@ -57,3 +57,38 @@ Distilled from the owner's 12 study videos (Nov 2026). Rules only; numbers are d
 5. Re-hooks at each section; twist on the last word. 6. New cast + grade not used in the last 10 videos.
 7. Voice pauses ≤0.3 s; effects under the voice; -14 LUFS. 8. Faces clear of captions; nothing too dark on a phone.
 9. Facts sourced (true stories) and sources in the description. 10. Watched in full before upload; one Short per 3 hours.
+
+## 8. Additions from the full master playbook (all 12 videos)
+**Hook formulas (pick one per video, rotate them):**
+F1 whole story in line 1 ([date], [what happened], [impossible outcome]) · F2 impossible premise in one sentence ·
+F3 oblivious foreground (normal action in front, horror behind) · F4 ignored warning ("warned twice... and did it anyway") ·
+F5 countdown (212 checked in, 211 checked out) · F6 click confirmation + escalation · F7 common belief, then contradiction ·
+F8 replay the viewer's own behaviour, then twist it · F9 dare them to leave · F10 luckily / unluckily ·
+F11 "Why..." / "The __ that..." title paid off by line 1 · F12 binary stakes · F13 evidence first (the logbook page) ·
+F14 one second of black and silence, one image, one line · F15 ending planted in the opening.
+Hooks start on the claim or the proof, never a greeting. Shorts: premise lands within 3 s. Long-form: click confirmed within 5 s, full hook done by 30 s. The first picture proves the first line.
+
+**Shot lengths (horror starting targets):** Shorts hook 1.5-2 s · Shorts body 2-3 s · long-form first minute 2-4 s ·
+long-form narrative 4-8 s with something moving · dread holds 6-15 s only if something slowly changes (push, dying light,
+figure one step closer) · pre-scare: halve each shot down to ~4 frames · ~1 s silence before the reveal · hold the reveal 1.5-3 s.
+
+**Motion:** default ease-out (expo/quint, 0.6-1.4 s), no bounce, no linear moves; the shock is 1 frame with no easing and
+nothing else snaps; shake + small punch-in only on the hit; everything still for the last second; 3+ parallax depth layers;
+one continuous camera move can beat many cuts; key every camera change to a spoken word.
+
+**Horror sound:** silence before the payoff, loudest on it (~1 s mute, then the hit). Land the hit ~0.6 s before the last line
+so the voice doesn't swallow it. Pre-scare build: heartbeat speeds up, drone rises, cuts accelerate, then mute.
+Never talk over the payoff. Music never louder than speech; 2 s tail after the last frame. Licensed or synthesised audio only.
+
+**Look:** 3-4 colours per video, each colour means one thing (red = danger). One lit figure in near-black reads best.
+Film grain ~6-7%, new seed every 2 frames. Dark frames must still read on a phone (test the darkest shot first).
+Small, repeated wrongness beats big expressions: the figure one pose closer each time we cut back.
+
+**Pattern interrupts for long-form:** 6-9 s chapter sting with the case-file/map advancing · blurred-shot typography over the
+voice · 3-4 frame glitch transition · pull-back reveal · same image washed red when it goes wrong · hard mute before a reveal.
+
+**Captions:** Shorts: small single words or one short line, kept off faces (66-76% band). Long-form: no running subtitles,
+only selective keywords / handwritten in-scene text; rely on YouTube's closed captions.
+
+**Banned list (every brief):** jump-scare stings on every beat, full creature reveals before the climax, red-on-black text
+below readable contrast, default flat gradients, generic fade-ins, bounce easing, centred walls of text.
