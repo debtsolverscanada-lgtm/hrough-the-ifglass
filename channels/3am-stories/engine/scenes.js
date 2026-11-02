@@ -391,7 +391,7 @@ S.bed = (t, d, p) => {
     ${floor(1180)}
     <rect x="420" y="1040" width="1080" height="70" rx="20" fill="#2a1d14"/>
     <rect x="460" y="980" width="320" height="110" rx="40" fill="#cfd6e4"/>
-    ${head(720, 960 + Math.sin(breathe) * 4, 1.15, { eyes: p.eyes || 'wide', look: p.look ?? 0.6, glow: p.phone ? 'phoneGlow' : null, light: p.phone ? '#9fd2ff' : null, sweat: p.sweat })}
+    ${head(720, 960, 1.15, { eyes: p.eyes || 'wide', look: p.look ?? 0.6, glow: p.phone ? 'phoneGlow' : null, light: p.phone ? '#9fd2ff' : null, sweat: p.sweat })}
     <path d="M300 1060 Q700 980 1000 1010 Q1300 990 1620 1060 L1660 1500 L260 1500Z" fill="url(#blanket)" stroke="#000" stroke-width="7"/>
     <path d="M420 1100 q160 -40 300 -10 M1050 1090 q170 -30 330 10" stroke="#465578" stroke-width="9" fill="none" stroke-linecap="round" opacity=".6"/>
     ${p.phone ? `<g transform="translate(720,1050)"><rect x="-60" y="-20" width="120" height="70" rx="12" fill="#0c0c0c" stroke="#d8eeff" stroke-width="5"/><rect x="-50" y="-12" width="100" height="54" rx="6" fill="#dff1ff"/>${[-76, -54, 54, 76].map((fx) => `<ellipse cx="${fx}" cy="14" rx="19" ry="25" fill="url(#skin)" stroke="${INK}" stroke-width="6"/>`).join('')}</g>` : ''}
@@ -806,14 +806,15 @@ function camAt(name, t, d, p, vc, drift) {
   let cx = vc[0], cy = vc[1], z = drift;
   const moving = (STYLE === 'anime' || STYLE === '3d') && !p.still && !['text', 'black'].includes(name);
   if (!moving) return { cx, cy, z };
-  if (p.whip !== false && t < WHIP) cx += ((p._i || 0) % 2 ? -1 : 1) * 900 * Math.pow(1 - clamp(t / WHIP), 3);
+  if (p.whip === true && t < WHIP) cx += ((p._i || 0) % 2 ? -1 : 1) * 900 * Math.pow(1 - clamp(t / WHIP), 3);
   if (p.snap) {
     const sn = p.snap, k = eio((t - sn.at) / SNAP) - (sn.back != null ? eio((t - sn.back) / SNAP) : 0);
     cx += (sn.to[0] - cx) * k; cy += (sn.to[1] - cy) * k; z += ((sn.z || 2.2) - z) * k;
   }
-  const hs = 1 + 3 * (p.shake || 0);  // handheld: slow breathing drift plus a little jitter when shaking
-  cx += hs * (6 * Math.sin(t * 0.9) + (p.shake ? 5 * noise(Math.floor(t * 24)) : 0));
-  cy += hs * (4 * Math.sin(t * 1.3 + 1) + (p.shake ? 5 * noise(Math.floor(t * 24) + 7) : 0));
+  if (p.shake) {  // no idle handheld drift (holds stay still, the camera only creeps); jitter only on shake moments
+    const hs = 1 + 3 * p.shake;
+    cx += hs * 5 * noise(Math.floor(t * 24)); cy += hs * 5 * noise(Math.floor(t * 24) + 7);
+  }
   return { cx, cy, z };
 }
 
@@ -834,7 +835,7 @@ function frameSVG(name, t, d, p, view, frameNo) {
   VW = view[2];
   STYLE = p.style || 'cartoon';
   // p.push: zoom speed per second (e.g. 0.035 = the fast story-TikTok push-in of 3.5%/s); p.push = 0 holds still.
-  const drift = p.still ? 1 : p.push != null ? 1 + p.push * t : 1 + (DEPTH() ? 0.08 : 0.04) * (t / Math.max(d, 1));
+  const drift = p.still ? 1 : p.push != null ? 1 + p.push * t : DEPTH() ? 1 + Math.min(0.05 * t, 0.2 * t / Math.max(d, 1)) : 1 + 0.04 * (t / Math.max(d, 1));
   CUR_T = t; CUR_DRIFT = drift; CUR_SCENE = name;
   setHero(p.hero);
   const body = (S[name] || S.text)(t, d, p);

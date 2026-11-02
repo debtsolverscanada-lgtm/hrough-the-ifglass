@@ -79,7 +79,7 @@ tl, voices, caps, t = [], [], [], 0.0
 for i, s in enumerate(ST['scenes']):
     if s.get('text'):
         mp3, words = voice_line(i, s['text'], s.get('voice'))
-        lead = 0.25
+        lead = 0.1  # voice starts right on the cut (tight pacing)
         dur = lead + dur_of(mp3) + s.get('pause', 0.45)
         voices.append((mp3, t + lead, s.get('fx')))
         if s['scene'] in ('text', 'black'): words = []  # the words are already on screen
@@ -139,7 +139,7 @@ for k, (kind, at, pan) in enumerate((x[0], s['start'] + x[1], x[2] if len(x) > 2
     ins += ['-i', f]; parts.append(f'[{len(ins) // 2 - 1}:a]volume={SFX[kind][2]},{fxchain(pan)}adelay={int(at * 1000)}:all=1[s{k}]')
 amb = f"anoisesrc=d={TOTAL + 1}:c=brown:a=0.4,lowpass=f=180,volume=0.12[amb]"
 labels = ''.join(p[p.rindex('['):] for p in parts)
-graph = ';'.join(parts + [amb]) + f";{labels}[amb]amix=inputs={len(parts) + 1}:normalize=0,alimiter=limit=0.95,loudnorm=I=-15:TP=-1.5[mix]"
+graph = ';'.join(parts + [amb]) + f";{labels}[amb]amix=inputs={len(parts) + 1}:normalize=0,alimiter=limit=0.95,loudnorm=I=-14:TP=-1.5[mix]"
 run('ffmpeg', '-v', 'error', '-y', *ins, '-filter_complex', graph, '-map', '[mix]', '-t', f'{TOTAL:.3f}', '-ar', '48000', f'{WK}/mix.wav')
 
 # ---------- captions (Shorts): two-three words at a time, current word red ----------

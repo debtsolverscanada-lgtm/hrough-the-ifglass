@@ -14,11 +14,20 @@ window.frame = (T, n) => {
   const s = TL[k], t = T - s.start;
   const p = { ...(s.p || {}), _i: k };
   let svg = frameSVG(s.scene, t, s.dur, p, VIEW, n);
-  // anime / 3d scenes whip in from the side instead of dipping to black (text and black cards still fade)
-  const whips = (sc) => sc && ['anime', '3d'].includes(sc.p?.style) && !['text', 'black'].includes(sc.scene) && sc.p?.whip !== false && !sc.p?.still;
-  const fadeIn = whips(s) ? 0 : (s.fade ?? 0.25), out = whips(TL[k + 1]) ? 0 : Math.min(0.25, s.dur / 4);
-  const a = Math.max(t < fadeIn ? 1 - t / fadeIn : 0, t > s.dur - out ? (t - (s.dur - out)) / out : 0);
-  document.getElementById('s').innerHTML = svg + (a > 0 ? `<div style="position:fixed;inset:0;background:#000;opacity:${a}"></div>` : '');
+  // anime / 3d: a 0.2 s dissolve between shots with BOTH shots still moving (the outgoing one keeps its camera creep);
+  // p.whip === true whips in instead (shock moments); text and black cards still dip to black.
+  const moving = (sc) => sc && ['anime', '3d'].includes(sc.p?.style) && !['text', 'black'].includes(sc.scene) && !sc.p?.still;
+  const DIS = 0.2, prev = TL[k - 1];
+  if (moving(s) && s.p?.whip !== true && prev && moving(prev) && t < DIS) {
+    const prevSvg = frameSVG(prev.scene, prev.dur + t, prev.dur, { ...(prev.p || {}), _i: k - 1 }, VIEW, n);
+    const cur = frameSVG(s.scene, t, s.dur, p, VIEW, n);
+    document.getElementById('s').innerHTML = `<div style="position:fixed;inset:0">${prevSvg}</div><div style="position:fixed;inset:0;opacity:${(t / DIS).toFixed(3)}">${cur}</div>`;
+  } else {
+    const blend = (sc) => moving(sc) && sc.p?.whip !== true;
+    const fadeIn = moving(s) ? 0 : (s.fade ?? 0.25), out = (moving(TL[k + 1]) || !TL[k + 1]) && moving(s) ? 0 : Math.min(0.25, s.dur / 4);
+    const a = Math.max(t < fadeIn ? 1 - t / fadeIn : 0, t > s.dur - out ? (t - (s.dur - out)) / out : 0);
+    document.getElementById('s').innerHTML = svg + (a > 0 ? `<div style="position:fixed;inset:0;background:#000;opacity:${a}"></div>` : '');
+  }
   const ims = [...document.querySelectorAll('#s image')];
   return ims.length ? Promise.all(ims.map((i) => i.decode ? i.decode().catch(() => 0) : 0)) : undefined;
 };
