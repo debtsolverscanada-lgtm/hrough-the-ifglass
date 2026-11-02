@@ -23,6 +23,9 @@ def rank(n):
     bad = any(x in n for x in ('lite', 'tts', 'image', 'live', 'embedding', 'audio', 'computer', 'robotics', 'exp', 'preview-tts'))
     return (not bad, 'pro' in n, v, 'preview' not in n)
 models = sorted([n for n in names if 'gemini' in n], key=rank, reverse=True)
+# free keys get 0 quota on Pro: keep the best Pro first, then the best Flash models
+models = [m for m in models if 'pro' in m][:2] + [m for m in models if 'flash' in m and 'lite' not in m][:3]
+dead = set()
 print('models:', models[:4])
 
 STYLE = """You are a video editor reverse-engineering why this horror/story video holds viewers. Watch the whole thing (picture AND sound) and answer in English with exact timestamps (m:ss.s). Be concrete and numeric, no vague adjectives.
@@ -44,17 +47,20 @@ for vid in ids:
         'generationConfig': {'temperature': 0.2, 'maxOutputTokens': 32768,
                              **({'mediaResolution': 'MEDIA_RESOLUTION_LOW'} if mode == 'talk' else {})}}
     done = False
-    for m in models[:4]:
+    for m in models:
+        if m in dead: continue
         for attempt in range(3):
             try:
                 r = call(f'{API}/{m}:generateContent', body)
                 txt = ''.join(p.get('text', '') for c in r.get('candidates', []) for p in c.get('content', {}).get('parts', []))
                 if not txt: raise RuntimeError(json.dumps(r)[:500])
                 open(f'{out}/{vid}.md', 'w').write(f'# {vid} ({m}, {mode})\n\n{txt}\n')
-                print(f'OK {vid} via {m}: {len(txt)} chars'); done = True; break
+                print(f'OK {vid} via {m}: {len(txt)} chars'); done = True; time.sleep(20); break
             except urllib.error.HTTPError as e:
                 msg = e.read().decode()[:400]; print(f'{vid} {m} HTTP {e.code}: {msg}')
-                if e.code in (429, 500, 503): time.sleep(30 * (attempt + 1)); continue
+                if e.code == 429 and 'limit: 0' in msg: dead.add(m); break
+                if e.code == 404: dead.add(m); break
+                if e.code in (429, 500, 503): time.sleep(60 * (attempt + 1)); continue
                 break
             except Exception as e:
                 print(f'{vid} {m} error: {str(e)[:400]}'); time.sleep(10)
