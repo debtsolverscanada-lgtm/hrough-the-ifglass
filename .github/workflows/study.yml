@@ -5,27 +5,30 @@ on:
       name:
         description: 'Study name (folder under study/)'
         required: true
-      ids:
-        description: 'Space-separated YouTube video ids'
+      urls:
+        description: 'Space-separated NAME|URL pairs (Zapier-hydrated Drive files of videos you saved yourself)'
         required: true
+permissions:
+  contents: write
 jobs:
   study:
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
-        with: { deno-version: v2.x }
       - name: Install tools
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg && pip install -q -U yt-dlp faster-whisper numpy
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg && pip install -q -U faster-whisper numpy
       # Private study only: the videos and frames never leave the runner unencrypted (sealed below), and nothing is re-published.
       - name: Download and measure
         run: |
           mkdir -p vids res
-          for id in ${{ github.event.inputs.ids }}; do
-            if yt-dlp -q --no-warnings -f 'bv*[height<=720][ext=mp4]+ba[ext=m4a]/b[height<=720]' --merge-output-format mp4 -o "vids/$id.mp4" "https://www.youtube.com/watch?v=$id"; then
-              python3 study/measure.py "vids/$id.mp4" "res/$id" || echo "MEASURE FAILED $id"
-            else echo "DOWNLOAD FAILED $id"; fi
+          URLS=$(jq -r '.inputs.urls' "$GITHUB_EVENT_PATH")
+          for p in $URLS; do echo "::add-mask::${p#*|}"; done
+          for p in $URLS; do
+            n=${p%%|*}; n=${n%.*}
+            if curl -sfL -o "vids/$n.mp4" "${p#*|}"; then
+              python3 study/measure.py "vids/$n.mp4" "res/$n" || echo "MEASURE FAILED $n"
+            else echo "DOWNLOAD FAILED $n"; fi
           done
           ls res
       - name: Commit sealed results
