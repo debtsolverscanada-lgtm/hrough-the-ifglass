@@ -116,7 +116,8 @@ function anHead(o) {
   const id = ++ANID;
   if (o.back) return `<path d="M-50 110 L-54 200 L54 200 L50 110Z" fill="${AN.skinS}" stroke="${ink}" stroke-width="6"/>
     <path d="M-128 40 Q-150 -170 0 -176 Q150 -170 128 40 L110 20 L96 110 L70 60 L40 130 L10 70 L-20 132 L-48 66 L-76 116 L-96 40 L-114 90Z" fill="${AN.hair}" stroke="${ink}" stroke-width="7" stroke-linejoin="round"/>
-    <path d="M-70 -140 Q0 -170 80 -130" stroke="${AN.hairH}" stroke-width="16" fill="none" stroke-linecap="round"/>`;
+    <path d="M-70 -140 Q0 -170 80 -130" stroke="${AN.hairH}" stroke-width="16" fill="none" stroke-linecap="round"/>
+    ${o.hero !== false && HERO.hairStyle === 'bun' ? `<circle cx="0" cy="-196" r="52" fill="${AN.hair}" stroke="${ink}" stroke-width="7"/>` : ''}`;
   const shocked = eyes === 'wide';
   const eye = (ex) => {
     const m = ex < 0 ? 1 : -1;  // mirror so the outer corner sits outside
@@ -516,6 +517,12 @@ S.kitchen = (t, d, p) => {
       <path d="M${FX - 40 * open} ${FY + 140} v60" stroke="${ink}" stroke-width="8" stroke-linecap="round"/>`
     : `<rect x="${FX + FW - 30}" y="${FY + 80}" width="12" height="110" rx="5" fill="#d8dce4" stroke="${ink}" stroke-width="3"/><rect x="${FX + FW - 30}" y="${FY + 270}" width="12" height="160" rx="5" fill="#d8dce4" stroke="${ink}" stroke-width="3"/>`}
     ${p.cam ? `<g transform="translate(1110,600)"><rect x="-10" y="-60" width="20" height="40" fill="#cfd3dc" stroke="${ink}" stroke-width="4"/><path d="M-50 -24 h100 l-20 60 h-60z" fill="#e8ebf2" stroke="${ink}" stroke-width="6"/><circle cx="0" cy="22" r="20" fill="#14161c" stroke="${ink}" stroke-width="5"/><circle cx="34" cy="-8" r="7" fill="#ff2a2a" opacity="${Math.sin(t * 6) > 0 ? 1 : 0.2}"/></g>` : ''}
+    ${p.cook ? `${[0, 1, 2].map((k) => `<path d="M${620 + k * 24} ${840 - ((t * 60 + k * 40) % 120)} q-14 -30 0 -60 q14 -30 0 -60" stroke="#e8eef4" stroke-width="8" fill="none" opacity="${0.35 - k * 0.08}"/>`).join('')}
+      <ellipse cx="650" cy="852" rx="60" ry="14" fill="#2a2a30" stroke="${ink}" stroke-width="5"/>
+      <g transform="translate(640,820) scale(0.55)">${person(0, 0, 1, { back: true, body: p.cookBody || HERO.body, hero: true })}</g>` : ''}
+    ${p.dinner ? `<g transform="translate(960,1330)"><path d="M-420 0 L420 0 L470 70 L-470 70Z" fill="#6a4a30" stroke="${ink}" stroke-width="8"/>
+      ${[-200, 200].map((x) => `<ellipse cx="${x}" cy="20" rx="120" ry="34" fill="#f2f2ee" stroke="${ink}" stroke-width="6"/><ellipse cx="${x}" cy="14" rx="70" ry="18" fill="#c87a3a"/>
+        ${[0, 1].map((k) => `<path d="M${x - 20 + k * 40} ${-10 - ((t * 50 + k * 30) % 90)} q-12 -24 0 -48 q12 -24 0 -48" stroke="#fff" stroke-width="6" fill="none" opacity=".35"/>`).join('')}`).join('')}</g>` : ''}
     ${p.watcher ? watcher(FX - 230, 880, .85, p.watcher, { tall: 1.0, fingers: true, blink: (t % 2.7) > 2.6 }) : ''}
     ${p.kid ? kid(960, 1420 - ease(t / d) * 260, 0.7 - ease(t / d) * 0.15, { eyes: 'closed', walk: t * 3 }) : ''}
     <rect width="1920" height="1920" fill="#203060" opacity="${warm ? 0 : 0.14}"/>`;
@@ -1367,6 +1374,90 @@ function outfit(ink) {
     <path d="M-44 36 L-60 140 L-14 200 M44 36 L60 140 L14 200" stroke="${ink}" stroke-width="5" fill="none"/>`;
   if (o === 'jacket') return `<path d="M-44 36 L0 120 L44 36" fill="${shirt}" stroke="${ink}" stroke-width="5"/><path d="M-6 120 V520 M6 120 V520" stroke="#c9c9c9" stroke-width="4"/>
     <path d="M-60 40 L-80 150 L-40 160 M60 40 L80 150 L40 160" stroke="${ink}" stroke-width="6" fill="none"/>`;
+  if (o === 'scrubs') return `<path d="M-130 150 Q-136 46 -44 36 L44 36 Q136 46 130 150 L148 520 L-148 520Z" fill="${body}" stroke="${ink}" stroke-width="8"/>
+    <path d="M-44 36 L0 110 L44 36" fill="none" stroke="${ink}" stroke-width="7"/><rect x="40" y="200" width="56" height="50" rx="6" fill="none" stroke="${ink}" stroke-width="5"/>
+    <rect x="-96" y="210" width="44" height="34" rx="4" fill="#e8f2f4" stroke="${ink}" stroke-width="4"/><path d="M-90 222 h30 M-90 232 h20" stroke="#4a6a7a" stroke-width="3"/>`;
   if (o === 'sweater') return `<path d="M-44 36 Q0 70 44 36" stroke="${ink}" stroke-width="10" fill="none"/>${[0, 1, 2, 3].map((k) => `<path d="M-120 ${220 + k * 70} H120" stroke="#000" stroke-width="5" opacity=".18"/>`).join('')}`;
   return '';
 }
+
+
+// ---------- apartment building: elevator, its button panel, the corridor ----------
+// inside the elevator, facing the doors. p.floor (display text, or p.from/p.to to count up across the scene),
+// p.open (0..1 doors), p.openTo, p.beyond ('dark' | 'hall' | 'lobby'), p.lead (the lead stands to the side), p.flicker
+S.elevator = (t, d, p) => {
+  const ink = K.ink, fl = p.flicker ? flick(t, 1.2) : 1;
+  const o = (p.open ?? 0) + ((p.openTo ?? p.open ?? 0) - (p.open ?? 0)) * ease(t / d);
+  let fl2 = p.floor ?? '12';
+  if (p.from != null) { const n = Math.min(p.to, p.from + Math.floor((t / d) * (p.to - p.from + 1))); fl2 = String(n); }
+  const DX0 = 680, DX1 = 1240, DY0 = 470, DY1 = 1240, half = (DX1 - DX0) / 2, gap = half * o;
+  const beyond = p.beyond === 'hall' ? `<rect x="${DX0}" y="${DY0}" width="${DX1 - DX0}" height="${DY1 - DY0}" fill="#3a3024"/>
+      <path d="M${DX0} ${DY1} L${DX1} ${DY1} L${960 + 60} 900 L${960 - 60} 900Z" fill="#5a1e22"/>
+      ${[0, 1, 2].map((k) => `<rect x="${DX0 + 30 + k * 30}" y="${640 + k * 40}" width="${60 - k * 14}" height="${300 - k * 70}" fill="#2a1c12" stroke="${ink}" stroke-width="4"/><rect x="${DX1 - 90 - k * 30}" y="${640 + k * 40}" width="${60 - k * 14}" height="${300 - k * 70}" fill="#2a1c12" stroke="${ink}" stroke-width="4"/>`).join('')}
+      <rect x="930" y="740" width="60" height="160" fill="#2a1c12" stroke="${ink}" stroke-width="4"/><rect x="930" y="890" width="60" height="10" fill="#ffd27a" opacity=".8"/>
+      <circle cx="960" cy="560" r="26" fill="#fff4cc" opacity="${0.8 * fl}"/>`
+    : p.beyond === 'lobby' ? `<rect x="${DX0}" y="${DY0}" width="${DX1 - DX0}" height="${DY1 - DY0}" fill="#cfc6b0"/><rect x="${DX0}" y="1000" width="${DX1 - DX0}" height="240" fill="#8a8070"/>`
+    : `<rect x="${DX0}" y="${DY0}" width="${DX1 - DX0}" height="${DY1 - DY0}" fill="#020203"/>`;
+  return `<rect width="1920" height="1920" fill="#2a2e34"/>
+    <path d="M0 420 L560 520 L560 1300 L0 1500Z" fill="#8a9098"/><path d="M1920 420 L1360 520 L1360 1300 L1920 1500Z" fill="#7a8088"/>
+    ${[0, 1, 2, 3].map((k) => `<path d="M${80 + k * 120} ${440 + k * 20} V${1480 - k * 46}" stroke="#a8aeb6" stroke-width="5" opacity=".6"/><path d="M${1840 - k * 120} ${440 + k * 20} V${1480 - k * 46}" stroke="#9aa0a8" stroke-width="5" opacity=".6"/>`).join('')}
+    <rect x="560" y="420" width="800" height="100" fill="#1a1c20"/><rect x="600" y="440" width="720" height="40" rx="10" fill="#f4f8ff" opacity="${0.9 * fl}"/>
+    <path d="M560 1300 L1360 1300 L1920 1500 L0 1500Z" fill="#3a3a3e"/>${[0, 1, 2, 3, 4, 5].map((k) => `<path d="M${560 + k * 160} 1300 L${k * 384} 1500" stroke="#2a2a2e" stroke-width="4"/>`).join('')}
+    <rect x="560" y="520" width="800" height="780" fill="#9aa2ac"/>
+    ${beyond}
+    <rect x="${DX0}" y="${DY0}" width="${half - gap}" height="${DY1 - DY0}" fill="#b8c0c8" stroke="${ink}" stroke-width="6"/>
+    <rect x="${DX0 + half + gap}" y="${DY0}" width="${half - gap}" height="${DY1 - DY0}" fill="#aeb6be" stroke="${ink}" stroke-width="6"/>
+    <path d="M${DX0 + 40} ${DY0 + 60} L${DX0 + half - gap - 30} ${DY0 + 200}" stroke="#fff" stroke-width="10" opacity=".25"/>
+    <rect x="${DX0 - 20}" y="${DY0 - 20}" width="${DX1 - DX0 + 40}" height="${DY1 - DY0 + 20}" fill="none" stroke="#6a7078" stroke-width="20"/>
+    <g transform="translate(960,${DY0 - 70})"><rect x="-110" y="-46" width="220" height="92" rx="10" fill="#0a0606" stroke="${ink}" stroke-width="6"/>
+      <text x="0" y="28" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="78" fill="${fl2 === '13' ? '#ff3a2a' : '#ffb03a'}">${fl2}</text>
+      <path d="M-86 -20 l14 -16 l14 16z" fill="#ffb03a" opacity="${p.from != null ? 1 : 0.3}"/></g>
+    ${p.lead ? `<g transform="translate(700,1060) scale(0.8)">${person(0, 0, 1, { eyes: p.eyes || 'tired', look: 0.6, sweat: p.sweat })}</g>` : ''}
+    <rect x="1290" y="760" width="60" height="200" rx="8" fill="#c8ccd2" stroke="${ink}" stroke-width="5"/>${[0, 1, 2, 3, 4, 5].map((k) => `<circle cx="1320" cy="${790 + k * 28}" r="9" fill="#e8e8e0" stroke="${ink}" stroke-width="2"/>`).join('')}
+    <rect width="1920" height="1920" fill="#203060" opacity=".08"/>`;
+};
+FOCUS.elevator = 960;
+
+// close-up of the elevator button panel. p.n (floors, default 12), p.lit (which button glows), p.thirteen (0..1 a 13th
+// button that should not exist, fading in), p.finger (a finger pressing p.lit)
+S.panel = (t, d, p) => {
+  const ink = K.ink, n = p.n ?? 12, lit = String(p.lit ?? ''), th = p.thirteen ?? 0;
+  const btn = (x, y, lab, on, red) => `<g transform="translate(${x},${y})"><circle r="62" fill="#9aa0a8" stroke="${ink}" stroke-width="6"/>
+    <circle r="48" fill="${on ? (red ? '#ff4a3a' : '#ffcf6a') : '#d8dce2'}" stroke="${ink}" stroke-width="5"/>
+    ${on ? `<circle r="80" fill="${red ? '#ff4a3a' : '#ffcf6a'}" opacity=".25" filter="url(#blur)"/>` : ''}
+    <text x="0" y="18" text-anchor="middle" font-family="Anton" font-size="52" fill="${on ? '#3a1a0a' : '#2a2e34'}">${lab}</text></g>`;
+  const rows = Math.ceil(n / 2), btns = [];
+  for (let i = 1; i <= n; i++) { const r = Math.floor((i - 1) / 2), c = (i - 1) % 2; btns.push(btn(820 + c * 280, 1500 - r * 165, i, String(i) === lit)); }
+  return `<rect width="1920" height="1920" fill="#7a8088"/>
+    <rect x="620" y="300" width="680" height="1340" rx="30" fill="#b8bec6" stroke="${ink}" stroke-width="10"/>
+    <rect x="640" y="320" width="640" height="40" fill="#fff" opacity=".18"/>
+    ${btns.join('')}
+    ${th > 0 ? `<g opacity="${ease(th)}">${btn(960, 1500 - rows * 165, 13, true, true)}</g>` : ''}
+    ${p.finger ? `<g transform="translate(${lit === '13' ? 1010 : 870 + ((+lit - 1) % 2) * 280},${(lit === '13' ? 1500 - rows * 165 : 1500 - Math.floor((+lit - 1) / 2) * 165) + 20 - 20 * Math.abs(Math.sin(t * 6))})">
+      <path d="M0 0 Q30 -10 60 30 L260 330 L180 380 L-10 70Z" fill="${AN.skin}" stroke="${ink}" stroke-width="7"/></g>` : ''}`;
+};
+FOCUS.panel = 960;
+
+// apartment corridor in perspective: runner carpet, doors on both sides with number plates, the end door with p.num,
+// p.ajar (end door open a crack with warm light and a moving shadow), p.flicker (a failing ceiling light)
+S.corridor = (t, d, p) => {
+  const ink = K.ink, fl = p.flicker ? flick(t, 1.0) : 1, VX = 960, VY = 820;
+  const doors = [0, 1, 2].map((k) => { const s = 1 - k * 0.27, xL = 260 + k * 190, xR = 1660 - k * 190, w = 150 * s, h = 520 * s, y = VY + 330 * s - h;
+    const num = (side) => `${(p.floor ?? 13)}0${side === 'L' ? 1 + k * 2 : 2 + k * 2}`;
+    return `<rect x="${xL}" y="${y}" width="${w}" height="${h}" fill="#3a2414" stroke="${ink}" stroke-width="5"/><rect x="${xL + w * 0.3}" y="${y + h * 0.18}" width="${w * 0.4}" height="${h * 0.07}" fill="#c9a24a"/><text x="${xL + w / 2}" y="${y + h * 0.235}" text-anchor="middle" font-family="Anton" font-size="${22 * s}" fill="#2a1a0a">${num('L')}</text>
+      <rect x="${xR - w}" y="${y}" width="${w}" height="${h}" fill="#3a2414" stroke="${ink}" stroke-width="5"/><rect x="${xR - w + w * 0.3}" y="${y + h * 0.18}" width="${w * 0.4}" height="${h * 0.07}" fill="#c9a24a"/><text x="${xR - w / 2}" y="${y + h * 0.235}" text-anchor="middle" font-family="Anton" font-size="${22 * s}" fill="#2a1a0a">${num('R')}</text>`; }).join('');
+  const aj = p.ajar ? ease(Math.min(1, t / 1.5)) : 0;
+  return `<rect width="1920" height="1920" fill="#2a2018"/>
+    <path d="M0 420 L${VX - 180} ${VY - 220} L${VX + 180} ${VY - 220} L1920 420Z" fill="#3a3024"/>
+    <path d="M0 420 L${VX - 180} ${VY - 220} L${VX - 180} ${VY + 120} L0 1500Z" fill="#6a5a44"/><path d="M1920 420 L${VX + 180} ${VY - 220} L${VX + 180} ${VY + 120} L1920 1500Z" fill="#5e5040"/>
+    <path d="M0 1500 L${VX - 180} ${VY + 120} L${VX + 180} ${VY + 120} L1920 1500Z" fill="#4a3a2a"/>
+    <path d="M500 1500 L${VX - 70} ${VY + 120} L${VX + 70} ${VY + 120} L1420 1500Z" fill="#6a1e24"/><path d="M560 1500 L${VX - 60} ${VY + 120} M1360 1500 L${VX + 60} ${VY + 120}" stroke="#c9a24a" stroke-width="5" opacity=".6"/>
+    ${doors}
+    <rect x="${VX - 70}" y="${VY - 120}" width="140" height="240" fill="#3a2414" stroke="${ink}" stroke-width="5"/>
+    <rect x="${VX - 22}" y="${VY - 80}" width="44" height="18" fill="#c9a24a"/><text x="${VX}" y="${VY - 66}" text-anchor="middle" font-family="Anton" font-size="16" fill="#2a1a0a">${p.num || '1307'}</text>
+    ${aj ? `<rect x="${VX - 70}" y="${VY - 120}" width="${30 * aj}" height="240" fill="#ffd27a" opacity=".9"/><path d="M${VX - 70} ${VY + 120} L${VX - 70 + 30 * aj} ${VY + 120} L${VX - 30 + 160 * aj} 1500 L${VX - 160} 1500Z" fill="#ffd27a" opacity=".15"/>
+      <rect x="${VX - 66}" y="${VY - 60 + 6 * Math.sin(t * 1.4)}" width="${18 * aj}" height="150" fill="#1a1008" opacity="${0.4 + 0.3 * Math.sin(t * 0.9)}"/>` : ''}
+    ${[0, 1, 2].map((k) => `<rect x="${VX - 60 + 0}" y="${440 + k * 60}" width="120" height="${16 - k * 3}" rx="6" fill="#fff4cc" opacity="${(k === 1 ? fl : 1) * (0.9 - k * 0.2)}" transform="translate(${0},0) scale(${1 - k * 0.2}) translate(${(k * 0.2) * VX / (1 - k * 0.2) * (1 - k * 0.2) / (1 - k * 0.2) * 0},0)"/>`).join('')}
+    <rect width="1920" height="1920" fill="#ffcf8a" opacity=".05"/>`;
+};
+FOCUS.corridor = 960;

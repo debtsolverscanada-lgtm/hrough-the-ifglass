@@ -1,0 +1,387 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.38,
+  "similarity": 0.8,
+  "style": 0.5,
+  "speed": 1.12
+ },
+ "grade": {
+  "preset": "sickGreen",
+  "amount": 0.32,
+  "sat": 1.0
+ },
+ "hero": {
+  "hairStyle": "bun",
+  "hair": "#4a2e1c",
+  "hairH": "#8a5a3a",
+  "outfit": "scrubs",
+  "body": "#2f7f7a",
+  "skin": "#efc9aa",
+  "skinS": "#d29c7c"
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "panel",
+  "bp": {
+   "thirteen": 1
+  },
+  "zoom": [
+   960,
+   268,
+   2.2
+  ],
+  "lines": [],
+  "band": 0,
+  "tint": "#100008"
+ },
+ "yt": {
+  "title": "My building has 12 floors. The elevator stopped at 13 😨 #scary #horror #shorts",
+  "description": "Three A.M. after a night shift. You press twelve. The elevator stops at thirteen, on a hallway exactly like yours... and someone is cooking in apartment 1307.\n\n🎧 headphones on. Would you have stepped out?\n\n#scarystories #horror #3amstories #elevator #shorts",
+  "tags": [
+   "scary stories",
+   "elevator horror",
+   "13th floor",
+   "horror short",
+   "3am stories",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "13",
+    "eyes": "wide",
+    "snap": {
+     "at": 2.6,
+     "to": [
+      960,
+      400
+     ],
+     "z": 2.2
+    },
+    "lead": true
+   },
+   "text": "My building has twelve floors. Last night, the elevator stopped at thirteen.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "panel",
+   "p": {
+    "lit": "",
+    "snap": {
+     "at": 0.2,
+     "to": [
+      960,
+      1000
+     ],
+     "z": 1.2
+    }
+   },
+   "text": "There's no button for it. One through twelve. That's it.",
+   "pause": 0.05
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "1",
+    "eyes": "tired",
+    "beyond": "lobby",
+    "open": 1,
+    "openTo": 0,
+    "lead": true
+   },
+   "text": "It's three A.M. I've just finished a twelve hour night shift.",
+   "pause": 0.05
+  },
+  {
+   "scene": "panel",
+   "p": {
+    "lit": "12",
+    "finger": true
+   },
+   "text": "I press twelve.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "tick",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "from": 10,
+    "to": 12,
+    "eyes": "tired",
+    "lead": true
+   },
+   "text": "Ten. Eleven. Twelve.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "tick",
+     0.2
+    ],
+    [
+     "tick",
+     0.9
+    ],
+    [
+     "tick",
+     1.6
+    ]
+   ]
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "13",
+    "eyes": "wide",
+    "snap": {
+     "at": 0.1,
+     "to": [
+      960,
+      400
+     ],
+     "z": 2.6
+    },
+    "push": 0,
+    "lead": true
+   },
+   "text": "Thirteen.",
+   "pause": 0.9,
+   "sfx": [
+    [
+     "silence_hit",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "13",
+    "eyes": "wide",
+    "beyond": "hall",
+    "open": 0,
+    "openTo": 1,
+    "lead": true
+   },
+   "text": "The doors open on a hallway that looks exactly like mine.",
+   "pause": 0.05
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "flicker": true,
+    "num": "1307",
+    "floor": 13
+   },
+   "text": "Same carpet. Same flickering light. Same door at the end.",
+   "pause": 0.05
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "flicker": true,
+    "num": "1307",
+    "floor": 13,
+    "snap": {
+     "at": 1.2,
+     "to": [
+      960,
+      760
+     ],
+     "z": 3.2
+    }
+   },
+   "text": "Except my apartment is twelve oh seven. This one says thirteen oh seven.",
+   "pause": 0.05
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "ajar": true,
+    "num": "1307",
+    "floor": 13
+   },
+   "text": "And it's open. Someone inside is cooking dinner.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "creak",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "cook": true,
+    "lights": true,
+    "focus": 820
+   },
+   "text": "Wait. I live alone.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "cook": true,
+    "lights": true,
+    "snap": {
+     "at": 1.0,
+     "to": [
+      680,
+      760
+     ],
+     "z": 1.9
+    },
+    "focus": 820
+   },
+   "text": "At my stove is a woman in my scrubs. With my hair. Humming the song I hum.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "whisper",
+     1.5,
+     "left"
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "cook": true,
+    "lights": true,
+    "snap": {
+     "at": 0.2,
+     "to": [
+      680,
+      700
+     ],
+     "z": 2.4
+    },
+    "push": 0.08,
+    "focus": 820
+   },
+   "text": "She starts to turn around.",
+   "pause": 1.1,
+   "sfx": [
+    [
+     "breath",
+     0.4,
+     "close"
+    ]
+   ]
+  },
+  {
+   "scene": "panel",
+   "p": {
+    "lit": "12",
+    "finger": true
+   },
+   "text": "I run. I hit twelve until my thumb hurts.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "knock1",
+     0.3
+    ],
+    [
+     "knock1",
+     0.7
+    ],
+    [
+     "knock1",
+     1.1
+    ]
+   ]
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "12",
+    "eyes": "tired",
+    "sweat": true,
+    "lead": true
+   },
+   "text": "You see, you trust the number on an elevator the way you trust the stairs in the dark. You never check.",
+   "pause": 0.05
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "num": "1207",
+    "floor": 12
+   },
+   "text": "Twelve. My hallway. My door. Locked.",
+   "pause": 0.05
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "dinner": true,
+    "lights": true,
+    "snap": {
+     "at": 0.6,
+     "to": [
+      960,
+      1300
+     ],
+     "z": 1.7
+    }
+   },
+   "text": "Inside, dinner is already on the table. Still warm.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "sting",
+     1.2
+    ]
+   ]
+  },
+  {
+   "scene": "panel",
+   "p": {
+    "lit": "",
+    "thirteen": 1,
+    "snap": {
+     "at": 1.6,
+     "to": [
+      960,
+      500
+     ],
+     "z": 2.2
+    }
+   },
+   "text": "And this morning, the elevator has a button for thirteen.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "boom",
+     2.4
+    ]
+   ]
+  }
+ ]
+}
