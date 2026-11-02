@@ -50,27 +50,22 @@
  },
  "scenes": [
   {
-   "scene": "kitchen",
+   "scene": "hall",
    "p": {
-    "fridge": true,
+    "light": "kitchen",
+    "walk": 0.3,
     "pops": [
      {
-      "at": 0.3,
-      "type": "date",
-      "text": "MAY 2008",
-      "x": 0.5,
-      "y": 0.14
-     },
-     {
-      "at": 2.2,
-      "type": "pin",
-      "text": "FUKUOKA, JAPAN",
-      "x": 0.5,
-      "y": 0.86
+      "at": 0.5,
+      "type": "label",
+      "text": "HIM",
+      "x": 0.6,
+      "y": 0.16
      }
-    ]
+    ],
+    "push": 0.035
    },
-   "text": "In 2008, a man in Japan noticed food was disappearing from his fridge.",
+   "text": "This guy is about to find out he never lived alone.",
    "pause": 0.05,
    "sfx": [
     [
@@ -78,8 +73,8 @@
      0
     ],
     [
-     "fridge",
-     0.4
+     "sting",
+     2.2
     ]
    ]
   },
@@ -87,23 +82,59 @@
    "scene": "hall",
    "p": {
     "light": "kitchen",
-    "walk": 0.4,
     "pops": [
      {
-      "at": 0.6,
+      "at": 0.3,
       "type": "num",
       "text": "57",
       "x": 0.5,
       "y": 0.2
      }
-    ]
+    ],
+    "push": 0.035
    },
-   "text": "He was fifty seven. He lived alone.",
+   "text": "He's fifty seven.",
+   "pause": 0.05
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "fridge": false,
+    "pops": [
+     {
+      "at": 0.4,
+      "type": "pin",
+      "text": "FUKUOKA, JAPAN",
+      "x": 0.5,
+      "y": 0.85
+     }
+    ],
+    "push": 0.035
+   },
+   "text": "He lives in Fukuoka, Japan.",
+   "pause": 0.05
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "fridge": true,
+    "pops": [
+     {
+      "at": 0.5,
+      "type": "date",
+      "text": "2008",
+      "x": 0.5,
+      "y": 0.14
+     }
+    ],
+    "push": 0.035
+   },
+   "text": "And in 2008, his food starts vanishing.",
    "pause": 0.05,
    "sfx": [
     [
-     "steps",
-     0
+     "fridge",
+     0.3
     ]
    ]
   },
@@ -112,13 +143,14 @@
    "p": {
     "fridge": true,
     "snap": {
-     "at": 0.8,
+     "at": 0.6,
      "to": [
       1000,
       1000
      ],
      "z": 1.7
-    }
+    },
+    "push": 0.05
    },
    "text": "Yogurt. Rice. A little less every day.",
    "pause": 0.05
@@ -128,9 +160,10 @@
    "p": {
     "time": "11:40",
     "eyes": "tired",
-    "look": 0.4
+    "look": 0.4,
+    "push": 0.035
    },
-   "text": "He told himself he was just forgetting.",
+   "text": "He thinks he's just getting forgetful.",
    "pause": 0.05,
    "sfx": [
     [
@@ -148,15 +181,11 @@
       "Home Cam",
       "Camera installed: Kitchen",
       0.3
-     ],
-     [
-      "Home Cam",
-      "Motion alerts ON",
-      1.2
      ]
-    ]
+    ],
+    "push": 0.035
    },
-   "text": "So he set up security cameras that sent pictures straight to his phone.",
+   "text": "So he sets up cameras that send pictures to his phone.",
    "pause": 0.05,
    "sfx": [
     [
@@ -173,21 +202,18 @@
      [
       "Home Cam",
       "⚠ Motion detected: Kitchen",
-      0.2
+      0.3
      ]
     ],
-    "shake": 0.3
+    "shake": 0.3,
+    "push": 0
    },
-   "text": "Then, while he was at work, his phone buzzed.",
+   "text": "One day at work, it buzzes.",
    "pause": 0.05,
    "sfx": [
     [
      "buzzphone",
-     0.2
-    ],
-    [
-     "sting",
-     1.6
+     0.3
     ]
    ]
   },
@@ -197,15 +223,16 @@
     "fridge": true,
     "watcher": 1,
     "snap": {
-     "at": 0.5,
+     "at": 0.3,
      "to": [
       1000,
       1000
      ],
-     "z": 2.0
-    }
+     "z": 2.1
+    },
+    "push": 0.06
    },
-   "text": "Someone was walking through his kitchen.",
+   "text": "There's someone in his kitchen.",
    "pause": 0.15,
    "sfx": [
     [
@@ -214,17 +241,18 @@
     ],
     [
      "heart",
-     0.6
+     0.5
     ]
    ]
   },
   {
    "scene": "text",
    "p": {
-    "text": "EVERY DOOR|WAS LOCKED.",
-    "color": "#ff2a2a"
+    "text": "EVERY DOOR|IS LOCKED.",
+    "color": "#ff2a2a",
+    "push": 0
    },
-   "text": "Every door and window was locked.",
+   "text": "Every door is locked.",
    "pause": 0.05,
    "sfx": [
     [
@@ -238,19 +266,32 @@
    "p": {
     "light": "none",
     "flicker": true,
-    "walk": 0.6
+    "walk": 0.6,
+    "push": 0.035
    },
-   "text": "Police searched every room. Nobody. Wait... then where did they go?",
+   "text": "Police search the whole house.",
    "pause": 0.05,
    "sfx": [
     [
      "steps",
      0,
      "orbit"
-    ],
+    ]
+   ]
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "none",
+    "flicker": true,
+    "push": 0.05
+   },
+   "text": "Nobody. Wait... then where did they go?",
+   "pause": 0.05,
+   "sfx": [
     [
      "creak",
-     2.5,
+     1.2,
      "behind"
     ]
    ]
@@ -259,9 +300,10 @@
    "scene": "closet",
    "p": {
     "gap": 0.05,
-    "gapTo": 0.5
+    "gapTo": 0.5,
+    "push": 0.035
    },
-   "text": "Then an officer slid open the small cupboard at the top of his closet.",
+   "text": "Then one cop slides open the little cupboard above his closet.",
    "pause": 0.05,
    "sfx": [
     [
@@ -275,8 +317,9 @@
    "p": {
     "gap": 0.5,
     "gapTo": 0.6,
+    "person": 1,
     "snap": {
-     "at": 0.3,
+     "at": 0.2,
      "to": [
       960,
       900
@@ -285,32 +328,25 @@
     },
     "pops": [
      {
-      "at": 1.3,
+      "at": 0.9,
       "type": "label",
       "text": "HORIKAWA",
       "x": 0.55,
       "y": 0.18
-     },
-     {
-      "at": 2.4,
-      "type": "num",
-      "text": "58",
-      "x": 0.5,
-      "y": 0.8
      }
     ],
-    "person": 1
+    "push": 0
    },
-   "text": "A woman was lying inside. Fifty eight years old.",
-   "pause": 0.15,
+   "text": "And there's a woman inside.",
+   "pause": 0.05,
    "sfx": [
     [
      "sting",
-     0.3
+     0.2
     ],
     [
      "breath",
-     1.2,
+     1.0,
      "left+close"
     ]
    ]
@@ -320,9 +356,19 @@
    "p": {
     "gap": 0.6,
     "gapTo": 0.6,
-    "person": 0.6
+    "person": 1,
+    "pops": [
+     {
+      "at": 0.3,
+      "type": "num",
+      "text": "58",
+      "x": 0.5,
+      "y": 0.8
+     }
+    ],
+    "push": 0.035
    },
-   "text": "She'd moved in a mattress. Bottles of drinking water. Her own little room.",
+   "text": "She's fifty eight.",
    "pause": 0.05
   },
   {
@@ -330,18 +376,30 @@
    "p": {
     "gap": 0.6,
     "gapTo": 0.6,
+    "person": 0.8,
+    "push": 0.035
+   },
+   "text": "She's got a mattress up there. Bottles of drinking water.",
+   "pause": 0.05
+  },
+  {
+   "scene": "closet",
+   "p": {
+    "gap": 0.6,
+    "gapTo": 0.6,
+    "person": 0.9,
     "pops": [
      {
-      "at": 1.2,
+      "at": 1.6,
       "type": "num",
       "text": "1 YEAR",
       "x": 0.5,
       "y": 0.2
      }
     ],
-    "person": 0.8
+    "push": 0.035
    },
-   "text": "Police said she'd been living there for about a year.",
+   "text": "And police say she's been living there for about a year.",
    "pause": 0.15,
    "sfx": [
     [
@@ -355,10 +413,9 @@
    "p": {
     "time": "2:47",
     "eyes": "closed",
-    "watcher": "fade",
-    "watcherX": 1100
+    "push": 0.035
    },
-   "text": "You see, nobody checks the top of their own closet. It's the one place in your home you never look.",
+   "text": "You see, nobody checks the top of their own closet.",
    "pause": 0.05,
    "sfx": [
     [
@@ -369,12 +426,25 @@
    ]
   },
   {
+   "scene": "bed",
+   "p": {
+    "time": "2:47",
+    "eyes": "closed",
+    "watcher": "fade",
+    "watcherX": 1100,
+    "push": 0.05
+   },
+   "text": "It's the one place in your home you never look.",
+   "pause": 0.05
+  },
+  {
    "scene": "text",
    "p": {
     "text": "HE SLEPT|10 FEET AWAY.",
-    "color": "#ff2a2a"
+    "color": "#ff2a2a",
+    "push": 0
    },
-   "text": "Every night for a year, he'd been sleeping a few steps away from her.",
+   "text": "Every night for a year, he was sleeping a few steps away from her.",
    "pause": 0.6,
    "sfx": [
     [

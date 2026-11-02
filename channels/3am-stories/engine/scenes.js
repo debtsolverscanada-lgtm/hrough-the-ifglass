@@ -778,7 +778,8 @@ function frameSVG(name, t, d, p, view, frameNo) {
   }
   VW = view[2];
   STYLE = p.style || 'cartoon';
-  const drift = p.still ? 1 : 1 + (DEPTH() ? 0.08 : 0.04) * (t / Math.max(d, 1));
+  // p.push: zoom speed per second (e.g. 0.035 = the fast story-TikTok push-in of 3.5%/s); p.push = 0 holds still.
+  const drift = p.still ? 1 : p.push != null ? 1 + p.push * t : 1 + (DEPTH() ? 0.08 : 0.04) * (t / Math.max(d, 1));
   CUR_T = t; CUR_DRIFT = drift; CUR_SCENE = name;
   const body = (S[name] || S.text)(t, d, p);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${view[2]}" height="${view[3]}" viewBox="${view.join(' ')}">${DEFS.replace('SEED', frameNo % 7)}
