@@ -13,35 +13,34 @@
   "style": "anime",
   "base": "bedroomdoor",
   "bp": {
-   "feet": true,
-   "knock": true
+   "feet": true
   },
   "zoom": [
    960,
-   1000,
-   1.25
+   1677,
+   1.8
   ],
   "lines": [
    [
-    "DON'T OPEN IT",
+    "NOBODY'S",
     "#fff"
    ],
    [
-    "IF IT KNOCKS",
+    "UP THERE",
     "#ff2a2a"
    ]
   ],
-  "x": 560,
-  "y": 640,
-  "step": 190,
-  "size": 170,
-  "band": 0,
+  "x": 960,
+  "y": 690,
+  "step": 200,
+  "size": 200,
+  "band": 0.5,
   "circle": [
    960,
-   1170,
-   230
+   1262,
+   240
   ],
-  "tint": "#200010"
+  "tint": "#300008"
  },
  "yt": {
   "title": "\"If It Knocks From Inside, Don't Open It\" - The House-Sitting Rules That Ruined My Life 🚪 (8D AUDIO)",
