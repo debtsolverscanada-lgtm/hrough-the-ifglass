@@ -1,0 +1,200 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.38,
+  "similarity": 0.8,
+  "style": 0.5,
+  "speed": 1.12
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "mirror",
+  "bp": {
+   "state": "smile"
+  },
+  "lines": [
+   [
+    "IT BLINKED",
+    "#fff"
+   ],
+   [
+    "FIRST.",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 960,
+  "y": 1380,
+  "step": 150,
+  "size": 140,
+  "band": 0.5,
+  "tint": "#200008"
+ },
+ "yt": {
+  "title": "My reflection was one second late all week. Tonight it was one second EARLY 😨 #scary #horror #shorts",
+  "description": "All week your reflection blinks a second after you. Tonight, it blinks first.\n\n🎧 headphones on. Don't look at a mirror after this.\n\n#scarystories #horror #3amstories #mirror #shorts",
+  "tags": [
+   "scary stories",
+   "mirror horror",
+   "reflection",
+   "horror short",
+   "3am",
+   "3am stories",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "mirror",
+   "p": {
+    "state": "lag"
+   },
+   "text": "Your reflection has been one second late all week. Tonight, it's one second early.",
+   "pause": 0.15,
+   "sfx": [
+    [
+     "drone",
+     0
+    ],
+    [
+     "sting",
+     3.0
+    ]
+   ]
+  },
+  {
+   "scene": "sink",
+   "p": {
+    "reflect": "copy",
+    "flicker": true
+   },
+   "text": "It's three A.M. You get up for water. The bathroom light is buzzing.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzz",
+     0
+    ],
+    [
+     "water",
+     1.5
+    ]
+   ]
+  },
+  {
+   "scene": "mirror",
+   "p": {
+    "state": "lag"
+   },
+   "text": "You first noticed it Monday. You'd blink... and it would blink just after.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "sink",
+   "p": {
+    "reflect": "lag",
+    "flicker": true
+   },
+   "text": "Tuesday you raised your hand. It waited. Then it raised its hand too.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "creak",
+     2.0
+    ]
+   ]
+  },
+  {
+   "scene": "mirror",
+   "p": {
+    "state": "tired"
+   },
+   "text": "Tired eyes, you told yourself. Old mirror. Bad light.",
+   "pause": 0.1
+  },
+  {
+   "scene": "mirror",
+   "p": {
+    "state": "stare",
+    "snap": {
+     "at": 1.6,
+     "to": [
+      960,
+      900
+     ],
+     "z": 1.8
+    }
+   },
+   "text": "But tonight you lean in close. And it blinks before you do.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "silence_hit",
+     0.2
+    ],
+    [
+     "sting",
+     2.0
+    ]
+   ]
+  },
+  {
+   "scene": "mirror",
+   "p": {
+    "state": "stare",
+    "shake": 0.2
+   },
+   "text": "Wait. If it's not copying you anymore... then who's copying who?",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "sink",
+   "p": {
+    "reflect": "smile"
+   },
+   "text": "You see, a reflection is like a shadow. It never decides anything. Unless it's been practicing. Your timing. Your face. Your blink.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "whisper",
+     2.0,
+     "behind"
+    ]
+   ]
+  },
+  {
+   "scene": "mirror",
+   "p": {
+    "state": "smile",
+    "shake": 0.3
+   },
+   "text": "It's smiling now. You're not. And then you feel your own mouth start to move... to match it.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "breath",
+     1.0,
+     "left+close"
+    ],
+    [
+     "boom",
+     5.2
+    ]
+   ]
+  }
+ ]
+}

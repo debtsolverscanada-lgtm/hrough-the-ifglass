@@ -1,0 +1,239 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.38,
+  "similarity": 0.8,
+  "style": 0.5,
+  "speed": 1.12
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "door",
+  "bp": {
+   "open": 0.15
+  },
+  "lines": [
+   [
+    "\"HERE,",
+    "#fff"
+   ],
+   [
+    "BOY.\"",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 960,
+  "y": 1230,
+  "step": 150,
+  "size": 140,
+  "band": 0.5,
+  "tint": "#200008"
+ },
+ "yt": {
+  "title": "The house-sitting rules said: lock the door, even if you hear the dog. There is no dog. 😨 #scary #horror #shorts",
+  "description": "Rule two: lock the back door at nine. Even if you hear the dog.\nThe owners put the dog down six years ago.\n\nFull story: \"If It Knocks From Inside, Don't Open It\" on the channel.\n🎧 headphones on.\n\n#scarystories #horror #3amstories #housesitting #shorts",
+  "tags": [
+   "scary stories",
+   "house sitting horror",
+   "rules horror",
+   "horror short",
+   "3am",
+   "3am stories",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "letter",
+   "p": {
+    "to": "House-sitter:",
+    "lines": [
+     "2. Lock the back door at 9.",
+     "    Even if you hear the dog."
+    ],
+    "red": 1
+   },
+   "text": "The house-sitting rules said: lock the back door at nine. Even if you hear the dog.",
+   "pause": 0.15,
+   "sfx": [
+    [
+     "drone",
+     0
+    ],
+    [
+     "sting",
+     3.2
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 0,
+    "smoke": true,
+    "light": true,
+    "snap": {
+     "at": 2.0,
+     "to": [
+      1180,
+      1050
+     ],
+     "z": 1.7
+    }
+   },
+   "text": "Five hundred bucks. Three nights. An old farmhouse in the snow. The owners are in Florida.",
+   "pause": 0.1
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "kitchen",
+    "walk": 0.6
+   },
+   "text": "You look all evening. No bowl. No leash. Not one dog hair on the couch.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "steps",
+     0,
+     "orbit"
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "8:58",
+    "msgs": [
+     [
+      "Me",
+      "where's the dog? want him inside before i lock up",
+      0.2
+     ],
+     [
+      "Mrs. Pruitt",
+      "We put Duke down six years ago.",
+      1.8
+     ],
+     [
+      "Mrs. Pruitt",
+      "Lock the door.",
+      3.0
+     ]
+    ]
+   },
+   "text": "So you text the owner. Where's the dog? Four seconds later. We put Duke down six years ago. Lock the door.",
+   "pause": 0.15,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ],
+    [
+     "buzzphone",
+     1.8
+    ],
+    [
+     "buzzphone",
+     3.0
+    ]
+   ]
+  },
+  {
+   "scene": "door",
+   "p": {
+    "open": 0.05,
+    "shake": 0.2
+   },
+   "text": "You turn the deadbolt. And something on the other side starts scratching. Low. Right at the bottom of the door.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "creak",
+     0.6
+    ],
+    [
+     "breath",
+     2.4,
+     "right"
+    ]
+   ]
+  },
+  {
+   "scene": "door",
+   "p": {
+    "open": 0.05,
+    "shake": 0.4
+   },
+   "text": "Wait. If there's no dog... what's it scratching for? Then a voice, right against the wood.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "door",
+   "p": {
+    "open": 0.05,
+    "shake": 0.5
+   },
+   "text": "Duke? Here, boy.",
+   "voice": [
+    "Dorothy",
+    "Matilda",
+    "Alice"
+   ],
+   "fx": "wrong+right",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "silence_hit",
+     0.9
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "9:01",
+    "msgs": [
+     [
+      "Mrs. Pruitt",
+      "Beach day! Florida is so warm 🌴",
+      0.4
+     ]
+    ],
+    "shake": 0.2
+   },
+   "text": "You see, it doesn't need to break in. It just needs a voice you trust, so you turn the lock yourself.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzzphone",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "IT WAS|HER VOICE.",
+    "color": "#ff2a2a"
+   },
+   "text": "Because that was Mrs. Pruitt's voice. And Mrs. Pruitt is in Florida.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  }
+ ]
+}

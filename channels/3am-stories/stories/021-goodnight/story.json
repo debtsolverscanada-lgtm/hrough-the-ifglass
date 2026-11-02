@@ -1,0 +1,201 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.38,
+  "similarity": 0.8,
+  "style": 0.5,
+  "speed": 1.12
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "brother",
+  "bp": {
+   "eyes": "black"
+  },
+  "lines": [
+   [
+    "HE STOPPED",
+    "#fff"
+   ],
+   [
+    "SAYING IT.",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 960,
+  "y": 1500,
+  "step": 150,
+  "size": 140,
+  "band": 0.5,
+  "tint": "#200008"
+ },
+ "yt": {
+  "title": "My little brother says goodnight to the man under my bed. Tonight he stopped 😨 #scary #horror #shorts",
+  "description": "Every night: goodnight mom, goodnight dad, goodnight man under the bed.\nTonight he skips it.\n\n🎧 headphones on.\n\n#scarystories #horror #3amstories #underthebed #shorts",
+  "tags": [
+   "scary stories",
+   "under the bed",
+   "little brother horror",
+   "horror short",
+   "3am",
+   "3am stories",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "brother",
+   "p": {
+    "eyes": "normal"
+   },
+   "text": "Every night, your little brother says goodnight to the man under your bed.",
+   "pause": 0.15,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "9:00",
+    "eyes": "normal",
+    "look": -0.6
+   },
+   "text": "He's six. You share a room. Lights out at nine.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "brother",
+   "p": {
+    "eyes": "closed"
+   },
+   "text": "Goodnight, Mom. Goodnight, Dad. Goodnight, man under the bed.",
+   "voice": [
+    "Lily",
+    "Jessica",
+    "Laura"
+   ],
+   "fx": "whisper+right+close",
+   "pause": 0.2
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "9:02",
+    "eyes": "tired",
+    "look": -0.6
+   },
+   "text": "It was cute, at first. One night you ask him what the man looks like.",
+   "pause": 0.1
+  },
+  {
+   "scene": "brother",
+   "p": {
+    "eyes": "normal"
+   },
+   "text": "Like you. But longer.",
+   "voice": [
+    "Lily",
+    "Jessica",
+    "Laura"
+   ],
+   "fx": "whisper+right+close",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "sting",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "9:00",
+    "eyes": "wide",
+    "look": -0.6
+   },
+   "text": "Tonight, he doesn't say it. He just rolls over. So you ask him why.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "creak",
+     1.5,
+     "behind"
+    ]
+   ]
+  },
+  {
+   "scene": "brother",
+   "p": {
+    "eyes": "black"
+   },
+   "text": "He said he doesn't need to hear it anymore.",
+   "voice": [
+    "Lily",
+    "Jessica",
+    "Laura"
+   ],
+   "fx": "whisper+left+close",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "silence_hit",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "9:03",
+    "eyes": "wide",
+    "sweat": true
+   },
+   "text": "Wait. Why not? You see, kids say goodnight to check everyone's still where they belong. Mom's room. Dad's room. Under the bed.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "9:04",
+    "eyes": "wide",
+    "sweat": true,
+    "watcher": "fade",
+    "watcherX": 1100,
+    "shake": 0.3
+   },
+   "text": "And he stopped checking... because the man isn't under your bed anymore. He's lying right behind you.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "breath",
+     1.0,
+     "behind"
+    ],
+    [
+     "boom",
+     4.6
+    ]
+   ]
+  }
+ ]
+}
