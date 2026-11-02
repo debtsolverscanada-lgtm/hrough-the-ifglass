@@ -409,10 +409,17 @@
    ]
   },
   {
-   "scene": "black",
+   "scene": "phone",
    "p": {
-    "text": "",
-    "color": "#e8e8e8"
+    "time": "9:01",
+    "msgs": [
+     [
+      "Mrs. Pruitt",
+      "Sending pics from the beach! Florida is so warm 🌴",
+      0.6
+     ]
+    ],
+    "shake": 0.3
    },
    "text": "It was Mrs. Pruitt's voice. And Mrs. Pruitt was in Florida.",
    "pause": 0.6,
@@ -723,10 +730,18 @@
    ]
   },
   {
-   "scene": "black",
+   "scene": "snow",
    "p": {
-    "text": "",
-    "color": "#e8e8e8"
+    "prints": 0,
+    "light": false,
+    "snap": {
+     "at": 0.8,
+     "to": [
+      1180,
+      1250
+     ],
+     "z": 1.8
+    }
    },
    "text": "Mr. Pruitt's car was not in the driveway. There was no car in the driveway but mine. Whatever it says tonight... it is not us.",
    "pause": 0.6,
@@ -1024,10 +1039,12 @@
    ]
   },
   {
-   "scene": "black",
+   "scene": "bed",
    "p": {
-    "text": "",
-    "color": "#e8e8e8"
+    "time": "5:57",
+    "eyes": "closed",
+    "watcher": "fade",
+    "watcherX": 1100
    },
    "text": "It was counting. Not footprints. Steps. It was counting its steps... to my bed.",
    "pause": 0.8,
@@ -1039,11 +1056,10 @@
    ]
   },
   {
-   "scene": "black",
+   "scene": "text",
    "p": {
-    "text": "31 steps in. 0 out.",
-    "color": "#e8e8e8",
-    "size": 90
+    "text": "31 STEPS IN.|0 OUT.",
+    "color": "#e8e8e8"
    },
    "text": "That was three weeks ago. I thought leaving was the end of it. But this morning, there was snow on my apartment steps. And footprints. Bare feet.",
    "pause": 0.4,
