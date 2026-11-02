@@ -506,5 +506,11 @@
     ]
    ]
   }
- ]
+ ],
+ "grade": "sodiumNight",
+ "hero": {
+  "hair": "#2a1a10",
+  "hairH": "#7a4a2a",
+  "body": "#4a3a2a"
+ }
 }

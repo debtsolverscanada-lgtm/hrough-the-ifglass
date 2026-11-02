@@ -86,7 +86,7 @@ for i, s in enumerate(ST['scenes']):
         caps += [(w, t + lead + a0, t + lead + b0) for w, a0, b0 in words]
     else:
         dur = s.get('dur', 2.5)
-    tl.append({'scene': s['scene'], 'p': {**s.get('p', {}), **({'style': ST['style']} if ST.get('style') else {})}, 'start': round(t, 3), 'dur': round(dur, 3), 'sfx': s.get('sfx', []),
+    tl.append({'scene': s['scene'], 'p': {**{k: ST[k] for k in ('grade', 'hero') if ST.get(k)}, **s.get('p', {}), **({'style': ST['style']} if ST.get('style') else {})}, 'start': round(t, 3), 'dur': round(dur, 3), 'sfx': s.get('sfx', []),
                'fade': 0.0 if i == 0 else 0.25})
     t += dur
 TOTAL = min(t, a.seconds or 1e9)
@@ -176,7 +176,7 @@ run('ffmpeg', '-v', 'error', '-y', '-framerate', 30, '-i', f'{FR}/f%05d.jpg', '-
     '-c:v', 'libx264', '-preset', 'medium', '-crf', 19, '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', f'{OUT}/video.mp4')
 
 # ---------- thumbnail (Day One style) ----------
-json.dump([{'scene': ST.get('thumb', {}).get('scene', 'thumb'), 'p': {**ST.get('thumb', {}), 'still': True}, 'start': 0, 'dur': 1, 'fade': 0}], open(f'{WK}/thumb.json', 'w'))
+json.dump([{'scene': ST.get('thumb', {}).get('scene', 'thumb'), 'p': {**{k: ST[k] for k in ('grade', 'hero') if ST.get(k)}, **ST.get('thumb', {}), 'still': True}, 'start': 0, 'dur': 1, 'fade': 0}], open(f'{WK}/thumb.json', 'w'))
 subprocess.run(['rm', '-rf', f'{WK}/thumbf'])
 run('node', f'{HERE}/render.js', f'{WK}/thumb.json', f'{WK}/thumbf', 'long', 0, 1000)
 run('ffmpeg', '-v', 'error', '-y', '-i', f'{WK}/thumbf/f00000.jpg', '-vf', 'scale=1280:720', '-q:v', 2, f'{OUT}/thumb.jpg')

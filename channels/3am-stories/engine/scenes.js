@@ -237,7 +237,7 @@ function head(x, y, s, o = {}) {
 function person(x, y, s, o = {}) {
   const bob = o.walk ? Math.sin(o.walk) * 6 : (o.breathe ? Math.sin(o.breathe) * 3 : 0);
   if (STYLE === 'anime') {
-    const base = o.body && !o.body.startsWith('url') ? o.body : '#23273d', shd = '#12131f', ink = AN.ink, rx = o.reach ? 230 : 150, ry = o.reach ? 300 : 430;
+    const base = o.body && !o.body.startsWith('url') ? o.body : (HERO_BODY || '#23273d'), shd = '#12131f', ink = AN.ink, rx = o.reach ? 230 : 150, ry = o.reach ? 300 : 430;
     const hand = (hx, hy) => `<g transform="translate(${hx},${hy})"><path d="M-24 -20 Q-30 20 -14 34 L20 34 Q32 10 24 -20Z" fill="${AN.skin}" stroke="${ink}" stroke-width="6" stroke-linejoin="round"/><path d="M-8 0 v26 M6 0 v28" stroke="${ink}" stroke-width="3"/></g>`;
     return `<g transform="translate(${x},${y + bob}) scale(${s})">
       <path d="M-130 150 Q-136 46 -44 36 L44 36 Q136 46 130 150 L148 520 L-148 520Z" fill="${base}" stroke="${ink}" stroke-width="8" stroke-linejoin="round"/>
@@ -833,15 +833,17 @@ function frameSVG(name, t, d, p, view, frameNo) {
   // p.push: zoom speed per second (e.g. 0.035 = the fast story-TikTok push-in of 3.5%/s); p.push = 0 holds still.
   const drift = p.still ? 1 : p.push != null ? 1 + p.push * t : 1 + (DEPTH() ? 0.08 : 0.04) * (t / Math.max(d, 1));
   CUR_T = t; CUR_DRIFT = drift; CUR_SCENE = name;
+  setHero(p.hero);
   const body = (S[name] || S.text)(t, d, p);
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${view[2]}" height="${view[3]}" viewBox="${view.join(' ')}">${DEFS.replace('SEED', frameNo % 7)}
     ${STYLE === '3d' ? D3 : ''}
     ${STYLE === 'anime' ? '<defs><linearGradient id="anIris" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1430"/><stop offset=".55" stop-color="#2a4aa8"/><stop offset="1" stop-color="#8ab4ff"/></linearGradient></defs>' : ''}
     ${STYLE === 'sketch' ? `<defs><filter id="boil" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="2" seed="${Math.floor(frameNo / 3) % 6 + 1}"/><feDisplacementMap in="SourceGraphic" scale="7"/></filter>
       <filter id="paper"><feTurbulence type="fractalNoise" baseFrequency=".6 .015" numOctaves="3" seed="2"/><feColorMatrix values="0 0 0 0 .9  0 0 0 0 .85  0 0 0 0 .75  0 0 0 .18 -.04"/></filter></defs>` : ''}
-    ${camWrap(body, name, t, d, p, view, drift)}
+    ${gradeDefs(p.grade)}<g ${p.grade ? 'filter="url(#gradeF)"' : ''}>${camWrap(body, name, t, d, p, view, drift)}</g>
     ${STYLE === 'sketch' ? '<rect width="1920" height="1920" filter="url(#paper)"/>' : ''}
-    ${STYLE === 'anime' ? '<rect width="1920" height="1920" fill="#2030a0" opacity=".08"/>' : ''}
+    ${STYLE === 'anime' && !p.grade ? '<rect width="1920" height="1920" fill="#2030a0" opacity=".08"/>' : ''}
+    ${p.grade && p.grade.wash ? `<rect width="1920" height="1920" fill="${p.grade.wash}" opacity="${p.grade.washA ?? 0.08}"/>` : ''}
     <rect width="1920" height="1920" fill="url(#vig)"/>
     <rect width="1920" height="1920" fill="#fff" filter="url(#grain)" opacity=".55"/>
     ${pops(t, p, view)}
@@ -1279,3 +1281,45 @@ S.oshiire = (t, d, p) => {
     <rect width="1920" height="1920" fill="#203060" opacity=".12"/>`;
 };
 FOCUS.oshiire = 960;
+
+
+// ---------- per-video look: every story gets its own colour grade and its own lead character ----------
+// story.json "grade": a gradient map over the whole frame, mixed with the original picture:
+//   { shadow: '#hex', mid: '#hex', high: '#hex', amount: 0..1 (how strong), sat: saturation (1 = unchanged),
+//     contrast: 1 = unchanged, wash: '#hex' (optional colour laid over everything), washA }
+// story.json "hero": { hair: '#hex', hairH: '#hex' (highlight), body: '#hex' (hoodie/jacket), skin: '#hex' }
+const GRADES = {
+  noirTeal:    { shadow: '#04161c', mid: '#3f7a7a', high: '#ffd9a0', amount: 0.55, sat: 0.9, contrast: 1.12 },
+  bloodMoon:   { shadow: '#14030a', mid: '#8a2030', high: '#ffd2b0', amount: 0.6, sat: 0.85, contrast: 1.15 },
+  sodiumNight: { shadow: '#0a0c1a', mid: '#a0602a', high: '#ffe2a0', amount: 0.55, sat: 1.0, contrast: 1.1 },
+  sickGreen:   { shadow: '#06120a', mid: '#4f7a3a', high: '#e8f0b0', amount: 0.55, sat: 0.8, contrast: 1.12 },
+  violetHaze:  { shadow: '#0e0618', mid: '#6a3a9a', high: '#ffd0f0', amount: 0.5, sat: 1.0, contrast: 1.08 },
+  coldSteel:   { shadow: '#05080e', mid: '#5a6a80', high: '#eef4ff', amount: 0.6, sat: 0.55, contrast: 1.18 },
+  sepiaFilm:   { shadow: '#140c06', mid: '#8a6a40', high: '#fff0d0', amount: 0.65, sat: 0.6, contrast: 1.1 },
+  neonPink:    { shadow: '#0c0414', mid: '#c03a8a', high: '#a0f0ff', amount: 0.5, sat: 1.15, contrast: 1.1 },
+  emberOrange: { shadow: '#120402', mid: '#b04a14', high: '#ffe8b0', amount: 0.55, sat: 1.05, contrast: 1.12 },
+  arcticBlue:  { shadow: '#020a14', mid: '#3a7ab0', high: '#f0fbff', amount: 0.5, sat: 0.9, contrast: 1.1 },
+};
+const hex3 = (h) => [1, 3, 5].map((i) => (parseInt(h.substr(i, 2), 16) / 255).toFixed(3));
+function gradeDefs(g) {
+  if (!g) return '';
+  if (typeof g === 'string') g = GRADES[g] || GRADES.noirTeal;
+  else if (g.preset) g = { ...(GRADES[g.preset] || {}), ...g };
+  const [S0, M0, H0] = [hex3(g.shadow || '#000000'), hex3(g.mid || '#808080'), hex3(g.high || '#ffffff')];
+  const a = g.amount ?? 0.5, c = g.contrast ?? 1, sat = g.sat ?? 1;
+  const tv = (i) => `${S0[i]} ${M0[i]} ${H0[i]}`;
+  return `<defs><filter id="gradeF" x="0" y="0" width="1" height="1" color-interpolation-filters="sRGB">
+    <feColorMatrix in="SourceGraphic" type="saturate" values="${sat}" result="sat"/>
+    <feColorMatrix in="SourceGraphic" type="saturate" values="0" result="grey"/>
+    <feComponentTransfer in="grey" result="map"><feFuncR type="table" tableValues="${tv(0)}"/><feFuncG type="table" tableValues="${tv(1)}"/><feFuncB type="table" tableValues="${tv(2)}"/></feComponentTransfer>
+    <feComposite in="map" in2="sat" operator="arithmetic" k2="${a}" k3="${1 - a}" result="mix"/>
+    <feComponentTransfer in="mix"><feFuncR type="linear" slope="${c}" intercept="${(1 - c) / 2}"/><feFuncG type="linear" slope="${c}" intercept="${(1 - c) / 2}"/><feFuncB type="linear" slope="${c}" intercept="${(1 - c) / 2}"/></feComponentTransfer>
+  </filter></defs>`;
+}
+const AN0 = { ...AN };
+function setHero(h) {
+  Object.assign(AN, AN0);
+  if (h) { if (h.hair) AN.hair = h.hair; if (h.hairH) AN.hairH = h.hairH; if (h.skin) { AN.skin = h.skin; } if (h.skinS) AN.skinS = h.skinS; }
+  HERO_BODY = h && h.body ? h.body : null;
+}
+let HERO_BODY = null;
