@@ -791,7 +791,32 @@ function frameSVG(name, t, d, p, view, frameNo) {
     ${STYLE === 'anime' ? '<rect width="1920" height="1920" fill="#2030a0" opacity=".08"/>' : ''}
     <rect width="1920" height="1920" fill="url(#vig)"/>
     <rect width="1920" height="1920" fill="#fff" filter="url(#grain)" opacity=".55"/>
+    ${pops(t, p, view)}
   </svg>`;
+}
+
+// True-story pop-ups drawn on top of the frame (screen space, not affected by the camera), like real-story TikToks:
+// p.pops = [{ at: seconds, type: 'label' | 'num' | 'pin' | 'date', text, x: 0..1, y: 0..1 (position in the frame) }]
+// label: a name in huge outlined letters with a curved purple arrow pointing down at the person; num: a big number;
+// pin: a map pin with a place name; date: a typewriter-style date stamp. Each one pops in with a quick overshoot.
+function pops(t, p, view) {
+  if (!p.pops) return '';
+  return p.pops.map((o) => {
+    const k = clamp((t - (o.at || 0)) / 0.18); if (k <= 0) return '';
+    const sc = k < 1 ? 0.6 + 0.55 * Math.sin(k * Math.PI * 0.75) : 1;
+    const x = view[0] + view[2] * (o.x ?? 0.5), y = view[1] + view[3] * (o.y ?? 0.2);
+    const T = esc3(String(o.text || '')), fs = Math.min(150, view[2] * (o.type === 'pin' ? 0.62 : 0.9) / (0.55 * Math.max(4, T.length)));
+    const txt = (sz, col) => `<text x="0" y="0" text-anchor="middle" font-family="Anton" font-size="${sz}" fill="${col}" stroke="#000" stroke-width="${sz / 9}" paint-order="stroke" letter-spacing="2">${T}</text>`;
+    let g = '';
+    if (o.type === 'num') g = txt(Math.min(220, fs * 1.4), '#fff');
+    else if (o.type === 'pin') g = `<rect x="${-fs * 0.55 * T.length / 2 - 110}" y="-${fs * 0.95}" width="${fs * 0.55 * T.length + 160}" height="${fs * 1.3}" rx="${fs * 0.3}" fill="#0b0b10" opacity=".85" stroke="#a020f0" stroke-width="6"/>
+        <g transform="translate(${-fs * 0.55 * T.length / 2 - 55},-${fs * 0.3})"><path d="M0 ${fs * 0.45} C-${fs * 0.42} 0 -${fs * 0.42} -${fs * 0.5} 0 -${fs * 0.5} C${fs * 0.42} -${fs * 0.5} ${fs * 0.42} 0 0 ${fs * 0.45}Z" fill="#ff2a3a"/><circle cx="0" cy="-${fs * 0.18}" r="${fs * 0.13}" fill="#fff"/></g>
+        <g transform="translate(40,0)">${txt(fs * 0.8, '#fff')}</g>`;
+    else if (o.type === 'date') g = `<g transform="rotate(-4)"><rect x="${-fs * 0.3 * T.length - 30}" y="-${fs * 0.85}" width="${fs * 0.6 * T.length + 60}" height="${fs * 1.15}" fill="none" stroke="#e8e0cc" stroke-width="8"/><text x="0" y="0" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="${fs * 0.8}" fill="#e8e0cc">${T}</text></g>`;
+    else g = `${txt(fs, '#fff')}<path d="M${-fs * 1.6} ${fs * 0.35} q-${fs * 0.15} ${fs * 0.7} ${fs * 0.55} ${fs * 1.0}" stroke="#a020f0" stroke-width="${fs * 0.16}" fill="none" stroke-linecap="round"/>
+        <path d="M${-fs * 1.05} ${fs * 1.35} l-${fs * 0.42} -${fs * 0.08} l${fs * 0.18} -${fs * 0.36}Z" fill="#a020f0" stroke="#a020f0" stroke-width="${fs * 0.08}" stroke-linejoin="round"/>`;
+    return `<g transform="translate(${x},${y}) scale(${sc})" style="filter:drop-shadow(0 8px 0 rgba(0,0,0,.6))">${g}</g>`;
+  }).join('');
 }
 
 // Thumbnail built from a real frame of the story: any scene underneath (p.base with p.bp), then huge outlined words
@@ -882,7 +907,7 @@ S.thumbCeiling = (t, d, p) => {
     <rect width="1920" height="1920" fill="url(#vig)" opacity=".6"/>`;
 };
 
-// your closet door from bed, open a crack. The gap widens over the scene (p.gap -> p.gapTo, 0..1); inside is black.
+// your closet door from bed, open a crack. p.person (0..1): a real person (grey-haired, wide-eyed) hiding inside instead of a creature. The gap widens over the scene (p.gap -> p.gapTo, 0..1); inside is black.
 // p.eyes (0..1) two eyes in the gap, p.fingers: long grey fingers curled round the door edge, p.knob shaking
 S.closet = (t, d, p) => {
   const g = (p.gap ?? 0.08) + ((p.gapTo ?? p.gap ?? 0.08) - (p.gap ?? 0.08)) * ease(t / d);
@@ -908,6 +933,8 @@ S.closet = (t, d, p) => {
     <rect x="${X0 - 30}" y="${Y0 - 30}" width="${X1 - X0 + 60}" height="${Y1 - Y0 + 30}" fill="#1a1c24" stroke="#0a0b10" stroke-width="12"/>
     <rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="#000"/>
     ${eyes}
+    ${p.person ? `<g opacity="${p.person}">${head(fx - 30, fy + 40, 0.95, { eyes: 'wide', look: -0.7, hair: `<path d="M-132 130 Q-152 -172 0 -180 Q152 -172 132 130 L98 160 L102 -36 Q60 -108 0 -110 Q-60 -108 -102 -36 L-98 160Z" fill="#8d8780" stroke="#120d0a" stroke-width="7" stroke-linejoin="round"/>` })}</g>
+      <rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="#05060a" opacity=".35"/>` : ''}
     <path d="M${X0} ${Y0} L${edge} ${Y0 - 20 * g} L${edge} ${Y1 + 20 * g} L${X0} ${Y1}Z" fill="#2c2620" stroke="#120e0a" stroke-width="10"/>
     <rect x="${X0 + 50}" y="${Y0 + 60}" width="${(edge - X0) - 100}" height="420" fill="none" stroke="#3a3228" stroke-width="8"/>
     <rect x="${X0 + 50}" y="${Y0 + 560}" width="${(edge - X0) - 100}" height="420" fill="none" stroke="#3a3228" stroke-width="8"/>
