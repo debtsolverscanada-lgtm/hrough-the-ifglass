@@ -1,0 +1,34 @@
+name: Gemini watch
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Study name (folder under study/)'
+        required: true
+      mode:
+        description: 'style (shot-by-shot study) or talk (transcript + teachings)'
+        required: true
+        default: style
+      ids:
+        description: 'Space-separated YouTube video ids'
+        required: true
+permissions:
+  contents: write
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      # Private study only: Gemini's notes are sealed before they reach the public repo.
+      - name: Watch with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python3 study/gemini_watch.py res "${{ github.event.inputs.mode }}" ${{ github.event.inputs.ids }}
+      - name: Commit sealed notes
+        run: |
+          ls res
+          D=study/${{ github.event.inputs.name }}; mkdir -p $D
+          vlog/seal.sh res $D/${{ github.run_id }}-gemini
+          git config user.name "study-bot" && git config user.email "study-bot@users.noreply.github.com"
+          git add $D && git commit -m "Gemini study (sealed): ${{ github.event.inputs.name }}" && git pull --rebase --autostash && git push
