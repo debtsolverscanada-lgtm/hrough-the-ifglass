@@ -509,8 +509,16 @@
  ],
  "grade": "sodiumNight",
  "hero": {
-  "hair": "#2a1a10",
-  "hairH": "#7a4a2a",
-  "body": "#4a3a2a"
+  "hairStyle": "parted",
+  "hair": "#3a3a40",
+  "hairH": "#9a9aa2",
+  "glasses": true,
+  "lines": 0.85,
+  "outfit": "shirtTie",
+  "shirt": "#e6eaf0",
+  "tie": "#24406e",
+  "body": "#e6eaf0",
+  "skin": "#f3d6bd",
+  "skinS": "#d9a98a"
  }
 }

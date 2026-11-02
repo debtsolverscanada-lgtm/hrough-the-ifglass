@@ -147,7 +147,8 @@ function anHead(o) {
     : o.mouth === 'o' ? `<path d="M-14 82 L14 82 L10 106 L-10 106Z" fill="#3a0606" stroke="${ink}" stroke-width="5" stroke-linejoin="round"/>`
     : shocked ? `<path d="M-22 88 Q0 80 22 88 L16 100 Q0 104 -16 100Z" fill="#3a0606" stroke="${ink}" stroke-width="5"/><path d="M-16 90 h32" stroke="#fff" stroke-width="4"/>`
     : `<path d="M-18 ${eyes === 'tired' ? 92 : 90} h36" stroke="${ink}" stroke-width="5" stroke-linecap="round"/>`;
-  const hair = o.hair || `
+  const hs = o.hero !== false && HERO.hairStyle ? HAIRS[HERO.hairStyle] : null;
+  const hair = o.hair || (hs ? hs(ink) : null) || `
     <path d="M-130 30 Q-160 -120 -70 -170 L-90 -210 L-30 -178 L-10 -236 L30 -180 L80 -220 L84 -164 Q150 -130 132 30 L118 -20 L108 50 L92 -40 L72 -60 L52 10 L36 -76 L8 -12 L-12 -84 L-34 -10 L-56 -70 L-84 6 L-96 -44 L-112 60Z" fill="${AN.hair}" stroke="${ink}" stroke-width="7" stroke-linejoin="round"/>
     ${[[-92, -112, -64, -134], [-48, -142, -14, -150], [8, -151, 42, -146], [62, -136, 90, -114]].map(([x1, y1, x2, y2]) => `<path d="M${x1} ${y1} Q${(x1 + x2) / 2} ${Math.min(y1, y2) - 10} ${x2} ${y2}" stroke="${AN.hairH}" stroke-width="13" fill="none" stroke-linecap="round"/>`).join('')}
     <path d="M118 -20 Q140 -90 100 -150" stroke="${AN.rim}" stroke-width="6" fill="none" opacity=".75"/>`;
@@ -161,6 +162,7 @@ function anHead(o) {
     ${hair}
     ${brows}${eye(-50)}${eye(50)}
     <path d="M4 30 L-6 52 L8 54" stroke="${ink}" stroke-width="4" fill="none" stroke-linejoin="round"/>
+    ${o.hero !== false ? heroFace(ink) : ''}
     ${mouth}`;
 }
 function skHead(o) {
@@ -237,7 +239,7 @@ function head(x, y, s, o = {}) {
 function person(x, y, s, o = {}) {
   const bob = o.walk ? Math.sin(o.walk) * 6 : (o.breathe ? Math.sin(o.breathe) * 3 : 0);
   if (STYLE === 'anime') {
-    const base = o.body && !o.body.startsWith('url') ? o.body : (HERO_BODY || '#23273d'), shd = '#12131f', ink = AN.ink, rx = o.reach ? 230 : 150, ry = o.reach ? 300 : 430;
+    const base = o.body && !o.body.startsWith('url') ? o.body : (HERO_BODY || '#23273d'), shd = mix(base.length === 7 ? base : '#23273d', '#000', 0.45), ink = AN.ink, rx = o.reach ? 230 : 150, ry = o.reach ? 300 : 430;
     const hand = (hx, hy) => `<g transform="translate(${hx},${hy})"><path d="M-24 -20 Q-30 20 -14 34 L20 34 Q32 10 24 -20Z" fill="${AN.skin}" stroke="${ink}" stroke-width="6" stroke-linejoin="round"/><path d="M-8 0 v26 M6 0 v28" stroke="${ink}" stroke-width="3"/></g>`;
     return `<g transform="translate(${x},${y + bob}) scale(${s})">
       <path d="M-130 150 Q-136 46 -44 36 L44 36 Q136 46 130 150 L148 520 L-148 520Z" fill="${base}" stroke="${ink}" stroke-width="8" stroke-linejoin="round"/>
@@ -246,6 +248,7 @@ function person(x, y, s, o = {}) {
       <path d="M-130 150 Q-110 120 -60 110" stroke="${AN.rim}" stroke-width="6" fill="none" opacity=".6"/>
       <path d="M-124 160 Q-180 300 -150 430" stroke="${ink}" stroke-width="72" stroke-linecap="round" fill="none"/><path d="M-124 160 Q-180 300 -150 430" stroke="${base}" stroke-width="58" stroke-linecap="round" fill="none"/>
       <path d="M124 160 Q180 300 ${rx} ${ry}" stroke="${ink}" stroke-width="72" stroke-linecap="round" fill="none"/><path d="M124 160 Q180 300 ${rx} ${ry}" stroke="${shd}" stroke-width="58" stroke-linecap="round" fill="none"/>
+      ${o.hero !== false ? outfit(ink) : ''}
       ${hand(-150, 452)}${hand(rx, ry + 22)}
       ${head(0, -110, 1, o)}
     </g>`;
@@ -988,7 +991,7 @@ S.closet = (t, d, p) => {
     <rect x="${X0 - 30}" y="${Y0 - 30}" width="${X1 - X0 + 60}" height="${Y1 - Y0 + 30}" fill="#1a1c24" stroke="#0a0b10" stroke-width="12"/>
     <rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="#000"/>
     ${eyes}
-    ${p.person ? `<g opacity="${p.person}">${head(fx - 30, fy + 40, 0.95, { eyes: 'wide', look: -0.7, hair: `<path d="M-132 130 Q-152 -172 0 -180 Q152 -172 132 130 L98 160 L102 -36 Q60 -108 0 -110 Q-60 -108 -102 -36 L-98 160Z" fill="#8d8780" stroke="#120d0a" stroke-width="7" stroke-linejoin="round"/>` })}</g>
+    ${p.person ? `<g opacity="${p.person}">${head(fx - 30, fy + 40, 0.95, { eyes: 'wide', look: -0.7, hero: false, hair: `<path d="M-132 130 Q-152 -172 0 -180 Q152 -172 132 130 L98 160 L102 -36 Q60 -108 0 -110 Q-60 -108 -102 -36 L-98 160Z" fill="#8d8780" stroke="#120d0a" stroke-width="7" stroke-linejoin="round"/>` })}</g>
       <rect x="${X0}" y="${Y0}" width="${X1 - X0}" height="${Y1 - Y0}" fill="#05060a" opacity=".35"/>` : ''}
     <path d="M${X0} ${Y0} L${edge} ${Y0 - 20 * g} L${edge} ${Y1 + 20 * g} L${X0} ${Y1}Z" fill="#2c2620" stroke="#120e0a" stroke-width="10"/>
     <rect x="${X0 + 50}" y="${Y0 + 60}" width="${(edge - X0) - 100}" height="420" fill="none" stroke="#3a3228" stroke-width="8"/>
@@ -1159,7 +1162,7 @@ function officer(x, y, s, o = {}) {
     <path d="M-124 160 Q-176 300 -150 430" stroke="${ink}" stroke-width="72" stroke-linecap="round" fill="none"/><path d="M-124 160 Q-176 300 -150 430" stroke="${nv}" stroke-width="58" stroke-linecap="round" fill="none"/>
     <path d="M124 160 Q170 260 150 330" stroke="${ink}" stroke-width="72" stroke-linecap="round" fill="none"/><path d="M124 160 Q170 260 150 330" stroke="${nvS}" stroke-width="58" stroke-linecap="round" fill="none"/>
     ${o.beam != null ? `<rect x="130" y="310" width="90" height="34" rx="8" fill="#2a2a2a" stroke="${ink}" stroke-width="5" transform="rotate(${o.beam} 150 330)"/>` : ''}
-    ${head(0, -110, 1, { eyes: o.eyes || 'normal', look: o.look ?? 0.5 })}
+    ${head(0, -110, 1, { eyes: o.eyes || 'normal', look: o.look ?? 0.5, hero: false })}
     <path d="M-120 -210 Q0 -268 120 -210 L112 -170 L-112 -170Z" fill="${nv}" stroke="${ink}" stroke-width="7"/>
     <path d="M-118 -172 H118 L140 -150 H-140Z" fill="#0b0f1c" stroke="${ink}" stroke-width="6"/>
     <circle cx="0" cy="-208" r="16" fill="#e6c25a" stroke="${ink}" stroke-width="4"/>
@@ -1225,7 +1228,7 @@ FOCUS.street = 960;
 S.office = (t, d, p) => {
   const ink = K.ink, al = p.alert ? (Math.sin(t * 10) > 0 ? 1 : 0.6) : 0;
   const desk = (x, y, s, who) => `<g transform="translate(${x},${y}) scale(${s})">
-    ${who ? `<g transform="translate(0,-40)">${person(0, 0, 0.55, { eyes: 'normal', look: 0.3, body: '#3a4a6a' })}</g>` : ''}
+    ${who ? `<g transform="translate(0,-40)">${person(0, 0, 0.55, { eyes: 'normal', look: 0.3, body: '#3a4a6a', hero: false })}</g>` : ''}
     <rect x="-60" y="-190" width="160" height="110" rx="8" fill="#20283a" stroke="${ink}" stroke-width="6"/><rect x="-50" y="-180" width="140" height="90" fill="#7fa6e0" opacity=".8"/>
     <rect x="-220" y="-70" width="440" height="40" fill="#c9b89a" stroke="${ink}" stroke-width="6"/><rect x="-200" y="-30" width="20" height="160" fill="#8a7a60"/><rect x="180" y="-30" width="20" height="160" fill="#8a7a60"/></g>`;
   return `<rect width="1920" height="1920" fill="#d8dee6"/>
@@ -1266,7 +1269,7 @@ S.oshiire = (t, d, p) => {
   const inside = `<rect x="${X0}" y="${TY0}" width="${X1 - X0}" height="${TY1 - TY0}" fill="#07080c"/>
     ${p.person ? `<g opacity="${p.person}"><rect x="${X0 + 40}" y="${TY1 - 50}" width="${X1 - X0 - 80}" height="34" rx="12" fill="#c9b8d8" stroke="${ink}" stroke-width="5"/>
       <path d="M${X0 + 170} ${TY1 - 52} Q${X0 + 400} ${TY1 - 110} ${X1 - 120} ${TY1 - 60} L${X1 - 120} ${TY1 - 48} L${X0 + 170} ${TY1 - 40}Z" fill="#6a5a8a" stroke="${ink}" stroke-width="5"/>
-      ${head(X0 + 110, TY1 - 105, 0.5, { eyes: 'wide', look: 0.8, hair: '<path d="M-132 130 Q-152 -172 0 -180 Q152 -172 132 130 L98 160 L102 -36 Q60 -108 0 -110 Q-60 -108 -102 -36 L-98 160Z" fill="#8d8780" stroke="#120d0a" stroke-width="7" stroke-linejoin="round"/>' })}</g>` : ''}
+      ${head(X0 + 110, TY1 - 105, 0.5, { eyes: 'wide', look: 0.8, hero: false, hair: '<path d="M-132 130 Q-152 -172 0 -180 Q152 -172 132 130 L98 160 L102 -36 Q60 -108 0 -110 Q-60 -108 -102 -36 L-98 160Z" fill="#8d8780" stroke="#120d0a" stroke-width="7" stroke-linejoin="round"/>' })}</g>` : ''}
     ${p.bottles ? [0, 1, 2, 3].map((k) => `<g transform="translate(${X0 + 340 - k * 36},${TY1 - 40})"><rect x="-12" y="-74" width="24" height="74" rx="8" fill="#bfe6ff" opacity=".8" stroke="${ink}" stroke-width="3"/><rect x="-6" y="-86" width="12" height="14" fill="#2a6ad0"/></g>`).join('') : ''}`;
   return `<rect width="1920" height="1920" fill="#14110c"/>
     <rect x="0" y="420" width="1920" height="900" fill="#3a3326"/>
@@ -1318,8 +1321,51 @@ function gradeDefs(g) {
 }
 const AN0 = { ...AN };
 function setHero(h) {
+  HERO = h || {};
   Object.assign(AN, AN0);
   if (h) { if (h.hair) AN.hair = h.hair; if (h.hairH) AN.hairH = h.hairH; if (h.skin) { AN.skin = h.skin; } if (h.skinS) AN.skinS = h.skinS; }
   HERO_BODY = h && h.body ? h.body : null;
 }
 let HERO_BODY = null;
+
+// ---------- character builder: a new lead for every story ----------
+// story.json "hero": { hairStyle: 'parted'|'buzz'|'long'|'curly'|'bald'|'bun'|'spiky', hair, hairH, glasses: true|'round',
+//   lines (age wrinkles 0..1), stubble, moustache, beard, outfit: 'hoodie'|'shirtTie'|'suit'|'jacket'|'sweater', body (main colour),
+//   shirt (shirt colour), tie (tie colour), skin, skinS }
+let HERO = {};
+const HAIRS = {
+  parted: (ink) => `<path d="M-124 10 Q-140 -150 -10 -170 Q120 -174 128 -20 L118 -40 Q110 -110 30 -126 Q-20 -112 -70 -120 Q-108 -96 -112 -20Z" fill="${AN.hair}" stroke="${ink}" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M-30 -164 Q-40 -140 -70 -120" stroke="${AN.hairH}" stroke-width="10" fill="none" stroke-linecap="round"/><path d="M10 -160 Q60 -150 100 -110" stroke="${AN.hairH}" stroke-width="12" fill="none" stroke-linecap="round" opacity=".8"/>`,
+  buzz: (ink) => `<path d="M-116 -30 Q-120 -150 0 -160 Q120 -150 116 -30 Q100 -100 0 -108 Q-100 -100 -116 -30Z" fill="${AN.hair}" stroke="${ink}" stroke-width="6"/>`,
+  long: (ink) => `<path d="M-140 150 Q-160 -170 0 -178 Q160 -170 140 150 L106 170 L110 -30 Q70 -110 0 -112 Q-70 -110 -110 -30 L-106 170Z" fill="${AN.hair}" stroke="${ink}" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M-60 -150 Q0 -170 70 -146" stroke="${AN.hairH}" stroke-width="14" fill="none" stroke-linecap="round"/>`,
+  curly: (ink) => [[-110, -60], [-96, -120], [-50, -156], [0, -166], [50, -156], [96, -120], [112, -60], [-70, -100], [0, -120], [70, -100]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="${38}" fill="${AN.hair}" stroke="${ink}" stroke-width="6"/>`).join('') + [[-80, -130], [20, -150], [80, -110]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="10" fill="${AN.hairH}"/>`).join(''),
+  bald: (ink) => `<path d="M-60 -136 Q-20 -152 30 -146" stroke="#fff" stroke-width="12" opacity=".5" fill="none" stroke-linecap="round"/><path d="M-118 -20 Q-122 -70 -104 -90 L-100 -20Z M118 -20 Q122 -70 104 -90 L100 -20Z" fill="${AN.hair}" stroke="${ink}" stroke-width="5"/>`,
+  bun: (ink) => `<circle cx="0" cy="-196" r="52" fill="${AN.hair}" stroke="${ink}" stroke-width="7"/>` + HAIRS.buzz(ink).replace('M-116 -30 Q-120 -150 0 -160 Q120 -150 116 -30 Q100 -100 0 -108 Q-100 -100 -116 -30Z', 'M-120 0 Q-130 -160 0 -168 Q130 -160 120 0 Q110 -100 0 -112 Q-110 -100 -120 0Z'),
+};
+function heroFace(ink) {
+  const h = HERO, out = [];
+  if (h.lines) out.push(`<g opacity="${h.lines}"><path d="M-70 -96 h50 M24 -96 h50 M-60 -110 h36 M30 -110 h36" stroke="${ink}" stroke-width="3" opacity=".6"/>
+    <path d="M-86 30 q-6 30 10 50 M86 30 q6 30 -10 50 M-92 -10 l-14 -6 M92 -10 l14 -6 M-92 0 l-14 4 M92 0 l14 4" stroke="${ink}" stroke-width="3.5" fill="none" opacity=".7"/></g>`);
+  if (h.stubble) out.push(`<path d="M-96 40 Q-80 120 0 160 Q80 120 96 40 Q60 110 0 120 Q-60 110 -96 40Z" fill="${AN.hair}" opacity=".22"/>`);
+  if (h.beard) out.push(`<path d="M-104 20 Q-96 150 0 190 Q96 150 104 20 Q80 70 40 80 Q0 70 -40 80 Q-80 70 -104 20Z M-24 100 Q0 120 24 100 Q0 108 -24 100Z" fill="${AN.hair}" stroke="${ink}" stroke-width="6" fill-rule="evenodd"/>`);
+  if (h.moustache || h.beard) out.push(`<path d="M-44 74 Q-20 58 0 70 Q20 58 44 74 Q20 84 0 76 Q-20 84 -44 74Z" fill="${AN.hair}" stroke="${ink}" stroke-width="5"/>`);
+  if (h.glasses) { const r = h.glasses === 'round';
+    out.push(`<g fill="#bfe0ff" fill-opacity=".14" stroke="${ink}" stroke-width="7">${r ? '<circle cx="-50" cy="-2" r="44"/><circle cx="50" cy="-2" r="44"/>' : '<rect x="-98" y="-40" width="92" height="66" rx="12"/><rect x="6" y="-40" width="92" height="66" rx="12"/>'}</g>
+      <path d="M-6 -8 Q0 -16 6 -8 M-98 -12 L-118 -18 M98 -12 L118 -18" stroke="${ink}" stroke-width="6" fill="none"/>`); }
+  return out.join('');
+}
+function outfit(ink) {
+  const o = HERO.outfit; if (!o || o === 'hoodie') return '';
+  const shirt = HERO.shirt || '#e9edf4', tie = HERO.tie || '#7a1a2a', body = HERO.body || '#2a2e3a';
+  const shirtTie = `<path d="M-44 36 L0 120 L44 36 L40 300 L-40 300Z" fill="${shirt}" stroke="${ink}" stroke-width="5"/>
+    <path d="M-44 36 L-10 70 L-30 90Z M44 36 L10 70 L30 90Z" fill="${shirt}" stroke="${ink}" stroke-width="5"/>
+    <path d="M-12 66 L12 66 L18 240 L0 270 L-18 240Z" fill="${tie}" stroke="${ink}" stroke-width="5"/>`;
+  if (o === 'shirtTie') return `<path d="M-130 150 Q-136 46 -44 36 L44 36 Q136 46 130 150 L148 520 L-148 520Z" fill="${shirt}" stroke="${ink}" stroke-width="8"/>${shirtTie}`;
+  if (o === 'suit') return `${shirtTie}<path d="M-44 36 L-6 250 L-40 520 L-148 520 L-130 150 Q-136 46 -44 36Z M44 36 L6 250 L40 520 L148 520 L130 150 Q136 46 44 36Z" fill="${body}" stroke="${ink}" stroke-width="7"/>
+    <path d="M-44 36 L-60 140 L-14 200 M44 36 L60 140 L14 200" stroke="${ink}" stroke-width="5" fill="none"/>`;
+  if (o === 'jacket') return `<path d="M-44 36 L0 120 L44 36" fill="${shirt}" stroke="${ink}" stroke-width="5"/><path d="M-6 120 V520 M6 120 V520" stroke="#c9c9c9" stroke-width="4"/>
+    <path d="M-60 40 L-80 150 L-40 160 M60 40 L80 150 L40 160" stroke="${ink}" stroke-width="6" fill="none"/>`;
+  if (o === 'sweater') return `<path d="M-44 36 Q0 70 44 36" stroke="${ink}" stroke-width="10" fill="none"/>${[0, 1, 2, 3].map((k) => `<path d="M-120 ${220 + k * 70} H120" stroke="#000" stroke-width="5" opacity=".18"/>`).join('')}`;
+  return '';
+}
