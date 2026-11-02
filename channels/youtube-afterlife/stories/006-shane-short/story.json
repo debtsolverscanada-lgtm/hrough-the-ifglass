@@ -1,0 +1,207 @@
+{
+ "format": "short",
+ "style": "3d",
+ "voice": "Adam",
+ "tts": {
+  "stability": 0.45,
+  "similarity": 0.8,
+  "style": 0.35,
+  "speed": 1.08
+ },
+ "thumb": {
+  "scene": "yaThumb",
+  "style": "3d",
+  "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/JWukx3HGBKI.jpg",
+  "crop": "right",
+  "title": "WHAT HAPPENED",
+  "sub": "TO SHANE?",
+  "name": "SHANE",
+  "years": "2008-2020",
+  "cap": "KING OF YOUTUBE"
+ },
+ "yt": {
+  "title": "18 million subscribers. Almost nobody watches. What happened to Shane Dawson? 👀 #shanedawson #shorts",
+  "description": "In 2019 Shane Dawson's palette with Jeffree Star crashed the website. In June 2020 his old videos resurfaced, YouTube demonetized all three of his channels, and he lost over a million subscribers in about a week. He still has 18.4 million subscribers.\n\nFull story: \"What Happened to Shane Dawson?\" on the channel.\n\nSources: NBC News, Complex, Tubefilter. Thumbnails shown for commentary under fair use.\n\n#shanedawson #jeffreestar #youtubeafterlife #whathappened #shorts",
+  "tags": [
+   "shane dawson",
+   "what happened to shane dawson",
+   "jeffree star",
+   "youtube afterlife",
+   "youtube drama",
+   "youtuber fell off",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "yaCounter",
+   "p": {
+    "from": 20000000,
+    "to": 20000000,
+    "mode": "freeze",
+    "label": "SUBSCRIBERS",
+    "shake": 0.3
+   },
+   "text": "In 2019 he was the king of YouTube. Eight months later, YouTube stopped paying him.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "sting",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/9MoDGIkAudI.jpg",
+    "cap": "THE CONSPIRACY COLLECTION",
+    "tilt": -3,
+    "snap": {
+     "at": 2.2,
+     "to": [
+      1010,
+      860
+     ],
+     "z": 1.5
+    }
+   },
+   "text": "Shane Dawson. His makeup palette with Jeffree Star sold out so fast it crashed the website.",
+   "pause": 0.1
+  },
+  {
+   "scene": "yaPhoto",
+   "p": {
+    "img": "channels/youtube-afterlife/stories/005-shane-dawson/photos/BHLBaOASC74.jpg",
+    "cap": "51.9M VIEWS",
+    "tilt": 2
+   },
+   "text": "His conspiracy theory videos? Over fifty million views.",
+   "pause": 0.1
+  },
+  {
+   "scene": "yaNews",
+   "p": {
+    "headline": "OLD SHANE DAWSON VIDEOS RESURFACE",
+    "ticker": "Blackface - slurs - jokes about minors"
+   },
+   "text": "Then, summer 2020, people dug up his old videos. Blackface. Slurs. Jokes about kids.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "\"TAKING|ACCOUNTABILITY\"",
+    "sub": "shane, YouTube, June 26 2020",
+    "color": "#fff"
+   },
+   "text": "He posted an apology. The next day, another clip surfaced.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "sting",
+     2.0
+    ]
+   ]
+  },
+  {
+   "scene": "yaNews",
+   "p": {
+    "headline": "YOUTUBE DEMONETIZES SHANE DAWSON",
+    "ticker": "All three channels - indefinitely"
+   },
+   "text": "YouTube cut the ads on all three of his channels. Over a million subscribers gone in about a week.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "boom",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaCounter",
+   "p": {
+    "from": 18400000,
+    "to": 18400000,
+    "mode": "freeze",
+    "label": "SUBSCRIBERS TODAY"
+   },
+   "text": "But wait. He still has eighteen million subscribers. So why does almost nobody see his videos?",
+   "pause": 0.1
+  },
+  {
+   "scene": "yaChart",
+   "p": {
+    "title": "VIEWS PER VIDEO",
+    "bars": [
+     [
+      "Secret World of Jeffree Star (2018)",
+      54.3,
+      "54.3M"
+     ],
+     [
+      "Conspiracy Theories (2019)",
+      51.9,
+      "51.9M"
+     ],
+     [
+      "Beautiful World of Jeffree (2019)",
+      31.6,
+      "31.6M"
+     ],
+     [
+      "Ghost Hunting (2021)",
+      5.7,
+      "5.7M"
+     ],
+     [
+      "Cancelled World of Jeffree (2022)",
+      4.9,
+      "4.9M"
+     ],
+     [
+      "Conspiracy Theories (2024)",
+      3.9,
+      "3.9M"
+     ]
+    ],
+    "hi": 3,
+    "src": "YouTube view counts, Nov 2026"
+   },
+   "text": "You see, subscribers are like old phone numbers. You still have them, but nobody picks up. His biggest video did fifty four million. His comeback? Five point seven.",
+   "pause": 0.15
+  },
+  {
+   "scene": "yaWolfie",
+   "p": {
+    "pair": "sd",
+    "eyes": "normal",
+    "happy": 0.6
+   },
+   "text": "Today he's married, a dad of twins, and posts a few times a year.",
+   "pause": 0.1
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "HE KEPT THE CROWN.|LOST THE KINGDOM.",
+    "color": "#ff3a4a"
+   },
+   "text": "The king of YouTube still has his crown. He just lost the kingdom.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "boom",
+     0.1
+    ]
+   ]
+  }
+ ]
+}
