@@ -917,7 +917,7 @@ S.closet = (t, d, p) => {
 };
 
 // lonely farmhouse at night in snow, a dark forest behind, footprints coming out of the trees to the door, none going back.
-// p.prints (0..1 how far the trail is drawn), p.smoke (chimney smoke), p.light (one window lit)
+// p.prints (0..1 how far the trail is drawn), p.smoke (chimney smoke), p.light (one window lit), p.figs (two figures in the lit window, one waving)
 S.snow = (t, d, p) => {
   const n = 18, k = Math.round(n * (p.prints ?? 1) * (p.grow ? ease(t / d) : 1));
   const prints = [...Array(k)].map((_, i) => { const u = i / (n - 1), x = 280 + u * 720 + (i % 2 ? 18 : -18), y = 1120 + u * 260;
@@ -934,6 +934,9 @@ S.snow = (t, d, p) => {
       <rect x="120" y="-170" width="40" height="90" fill="#1a1210"/>
       ${p.smoke ? [0, 1, 2].map((i) => `<circle cx="${140 + Math.sin(t + i) * 20}" cy="${-200 - i * 60 - (t * 30) % 60}" r="${24 + i * 10}" fill="#8a94a8" opacity="${0.35 - i * 0.1}"/>`).join('') : ''}
       <rect x="-170" y="70" width="90" height="80" fill="${p.light ? '#ffd88a' : '#0a0a0e'}" stroke="#05070c" stroke-width="6"/>
+      ${p.figs ? `<g opacity="${ease(t / 1.2)}"><ellipse cx="-145" cy="104" rx="11" ry="13" fill="#05070c"/><path d="M-158 150 Q-160 118 -145 116 Q-130 118 -132 150Z" fill="#05070c"/>
+        <ellipse cx="-106" cy="100" rx="11" ry="13" fill="#05070c"/><path d="M-119 150 Q-121 114 -106 112 Q-91 114 -93 150Z" fill="#05070c"/>
+        <path d="M-95 124 L-86 ${96 + Math.sin(t * 5) * 8}" stroke="#05070c" stroke-width="7" stroke-linecap="round"/></g>` : ''}
       <rect x="80" y="70" width="90" height="80" fill="#0a0a0e" stroke="#05070c" stroke-width="6"/>
       <rect x="-40" y="140" width="80" height="160" fill="#140e0a" stroke="#05070c" stroke-width="6"/>
       <path d="M-230 0 h460" stroke="#e8eef8" stroke-width="10"/>

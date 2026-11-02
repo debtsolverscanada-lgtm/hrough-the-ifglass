@@ -1,0 +1,1117 @@
+{
+ "format": "long",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.4,
+  "similarity": 0.8,
+  "style": 0.4,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "bedroomdoor",
+  "bp": {
+   "feet": true,
+   "knock": true
+  },
+  "zoom": [
+   960,
+   1000,
+   1.25
+  ],
+  "lines": [
+   [
+    "DON'T OPEN IT",
+    "#fff"
+   ],
+   [
+    "IF IT KNOCKS",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 560,
+  "y": 640,
+  "step": 190,
+  "size": 170,
+  "band": 0,
+  "circle": [
+   960,
+   1170,
+   230
+  ],
+  "tint": "#200010"
+ },
+ "yt": {
+  "title": "\"If It Knocks From Inside, Don't Open It\" - The House-Sitting Rules That Ruined My Life 🚪 (8D AUDIO)",
+  "description": "🎧 WEAR HEADPHONES - 8D audio.\n\nA winter house-sitting job. Five hundred dollars cash for three nights at an old farmhouse. The owners left a letter with four rules. Rule three: the upstairs bedroom stays shut, and if anything knocks from inside it, do not answer.\n\nNobody is supposed to be up there.\n\nWhich rule would you have broken first? Tell me in the comments.\n\n#scarystories #horrorstories #3amstories #housesitting #rules #8daudio #animatedhorror",
+  "tags": [
+   "scary stories",
+   "horror stories",
+   "house sitting horror",
+   "rules horror",
+   "farmhouse horror",
+   "8d audio",
+   "3am stories",
+   "animated horror",
+   "anime horror",
+   "creepy stories",
+   "scary story animated",
+   "true scary stories"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true,
+    "knock": true,
+    "shake": 0.2
+   },
+   "text": "The bedroom upstairs was empty. I checked it twice. So why was someone knocking on the door... from the inside?",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "knock",
+     0.2
+    ],
+    [
+     "knock",
+     4.6
+    ],
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "letter",
+   "p": {
+    "to": "House-sitter:",
+    "lines": [
+     "3. The upstairs bedroom",
+     "    stays shut. If it knocks,",
+     "    DO NOT ANSWER."
+    ],
+    "red": 2,
+    "sign": "- the Pruitts"
+   },
+   "text": "The owners left me four rules. Rule three said: the upstairs bedroom stays shut. If anything knocks from inside it, do not answer.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "sting",
+     4.0
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:14",
+    "label": "farmhouse night 3",
+    "rec": true,
+    "spike": 0.9
+   },
+   "text": "My phone recorded the whole third night. I still have the file. Later in this story, you're going to hear what's on it.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "static",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 0.0,
+    "smoke": true,
+    "light": true
+   },
+   "text": "Everyone thinks the scary part of house-sitting is being alone in a big empty house. It isn't. The scary part is finding out you never were.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "headphones in. 8D audio.",
+    "color": "#e8e8e8",
+    "size": 90
+   },
+   "text": "Put your headphones in. And pay attention to rule four... because it's the only one I didn't understand until it was too late.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "NIGHT ONE",
+    "color": "#e8e8e8"
+   },
+   "text": "Night one.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "4:12",
+    "msgs": [
+     [
+      "Mrs. Pruitt",
+      "$500 cash for 3 nights. Just keep the house warm while we're away",
+      0.3
+     ],
+     [
+      "Mrs. Pruitt",
+      "letter's on the table. please follow it exactly",
+      1.6
+     ]
+    ]
+   },
+   "text": "The job came from a woman named Mrs. Pruitt. Five hundred dollars cash, three nights, an old farmhouse forty minutes past the last gas station. Just keep the house warm.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "buzzphone",
+     0.3
+    ],
+    [
+     "buzzphone",
+     1.6
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 0,
+    "smoke": true,
+    "light": false,
+    "snap": {
+     "at": 3.0,
+     "to": [
+      1180,
+      1050
+     ],
+     "z": 1.6
+    }
+   },
+   "text": "It was already getting dark when I pulled in. Snow up to my shins. No neighbours. Just a black wall of trees behind the barn.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "fridge": true
+   },
+   "text": "Inside, the kitchen smelled like woodsmoke and old coffee. The envelope of cash was on the table. And under it... the letter.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "fridge",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "letter",
+   "p": {
+    "to": "House-sitter:",
+    "lines": [
+     "1. Keep the fire going.",
+     "2. Lock the back door at 9.",
+     "    Even if you hear the dog."
+    ]
+   },
+   "text": "Rule one. Keep the fire going after dark. Rule two. Lock the back door at nine. Even if you hear the dog.",
+   "pause": 0.3
+  },
+  {
+   "scene": "letter",
+   "p": {
+    "to": "House-sitter:",
+    "lines": [
+     "1. Keep the fire going.",
+     "2. Lock the back door at 9.",
+     "    Even if you hear the dog.",
+     "3. The upstairs bedroom",
+     "4. Footprints in the snow?",
+     "    Count them."
+    ],
+    "red": 4,
+    "sign": "- the Pruitts"
+   },
+   "text": "Rule three. The bedroom. Rule four. If there are footprints in the snow in the morning... count them. That was it. Count them. And then what?",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "sting",
+     6.0
+    ]
+   ]
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "none",
+    "walk": 0.7
+   },
+   "text": "Here's the thing. I looked for the dog all evening. No bowl. No leash. No hair on the couch. The Pruitts didn't own a dog.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "steps",
+     0,
+     "orbit"
+    ],
+    [
+     "creak",
+     3.5,
+     "behind"
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "8:58",
+    "msgs": [
+     [
+      "Me",
+      "hey quick q, where's the dog? want to make sure he's inside before i lock up",
+      0.3
+     ]
+    ]
+   },
+   "text": "So at two minutes to nine, I texted Mrs. Pruitt.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "buzzphone",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "9:00",
+    "msgs": [
+     [
+      "Me",
+      "hey quick q, where's the dog? want to make sure he's inside before i lock up",
+      0
+     ],
+     [
+      "Mrs. Pruitt",
+      "We had to put Duke down in 2019.",
+      1.0
+     ],
+     [
+      "Mrs. Pruitt",
+      "Lock the door.",
+      2.6
+     ]
+    ]
+   },
+   "text": "She answered in four seconds. We had to put Duke down six years ago. Lock the door.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "buzzphone",
+     1.0
+    ],
+    [
+     "buzzphone",
+     2.6
+    ],
+    [
+     "silence_hit",
+     3.4
+    ]
+   ]
+  },
+  {
+   "scene": "door",
+   "p": {},
+   "text": "And right as I turned the deadbolt... something on the other side of the back door started to whine. And scratch. Low, at the bottom. Exactly like a dog.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "creak",
+     1.0
+    ],
+    [
+     "breath",
+     4.0,
+     "right"
+    ]
+   ]
+  },
+  {
+   "scene": "door",
+   "p": {
+    "shake": 0.3
+   },
+   "text": "Then it stopped. And a voice, right against the wood, said...",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "door",
+   "p": {
+    "shake": 0.4
+   },
+   "text": "Duke? Here, boy.",
+   "voice": [
+    "Dorothy",
+    "Matilda",
+    "Alice"
+   ],
+   "fx": "wrong+right",
+   "pause": 1.0,
+   "sfx": [
+    [
+     "silence_hit",
+     1.2
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "",
+    "color": "#e8e8e8"
+   },
+   "text": "It was Mrs. Pruitt's voice. And Mrs. Pruitt was in Florida.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "11:40",
+    "eyes": "wide",
+    "phone": true
+   },
+   "text": "I didn't sleep. I sat on the couch with every light on, feeding the fire like my life depended on it. I thought that voice was the worst thing I'd hear in that house. I was so wrong.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "NIGHT TWO",
+    "color": "#e8e8e8"
+   },
+   "text": "Night two.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 1.0,
+    "smoke": true,
+    "light": false,
+    "snap": {
+     "at": 4.0,
+     "to": [
+      960,
+      1250
+     ],
+     "z": 1.9,
+     "back": 8.0
+    }
+   },
+   "text": "In the morning there were footprints. Bare feet. Coming out of the trees, straight across the yard, right up to the back door. Rule four. Count them.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 1.0,
+    "light": false,
+    "snap": {
+     "at": 1.0,
+     "to": [
+      960,
+      1250
+     ],
+     "z": 2.3
+    }
+   },
+   "text": "So I counted. Thirty-one steps to the door. And then I looked for the steps going back. There weren't any.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "sting",
+     3.6
+    ]
+   ]
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "kitchen",
+    "walk": 0.4
+   },
+   "text": "I told myself the wind filled them in. Wind does that. I made coffee. I laughed at myself, a little. It was daytime. Daytime is safe.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "steps",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "none",
+    "flicker": true,
+    "shake": 0.2
+   },
+   "text": "But I want you to think about the last time you were home alone and heard the floor creak in a room you weren't in. That little voice that says, it's an old house. Remember that voice. Mine was about to stop working.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "creak",
+     2.0,
+     "behind"
+    ],
+    [
+     "creak",
+     6.0,
+     "right"
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": false
+   },
+   "text": "Because at four in the afternoon, I walked past the upstairs bedroom. The one that stays shut. And the light under the door was on.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true,
+    "shake": 0.2
+   },
+   "text": "And there were two shadows in the strip of light. Feet. Standing just on the other side. Perfectly still.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "breath",
+     1.0,
+     "left+close"
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "4:03",
+    "msgs": [
+     [
+      "Me",
+      "is someone staying in the upstairs bedroom??",
+      0.3
+     ],
+     [
+      "Mrs. Pruitt",
+      "No.",
+      2.2
+     ],
+     [
+      "Mrs. Pruitt",
+      "Did you open it?",
+      3.4
+     ]
+    ]
+   },
+   "text": "I texted Mrs. Pruitt. Is someone staying in the upstairs bedroom? No. Then. Did you open it?",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "buzzphone",
+     0.3
+    ],
+    [
+     "buzzphone",
+     2.2
+    ],
+    [
+     "buzzphone",
+     3.4
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "4:04",
+    "msgs": [
+     [
+      "Me",
+      "no",
+      0
+     ],
+     [
+      "Mrs. Pruitt",
+      "Good. Whatever it says tonight, it is not us.",
+      1.4
+     ]
+    ]
+   },
+   "text": "I said no. She wrote back: Good. Whatever it says tonight... it is not us.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "buzzphone",
+     1.4
+    ],
+    [
+     "silence_hit",
+     2.6
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "2:51",
+    "eyes": "wide",
+    "phone": true,
+    "sweat": true
+   },
+   "text": "That night I started the voice memo. I wanted proof. Or maybe I just wanted something to be awake with me.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "tick",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:14",
+    "label": "farmhouse night 2",
+    "rec": true,
+    "spike": 0.2
+   },
+   "text": "At three fourteen in the morning, the recording picked up three knocks. Slow. From upstairs.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "knock",
+     1.8
+    ],
+    [
+     "knock",
+     2.6
+    ],
+    [
+     "knock",
+     3.4
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:15",
+    "label": "farmhouse night 2",
+    "rec": true,
+    "spike": 0.7,
+    "shake": 0.2
+   },
+   "text": "Then a voice. A man's voice, warm and tired, like someone's dad calling down the stairs.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "static",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:15",
+    "label": "farmhouse night 2",
+    "rec": true,
+    "spike": 1.0,
+    "shake": 0.4
+   },
+   "text": "Hey. It's Mr. Pruitt. We came home early. Can you come up and open the door? It's stuck.",
+   "voice": [
+    "Bill",
+    "George",
+    "Daniel"
+   ],
+   "fx": "far+orbit",
+   "pause": 1.0,
+   "sfx": [
+    [
+     "silence_hit",
+     1.2
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "",
+    "color": "#e8e8e8"
+   },
+   "text": "Mr. Pruitt's car was not in the driveway. There was no car in the driveway but mine. Whatever it says tonight... it is not us.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:20",
+    "eyes": "closed",
+    "phone": false
+   },
+   "text": "So I did the only thing I could think of. I put the pillow over my head. And I let it knock.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "knock",
+     0.8
+    ],
+    [
+     "knock",
+     3.0
+    ],
+    [
+     "knock",
+     5.2
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "5:58",
+    "eyes": "tired",
+    "phone": true
+   },
+   "text": "It knocked until almost six. And then, right before the sun came up, it stopped. Like it knew. I thought I'd made it. One more night and I'd have my five hundred dollars. But here's where it gets bad.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "silence_hit",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "NIGHT THREE",
+    "color": "#ff2a2a"
+   },
+   "text": "Night three.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 1.0,
+    "light": true,
+    "snap": {
+     "at": 2.5,
+     "to": [
+      960,
+      1250
+     ],
+     "z": 2.0,
+     "back": 7.0
+    }
+   },
+   "text": "Second morning. More footprints. Same trees, same yard, same door. I counted again. Thirty-one. And again, none going back out.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "hall",
+   "p": {
+    "light": "bathroom",
+    "walk": 0.5,
+    "watcher": true
+   },
+   "text": "Sixty-two steps in. Zero steps out. Wait... if two of them walked in... and none walked out... then where were they?",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "steps",
+     0,
+     "behind"
+    ],
+    [
+     "sting",
+     5.0
+    ]
+   ]
+  },
+  {
+   "scene": "letter",
+   "p": {
+    "to": "Rule 4:",
+    "lines": [
+     "Footprints in the snow?",
+     "Count them."
+    ],
+    "red": 1
+   },
+   "text": "You see, I'd been reading rule four wrong the whole time. Counting the footprints wasn't about keeping something out. It's like counting your kids after a field trip. You count them to know how many came home.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "letter",
+   "p": {
+    "to": "(on the back)",
+    "lines": [
+     "If they don't leave...",
+     "neither should you."
+    ],
+    "red": 1,
+    "shake": 0.4
+   },
+   "text": "And when I flipped the letter over, there was one more line on the back, in different handwriting. If they don't leave... neither should you.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "sting",
+     4.0
+    ],
+    [
+     "silence_hit",
+     7.0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "6:41",
+    "msgs": [
+     [
+      "Me",
+      "im leaving. keep the money",
+      0.3
+     ],
+     [
+      "Mrs. Pruitt",
+      "Please don't. If you leave, they follow the warm one.",
+      2.0
+     ]
+    ]
+   },
+   "text": "I texted Mrs. Pruitt that I was leaving. She said, please don't. If you leave... they follow the warm one.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "buzzphone",
+     0.3
+    ],
+    [
+     "buzzphone",
+     2.0
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 1.0,
+    "light": true,
+    "smoke": true,
+    "snap": {
+     "at": 5.2,
+     "to": [
+      1055,
+      1090
+     ],
+     "z": 2.6
+    }
+   },
+   "text": "I didn't care. I grabbed my keys and ran out the front door. And as I backed down the driveway, I looked up at the house. The bedroom light was on.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     4.8
+    ]
+   ]
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 1.0,
+    "light": true,
+    "figs": true,
+    "shake": 0.2,
+    "snap": {
+     "at": 0.2,
+     "to": [
+      1055,
+      1090
+     ],
+     "z": 3.0
+    }
+   },
+   "text": "And there were two shapes standing in the window. Watching me go. One of them lifted its hand. And waved.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "heart",
+     0
+    ],
+    [
+     "whisper",
+     3.0,
+     "left"
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:14",
+    "label": "farmhouse night 3",
+    "rec": false,
+    "spike": 0.1
+   },
+   "text": "I made it home before dark. Locked every door. And that night, I finally played the recording from the night before. All the way to the end.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "static",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "5:57",
+    "label": "farmhouse night 2",
+    "rec": false,
+    "spike": 0.6,
+    "shake": 0.3
+   },
+   "text": "Right before six, after the knocking stopped, there's a whisper. So close to the phone it clips the microphone. It says...",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "5:57",
+    "label": "farmhouse night 2",
+    "rec": false,
+    "spike": 1.0,
+    "shake": 0.5
+   },
+   "text": "Thirty-one. Thirty-two.",
+   "voice": [
+    "Callum",
+    "Clyde",
+    "George"
+   ],
+   "fx": "whisper+left+close",
+   "pause": 1.2,
+   "sfx": [
+    [
+     "silence_hit",
+     1.4
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "",
+    "color": "#e8e8e8"
+   },
+   "text": "It was counting. Not footprints. Steps. It was counting its steps... to my bed.",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "boom",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {
+    "text": "31 steps in. 0 out.",
+    "color": "#e8e8e8",
+    "size": 90
+   },
+   "text": "That was three weeks ago. I thought leaving was the end of it. But this morning, there was snow on my apartment steps. And footprints. Bare feet.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true
+   },
+   "text": "I counted them. Thirty-one... up to my door. None going back. And right now, while I'm telling you this... something is knocking on my bedroom door.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "knock",
+     4.0
+    ],
+    [
+     "knock",
+     4.8
+    ],
+    [
+     "knock",
+     5.6
+    ]
+   ]
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true,
+    "knock": true,
+    "shake": 0.5
+   },
+   "text": "From the inside.",
+   "pause": 1.4,
+   "sfx": [
+    [
+     "silence_hit",
+     0.0
+    ],
+    [
+     "knock",
+     1.0,
+     "behind"
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "PART 2|SOON",
+    "color": "#ff2a2a",
+    "sub": "which rule would you have broken first?"
+   },
+   "text": "If I'm still here tomorrow, I'll tell you what happened when I answered it. Which rule would you have broken first? Tell me in the comments.",
+   "pause": 1.0,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  }
+ ]
+}
