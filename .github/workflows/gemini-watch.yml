@@ -15,20 +15,36 @@ on:
 permissions:
   contents: write
 jobs:
-  watch:
+  list:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    outputs:
+      ids: ${{ steps.s.outputs.ids }}
+    steps:
+      - id: s
+        run: echo "ids=$(python3 -c 'import json,sys;print(json.dumps(sys.argv[1].split()))' "${{ github.event.inputs.ids }}")" >> $GITHUB_OUTPUT
+  watch:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        id: ${{ fromJSON(needs.list.outputs.ids) }}
     steps:
       - uses: actions/checkout@v4
       # Private study only: Gemini's notes are sealed before they reach the public repo.
       - name: Watch with Gemini
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python3 study/gemini_watch.py res "${{ github.event.inputs.mode }}" ${{ github.event.inputs.ids }}
+        run: timeout 33m python3 -u study/gemini_watch.py res "${{ github.event.inputs.mode }}" ${{ matrix.id }}
       - name: Commit sealed notes
+        if: always()
         run: |
-          ls res
+          ls res || exit 0
+          [ -n "$(ls res)" ] || exit 0
           D=study/${{ github.event.inputs.name }}; mkdir -p $D
-          vlog/seal.sh res $D/${{ github.run_id }}-gemini
+          vlog/seal.sh res $D/${{ github.run_id }}-${{ matrix.id }}
           git config user.name "study-bot" && git config user.email "study-bot@users.noreply.github.com"
-          git add $D && git commit -m "Gemini study (sealed): ${{ github.event.inputs.name }}" && git pull --rebase --autostash && git push
+          git add $D && git commit -m "Gemini study (sealed): ${{ github.event.inputs.name }} ${{ matrix.id }}"
+          for i in 1 2 3 4 5; do git pull --rebase && git push && break; sleep $((i*5)); done

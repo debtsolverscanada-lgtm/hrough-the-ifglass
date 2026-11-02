@@ -13,7 +13,7 @@ API = 'https://generativelanguage.googleapis.com/v1beta'
 def call(url, body=None):
     req = urllib.request.Request(url, data=json.dumps(body).encode() if body else None,
                                  headers={'Content-Type': 'application/json', 'x-goog-api-key': KEY})
-    with urllib.request.urlopen(req, timeout=900) as r: return json.load(r)
+    with urllib.request.urlopen(req, timeout=480) as r: return json.load(r)
 
 # best available model: newest "pro", else newest "flash", that supports generateContent
 names = [m['name'] for m in call(f'{API}/models?pageSize=200')['models'] if 'generateContent' in m.get('supportedGenerationMethods', [])]
@@ -60,7 +60,7 @@ for vid in ids:
                 msg = e.read().decode()[:400]; print(f'{vid} {m} HTTP {e.code}: {msg}')
                 if e.code == 429 and 'limit: 0' in msg: dead.add(m); break
                 if e.code == 404: dead.add(m); break
-                if e.code in (429, 500, 503): time.sleep(60 * (attempt + 1)); continue
+                if e.code in (429, 500, 503): time.sleep(30 * (attempt + 1)); continue
                 break
             except Exception as e:
                 print(f'{vid} {m} error: {str(e)[:400]}'); time.sleep(10)
