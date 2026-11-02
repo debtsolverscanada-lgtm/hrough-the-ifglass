@@ -451,6 +451,8 @@ def drop_missing(edl):
         if 'clips' in sec: sec['clips'] = keep
     edl['sections'] = [s for s in edl['sections'] if s['type'] == 'rewind' or s.get('clips')]
     if gone: print('SKIPPED (not downloaded):', ', '.join(sorted(gone)), flush=True)
+    if gone and not PREVIEW and os.environ.get('ALLOW_MISSING') != '1':  # don't render and upload a broken full cut
+        raise SystemExit(f'{len(gone)} clips failed to download; stopping instead of uploading a partial vlog')
 
 
 def main():

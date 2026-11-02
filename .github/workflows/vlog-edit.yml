@@ -36,6 +36,9 @@ jobs:
       - name: Download raw footage
         env:
           VLOG_KEY: ${{ secrets.VLOG_KEY }}
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
         run: |
           vlog/unlock.sh
           # read the links from the event file (not the step env) and mask them, so public logs never show them

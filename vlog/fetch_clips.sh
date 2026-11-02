@@ -15,6 +15,10 @@ for p in $*; do
       curl -sSL --retry 3 -o "raw/$n" "https://drive.usercontent.google.com/download?id=$id&export=download&confirm=t"
       [ "$(stat -c %s "raw/$n" 2>/dev/null || echo 0)" -lt 1000000 ] && { echo "direct link failed for $n: $(head -c 300 "raw/$n" | tr '\n' ' ')"; rm -f "raw/$n"; }
     fi
+    if [ ! -s "raw/$n" ]; then  # logged-in Drive API: not limited by the public-link download quota
+      did=${id:-$(echo "$u" | sed -n 's/.*[?&]id=\([^&]*\).*/\1/p')}
+      [ -n "$did" ] && python3 vlog/drive_fetch.py "$did" "raw/$n" || rm -f "raw/$n"
+    fi
     [ -s "raw/$n" ] || echo "FAILED $n"
   fi
 done
