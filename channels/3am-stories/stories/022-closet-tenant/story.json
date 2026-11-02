@@ -11,11 +11,17 @@
  "thumb": {
   "scene": "thumbOver",
   "style": "anime",
-  "base": "closet",
+  "base": "oshiire",
   "bp": {
-   "gap": 0.6,
-   "person": 1
+   "open": 1,
+   "person": 1,
+   "bottles": true
   },
+  "zoom": [
+   760,
+   450,
+   1.55
+  ],
   "lines": [
    [
     "SHE LIVED IN",
@@ -26,11 +32,11 @@
     "#ff2a2a"
    ]
   ],
-  "x": 1380,
+  "x": 1300,
   "y": 1130,
   "step": 170,
   "size": 150,
-  "band": 0.5,
+  "band": 0.6,
   "tint": "#200008"
  },
  "yt": {
@@ -97,9 +103,10 @@
    "pause": 0.05
   },
   {
-   "scene": "kitchen",
+   "scene": "street",
    "p": {
-    "fridge": false,
+    "lit": 1,
+    "zoom": 0.2,
     "pops": [
      {
       "at": 0.4,
@@ -118,6 +125,7 @@
    "scene": "kitchen",
    "p": {
     "fridge": true,
+    "food": 1,
     "pops": [
      {
       "at": 0.5,
@@ -127,8 +135,7 @@
       "y": 0.14
      }
     ],
-    "push": 0.035,
-    "food": 1
+    "push": 0.035
    },
    "text": "And in 2008, his food starts vanishing.",
    "pause": 0.05,
@@ -140,21 +147,39 @@
    ]
   },
   {
-   "scene": "kitchen",
+   "scene": "fridgeClose",
    "p": {
-    "fridge": true,
+    "yogurt": 3,
+    "rice": 1,
     "snap": {
-     "at": 0.6,
+     "at": 0.1,
      "to": [
-      1295,
-      845
+      840,
+      860
      ],
-     "z": 1.9
+     "z": 1.6
     },
-    "push": 0.05,
-    "food": 0.45
+    "push": 0.05
    },
-   "text": "Yogurt. Rice. A little less every day.",
+   "text": "Yogurt.",
+   "pause": 0.05
+  },
+  {
+   "scene": "fridgeClose",
+   "p": {
+    "yogurt": 3,
+    "rice": 0.35,
+    "snap": {
+     "at": 0.1,
+     "to": [
+      760,
+      1200
+     ],
+     "z": 1.6
+    },
+    "push": 0.05
+   },
+   "text": "Rice. A little less every day.",
    "pause": 0.05
   },
   {
@@ -175,19 +200,36 @@
    ]
   },
   {
-   "scene": "phone",
+   "scene": "kitchen",
    "p": {
-    "time": "7:58",
-    "msgs": [
-     [
-      "Home Cam",
-      "Camera installed: Kitchen",
-      0.3
-     ]
-    ],
+    "cam": true,
+    "snap": {
+     "at": 0.8,
+     "to": [
+      1110,
+      600
+     ],
+     "z": 2.0
+    },
     "push": 0.035
    },
    "text": "So he sets up cameras that send pictures to his phone.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "buzzphone",
+     1.2
+    ]
+   ]
+  },
+  {
+   "scene": "office",
+   "p": {
+    "alert": true,
+    "shock": false,
+    "push": 0
+   },
+   "text": "One day at work, it buzzes.",
    "pause": 0.05,
    "sfx": [
     [
@@ -204,18 +246,18 @@
      [
       "Home Cam",
       "⚠ Motion detected: Kitchen",
-      0.3
+      0.2
      ]
     ],
     "shake": 0.3,
-    "push": 0
+    "push": 0.035
    },
-   "text": "One day at work, it buzzes.",
+   "text": "Motion detected. Kitchen.",
    "pause": 0.05,
    "sfx": [
     [
      "buzzphone",
-     0.3
+     0.2
     ]
    ]
   },
@@ -223,6 +265,8 @@
    "scene": "kitchen",
    "p": {
     "fridge": true,
+    "food": 0.3,
+    "cam": true,
     "watcher": 1,
     "snap": {
      "at": 0.3,
@@ -232,8 +276,7 @@
      ],
      "z": 1.8
     },
-    "push": 0.06,
-    "food": 0.3
+    "push": 0.06
    },
    "text": "There's someone in his kitchen.",
    "pause": 0.15,
@@ -249,27 +292,25 @@
    ]
   },
   {
-   "scene": "text",
+   "scene": "office",
    "p": {
-    "text": "EVERY DOOR|IS LOCKED.",
-    "color": "#ff2a2a",
+    "alert": true,
+    "shock": true,
     "push": 0
    },
-   "text": "Every door is locked.",
+   "text": "And every door in his house is locked.",
    "pause": 0.05,
    "sfx": [
     [
      "boom",
-     0
+     0.6
     ]
    ]
   },
   {
-   "scene": "hall",
+   "scene": "police",
    "p": {
-    "light": "none",
-    "flicker": true,
-    "walk": 0.6,
+    "n": 2,
     "push": 0.035
    },
    "text": "Police search the whole house.",
@@ -283,10 +324,10 @@
    ]
   },
   {
-   "scene": "hall",
+   "scene": "police",
    "p": {
-    "light": "none",
-    "flicker": true,
+    "n": 1,
+    "eyes": "wide",
     "push": 0.05
    },
    "text": "Nobody. Wait... then where did they go?",
@@ -300,34 +341,35 @@
    ]
   },
   {
-   "scene": "closet",
+   "scene": "oshiire",
    "p": {
-    "gap": 0.05,
-    "gapTo": 0.5,
+    "open": 0,
+    "openTo": 1,
+    "officer": true,
     "push": 0.035
    },
-   "text": "Then one cop slides open the little cupboard above his closet.",
+   "text": "Then one cop slides open the little cupboard at the top of his closet.",
    "pause": 0.05,
    "sfx": [
     [
      "creak",
-     0.4
+     0.6
     ]
    ]
   },
   {
-   "scene": "closet",
+   "scene": "oshiire",
    "p": {
-    "gap": 0.5,
-    "gapTo": 0.6,
+    "open": 1,
     "person": 1,
+    "officer": true,
     "snap": {
      "at": 0.2,
      "to": [
-      960,
-      900
+      700,
+      560
      ],
-     "z": 1.8
+     "z": 2.0
     },
     "pops": [
      {
@@ -335,7 +377,7 @@
       "type": "label",
       "text": "HORIKAWA",
       "x": 0.55,
-      "y": 0.18
+      "y": 0.14
      }
     ],
     "push": 0
@@ -355,11 +397,11 @@
    ]
   },
   {
-   "scene": "closet",
+   "scene": "oshiire",
    "p": {
-    "gap": 0.6,
-    "gapTo": 0.6,
+    "open": 1,
     "person": 1,
+    "officer": true,
     "pops": [
      {
       "at": 0.3,
@@ -375,29 +417,37 @@
    "pause": 0.05
   },
   {
-   "scene": "closet",
+   "scene": "oshiire",
    "p": {
-    "gap": 0.6,
-    "gapTo": 0.6,
-    "person": 0.8,
+    "open": 1,
+    "person": 1,
+    "bottles": true,
+    "snap": {
+     "at": 0.1,
+     "to": [
+      760,
+      560
+     ],
+     "z": 2.0
+    },
     "push": 0.035
    },
    "text": "She's got a mattress up there. Bottles of drinking water.",
    "pause": 0.05
   },
   {
-   "scene": "closet",
+   "scene": "oshiire",
    "p": {
-    "gap": 0.6,
-    "gapTo": 0.6,
-    "person": 0.9,
+    "open": 1,
+    "person": 1,
+    "bottles": true,
     "pops": [
      {
       "at": 1.6,
       "type": "num",
       "text": "1 YEAR",
       "x": 0.5,
-      "y": 0.2
+      "y": 0.85
      }
     ],
     "push": 0.035

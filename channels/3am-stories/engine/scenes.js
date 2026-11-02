@@ -467,7 +467,7 @@ S.kitchenDoor = (t, d, p) => `${room('#040405')}
     ${[0, 1, 2, 3].map((i) => `<rect x="${420 + i * 40}" y="${1500 + i * 110}" width="${1080 - i * 80}" height="22" fill="#0d0d0d"/>`).join('')}`;
 // a real kitchen at night: upper and lower cabinets, counter with sink and faucet under a moonlit window, a stove,
 // a wall clock and a tall fridge. p: fridge (door swings open, lit shelves, light spills on the floor), food (0..1 how
-// full the shelves are), time (clock text), watcher (0..1 a figure by the fridge), kid, lights (warm ceiling light on)
+// full the shelves are), time (clock text), cam (a security camera on the wall, red light blinking), watcher (0..1 a figure by the fridge), kid, lights (warm ceiling light on)
 S.kitchen = (t, d, p) => {
   const fl = flick(t, 0.25), open = p.fridge ? ease(Math.min(1, t / 0.8 + 0.6)) : 0, food = p.food ?? 1, warm = p.lights;
   const ink = '#0a0a0e', cab = warm ? '#5a4632' : '#2a2f3e', cabD = warm ? '#3e3020' : '#1c202c', top = warm ? '#c9c2b4' : '#5d6478';
@@ -512,6 +512,7 @@ S.kitchen = (t, d, p) => {
       <path d="M${FX} ${FY} L${FX - 150 * open} ${FY + 40 * open} L${FX - 150 * open} ${FY + FH - 40 * open} L${FX} ${FY + FH}Z" fill="#c9d2de" stroke="${ink}" stroke-width="8"/>
       <path d="M${FX - 40 * open} ${FY + 140} v60" stroke="${ink}" stroke-width="8" stroke-linecap="round"/>`
     : `<rect x="${FX + FW - 30}" y="${FY + 80}" width="12" height="110" rx="5" fill="#d8dce4" stroke="${ink}" stroke-width="3"/><rect x="${FX + FW - 30}" y="${FY + 270}" width="12" height="160" rx="5" fill="#d8dce4" stroke="${ink}" stroke-width="3"/>`}
+    ${p.cam ? `<g transform="translate(1110,600)"><rect x="-10" y="-60" width="20" height="40" fill="#cfd3dc" stroke="${ink}" stroke-width="4"/><path d="M-50 -24 h100 l-20 60 h-60z" fill="#e8ebf2" stroke="${ink}" stroke-width="6"/><circle cx="0" cy="22" r="20" fill="#14161c" stroke="${ink}" stroke-width="5"/><circle cx="34" cy="-8" r="7" fill="#ff2a2a" opacity="${Math.sin(t * 6) > 0 ? 1 : 0.2}"/></g>` : ''}
     ${p.watcher ? watcher(FX - 230, 880, .85, p.watcher, { tall: 1.0, fingers: true, blink: (t % 2.7) > 2.6 }) : ''}
     ${p.kid ? kid(960, 1420 - ease(t / d) * 260, 0.7 - ease(t / d) * 0.15, { eyes: 'closed', walk: t * 3 }) : ''}
     <rect width="1920" height="1920" fill="#203060" opacity="${warm ? 0 : 0.14}"/>`;
@@ -1140,3 +1141,141 @@ S.house = (t, d, p) => {
     <rect width="1920" height="1920" fill="#203060" opacity=".12"/>`;
 };
 FOCUS.letter = 960; FOCUS.house = 1000;
+
+// ---------- places and things for true stories: everything the narrator names gets drawn ----------
+const K = { ink: '#0a0a12' };
+// police officer (navy uniform, peaked cap, badge), optional flashlight beam. o.beam: angle in degrees (0 = right)
+function officer(x, y, s, o = {}) {
+  const ink = K.ink, nv = '#1c2a4a', nvS = '#111b33';
+  const beam = o.beam != null ? `<g transform="translate(150,330) rotate(${o.beam})"><path d="M0 -14 L1100 -260 L1100 260 L0 14Z" fill="#fff6d0" opacity=".16"/><path d="M0 -6 L900 -90 L900 90 L0 6Z" fill="#fff6d0" opacity=".18"/></g>` : '';
+  return `<g transform="translate(${x},${y}) scale(${s})">${beam}
+    <path d="M-132 150 Q-138 46 -44 36 L44 36 Q138 46 132 150 L148 520 L-148 520Z" fill="${nv}" stroke="${ink}" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M40 40 Q138 46 132 150 L148 520 L50 520 Q90 300 40 40Z" fill="${nvS}"/>
+    <path d="M-44 36 L0 110 L44 36" fill="#cfd8ea" stroke="${ink}" stroke-width="6"/><path d="M-8 60 L0 110 L8 60Z" fill="${nvS}"/>
+    <path d="M-150 360 H150" stroke="#0b0b10" stroke-width="30"/><rect x="-24" y="345" width="48" height="30" rx="4" fill="#c9a24a"/>
+    <path d="M60 120 l26 0 l6 30 l-19 18 l-19 -18z" fill="#e6c25a" stroke="${ink}" stroke-width="4"/>
+    <path d="M-124 160 Q-176 300 -150 430" stroke="${ink}" stroke-width="72" stroke-linecap="round" fill="none"/><path d="M-124 160 Q-176 300 -150 430" stroke="${nv}" stroke-width="58" stroke-linecap="round" fill="none"/>
+    <path d="M124 160 Q170 260 150 330" stroke="${ink}" stroke-width="72" stroke-linecap="round" fill="none"/><path d="M124 160 Q170 260 150 330" stroke="${nvS}" stroke-width="58" stroke-linecap="round" fill="none"/>
+    ${o.beam != null ? `<rect x="130" y="310" width="90" height="34" rx="8" fill="#2a2a2a" stroke="${ink}" stroke-width="5" transform="rotate(${o.beam} 150 330)"/>` : ''}
+    ${head(0, -110, 1, { eyes: o.eyes || 'normal', look: o.look ?? 0.5 })}
+    <path d="M-120 -210 Q0 -268 120 -210 L112 -170 L-112 -170Z" fill="${nv}" stroke="${ink}" stroke-width="7"/>
+    <path d="M-118 -172 H118 L140 -150 H-140Z" fill="#0b0f1c" stroke="${ink}" stroke-width="6"/>
+    <circle cx="0" cy="-208" r="16" fill="#e6c25a" stroke="${ink}" stroke-width="4"/>
+  </g>`;
+}
+
+// close-up of the open fridge: yogurt cups and a bowl of rice under cling film, milk, eggs. p.yogurt (number of cups 0-6),
+// p.rice (0..1 how full the rice bowl is), p.labels (true: small hand-written labels). Light flickers a little.
+S.fridgeClose = (t, d, p) => {
+  const ink = K.ink, fl = flick(t, 0.2), n = p.yogurt ?? 6, r = p.rice ?? 1;
+  const cup = (x, y) => `<g transform="translate(${x},${y})"><path d="M-46 -110 L46 -110 L38 0 L-38 0Z" fill="#f6f4ee" stroke="${ink}" stroke-width="6"/>
+    <rect x="-50" y="-124" width="100" height="18" rx="5" fill="#e04a6a" stroke="${ink}" stroke-width="5"/>
+    <rect x="-34" y="-80" width="68" height="34" rx="6" fill="#ffd2dc"/><text x="0" y="-56" text-anchor="middle" font-family="Anton" font-size="22" fill="#b0234a">YOGURT</text></g>`;
+  const cups = [...Array(6)].map((_, k) => k < n ? cup(640 + k * 115, 900) : `<ellipse cx="${640 + k * 115}" cy="900" rx="40" ry="8" fill="#b8c6d6" opacity=".7"/>`).join('');
+  const ry = 1180 - 120 * r;
+  return `<rect width="1920" height="1920" fill="#dfeaf2"/>
+    <rect x="380" y="300" width="1160" height="1300" rx="30" fill="#f4fbff" stroke="${ink}" stroke-width="14" opacity="${0.92 + 0.08 * fl}"/>
+    <circle cx="960" cy="400" r="70" fill="#fff" filter="url(#blur)"/>
+    ${[910, 1300].map((y) => `<rect x="400" y="${y}" width="1120" height="22" fill="#b9cad9" stroke="${ink}" stroke-width="5"/><rect x="400" y="${y + 22}" width="1120" height="14" fill="#000" opacity=".08"/>`).join('')}
+    ${cups}
+    <g transform="translate(760,1300)"><path d="M-170 -150 Q-170 0 0 0 Q170 0 170 -150Z" fill="#fdfdfb" stroke="${ink}" stroke-width="8"/>
+      <path d="M-170 -150 H170" stroke="${ink}" stroke-width="8"/>
+      ${r > 0 ? `<path d="M-160 ${-150 + (1 - r) * 120} Q0 ${-200 + (1 - r) * 150} 160 ${-150 + (1 - r) * 120} L150 -150 L-150 -150Z" fill="#fffef6" stroke="#d8d4c4" stroke-width="5"/>
+        ${[...Array(Math.round(26 * r))].map((_, k) => `<ellipse cx="${-130 + (k * 47) % 260}" cy="${-150 - (k % 3) * 10 + (1 - r) * 110}" rx="9" ry="5" fill="#ece8d8"/>`).join('')}` : ''}
+      <path d="M-178 -168 Q0 -230 178 -168" stroke="#bfe0ff" stroke-width="8" fill="none" opacity=".7"/>
+      <text x="0" y="-60" text-anchor="middle" font-family="Anton" font-size="44" fill="#6a6a6a">RICE</text></g>
+    <g transform="translate(1180,1300)"><path d="M-70 0 V-300 L0 -360 L70 -300 V0Z" fill="#fff" stroke="${ink}" stroke-width="7"/><rect x="-70" y="-220" width="140" height="90" fill="#3a8ae0"/><text x="0" y="-160" text-anchor="middle" font-family="Anton" font-size="40" fill="#fff">MILK</text></g>
+    <g transform="translate(1390,1300)">${[0, 1, 2].map((k) => `<ellipse cx="${-50 + k * 50}" cy="-40" rx="26" ry="34" fill="#f2dcc0" stroke="${ink}" stroke-width="5"/>`).join('')}</g>
+    <rect width="1920" height="1920" fill="#203060" opacity=".06"/>`;
+};
+FOCUS.fridgeClose = 960;
+
+// a quiet residential street in Fukuoka (Japan) at night: two-storey houses with dark tiled roofs, power lines on poles,
+// a glowing drinks vending machine, one lit window. p.lit (which house window glows: 0,1,2), p.zoom (slow move in)
+S.street = (t, d, p) => {
+  const ink = K.ink, z = 1 + (p.zoom || 0) * ease(t / d), lit = p.lit ?? 1, fl = flick(t, 0.5);
+  const house = (x, i) => `<g transform="translate(${x},0)">
+    <path d="M-40 700 L230 560 L500 700Z" fill="#1c2230" stroke="${ink}" stroke-width="8"/>${[0, 1, 2, 3, 4].map((k) => `<path d="M${-10 + k * 50} ${686 - k * 26} L${470 - k * 50} ${686 - k * 26}" stroke="#2a3244" stroke-width="5"/>`).join('')}
+    <rect x="0" y="700" width="460" height="230" fill="#3a3a40" stroke="${ink}" stroke-width="8"/>
+    <path d="M-30 930 L230 830 L490 930Z" fill="#1c2230" stroke="${ink}" stroke-width="8"/>
+    <rect x="0" y="930" width="460" height="300" fill="#4a4740" stroke="${ink}" stroke-width="8"/>
+    ${[[60, 760], [300, 760], [60, 1000]].map(([wx, wy], k) => `<rect x="${wx}" y="${wy}" width="110" height="90" fill="${i === lit && k === 0 ? '#ffd27a' : '#0c1018'}" opacity="${i === lit && k === 0 ? fl : 1}" stroke="${ink}" stroke-width="6"/><path d="M${wx + 55} ${wy} v90" stroke="${ink}" stroke-width="5"/>`).join('')}
+    <rect x="280" y="1040" width="120" height="190" fill="#2a2016" stroke="${ink}" stroke-width="6"/>
+    <rect x="-20" y="1180" width="500" height="50" fill="#2a2a30" stroke="${ink}" stroke-width="6"/></g>`;
+  return `<rect width="1920" height="1920" fill="#060a18"/>
+    ${[...Array(40)].map((_, i) => `<circle cx="${(i * 733) % 1920}" cy="${430 + (i * 197) % 260}" r="${1 + i % 2}" fill="#fff" opacity=".5"/>`).join('')}
+    <circle cx="1600" cy="500" r="50" fill="#eef3ff" opacity=".8"/>
+    <g transform="translate(960,1000) scale(${z}) translate(-960,-1000)">
+      ${house(-180, 0)}${house(380, 1)}${house(940, 2)}
+      <rect x="1460" y="1020" width="150" height="210" rx="10" fill="#e9f2ff" opacity="${0.9 * fl}" stroke="${ink}" stroke-width="7"/>
+      ${[0, 1, 2].map((r) => [0, 1, 2].map((c) => `<rect x="${1475 + c * 44}" y="${1040 + r * 50}" width="32" height="38" rx="5" fill="${['#e04a4a', '#3a8ae0', '#f0c040'][(r + c) % 3]}"/>`).join('')).join('')}
+      <circle cx="1535" cy="1125" r="230" fill="#cfe4ff" opacity=".12" filter="url(#blur)"/>
+      ${[350, 1350].map((x) => `<rect x="${x}" y="520" width="22" height="720" fill="#151515"/><path d="M${x - 50} 560 h122" stroke="#151515" stroke-width="12"/>`).join('')}
+      <path d="M-100 600 Q350 650 361 562 Q860 640 1361 562 Q1700 620 2100 590 M-100 640 Q350 690 361 600 Q860 690 1361 600 Q1700 660 2100 630" stroke="#0e0e0e" stroke-width="5" fill="none"/>
+      <rect x="0" y="1230" width="1920" height="700" fill="#141820"/><path d="M0 1400 H1920" stroke="#e8e0a0" stroke-width="10" stroke-dasharray="80 60" opacity=".5"/>
+    </g>
+    <rect width="1920" height="1920" fill="#203060" opacity=".12"/>`;
+};
+FOCUS.street = 960;
+
+// an office in the daytime: big windows over the city, rows of desks and monitors, co-workers, and HIM at the front desk
+// holding his phone. p.alert (phone lights up red with a notification), p.shock (his eyes go wide)
+S.office = (t, d, p) => {
+  const ink = K.ink, al = p.alert ? (Math.sin(t * 10) > 0 ? 1 : 0.6) : 0;
+  const desk = (x, y, s, who) => `<g transform="translate(${x},${y}) scale(${s})">
+    ${who ? `<g transform="translate(0,-40)">${person(0, 0, 0.55, { eyes: 'normal', look: 0.3, body: '#3a4a6a' })}</g>` : ''}
+    <rect x="-60" y="-190" width="160" height="110" rx="8" fill="#20283a" stroke="${ink}" stroke-width="6"/><rect x="-50" y="-180" width="140" height="90" fill="#7fa6e0" opacity=".8"/>
+    <rect x="-220" y="-70" width="440" height="40" fill="#c9b89a" stroke="${ink}" stroke-width="6"/><rect x="-200" y="-30" width="20" height="160" fill="#8a7a60"/><rect x="180" y="-30" width="20" height="160" fill="#8a7a60"/></g>`;
+  return `<rect width="1920" height="1920" fill="#d8dee6"/>
+    <rect x="0" y="420" width="1920" height="520" fill="#9fc2e6"/>
+    ${[...Array(12)].map((_, i) => `<rect x="${i * 170 - 20}" y="${600 - (i * 53 % 160)}" width="${120 + i * 17 % 50}" height="${400 + (i * 53 % 160)}" fill="#6c86a6" opacity=".7"/>`).join('')}
+    ${[...Array(7)].map((_, i) => `<rect x="${i * 300}" y="420" width="24" height="520" fill="#5a606a"/>`).join('')}
+    <rect x="0" y="940" width="1920" height="980" fill="#b9b2a4"/><rect x="0" y="930" width="1920" height="20" fill="#7a7468"/>
+    ${desk(420, 1060, 0.7, true)}${desk(960, 1040, 0.65, true)}${desk(1500, 1060, 0.7, true)}
+    <g transform="translate(960,1060)">${person(0, 120, 1.05, { eyes: p.shock ? 'wide' : 'normal', look: 0, sweat: p.shock, body: '#2a3550' })}
+      <rect x="-300" y="430" width="600" height="60" fill="#c9b89a" stroke="${ink}" stroke-width="8"/>
+      <g transform="translate(150,480)"><rect x="-55" y="-120" width="110" height="200" rx="16" fill="#111" stroke="${ink}" stroke-width="6"/>
+        <rect x="-45" y="-108" width="90" height="176" rx="8" fill="${p.alert ? '#ff3a3a' : '#9fd2ff'}" opacity="${p.alert ? al : 0.8}"/>
+        ${p.alert ? '<text x="0" y="-20" text-anchor="middle" font-family="Anton" font-size="44" fill="#fff">⚠</text>' : ''}</g></g>
+    ${p.alert ? `<circle cx="1110" cy="1500" r="300" fill="#ff3a3a" opacity="${0.12 * al}" filter="url(#blur)"/>` : ''}`;
+};
+FOCUS.office = 1000;
+
+// police searching the house with flashlights: a dark hallway, two officers, beams sweeping. p.n (1 or 2 officers)
+S.police = (t, d, p) => {
+  const sw = Math.sin(t * 1.3) * 18;
+  return `${room('#05060a')}
+    <rect x="740" y="470" width="440" height="700" fill="#0a0b10" stroke="#1a1c24" stroke-width="12"/>
+    ${(p.n ?? 2) > 1 ? officer(1250, 880, 0.8, { beam: 200 + sw, look: -0.6 }) : ''}
+    ${officer(720, 960, 0.95, { beam: -20 - sw, look: 0.6, eyes: p.eyes })}
+    <rect width="1920" height="1920" fill="#203060" opacity=".14"/>`;
+};
+FOCUS.police = 960;
+
+// a Japanese oshiire closet in a tatami room: wide sliding paper doors below and a small upper compartment (tenbukuro)
+// up near the ceiling. p.open (0..1 the upper door slides open), p.person (0..1 the woman lying on a thin mattress inside),
+// p.bottles (water bottles beside her), p.officer (an officer's flashlight beam from the bottom right)
+S.oshiire = (t, d, p) => {
+  const ink = K.ink, o = (p.open ?? 0) + ((p.openTo ?? p.open ?? 0) - (p.open ?? 0)) * ease(t / d);
+  const X0 = 560, X1 = 1360, TY0 = 440, TY1 = 640;
+  const fusuma = (x, w, y, h) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#e9e0c8" stroke="#3a2a1a" stroke-width="10"/>
+    <path d="M${x + 40} ${y + h * 0.7} q${w * 0.2} -40 ${w * 0.4} 0 t${w * 0.4} 0" stroke="#b9a87a" stroke-width="5" fill="none" opacity=".7"/>
+    <circle cx="${x + w - 40}" cy="${y + h / 2}" r="16" fill="#8a6a3a" stroke="#3a2a1a" stroke-width="4"/>`;
+  const inside = `<rect x="${X0}" y="${TY0}" width="${X1 - X0}" height="${TY1 - TY0}" fill="#07080c"/>
+    ${p.person ? `<g opacity="${p.person}"><rect x="${X0 + 40}" y="${TY1 - 50}" width="${X1 - X0 - 80}" height="34" rx="12" fill="#c9b8d8" stroke="${ink}" stroke-width="5"/>
+      <path d="M${X0 + 170} ${TY1 - 52} Q${X0 + 400} ${TY1 - 110} ${X1 - 120} ${TY1 - 60} L${X1 - 120} ${TY1 - 48} L${X0 + 170} ${TY1 - 40}Z" fill="#6a5a8a" stroke="${ink}" stroke-width="5"/>
+      ${head(X0 + 110, TY1 - 105, 0.5, { eyes: 'wide', look: 0.8, hair: '<path d="M-132 130 Q-152 -172 0 -180 Q152 -172 132 130 L98 160 L102 -36 Q60 -108 0 -110 Q-60 -108 -102 -36 L-98 160Z" fill="#8d8780" stroke="#120d0a" stroke-width="7" stroke-linejoin="round"/>' })}</g>` : ''}
+    ${p.bottles ? [0, 1, 2, 3].map((k) => `<g transform="translate(${X0 + 340 - k * 36},${TY1 - 40})"><rect x="-12" y="-74" width="24" height="74" rx="8" fill="#bfe6ff" opacity=".8" stroke="${ink}" stroke-width="3"/><rect x="-6" y="-86" width="12" height="14" fill="#2a6ad0"/></g>`).join('') : ''}`;
+  return `<rect width="1920" height="1920" fill="#14110c"/>
+    <rect x="0" y="420" width="1920" height="900" fill="#3a3326"/>
+    <rect x="0" y="1300" width="1920" height="620" fill="#7a7448"/>${[0, 1, 2, 3, 4].map((k) => `<path d="M${-200 + k * 520} 1300 L${-600 + k * 700} 1920" stroke="#4a4428" stroke-width="10"/>`).join('')}
+    <path d="M0 1300 H1920" stroke="#2a2416" stroke-width="16"/>
+    <rect x="${X0 - 40}" y="${TY0 - 30}" width="${X1 - X0 + 80}" height="900" fill="#2a1f14" stroke="#120c06" stroke-width="12"/>
+    ${inside}
+    ${fusuma(X0 + (X1 - X0) / 2 * o, (X1 - X0) / 2, TY0, TY1 - TY0)}${fusuma(X0 + (X1 - X0) / 2, (X1 - X0) / 2, TY0, TY1 - TY0)}
+    <rect x="${X0 - 40}" y="${TY1}" width="${X1 - X0 + 80}" height="30" fill="#2a1f14"/>
+    ${fusuma(X0, (X1 - X0) / 2, TY1 + 30, 620)}${fusuma(X0 + (X1 - X0) / 2, (X1 - X0) / 2, TY1 + 30, 620)}
+    ${p.officer ? `<path d="M1800 1700 L${X0 + 120} ${TY0 + 60} L${X1 - 200} ${TY1 - 10}Z" fill="#fff6d0" opacity=".2"/><circle cx="${X0 + 200}" cy="${TY1 - 80}" r="160" fill="#fff6d0" opacity=".14" filter="url(#blur)"/>` : ''}
+    <rect width="1920" height="1920" fill="#203060" opacity=".12"/>`;
+};
+FOCUS.oshiire = 960;
