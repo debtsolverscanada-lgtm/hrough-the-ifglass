@@ -19,3 +19,7 @@
 | Story | Grade | Hero |
 |---|---|---|
 | 022 closet tenant | sodiumNight (warm orange street-light night) | 57-year-old office worker: greying side-parted hair, glasses, age lines, white shirt + navy tie |
+
+## Sound (owner's rule, Nov 2026)
+- Effects sit under the voice: no sharp "bing" stings, no loud booms. Loud hits make people scroll away.
+- Measured target: loudest moment no more than ~7 dB above the typical level (022: was 11 dB, now 6.7 dB).

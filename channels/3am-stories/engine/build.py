@@ -96,26 +96,26 @@ print(f'{len(tl)} scenes, {TOTAL:.1f}s', flush=True)
 
 # ---------- sound design (all synthesised) ----------
 SFX = {  # kind: (lavfi graph, seconds, gain)
-    'tick': ("aevalsrc='0.5*sin(2*PI*2600*t)*exp(-90*mod(t\\,1))':d=4", 4, 0.5),
-    'breath': ("anoisesrc=d=4:c=pink:a=0.5,bandpass=f=700:w=500,tremolo=f=0.35:d=0.9", 4, 0.35),
-    'whisper': ("anoisesrc=d=2.5:c=white:a=0.4,bandpass=f=2600:w=1800,tremolo=f=7:d=0.8,afade=t=in:d=0.4,afade=t=out:st=1.8:d=0.7", 2.5, 0.35),
+    'tick': ("aevalsrc='0.5*sin(2*PI*2600*t)*exp(-90*mod(t\\,1))':d=4", 4, 0.18),
+    'breath': ("anoisesrc=d=4:c=pink:a=0.5,bandpass=f=700:w=500,tremolo=f=0.35:d=0.9", 4, 0.3),
+    'whisper': ("anoisesrc=d=2.5:c=white:a=0.4,bandpass=f=2600:w=1800,tremolo=f=7:d=0.8,afade=t=in:d=0.4,afade=t=out:st=1.8:d=0.7", 2.5, 0.3),
     'voice_far': ("anoisesrc=d=2:c=pink:a=0.5,bandpass=f=900:w=500,tremolo=f=5:d=0.7,lowpass=f=1500,afade=t=in:d=0.3,afade=t=out:st=1.4:d=0.6", 2, 0.4),
-    'steps': ("aevalsrc='0.9*sin(2*PI*70*t)*exp(-22*mod(t\\,0.62))':d=3.1,lowpass=f=400", 3.1, 0.6),
+    'steps': ("aevalsrc='0.9*sin(2*PI*70*t)*exp(-22*mod(t\\,0.62))':d=3.1,lowpass=f=400", 3.1, 0.35),
     'buzz': ("aevalsrc='0.06*sin(2*PI*100*t)+0.04*sin(2*PI*200*t)+0.02*sin(2*PI*300*t)':d=8,tremolo=f=11:d=0.6", 8, 0.6),
-    'creak': ("aevalsrc='0.3*sin(2*PI*(170+70*sin(2*PI*0.8*t))*t)*sin(PI*t/2.2)':d=2.2,bandpass=f=600:w=900,vibrato=f=14:d=0.6", 2.2, 0.6),
+    'creak': ("aevalsrc='0.3*sin(2*PI*(170+70*sin(2*PI*0.8*t))*t)*sin(PI*t/2.2)':d=2.2,bandpass=f=600:w=900,vibrato=f=14:d=0.6", 2.2, 0.35),
     'water': ("anoisesrc=d=2.4:c=pink:a=0.6,highpass=f=700,lowpass=f=6000,afade=t=in:d=0.2,afade=t=out:st=1.6:d=0.8", 2.4, 0.35),
-    'heart': ("aevalsrc='0.9*sin(2*PI*52*t)*(exp(-28*mod(t\\,1.05))+0.7*exp(-28*mod(t-0.24\\,1.05))*gte(mod(t\\,1.05)\\,0.24))':d=4.2,lowpass=f=180", 4.2, 0.9),
-    'drone': ("aevalsrc='0.22*sin(2*PI*55*t)+0.22*sin(2*PI*58.3*t)+0.09*sin(2*PI*110.7*t)+0.05*sin(2*PI*233*t)':d=7,afade=t=in:d=2.5,afade=t=out:st=5:d=2", 7, 0.8),
-    'sting': ("aevalsrc='(0.4*sin(2*PI*1480*t)+0.4*sin(2*PI*1571*t)+0.3*sin(2*PI*2217*t)+0.4*sin(2*PI*97*t))*exp(-2.2*t)':d=2.4", 2.4, 1.1),
-    'boom': ("aevalsrc='0.9*sin(2*PI*(62-26*t)*t)*exp(-2.6*t)':d=2.5,lowpass=f=300", 2.5, 1.2),
-    'knock': ("aevalsrc='0.9*sin(2*PI*170*t)*exp(-45*mod(t\\,0.3))*lt(t\\,0.88)':d=1.2,lowpass=f=900", 1.2, 1.0),
-    'knock1': ("aevalsrc='1.0*sin(2*PI*150*t)*exp(-40*t)':d=0.6,lowpass=f=800", 0.6, 1.1),
-    'buzzphone': ("aevalsrc='0.35*sin(2*PI*165*t)*lt(mod(t\\,0.55)\\,0.38)':d=1.1", 1.1, 0.7),
+    'heart': ("aevalsrc='0.9*sin(2*PI*52*t)*(exp(-28*mod(t\\,1.05))+0.7*exp(-28*mod(t-0.24\\,1.05))*gte(mod(t\\,1.05)\\,0.24))':d=4.2,lowpass=f=180", 4.2, 0.45),
+    'drone': ("aevalsrc='0.22*sin(2*PI*55*t)+0.22*sin(2*PI*58.3*t)+0.09*sin(2*PI*110.7*t)+0.05*sin(2*PI*233*t)':d=7,afade=t=in:d=2.5,afade=t=out:st=5:d=2", 7, 0.6),
+    'sting': ("aevalsrc='(0.35*sin(2*PI*370*t)+0.3*sin(2*PI*392*t)+0.25*sin(2*PI*98*t))*(1-exp(-6*t))*exp(-1.4*t)':d=2.6,lowpass=f=1400", 2.6, 0.35),  # soft swell, not a sharp bing
+    'boom': ("aevalsrc='0.9*sin(2*PI*(62-26*t)*t)*exp(-2.6*t)':d=2.5,lowpass=f=300", 2.5, 0.45),
+    'knock': ("aevalsrc='0.9*sin(2*PI*170*t)*exp(-45*mod(t\\,0.3))*lt(t\\,0.88)':d=1.2,lowpass=f=900", 1.2, 0.55),
+    'knock1': ("aevalsrc='1.0*sin(2*PI*150*t)*exp(-40*t)':d=0.6,lowpass=f=800", 0.6, 0.6),
+    'buzzphone': ("aevalsrc='0.35*sin(2*PI*165*t)*lt(mod(t\\,0.55)\\,0.38)':d=1.1", 1.1, 0.3),
     'fridge': ("aevalsrc='0.05*sin(2*PI*60*t)+0.03*sin(2*PI*120*t)':d=9", 9, 0.7),
     'snore': ("anoisesrc=d=4:c=brown:a=0.6,bandpass=f=220:w=160,tremolo=f=0.3:d=0.95", 4, 0.45),
-    'jump': ("aevalsrc='(0.5*sin(2*PI*1480*t)+0.5*sin(2*PI*1571*t)+0.4*sin(2*PI*2217*t)+0.6*sin(2*PI*(80-40*t)*t))*exp(-1.6*t)+0.5*(random(0)-0.5)*exp(-6*t)':d=2.2", 2.2, 1.6),
-    'static': ("anoisesrc=d=1.2:c=white:a=0.5,highpass=f=1500,tremolo=f=22:d=0.9,afade=t=out:st=0.8:d=0.4", 1.2, 0.5),
-    'silence_hit': ("aevalsrc='0.8*sin(2*PI*45*t)*exp(-1.2*t)':d=3,lowpass=f=120", 3, 1.3),
+    'jump': ("aevalsrc='(0.5*sin(2*PI*740*t)+0.5*sin(2*PI*785*t)+0.4*sin(2*PI*1108*t)+0.6*sin(2*PI*(80-40*t)*t))*exp(-1.6*t)+0.5*(random(0)-0.5)*exp(-6*t)':d=2.2", 2.2, 0.45),
+    'static': ("anoisesrc=d=1.2:c=white:a=0.5,highpass=f=1500,tremolo=f=22:d=0.9,afade=t=out:st=0.8:d=0.4", 1.2, 0.25),
+    'silence_hit': ("aevalsrc='0.8*sin(2*PI*45*t)*exp(-1.2*t)':d=3,lowpass=f=120", 3, 0.45),
 }
 ins, parts = [], []
 FX = {'far': 'highpass=f=250,lowpass=f=2600,aecho=0.8:0.7:120|260:0.35|0.22,volume=0.9',     # a voice from another room
