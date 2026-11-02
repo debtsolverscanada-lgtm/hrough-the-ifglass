@@ -127,7 +127,8 @@
       "y": 0.14
      }
     ],
-    "push": 0.035
+    "push": 0.035,
+    "food": 1
    },
    "text": "And in 2008, his food starts vanishing.",
    "pause": 0.05,
@@ -145,12 +146,13 @@
     "snap": {
      "at": 0.6,
      "to": [
-      1000,
-      1000
+      1295,
+      845
      ],
-     "z": 1.7
+     "z": 1.9
     },
-    "push": 0.05
+    "push": 0.05,
+    "food": 0.45
    },
    "text": "Yogurt. Rice. A little less every day.",
    "pause": 0.05
@@ -225,12 +227,13 @@
     "snap": {
      "at": 0.3,
      "to": [
-      1000,
-      1000
+      1060,
+      860
      ],
-     "z": 2.1
+     "z": 1.8
     },
-    "push": 0.06
+    "push": 0.06,
+    "food": 0.3
    },
    "text": "There's someone in his kitchen.",
    "pause": 0.15,

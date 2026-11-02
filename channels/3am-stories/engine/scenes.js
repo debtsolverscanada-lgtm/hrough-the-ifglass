@@ -459,12 +459,63 @@ S.nan = (t, d, p) => `${room('#140d06')}
     ${nan(960, 1040, 1.15, t)}
     <rect width="1920" height="1920" fill="#c48a3a" opacity=".12"/>`;
 // dark kitchen doorway seen from the stairs. p: fridge (open light), watcher, kid
-S.kitchen = (t, d, p) => `${room('#040405')}
+S.kitchenDoor = (t, d, p) => `${room('#040405')}
     <rect x="520" y="500" width="880" height="900" fill="#08090b" stroke="#16181c" stroke-width="12"/>
     ${p.fridge !== false ? `<rect x="1020" y="620" width="300" height="680" fill="#e8f4ff" opacity="${0.75 * flick(t, 0.3)}"/><path d="M1020 1300 L1320 1300 L1600 1920 L700 1920Z" fill="#cfe6ff" opacity=".12"/><path d="M1020 620 L900 660 L900 1340 L1020 1300Z" fill="#cfd8e0" stroke="#000" stroke-width="6"/>` : ''}
     ${p.watcher ? watcher(780, 900, .9, p.watcher, { tall: 1.05, fingers: true, blink: (t % 2.7) > 2.6 }) : ''}
     ${p.kid ? kid(960, 1420 - ease(t / d) * 260, 0.7 - ease(t / d) * 0.15, { eyes: 'closed', walk: t * 3 }) : ''}
     ${[0, 1, 2, 3].map((i) => `<rect x="${420 + i * 40}" y="${1500 + i * 110}" width="${1080 - i * 80}" height="22" fill="#0d0d0d"/>`).join('')}`;
+// a real kitchen at night: upper and lower cabinets, counter with sink and faucet under a moonlit window, a stove,
+// a wall clock and a tall fridge. p: fridge (door swings open, lit shelves, light spills on the floor), food (0..1 how
+// full the shelves are), time (clock text), watcher (0..1 a figure by the fridge), kid, lights (warm ceiling light on)
+S.kitchen = (t, d, p) => {
+  const fl = flick(t, 0.25), open = p.fridge ? ease(Math.min(1, t / 0.8 + 0.6)) : 0, food = p.food ?? 1, warm = p.lights;
+  const ink = '#0a0a0e', cab = warm ? '#5a4632' : '#2a2f3e', cabD = warm ? '#3e3020' : '#1c202c', top = warm ? '#c9c2b4' : '#5d6478';
+  const FX = 1190, FY = 520, FW = 210, FH = 650;   // fridge box
+  const doors = (x0, x1, y0, y1, n) => [...Array(n)].map((_, k) => { const w = (x1 - x0) / n, x = x0 + k * w;
+    return `<rect x="${x + 8}" y="${y0 + 8}" width="${w - 16}" height="${y1 - y0 - 16}" rx="6" fill="${cab}" stroke="${ink}" stroke-width="6"/>
+      <rect x="${x + (k % 2 ? 22 : w - 34)}" y="${y0 + (y1 - y0) * 0.42}" width="12" height="${(y1 - y0) * 0.16}" rx="5" fill="#a9a08a" stroke="${ink}" stroke-width="3"/>`; }).join('');
+  const items = [];
+  const shelf = (y, list) => list.forEach(([dx, w, h, c], k) => { if (k / list.length < food) items.push(`<rect x="${FX + dx}" y="${y - h}" width="${w}" height="${h}" rx="4" fill="${c}" stroke="#1a1a1a" stroke-width="3"/>`); });
+  shelf(700, [[20, 40, 60, '#f2f2f2'], [66, 40, 60, '#f2f2f2'], [112, 40, 60, '#ffd9e0'], [158, 34, 80, '#9fd3ff']]);
+  shelf(860, [[20, 90, 46, '#ffffff'], [118, 70, 70, '#e6c27a']]);
+  shelf(1020, [[24, 50, 110, '#7fc96b'], [84, 28, 120, '#e8e8e8'], [120, 60, 50, '#d97a4a']]);
+  const lightOn = open > 0.05;
+  return `${room(warm ? '#2a1e12' : '#06070b')}
+    ${warm ? '<rect width="1920" height="1920" fill="#ffcf8a" opacity=".10"/>' : ''}
+    <rect x="520" y="420" width="880" height="16" fill="${ink}" opacity=".6"/>
+    ${doors(540, 820, 440, 650, 2)}${doors(1080, 1180, 440, 650, 1)}
+    <rect x="850" y="470" width="200" height="230" fill="#0c1430" stroke="${ink}" stroke-width="12"/>
+    <rect x="862" y="482" width="176" height="206" fill="${warm ? '#1a2240' : '#3a5aa8'}" opacity=".75"/>
+    <path d="M950 470 V700 M850 585 H1050" stroke="${ink}" stroke-width="8"/>
+    <circle cx="1000" cy="530" r="22" fill="#eef3ff" opacity="${warm ? 0.3 : 0.9}"/>
+    <path d="M862 688 L1038 688 L1160 1180 L780 1180Z" fill="#a8c0ff" opacity="${warm ? 0 : 0.07}"/>
+    <g transform="translate(700,560)"><circle r="44" fill="#e8e2d2" stroke="${ink}" stroke-width="7"/>
+      <path d="M0 0 L0 -30 M0 0 L22 10" stroke="${ink}" stroke-width="6" stroke-linecap="round"/>
+      ${p.time ? `<rect x="-62" y="56" width="124" height="44" rx="8" fill="#0b0b10"/><text x="0" y="88" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="32" fill="#ff3a3a">${p.time}</text>` : ''}</g>
+    <rect x="530" y="880" width="660" height="34" rx="6" fill="${top}" stroke="${ink}" stroke-width="7"/>
+    ${doors(540, 1180, 914, 1170, 4)}
+    <rect x="540" y="1160" width="640" height="20" fill="#000" opacity=".5"/>
+    <rect x="820" y="884" width="250" height="20" rx="8" fill="#20242e" stroke="${ink}" stroke-width="5"/>
+    <path d="M945 884 V820 Q945 795 975 795 H1005" stroke="#c8ccd6" stroke-width="12" fill="none" stroke-linecap="round"/><path d="M1005 795 v18" stroke="#c8ccd6" stroke-width="10" stroke-linecap="round"/>
+    <rect x="560" y="860" width="210" height="22" rx="4" fill="#15171c" stroke="${ink}" stroke-width="4"/>
+    ${[600, 700].map((x) => `<ellipse cx="${x}" cy="866" rx="34" ry="8" fill="#0a0a0a" stroke="#3a3a42" stroke-width="4"/>`).join('')}
+    ${[580, 630, 680, 730].map((x) => `<circle cx="${x}" cy="1000" r="9" fill="#bbb" stroke="${ink}" stroke-width="3"/>`).join('')}
+    <rect x="${FX}" y="${FY}" width="${FW}" height="${FH}" rx="14" fill="${warm ? '#e9e6df' : '#9aa3b6'}" stroke="${ink}" stroke-width="9"/>
+    <path d="M${FX} ${FY + 230} H${FX + FW}" stroke="${ink}" stroke-width="6"/>
+    ${lightOn ? `<rect x="${FX + 8}" y="${FY + 8}" width="${FW - 16}" height="${FH - 16}" rx="8" fill="#f4fbff" opacity="${0.95 * fl}"/>
+      ${[700, 860, 1020].map((y) => `<rect x="${FX + 10}" y="${y}" width="${FW - 20}" height="8" fill="#b8c8d8"/>`).join('')}
+      <rect x="${FX + 10}" y="${FY + 20}" width="${FW - 20}" height="150" fill="#dfeaf4"/>
+      ${items.join('')}
+      <path d="M${FX} ${FY + FH} L${FX + FW} ${FY + FH} L${FX + FW + 420} 1920 L${FX - 520} 1920Z" fill="#dff0ff" opacity="${0.16 * open * fl}"/>
+      <circle cx="${FX + FW / 2}" cy="${FY + FH / 2}" r="520" fill="#dff0ff" opacity="${0.10 * open}" filter="url(#blur)"/>
+      <path d="M${FX} ${FY} L${FX - 150 * open} ${FY + 40 * open} L${FX - 150 * open} ${FY + FH - 40 * open} L${FX} ${FY + FH}Z" fill="#c9d2de" stroke="${ink}" stroke-width="8"/>
+      <path d="M${FX - 40 * open} ${FY + 140} v60" stroke="${ink}" stroke-width="8" stroke-linecap="round"/>`
+    : `<rect x="${FX + FW - 30}" y="${FY + 80}" width="12" height="110" rx="5" fill="#d8dce4" stroke="${ink}" stroke-width="3"/><rect x="${FX + FW - 30}" y="${FY + 270}" width="12" height="160" rx="5" fill="#d8dce4" stroke="${ink}" stroke-width="3"/>`}
+    ${p.watcher ? watcher(FX - 230, 880, .85, p.watcher, { tall: 1.0, fingers: true, blink: (t % 2.7) > 2.6 }) : ''}
+    ${p.kid ? kid(960, 1420 - ease(t / d) * 260, 0.7 - ease(t / d) * 0.15, { eyes: 'closed', walk: t * 3 }) : ''}
+    <rect width="1920" height="1920" fill="#203060" opacity="${warm ? 0 : 0.14}"/>`;
+};
 // inside your room, looking at the closed door: light strip underneath, two shadow feet. p: feet (bool), knock
 S.bedroomdoor = (t, d, p) => {
   const k = p.knock ? (Math.floor(t * 2.2) % 3 === 0 && (t % (1 / 2.2)) < 0.12 ? 6 : 0) : 0;
@@ -740,7 +791,7 @@ S.thumbSketch = (t, d, p) => {
 
 // wrap: camera drift, vignette, film grain (seed changes per frame so the grain moves)
 // Where the action is in each scene (world x). Vertical Shorts/TikToks centre their narrow window on it.
-const FOCUS = { clown: 1240, bed: 790, reflection: 960, face: 960, door: 800, nan: 1040, kitchen: 1000, morning: 960 };
+const FOCUS = { clown: 1240, bed: 790, reflection: 960, face: 960, door: 800, nan: 1040, kitchen: 1080, kitchenDoor: 1000, morning: 960 };
 // ---------- camera (anime / 3d styles) ----------
 // Every scene whips in sideways with motion blur instead of a dip to black, the frame breathes like a handheld shot,
 // and a scene can snap-zoom onto something: p.snap = { at: seconds, to: [x, y], z: 2.2, back: seconds (optional) }.
