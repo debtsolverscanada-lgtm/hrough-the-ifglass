@@ -1811,3 +1811,22 @@ S.counter = (t, d, p) => {
     <rect width="1920" height="1920" fill="#b070ff" opacity=".05"/>`;
 };
 FOCUS.counter = 900;
+
+// Farmhouse Rules thumbnail (v2): upstairs hall, the shut bedroom door on the left third, warm light under it with two
+// feet standing on the other side, knock marks on the door, empty dark hall to the right. p.text [[word, colour], ...]
+S.thumbFarm = (t, d, p) => {
+  const ink = K.ink;
+  return `<rect width="1920" height="1920" fill="#120e1c"/>
+    ${[...Array(24)].map((_, i) => `<rect x="${i * 80}" y="420" width="40" height="980" fill="#1a1526"/>`).join('')}
+    <path d="M0 1300 H1920 V1920 H0Z" fill="#2a1c14"/>${[...Array(16)].map((_, i) => `<path d="M${640 + (i - 8) * 60} 1300 L${640 + (i - 8) * 260} 1920" stroke="#1a110c" stroke-width="6"/>`).join('')}
+    <rect x="0" y="1280" width="1920" height="26" fill="#3a2a1c"/>
+    <path d="M330 1300 L950 1300 L1500 1920 L-200 1920Z" fill="#ffb84a" opacity=".16"/>
+    <rect x="360" y="500" width="580" height="800" fill="#4a3220" stroke="#120c08" stroke-width="18"/>
+    <rect x="400" y="545" width="500" height="320" fill="none" stroke="#2e1e12" stroke-width="10"/><rect x="400" y="905" width="500" height="340" fill="none" stroke="#2e1e12" stroke-width="10"/>
+    <circle cx="870" cy="900" r="22" fill="#c8a85a" stroke="#120c08" stroke-width="5"/>
+    <rect x="360" y="1276" width="580" height="30" fill="#ffd27a"/><rect x="340" y="1270" width="620" height="46" fill="#ffc04a" opacity=".35" filter="url(#soft)"/>
+    <rect x="510" y="1276" width="104" height="30" fill="#050404"/><rect x="680" y="1276" width="104" height="30" fill="#050404"/>
+    <g stroke="#ff3a2a" stroke-width="10" stroke-linecap="round" style="filter:drop-shadow(0 0 8px #ff0000)" opacity=".9">${[0, 1, 2, 3, 4, 5, 6, 7].map((k) => { const a = k * 0.785; return `<path d="M${650 + Math.cos(a) * 46} ${740 + Math.sin(a) * 46} L${650 + Math.cos(a) * 88} ${740 + Math.sin(a) * 88}"/>`; }).join('')}</g>
+    ${p.text ? p.text.map(([w, c], i) => `<text x="1460" y="${700 + i * 210}" text-anchor="middle" font-family="Anton" font-size="210" fill="${c}" stroke="#000" stroke-width="18" paint-order="stroke" letter-spacing="3">${w}</text>`).join('') : ''}
+    <rect width="1920" height="1920" fill="url(#vig)" opacity=".55"/>`;
+};
