@@ -1483,7 +1483,7 @@ S.van = (t, d, p) => {
     <path d="M0 420 H1920 V560 Q960 500 0 560Z" fill="#101218"/><path d="M0 1180 Q960 1120 1920 1180 V1920 H0Z" fill="#14161c"/>
     <path d="M300 520 L100 1180 M1620 520 L1820 1180" stroke="#0a0b10" stroke-width="60"/>
     <g transform="translate(960,470)"><rect x="-190" y="-34" width="380" height="96" rx="16" fill="#0c0d12" stroke="#2a2c34" stroke-width="8"/>
-      <rect x="-176" y="-22" width="352" height="72" rx="10" fill="#1a2030"/>
+      <rect x="-176" y="-22" width="352" height="72" rx="10" fill="#4a5a7a"/><rect x="-150" y="-16" width="300" height="40" rx="6" fill="#8aa0c8" opacity=".55"/>
       ${back > 0 ? `<g opacity="${Math.min(1, back * 1.3)}" transform="translate(${50 - 40 * back},${46}) scale(${0.25 + 0.75 * back})"><path d="M-70 40 Q-70 -6 -30 -14 L30 -14 Q70 -6 70 40Z" fill="#000"/><ellipse cx="0" cy="-44" rx="30" ry="36" fill="#000"/>${back > 0.6 ? '<circle cx="-11" cy="-46" r="3.5" fill="#e8eef4"/><circle cx="11" cy="-46" r="3.5" fill="#e8eef4"/>' : ''}</g>` : ''}
       <rect x="-176" y="-22" width="352" height="72" rx="10" fill="#9fb4ff" opacity=".08"/></g>
     <path d="M0 1230 Q960 1180 1920 1230 V1920 H0Z" fill="#1c1e26" stroke="#0a0b10" stroke-width="10"/>
