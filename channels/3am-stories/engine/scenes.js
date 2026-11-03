@@ -1377,6 +1377,9 @@ function outfit(ink) {
   if (o === 'scrubs') return `<path d="M-130 150 Q-136 46 -44 36 L44 36 Q136 46 130 150 L148 520 L-148 520Z" fill="${body}" stroke="${ink}" stroke-width="8"/>
     <path d="M-44 36 L0 110 L44 36" fill="none" stroke="${ink}" stroke-width="7"/><rect x="40" y="200" width="56" height="50" rx="6" fill="none" stroke="${ink}" stroke-width="5"/>
     <rect x="-96" y="210" width="44" height="34" rx="4" fill="#e8f2f4" stroke="${ink}" stroke-width="4"/><path d="M-90 222 h30 M-90 232 h20" stroke="#4a6a7a" stroke-width="3"/>`;
+  if (o === 'hivis') return `<path d="M-130 150 Q-136 46 -44 36 L44 36 Q136 46 130 150 L148 520 L-148 520Z" fill="${body}" stroke="${ink}" stroke-width="8"/>
+    <path d="M-110 90 L-40 40 L-20 300 L-120 300Z M110 90 L40 40 L20 300 L120 300Z" fill="#d8f02a" stroke="${ink}" stroke-width="6"/>
+    <path d="M-118 200 H-26 M118 200 H26 M-118 250 H-24 M118 250 H24" stroke="#e8eef4" stroke-width="12"/>`;
   if (o === 'sweater') return `<path d="M-44 36 Q0 70 44 36" stroke="${ink}" stroke-width="10" fill="none"/>${[0, 1, 2, 3].map((k) => `<path d="M-120 ${220 + k * 70} H120" stroke="#000" stroke-width="5" opacity=".18"/>`).join('')}`;
   return '';
 }
@@ -1461,3 +1464,104 @@ S.corridor = (t, d, p) => {
     <rect width="1920" height="1920" fill="#ffcf8a" opacity=".05"/>`;
 };
 FOCUS.corridor = 960;
+
+
+// ---------- night delivery: van cab, animated map route, a photo, a dark roadside ----------
+// the van seen from the driver's seat at night: windshield road in headlights, dashboard with a phone on a mount
+// (p.map: the phone shows a route), the rear-view mirror (p.back 0..1: a shape in the back seat, closer each time),
+// p.driver (the lead's shoulder and hands on the wheel), p.speed (road dashes speed)
+S.van = (t, d, p) => {
+  const ink = K.ink, sp = p.speed ?? 1, back = p.back ?? 0;
+  const dashes = [...Array(7)].map((_, k) => { const u = ((k / 7) + t * 0.35 * sp) % 1, y = 760 + u * u * 520, w = 6 + u * 40, h = 10 + u * 70;
+    return `<rect x="${960 - w / 2}" y="${y}" width="${w}" height="${h}" fill="#e8e0a0" opacity="${0.3 + u * 0.6}"/>`; }).join('');
+  return `<rect width="1920" height="1920" fill="#020308"/>
+    <path d="M300 520 L1620 520 L1820 1180 L100 1180Z" fill="#05070e"/>
+    <path d="M760 760 L1160 760 L1720 1180 L200 1180Z" fill="#1a1c22"/><path d="M760 760 L1160 760 L1720 1180 L200 1180Z" fill="url(#vanBeam)"/>
+    <defs><radialGradient id="vanBeam" cx="50%" cy="100%" r="80%"><stop offset="0" stop-color="#fff4c0" stop-opacity=".35"/><stop offset="1" stop-color="#fff4c0" stop-opacity="0"/></radialGradient></defs>
+    ${dashes}
+    ${[...Array(10)].map((_, k) => `<path d="M${k * 60} 760 l26 -${60 + (k * 37) % 70} l26 ${60 + (k * 37) % 70}Z M${1920 - k * 60} 760 l-26 -${60 + (k * 41) % 70} l-26 ${60 + (k * 41) % 70}Z" fill="#03050a"/>`).join('')}
+    <path d="M0 420 H1920 V560 Q960 500 0 560Z" fill="#101218"/><path d="M0 1180 Q960 1120 1920 1180 V1920 H0Z" fill="#14161c"/>
+    <path d="M300 520 L100 1180 M1620 520 L1820 1180" stroke="#0a0b10" stroke-width="60"/>
+    <g transform="translate(960,470)"><rect x="-190" y="-34" width="380" height="96" rx="16" fill="#0c0d12" stroke="#2a2c34" stroke-width="8"/>
+      <rect x="-176" y="-22" width="352" height="72" rx="10" fill="#1a2030"/>
+      ${back > 0 ? `<g opacity="${Math.min(1, back * 1.3)}" transform="translate(${50 - 40 * back},${46}) scale(${0.25 + 0.75 * back})"><path d="M-70 40 Q-70 -6 -30 -14 L30 -14 Q70 -6 70 40Z" fill="#000"/><ellipse cx="0" cy="-44" rx="30" ry="36" fill="#000"/>${back > 0.6 ? '<circle cx="-11" cy="-46" r="3.5" fill="#e8eef4"/><circle cx="11" cy="-46" r="3.5" fill="#e8eef4"/>' : ''}</g>` : ''}
+      <rect x="-176" y="-22" width="352" height="72" rx="10" fill="#9fb4ff" opacity=".08"/></g>
+    <path d="M0 1230 Q960 1180 1920 1230 V1920 H0Z" fill="#1c1e26" stroke="#0a0b10" stroke-width="10"/>
+    ${p.map ? `<g transform="translate(1340,1120) rotate(-6)"><rect x="-120" y="-200" width="240" height="400" rx="26" fill="#0b0b0e" stroke="#30323a" stroke-width="8"/>
+      <rect x="-104" y="-182" width="208" height="364" rx="14" fill="#e8ecf2"/>${[0, 1, 2, 3, 4].map((k) => `<path d="M-104 ${-150 + k * 70} H104 M${-80 + k * 44} -182 V182" stroke="#c8ccd6" stroke-width="6"/>`).join('')}
+      <path d="M-60 150 L-60 40 L30 40 L30 -60 L70 -140" stroke="#2a7aff" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M70 -170 c-22 0 -22 30 0 46 c22 -16 22 -46 0 -46z" fill="#ff3a3a"/><circle cx="70" cy="-158" r="7" fill="#fff"/>
+      <circle cx="0" cy="0" r="400" fill="#cfe0ff" opacity=".07" filter="url(#blur)"/></g>` : ''}
+    ${p.driver ? `<g transform="translate(560,1380)"><circle r="230" fill="none" stroke="#111" stroke-width="44"/><circle r="230" fill="none" stroke="#2a2c34" stroke-width="10"/>
+      <path d="M-210 -40 q-20 40 0 70" stroke="${AN.skin}" stroke-width="60" stroke-linecap="round" fill="none"/><path d="M210 -40 q20 40 0 70" stroke="${AN.skin}" stroke-width="60" stroke-linecap="round" fill="none"/></g>` : ''}
+    <rect width="1920" height="1920" fill="#203060" opacity=".1"/>`;
+};
+FOCUS.van = 960;
+
+// a map seen at a tilt (like a nav app): a dark city grid, a route that draws itself (p.draw 0..1 over the scene, or a
+// fixed p.progress), the van dot riding the line, a pin that drops in at p.pinAt (eased, no bounce), an ETA card that
+// counts down from p.eta[0] to p.eta[1] minutes, and a label under the pin (p.pin)
+S.maproute = (t, d, p) => {
+  const ink = K.ink, prog = p.progress ?? ease(Math.min(1, t / Math.max(0.5, d * (p.draw ?? 0.8))));
+  const pts = [[300, 1500], [300, 1200], [700, 1200], [700, 900], [1100, 900], [1100, 600], [1500, 450]];
+  const seg = pts.slice(1).map((q, i) => Math.hypot(q[0] - pts[i][0], q[1] - pts[i][1])), L = seg.reduce((a, b) => a + b, 0);
+  let acc = 0, head = pts[0];
+  for (let i = 0; i < seg.length; i++) { if (acc + seg[i] >= prog * L) { const u = (prog * L - acc) / seg[i]; head = [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * u, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * u]; break; } acc += seg[i]; head = pts[i + 1]; }
+  const path = 'M' + pts.map((q) => q.join(' ')).join(' L');
+  const pa = p.pinAt != null ? ease(Math.min(1, Math.max(0, (t - p.pinAt) / 0.5))) : 0;
+  const eta = p.eta ? Math.max(p.eta[1], Math.round(p.eta[0] - (p.eta[0] - p.eta[1]) * prog)) : null;
+  return `<rect width="1920" height="1920" fill="#0a0d16"/>
+    <g transform="translate(960,980) scale(1,0.62) rotate(-18) translate(-960,-980)">
+      <rect x="-400" y="-200" width="2700" height="2400" fill="#121828"/>
+      ${[...Array(22)].map((_, k) => `<path d="M${-300 + k * 140} -200 V2200" stroke="#1e2638" stroke-width="${k % 4 ? 8 : 18}"/><path d="M-400 ${-100 + k * 120} H2300" stroke="#1e2638" stroke-width="${k % 3 ? 8 : 18}"/>`).join('')}
+      ${[...Array(30)].map((_, k) => `<rect x="${-260 + (k * 377) % 2400}" y="${-80 + (k * 211) % 2100}" width="${80 + k % 3 * 30}" height="${70 + k % 4 * 20}" fill="#182034"/>`).join('')}
+      <path d="M1250 -200 Q1400 400 1650 700 Q1900 1000 2300 1100" stroke="#0a1220" stroke-width="120" fill="none"/>
+      <path d="${path}" stroke="#2a3a5a" stroke-width="26" fill="none" stroke-linejoin="round"/>
+      <path d="${path}" stroke="#3a9aff" stroke-width="26" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="${L}" stroke-dashoffset="${L * (1 - prog)}"/>
+      <circle cx="${head[0]}" cy="${head[1]}" r="34" fill="#fff" stroke="#3a9aff" stroke-width="12"/>
+      <ellipse cx="1500" cy="450" rx="${60 * pa}" ry="${30 * pa}" fill="#ff3a3a" opacity=".3"/>
+    </g>
+    ${pa > 0 ? `<g transform="translate(1310,${414 - 300 * (1 - pa)})" opacity="${pa}"><path d="M0 0 c-70 0 -70 90 0 150 c70 -60 70 -150 0 -150z" fill="#ff3a3a" stroke="${ink}" stroke-width="6"/><circle cx="0" cy="58" r="22" fill="#fff"/>
+      ${p.pin ? `<rect x="-150" y="170" width="300" height="70" rx="14" fill="#0b0b10" stroke="#ff3a3a" stroke-width="5"/><text x="0" y="218" text-anchor="middle" font-family="Anton" font-size="40" fill="#fff">${esc3(p.pin)}</text>` : ''}</g>` : ''}
+    ${eta != null ? `<g transform="translate(960,1380)"><rect x="-230" y="-70" width="460" height="130" rx="24" fill="#0b0b10" stroke="#3a9aff" stroke-width="6"/>
+      <text x="0" y="20" text-anchor="middle" font-family="Anton" font-size="72" fill="#fff">${eta} MIN</text></g>` : ''}`;
+};
+FOCUS.maproute = 960;
+
+// a photo on a phone screen: the inside of the van from the back seat, the driver's head and shoulders from behind,
+// the road lit up ahead. p.reveal (0..1 the photo fades up as if loading), p.caption (the notification above it)
+S.photo = (t, d, p) => {
+  const ink = K.ink, rv = p.reveal != null ? ease(Math.min(1, t / Math.max(0.3, d * p.reveal))) : 1;
+  return `<rect width="1920" height="1920" fill="#050507"/>
+    <rect x="560" y="200" width="800" height="1560" rx="70" fill="#0b0b0e" stroke="#2a2a32" stroke-width="14"/>
+    ${p.caption ? `<rect x="610" y="300" width="700" height="130" rx="24" fill="#1c2230"/><text x="650" y="356" font-family="Inter, sans-serif" font-weight="800" font-size="34" fill="#e8eef8">${esc3(p.caption[0])}</text><text x="650" y="404" font-family="Inter, sans-serif" font-size="30" fill="#9fb4d0">${esc3(p.caption[1])}</text>` : ''}
+    <g opacity="${rv}"><clipPath id="phClip"><rect x="610" y="480" width="700" height="900" rx="20"/></clipPath>
+      <g clip-path="url(#phClip)" filter="url(#blur)" style="filter:blur(${(1 - rv) * 8}px)">
+        <rect x="610" y="480" width="700" height="900" fill="#05060a"/>
+        <path d="M700 560 L1220 560 L1300 900 L620 900Z" fill="#0c1018"/><path d="M880 700 L1040 700 L1220 900 L700 900Z" fill="#3a3a2a" opacity=".7"/>
+        <rect x="610" y="900" width="700" height="480" fill="#0e0f14"/>
+        <g transform="translate(960,1130) scale(1.25)">${head(0, 0, 1, { back: true })}<path d="M-150 120 Q-140 40 0 40 Q140 40 150 120 L170 320 L-170 320Z" fill="${HERO.body || '#2a2e3a'}" stroke="${ink}" stroke-width="8"/></g>
+        <rect x="610" y="480" width="700" height="900" fill="#ffe8a0" opacity=".05"/>
+      </g></g>
+    <rect x="610" y="480" width="700" height="900" rx="20" fill="none" stroke="#2a2a32" stroke-width="6"/>`;
+};
+FOCUS.photo = 960;
+
+// a dark country roadside: an empty field behind a wire fence, a crooked mailbox, one far-off light, the van's headlights
+// washing across the grass. p.pin (a red map pin standing over the field, as the app sees it), p.figure (0..1 someone far off)
+S.roadside = (t, d, p) => {
+  const ink = K.ink;
+  return `<rect width="1920" height="1920" fill="#04060c"/>
+    ${[...Array(60)].map((_, i) => `<circle cx="${(i * 733) % 1920}" cy="${430 + (i * 197) % 320}" r="${1 + i % 2}" fill="#fff" opacity=".45"/>`).join('')}
+    <path d="M0 860 Q500 820 960 850 Q1400 880 1920 840 V1920 H0Z" fill="#0a0e0a"/>
+    <path d="M300 1500 L900 900 L1100 900 L1700 1500Z" fill="#e8f0c0" opacity=".08"/>
+    ${[...Array(40)].map((_, k) => `<path d="M${(k * 97) % 1920} ${1000 + (k * 53) % 460} l6 -${30 + k % 4 * 10} l6 ${30 + k % 4 * 10}" stroke="#1a2a1a" stroke-width="4" fill="none"/>`).join('')}
+    ${[...Array(9)].map((_, k) => `<rect x="${80 + k * 230}" y="${960 - (k % 2) * 6}" width="12" height="150" fill="#1a1612"/>`).join('')}
+    <path d="M80 990 H1940 M80 1040 H1940" stroke="#2a2420" stroke-width="3"/>
+    <g transform="translate(420,1100) rotate(-6)"><rect x="-8" y="0" width="16" height="200" fill="#2a2016"/><rect x="-60" y="-70" width="120" height="74" rx="30" fill="#3a4048" stroke="${ink}" stroke-width="6"/><rect x="40" y="-60" width="10" height="40" fill="#ff3a3a"/></g>
+    <circle cx="1500" cy="860" r="6" fill="#ffd27a"/><circle cx="1500" cy="860" r="40" fill="#ffd27a" opacity=".12"/>
+    ${p.figure ? `<g opacity="${p.figure}" transform="translate(1160,930) scale(0.25)">${watcher(0, 0, 1, 1, { noeyes: true })}</g>` : ''}
+    ${p.pin ? `<g transform="translate(960,${760 + 8 * Math.sin(t * 2)})"><path d="M0 0 c-70 0 -70 90 0 150 c70 -60 70 -150 0 -150z" fill="#ff3a3a" stroke="${ink}" stroke-width="6" opacity=".9"/><circle cx="0" cy="58" r="22" fill="#fff"/></g>` : ''}
+    <rect width="1920" height="1920" fill="#203060" opacity=".1"/>`;
+};
+FOCUS.roadside = 960;

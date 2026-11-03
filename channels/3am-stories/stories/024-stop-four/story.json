@@ -1,0 +1,300 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Bill",
+ "tts": {
+  "stability": 0.45,
+  "similarity": 0.8,
+  "style": 0.4,
+  "speed": 1.06
+ },
+ "grade": {
+  "preset": "coldSteel",
+  "amount": 0.38,
+  "sat": 0.85
+ },
+ "hero": {
+  "hairStyle": "buzz",
+  "hair": "#76767e",
+  "hairH": "#a8a8b0",
+  "beard": true,
+  "lines": 0.6,
+  "outfit": "hivis",
+  "body": "#2a2e3a",
+  "skin": "#e8c4a8",
+  "skinS": "#c8957a"
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "van",
+  "bp": {
+   "back": 0.95,
+   "driver": true
+  },
+  "zoom": [
+   960,
+   264,
+   2.6
+  ],
+  "lines": [],
+  "band": 0,
+  "tint": "#08000a"
+ },
+ "yt": {
+  "title": "My delivery app added a 4th stop. I only had 3 packages 😨 #scary #horror #shorts",
+  "description": "2 A.M. Three packages delivered, van empty. Then the app adds Stop 4: no address, no name, just a pin over an empty field. It says Delivered. With a photo.\n\n🎧 headphones on. Would you have turned around?\n\n#scarystories #horror #3amstories #deliverydriver #shorts",
+  "tags": [
+   "scary stories",
+   "delivery driver horror",
+   "night shift horror",
+   "horror short",
+   "3am stories",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "maproute",
+   "p": {
+    "progress": 1,
+    "pinAt": 0.6,
+    "pin": "STOP 4"
+   },
+   "text": "This is the last stop my delivery app ever gave me. Stop four.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "van",
+   "p": {
+    "map": true,
+    "driver": true,
+    "speed": 1
+   },
+   "text": "I'd already dropped my three packages. The van was empty. Two A.M.",
+   "pause": 0.05
+  },
+  {
+   "scene": "maproute",
+   "p": {
+    "draw": 0.9,
+    "eta": [
+     9,
+     1
+    ]
+   },
+   "text": "The route drew itself out of town, down a road I'd never driven.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "tick",
+     1.0
+    ],
+    [
+     "tick",
+     2.2
+    ]
+   ]
+  },
+  {
+   "scene": "van",
+   "p": {
+    "map": true,
+    "driver": true,
+    "back": 0.15,
+    "snap": {
+     "at": 0.4,
+     "to": [
+      1340,
+      1100
+     ],
+     "z": 2.0
+    }
+   },
+   "text": "No address. No name. Just a pin.",
+   "pause": 0.05
+  },
+  {
+   "scene": "roadside",
+   "p": {
+    "pin": true
+   },
+   "text": "The pin was standing over an empty field.",
+   "pause": 0.05
+  },
+  {
+   "scene": "roadside",
+   "p": {
+    "snap": {
+     "at": 0.5,
+     "to": [
+      420,
+      1080
+     ],
+     "z": 2.3
+    }
+   },
+   "text": "No house. No driveway. Just a mailbox with the flag up.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "creak",
+     1.4,
+     "right"
+    ]
+   ]
+  },
+  {
+   "scene": "photo",
+   "p": {
+    "caption": [
+     "Stop 4",
+     "Delivered ✓ · photo attached"
+    ],
+    "reveal": 0
+   },
+   "text": "That's when I noticed the app said: delivered.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "photo",
+   "p": {
+    "caption": [
+     "Stop 4",
+     "Delivered ✓ · photo attached"
+    ],
+    "reveal": 0.9,
+    "push": 0.02
+   },
+   "text": "With a photo attached.",
+   "pause": 0.9
+  },
+  {
+   "scene": "photo",
+   "p": {
+    "caption": [
+     "Stop 4",
+     "Delivered ✓ · photo attached"
+    ],
+    "snap": {
+     "at": 0.0,
+     "to": [
+      960,
+      1100
+     ],
+     "z": 1.7
+    },
+    "push": 0
+   },
+   "text": "The back of my head. Taken from inside my van.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "silence_hit",
+     0.0
+    ]
+   ]
+  },
+  {
+   "scene": "van",
+   "p": {
+    "driver": true,
+    "back": 0.45,
+    "speed": 2.2
+   },
+   "text": "I didn't turn around. I just drove.",
+   "pause": 0.05
+  },
+  {
+   "scene": "maproute",
+   "p": {
+    "progress": 1,
+    "eta": [
+     22,
+     0
+    ],
+    "draw": 1
+   },
+   "text": "Twenty two minutes back to the depot. Both hands on the wheel.",
+   "pause": 0.05
+  },
+  {
+   "scene": "van",
+   "p": {
+    "driver": true,
+    "back": 0.85,
+    "speed": 2.2,
+    "snap": {
+     "at": 1.6,
+     "to": [
+      960,
+      470
+     ],
+     "z": 3.0
+    }
+   },
+   "text": "Except every time I checked the mirror, the dark in the back seat was a little closer.",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "breath",
+     2.0,
+     "behind"
+    ]
+   ]
+  },
+  {
+   "scene": "maproute",
+   "p": {
+    "progress": 1,
+    "pinAt": 0.5,
+    "pin": "STOP 1: HOME"
+   },
+   "text": "This morning, the app gave me tomorrow's route.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "buzzphone",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "van",
+   "p": {
+    "back": 1,
+    "shake": 0.3,
+    "snap": {
+     "at": 0.2,
+     "to": [
+      960,
+      470
+     ],
+     "z": 3.4
+    },
+    "push": 0
+   },
+   "text": "Stop one is my house. And the package is already loaded.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "boom",
+     2.6
+    ]
+   ]
+  }
+ ]
+}

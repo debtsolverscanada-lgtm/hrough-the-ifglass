@@ -18,6 +18,7 @@
 
 | Story | Grade | Hero |
 |---|---|---|
+| 024 stop four | coldSteel at 0.38 (steel-blue night, reds kept) | grey-bearded delivery driver, buzz cut, hi-vis vest; narrator Bill |
 | 023 floor thirteen | sickGreen at 0.32 (fluorescent elevator green, reds kept) | night-shift nurse: hair bun, teal scrubs; narrator Sarah (female, first person) |
 | 022 closet tenant | sodiumNight (warm orange street-light night) | 57-year-old office worker: greying side-parted hair, glasses, age lines, white shirt + navy tie |
 
@@ -38,3 +39,4 @@
 |---|---|---|---|
 | 022 closet tenant | Brian | "This guy..." intro (true story) | Wait / You see |
 | 023 floor thirteen | Sarah | F2 impossible premise + F15 loop | (no Wait) / Here's the thing about elevators |
+| 024 stop four | Bill | F13 evidence first + F15 loop | That's when I noticed / Except |
