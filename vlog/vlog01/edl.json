@@ -165,7 +165,8 @@
        "text": "LEON'S BAGELS",
        "at": 0.3
       }
-     ]
+     ],
+     "food": true
     },
     {
      "clip": "C0019.MP4",
@@ -175,7 +176,8 @@
       {
        "text": "YOGURT TASTE TEST"
       }
-     ]
+     ],
+     "food": true
     },
     {
      "clip": "C0020.MP4",
@@ -185,7 +187,8 @@
       {
        "text": "MISO BLONDIE LATTE"
       }
-     ]
+     ],
+     "food": true
     },
     {
      "clip": "C0045.MP4",
@@ -196,7 +199,8 @@
        "text": "CHIRASHI AT THE BAR",
        "at": 60.0
       }
-     ]
+     ],
+     "food": true
     },
     {
      "clip": "C0047.MP4",
@@ -206,7 +210,8 @@
       {
        "text": "COOKIE TASTE TEST"
       }
-     ]
+     ],
+     "food": true
     },
     {
      "clip": "C0051.MP4",
@@ -218,7 +223,8 @@
        "text": "BAGEL PUB TASTE TEST",
        "at": 0.3
       }
-     ]
+     ],
+     "food": true
     },
     {
      "clip": "C0052.MP4",
@@ -228,7 +234,8 @@
       {
        "text": "ROUND 2"
       }
-     ]
+     ],
+     "food": true
     }
    ]
   },
@@ -284,7 +291,7 @@
    "song": "campus.mp3",
    "song_from": 34.0,
    "own_song": true,
-   "beats_per_cut": 2,
+   "beats_per_cut": 4,
    "freeze": 0.8,
    "gain": 0.9,
    "clips": [
@@ -453,9 +460,8 @@
   {
    "type": "scenes",
    "music": {
-    "song": "someday.mp3",
-    "from": 90.0,
-    "gain": 0.6
+    "song": "campus.mp3",
+    "continue": true
    },
    "clips": [
     {
@@ -548,5 +554,8 @@
    ]
   }
  ],
- "pop_text": false
+ "pop_text": false,
+ "cut_dead": true,
+ "dead_gap": 0.7,
+ "dead_keep": 3.0
 }

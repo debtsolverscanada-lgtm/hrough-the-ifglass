@@ -236,7 +236,9 @@ def expand(edl):
                 add({'clip': p['clip'], 's': p['s'], 'e': p['e'], 'reverse': True, 'speed': sec.get('speed', 3.0) * p['speed'], 'vhs': True, 'mute': True})
             sfx.append(('rewind', t0, {'song': teaser['_song'][0], 'end': teaser['_song'][1], 'dur': t - t0}))
         elif kind == 'scenes':
-            if sec.get('music'):
+            if sec.get('music') and sec['music'].get('continue'):
+                pass  # keep the previous song playing (its cue is extended when this section ends)
+            elif sec.get('music'):
                 m = sec['music']; bt = BEATS[m['song']]['beats']
                 frm = min(bt, key=lambda b: abs(b - m.get('from', 0)))  # start the song on a beat
                 cues.append({'song': m['song'], 'at': t, 'from': frm, 'dur': None, 'gain': m.get('gain', 0.35), 'tag': 'bed'})
@@ -304,6 +306,34 @@ def speech_spans(name, s, e):
     return res or [(s, e)]
 
 
+_WM = None
+def voice_spans(name, s, e):
+    """Where someone actually speaks (Whisper's own voice detection), merged across short breaths. Everything else in
+    the shot is dead air: walking, waiting, street noise. Long phrase runs are split every angle_every seconds
+    (frame-exact, so no sound repeats) so the framing keeps changing."""
+    global _WM
+    import numpy as np
+    from faster_whisper import WhisperModel
+    if _WM is None: _WM = WhisperModel('small.en', device='cpu', compute_type='int8')
+    raw = subprocess.run(['ffmpeg', '-v', 'error', '-ss', f'{s:.3f}', '-t', f'{e - s:.3f}', '-i', str(clip(name)), '-vn', '-ac', '1', '-ar', '16000',
+                          '-f', 's16le', '-'], capture_output=True).stdout
+    a = np.frombuffer(raw, np.int16).astype(np.float32) / 32768
+    if len(a) < 16000: return []
+    segs, _ = _WM.transcribe(a, vad_filter=True, word_timestamps=True, language='en')
+    words = [(w.start, w.end) for sg in segs for w in (sg.words or []) if w.probability > 0.3]
+    gap, pad = EDL.get('dead_gap', 0.7), 0.12
+    runs = []
+    for a0, b0 in words:
+        if runs and a0 - runs[-1][1] < gap: runs[-1][1] = b0
+        else: runs.append([a0, b0])
+    every, out = EDL.get('angle_every', 3.2), []
+    for a0, b0 in runs:
+        a0, b0 = max(0, a0 - pad), min(e - s, b0 + pad)
+        while b0 - a0 > every * 1.4: out.append((s + a0, s + a0 + every)); a0 += every
+        if b0 - a0 > 0.25: out.append((s + a0, s + b0))
+    return out
+
+
 def jumpcut(p, k0=0):
     """David Dobrik-style: every phrase is its own shot, pauses gone, framing changes on every cut,
     and a long ramble gets trimmed (max_phrase_run seconds per shot, the rest of a long phrase is kept)."""
@@ -315,7 +345,9 @@ def jumpcut(p, k0=0):
     if hold: out.append(dict(p, e=min(p['e'], first_end + 0.01)))
     rest = {k: v for k, v in p.items() if k not in ('titles', 'photos', 'loc', 'loc_at', 'freeze')}
     if first_end < p['e'] - 0.4:
-        for k, (a, b) in enumerate(speech_spans(p['clip'], max(p['s'], first_end), p['e'])):
+        spans = speech_spans(p['clip'], max(p['s'], first_end), p['e']) if p.get('food') or not EDL.get('cut_dead') else voice_spans(p['clip'], max(p['s'], first_end), p['e'])
+        if not spans and not out: return [dict(p, e=min(p['e'], p['s'] + EDL.get('dead_keep', 3.0) * p.get('speed', 1.0)))]  # nobody speaks: a few seconds is enough
+        for k, (a, b) in enumerate(spans):
             z, x, y = ANGLES[(k0 + k) % len(ANGLES)]
             out.append(dict(rest, s=a, e=b, zoom=z, zx=x, zy=y, letterbox=False, _cut=True))
     if p.get('freeze') and out: out[-1]['freeze'] = p['freeze']
