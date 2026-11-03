@@ -1,0 +1,510 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "ara",
+ "tts": {
+  "provider": "grok",
+  "one_take": true,
+  "language": "en"
+ },
+ "captions": false,
+ "art_aspect": "9:16",
+ "art_style": "2D animated horror cartoon frame, anime-inspired horror animation, clean thick black ink outlines, flat cel shading with soft gradients, bold readable shapes, expressive characters, cinematic lighting, muted autumn palette with cold shadows and warm orange firelight accents, like a frame from a popular animated scary-story YouTube channel, vertical 9:16, no text, no captions, no watermark.",
+ "art_cast": "",
+ "thumb": {
+  "scene": "paint",
+  "style": "anime",
+  "img": "channels/3am-stories/stories/030-lizzie/art/thumb.jpg",
+  "wide": true
+ },
+ "yt": {
+  "title": "My only friend in 4th grade burned down my grandma's house 😨 #horror #shorts",
+  "description": "Her name was Lizzie. Nobody else ever saw her.\n\n▶ Full story: https://www.youtube.com/watch?v=lEcPNcDNTGc\n\n🎧 headphones on. Did you have an imaginary friend?\n\n#scarystories #horror #3amstories #imaginaryfriend #shorts",
+  "tags": [
+   "scary stories",
+   "imaginary friend horror",
+   "horror short",
+   "3am stories",
+   "creepy",
+   "animated horror",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "paint",
+   "text": "In fourth grade, I had one friend. Her name was Lizzie. My mom says she never existed.",
+   "art": "A school playground at recess, children running and playing in a blur. At the far edge by the chain-link fence, Lizzie: a pale nine-year-old girl with long straight blonde hair, an old-fashioned pale blue dress with a white collar, bare feet, and a calm, too-wide smile, standing perfectly still, watching.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "pops": [
+     {
+      "at": 0.0,
+      "type": "label",
+      "text": "WHO'S LIZZIE?",
+      "x": 0.5,
+      "y": 0.16
+     }
+    ],
+    "snap": {
+     "at": 3.6,
+     "to": [
+      1150,
+      900
+     ],
+     "z": 1.6
+    },
+    "pulse": true,
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/00.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f001.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f002.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f003.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f004.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f005.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f006.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f007.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f008.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f009.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f010.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f011.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f012.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f013.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f014.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f015.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f016.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f017.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f018.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f019.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f020.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f021.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f022.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f023.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f024.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f025.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f026.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f027.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f028.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f029.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f030.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f031.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f032.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f033.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f034.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f035.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f036.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f037.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f038.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f039.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f040.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f041.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f042.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f043.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f044.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f045.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f046.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f047.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f048.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f049.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f050.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f051.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f052.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f053.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f054.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f055.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f056.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f057.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f058.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f059.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f060.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/00/f061.jpg"
+    ],
+    "fps": 12
+   },
+   "pause": 0.3,
+   "anim": "Animated horror cartoon. Children run past in a blur; the blonde girl at the chain-link fence stays perfectly still, then slowly tilts her head and smiles. Static camera.",
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "She waited for me at the school gate every single day. Before the bell had even finished ringing.",
+   "art": "A school gate at 3 PM, kids just starting to spill out of the doors. Lizzie: a pale nine-year-old girl with long straight blonde hair, an old-fashioned pale blue dress with a white collar, bare feet, and a calm, too-wide smile already standing at the gate, waiting, perfectly still.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "whip": true,
+    "snap": {
+     "at": 3.0,
+     "to": [
+      960,
+      1000
+     ],
+     "z": 1.6
+    },
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/01.jpg"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "We played in my grandma's backyard. And every time I looked up, Grandma was at the window. Watching her.",
+   "art": "From the backyard, looking up at the kitchen window of Grandma's house: a small old two-storey white clapboard house with a back porch, a fenced backyard with a big oak tree. Grandma: a thin elderly woman with grey hair in a loose bun, a brown cardigan, a cigarette between her fingers stands behind the glass, cigarette smoke curling, staring down hard.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "smoke": true,
+    "pan": [
+     0,
+     -80
+    ],
+    "snap": {
+     "at": 4.0,
+     "to": [
+      960,
+      700
+     ],
+     "z": 1.8
+    },
+    "pulse": true,
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/02.jpg"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "We built a pile of branches by the house. It grew faster than we built it.",
+   "art": "Next to the white clapboard wall, a huge mound of dry branches and leaves, taller than the narrator as a child: a shy nine-year-old girl with a dark brown bob haircut and a green knitted sweater, who stares up at it, confused.",
+   "p": {
+    "noVig": true,
+    "push": 0.0,
+    "shake": 0.08,
+    "whip": true,
+    "pull": true,
+    "snap": {
+     "at": 2.8,
+     "to": [
+      960,
+      800
+     ],
+     "z": 1.5
+    },
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/03.jpg"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "Then one afternoon, Lizzie took Grandma's silver lighter.",
+   "art": "Extreme close-up of a small pale hand lifting a silver lighter from a wooden end table, beside an ashtray.",
+   "p": {
+    "noVig": true,
+    "push": 0.06,
+    "shake": 0.08,
+    "pulse": true,
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/04.jpg"
+   },
+   "pause": 0.3,
+   "sfx": [
+    [
+     "heart",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "She flicked it.",
+   "art": "Lizzie: a pale nine-year-old girl with long straight blonde hair, an old-fashioned pale blue dress with a white collar, bare feet, and a calm, too-wide smile kneeling at the base of the giant branch pile, a tiny flame catching in the dry leaves, her face lit orange.",
+   "p": {
+    "noVig": true,
+    "push": 0.07,
+    "shake": 0.08,
+    "whip": true,
+    "embers": true,
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/05.jpg"
+   },
+   "pause": 0.6
+  },
+  {
+   "scene": "paint",
+   "text": "And the side of the house went up in flames.",
+   "art": "Wide shot: the whole side wall of Grandma's house: a small old two-storey white clapboard house with a back porch, a fenced backyard with a big oak tree burning, black smoke pouring into the sky, a small girl frozen on the lawn.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.3,
+    "embers": true,
+    "smoke": true,
+    "flashAt": [
+     0.02
+    ],
+    "flashColor": "#ff6a1a",
+    "glitch": [
+     0.0
+    ],
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/06.jpg"
+   },
+   "pause": 0.3,
+   "sfx": [
+    [
+     "boom",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "Lizzie didn't run. She walked into the smoke. Smiling.",
+   "art": "Lizzie: a pale nine-year-old girl with long straight blonde hair, an old-fashioned pale blue dress with a white collar, bare feet, and a calm, too-wide smile walking calmly away into thick grey smoke at the edge of the burning yard, looking back over her shoulder with a calm smile.",
+   "p": {
+    "noVig": true,
+    "push": 0.03,
+    "shake": 0.08,
+    "embers": true,
+    "smoke": true,
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/07.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f001.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f002.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f003.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f004.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f005.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f006.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f007.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f008.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f009.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f010.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f011.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f012.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f013.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f014.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f015.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f016.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f017.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f018.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f019.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f020.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f021.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f022.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f023.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f024.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f025.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f026.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f027.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f028.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f029.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f030.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f031.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f032.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f033.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f034.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f035.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f036.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f037.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f038.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f039.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f040.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f041.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f042.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f043.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f044.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f045.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f046.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f047.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f048.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f049.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f050.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f051.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f052.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f053.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f054.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f055.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f056.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f057.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f058.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f059.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f060.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/07/f061.jpg"
+    ],
+    "fps": 12
+   },
+   "pause": 0.3,
+   "anim": "Animated horror cartoon. The blonde girl walks slowly away into thick drifting smoke, looks back over her shoulder with a calm smile, and fades into the smoke. Static camera."
+  },
+  {
+   "scene": "paint",
+   "text": "Twenty years later, I mentioned her to my mom. And she said, who's Lizzie?",
+   "art": "The mother, in her sixties, setting down her coffee cup, looking confused and uneasy.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "whip": true,
+    "snap": {
+     "at": 4.2,
+     "to": [
+      960,
+      900
+     ],
+     "z": 1.7
+    },
+    "pops": [
+     {
+      "at": 4.2,
+      "type": "label",
+      "text": "WHO'S LIZZIE?",
+      "x": 0.5,
+      "y": 0.16
+     }
+    ],
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/08.jpg"
+   },
+   "pause": 0.6,
+   "sfx": [
+    [
+     "silence_hit",
+     4.4
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "Then she found a photo in Grandma's old things. Grandma, at nine years old. Next to a blonde girl in a pale blue dress.",
+   "art": "The same old black-and-white photograph: the second girl has long straight blonde hair and a pale dress with a white collar, smiling a calm, too-wide smile, looking straight into the camera.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "dust": true,
+    "glitch": [
+     0.05
+    ],
+    "snap": {
+     "at": 4.6,
+     "to": [
+      1150,
+      900
+     ],
+     "z": 2.0
+    },
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/09.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f001.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f002.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f003.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f004.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f005.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f006.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f007.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f008.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f009.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f010.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f011.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f012.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f013.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f014.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f015.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f016.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f017.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f018.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f019.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f020.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f021.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f022.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f023.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f024.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f025.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f026.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f027.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f028.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f029.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f030.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f031.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f032.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f033.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f034.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f035.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f036.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f037.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f038.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f039.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f040.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f041.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f042.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f043.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f044.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f045.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f046.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f047.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f048.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f049.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f050.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f051.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f052.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f053.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f054.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f055.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f056.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f057.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f058.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f059.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f060.jpg",
+     "channels/3am-stories/stories/031-lizzie-teaser/art/09/f061.jpg"
+    ],
+    "fps": 12
+   },
+   "pause": 0.3,
+   "anim": "Animated horror cartoon. An old black-and-white photograph of two girls; the blonde girl's eyes slowly move to look directly at the viewer and her smile widens. Very slow push in."
+  },
+  {
+   "scene": "letter",
+   "text": "On the back, in Grandma's handwriting: Me and Lizzie. The summer before the fire.",
+   "p": {
+    "to": "(on the back)",
+    "lines": [
+     "Me and Lizzie.",
+     "Mill Road.",
+     "The summer before the fire."
+    ],
+    "red": 2,
+    "push": 0.05,
+    "shake": 0.08
+   },
+   "pause": 0.9
+  },
+  {
+   "scene": "paint",
+   "text": "And that's not even the worst part.",
+   "art": "Lizzie: a pale nine-year-old girl with long straight blonde hair, an old-fashioned pale blue dress with a white collar, bare feet, and a calm, too-wide smile standing at the end of a dim present-day hallway, barefoot in her pale blue dress, smiling straight at the viewer.",
+   "p": {
+    "noVig": true,
+    "push": 0.06,
+    "shake": 0.2,
+    "flashAt": [
+     0.02
+    ],
+    "glitch": [
+     0.0,
+     0.7
+    ],
+    "img": "channels/3am-stories/stories/031-lizzie-teaser/art/11.jpg"
+   },
+   "pause": 0.8,
+   "sfx": [
+    [
+     "boom",
+     1.6
+    ]
+   ]
+  }
+ ]
+}
