@@ -1980,8 +1980,20 @@ S.thumbFarmPOV = (t, d, p) => {
     ${[0, 1, 2, 3].map((k) => `<rect x="${gx - 4}" y="${790 + k * 32}" width="${54 - Math.abs(k - 1.5) * 8}" height="24" rx="12" fill="#b8c2c2" stroke="#000" stroke-width="5"/><rect x="${gx + 32 - Math.abs(k - 1.5) * 8}" y="${795 + k * 32}" width="12" height="13" rx="4" fill="#3a2a2a"/>`).join('')}
     <rect x="1080" y="1308" width="520" height="22" fill="#ffb04a" style="${VIB.glow('#ff8a1a', 16)}"/><rect x="1190" y="1308" width="80" height="22" fill="#020101"/><rect x="1330" y="1308" width="80" height="22" fill="#020101"/>
     ${hand(1690, 760, 14, 1)}${hand(1000, 1000, -8, 0.85)}${hand(1700, 1130, 4, 0.75)}
-    <path d="M640 1150 L1100 760 L1100 1250Z" fill="#e8f2ff" opacity=".12"/>
-    <g transform="translate(430,1300) scale(1.2)" style="filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 18px #6aa0ff)">${person(0, 0, 1, { back: true, reach: true })}</g>
+    <path d="M740 1230 L1100 760 L1100 1300Z" fill="#e8f2ff" opacity=".12"/><circle cx="738" cy="1232" r="12" fill="#ffffff" style="filter:drop-shadow(0 0 12px #fff)"/>
+    <g transform="translate(560,1000) scale(0.72)" style="filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 18px #6aa0ff)">
+      <path d="M-150 520 L-140 150 Q-130 60 -40 40 L40 40 Q130 60 140 150 L150 520Z" fill="#2a3a5a" stroke="#000" stroke-width="8"/>
+      <path d="M-90 50 Q0 150 90 50 Q60 130 0 140 Q-60 130 -90 50Z" fill="#22304c" stroke="#000" stroke-width="6"/>
+      <path d="M-60 320 h120" stroke="#1a2440" stroke-width="8"/>
+      <path d="M-128 170 Q-170 320 -150 470" stroke="#000" stroke-width="70" stroke-linecap="round" fill="none"/><path d="M-128 170 Q-170 320 -150 470" stroke="#2a3a5a" stroke-width="56" stroke-linecap="round" fill="none"/>
+      <path d="M128 170 Q220 260 230 330" stroke="#000" stroke-width="70" stroke-linecap="round" fill="none"/><path d="M128 170 Q220 260 230 330" stroke="#2a3a5a" stroke-width="56" stroke-linecap="round" fill="none"/>
+      <ellipse cx="236" cy="340" rx="28" ry="32" fill="#e8b890" stroke="#000" stroke-width="5"/><rect x="226" y="296" width="44" height="70" rx="8" fill="#0a0a12" stroke="#000" stroke-width="4"/>
+      <path d="M-40 40 L-34 0 L34 0 L40 40Z" fill="#c8946c" stroke="#000" stroke-width="6"/>
+      <circle cx="0" cy="-90" r="118" fill="#2a1a10" stroke="#000" stroke-width="8"/>
+      <ellipse cx="-118" cy="-80" rx="18" ry="30" fill="#c8946c" stroke="#000" stroke-width="5"/><ellipse cx="118" cy="-80" rx="18" ry="30" fill="#c8946c" stroke="#000" stroke-width="5"/>
+      <circle cx="0" cy="-90" r="112" fill="#2a1a10"/>
+      <path d="M-70 -160 Q0 -200 70 -160" stroke="#5a3a24" stroke-width="16" fill="none" stroke-linecap="round"/>
+      <path d="M-100 -10 L-80 30 L-60 0 L-40 36 L-20 4 L0 40 L20 4 L40 36 L60 0 L80 30 L100 -10" fill="#2a1a10" stroke="#000" stroke-width="6" stroke-linejoin="round"/></g>
     <rect x="0" y="420" width="1920" height="1080" fill="url(#vig)" opacity=".55"/>
     ${VIB.words(p.words || [["IT'S", '#ffffff', 165], ['EMPTY', '#ff8a2a', 225]], 60, 420)}`;
 };
