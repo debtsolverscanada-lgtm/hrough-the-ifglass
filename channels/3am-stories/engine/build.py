@@ -43,7 +43,7 @@ lines = [s.get('text') for s in ST['scenes']]
 def voice_line(i, text, who=None):
     """-> (mp3 path, [(word, start, end)]) for scene i, voicing it only if the cached take is missing or stale."""
     who = who or NARRATOR
-    h = hashlib.sha1(json.dumps([text, who if who != NARRATOR else ST.get('voice'), SETTINGS]).encode()).hexdigest()[:10]
+    h = hashlib.sha1(json.dumps([text, who if who != NARRATOR else ST.get('voice'), SETTINGS] + ([TTS['model']] if TTS.get('model') else [])).encode()).hexdigest()[:10]
     mp3, js = f'{VO}/{i:02d}-{h}.mp3', f'{VO}/{i:02d}-{h}.json'
     if os.environ.get('FAKE_TTS'):  # layout previews without spending credits: silence, 0.33 s per word
         mp3, js = f'{WK}/fake{i:02d}.mp3', f'{WK}/fake{i:02d}.json'
@@ -56,13 +56,7 @@ def voice_line(i, text, who=None):
     elif not os.path.exists(mp3):
         if not KEY: sys.exit('ELEVENLABS_API_KEY needed to voice: ' + text)
         prev = ' '.join(t for t in lines[max(0, i - 2):i] if t); nxt = next((t for t in lines[i + 1:] if t), '')
-        r = requests.post(f'https://api.elevenlabs.io/v1/text-to-speech/{voice_id(who)}/with-timestamps', params={'output_format': 'mp3_44100_128'},
-                          headers={'xi-api-key': KEY}, timeout=300,
-                          json={'text': text, 'model_id': TTS.get('model', 'eleven_multilingual_v2'), 'voice_settings': SETTINGS,
-                                'previous_text': prev, 'next_text': nxt})
-        if r.status_code != 200: sys.exit(f'ElevenLabs {r.status_code}: {r.text[:400]}')
-        j = r.json(); open(mp3, 'wb').write(base64.b64decode(j['audio_base64']))
-        json.dump(j.get('alignment') or j.get('normalized_alignment'), open(js, 'w'))
+        audio, al = tts_call(text, who, prev, nxt); open(mp3, 'wb').write(audio); json.dump(al, open(js, 'w'))
         print(f'voiced scene {i}: {text[:50]}', flush=True)
     al = json.load(open(js)); words, cur, st = [], '', None
     for ch, s0, e0 in zip(al['characters'], al['character_start_times_seconds'], al['character_end_times_seconds']):
@@ -74,13 +68,78 @@ def voice_line(i, text, who=None):
     if cur: words.append((cur, st, last))
     return mp3, words
 
+# ---------- one-take narration (tts.one_take): consecutive narrator lines are voiced as ONE continuous read, so the
+# intonation flows like a real storyteller and nothing is clipped; the take is then cut per scene in the middle of
+# the natural pauses between sentences. Character lines (scene "voice") stay separate takes.
+def tts_call(text, who, prev='', nxt=''):
+    model = TTS.get('model', 'eleven_multilingual_v2')
+    st = dict(SETTINGS)
+    if model == 'eleven_v3': st = {'stability': min([0.0, 0.5, 1.0], key=lambda v: abs(v - SETTINGS['stability'])), 'similarity_boost': SETTINGS['similarity_boost'],
+                                   'style': SETTINGS['style'], 'use_speaker_boost': True, 'speed': SETTINGS['speed']}
+    body = {'text': text, 'model_id': model, 'voice_settings': st}
+    if model != 'eleven_v3': body.update(previous_text=prev, next_text=nxt)
+    r = requests.post(f'https://api.elevenlabs.io/v1/text-to-speech/{voice_id(who)}/with-timestamps', params={'output_format': 'mp3_44100_128'},
+                      headers={'xi-api-key': KEY}, timeout=600, json=body)
+    if r.status_code != 200 and model == 'eleven_v3':
+        print('eleven_v3 failed, falling back to multilingual v2:', r.status_code, r.text[:200], flush=True)
+        body = {'text': text, 'model_id': 'eleven_multilingual_v2', 'voice_settings': SETTINGS, 'previous_text': prev, 'next_text': nxt}
+        r = requests.post(f'https://api.elevenlabs.io/v1/text-to-speech/{voice_id(who)}/with-timestamps', params={'output_format': 'mp3_44100_128'},
+                          headers={'xi-api-key': KEY}, timeout=600, json=body)
+    if r.status_code != 200: sys.exit(f'ElevenLabs {r.status_code}: {r.text[:400]}')
+    j = r.json(); return base64.b64decode(j['audio_base64']), (j.get('alignment') or j.get('normalized_alignment'))
+
+ONE = {}
+if TTS.get('one_take') and not os.environ.get('FAKE_TTS'):
+    idx = [i for i, sc in enumerate(ST['scenes']) if sc.get('text')]
+    runs, cur = [], []
+    for i in idx:
+        if ST['scenes'][i].get('voice'): runs += [cur] if cur else []; runs.append([i]); cur = []
+        else: cur.append(i)
+    if cur: runs.append(cur)
+    for rn in runs:
+        if ST['scenes'][rn[0]].get('voice') or len(rn) == 1: continue  # single lines use the per-line path
+        texts = [ST['scenes'][i]['text'] for i in rn]
+        full = '\n\n'.join(texts)
+        h = hashlib.sha1(json.dumps([full, ST.get('voice'), SETTINGS, TTS.get('model')]).encode()).hexdigest()[:10]
+        mp3, js = f'{VO}/take-{rn[0]:02d}-{h}.mp3', f'{VO}/take-{rn[0]:02d}-{h}.json'
+        if not os.path.exists(mp3):
+            if not KEY: sys.exit('ELEVENLABS_API_KEY needed to voice the take')
+            audio, al = tts_call(full, NARRATOR); open(mp3, 'wb').write(audio); json.dump(al, open(js, 'w'))
+            print(f'voiced one take: scenes {rn[0]}-{rn[-1]}', flush=True)
+        al = json.load(open(js)); ch, cs, ce = al['characters'], al['character_start_times_seconds'], al['character_end_times_seconds']
+        joined = ''.join(ch); pos = 0; spans = []
+        for tx in texts:
+            k = joined.find(tx[:12], pos); k = pos if k < 0 else k; e = min(len(ch) - 1, k + len(tx) - 1)
+            spans.append((k, e)); pos = e + 1
+        total = dur_of(mp3); cuts = [0.0]
+        for (a0, e0), (a1, e1) in zip(spans, spans[1:]):
+            cuts.append((ce[e0] + cs[a1]) / 2)
+        cuts.append(total)
+        for n, i in enumerate(rn):
+            piece = f'{WK}/take{i:02d}.wav'
+            run('ffmpeg', '-v', 'error', '-y', '-i', mp3, '-ss', f'{cuts[n]:.3f}', '-to', f'{cuts[n + 1]:.3f}', '-ar', '44100', '-ac', '1', piece)
+            a0, e0 = spans[n]; words, curw, stw = [], '', None
+            for c, s0, e1 in zip(ch[a0:e0 + 1], cs[a0:e0 + 1], ce[a0:e0 + 1]):
+                if c.isspace():
+                    if curw: words.append((curw, stw - cuts[n], last - cuts[n])); curw = ''
+                else:
+                    if not curw: stw = s0
+                    curw += c; last = e1
+            if curw: words.append((curw, stw - cuts[n], last - cuts[n]))
+            ONE[i] = (piece, [w for w in words if not w[0].startswith('[')])
+
 # ---------- timeline ----------
 tl, voices, caps, t = [], [], [], 0.0
 for i, s in enumerate(ST['scenes']):
     if s.get('text'):
-        mp3, words = voice_line(i, s['text'], s.get('voice'))
-        lead = 0.1  # voice starts right on the cut (tight pacing)
-        dur = lead + dur_of(mp3) + s.get('pause', 0.45)
+        if i in ONE:  # a slice of the continuous take: its natural pause is already inside; 'pause' adds only a held beat
+            mp3, words = ONE[i]; lead = 0.0
+            dur = dur_of(mp3) + max(0.0, s.get('pause', 0.45) - 0.3)
+        else:
+            mp3, words = voice_line(i, s['text'], s.get('voice'))
+            words = [w for w in words if not w[0].startswith('[')]
+            lead = 0.1  # voice starts right on the cut (tight pacing)
+            dur = lead + dur_of(mp3) + max(s.get('pause', 0.45), 0.25)  # never butt two takes together
         voices.append((mp3, t + lead, s.get('fx')))
         if s['scene'] in ('text', 'black'): words = []  # the words are already on screen
         caps += [(w, t + lead + a0, t + lead + b0) for w, a0, b0 in words]

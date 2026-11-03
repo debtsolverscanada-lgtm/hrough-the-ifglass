@@ -1,0 +1,21 @@
+name: Voice audition
+on: workflow_dispatch
+jobs:
+  audition:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install requests
+      - name: Collect voices
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: python3 channels/3am-stories/engine/voice_audition.py aud
+      - name: Upload to Drive (Vlog Edits/Voice auditions)
+        env:
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+        run: |
+          for f in aud/*; do python3 vlog/drive_put.py "$f" "$(basename "$f")" "Voice auditions"; done
