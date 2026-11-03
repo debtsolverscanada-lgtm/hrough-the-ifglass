@@ -7,7 +7,7 @@ description: Read the owner's YouTube analytics (screenshots from the YouTube St
 
 Channels: 3 AM Stories (YouTube connection `0202bdfc-ea80-8057-b7a3-2226e8be0dd3`, channel UC42lL9Ygyl7d262Umj3Wg_A),
 Through the Ifglass (`02fbff33-7e6c-848c-817a-ee35e4c556b2`), YoutubeAfterLife (`02ee4a72-1d30-88d2-8553-30435d28a8e3`).
-Goal: YouTube Partner Program (1,000 subscribers + 4,000 long-form watch hours, or 10M Shorts views in 90 days).
+Goal: YouTube Partner Program ads tier: 1,000 subscribers plus either 4,000 public long-form watch hours in 12 months or 10M Shorts views in 90 days.
 
 ## Reading a screenshot
 - Name the metric and the number, compare to a rule of thumb, then give 1-3 actions. Short and plain.
