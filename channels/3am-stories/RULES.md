@@ -25,10 +25,20 @@
 | 023 floor thirteen | sickGreen at 0.32 (fluorescent elevator green, reds kept) | night-shift nurse: hair bun, teal scrubs; narrator Sarah (female, first person) |
 | 022 closet tenant | sodiumNight (warm orange street-light night) | 57-year-old office worker: greying side-parted hair, glasses, age lines, white shirt + navy tie |
 
-## Thumbnails pop like Ifglass (owner's rule, Nov 2026)
-- Vibrant, not dark: saturated gradient background (purple/magenta/orange), soft bokeh lights, neon rim glow on the
-  characters, one glowing object, big Inter Display Black words (white + yellow, fat black outline). Use the VIB kit in
-  scenes.js and p.noVig. Horror comes from the one wrong thing (black eyes, red light), not from making the image dark.
+## Thumbnails: the Floor 13 v5 recipe (owner's rule, Nov 2026)
+Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p + S.thumbF13h). Use it for most thumbnails.
+- Bright, saturated background: purple to hot pink to orange gradient, sunburst rays behind the lead, bokeh lights.
+  Never a dark/grey image. Run the whole thing through saturate ~1.3 / contrast ~1.1, p.noVig, no colour grade.
+- Left: the lead's frightened face, big (about half the frame height), white sticker outline + cyan neon glow,
+  eyes wide, mouth open, sweat and tears.
+- Right: the threat, small but unmistakable, white sticker outline + red glow, glowing red eyes, a too-wide black grin.
+- One glowing object that is the story (the 13, the machine number, the door light) in white with a red glow.
+- Horror layer: cartoon blood handprints and drips on the set, cracks, red edge glow and a light red tint.
+  Cartoon only, no wounds or gore, so it stays advertiser-friendly.
+- A red arrow pointing at the threat.
+- Words top-left in Inter Display Black: line 1 white, line 2 bigger in yellow, fat black outline, 0-3 words that are
+  not the title. Nothing in the bottom-right.
+- Check at 320x180 before posting: the face, the red eyes and the glowing object must read in one second.
 
 ## Sound (owner's rule, Nov 2026)
 - Effects sit under the voice: no sharp "bing" stings, no loud booms. Loud hits make people scroll away.
