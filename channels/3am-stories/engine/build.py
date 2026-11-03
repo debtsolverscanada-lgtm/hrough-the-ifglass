@@ -118,7 +118,9 @@ if TTS.get('one_take') and not os.environ.get('FAKE_TTS'):
     runs, cur = [], []
     for i in idx:
         if ST['scenes'][i].get('voice'): runs += [cur] if cur else []; runs.append([i]); cur = []
-        else: cur.append(i)
+        else:
+            cur.append(i)
+            if len(cur) >= TTS.get('take_scenes', 10): runs.append(cur); cur = []  # long videos: one take per ~10 lines
     if cur: runs.append(cur)
     for rn in runs:
         if ST['scenes'][rn[0]].get('voice') or len(rn) == 1: continue  # single lines use the per-line path
@@ -181,6 +183,7 @@ for i, s in enumerate(ST['scenes']):
                'fade': 0.0 if i == 0 else 0.25})
     t += dur
 TOTAL = min(t, a.seconds or 1e9)
+if os.environ.get('VOICE_ONLY'): print(f'voiced, {t:.1f}s'); sys.exit(0)
 tl = [x for x in tl if x['start'] < TOTAL]
 json.dump(tl, open(f'{WK}/timeline.json', 'w'))
 print(f'{len(tl)} scenes, {TOTAL:.1f}s', flush=True)

@@ -5,6 +5,7 @@ front of every prompt so the whole video looks like one painter made it; "art_ca
 usage: python3 engine/gen_grok.py stories/<id> [--thumb]   (auth: XAI_API_KEY env, or the session's proxy-injected key)
 """
 import base64, json, os, sys, urllib.request
+from concurrent.futures import ThreadPoolExecutor
 D = sys.argv[1]; ST = json.load(open(f'{D}/story.json')); os.makedirs(f'{D}/art', exist_ok=True)
 H = {'Content-Type': 'application/json'}
 if os.environ.get('XAI_API_KEY'): H['Authorization'] = 'Bearer ' + os.environ['XAI_API_KEY']
@@ -15,11 +16,17 @@ def paint(prompt, out, aspect):
     open(out, 'wb').write(base64.b64decode(d['data'][0]['b64_json'])); print('painted', out, flush=True)
 style, cast = ST.get('art_style', ''), ST.get('art_cast', '')
 rel = os.path.relpath(D, os.path.join(os.path.dirname(__file__), '../../..'))
+todo = []
 for i, s in enumerate(ST['scenes']):
     if not s.get('art'): continue
     f = f'{D}/art/{i:02d}.jpg'
-    if not os.path.exists(f): paint(f"{style} {cast} Scene: {s['art']}", f, s.get('aspect', '9:16'))
+    if not os.path.exists(f): todo.append((f"{style} {cast} Scene: {s['art']}", f, s.get('aspect', ST.get('art_aspect', '9:16'))))
     s.setdefault('p', {})['img'] = f'{rel}/art/{i:02d}.jpg'
+def safe(a):
+    for k in range(3):
+        try: return paint(*a)
+        except Exception as e: print('retry', a[1], e, flush=True)
+with ThreadPoolExecutor(4) as ex: list(ex.map(safe, todo))
 if '--thumb' in sys.argv and ST.get('thumb_art'):
     f = f'{D}/art/thumb.jpg'
     if not os.path.exists(f): paint(f"{style} {ST['thumb_art']}", f, '16:9')
