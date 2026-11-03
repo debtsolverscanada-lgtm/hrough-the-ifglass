@@ -42,7 +42,7 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.03,
+    "push": 0.04,
     "pops": [
      {
       "at": 0.0,
@@ -52,7 +52,17 @@
       "y": 0.2
      }
     ],
-    "img": "channels/3am-stories/stories/030-lizzie/art/00.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/00.jpg",
+    "snap": {
+     "at": 3.91,
+     "to": [
+      1100,
+      900
+     ],
+     "z": 1.6,
+     "back": 7.12
+    },
+    "shake": 0.08
    },
    "pause": 0.35,
    "sfx": [
@@ -70,7 +80,29 @@
     "wide": true,
     "noVig": true,
     "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/01.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/01.jpg",
+    "pan": [
+     140,
+     0
+    ],
+    "snap": {
+     "at": 5.08,
+     "to": [
+      820,
+      880
+     ],
+     "z": 1.5
+    },
+    "shake": 0.08,
+    "pops": [
+     {
+      "at": 1.2,
+      "type": "date",
+      "text": "4TH GRADE",
+      "x": 0.78,
+      "y": 0.2
+     }
+    ]
    },
    "pause": 0.35
   },
@@ -81,12 +113,23 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
+    "push": 0.0,
     "pan": [
      -60,
      0
     ],
-    "img": "channels/3am-stories/stories/030-lizzie/art/02.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/02.jpg",
+    "pull": true,
+    "snap": {
+     "at": 4.08,
+     "to": [
+      960,
+      820
+     ],
+     "z": 1.7
+    },
+    "whip": true,
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -170,7 +213,12 @@
      "channels/3am-stories/stories/030-lizzie/art/03/f060.jpg",
      "channels/3am-stories/stories/030-lizzie/art/03/f061.jpg"
     ],
-    "fps": 12
+    "fps": 12,
+    "pan": [
+     100,
+     0
+    ],
+    "shake": 0.08
    },
    "pause": 0.35,
    "anim": "Animated horror cartoon. The children run around in a blur; the blonde girl at the fence stays perfectly still, then slowly tilts her head and smiles. Static camera."
@@ -182,8 +230,26 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.05,
-    "img": "channels/3am-stories/stories/030-lizzie/art/04.jpg"
+    "push": 0.06,
+    "img": "channels/3am-stories/stories/030-lizzie/art/04.jpg",
+    "snap": {
+     "at": 2.01,
+     "to": [
+      700,
+      900
+     ],
+     "z": 1.8,
+     "back": 4.32
+    },
+    "whip": true,
+    "shake": 0.08,
+    "flashAt": [
+     0.02
+    ],
+    "glitch": [
+     0.0,
+     0.9
+    ]
    },
    "pause": 0.35,
    "sfx": [
@@ -200,8 +266,18 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/05.jpg"
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/030-lizzie/art/05.jpg",
+    "snap": {
+     "at": 2.68,
+     "to": [
+      1100,
+      900
+     ],
+     "z": 1.6,
+     "back": 4.89
+    },
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -221,7 +297,22 @@
      ],
      "z": 1.7
     },
-    "img": "channels/3am-stories/stories/030-lizzie/art/06.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/06.jpg",
+    "pan": [
+     -100,
+     0
+    ],
+    "whip": true,
+    "shake": 0.08,
+    "pops": [
+     {
+      "at": 5.85,
+      "type": "label",
+      "text": "BEFORE THE BELL",
+      "x": 0.5,
+      "y": 0.18
+     }
+    ]
    },
    "pause": 0.35
   },
@@ -232,12 +323,22 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
+    "push": 0.0,
     "pan": [
      80,
      0
     ],
-    "img": "channels/3am-stories/stories/030-lizzie/art/07.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/07.jpg",
+    "pull": true,
+    "snap": {
+     "at": 2.35,
+     "to": [
+      960,
+      820
+     ],
+     "z": 1.7
+    },
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -249,7 +350,22 @@
     "wide": true,
     "noVig": true,
     "push": 0.03,
-    "img": "channels/3am-stories/stories/030-lizzie/art/08.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/08.jpg",
+    "pan": [
+     -140,
+     0
+    ],
+    "snap": {
+     "at": 1.76,
+     "to": [
+      1250,
+      950
+     ],
+     "z": 1.45
+    },
+    "whip": true,
+    "shake": 0.08,
+    "smoke": true
    },
    "pause": 0.35
   },
@@ -260,9 +376,19 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
+    "push": 0.06,
     "shake": 0.15,
-    "img": "channels/3am-stories/stories/030-lizzie/art/09.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/09.jpg",
+    "snap": {
+     "at": 3.26,
+     "to": [
+      700,
+      900
+     ],
+     "z": 1.8,
+     "back": 6.98
+    },
+    "smoke": true
    },
    "pause": 0.35
   },
@@ -273,8 +399,19 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/10.jpg"
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/030-lizzie/art/10.jpg",
+    "snap": {
+     "at": 0.84,
+     "to": [
+      1100,
+      900
+     ],
+     "z": 1.6,
+     "back": 1.54
+    },
+    "whip": true,
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -358,7 +495,14 @@
      "channels/3am-stories/stories/030-lizzie/art/11/f060.jpg",
      "channels/3am-stories/stories/030-lizzie/art/11/f061.jpg"
     ],
-    "fps": 12
+    "fps": 12,
+    "pan": [
+     100,
+     0
+    ],
+    "shake": 0.08,
+    "smoke": true,
+    "pulse": true
    },
    "pause": 0.35,
    "anim": "Animated horror cartoon. The grandmother stands motionless behind the kitchen window, cigarette smoke slowly curling up the glass, her eyes following something across the yard. Static camera."
@@ -370,8 +514,21 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.05,
-    "img": "channels/3am-stories/stories/030-lizzie/art/12.jpg"
+    "push": 0.0,
+    "img": "channels/3am-stories/stories/030-lizzie/art/12.jpg",
+    "pull": true,
+    "snap": {
+     "at": 1.56,
+     "to": [
+      960,
+      820
+     ],
+     "z": 1.7
+    },
+    "whip": true,
+    "shake": 0.08,
+    "smoke": true,
+    "pulse": true
    },
    "pause": 0.6
   },
@@ -382,8 +539,21 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/13.jpg"
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/030-lizzie/art/13.jpg",
+    "pan": [
+     -140,
+     0
+    ],
+    "snap": {
+     "at": 5.13,
+     "to": [
+      1250,
+      950
+     ],
+     "z": 1.45
+    },
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -394,12 +564,23 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
+    "push": 0.06,
     "pan": [
      -70,
      0
     ],
-    "img": "channels/3am-stories/stories/030-lizzie/art/14.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/14.jpg",
+    "snap": {
+     "at": 3.01,
+     "to": [
+      700,
+      900
+     ],
+     "z": 1.8,
+     "back": 6.44
+    },
+    "whip": true,
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -410,8 +591,18 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/15.jpg"
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/030-lizzie/art/15.jpg",
+    "snap": {
+     "at": 2.93,
+     "to": [
+      1100,
+      900
+     ],
+     "z": 1.6,
+     "back": 5.34
+    },
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -431,7 +622,13 @@
      ],
      "z": 1.6
     },
-    "img": "channels/3am-stories/stories/030-lizzie/art/16.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/16.jpg",
+    "pan": [
+     -100,
+     0
+    ],
+    "whip": true,
+    "shake": 0.08
    },
    "pause": 0.5
   },
@@ -442,8 +639,18 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.04,
-    "img": "channels/3am-stories/stories/030-lizzie/art/17.jpg"
+    "push": 0.0,
+    "img": "channels/3am-stories/stories/030-lizzie/art/17.jpg",
+    "pull": true,
+    "snap": {
+     "at": 2.63,
+     "to": [
+      960,
+      820
+     ],
+     "z": 1.7
+    },
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -454,8 +661,23 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.05,
-    "img": "channels/3am-stories/stories/030-lizzie/art/18.jpg"
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/030-lizzie/art/18.jpg",
+    "pan": [
+     -140,
+     0
+    ],
+    "snap": {
+     "at": 3.11,
+     "to": [
+      1250,
+      950
+     ],
+     "z": 1.45
+    },
+    "whip": true,
+    "shake": 0.08,
+    "pulse": true
    },
    "pause": 0.7
   },
@@ -466,8 +688,19 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.03,
-    "img": "channels/3am-stories/stories/030-lizzie/art/19.jpg"
+    "push": 0.06,
+    "img": "channels/3am-stories/stories/030-lizzie/art/19.jpg",
+    "snap": {
+     "at": 1.64,
+     "to": [
+      700,
+      900
+     ],
+     "z": 1.8,
+     "back": 3.51
+    },
+    "shake": 0.08,
+    "smoke": true
    },
    "pause": 0.35
   },
@@ -487,7 +720,14 @@
      ],
      "z": 1.8
     },
-    "img": "channels/3am-stories/stories/030-lizzie/art/20.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/20.jpg",
+    "pan": [
+     -100,
+     0
+    ],
+    "whip": true,
+    "shake": 0.08,
+    "pulse": true
    },
    "pause": 0.35,
    "sfx": [
@@ -505,7 +745,21 @@
     "wide": true,
     "noVig": true,
     "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/21.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/21.jpg",
+    "pan": [
+     140,
+     0
+    ],
+    "snap": {
+     "at": 1.38,
+     "to": [
+      820,
+      880
+     ],
+     "z": 1.5
+    },
+    "shake": 0.08,
+    "pulse": true
    },
    "pause": 0.6
   },
@@ -516,7 +770,7 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.05,
+    "push": 0.0,
     "img": "channels/3am-stories/stories/030-lizzie/art/22.jpg",
     "imgs": [
      "channels/3am-stories/stories/030-lizzie/art/22/f001.jpg",
@@ -581,7 +835,20 @@
      "channels/3am-stories/stories/030-lizzie/art/22/f060.jpg",
      "channels/3am-stories/stories/030-lizzie/art/22/f061.jpg"
     ],
-    "fps": 12
+    "fps": 12,
+    "pull": true,
+    "snap": {
+     "at": 2.91,
+     "to": [
+      960,
+      820
+     ],
+     "z": 1.7
+    },
+    "whip": true,
+    "shake": 0.2,
+    "embers": true,
+    "smoke": true
    },
    "pause": 0.35,
    "anim": "Animated horror cartoon. A tiny flame catches in the dry leaves at the base of the branch pile and slowly spreads, the kneeling blonde girl watching calmly. Static camera."
@@ -593,8 +860,23 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.04,
-    "img": "channels/3am-stories/stories/030-lizzie/art/23.jpg"
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/030-lizzie/art/23.jpg",
+    "pan": [
+     -140,
+     0
+    ],
+    "snap": {
+     "at": 4.06,
+     "to": [
+      1250,
+      950
+     ],
+     "z": 1.45
+    },
+    "shake": 0.2,
+    "embers": true,
+    "smoke": true
    },
    "pause": 0.35
   },
@@ -605,9 +887,28 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.07,
+    "push": 0.06,
     "shake": 0.3,
-    "img": "channels/3am-stories/stories/030-lizzie/art/24.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/24.jpg",
+    "snap": {
+     "at": 1.35,
+     "to": [
+      700,
+      900
+     ],
+     "z": 1.8,
+     "back": 2.89
+    },
+    "whip": true,
+    "embers": true,
+    "smoke": true,
+    "flashAt": [
+     0.02
+    ],
+    "glitch": [
+     0.0,
+     0.9
+    ]
    },
    "pause": 0.2,
    "sfx": [
@@ -624,7 +925,7 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
+    "push": 0.04,
     "shake": 0.25,
     "img": "channels/3am-stories/stories/030-lizzie/art/25.jpg",
     "imgs": [
@@ -690,7 +991,22 @@
      "channels/3am-stories/stories/030-lizzie/art/25/f060.jpg",
      "channels/3am-stories/stories/030-lizzie/art/25/f061.jpg"
     ],
-    "fps": 12
+    "fps": 12,
+    "snap": {
+     "at": 0.89,
+     "to": [
+      1100,
+      900
+     ],
+     "z": 1.6,
+     "back": 1.61
+    },
+    "embers": true,
+    "smoke": true,
+    "flashAt": [
+     0.02
+    ],
+    "flashColor": "#ff6a1a"
    },
    "pause": 0.35,
    "anim": "Animated horror cartoon. Flames climb the side wall of the white house and black smoke pours into the sky; a small girl stands frozen on the lawn. Slow push in."
@@ -767,7 +1083,23 @@
      "channels/3am-stories/stories/030-lizzie/art/26/f060.jpg",
      "channels/3am-stories/stories/030-lizzie/art/26/f061.jpg"
     ],
-    "fps": 12
+    "fps": 12,
+    "pan": [
+     140,
+     0
+    ],
+    "snap": {
+     "at": 3.34,
+     "to": [
+      820,
+      880
+     ],
+     "z": 1.5
+    },
+    "whip": true,
+    "shake": 0.2,
+    "embers": true,
+    "smoke": true
    },
    "pause": 0.35,
    "anim": "Animated horror cartoon. The blonde girl walks slowly away into thick drifting smoke, looks back over her shoulder with a calm smile, and fades into the smoke. Static camera."
@@ -779,8 +1111,20 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.05,
-    "img": "channels/3am-stories/stories/030-lizzie/art/27.jpg"
+    "push": 0.0,
+    "img": "channels/3am-stories/stories/030-lizzie/art/27.jpg",
+    "pull": true,
+    "snap": {
+     "at": 0.84,
+     "to": [
+      960,
+      820
+     ],
+     "z": 1.7
+    },
+    "shake": 0.2,
+    "embers": true,
+    "smoke": true
    },
    "pause": 0.8
   },
@@ -791,12 +1135,24 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
+    "push": 0.03,
     "pan": [
-     60,
+     -140,
      0
     ],
-    "img": "channels/3am-stories/stories/030-lizzie/art/28.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/28.jpg",
+    "snap": {
+     "at": 4.39,
+     "to": [
+      1250,
+      950
+     ],
+     "z": 1.45
+    },
+    "whip": true,
+    "shake": 0.2,
+    "embers": true,
+    "smoke": true
    },
    "pause": 0.35,
    "sfx": [
@@ -813,8 +1169,20 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/29.jpg"
+    "push": 0.06,
+    "img": "channels/3am-stories/stories/030-lizzie/art/29.jpg",
+    "snap": {
+     "at": 2.4,
+     "to": [
+      700,
+      900
+     ],
+     "z": 1.8,
+     "back": 5.15
+    },
+    "shake": 0.2,
+    "embers": true,
+    "smoke": true
    },
    "pause": 0.35
   },
@@ -825,8 +1193,19 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/30.jpg"
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/030-lizzie/art/30.jpg",
+    "snap": {
+     "at": 3.22,
+     "to": [
+      1100,
+      900
+     ],
+     "z": 1.6,
+     "back": 5.88
+    },
+    "whip": true,
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -838,7 +1217,20 @@
     "wide": true,
     "noVig": true,
     "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/31.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/31.jpg",
+    "pan": [
+     140,
+     0
+    ],
+    "snap": {
+     "at": 3.26,
+     "to": [
+      820,
+      880
+     ],
+     "z": 1.5
+    },
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -849,8 +1241,19 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/32.jpg"
+    "push": 0.0,
+    "img": "channels/3am-stories/stories/030-lizzie/art/32.jpg",
+    "pull": true,
+    "snap": {
+     "at": 2.17,
+     "to": [
+      960,
+      820
+     ],
+     "z": 1.7
+    },
+    "whip": true,
+    "shake": 0.08
    },
    "pause": 0.4
   },
@@ -861,8 +1264,22 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.06,
-    "img": "channels/3am-stories/stories/030-lizzie/art/33.jpg"
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/030-lizzie/art/33.jpg",
+    "pan": [
+     -140,
+     0
+    ],
+    "snap": {
+     "at": 3.14,
+     "to": [
+      1250,
+      950
+     ],
+     "z": 1.45
+    },
+    "shake": 0.08,
+    "pulse": true
    },
    "pause": 0.9,
    "sfx": [
@@ -879,8 +1296,19 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/34.jpg"
+    "push": 0.06,
+    "img": "channels/3am-stories/stories/030-lizzie/art/34.jpg",
+    "snap": {
+     "at": 2.69,
+     "to": [
+      700,
+      900
+     ],
+     "z": 1.8,
+     "back": 5.77
+    },
+    "whip": true,
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -891,8 +1319,18 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.03,
-    "img": "channels/3am-stories/stories/030-lizzie/art/35.jpg"
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/030-lizzie/art/35.jpg",
+    "snap": {
+     "at": 1.62,
+     "to": [
+      1100,
+      900
+     ],
+     "z": 1.6,
+     "back": 2.95
+    },
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -912,7 +1350,29 @@
      ],
      "z": 1.7
     },
-    "img": "channels/3am-stories/stories/030-lizzie/art/36.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/36.jpg",
+    "pan": [
+     -100,
+     0
+    ],
+    "whip": true,
+    "shake": 0.08,
+    "flashAt": [
+     0.02
+    ],
+    "glitch": [
+     0.0,
+     0.9
+    ],
+    "pops": [
+     {
+      "at": 1.4,
+      "type": "label",
+      "text": "WHO'S LIZZIE?",
+      "x": 0.5,
+      "y": 0.18
+     }
+    ]
    },
    "pause": 1.0,
    "sfx": [
@@ -929,8 +1389,18 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/37.jpg"
+    "push": 0.0,
+    "img": "channels/3am-stories/stories/030-lizzie/art/37.jpg",
+    "pull": true,
+    "snap": {
+     "at": 5.4,
+     "to": [
+      960,
+      820
+     ],
+     "z": 1.7
+    },
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -941,8 +1411,26 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.04,
-    "img": "channels/3am-stories/stories/030-lizzie/art/38.jpg"
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/030-lizzie/art/38.jpg",
+    "pan": [
+     -140,
+     0
+    ],
+    "snap": {
+     "at": 3.07,
+     "to": [
+      1250,
+      950
+     ],
+     "z": 1.45
+    },
+    "whip": true,
+    "shake": 0.08,
+    "dust": true,
+    "glitch": [
+     0.05
+    ]
    },
    "pause": 0.35
   },
@@ -962,7 +1450,16 @@
      ],
      "z": 2.2
     },
-    "img": "channels/3am-stories/stories/030-lizzie/art/39.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/39.jpg",
+    "pan": [
+     100,
+     0
+    ],
+    "shake": 0.08,
+    "dust": true,
+    "glitch": [
+     0.05
+    ]
    },
    "pause": 0.6
   },
@@ -973,8 +1470,19 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/40.jpg"
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/030-lizzie/art/40.jpg",
+    "snap": {
+     "at": 3.55,
+     "to": [
+      1100,
+      900
+     ],
+     "z": 1.6,
+     "back": 6.46
+    },
+    "whip": true,
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -987,10 +1495,19 @@
     "noVig": true,
     "push": 0.025,
     "pan": [
-     70,
+     140,
      0
     ],
-    "img": "channels/3am-stories/stories/030-lizzie/art/41.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/41.jpg",
+    "snap": {
+     "at": 4.09,
+     "to": [
+      820,
+      880
+     ],
+     "z": 1.5
+    },
+    "shake": 0.08
    },
    "pause": 0.35
   },
@@ -1010,7 +1527,13 @@
      ],
      "z": 1.9
     },
-    "img": "channels/3am-stories/stories/030-lizzie/art/42.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/42.jpg",
+    "pan": [
+     -100,
+     0
+    ],
+    "whip": true,
+    "shake": 0.08
    },
    "pause": 0.6
   },
@@ -1021,8 +1544,21 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/43.jpg"
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/030-lizzie/art/43.jpg",
+    "pan": [
+     -140,
+     0
+    ],
+    "snap": {
+     "at": 1.02,
+     "to": [
+      1250,
+      950
+     ],
+     "z": 1.45
+    },
+    "shake": 0.08
    },
    "pause": 0.6
   },
@@ -1033,8 +1569,23 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.03,
-    "img": "channels/3am-stories/stories/030-lizzie/art/44.jpg"
+    "push": 0.06,
+    "img": "channels/3am-stories/stories/030-lizzie/art/44.jpg",
+    "snap": {
+     "at": 2.26,
+     "to": [
+      700,
+      900
+     ],
+     "z": 1.8,
+     "back": 4.84
+    },
+    "whip": true,
+    "shake": 0.08,
+    "dust": true,
+    "glitch": [
+     0.05
+    ]
    },
    "pause": 0.35
   },
@@ -1046,7 +1597,21 @@
     "wide": true,
     "noVig": true,
     "push": 0.04,
-    "img": "channels/3am-stories/stories/030-lizzie/art/45.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/45.jpg",
+    "snap": {
+     "at": 2.54,
+     "to": [
+      1100,
+      900
+     ],
+     "z": 1.6,
+     "back": 4.63
+    },
+    "shake": 0.08,
+    "dust": true,
+    "glitch": [
+     0.05
+    ]
    },
    "pause": 0.35
   },
@@ -1130,7 +1695,21 @@
      "channels/3am-stories/stories/030-lizzie/art/46/f060.jpg",
      "channels/3am-stories/stories/030-lizzie/art/46/f061.jpg"
     ],
-    "fps": 12
+    "fps": 12,
+    "pan": [
+     -100,
+     0
+    ],
+    "whip": true,
+    "shake": 0.08,
+    "dust": true,
+    "glitch": [
+     0.0,
+     0.9
+    ],
+    "flashAt": [
+     0.02
+    ]
    },
    "pause": 0.35,
    "anim": "Animated horror cartoon. An old black-and-white photograph of two girls; the blonde girl's eyes slowly move to look directly at the viewer and her smile widens. Very slow push in."
@@ -1142,8 +1721,22 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.05,
-    "img": "channels/3am-stories/stories/030-lizzie/art/47.jpg"
+    "push": 0.0,
+    "img": "channels/3am-stories/stories/030-lizzie/art/47.jpg",
+    "pull": true,
+    "snap": {
+     "at": 2.21,
+     "to": [
+      960,
+      820
+     ],
+     "z": 1.7
+    },
+    "shake": 0.08,
+    "dust": true,
+    "glitch": [
+     0.05
+    ]
    },
    "pause": 0.8
   },
@@ -1154,8 +1747,23 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/48.jpg"
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/030-lizzie/art/48.jpg",
+    "pan": [
+     -140,
+     0
+    ],
+    "snap": {
+     "at": 3.17,
+     "to": [
+      1250,
+      950
+     ],
+     "z": 1.45
+    },
+    "whip": true,
+    "shake": 0.08,
+    "pulse": true
    },
    "pause": 0.35
   },
@@ -1175,7 +1783,22 @@
      ],
      "z": 1.8
     },
-    "img": "channels/3am-stories/stories/030-lizzie/art/49.jpg"
+    "img": "channels/3am-stories/stories/030-lizzie/art/49.jpg",
+    "pan": [
+     100,
+     0
+    ],
+    "shake": 0.08,
+    "pulse": true,
+    "pops": [
+     {
+      "at": 6.33,
+      "type": "label",
+      "text": "BEFORE THE BELL",
+      "x": 0.5,
+      "y": 0.18
+     }
+    ]
    },
    "pause": 0.4
   },
@@ -1186,8 +1809,20 @@
    "p": {
     "wide": true,
     "noVig": true,
-    "push": 0.025,
-    "img": "channels/3am-stories/stories/030-lizzie/art/50.jpg"
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/030-lizzie/art/50.jpg",
+    "snap": {
+     "at": 1.02,
+     "to": [
+      1100,
+      900
+     ],
+     "z": 1.6,
+     "back": 1.86
+    },
+    "whip": true,
+    "shake": 0.08,
+    "pulse": true
    },
    "pause": 1.0,
    "sfx": [
@@ -1270,7 +1905,26 @@
      "channels/3am-stories/stories/030-lizzie/art/51/f060.jpg",
      "channels/3am-stories/stories/030-lizzie/art/51/f061.jpg"
     ],
-    "fps": 12
+    "fps": 12,
+    "pan": [
+     140,
+     0
+    ],
+    "snap": {
+     "at": 1.31,
+     "to": [
+      820,
+      880
+     ],
+     "z": 1.5
+    },
+    "flashAt": [
+     0.02
+    ],
+    "glitch": [
+     0.0,
+     0.9
+    ]
    },
    "pause": 1.4,
    "anim": "Animated horror cartoon. At the end of a dim hallway the barefoot blonde girl in the pale blue dress stands still, then her smile slowly widens. Static camera, lights flicker.",

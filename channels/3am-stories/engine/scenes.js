@@ -2052,9 +2052,9 @@ S.paint = (t, d, p) => {
   // animated clip (Grok video frames) or a still with a slow pan
   const src = p.imgs && p.imgs.length ? p.imgs[Math.min(p.imgs.length - 1, Math.floor(t * (p.fps || 12)) % (p.loop ? p.imgs.length : 1e9))] : p.img;
   const [px, py] = p.pan || [0, 0], k = ease(t / Math.max(d, 0.1));
-  const ox = px * k, oy = py * k, over = (Math.abs(px) || Math.abs(py)) ? 1.08 : 1;
+  const ox = px * k, oy = py * k, over = ((Math.abs(px) || Math.abs(py)) ? 1.08 : 1) * (p.pull ? 1.18 - 0.18 * k : 1);  // p.pull: slow pull-back
   // glitch: scan tears + colour split at the start of a camera shot and at p.glitch times
-  const gl = p.cam && (t < 0.22 || (p.glitch || []).some((g) => t >= g && t < g + 0.18));
+  const gl = (p.cam && t < 0.22) || (p.glitch || []).some((g) => t >= g && t < g + 0.18);
   const tears = gl ? [...Array(6)].map((_, i) => { const yy = y + ((i * 397 + Math.floor(t * 60) * 131) % h); return `<rect x="${x}" y="${yy}" width="${w}" height="${10 + (i * 7) % 26}" fill="#fff" opacity=".12"/><rect x="${x + 30}" y="${yy + 6}" width="${w}" height="6" fill="#ff2a5a" opacity=".18"/>`; }).join('') : '';
   const img = src ? `<g transform="translate(${ox + (gl ? 14 * Math.sin(t * 90) : 0)},${oy})"><image href="${src}" x="${x - (over - 1) * w / 2}" y="${y - (over - 1) * h / 2}" width="${w * over}" height="${h * over}" preserveAspectRatio="xMidYMid slice" opacity="${fl}" style="filter:brightness(${p.bright ?? 1.15}) contrast(1.05)"/></g>` : '';
   const cam = '';  // the camera HUD is drawn screen-fixed by camHud() in frameSVG, so zooms never crop it
@@ -2067,7 +2067,15 @@ S.paint = (t, d, p) => {
       <rect x="${X}" y="${Y - 54}" width="${Math.max(220, (p.boxLabel || 'PERSON').length * 26 + 30)}" height="48" fill="${c}"/>
       <text x="${X + 14}" y="${Y - 18}" font-family="Courier New, monospace" font-weight="700" font-size="34" fill="#000">${esc3(p.boxLabel || 'PERSON 98%')}</text></g>`;
   }
-  return `<rect width="1920" height="1920" fill="#000"/>${img}
+  // atmosphere layers (motion graphics): embers rising, drifting smoke, floating dust, heartbeat pulse, flash frames
+  const R = (n) => Math.abs(Math.sin(n * 12.9898) * 43758.5453) % 1;
+  const embers = p.embers ? [...Array(40)].map((_, i) => { const sp = 120 + R(i) * 160, yy = y + h - ((t * sp + R(i + 7) * h) % (h + 80)), xx = x + R(i + 3) * w + Math.sin(t * 2 + i) * 24;
+    return `<circle cx="${xx}" cy="${yy}" r="${2 + R(i + 9) * 4}" fill="${i % 3 ? '#ffb04a' : '#ff5a1a'}" opacity="${0.5 + R(i + 5) * 0.5}" style="filter:drop-shadow(0 0 6px #ff7a1a)"/>`; }).join('') : '';
+  const smoke = p.smoke ? [0, 1, 2, 3].map((i) => `<ellipse cx="${x + ((t * (40 + i * 14) + i * 500) % (w + 600)) - 300}" cy="${y + h * (0.25 + i * 0.17)}" rx="${420 + i * 60}" ry="${120 + i * 20}" fill="#9a9aa2" opacity="${0.1 + 0.04 * i}" filter="url(#blur)"/>`).join('') : '';
+  const dust = p.dust ? [...Array(30)].map((_, i) => `<circle cx="${x + ((R(i) * w + t * (8 + R(i + 2) * 18)) % w)}" cy="${y + ((R(i + 4) * h + Math.sin(t + i) * 30) % h)}" r="${1.5 + R(i + 6) * 2.5}" fill="#f2ead8" opacity="${0.15 + 0.25 * R(i + 8)}"/>`).join('') : '';
+  const pulse = p.pulse ? `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#vig)" opacity="${0.35 + 0.35 * Math.pow(Math.max(0, Math.sin(t * 6.3)), 8)}"/>` : '';
+  const flash = (p.flashAt || []).some((f) => t >= f && t < f + 0.08) ? `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${p.flashColor || '#fff'}" opacity=".75"/>` : '';
+  return `<rect width="1920" height="1920" fill="#000"/>${img}${smoke}${embers}${dust}${pulse}${flash}
     ${p.dim ? `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#000" opacity="${p.dim}"/>` : ''}${tears}${box}${cam}`;
 };
 FOCUS.paint = 960;
