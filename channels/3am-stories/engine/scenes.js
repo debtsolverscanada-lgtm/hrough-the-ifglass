@@ -1927,3 +1927,34 @@ S.thumbF13h = (t, d, p) => {
     ${[[384, 1165], [592, 1165]].map(([x, y]) => `<path d="M${x} ${y} q-10 50 4 90" stroke="#bfefff" stroke-width="16" fill="none" stroke-linecap="round" opacity=".9"/>`).join('')}
     ${VIB.words([['NO 13TH', '#ffffff', 165], ['FLOOR', '#ffe23a', 225]], 60, 420)}`;
 };
+
+// Farmhouse Rules thumbnail v3 (house recipe): the house-sitter's terrified face left; right, the upstairs bedroom door
+// open a crack on red light, glowing eyes and a grin in the gap, grey fingers round the edge, light under the door with
+// feet, a knock burst, blood handprints. Words top-left.
+S.thumbFarmH = (t, d, p) => {
+  const ink = K.ink, sticker = (c) => `filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff) drop-shadow(0 0 3px #fff) drop-shadow(0 0 22px ${c}) drop-shadow(0 0 10px ${c})`;
+  const rays = [...Array(18)].map((_, i) => { const a = i * Math.PI / 9, b = a + 0.12; return `<path d="M520 1000 L${520 + Math.cos(a) * 1400} ${1000 + Math.sin(a) * 1400} L${520 + Math.cos(b) * 1400} ${1000 + Math.sin(b) * 1400}Z" fill="#ffd25a" opacity=".16"/>`; }).join('');
+  const hand = (x, y, r, s = 1) => `<g transform="translate(${x},${y}) rotate(${r}) scale(${s})" opacity=".92"><path d="M-30 40 Q-40 -6 -26 -24 L-26 -86 Q-20 -98 -12 -86 L-8 -34 L-2 -100 Q6 -112 14 -100 L12 -36 L24 -92 Q32 -102 40 -90 L32 -30 L46 -66 Q56 -74 60 -62 L44 0 Q40 40 10 52 Q-20 58 -30 40Z" fill="#b0000e"/><path d="M-20 52 q-4 40 2 70 M20 54 q2 30 -2 56" stroke="#b0000e" stroke-width="10" stroke-linecap="round"/></g>`;
+  const gx = 1250;  // the gap between door and frame
+  return `<g style="filter:saturate(1.3) contrast(1.1)">${VIB.bg('#4a12b8', '#c81a8a', '#ff6a1a')}${rays}${VIB.bokeh(['#ffe03a', '#ff4ad8', '#3ae0ff'], 24)}
+    <g style="${VIB.glow('#ffb03a', 22)}"><rect x="1060" y="560" width="680" height="940" fill="#6a3a1a" stroke="${ink}" stroke-width="12"/></g>
+    <rect x="1110" y="610" width="580" height="890" fill="#1a0206"/>
+    <defs><radialGradient id="farmR" cx="25%" cy="45%" r="60%"><stop offset="0" stop-color="#ff3a2a"/><stop offset=".7" stop-color="#900010" stop-opacity=".6"/><stop offset="1" stop-color="#1a0206" stop-opacity="0"/></radialGradient></defs>
+    <rect x="1110" y="610" width="200" height="890" fill="url(#farmR)"/>
+    <circle cx="${gx - 50}" cy="930" r="15" fill="#ff2a2a" style="${VIB.glow('#ff0000', 14)}"/><circle cx="${gx - 50}" cy="930" r="6" fill="#fff"/>
+    <circle cx="${gx + 10}" cy="934" r="15" fill="#ff2a2a" style="${VIB.glow('#ff0000', 14)}"/><circle cx="${gx + 10}" cy="934" r="6" fill="#fff"/>
+    <path d="M${gx - 80} 1000 Q${gx - 20} 1060 ${gx + 30} 1000 Q${gx - 20} 1030 ${gx - 80} 1000Z" fill="#050004"/>${[-60, -40, -20, 0, 20].map((dx) => `<path d="M${gx + dx} ${1008 + Math.abs(dx + 20) * 0.1} v14" stroke="#f0ece0" stroke-width="6"/>`).join('')}
+    <g style="${sticker('#ffb03a')}"><path d="M${gx} 610 L1690 640 L1690 1470 L${gx} 1500Z" fill="#8a5228" stroke="${ink}" stroke-width="10"/></g>
+    <path d="M${gx + 50} 700 L1640 720 L1640 1010 L${gx + 50} 1010Z M${gx + 50} 1070 L1640 1070 L1640 1400 L${gx + 50} 1420Z" fill="none" stroke="#5a3418" stroke-width="10"/>
+    <circle cx="${gx + 50}" cy="1060" r="20" fill="#e8c86a" stroke="${ink}" stroke-width="5"/>
+    ${[0, 1, 2, 3].map((k) => `<rect x="${gx - 4}" y="${850 + k * 34}" width="${58 - Math.abs(k - 1.5) * 8}" height="26" rx="13" fill="#c8d0d0" stroke="#0a0a12" stroke-width="5"/><rect x="${gx + 34 - Math.abs(k - 1.5) * 8}" y="${856 + k * 34}" width="14" height="14" rx="4" fill="#3a2a2a"/>`).join('')}
+    <rect x="1060" y="1480" width="680" height="24" fill="#ffd27a" style="${VIB.glow('#ffb03a', 14)}"/>
+    <g stroke="#ffffff" stroke-width="12" stroke-linecap="round" style="${VIB.glow('#ff2a2a', 12)}">${[0, 1, 2, 3, 4, 5, 6, 7].map((k) => { const a = k * 0.785; return `<path d="M${1480 + Math.cos(a) * 50} ${860 + Math.sin(a) * 50} L${1480 + Math.cos(a) * 92} ${860 + Math.sin(a) * 92}"/>`; }).join('')}</g>
+    ${hand(1120, 1250, -10, 1.0)}${hand(1700, 900, 14, 0.9)}${hand(1560, 1280, 8, 0.8)}
+    <g stroke="#ff2a2a" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" fill="none" style="filter:drop-shadow(0 8px 0 rgba(0,0,0,.6))"><path d="M960 760 Q1060 700 1150 860"/><path d="M1150 860 l-74 -30 M1150 860 l4 -80"/></g>
+    <g transform="translate(470,1330)" style="${sticker('#2af0ff')}">${person(0, 0, 1.85, { eyes: 'wide', look: 0.9, mouth: 'o', sweat: true, seed: 1.7 })}</g>
+    ${[[384, 1165], [592, 1165]].map(([x, y]) => `<path d="M${x} ${y} q-10 50 4 90" stroke="#bfefff" stroke-width="16" fill="none" stroke-linecap="round" opacity=".9"/>`).join('')}
+    </g><rect width="1920" height="1920" fill="#ff0010" opacity=".06"/>
+    <defs><radialGradient id="redEdgeF" r="70%"><stop offset=".55" stop-color="#3a0008" stop-opacity="0"/><stop offset="1" stop-color="#3a0008" stop-opacity=".7"/></radialGradient></defs><rect x="0" y="420" width="1920" height="1080" fill="url(#redEdgeF)"/>
+    ${VIB.words(p.words || [["IT'S", '#ffffff', 165], ['EMPTY', '#ffe23a', 225]], 60, 420)}`;
+};
