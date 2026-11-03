@@ -18,6 +18,7 @@
 
 | Story | Grade | Hero |
 |---|---|---|
+| 025 floor thirteen (long) | noirTeal at 0.36 (series continuation of 023: same lead, Ana) | Ana the nurse + new: Mr. Haskell (grey, balding manager), Ruth (1974 clipping); narrator Sarah |
 | 024 stop four | coldSteel at 0.38 (steel-blue night, reds kept) | grey-bearded delivery driver, buzz cut, hi-vis vest; narrator Bill |
 | 023 floor thirteen | sickGreen at 0.32 (fluorescent elevator green, reds kept) | night-shift nurse: hair bun, teal scrubs; narrator Sarah (female, first person) |
 | 022 closet tenant | sodiumNight (warm orange street-light night) | 57-year-old office worker: greying side-parted hair, glasses, age lines, white shirt + navy tie |

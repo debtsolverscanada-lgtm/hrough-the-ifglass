@@ -110,6 +110,7 @@ function k3Head(o) {
 const AN = { ink: '#0a0a12', skin: '#fbe2cf', skinS: '#e2a98c', hair: '#161827', hairH: '#34406e', rim: '#7fa2ff' };
 let ANID = 0;
 function anHead(o) {
+  if (!o.blink && !o.back && o.eyes !== 'closed' && !o.black && CUR_T != null && ((CUR_T + (o.seed || 0)) % 3.3) < 0.11) o = { ...o, blink: true };
   const look = o.look || 0, eyes = o.eyes || 'normal', ink = AN.ink;
   const skin = o.skin && o.skin.startsWith('#') ? o.skin : AN.skin;
   const face = 'M-112 -30 Q-116 -150 0 -152 Q116 -150 112 -30 L106 34 Q94 92 44 138 L0 164 L-44 138 Q-94 92 -106 34Z';
@@ -857,11 +858,14 @@ function frameSVG(name, t, d, p, view, frameNo) {
     ${p.grade && p.grade.wash ? `<rect width="1920" height="1920" fill="${p.grade.wash}" opacity="${p.grade.washA ?? 0.08}"/>` : ''}
     <rect width="1920" height="1920" fill="url(#vig)"/>
     <rect width="1920" height="1920" fill="#fff" filter="url(#grain)" opacity=".55"/>
+    ${p.torch ? `<defs><radialGradient id="torchG" cx="${p.torch[0] / 1920}" cy="${p.torch[1] / 1920}" r="${(p.torch[2] || 380) / 1920}"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".55" stop-color="#000" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity=".93"/></radialGradient></defs><rect width="1920" height="1920" fill="url(#torchG)"/>` : ''}
+    ${p.flash != null && t >= p.flash && t < p.flash + 1 / 30 ? '<rect width="1920" height="1920" fill="#fff"/>' : ''}
     ${pops(t, p, view)}
   </svg>`;
 }
 
 // True-story pop-ups drawn on top of the frame (screen space, not affected by the camera), like real-story TikToks:
+// p.torch = [x, y, r]: everything dark except a flashlight circle; p.flash = seconds: a single white frame (the shock).
 // p.pops = [{ at: seconds, type: 'label' | 'num' | 'pin' | 'date', text, x: 0..1, y: 0..1 (position in the frame) }]
 // label: a name in huge outlined letters with a curved purple arrow pointing down at the person; num: a big number;
 // pin: a map pin with a place name; date: a typewriter-style date stamp. Each one pops in with a quick overshoot.
@@ -1199,6 +1203,7 @@ S.fridgeClose = (t, d, p) => {
       <text x="0" y="-60" text-anchor="middle" font-family="Anton" font-size="44" fill="#6a6a6a">RICE</text></g>
     <g transform="translate(1180,1300)"><path d="M-70 0 V-300 L0 -360 L70 -300 V0Z" fill="#fff" stroke="${ink}" stroke-width="7"/><rect x="-70" y="-220" width="140" height="90" fill="#3a8ae0"/><text x="0" y="-160" text-anchor="middle" font-family="Anton" font-size="40" fill="#fff">MILK</text></g>
     <g transform="translate(1390,1300)">${[0, 1, 2].map((k) => `<ellipse cx="${-50 + k * 50}" cy="-40" rx="26" ry="34" fill="#f2dcc0" stroke="${ink}" stroke-width="5"/>`).join('')}</g>
+    ${p.note ? `<g transform="translate(1180,560) rotate(4)"><rect x="-150" y="-110" width="300" height="230" fill="#ffe680" stroke="#8a7a2a" stroke-width="4"/>${String(p.note).split('|').map((ln, i) => `<text x="-128" y="${-56 + i * 62}" font-family="Hand" font-weight="700" font-size="54" fill="${i === String(p.note).split('|').length - 1 && p.noteRed ? '#a0101a' : '#2a2416'}">${esc3(ln)}</text>`).join('')}</g>` : ''}
     <rect width="1920" height="1920" fill="#203060" opacity=".06"/>`;
 };
 FOCUS.fridgeClose = 960;
@@ -1398,6 +1403,7 @@ S.elevator = (t, d, p) => {
       <path d="M${DX0} ${DY1} L${DX1} ${DY1} L${960 + 60} 900 L${960 - 60} 900Z" fill="#5a1e22"/>
       ${[0, 1, 2].map((k) => `<rect x="${DX0 + 30 + k * 30}" y="${640 + k * 40}" width="${60 - k * 14}" height="${300 - k * 70}" fill="#2a1c12" stroke="${ink}" stroke-width="4"/><rect x="${DX1 - 90 - k * 30}" y="${640 + k * 40}" width="${60 - k * 14}" height="${300 - k * 70}" fill="#2a1c12" stroke="${ink}" stroke-width="4"/>`).join('')}
       <rect x="930" y="740" width="60" height="160" fill="#2a1c12" stroke="${ink}" stroke-width="4"/><rect x="930" y="890" width="60" height="10" fill="#ffd27a" opacity=".8"/>
+      ${p.figure ? `<g opacity="${p.figure}" transform="translate(960,900) scale(0.2)">${person(0, -520, 1, { back: true, hero: true, body: HERO.body })}</g>` : ''}
       <circle cx="960" cy="560" r="26" fill="#fff4cc" opacity="${0.8 * fl}"/>`
     : p.beyond === 'lobby' ? `<rect x="${DX0}" y="${DY0}" width="${DX1 - DX0}" height="${DY1 - DY0}" fill="#cfc6b0"/><rect x="${DX0}" y="1000" width="${DX1 - DX0}" height="240" fill="#8a8070"/>`
     : `<rect x="${DX0}" y="${DY0}" width="${DX1 - DX0}" height="${DY1 - DY0}" fill="#020203"/>`;
@@ -1412,7 +1418,7 @@ S.elevator = (t, d, p) => {
     <rect x="${DX0 + half + gap}" y="${DY0}" width="${half - gap}" height="${DY1 - DY0}" fill="#aeb6be" stroke="${ink}" stroke-width="6"/>
     <path d="M${DX0 + 40} ${DY0 + 60} L${DX0 + half - gap - 30} ${DY0 + 200}" stroke="#fff" stroke-width="10" opacity=".25"/>
     <rect x="${DX0 - 20}" y="${DY0 - 20}" width="${DX1 - DX0 + 40}" height="${DY1 - DY0 + 20}" fill="none" stroke="#6a7078" stroke-width="20"/>
-    <g transform="translate(960,${DY0 - 70})"><rect x="-110" y="-46" width="220" height="92" rx="10" fill="#0a0606" stroke="${ink}" stroke-width="6"/>
+    <g transform="translate(960,${DY0 + 52}) scale(0.82)"><rect x="-110" y="-46" width="220" height="92" rx="10" fill="#0a0606" stroke="${ink}" stroke-width="6"/>
       <text x="0" y="28" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="78" fill="${fl2 === '13' ? '#ff3a2a' : '#ffb03a'}">${fl2}</text>
       <path d="M-86 -20 l14 -16 l14 16z" fill="#ffb03a" opacity="${p.from != null ? 1 : 0.3}"/></g>
     ${p.lead ? `<g transform="translate(700,1060) scale(0.8)">${person(0, 0, 1, { eyes: p.eyes || 'tired', look: 0.6, sweat: p.sweat })}</g>` : ''}
@@ -1458,6 +1464,7 @@ S.corridor = (t, d, p) => {
     ${doors}
     <rect x="${VX - 70}" y="${VY - 120}" width="140" height="240" fill="#3a2414" stroke="${ink}" stroke-width="5"/>
     <rect x="${VX - 22}" y="${VY - 80}" width="44" height="18" fill="#c9a24a"/><text x="${VX}" y="${VY - 66}" text-anchor="middle" font-family="Anton" font-size="16" fill="#2a1a0a">${p.num || '1307'}</text>
+    ${p.figure ? `<g opacity="${p.figure}" transform="translate(${VX},${VY + 120 + 420 * (p.figNear || 0)}) scale(${0.22 + 0.6 * (p.figNear || 0)})">${person(0, -520, 1, { back: true, hero: true, body: HERO.body })}</g>` : ''}
     ${aj ? `<rect x="${VX - 70}" y="${VY - 120}" width="${30 * aj}" height="240" fill="#ffd27a" opacity=".9"/><path d="M${VX - 70} ${VY + 120} L${VX - 70 + 30 * aj} ${VY + 120} L${VX - 30 + 160 * aj} 1500 L${VX - 160} 1500Z" fill="#ffd27a" opacity=".15"/>
       <rect x="${VX - 66}" y="${VY - 60 + 6 * Math.sin(t * 1.4)}" width="${18 * aj}" height="150" fill="#1a1008" opacity="${0.4 + 0.3 * Math.sin(t * 0.9)}"/>` : ''}
     ${[0, 1, 2].map((k) => `<rect x="${VX - 60 + 0}" y="${440 + k * 60}" width="120" height="${16 - k * 3}" rx="6" fill="#fff4cc" opacity="${(k === 1 ? fl : 1) * (0.9 - k * 0.2)}" transform="translate(${0},0) scale(${1 - k * 0.2}) translate(${(k * 0.2) * VX / (1 - k * 0.2) * (1 - k * 0.2) / (1 - k * 0.2) * 0},0)"/>`).join('')}
@@ -1565,3 +1572,59 @@ S.roadside = (t, d, p) => {
     <rect width="1920" height="1920" fill="#203060" opacity=".1"/>`;
 };
 FOCUS.roadside = 960;
+
+
+// ---------- long-form set pieces ----------
+// building lobby at night: wall of brass mailboxes (1201-1207...), a floor directory listing 1-12 (p.thirteen 0..1 a 13th
+// line that shouldn't be there), the front desk with the old building manager behind it (p.manager)
+S.lobby = (t, d, p) => {
+  const ink = K.ink, th = p.thirteen ?? 0;
+  return `${room('#120e0a')}
+    <rect x="560" y="470" width="420" height="420" fill="#3a2a18" stroke="${ink}" stroke-width="8"/>
+    ${[...Array(5)].map((_, r) => [...Array(4)].map((_, c) => `<rect x="${580 + c * 98}" y="${490 + r * 78}" width="86" height="64" fill="#b8963a" stroke="${ink}" stroke-width="4"/><text x="${623 + c * 98}" y="${530 + r * 78}" text-anchor="middle" font-family="Anton" font-size="20" fill="#3a2a10">${12 - r}0${c + 1}</text>`).join('')).join('')}
+    <rect x="1080" y="470" width="300" height="440" fill="#14100c" stroke="#8a7a5a" stroke-width="8"/>
+    <text x="1230" y="512" text-anchor="middle" font-family="Anton" font-size="30" fill="#e8dcb8">DIRECTORY</text>
+    ${[...Array(12)].map((_, i) => `<text x="1110" y="${548 + i * 28}" font-family="Courier New, monospace" font-weight="700" font-size="22" fill="#e8dcb8">FL ${12 - i}  ......  ${['ROOF ACCESS', 'RESIDENTS', 'RESIDENTS', 'RESIDENTS', 'RESIDENTS', 'RESIDENTS', 'RESIDENTS', 'RESIDENTS', 'GYM', 'LAUNDRY', 'MAIL', 'LOBBY'][i]}</text>`).join('')}
+    ${th > 0 ? `<text x="1110" y="${548 - 28}" font-family="Courier New, monospace" font-weight="700" font-size="22" fill="#ff4a3a" opacity="${ease(th)}">FL 13  ......  </text>` : ''}
+    <rect x="460" y="960" width="1000" height="220" fill="#4a3220" stroke="${ink}" stroke-width="10"/><rect x="440" y="940" width="1040" height="34" fill="#6a4a30" stroke="${ink}" stroke-width="7"/>
+    ${p.manager ? `<g transform="translate(860,820) scale(0.62)">${person(0, 0, 1, { hero: false, body: '#3a3a44', eyes: p.mEyes || 'tired', look: 0.3, hair: HAIRS.bald(K.ink).split(AN.hair).join('#cfcfd4') + '<path d="M-70 -60 h50 M20 -60 h50" stroke="#cfcfd4" stroke-width="10" stroke-linecap="round"/>' })}</g><rect x="460" y="960" width="1000" height="220" fill="#4a3220" stroke="${ink}" stroke-width="10"/>` : ''}
+    <rect x="1300" y="900" width="70" height="40" fill="#d8d0b0" stroke="${ink}" stroke-width="4"/><circle cx="1335" cy="880" r="18" fill="#c9a24a" stroke="${ink}" stroke-width="4"/>
+    <rect width="1920" height="1920" fill="#ffcf8a" opacity=".05"/>`;
+};
+FOCUS.lobby = 960;
+
+// an old newspaper clipping under a desk lamp: p.date, p.headline, p.sub (2 lines max via |), a photo of a woman in a
+// 1970s nurse's cap (p.photo), p.circle (red pen circle around the photo)
+S.news = (t, d, p) => {
+  const ink = K.ink;
+  return `<rect width="1920" height="1920" fill="#1a120a"/><rect width="1920" height="1920" fill="url(#lamp)"/>
+    <radialGradient id="lamp" cx="50%" cy="45%" r="55%"><stop offset="0" stop-color="#ffd08a" stop-opacity=".45"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+    <g transform="rotate(-3 960 960)"><rect x="560" y="420" width="800" height="1080" fill="#e2d6b8" stroke="#a8946a" stroke-width="6"/>
+      <text x="960" y="490" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="30" fill="#3a2e1e">${esc3(p.date || 'MARCH 3, 1974')}</text>
+      <path d="M600 510 H1320" stroke="#3a2e1e" stroke-width="4"/>
+      ${String(p.headline || '').split('|').map((ln, i) => `<text x="960" y="${590 + i * 78}" text-anchor="middle" font-family="Anton" font-size="${Math.min(76, 1300 / Math.max(8, ln.length))}" fill="#1e1810">${esc3(ln)}</text>`).join('')}
+      ${p.photo ? `<g transform="translate(960,${930})"><rect x="-170" y="-170" width="340" height="340" fill="#8a8070" stroke="#3a2e1e" stroke-width="6"/>
+        <g transform="translate(0,40) scale(0.9)" style="filter:grayscale(1)">${head(0, 0, 1, { hero: false, eyes: 'normal', look: 0, hair: '<path d="M-132 60 Q-150 -170 0 -176 Q150 -170 132 60 L104 -30 Q60 -110 0 -112 Q-60 -110 -104 -30Z" fill="#3a3028" stroke="#120d0a" stroke-width="7"/><path d="M-110 -150 L110 -150 L90 -200 L-90 -200Z" fill="#f4f2ec" stroke="#120d0a" stroke-width="6"/><path d="M-12 -190 h24 v-0 M0 -198 v20" stroke="#c02020" stroke-width="8"/>' })}</g>
+        ${p.circle ? `<ellipse cx="0" cy="0" rx="${210}" ry="${200}" fill="none" stroke="#c0101a" stroke-width="10" stroke-dasharray="${1400 * ease(Math.min(1, t / 1.2))} 1400" transform="rotate(-8)"/>` : ''}</g>` : ''}
+      ${[...Array(9)].map((_, i) => `<path d="M610 ${1150 + i * 34} H${i % 3 === 2 ? 1100 : 1310}" stroke="#7a6a52" stroke-width="10" opacity=".5"/>`).join('')}
+      ${p.sub ? String(p.sub).split('|').map((ln, i) => `<text x="960" y="${1160 + i * 46}" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="30" fill="#2a2216">${esc3(ln)}</text>`).join('') : ''}
+    </g>`;
+};
+FOCUS.news = 960;
+
+// chapter sting: a case-file cork board. p.n (chapter number), p.title, p.items ([label, ...] polaroids pinned so far),
+// red string joining them; the newest polaroid and the title slide in. No narration needed (6-9 s pattern interrupt).
+S.casefile = (t, d, p) => {
+  const ink = K.ink, items = p.items || [], k = ease(Math.min(1, t / 0.9));
+  const pos = (i) => [520 + (i % 4) * 300 + (i % 2) * 30, 560 + Math.floor(i / 4) * 300 + (i % 3) * 20];
+  const strings = items.slice(1).map((_, i) => { const a = pos(i), b = pos(i + 1); return `<path d="M${a[0]} ${a[1] - 60} Q${(a[0] + b[0]) / 2} ${Math.max(a[1], b[1]) + 30} ${b[0]} ${b[1] - 60}" stroke="#c0101a" stroke-width="5" fill="none" opacity="${i === items.length - 2 ? k : 1}"/>`; }).join('');
+  return `<rect width="1920" height="1920" fill="#2a1a0e"/><rect x="380" y="430" width="1160" height="1060" fill="#8a6440" stroke="#3a2412" stroke-width="20"/>
+    ${[...Array(60)].map((_, i) => `<circle cx="${400 + (i * 197) % 1120}" cy="${450 + (i * 131) % 1020}" r="${2 + i % 3}" fill="#6a4a2a" opacity=".6"/>`).join('')}
+    ${strings}
+    ${items.map((lab, i) => { const [x, y] = pos(i), last = i === items.length - 1, o = last ? k : 1;
+      return `<g opacity="${o}" transform="translate(${x},${y - (last ? 60 * (1 - k) : 0)}) rotate(${(i % 3 - 1) * 4})"><rect x="-110" y="-120" width="220" height="230" fill="#f2efe6" stroke="#9a9488" stroke-width="3"/><rect x="-94" y="-104" width="188" height="150" fill="#2a2e38"/><text x="0" y="-20" text-anchor="middle" font-family="Anton" font-size="${Math.min(46, 330 / Math.max(3, lab.length))}" fill="#e8e0c8">${esc3(lab)}</text><circle cx="0" cy="-112" r="12" fill="#c0101a"/></g>`; }).join('')}
+    <g opacity="${k}"><rect x="460" y="1300" width="1000" height="150" fill="#0c0a08" opacity=".85"/>
+      <text x="960" y="1362" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="34" fill="#c0101a">CHAPTER ${p.n || 1}</text>
+      <text x="960" y="1426" text-anchor="middle" font-family="Anton" font-size="${Math.min(64, 1500 / Math.max(10, String(p.title || '').length))}" fill="#f2ead8">${esc3(p.title || '')}</text></g>`;
+};
+FOCUS.casefile = 960;

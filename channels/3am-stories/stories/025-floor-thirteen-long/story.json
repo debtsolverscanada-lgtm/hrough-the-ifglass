@@ -1,0 +1,1256 @@
+{
+ "format": "long",
+ "style": "anime",
+ "voice": "Sarah",
+ "tts": {
+  "stability": 0.45,
+  "similarity": 0.8,
+  "style": 0.4,
+  "speed": 1.0
+ },
+ "grade": {
+  "preset": "noirTeal",
+  "amount": 0.36,
+  "sat": 0.95
+ },
+ "hero": {
+  "hairStyle": "bun",
+  "hair": "#4a2e1c",
+  "hairH": "#8a5a3a",
+  "outfit": "scrubs",
+  "body": "#2f7f7a",
+  "skin": "#efc9aa",
+  "skinS": "#d29c7c"
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "elevator",
+  "bp": {
+   "floor": "13",
+   "beyond": "hall",
+   "open": 1,
+   "figure": 1
+  },
+  "zoom": [
+   960,
+   700,
+   1.25
+  ],
+  "lines": [
+   [
+    "DON'T",
+    "#fff"
+   ],
+   [
+    "STEP OUT",
+    "#ff2a2a"
+   ]
+  ],
+  "x": 1530,
+  "y": 980,
+  "step": 170,
+  "size": 160,
+  "band": 0.0
+ },
+ "yt": {
+  "title": "I Live on the 12th Floor. Last Night My Elevator Stopped at 13.",
+  "description": "Every building skips the 13th floor. Mine hid it. A night nurse on the 12th floor finds the 1974 maintenance log, a missing-nurse clipping taped inside it... and a woman in her own scrubs cooking in apartment 1307.\n\nThis is the full story behind the Short \"My building has 12 floors. The elevator stopped at 13\".\n\nWould you have stepped out? Tell me in the comments 👇\n\nCHAPTERS\n0:00 The floor that was hidden\n\nA work of fiction.\n\n#scarystories #horrorstories #3amstories #elevator #13thfloor #animatedhorror",
+  "tags": [
+   "scary stories",
+   "horror stories",
+   "13th floor",
+   "elevator horror",
+   "night shift horror",
+   "nurse horror",
+   "3am stories",
+   "animated horror",
+   "creepy stories",
+   "scary story animated",
+   "apartment horror"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "13",
+    "lead": true,
+    "eyes": "wide",
+    "snap": {
+     "at": 3.0,
+     "to": [
+      960,
+      520
+     ],
+     "z": 2.0
+    }
+   },
+   "text": "Every building I've ever lived in skips the thirteenth floor. Mine didn't skip it. Mine hid it.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "panel",
+   "p": {
+    "lit": "12"
+   },
+   "text": "Twelve buttons. One through twelve. For three years I pressed twelve, and the elevator took me home.",
+   "pause": 0.25
+  },
+  {
+   "scene": "letter",
+   "p": {
+    "to": "",
+    "lines": [
+     "MAINTENANCE LOG - 1974",
+     "Mar 1: elevator 2 serviced",
+     "Mar 3: FLOOR 13 SEALED",
+     "  by order of mgmt.",
+     "  DO NOT REOPEN."
+    ],
+    "red": 2,
+    "pops": [
+     {
+      "at": 1.5,
+      "type": "date",
+      "text": "1974",
+      "x": 0.82,
+      "y": 0.18
+     }
+    ]
+   },
+   "text": "Then last week, I found this. The building's maintenance log from 1974. One line, in red. Floor thirteen. Sealed.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "sting",
+     6.0
+    ]
+   ]
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "torch": [
+     960,
+     820,
+     300
+    ],
+    "figure": 0.7,
+    "figNear": 0.0,
+    "flicker": true
+   },
+   "text": "I've been up there three times now. And every time, something followed me back down.",
+   "pause": 0.25
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "THREE NIGHTS.",
+    "sub": "the third one is why I'm recording this"
+   },
+   "text": "Three nights. The third one is why I'm recording this.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "boom",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "casefile",
+   "p": {
+    "n": 1,
+    "title": "THE BUTTON THAT WASN'T THERE",
+    "items": [
+     "13"
+    ],
+    "push": 0
+   },
+   "dur": 4.5,
+   "sfx": [
+    [
+     "boom",
+     0.2
+    ],
+    [
+     "drone",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "1",
+    "lead": true,
+    "eyes": "tired",
+    "beyond": "lobby",
+    "open": 1,
+    "openTo": 0
+   },
+   "text": "My name is Ana. I'm a night nurse. Twelve hour shifts, home at three A.M. Every night, the same routine.",
+   "pause": 0.25
+  },
+  {
+   "scene": "street",
+   "p": {
+    "lit": 1,
+    "zoom": 0.15,
+    "pops": [
+     {
+      "at": 1.0,
+      "type": "date",
+      "text": "BUILT 1961",
+      "x": 0.5,
+      "y": 0.15
+     }
+    ]
+   },
+   "text": "The Harrow Street apartments were built in 1961. Twelve floors, red brick, one old elevator with a brass door that still sticks in winter.",
+   "pause": 0.25
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "1",
+    "lead": true,
+    "eyes": "closed"
+   },
+   "text": "I've taken that elevator maybe two thousand times. I could ride it with my eyes closed. Some nights, after a double shift, I basically do.",
+   "pause": 0.25
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true
+   },
+   "text": "Wave at Mister Haskell at the front desk. He's run this building for forty years. He never seems to sleep either.",
+   "pause": 0.25
+  },
+  {
+   "scene": "panel",
+   "p": {
+    "lit": "12",
+    "finger": true
+   },
+   "text": "Press twelve.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "tick",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "from": 10,
+    "to": 12,
+    "lead": true,
+    "eyes": "tired"
+   },
+   "text": "Ten. Eleven. Twelve.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "tick",
+     0.2
+    ],
+    [
+     "tick",
+     0.9
+    ],
+    [
+     "tick",
+     1.6
+    ]
+   ]
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "13",
+    "lead": true,
+    "eyes": "wide",
+    "snap": {
+     "at": 0.1,
+     "to": [
+      960,
+      520
+     ],
+     "z": 2.6
+    },
+    "push": 0
+   },
+   "text": "Thirteen.",
+   "pause": 1.0,
+   "sfx": [
+    [
+     "silence_hit",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "13",
+    "lead": true,
+    "eyes": "wide",
+    "beyond": "hall",
+    "open": 0,
+    "openTo": 1
+   },
+   "text": "The doors opened on my hallway. Same red carpet. Same light that's been flickering since the day I moved in.",
+   "pause": 0.25
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "flicker": true,
+    "num": "1307",
+    "floor": 13,
+    "snap": {
+     "at": 2.2,
+     "to": [
+      960,
+      760
+     ],
+     "z": 3.0
+    }
+   },
+   "text": "Same door at the end. But the brass number on it said thirteen oh seven.",
+   "pause": 0.25
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "ajar": true,
+    "num": "1307",
+    "floor": 13
+   },
+   "text": "And it was open. Warm light. Garlic and onions. Somebody was cooking.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "creak",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "cook": true,
+    "lights": true,
+    "focus": 820
+   },
+   "text": "I know. I should have stayed in the elevator. Everyone yells that at the screen. But it smelled like my kitchen. It looked like my kitchen.",
+   "pause": 0.25
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "cook": true,
+    "lights": true,
+    "focus": 820,
+    "snap": {
+     "at": 1.4,
+     "to": [
+      660,
+      760
+     ],
+     "z": 1.8
+    }
+   },
+   "text": "And at my stove was a woman in teal scrubs. My scrubs. Hair pinned up in a bun. Humming.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "whisper",
+     2.4,
+     "left"
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "cook": true,
+    "lights": true,
+    "focus": 820,
+    "push": 0.03
+   },
+   "text": "She was humming the song my grandmother used to sing to me. The one I hum when I cook.",
+   "pause": 0.6
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "cook": true,
+    "lights": true,
+    "focus": 820,
+    "snap": {
+     "at": 0.2,
+     "to": [
+      660,
+      700
+     ],
+     "z": 2.4
+    },
+    "push": 0.08
+   },
+   "text": "She started to turn around.",
+   "pause": 1.3,
+   "sfx": [
+    [
+     "breath",
+     0.4,
+     "close"
+    ]
+   ]
+  },
+  {
+   "scene": "panel",
+   "p": {
+    "lit": "12",
+    "finger": true
+   },
+   "text": "I ran. I hit twelve so hard my thumb bled.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "knock1",
+     0.3
+    ],
+    [
+     "knock1",
+     0.7
+    ],
+    [
+     "knock1",
+     1.1
+    ]
+   ]
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "num": "1207",
+    "floor": 12
+   },
+   "text": "Twelve. My hallway. My door. Locked from the inside, the way I always leave it.",
+   "pause": 0.25
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "dinner": true,
+    "lights": true,
+    "snap": {
+     "at": 1.2,
+     "to": [
+      960,
+      1300
+     ],
+     "z": 1.7
+    }
+   },
+   "text": "Inside, dinner was on the table. Two plates. Still warm.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "sting",
+     2.4
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "3:41",
+    "eyes": "wide",
+    "sweat": true
+   },
+   "text": "I didn't sleep. I sat on my bed with every light on and the chain on the door, and I told myself the obvious things.",
+   "pause": 0.25
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "4:05",
+    "eyes": "tired"
+   },
+   "text": "I was exhausted. I'd pressed the wrong button. Someone on twelve was cooking and I got turned around. Nurses see strange things at three A.M. We're good at explaining them away.",
+   "pause": 0.25
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "dinner": true,
+    "lights": true,
+    "snap": {
+     "at": 3.6,
+     "to": [
+      760,
+      1340
+     ],
+     "z": 2.2
+    }
+   },
+   "text": "But I couldn't explain the plates. I hadn't cooked. I live alone. And one of the plates had a little lipstick on the rim. My shade.",
+   "pause": 0.25
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "IT WASN'T|EVEN CLOSE.",
+    "color": "#ff2a2a"
+   },
+   "text": "I thought that was the worst thing I'd ever see in that building. It wasn't even close.",
+   "pause": 0.25
+  },
+  {
+   "scene": "casefile",
+   "p": {
+    "n": 2,
+    "title": "WHAT MR. HASKELL KNEW",
+    "items": [
+     "13",
+     "1307"
+    ],
+    "push": 0
+   },
+   "dur": 4.5,
+   "sfx": [
+    [
+     "boom",
+     0.2
+    ],
+    [
+     "drone",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true
+   },
+   "text": "The next morning, I went straight down to the front desk.",
+   "pause": 0.25
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true,
+    "snap": {
+     "at": 3.0,
+     "to": [
+      860,
+      760
+     ],
+     "z": 1.8
+    }
+   },
+   "text": "I asked Mister Haskell if this building had a thirteenth floor. He didn't laugh. He didn't even look up. He just asked me which apartment.",
+   "pause": 0.25
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true,
+    "mEyes": "wide",
+    "thirteen": 1,
+    "snap": {
+     "at": 2.6,
+     "to": [
+      1230,
+      560
+     ],
+     "z": 2.0
+    }
+   },
+   "text": "I said thirteen oh seven. And for the first time in three years, he looked scared.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "sting",
+     2.6
+    ]
+   ]
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true,
+    "mEyes": "tired"
+   },
+   "text": "He said the elevator was installed the year the building opened. He said it had always been, his word, particular. And he said the thirteenth floor wasn't removed because of superstition.",
+   "pause": 0.25
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true,
+    "mEyes": "wide",
+    "push": 0.04
+   },
+   "text": "It was removed because people kept getting off there.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "sting",
+     1.6
+    ]
+   ]
+  },
+  {
+   "scene": "letter",
+   "p": {
+    "to": "",
+    "lines": [
+     "MAINTENANCE LOG - 1974",
+     "Mar 1: elevator 2 serviced",
+     "Mar 3: FLOOR 13 SEALED",
+     "  by order of mgmt.",
+     "  DO NOT REOPEN."
+    ],
+    "red": 2
+   },
+   "text": "He took out the old maintenance log. March 1974. Floor thirteen, sealed by order of management. Do not reopen.",
+   "pause": 0.25
+  },
+  {
+   "scene": "news",
+   "p": {
+    "date": "MARCH 3, 1974",
+    "headline": "NIGHT NURSE MISSING|FROM HARROW ST. APTS",
+    "photo": true
+   },
+   "text": "And taped inside the back cover, this. A newspaper clipping.",
+   "pause": 0.25
+  },
+  {
+   "scene": "news",
+   "p": {
+    "date": "MARCH 3, 1974",
+    "headline": "NIGHT NURSE MISSING|FROM HARROW ST. APTS",
+    "photo": true,
+    "circle": true,
+    "pops": [
+     {
+      "at": 1.2,
+      "type": "label",
+      "text": "RUTH",
+      "x": 0.8,
+      "y": 0.5
+     }
+    ]
+   },
+   "text": "Her name was Ruth Okafor. She lived in twelve oh seven. My apartment.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "news",
+   "p": {
+    "date": "MARCH 3, 1974",
+    "headline": "NIGHT NURSE MISSING|FROM HARROW ST. APTS",
+    "photo": true,
+    "circle": true,
+    "pops": [
+     {
+      "at": 2.6,
+      "type": "num",
+      "text": "29",
+      "x": 0.8,
+      "y": 0.25
+     }
+    ]
+   },
+   "text": "She was a night nurse at Saint Agnes. The same hospital I work at. She was twenty nine. So am I.",
+   "pause": 0.25
+  },
+  {
+   "scene": "news",
+   "p": {
+    "date": "MARCH 3, 1974",
+    "headline": "NIGHT NURSE MISSING|FROM HARROW ST. APTS",
+    "photo": true,
+    "circle": true,
+    "sub": "LAST SEEN ENTERING ELEVATOR|3:02 A.M."
+   },
+   "text": "She left her shift at three A.M. on March second. The elevator logged her going up. It never logged her coming down.",
+   "pause": 0.25
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "12",
+    "lead": false
+   },
+   "text": "But here's what nobody tells you about sealing a floor. You can brick up the doors. You can pull out the button. The elevator still remembers where it used to stop.",
+   "pause": 0.25
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "AND WHO USED|TO RIDE IT."
+   },
+   "text": "And who used to ride it.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "boom",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true,
+    "mEyes": "wide"
+   },
+   "text": "Before I left the desk, Mister Haskell told me one more thing. If the elevator ever takes me up there again, don't step out. And whatever happens, don't answer her.",
+   "pause": 0.25
+  },
+  {
+   "scene": "casefile",
+   "p": {
+    "n": 3,
+    "title": "SHE KNOWS MY SONG",
+    "items": [
+     "13",
+     "1307",
+     "1974"
+    ],
+    "push": 0
+   },
+   "dur": 4.5,
+   "sfx": [
+    [
+     "boom",
+     0.2
+    ],
+    [
+     "drone",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "2:58",
+    "eyes": "wide",
+    "phone": true
+   },
+   "text": "I should have moved out. Instead, I did what nurses do. I went back to check.",
+   "pause": 0.25
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "03:00:12",
+    "label": "Floor 13 - night 2",
+    "rec": true,
+    "spike": 0.2
+   },
+   "text": "I took my phone. Camera running. Three A.M.",
+   "pause": 0.25
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "from": 11,
+    "to": 13,
+    "lead": true,
+    "eyes": "wide",
+    "flicker": true
+   },
+   "text": "Eleven. Twelve. Thirteen. It didn't even pretend to stop at my floor.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "tick",
+     0.3
+    ],
+    [
+     "tick",
+     1.0
+    ],
+    [
+     "tick",
+     1.7
+    ]
+   ]
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "torch": [
+     960,
+     860,
+     330
+    ],
+    "flicker": true,
+    "num": "1307",
+    "floor": 13
+   },
+   "text": "The hallway was dark this time. My phone light was the only light.",
+   "pause": 0.25
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "torch": [
+     960,
+     860,
+     330
+    ],
+    "figure": 1,
+    "figNear": 0.08,
+    "num": "1307",
+    "floor": 13
+   },
+   "text": "And she was standing at the end of the hallway. Back to me. In my scrubs.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "breath",
+     1.2,
+     "behind"
+    ]
+   ]
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "torch": [
+     960,
+     880,
+     330
+    ],
+    "figure": 1,
+    "figNear": 0.32,
+    "flicker": true,
+    "num": "1307",
+    "floor": 13
+   },
+   "text": "Every time the light flickered, she was closer.",
+   "pause": 0.25
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "torch": [
+     960,
+     900,
+     340
+    ],
+    "figure": 1,
+    "figNear": 0.55,
+    "num": "1307",
+    "floor": 13
+   },
+   "text": "I didn't run. I said her name. Ruth.",
+   "pause": 0.25
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "torch": [
+     960,
+     900,
+     340
+    ],
+    "figure": 1,
+    "figNear": 0.55,
+    "num": "1307",
+    "floor": 13,
+    "push": 0
+   },
+   "text": "She stopped.",
+   "pause": 1.2,
+   "sfx": [
+    [
+     "silence_hit",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "torch": [
+     960,
+     920,
+     360
+    ],
+    "figure": 1,
+    "figNear": 0.85,
+    "num": "1307",
+    "floor": 13,
+    "push": 0
+   },
+   "text": "And she said mine.",
+   "pause": 0.2
+  },
+  {
+   "scene": "corridor",
+   "p": {
+    "torch": [
+     960,
+     940,
+     380
+    ],
+    "figure": 1,
+    "figNear": 0.95,
+    "num": "1307",
+    "floor": 13,
+    "shake": 0.5,
+    "flash": 0.35,
+    "push": 0
+   },
+   "text": "Ana.",
+   "pause": 1.0,
+   "sfx": [
+    [
+     "boom",
+     0.35
+    ]
+   ],
+   "voice": [
+    "Matilda",
+    "Dorothy",
+    "Alice"
+   ],
+   "fx": "whisper+behind+close"
+  },
+  {
+   "scene": "bed",
+   "p": {
+    "time": "7:12",
+    "eyes": "tired"
+   },
+   "text": "When I woke up, it was morning. I was in my own bed, still in my scrubs. I don't remember coming home.",
+   "pause": 0.25
+  },
+  {
+   "scene": "fridgeClose",
+   "p": {
+    "yogurt": 4,
+    "rice": 0.8,
+    "note": "pick up milk|don't take|the elevator",
+    "noteRed": true,
+    "snap": {
+     "at": 1.6,
+     "to": [
+      1180,
+      560
+     ],
+     "z": 2.0
+    }
+   },
+   "text": "There was a note on my fridge. In my handwriting.",
+   "pause": 0.25
+  },
+  {
+   "scene": "fridgeClose",
+   "p": {
+    "yogurt": 4,
+    "rice": 0.8,
+    "note": "pick up milk|don't take|the elevator",
+    "noteRed": true,
+    "push": 0
+   },
+   "text": "I never wrote it.",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "sting",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "03:04:51",
+    "label": "Floor 13 - night 2",
+    "rec": false,
+    "spike": 0.1
+   },
+   "text": "Then I remembered my phone. The camera had been running the whole time.",
+   "pause": 0.25
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "03:05:20",
+    "label": "Floor 13 - night 2",
+    "rec": false,
+    "spike": 0.3
+   },
+   "text": "The video shows the elevator doors opening. It shows the dark hallway. It shows her, at the end, with her back to me.",
+   "pause": 0.25
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "03:06:02",
+    "label": "Floor 13 - night 2",
+    "rec": false,
+    "spike": 0.6
+   },
+   "text": "And then it shows something I don't remember at all. It shows me walking toward her. Slowly. Smiling.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "heart",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "03:07:44",
+    "label": "Floor 13 - night 2",
+    "rec": false,
+    "spike": 0.9,
+    "shake": 0.2
+   },
+   "text": "She never moves. The whole time, she never moves. I'm the one who keeps getting closer.",
+   "pause": 0.9
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "I WAS THE ONE|GETTING CLOSER.",
+    "color": "#ff2a2a"
+   },
+   "text": "Except she hadn't been the one getting closer. I had.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "boom",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "casefile",
+   "p": {
+    "n": 4,
+    "title": "SOMEONE HAS TO LIVE ON 13",
+    "items": [
+     "13",
+     "1307",
+     "1974",
+     "NOTE"
+    ],
+    "push": 0
+   },
+   "dur": 4.5,
+   "sfx": [
+    [
+     "boom",
+     0.2
+    ],
+    [
+     "drone",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true,
+    "mEyes": "tired"
+   },
+   "text": "I showed Mister Haskell the note. He read it twice. Then he told me the rest.",
+   "pause": 0.25
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true
+   },
+   "text": "Ruth wasn't the first. She was the second nurse from twelve oh seven to go missing.",
+   "pause": 0.25
+  },
+  {
+   "scene": "letter",
+   "p": {
+    "to": "TENANTS - APT 1207",
+    "lines": [
+     "M. Doyle   1961-1968  (missing)",
+     "R. Okafor  1968-1974  (missing)",
+     "... ",
+     "A. Reyes   2023-"
+    ],
+    "red": 3
+   },
+   "text": "Every few years, twelve oh seven gets a new tenant. And thirteen oh seven gets one too.",
+   "pause": 0.25
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "SOMEONE HAS TO|LIVE ON 13."
+   },
+   "text": "Someone always has to live on thirteen.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "boom",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true,
+    "mEyes": "tired"
+   },
+   "text": "Mister Haskell said the last tenant of twelve oh seven before me moved out in a hurry in 2022. She left everything. Her furniture. Her dishes. Her scrubs.",
+   "pause": 0.25
+  },
+  {
+   "scene": "lobby",
+   "p": {
+    "manager": true,
+    "mEyes": "wide",
+    "push": 0
+   },
+   "text": "He said he'd never seen her come down.",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "sting",
+     1.2
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "dinner": true,
+    "lights": true
+   },
+   "text": "That's when I understood the dinner. The second plate. She wasn't trying to scare me. She was setting a place for me.",
+   "pause": 0.25
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "floor": "12",
+    "lead": true,
+    "eyes": "tired"
+   },
+   "text": "I'm moving out tomorrow. My boxes are packed. I'm recording this in my kitchen so someone knows.",
+   "pause": 0.25
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "lights": true,
+    "time": "2:58",
+    "push": 0.02
+   },
+   "text": "It's two fifty-eight. I can hear the elevator.",
+   "pause": 0.25,
+   "sfx": [
+    [
+     "tick",
+     0.5
+    ],
+    [
+     "tick",
+     1.5
+    ]
+   ]
+  },
+  {
+   "scene": "elevator",
+   "p": {
+    "from": 11,
+    "to": 13,
+    "lead": false
+   },
+   "text": "It's not stopping at twelve.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "tick",
+     0.3
+    ],
+    [
+     "tick",
+     0.9
+    ]
+   ]
+  },
+  {
+   "scene": "kitchen",
+   "p": {
+    "cook": true,
+    "lights": true,
+    "focus": 820,
+    "snap": {
+     "at": 0.4,
+     "to": [
+      660,
+      760
+     ],
+     "z": 1.9
+    },
+    "push": 0
+   },
+   "text": "And someone just started cooking in my kitchen.",
+   "pause": 1.2,
+   "sfx": [
+    [
+     "silence_hit",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "PART 2|SOON",
+    "color": "#ff2a2a",
+    "sub": "would you have stepped out?"
+   },
+   "text": "If this video ends early, Mister Haskell has my phone. Part two is everything that was on it.",
+   "pause": 1.0,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  }
+ ]
+}
