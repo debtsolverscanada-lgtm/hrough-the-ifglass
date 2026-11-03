@@ -45,6 +45,10 @@ Distilled from the owner's 12 study videos (Nov 2026). Rules only; numbers are d
 - Nothing important bottom-right (timecode). Balance the frame; an intentional empty side is a horror tool.
 - What should be seen first goes on the left. Design for phone size and rounded corners.
 - Must be true: open the video on the thumbnail's image within 5 s.
+- Lesson (Floor 13 long-form, Nov 2026): 0.4% CTR on 1K suggested impressions with a tiny back-turned figure, flat grey
+  colour and text in the bottom-right. Fix: a big frightened face (eyes and mouth readable at phone size) on the left,
+  one glowing element (the red 13), the threat small but clear on the right, strong red/black contrast.
+  Check every thumbnail at 320x180 before posting: if you can't tell what's wrong in one second, redo it.
 
 ## 7. Staying monetisable
 - No reused templates: new characters, grade, scenery and story every video; research and sources visible.
