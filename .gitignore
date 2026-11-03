@@ -21,3 +21,6 @@ vlog/loc/frames/
 channels/3am-stories/stories/*/work/
 channels/3am-stories/stories/*/out/
 exports/
+channels/3am-stories/stories/*/art/*.mp4
+channels/3am-stories/stories/*/art_paint/
+channels/3am-stories/engine/node_modules

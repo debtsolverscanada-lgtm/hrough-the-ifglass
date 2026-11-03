@@ -1,12 +1,11 @@
 {
  "format": "short",
  "style": "anime",
- "voice": "Sarah",
+ "voice": "ara",
  "tts": {
-  "stability": 0.42,
-  "similarity": 0.8,
-  "style": 0.42,
-  "speed": 1.06
+  "provider": "grok",
+  "one_take": true,
+  "language": "en"
  },
  "hero": {
   "hairStyle": "long",
@@ -14,9 +13,9 @@
   "hairH": "#a85a2a",
   "body": "#6a6a70"
  },
- "art_style": "Cinematic painted horror illustration, semi-realistic digital painting, true-story feel, muted desaturated palette, near-black shadows, one cold light source, subtle film grain, vertical 9:16 composition, no text, no captions, no watermark, no logos.",
+ "art_style": "2D animated horror cartoon frame, anime-inspired horror animation, clean thick black ink outlines, flat cel shading with soft gradients, bold readable shapes, expressive characters, cinematic lighting, dark night palette with one cold light and small red accents, like a frame from a popular animated scary-story YouTube channel, vertical 9:16, no text, no captions, no watermark.",
  "art_cast": "",
- "thumb_art": "YouTube horror thumbnail, painted cinematic, 16:9. A doorbell camera night-vision view of a small front porch, fisheye lens, grainy grey-green image. Standing very close to the camera is a tall pale figure with a hood, face mostly in shadow, only an impossibly wide grin with too many teeth visible. Near-black edges, one cold porch light, single red accent: a small red REC dot top right. Strong contrast, readable at phone size. Empty dark space on the left third. No text, no watermark.",
+ "thumb_art": "2D animated horror cartoon, anime-inspired, clean thick black outlines, flat cel shading, 16:9 YouTube thumbnail. Doorbell camera night-vision view of a small front porch, fisheye. A tall hooded figure pressed close to the camera, face in shadow except an impossibly wide grin with too many teeth. Near-black edges, one cold porch light, small red REC dot top right. Empty dark space on the left third. No text, no watermark.",
  "thumb": {
   "scene": "thumbOver",
   "style": "anime",
@@ -56,11 +55,28 @@
       "type": "label",
       "text": "NOBODY WAS THERE",
       "x": 0.5,
-      "y": 0.24
+      "y": 0.15
      }
     ],
     "img": "channels/3am-stories/stories/029-doorbell-cam/art/00.jpg",
-    "noVig": true
+    "noVig": true,
+    "snap": {
+     "at": 2.6,
+     "to": [
+      960,
+      700
+     ],
+     "z": 1.9
+    },
+    "box": [
+     0.38,
+     0.3,
+     0.24,
+     0.36
+    ],
+    "boxAt": 3.0,
+    "boxLabel": "NO MOTION",
+    "boxColor": "#ffd23a"
    },
    "text": "My doorbell camera recorded a man on my porch at three twelve in the morning. The motion log says nobody was there.",
    "pause": 0.05,
@@ -102,11 +118,25 @@
    "art": "Doorbell camera footage: wide fisheye lens, grainy black-and-white night vision with a faint green tint, looking down at a small wooden front porch with a welcome mat, two potted plants, porch steps and a dark suburban street beyond. a tall thin man in a long dark coat, hood up, face lost in shadow, arms hanging straight down stands in the middle of the welcome mat now, a little closer, head tilted very slightly, staring straight into the lens.",
    "p": {
     "cam": {
-     "time": "3:15 AM"
+     "time": "3:15 AM",
+     "s0": 4
     },
-    "push": 0.04,
+    "push": 0.0,
     "img": "channels/3am-stories/stories/029-doorbell-cam/art/02.jpg",
-    "noVig": true
+    "noVig": true,
+    "pan": [
+     0,
+     -60
+    ],
+    "snap": {
+     "at": 1.2,
+     "to": [
+      960,
+      760
+     ],
+     "z": 1.7
+    },
+    "whip": true
    },
    "text": "He never knocks. He never moves. He just stares into the camera.",
    "pause": 0.2
@@ -115,9 +145,13 @@
    "scene": "paint",
    "art": "A woman in her early thirties with shoulder-length auburn hair and a grey t-shirt sits up in bed in a dark bedroom at night, knees pulled up under the duvet, her face lit cold blue by the phone in her hands. Curtains closed behind her. Clock on the nightstand.",
    "p": {
-    "push": 0.03,
+    "push": 0.04,
     "img": "channels/3am-stories/stories/029-doorbell-cam/art/03.jpg",
-    "noVig": true
+    "noVig": true,
+    "pan": [
+     -40,
+     0
+    ]
    },
    "text": "The next night, I stayed up and watched the live feed from bed.",
    "pause": 0.05
@@ -128,11 +162,15 @@
    "p": {
     "cam": {
      "time": "3:11 AM",
-     "label": "LIVE"
+     "label": "LIVE",
+     "s0": 52
     },
-    "push": 0.02,
+    "push": 0.0,
     "img": "channels/3am-stories/stories/029-doorbell-cam/art/04.jpg",
-    "noVig": true
+    "noVig": true,
+    "glitch": [
+     1.1
+    ]
    },
    "text": "Three eleven. Empty porch.",
    "pause": 0.5
@@ -143,11 +181,86 @@
    "p": {
     "cam": {
      "time": "3:12 AM",
-     "label": "LIVE"
+     "label": "LIVE",
+     "s0": 0
     },
-    "push": 0.06,
+    "push": 0.07,
     "img": "channels/3am-stories/stories/029-doorbell-cam/art/05.jpg",
-    "noVig": true
+    "noVig": true,
+    "whip": true,
+    "shake": 0.3,
+    "box": [
+     0.25,
+     0.15,
+     0.5,
+     0.6
+    ],
+    "boxAt": 0.4,
+    "boxLabel": "PERSON 99%",
+    "imgs": [
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f001.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f002.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f003.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f004.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f005.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f006.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f007.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f008.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f009.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f010.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f011.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f012.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f013.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f014.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f015.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f016.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f017.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f018.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f019.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f020.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f021.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f022.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f023.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f024.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f025.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f026.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f027.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f028.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f029.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f030.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f031.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f032.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f033.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f034.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f035.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f036.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f037.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f038.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f039.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f040.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f041.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f042.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f043.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f044.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f045.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f046.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f047.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f048.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f049.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f050.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f051.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f052.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f053.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f054.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f055.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f056.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f057.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f058.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f059.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f060.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/05/f061.jpg"
+    ],
+    "fps": 12
    },
    "text": "Three twelve. He's there. Closer than ever.",
    "pause": 0.3,
@@ -156,15 +269,24 @@
      "heart",
      0.2
     ]
-   ]
+   ],
+   "anim": "Animated horror cartoon, doorbell camera view, static camera. The hooded figure steps one step closer to the lens, coat swaying slightly, porch light flickering."
   },
   {
    "scene": "paint",
    "art": "Close-up of the same auburn-haired woman's face in the dark, eyes wide with fear, lit only by the cold blue glow of her phone from below, a strand of hair across her cheek.",
    "p": {
-    "push": 0.05,
+    "push": 0.06,
     "img": "channels/3am-stories/stories/029-doorbell-cam/art/06.jpg",
-    "noVig": true
+    "noVig": true,
+    "snap": {
+     "at": 2.0,
+     "to": [
+      960,
+      900
+     ],
+     "z": 1.5
+    }
    },
    "text": "That's when I noticed the porch light on the feed was on. But I'd turned it off at ten.",
    "pause": 0.2
@@ -173,9 +295,13 @@
    "scene": "paint",
    "art": "Point of view through a dark upstairs bedroom window, curtain pulled slightly aside by a hand, looking down at the same small front porch from above. The porch light is OFF. The porch is pitch dark and completely empty. Moonlight on the street.",
    "p": {
-    "push": 0.03,
+    "push": 0.02,
     "img": "channels/3am-stories/stories/029-doorbell-cam/art/07.jpg",
-    "noVig": true
+    "noVig": true,
+    "pan": [
+     0,
+     40
+    ]
    },
    "text": "I looked out the window. The porch was dark. And empty.",
    "pause": 0.6
@@ -186,12 +312,90 @@
    "p": {
     "cam": {
      "time": "3:13 AM",
-     "label": "LIVE"
+     "label": "LIVE",
+     "s0": 20
     },
     "push": 0.05,
     "img": "channels/3am-stories/stories/029-doorbell-cam/art/08.jpg",
     "noVig": true,
-    "bright": 1.6
+    "bright": 1.6,
+    "shake": 0.25,
+    "glitch": [
+     0.9,
+     2.4
+    ],
+    "snap": {
+     "at": 1.0,
+     "to": [
+      960,
+      760
+     ],
+     "z": 2.0
+    },
+    "imgs": [
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f001.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f002.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f003.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f004.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f005.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f006.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f007.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f008.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f009.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f010.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f011.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f012.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f013.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f014.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f015.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f016.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f017.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f018.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f019.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f020.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f021.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f022.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f023.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f024.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f025.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f026.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f027.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f028.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f029.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f030.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f031.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f032.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f033.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f034.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f035.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f036.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f037.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f038.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f039.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f040.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f041.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f042.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f043.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f044.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f045.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f046.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f047.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f048.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f049.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f050.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f051.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f052.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f053.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f054.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f055.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f056.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f057.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f058.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f059.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f060.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/08/f061.jpg"
+    ],
+    "fps": 12
    },
    "text": "But on the feed, he was still standing there. And now he was smiling.",
    "pause": 0.4,
@@ -200,7 +404,8 @@
      "sting",
      0.6
     ]
-   ]
+   ],
+   "anim": "Animated horror cartoon, doorbell camera view, static camera. The hooded figure slowly leans toward the lens and his huge grin stretches even wider, head tilting a little."
   },
   {
    "scene": "paint",
@@ -208,12 +413,85 @@
    "p": {
     "cam": {
      "time": "3:13 AM",
-     "label": "LIVE"
+     "label": "LIVE",
+     "s0": 41
     },
-    "push": 0.04,
+    "push": 0.03,
     "img": "channels/3am-stories/stories/029-doorbell-cam/art/09.jpg",
     "noVig": true,
-    "bright": 1.35
+    "bright": 1.35,
+    "snap": {
+     "at": 2.6,
+     "to": [
+      960,
+      560
+     ],
+     "z": 1.8
+    },
+    "imgs": [
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f001.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f002.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f003.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f004.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f005.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f006.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f007.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f008.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f009.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f010.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f011.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f012.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f013.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f014.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f015.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f016.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f017.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f018.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f019.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f020.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f021.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f022.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f023.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f024.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f025.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f026.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f027.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f028.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f029.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f030.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f031.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f032.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f033.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f034.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f035.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f036.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f037.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f038.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f039.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f040.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f041.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f042.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f043.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f044.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f045.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f046.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f047.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f048.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f049.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f050.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f051.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f052.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f053.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f054.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f055.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f056.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f057.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f058.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f059.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f060.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/09/f061.jpg"
+    ],
+    "fps": 12
    },
    "text": "Then, slowly, he looked up. Not at the camera. At my bedroom window.",
    "pause": 1.0,
@@ -222,7 +500,8 @@
      "silence_hit",
      3.8
     ]
-   ]
+   ],
+   "anim": "Animated horror cartoon, doorbell camera view, static camera. The hooded figure slowly tilts his head back and looks up toward the upstairs window, grin widening."
   },
   {
    "scene": "phone",
@@ -247,15 +526,88 @@
   },
   {
    "scene": "paint",
-   "art": "Security camera view from a high corner of a dark bedroom, grainy black-and-white night vision with a faint green tint. The auburn-haired woman sits in bed holding her phone, unaware. In the dark corner right beside the bed stands a tall thin figure in a long dark coat with its hood up, a wide pale grin barely visible.",
+   "art": "Security camera view from a high corner of a dark bedroom, grainy black-and-white night vision with a faint green tint. The auburn-haired woman sits in bed holding her phone, unaware. In the dark corner right beside the bed stands a tall thin figure in a long dark coat with its hood up, a wide pale grin barely visible. Absolutely no text, numbers, timestamps or labels anywhere in the image.",
    "p": {
     "cam": {
      "time": "3:14 AM",
-     "label": "BEDROOM"
+     "label": "BEDROOM",
+     "s0": 3
     },
-    "push": 0.03,
+    "push": 0.025,
     "img": "channels/3am-stories/stories/029-doorbell-cam/art/11.jpg",
-    "noVig": true
+    "noVig": true,
+    "box": [
+     0.62,
+     0.08,
+     0.3,
+     0.55
+    ],
+    "boxAt": 1.2,
+    "boxLabel": "PERSON 97%",
+    "imgs": [
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f001.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f002.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f003.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f004.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f005.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f006.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f007.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f008.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f009.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f010.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f011.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f012.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f013.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f014.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f015.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f016.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f017.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f018.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f019.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f020.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f021.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f022.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f023.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f024.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f025.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f026.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f027.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f028.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f029.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f030.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f031.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f032.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f033.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f034.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f035.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f036.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f037.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f038.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f039.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f040.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f041.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f042.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f043.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f044.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f045.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f046.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f047.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f048.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f049.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f050.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f051.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f052.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f053.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f054.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f055.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f056.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f057.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f058.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f059.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f060.jpg",
+     "channels/3am-stories/stories/029-doorbell-cam/art/11/f061.jpg"
+    ],
+    "fps": 12
    },
    "text": "I don't have a bedroom camera.",
    "pause": 0.8,
@@ -264,7 +616,9 @@
      "boom",
      1.4
     ]
-   ]
+   ],
+   "anim": "Animated horror cartoon, security camera in a bedroom corner, static camera. The woman keeps looking at her phone; in the dark corner the tall hooded figure slowly turns its head toward her and smiles."
   }
- ]
+ ],
+ "captions": false
 }

@@ -860,7 +860,7 @@ function frameSVG(name, t, d, p, view, frameNo) {
     <rect width="1920" height="1920" fill="#fff" filter="url(#grain)" opacity=".55"/>
     ${p.torch ? `<defs><radialGradient id="torchG" cx="${p.torch[0] / 1920}" cy="${p.torch[1] / 1920}" r="${(p.torch[2] || 380) / 1920}"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".55" stop-color="#000" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity=".93"/></radialGradient></defs><rect width="1920" height="1920" fill="url(#torchG)"/>` : ''}
     ${p.flash != null && t >= p.flash && t < p.flash + 1 / 30 ? '<rect width="1920" height="1920" fill="#fff"/>' : ''}
-    ${pops(t, p, view)}
+    ${camHud(t, p, view)}${pops(t, p, view)}
   </svg>`;
 }
 
@@ -869,6 +869,23 @@ function frameSVG(name, t, d, p, view, frameNo) {
 // p.pops = [{ at: seconds, type: 'label' | 'num' | 'pin' | 'date', text, x: 0..1, y: 0..1 (position in the frame) }]
 // label: a name in huge outlined letters with a curved purple arrow pointing down at the person; num: a big number;
 // pin: a map pin with a place name; date: a typewriter-style date stamp. Each one pops in with a quick overshoot.
+
+// doorbell/security-cam HUD pinned to the screen (not the picture): ticking clock, REC, label, frame corners, scanlines
+function camHud(t, p, view) {
+  if (!p.cam || p.cam.hud === false) return '';
+  const [x, y, w, h] = view, base = String(p.cam.time || '3:12 AM').match(/(\d+):(\d+)\s*(AM|PM)?/i) || [0, 3, 12, 'AM'];
+  const ts = `${base[1]}:${base[2]}:${String(Math.floor((p.cam.s0 || 0) + t) % 60).padStart(2, '0')} ${base[3] || ''}`;
+  const fs = w * 0.05, tx = x + w - w * 0.1, ty = y + h * 0.075;
+  return `<g font-family="Courier New, monospace" font-weight="700">
+    <defs><radialGradient id="camVig" r="62%"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></radialGradient>
+      <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#fff" opacity=".05"/></pattern></defs>
+    <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#camVig)"/><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#scan)"/>
+    <text x="${tx}" y="${ty}" text-anchor="end" font-size="${fs}" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(ts)}</text>
+    <circle cx="${tx + fs * 0.6}" cy="${ty - fs * 0.35}" r="${fs * 0.25}" fill="#ff2020" opacity="${Math.floor(t * 2) % 2 ? 1 : 0.3}"/>
+    <text x="${x + w * 0.07}" y="${ty}" font-size="${fs * 0.75}" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.label || 'FRONT DOOR')}</text>
+    ${[[0, 0], [1, 0], [0, 1], [1, 1]].map(([cx, cy]) => { const X = x + w * 0.04 + cx * w * 0.92, Y = y + h * 0.025 + cy * h * 0.95, sx = cx ? -1 : 1, sy = cy ? -1 : 1;
+      return `<path d="M${X} ${Y + sy * w * 0.06} V${Y} H${X + sx * w * 0.06}" stroke="#f0f0f0" stroke-width="5" fill="none" opacity=".7"/>`; }).join('')}</g>`;
+}
 function pops(t, p, view) {
   if (!p.pops) return '';
   return p.pops.map((o) => {
@@ -2040,22 +2057,7 @@ S.paint = (t, d, p) => {
   const gl = p.cam && (t < 0.22 || (p.glitch || []).some((g) => t >= g && t < g + 0.18));
   const tears = gl ? [...Array(6)].map((_, i) => { const yy = y + ((i * 397 + Math.floor(t * 60) * 131) % h); return `<rect x="${x}" y="${yy}" width="${w}" height="${10 + (i * 7) % 26}" fill="#fff" opacity=".12"/><rect x="${x + 30}" y="${yy + 6}" width="${w}" height="6" fill="#ff2a5a" opacity=".18"/>`; }).join('') : '';
   const img = src ? `<g transform="translate(${ox + (gl ? 14 * Math.sin(t * 90) : 0)},${oy})"><image href="${src}" x="${x - (over - 1) * w / 2}" y="${y - (over - 1) * h / 2}" width="${w * over}" height="${h * over}" preserveAspectRatio="xMidYMid slice" opacity="${fl}" style="filter:brightness(${p.bright ?? 1.15}) contrast(1.05)"/></g>` : '';
-  let cam = '';
-  if (p.cam) {
-    const base = String(p.cam.time || '3:12 AM').match(/(\d+):(\d+)\s*(AM|PM)?/i) || [0, 3, 12, 'AM'];
-    const sec = Math.floor((p.cam.s0 || 0) + t) % 60;
-    const ts = `${base[1]}:${base[2]}:${String(sec).padStart(2, '0')} ${base[3] || ''}`;
-    const tx = x + w - (p.wide ? 70 : 150), ty = y + (p.wide ? 90 : 340);
-    cam = `<g font-family="Courier New, monospace" font-weight="700">
-      <defs><radialGradient id="camVig" r="62%"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></radialGradient>
-        <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#fff" opacity=".05"/></pattern></defs>
-      <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#camVig)"/><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#scan)"/>
-      <text x="${tx}" y="${ty}" text-anchor="end" font-size="50" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(ts)}</text>
-      <circle cx="${tx + 32}" cy="${ty - 18}" r="13" fill="#ff2020" opacity="${Math.floor(t * 2) % 2 ? 1 : 0.3}"/>
-      <text x="${x + (p.wide ? 70 : 110)}" y="${ty}" font-size="38" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.label || 'FRONT DOOR')}</text>
-      ${[[0, 0], [1, 0], [0, 1], [1, 1]].map(([cx, cy]) => { const X = x + (p.wide ? 40 : 90) + cx * (w - (p.wide ? 80 : 180)), Y = y + (p.wide ? 30 : 280) + cy * (h - (p.wide ? 60 : 560)), sx = cx ? -1 : 1, sy = cy ? -1 : 1;
-        return `<path d="M${X} ${Y + sy * 60} V${Y} H${X + sx * 60}" stroke="#f0f0f0" stroke-width="5" fill="none" opacity=".7"/>`; }).join('')}</g>`;
-  }
+  const cam = '';  // the camera HUD is drawn screen-fixed by camHud() in frameSVG, so zooms never crop it
   // motion-detection box: p.box [x, y, w, h] as fractions of the picture, p.boxLabel, p.boxAt (seconds it appears)
   let box = '';
   if (p.box && t >= (p.boxAt || 0)) {
