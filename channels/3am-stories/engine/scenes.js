@@ -1883,3 +1883,25 @@ S.thumbF13v = (t, d, p) => {
     <circle cx="560" cy="980" r="360" fill="#ffb060" opacity=".12" filter="url(#blur)"/>
     ${VIB.words(p.words || [['NO 13TH', '#ffffff', 150], ['FLOOR', '#ffe23a', 200]], 70, 420)}`;
 };
+
+// v4: even louder. Sun-burst rays behind the face, white sticker outline + neon glow on both characters, Ruth closer with
+// glowing red eyes, a red arrow onto her, everything run through a saturation/contrast boost.
+S.thumbF13p = (t, d, p) => {
+  const ink = K.ink, sticker = (c) => `filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff) drop-shadow(0 0 3px #fff) drop-shadow(0 0 22px ${c}) drop-shadow(0 0 10px ${c})`;
+  const ruthHair = '<path d="M-140 200 Q-160 -170 0 -178 Q160 -170 140 200 L106 210 L110 -30 Q70 -110 0 -112 Q-70 -110 -110 -30 L-106 210Z" fill="#14100e" stroke="#000" stroke-width="7"/><path d="M-110 -150 L110 -150 L90 -205 L-90 -205Z" fill="#f4f2ec" stroke="#000" stroke-width="6"/><path d="M-12 -190 h24 M0 -200 v20" stroke="#c0101a" stroke-width="7"/>';
+  const rays = [...Array(18)].map((_, i) => { const a = i * Math.PI / 9, b = a + 0.12; return `<path d="M520 1000 L${520 + Math.cos(a) * 1400} ${1000 + Math.sin(a) * 1400} L${520 + Math.cos(b) * 1400} ${1000 + Math.sin(b) * 1400}Z" fill="#ffd25a" opacity=".16"/>`; }).join('');
+  const rx = 1410, ry = 1250, rs = 0.82;
+  return `<g style="filter:saturate(1.35) contrast(1.08)">${VIB.bg('#5a12c8', '#d0208a', '#ff5a1a')}${rays}${VIB.bokeh(['#ffe03a', '#ff4ad8', '#3ae0ff'], 24)}
+    <g style="${VIB.glow('#2af0ff', 24)}"><rect x="1030" y="560" width="760" height="940" rx="10" fill="#18c8d8" stroke="${ink}" stroke-width="12"/></g>
+    <rect x="1110" y="660" width="600" height="840" fill="#1a0206"/>
+    <defs><radialGradient id="corr2" cx="50%" cy="45%" r="70%"><stop offset="0" stop-color="#ff3a2a"/><stop offset=".6" stop-color="#b00018" stop-opacity=".8"/><stop offset="1" stop-color="#1a0206" stop-opacity="0"/></radialGradient></defs>
+    <rect x="1110" y="660" width="600" height="840" fill="url(#corr2)"/>
+    <g transform="translate(${rx},${ry}) scale(${rs})" style="${sticker('#ff1a1a')}">${person(0, 0, 1, { hero: false, black: true, eyes: 'wide', look: 0, seed: 1.7, body: '#f6f2ea', skin: '#e8f0f0', hair: ruthHair })}</g>
+    ${[[-80, -121], [40, -121]].map(([ex, ey]) => `<circle cx="${rx + ex * rs}" cy="${ry + ey * rs}" r="15" fill="#ff2a2a" style="${VIB.glow('#ff0000', 14)}"/><circle cx="${rx + ex * rs}" cy="${ry + ey * rs}" r="6" fill="#fff"/>`).join('')}
+    <g transform="translate(1410,560)"><rect x="-180" y="-115" width="360" height="180" rx="22" fill="#120208" stroke="#fff" stroke-width="8" style="${VIB.glow('#ff2a2a', 26)}"/>
+      <text y="42" text-anchor="middle" font-family="Inter Display, Inter" font-weight="900" font-size="165" fill="#fff4f0" style="${VIB.glow('#ff0000', 20)}">13</text></g>
+    <g stroke="#ff2a2a" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" fill="none" style="filter:drop-shadow(0 0 0 #fff) drop-shadow(0 8px 0 rgba(0,0,0,.6))">
+      <path d="M980 860 Q1080 800 1180 900"/><path d="M1180 900 l-80 -10 M1180 900 l-20 -76"/></g>
+    <g transform="translate(470,1330)" style="${sticker('#2af0ff')}">${person(0, 0, 1.85, { eyes: 'wide', look: 0.9, mouth: 'o', sweat: true, seed: 1.7 })}</g>
+    ${VIB.words(p.words || [['NO 13TH', '#ffffff', 165], ['FLOOR', '#ffe23a', 225]], 60, 420)}</g>`;
+};
