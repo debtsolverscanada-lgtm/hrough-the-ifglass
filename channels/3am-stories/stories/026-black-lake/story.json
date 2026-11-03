@@ -1,0 +1,690 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Callum",
+ "tts": {
+  "stability": 0.4,
+  "similarity": 0.8,
+  "style": 0.45,
+  "speed": 1.1
+ },
+ "grade": {
+  "preset": "arcticBlue",
+  "amount": 0.35,
+  "sat": 0.95
+ },
+ "hero": {
+  "hairStyle": "curly",
+  "hair": "#1a1410",
+  "hairH": "#3a2a20",
+  "body": "#a03a2a",
+  "skin": "#a8754f",
+  "skinS": "#86583a"
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "lake",
+  "bp": {
+   "heads": [
+    [
+     820,
+     1180,
+     0.55,
+     "hero"
+    ],
+    [
+     1000,
+     1150,
+     0.5,
+     "jordan"
+    ],
+    [
+     1170,
+     1185,
+     0.52,
+     "priya"
+    ],
+    [
+     1300,
+     1060,
+     0.45,
+     "stranger"
+    ]
+   ]
+  },
+  "zoom": [
+   1060,
+   1000,
+   1.5
+  ],
+  "lines": [],
+  "band": 0
+ },
+ "yt": {
+  "title": "Three of us went into the lake. Four of us came out 😨 #scary #horror #shorts",
+  "description": "Midnight swim at Black Lake. We counted off: one, two, three. Then a voice behind us said \"four.\"\n\n🎧 headphones on. Would you have stayed in the water?\n\n#scarystories #horror #3amstories #lake #camping #shorts",
+  "tags": [
+   "scary stories",
+   "lake horror",
+   "camping horror",
+   "horror short",
+   "3am stories",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ]
+    ],
+    "sign": true,
+    "focus": 700
+   },
+   "text": "Three of us went into Black Lake after dark. Four of us came out.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "drone",
+     0
+    ],
+    [
+     "water",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "sign": true,
+    "focus": 600,
+    "snap": {
+     "at": 0.6,
+     "to": [
+      300,
+      1080
+     ],
+     "z": 2.2
+    }
+   },
+   "text": "There's a sign on the shore. No swimming after dark. Everybody ignores it.",
+   "pause": 0.05
+  },
+  {
+   "scene": "shore",
+   "p": {
+    "eyes": "normal"
+   },
+   "text": "Me, Jordan and Priya. Senior year. Our last night at the cabins.",
+   "pause": 0.05
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ]
+    ]
+   },
+   "text": "We swam out past the dock, where the water turns black and cold, and counted off. Like camp taught us.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "water",
+     0.5
+    ]
+   ]
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ]
+    ],
+    "snap": {
+     "at": 0.1,
+     "to": [
+      1000,
+      1150
+     ],
+     "z": 1.7
+    },
+    "pops": [
+     {
+      "at": 0.1,
+      "type": "num",
+      "text": "1",
+      "x": 0.3,
+      "y": 0.2
+     },
+     {
+      "at": 0.6,
+      "type": "num",
+      "text": "2",
+      "x": 0.5,
+      "y": 0.2
+     },
+     {
+      "at": 1.1,
+      "type": "num",
+      "text": "3",
+      "x": 0.7,
+      "y": 0.2
+     }
+    ]
+   },
+   "text": "One. Two. Three.",
+   "pause": 0.05
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ],
+     [
+      1240,
+      1010.0,
+      0.22,
+      "stranger"
+     ]
+    ]
+   },
+   "text": "Then a voice right behind us said:",
+   "pause": 0.3
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ],
+     [
+      1240,
+      1010.0,
+      0.22,
+      "stranger"
+     ]
+    ],
+    "push": 0
+   },
+   "text": "Four.",
+   "pause": 0.9,
+   "sfx": [
+    [
+     "silence_hit",
+     0.5
+    ]
+   ],
+   "voice": [
+    "Clyde",
+    "George",
+    "Callum"
+   ],
+   "fx": "wrong+behind+close"
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ],
+     [
+      1240,
+      1022.0,
+      0.255,
+      "stranger"
+     ]
+    ],
+    "snap": {
+     "at": 1.4,
+     "to": [
+      1240,
+      1030
+     ],
+     "z": 2.2
+    },
+    "pops": [
+     {
+      "at": 0.6,
+      "type": "num",
+      "text": "4",
+      "x": 0.75,
+      "y": 0.2
+     }
+    ]
+   },
+   "text": "There was a fourth head in the water. Ten meters out. Just sitting there.",
+   "pause": 0.05
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ],
+     [
+      1240,
+      1028.0,
+      0.2725,
+      "stranger"
+     ]
+    ]
+   },
+   "text": "The weird part? We weren't scared yet. We figured it was some kid from the other cabins.",
+   "pause": 0.05
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ],
+     [
+      1240,
+      1028.0,
+      0.2725,
+      "stranger"
+     ]
+    ]
+   },
+   "text": "Hey! Which cabin are you in?",
+   "pause": 0.3,
+   "voice": [
+    "Lily",
+    "Jessica",
+    "Laura"
+   ],
+   "fx": "far"
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ],
+     [
+      1240,
+      1064.0,
+      0.3775,
+      "stranger"
+     ]
+    ],
+    "push": 0.05
+   },
+   "text": "It didn't answer. It didn't swim. It just got closer.",
+   "pause": 0.9,
+   "sfx": [
+    [
+     "heart",
+     0.4
+    ]
+   ]
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ],
+     [
+      1180,
+      1120.0,
+      0.48249999999999993,
+      "stranger"
+     ]
+    ],
+    "shake": 0.2
+   },
+   "text": "No splash. No ripples. Every time I blinked, it was nearer.",
+   "pause": 0.05
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      820,
+      1180,
+      0.55,
+      "hero"
+     ],
+     [
+      1000,
+      1150,
+      0.5,
+      "jordan"
+     ],
+     [
+      1170,
+      1185,
+      0.52,
+      "priya"
+     ],
+     [
+      1180,
+      1120.0,
+      0.48249999999999993,
+      "stranger"
+     ]
+    ],
+    "shake": 0.5,
+    "whip": true
+   },
+   "text": "We swam for the beach like our lives depended on it.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "water",
+     0.0
+    ],
+    [
+     "water",
+     1.0
+    ]
+   ]
+  },
+  {
+   "scene": "shore",
+   "p": {
+    "eyes": "wide"
+   },
+   "text": "On the sand, we counted again. One. Two. Three. All of us.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "breath",
+     0.5
+    ]
+   ]
+  },
+  {
+   "scene": "shore",
+   "p": {
+    "eyes": "wide",
+    "prints": 3,
+    "snap": {
+     "at": 1.4,
+     "to": [
+      900,
+      1440
+     ],
+     "z": 1.6
+    }
+   },
+   "text": "Priya pointed at the dock. Wet footprints.",
+   "pause": 0.05
+  },
+  {
+   "scene": "shore",
+   "p": {
+    "eyes": "wide",
+    "prints": 4,
+    "newPrint": true,
+    "snap": {
+     "at": 0.0,
+     "to": [
+      1100,
+      1440
+     ],
+     "z": 1.8
+    },
+    "push": 0
+   },
+   "text": "Four sets.",
+   "pause": 0.9,
+   "sfx": [
+    [
+     "silence_hit",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "shore",
+   "p": {
+    "eyes": "wide",
+    "prints": 4,
+    "towel": "dry",
+    "snap": {
+     "at": 1.6,
+     "to": [
+      1560,
+      1440
+     ],
+     "z": 2.0
+    }
+   },
+   "text": "And next to them, Jordan's towel. Folded. Completely dry.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "sting",
+     2.4
+    ]
+   ]
+  },
+  {
+   "scene": "shore",
+   "p": {
+    "who": [
+     "hero",
+     "priya"
+    ],
+    "eyes": "wide"
+   },
+   "text": "I turned to ask Jordan about it. He wasn't there.",
+   "pause": 0.6
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "12:41",
+    "msgs": [
+     [
+      "Jordan",
+      "where are you guys?? fell asleep in the cabin lol",
+      0.8
+     ]
+    ]
+   },
+   "text": "Then my phone buzzed. A text. From Jordan.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "buzzphone",
+     0.8
+    ]
+   ]
+  },
+  {
+   "scene": "lake",
+   "p": {
+    "heads": [
+     [
+      1000,
+      1080,
+      0.75,
+      "stranger"
+     ]
+    ],
+    "dock": "dry",
+    "push": 0.04
+   },
+   "text": "Jordan never went in the lake. So who did I count?",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "boom",
+     2.6
+    ]
+   ]
+  }
+ ]
+}

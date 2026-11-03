@@ -18,6 +18,7 @@
 
 | Story | Grade | Hero |
 |---|---|---|
+| 026 black lake | arcticBlue at 0.35 (icy moonlit lake, reds kept) | curly-haired teen in a red shirt + new: Jordan (blond spikes), Priya (long black hair), the faceless fourth swimmer; narrator Callum |
 | 025 floor thirteen (long) | noirTeal at 0.36 (series continuation of 023: same lead, Ana) | Ana the nurse + new: Mr. Haskell (grey, balding manager), Ruth (1974 clipping); narrator Sarah |
 | 024 stop four | coldSteel at 0.38 (steel-blue night, reds kept) | grey-bearded delivery driver, buzz cut, hi-vis vest; narrator Bill |
 | 023 floor thirteen | sickGreen at 0.32 (fluorescent elevator green, reds kept) | night-shift nurse: hair bun, teal scrubs; narrator Sarah (female, first person) |
@@ -41,3 +42,4 @@
 | 022 closet tenant | Brian | "This guy..." intro (true story) | Wait / You see |
 | 023 floor thirteen | Sarah | F2 impossible premise + F15 loop | (no Wait) / Here's the thing about elevators |
 | 024 stop four | Bill | F13 evidence first + F15 loop | That's when I noticed / Except |
+| 026 black lake | Callum | F5 countdown (One. Two. Three. Four.) + F15 loop | The weird part? |

@@ -1628,3 +1628,57 @@ S.casefile = (t, d, p) => {
       <text x="960" y="1426" text-anchor="middle" font-family="Anton" font-size="${Math.min(64, 1500 / Math.max(10, String(p.title || '').length))}" fill="#f2ead8">${esc3(p.title || '')}</text></g>`;
 };
 FOCUS.casefile = 960;
+
+// ---------- Black Lake: night swim, heads in the water, the beach ----------
+const LAKE_FRIENDS = {
+  jordan: { hair: '<path d="M-118 -10 Q-130 -150 0 -168 Q130 -150 118 -10 L104 -60 L88 -30 L74 -96 L50 -60 L30 -110 L6 -70 L-20 -112 L-40 -66 L-66 -104 L-80 -54 L-100 -80Z" fill="#e8c86a" stroke="#120d0a" stroke-width="6" stroke-linejoin="round"/>', skin: '#f2d2bc', body: '#3a6ab0' },
+  priya: { hair: '<path d="M-136 150 Q-158 -170 0 -178 Q158 -170 136 150 L104 170 L110 -30 Q70 -110 0 -112 Q-70 -110 -110 -30 L-104 170Z" fill="#141018" stroke="#120d0a" stroke-width="6"/>', skin: '#c99a76', body: '#8a3a8a' },
+};
+// a head in the water: p is [x, y, scale, who]; who 'hero' | 'jordan' | 'priya' | 'stranger' (no face: wet hair over it)
+function swimmer(x, y, s, who, t) {
+  const bob = Math.sin(t * 1.7 + x) * 6, rip = (k) => `<ellipse cx="0" cy="${150}" rx="${190 + k * 50}" ry="${30 + k * 8}" fill="none" stroke="#cfe0ff" stroke-width="4" opacity="${0.35 - k * 0.1}"/>`;
+  if (who === 'stranger') return `<g transform="translate(${x},${y}) scale(${s})">${rip(0)}${rip(1)}
+    <path d="M-120 140 Q-130 -150 0 -160 Q130 -150 120 140Z" fill="#0a0c10"/><path d="M-90 -100 q-10 120 -20 240 M-40 -140 q-6 140 -10 280 M10 -150 q6 150 4 290 M60 -130 q10 140 14 270" stroke="#1a1e26" stroke-width="10" fill="none"/>
+    <ellipse cx="-34" cy="-30" rx="13" ry="7" fill="#dfe8f0" opacity=".9"/><ellipse cx="34" cy="-30" rx="13" ry="7" fill="#dfe8f0" opacity=".9"/>
+    <rect x="-200" y="120" width="400" height="200" fill="#0a1424"/></g>`;
+  const f = LAKE_FRIENDS[who] || {};
+  return `<g transform="translate(${x},${y + bob}) scale(${s})">${rip(0)}${rip(1)}
+    ${head(0, 0, 1, who === 'hero' ? { eyes: 'wide', look: 0.4, seed: x / 97 } : { hero: false, hair: f.hair, skin: f.skin, eyes: 'normal', look: -0.3, seed: x / 97 })}
+    <rect x="-220" y="110" width="440" height="220" fill="#0a1424"/><path d="M-220 110 H220" stroke="#cfe0ff" stroke-width="5" opacity=".5"/></g>`;
+}
+// the lake at night: moon and its reflection, black treeline, a floating dock, a warning sign on the shore.
+// p.heads [[x, y, scale, who], ...], p.sign (show the sign close), p.dock (towel on the dock: 'dry'), p.ripple
+S.lake = (t, d, p) => {
+  const ink = K.ink;
+  return `<rect width="1920" height="1920" fill="#040814"/>
+    ${[...Array(70)].map((_, i) => `<circle cx="${(i * 733) % 1920}" cy="${430 + (i * 197) % 300}" r="${1 + i % 2}" fill="#fff" opacity=".5"/>`).join('')}
+    <circle cx="1400" cy="540" r="70" fill="#eef4ff"/><circle cx="1400" cy="540" r="160" fill="#eef4ff" opacity=".08"/>
+    ${[...Array(26)].map((_, i) => `<path d="M${i * 80 - 20} 790 l40 -${120 + (i * 53) % 110} l40 ${120 + (i * 53) % 110}Z" fill="#02040a"/>`).join('')}
+    <rect x="0" y="790" width="1920" height="1130" fill="#0a1424"/>
+    ${[...Array(9)].map((_, k) => `<rect x="${1400 - 60 + Math.sin(t * 2 + k) * 14 - k * 6}" y="${820 + k * 40}" width="${120 + k * 12}" height="8" fill="#eef4ff" opacity="${0.55 - k * 0.05}"/>`).join('')}
+    <g transform="translate(560,960)"><rect x="-200" y="0" width="400" height="40" fill="#3a2a1a" stroke="${ink}" stroke-width="6"/>${[-150, -50, 50, 150].map((x) => `<rect x="${x - 6}" y="40" width="12" height="40" fill="#2a1e14"/>`).join('')}
+      ${p.dock === 'dry' ? '<rect x="40" y="-28" width="110" height="30" rx="6" fill="#d8443a" stroke="#120d0a" stroke-width="4"/><path d="M50 -20 h90 M50 -10 h90" stroke="#f2e2c0" stroke-width="4"/>' : ''}</g>
+    ${[...(p.heads || [])].sort((a, b) => a[1] - b[1]).map(([x, y, s, who]) => swimmer(x, y, s, who, t)).join('')}
+    ${p.sign ? `<g transform="translate(300,1150)"><rect x="-10" y="0" width="20" height="330" fill="#3a2a1a"/><rect x="-190" y="-150" width="380" height="170" fill="#e8dcb0" stroke="${ink}" stroke-width="8"/>
+      <text x="0" y="-92" text-anchor="middle" font-family="Anton" font-size="44" fill="#a0101a">NO SWIMMING</text><text x="0" y="-38" text-anchor="middle" font-family="Anton" font-size="44" fill="#2a2016">AFTER DARK</text></g>` : ''}
+    <rect width="1920" height="1920" fill="#1a3060" opacity=".14"/>`;
+};
+FOCUS.lake = 960;
+
+// the beach after: a campfire, the three of them (p.who list of 'hero' | 'jordan' | 'priya'), wet footprints on the dock
+// boards in the foreground (p.prints count, the last one fading in), and a folded towel (p.towel 'dry').
+S.shore = (t, d, p) => {
+  const ink = K.ink, fl = 0.85 + 0.15 * Math.sin(t * 13) * Math.sin(t * 7);
+  const who = p.who || ['hero', 'jordan', 'priya'];
+  const pos = { hero: 760, jordan: 1060, priya: 1300 };
+  return `<rect width="1920" height="1920" fill="#040814"/>
+    ${[...Array(24)].map((_, i) => `<path d="M${i * 84 - 20} 760 l42 -${120 + (i * 53) % 110} l42 ${120 + (i * 53) % 110}Z" fill="#02040a"/>`).join('')}
+    <rect x="0" y="760" width="1920" height="200" fill="#0a1424"/><path d="M0 960 Q960 900 1920 960 V1920 H0Z" fill="#3a3024"/>
+    <g transform="translate(560,1060)"><circle r="300" fill="#ff9a3a" opacity="${0.12 * fl}"/>${[0, 1, 2].map((k) => `<path d="M${-30 + k * 30} 40 q${-20 + k * 20} -${80 + k * 20} 0 -${150 + k * 30} q${20 - k * 10} ${70} 0 ${150 + k * 30}" fill="${['#ff6a1a', '#ffb03a', '#ffe08a'][k]}" opacity="${fl}"/>`).join('')}<path d="M-70 50 L70 30 M-70 30 L70 50" stroke="#3a2416" stroke-width="18"/></g>
+    ${who.map((w) => w === 'hero' ? `<g transform="translate(${pos[w]},880) scale(0.55)">${person(0, 0, 1, { eyes: p.eyes || 'wide', look: 0.3 })}</g>` : `<g transform="translate(${pos[w]},880) scale(0.55)">${person(0, 0, 1, { hero: false, hair: LAKE_FRIENDS[w].hair, skin: LAKE_FRIENDS[w].skin, body: LAKE_FRIENDS[w].body, eyes: p.eyes || 'wide', look: -0.3 })}</g>`).join('')}
+    <rect x="0" y="1300" width="1920" height="620" fill="#4a3624"/>${[...Array(8)].map((_, k) => `<path d="M0 ${1320 + k * 26} H1920" stroke="#2a1e14" stroke-width="5"/>`).join('')}
+    ${[...Array(p.prints || 0)].map((_, k) => `<g opacity="${k === (p.prints - 1) && p.newPrint ? ease(Math.min(1, t / 1.5)) : 0.9}" transform="translate(${560 + k * 230},${1420 + (k % 2) * 40}) rotate(${-10 + k * 6})"><ellipse rx="34" ry="62" fill="#1e1610"/>${[0, 1, 2, 3, 4].map((q) => `<circle cx="${-24 + q * 12}" cy="${-72 - Math.abs(q - 2) * 4}" r="${9 - Math.abs(q - 2)}" fill="#1e1610"/>`).join('')}</g>`).join('')}
+    ${p.towel === 'dry' ? `<g transform="translate(1560,1440)"><rect x="-110" y="-40" width="220" height="70" rx="10" fill="#d8443a" stroke="${ink}" stroke-width="6"/><path d="M-100 -20 h200 M-100 0 h200" stroke="#f2e2c0" stroke-width="6"/></g>` : ''}
+    <rect width="1920" height="1920" fill="#ff8a3a" opacity=".04"/>`;
+};
+FOCUS.shore = 960;
