@@ -1958,3 +1958,30 @@ S.thumbFarmH = (t, d, p) => {
     <defs><radialGradient id="redEdgeF" r="70%"><stop offset=".55" stop-color="#3a0008" stop-opacity="0"/><stop offset="1" stop-color="#3a0008" stop-opacity=".7"/></radialGradient></defs><rect x="0" y="420" width="1920" height="1080" fill="url(#redEdgeF)"/>
     ${VIB.words(p.words || [["IT'S", '#ffffff', 165], ['EMPTY', dark ? '#ff2a2a' : '#ffe23a', 225]], 60, 420)}`;
 };
+
+// Layout L3 "POV from behind": the lead seen from behind in the left foreground, phone torch beam crossing a dark
+// moonlit hallway to the bedroom door, which stands open a crack on orange light: one red eye, a grin, grey fingers,
+// feet in the light under the door, blood handprints on the wall. Cold blue-black + one warm light.
+S.thumbFarmPOV = (t, d, p) => {
+  const ink = K.ink, gx = 1290;
+  const hand = (x, y, r, s = 1) => `<g transform="translate(${x},${y}) rotate(${r}) scale(${s})" opacity=".9"><path d="M-30 40 Q-40 -6 -26 -24 L-26 -86 Q-20 -98 -12 -86 L-8 -34 L-2 -100 Q6 -112 14 -100 L12 -36 L24 -92 Q32 -102 40 -90 L32 -30 L46 -66 Q56 -74 60 -62 L44 0 Q40 40 10 52 Q-20 58 -30 40Z" fill="#a0000c"/><path d="M-20 52 q-4 40 2 70 M20 54 q2 30 -2 56" stroke="#a0000c" stroke-width="10" stroke-linecap="round"/></g>`;
+  return `${VIB.bg('#010208', '#06101e', '#0e1a30')}
+    ${[...Array(20)].map((_, i) => `<rect x="${i * 96}" y="420" width="48" height="900" fill="#0a1626" opacity=".7"/>`).join('')}
+    <rect x="120" y="500" width="300" height="380" fill="#1a3050" stroke="#02040a" stroke-width="14"/><path d="M270 500 V880 M120 690 H420" stroke="#02040a" stroke-width="12"/>
+    <path d="M140 520 L410 520 L900 1500 L-200 1500Z" fill="#9ac0ff" opacity=".07"/>
+    <path d="M0 1320 H1920 V1500 H0Z" fill="#0a0e16"/>${[...Array(14)].map((_, i) => `<path d="M${1220 + (i - 7) * 40} 1320 L${1220 + (i - 7) * 220} 1500" stroke="#05070c" stroke-width="5"/>`).join('')}
+    <rect x="1080" y="520" width="520" height="800" fill="#050204" stroke="#000" stroke-width="12"/>
+    <defs><radialGradient id="povR" cx="30%" cy="45%" r="60%"><stop offset="0" stop-color="#ff6a1a"/><stop offset=".6" stop-color="#a01808" stop-opacity=".7"/><stop offset="1" stop-color="#1a0204" stop-opacity="0"/></radialGradient></defs>
+    <rect x="1100" y="540" width="${gx - 1100}" height="780" fill="url(#povR)"/>
+    <circle cx="${gx - 40}" cy="860" r="14" fill="#ff2a2a" style="${VIB.glow('#ff0000', 16)}"/><circle cx="${gx - 40}" cy="860" r="5" fill="#fff"/>
+    <path d="M${gx - 90} 930 Q${gx - 30} 985 ${gx + 10} 930 Q${gx - 30} 958 ${gx - 90} 930Z" fill="#050004"/>${[-70, -50, -30, -10].map((dx) => `<path d="M${gx + dx} 936 v13" stroke="#f0ece0" stroke-width="6"/>`).join('')}
+    <path d="M${gx} 540 L1580 560 L1580 1300 L${gx} 1320Z" fill="#3a2414" stroke="#000" stroke-width="10"/>
+    <path d="M${gx + 40} 620 L1540 634 L1540 900 L${gx + 40} 900Z M${gx + 40} 960 L1540 960 L1540 1250 L${gx + 40} 1266Z" fill="none" stroke="#24160c" stroke-width="10"/>
+    ${[0, 1, 2, 3].map((k) => `<rect x="${gx - 4}" y="${790 + k * 32}" width="${54 - Math.abs(k - 1.5) * 8}" height="24" rx="12" fill="#b8c2c2" stroke="#000" stroke-width="5"/><rect x="${gx + 32 - Math.abs(k - 1.5) * 8}" y="${795 + k * 32}" width="12" height="13" rx="4" fill="#3a2a2a"/>`).join('')}
+    <rect x="1080" y="1308" width="520" height="22" fill="#ffb04a" style="${VIB.glow('#ff8a1a', 16)}"/><rect x="1190" y="1308" width="80" height="22" fill="#020101"/><rect x="1330" y="1308" width="80" height="22" fill="#020101"/>
+    ${hand(1690, 760, 14, 1)}${hand(1000, 1000, -8, 0.85)}${hand(1700, 1130, 4, 0.75)}
+    <path d="M640 1150 L1100 760 L1100 1250Z" fill="#e8f2ff" opacity=".12"/>
+    <g transform="translate(430,1300) scale(1.2)" style="filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 18px #6aa0ff)">${person(0, 0, 1, { back: true, reach: true })}</g>
+    <rect x="0" y="420" width="1920" height="1080" fill="url(#vig)" opacity=".55"/>
+    ${VIB.words(p.words || [["IT'S", '#ffffff', 165], ['EMPTY', '#ff8a2a', 225]], 60, 420)}`;
+};

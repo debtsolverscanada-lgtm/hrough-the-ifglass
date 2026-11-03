@@ -39,6 +39,16 @@ Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p 
 - A red arrow pointing at the threat.
 - Words top-left in Inter Display Black: line 1 white, line 2 bigger in yellow, fat black outline, 0-3 words that are
   not the title. Nothing in the bottom-right.
+- Thumbnails must not look alike (owner's rule): rotate the LAYOUT and the ACCENT colour, never repeat the last 3.
+  Layouts: L1 face-left / threat-right (S.thumbF13h) · L2 the threat's face filling the frame, peeking from dark ·
+  L3 POV from behind the lead, torch beam to the threat (S.thumbFarmPOV) · L4 the object huge and close (machine
+  window, door gap, phone screen) with no people · L5 tiny lead in the bottom-left under a huge shadow/silhouette.
+  Accents (one per video, on black): blood red · ember orange · sick green · cold cyan · violet.
+  Word colour follows the accent; word position moves too (top-left, top-right, centre-top).
+  | Video | Layout | Accent |
+  |---|---|---|
+  | 025 Floor 13 long | L1 | blood red |
+  | 018 Farmhouse Rules | L3 | ember orange on blue-black |
 - Check at 320x180 before posting: the face, the red eyes and the glowing object must read in one second.
 
 ## Sound (owner's rule, Nov 2026)
