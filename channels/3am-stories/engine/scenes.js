@@ -2024,3 +2024,24 @@ S.thumbF13c = (t, d, p) => {
     <defs><radialGradient id="f13cFace" cx=".42" cy=".55" r=".3"><stop offset="0" stop-color="#ff1a1a" stop-opacity=".16"/><stop offset="1" stop-color="#ff1a1a" stop-opacity="0"/></radialGradient></defs><rect width="1920" height="1920" fill="url(#f13cFace)"/>
     ${VIB.words(p.words || [['NO 13TH', '#ffffff', 165], ['FLOOR', '#ff2a2a', 225]], 60, 420)}`;
 };
+
+// ---------- painted art (Grok Imagine stills) ----------
+// p.img: a 9:16 painting (repo-relative path, inlined by render.js), drawn over the vertical window (or the full
+// 16:9 band when p.wide). p.cam: doorbell/security-cam overlay {time, label} drawn as real text (timestamp, REC dot,
+// fisheye vignette, scanlines). p.dim (0..1 darken), p.flick (light flicker). Camera push comes from p.push as usual.
+S.paint = (t, d, p) => {
+  const [x, y, w, h] = p.wide ? [0, 420, 1920, 1080] : [420, 0, 1080, 1920];
+  const fl = p.flick ? flick(t, 0.8) : 1;
+  const cam = p.cam ? `<g font-family="Courier New, monospace" font-weight="700">
+      <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#camVig)"/>
+      <defs><radialGradient id="camVig" r="62%"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".85"/></radialGradient>
+        <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#fff" opacity=".05"/></pattern></defs>
+      <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#scan)"/>
+      <text x="${x + w - 70}" y="${y + 330}" text-anchor="end" font-size="54" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.time || '3:12 AM')}</text>
+      <circle cx="${x + w - 40}" cy="${y + 312}" r="14" fill="#ff2020" opacity="${Math.floor(t * 2) % 2 ? 1 : 0.35}"/>
+      <text x="${x + 70}" y="${y + 330}" font-size="38" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.label || 'FRONT DOOR')}</text></g>` : '';
+  return `<rect width="1920" height="1920" fill="#000"/>
+    ${p.img ? `<image href="${p.img}" x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid slice" opacity="${fl}"/>` : ''}
+    ${p.dim ? `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#000" opacity="${p.dim}"/>` : ''}${cam}`;
+};
+FOCUS.paint = 960;
