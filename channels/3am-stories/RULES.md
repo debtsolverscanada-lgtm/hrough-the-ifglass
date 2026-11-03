@@ -25,6 +25,11 @@
 | 023 floor thirteen | sickGreen at 0.32 (fluorescent elevator green, reds kept) | night-shift nurse: hair bun, teal scrubs; narrator Sarah (female, first person) |
 | 022 closet tenant | sodiumNight (warm orange street-light night) | 57-year-old office worker: greying side-parted hair, glasses, age lines, white shirt + navy tie |
 
+## Thumbnails pop like Ifglass (owner's rule, Nov 2026)
+- Vibrant, not dark: saturated gradient background (purple/magenta/orange), soft bokeh lights, neon rim glow on the
+  characters, one glowing object, big Inter Display Black words (white + yellow, fat black outline). Use the VIB kit in
+  scenes.js and p.noVig. Horror comes from the one wrong thing (black eyes, red light), not from making the image dark.
+
 ## Sound (owner's rule, Nov 2026)
 - Effects sit under the voice: no sharp "bing" stings, no loud booms. Loud hits make people scroll away.
 - Measured target: loudest moment no more than ~7 dB above the typical level (022: was 11 dB, now 6.7 dB).
