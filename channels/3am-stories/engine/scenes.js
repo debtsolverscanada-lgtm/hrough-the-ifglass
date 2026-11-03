@@ -1830,3 +1830,27 @@ S.thumbFarm = (t, d, p) => {
     ${p.text ? p.text.map(([w, c], i) => `<text x="1460" y="${700 + i * 210}" text-anchor="middle" font-family="Anton" font-size="210" fill="${c}" stroke="#000" stroke-width="18" paint-order="stroke" letter-spacing="3">${w}</text>`).join('') : ''}
     <rect width="1920" height="1920" fill="url(#vig)" opacity=".55"/>`;
 };
+
+// Floor Thirteen long-form thumbnail (v2): the lead's terrified face big on the left, lit red; on the right the elevator
+// doors open on floor 13, the glowing 13 above them, and a pale woman in a 1974 nurse's cap standing just outside.
+// p.text [[word, colour], ...] (top-left), p.near (0..1 how close the woman is)
+S.thumbF13 = (t, d, p) => {
+  const ink = K.ink, near = p.near ?? 0.6;
+  const ruthHair = '<path d="M-140 200 Q-160 -170 0 -178 Q160 -170 140 200 L106 210 L110 -30 Q70 -110 0 -112 Q-70 -110 -110 -30 L-106 210Z" fill="#14100e" stroke="#000" stroke-width="7"/><path d="M-110 -150 L110 -150 L90 -205 L-90 -205Z" fill="#f4f2ec" stroke="#000" stroke-width="6"/><path d="M-12 -190 h24 M0 -200 v20" stroke="#c0101a" stroke-width="7"/>';
+  return `<rect width="1920" height="1920" fill="#0e1214"/>
+    <rect x="0" y="420" width="1920" height="1080" fill="#1a2224"/>${[...Array(10)].map((_, i) => `<path d="M${i * 200} 420 V1500" stroke="#11181a" stroke-width="10"/>`).join('')}
+    <rect x="1010" y="640" width="760" height="860" fill="#020304"/>
+    <path d="M1010 1500 L1770 1500 L1500 900 L1280 900Z" fill="#2a0608" opacity=".9"/>
+    <rect x="1290" y="700" width="200" height="200" fill="#5a0a0e" opacity=".55" filter="url(#blur)"/>
+    <g transform="translate(1390,${1120 - 80 * near}) scale(${0.42 + 0.3 * near})">${person(0, 0, 1, { hero: false, black: true, eyes: 'wide', look: 0, seed: 1.7, body: '#d8d4cc', skin: '#d8dcd8', hair: ruthHair })}</g>
+    <rect x="1010" y="640" width="760" height="860" fill="#ff2a2a" opacity=".06"/>
+    <rect x="930" y="600" width="100" height="900" fill="#8a969c" stroke="${ink}" stroke-width="8"/><rect x="1750" y="600" width="100" height="900" fill="#8a969c" stroke="${ink}" stroke-width="8"/>
+    <rect x="930" y="560" width="920" height="80" fill="#6a767c" stroke="${ink}" stroke-width="8"/>
+    <rect x="1230" y="430" width="320" height="170" rx="14" fill="#0a0404" stroke="${ink}" stroke-width="8"/>
+    <text x="1390" y="570" text-anchor="middle" font-family="Anton" font-size="150" fill="#ff2a2a" style="filter:drop-shadow(0 0 22px #ff0000)">13</text>
+    <circle cx="560" cy="1040" r="520" fill="#ff1a1a" opacity=".16" filter="url(#blur)"/>
+    <g transform="translate(470,1240)">${person(0, 0, 1.6, { eyes: 'wide', look: 0.9, mouth: 'o', sweat: true, seed: 1.7 })}</g>
+    <rect x="0" y="420" width="900" height="1080" fill="#ff2020" opacity=".1"/>
+    ${p.text ? p.text.map(([w, c], i) => `<text x="${p.tx ?? 470}" y="${(p.ty ?? 600) + i * 180}" text-anchor="middle" font-family="Anton" font-size="${p.size || 180}" fill="${c}" stroke="#000" stroke-width="18" paint-order="stroke" letter-spacing="3">${w}</text>`).join('') : ''}
+    <rect width="1920" height="1920" fill="url(#vig)" opacity=".5"/>`;
+};
