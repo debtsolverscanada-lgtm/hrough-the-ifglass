@@ -2034,14 +2034,14 @@ S.paint = (t, d, p) => {
   const fl = p.flick ? flick(t, 0.8) : 1;
   const cam = p.cam ? `<g font-family="Courier New, monospace" font-weight="700">
       <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#camVig)"/>
-      <defs><radialGradient id="camVig" r="62%"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".85"/></radialGradient>
+      <defs><radialGradient id="camVig" r="62%"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></radialGradient>
         <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#fff" opacity=".05"/></pattern></defs>
       <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#scan)"/>
-      <text x="${x + w - 70}" y="${y + 330}" text-anchor="end" font-size="54" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.time || '3:12 AM')}</text>
-      <circle cx="${x + w - 40}" cy="${y + 312}" r="14" fill="#ff2020" opacity="${Math.floor(t * 2) % 2 ? 1 : 0.35}"/>
-      <text x="${x + 70}" y="${y + 330}" font-size="38" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.label || 'FRONT DOOR')}</text></g>` : '';
+      <text x="${x + w - (p.wide ? 70 : 150)}" y="${y + (p.wide ? 90 : 340)}" text-anchor="end" font-size="54" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.time || '3:12 AM')}</text>
+      <circle cx="${x + w - (p.wide ? 40 : 118)}" cy="${y + (p.wide ? 72 : 322)}" r="14" fill="#ff2020" opacity="${Math.floor(t * 2) % 2 ? 1 : 0.35}"/>
+      <text x="${x + (p.wide ? 70 : 110)}" y="${y + (p.wide ? 90 : 340)}" font-size="38" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.label || 'FRONT DOOR')}</text></g>` : '';
   return `<rect width="1920" height="1920" fill="#000"/>
-    ${p.img ? `<image href="${p.img}" x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid slice" opacity="${fl}"/>` : ''}
+    ${p.img ? `<image href="${p.img}" x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid slice" opacity="${fl}" style="filter:brightness(${p.bright ?? 1.15}) contrast(1.05)"/>` : ''}
     ${p.dim ? `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#000" opacity="${p.dim}"/>` : ''}${cam}`;
 };
 FOCUS.paint = 960;

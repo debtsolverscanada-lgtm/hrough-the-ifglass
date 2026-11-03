@@ -1,0 +1,270 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Sarah",
+ "tts": {
+  "stability": 0.42,
+  "similarity": 0.8,
+  "style": 0.42,
+  "speed": 1.06
+ },
+ "hero": {
+  "hairStyle": "long",
+  "hair": "#7a3a1a",
+  "hairH": "#a85a2a",
+  "body": "#6a6a70"
+ },
+ "art_style": "Cinematic painted horror illustration, semi-realistic digital painting, true-story feel, muted desaturated palette, near-black shadows, one cold light source, subtle film grain, vertical 9:16 composition, no text, no captions, no watermark, no logos.",
+ "art_cast": "",
+ "thumb_art": "YouTube horror thumbnail, painted cinematic, 16:9. A doorbell camera night-vision view of a small front porch, fisheye lens, grainy grey-green image. Standing very close to the camera is a tall pale figure with a hood, face mostly in shadow, only an impossibly wide grin with too many teeth visible. Near-black edges, one cold porch light, single red accent: a small red REC dot top right. Strong contrast, readable at phone size. Empty dark space on the left third. No text, no watermark.",
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "paint",
+  "bp": {
+   "wide": true,
+   "img": "channels/3am-stories/stories/029-doorbell-cam/art/thumb.jpg"
+  },
+  "lines": [],
+  "band": 0
+ },
+ "yt": {
+  "title": "My doorbell cam filmed him at 3:12 AM. The motion log says nobody was there 😨 #horror #shorts",
+  "description": "Every night at 3:12 AM my doorbell camera records the same man standing on my porch. The motion sensor says nobody was ever there.\n\n🎧 headphones on. Would you have looked out the window?\n\n#scarystories #horror #3amstories #doorbellcamera #creepy #shorts",
+  "tags": [
+   "scary stories",
+   "doorbell camera horror",
+   "ring camera scary",
+   "horror short",
+   "3am stories",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "paint",
+   "art": "Doorbell camera footage: wide fisheye lens, grainy black-and-white night vision with a faint green tint, looking down at a small wooden front porch with a welcome mat, two potted plants, porch steps and a dark suburban street beyond. At the far edge of the porch, by the steps, stands a tall thin man in a long dark coat, hood up, face lost in shadow, arms hanging straight down, perfectly still, facing the camera.",
+   "p": {
+    "cam": {
+     "time": "3:12 AM"
+    },
+    "push": 0.03,
+    "pops": [
+     {
+      "at": 0.0,
+      "type": "label",
+      "text": "NOBODY WAS THERE",
+      "x": 0.5,
+      "y": 0.24
+     }
+    ],
+    "img": "channels/3am-stories/stories/029-doorbell-cam/art/00.jpg",
+    "noVig": true
+   },
+   "text": "My doorbell camera recorded a man on my porch at three twelve in the morning. The motion log says nobody was there.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "7:02",
+    "msgs": [
+     [
+      "Doorbell",
+      "Front Door: no motion detected (12:00 AM – 7:00 AM)",
+      0.2
+     ],
+     [
+      "Doorbell",
+      "1 recording saved: 3:12 AM (7 min)",
+      1.4
+     ]
+    ]
+   },
+   "text": "No motion. No alerts. Just one seven-minute video of him, standing there.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "buzzphone",
+     1.4
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "art": "Doorbell camera footage: wide fisheye lens, grainy black-and-white night vision with a faint green tint, looking down at a small wooden front porch with a welcome mat, two potted plants, porch steps and a dark suburban street beyond. a tall thin man in a long dark coat, hood up, face lost in shadow, arms hanging straight down stands in the middle of the welcome mat now, a little closer, head tilted very slightly, staring straight into the lens.",
+   "p": {
+    "cam": {
+     "time": "3:15 AM"
+    },
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/029-doorbell-cam/art/02.jpg",
+    "noVig": true
+   },
+   "text": "He never knocks. He never moves. He just stares into the camera.",
+   "pause": 0.2
+  },
+  {
+   "scene": "paint",
+   "art": "A woman in her early thirties with shoulder-length auburn hair and a grey t-shirt sits up in bed in a dark bedroom at night, knees pulled up under the duvet, her face lit cold blue by the phone in her hands. Curtains closed behind her. Clock on the nightstand.",
+   "p": {
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/029-doorbell-cam/art/03.jpg",
+    "noVig": true
+   },
+   "text": "The next night, I stayed up and watched the live feed from bed.",
+   "pause": 0.05
+  },
+  {
+   "scene": "paint",
+   "art": "Doorbell camera footage: wide fisheye lens, grainy black-and-white night vision with a faint green tint, looking down at a small wooden front porch with a welcome mat, two potted plants, porch steps and a dark suburban street beyond. The porch is completely empty. Porch light on, casting a soft circle on the mat.",
+   "p": {
+    "cam": {
+     "time": "3:11 AM",
+     "label": "LIVE"
+    },
+    "push": 0.02,
+    "img": "channels/3am-stories/stories/029-doorbell-cam/art/04.jpg",
+    "noVig": true
+   },
+   "text": "Three eleven. Empty porch.",
+   "pause": 0.5
+  },
+  {
+   "scene": "paint",
+   "art": "Doorbell camera footage: wide fisheye lens, grainy black-and-white night vision with a faint green tint, looking down at a small wooden front porch with a welcome mat, two potted plants, porch steps and a dark suburban street beyond. a tall thin man in a long dark coat, hood up, face lost in shadow, arms hanging straight down is suddenly right in front of the door, much closer to the camera than before, his dark shape filling half the frame. Porch light still on.",
+   "p": {
+    "cam": {
+     "time": "3:12 AM",
+     "label": "LIVE"
+    },
+    "push": 0.06,
+    "img": "channels/3am-stories/stories/029-doorbell-cam/art/05.jpg",
+    "noVig": true
+   },
+   "text": "Three twelve. He's there. Closer than ever.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "heart",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "art": "Close-up of the same auburn-haired woman's face in the dark, eyes wide with fear, lit only by the cold blue glow of her phone from below, a strand of hair across her cheek.",
+   "p": {
+    "push": 0.05,
+    "img": "channels/3am-stories/stories/029-doorbell-cam/art/06.jpg",
+    "noVig": true
+   },
+   "text": "That's when I noticed the porch light on the feed was on. But I'd turned it off at ten.",
+   "pause": 0.2
+  },
+  {
+   "scene": "paint",
+   "art": "Point of view through a dark upstairs bedroom window, curtain pulled slightly aside by a hand, looking down at the same small front porch from above. The porch light is OFF. The porch is pitch dark and completely empty. Moonlight on the street.",
+   "p": {
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/029-doorbell-cam/art/07.jpg",
+    "noVig": true
+   },
+   "text": "I looked out the window. The porch was dark. And empty.",
+   "pause": 0.6
+  },
+  {
+   "scene": "paint",
+   "art": "Doorbell camera footage: wide fisheye lens, grainy black-and-white night vision with a faint green tint, looking down at a small wooden front porch with a welcome mat, two potted plants, porch steps and a dark suburban street beyond. The porch light is on. a tall thin man in a long dark coat, hood up, face lost in shadow, arms hanging straight down stands right up against the camera, his face now half visible under the hood: pale grey skin and an impossibly wide smile with too many teeth.",
+   "p": {
+    "cam": {
+     "time": "3:13 AM",
+     "label": "LIVE"
+    },
+    "push": 0.05,
+    "img": "channels/3am-stories/stories/029-doorbell-cam/art/08.jpg",
+    "noVig": true,
+    "bright": 1.6
+   },
+   "text": "But on the feed, he was still standing there. And now he was smiling.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "sting",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "art": "Doorbell camera footage: wide fisheye lens, grainy black-and-white night vision with a faint green tint, looking down at a small wooden front porch with a welcome mat, two potted plants, porch steps and a dark suburban street beyond. a tall thin man in a long dark coat, hood up, face lost in shadow, arms hanging straight down has tilted his head all the way back and is looking straight up, past the camera, toward the upstairs window above the porch. Wide grin visible.",
+   "p": {
+    "cam": {
+     "time": "3:13 AM",
+     "label": "LIVE"
+    },
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/029-doorbell-cam/art/09.jpg",
+    "noVig": true,
+    "bright": 1.35
+   },
+   "text": "Then, slowly, he looked up. Not at the camera. At my bedroom window.",
+   "pause": 1.0,
+   "sfx": [
+    [
+     "silence_hit",
+     3.8
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "3:14",
+    "msgs": [
+     [
+      "Doorbell",
+      "Motion detected: Bedroom Camera",
+      0.6
+     ]
+    ]
+   },
+   "text": "My phone buzzed. Motion detected. Bedroom camera.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "buzzphone",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "art": "Security camera view from a high corner of a dark bedroom, grainy black-and-white night vision with a faint green tint. The auburn-haired woman sits in bed holding her phone, unaware. In the dark corner right beside the bed stands a tall thin figure in a long dark coat with its hood up, a wide pale grin barely visible.",
+   "p": {
+    "cam": {
+     "time": "3:14 AM",
+     "label": "BEDROOM"
+    },
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/029-doorbell-cam/art/11.jpg",
+    "noVig": true
+   },
+   "text": "I don't have a bedroom camera.",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "boom",
+     1.4
+    ]
+   ]
+  }
+ ]
+}
