@@ -854,9 +854,9 @@ function frameSVG(name, t, d, p, view, frameNo) {
       <filter id="paper"><feTurbulence type="fractalNoise" baseFrequency=".6 .015" numOctaves="3" seed="2"/><feColorMatrix values="0 0 0 0 .9  0 0 0 0 .85  0 0 0 0 .75  0 0 0 .18 -.04"/></filter></defs>` : ''}
     ${gradeDefs(p.grade)}<g ${p.grade ? 'filter="url(#gradeF)"' : ''}>${camWrap(body, name, t, d, p, view, drift)}</g>
     ${STYLE === 'sketch' ? '<rect width="1920" height="1920" filter="url(#paper)"/>' : ''}
-    ${STYLE === 'anime' && !p.grade ? '<rect width="1920" height="1920" fill="#2030a0" opacity=".08"/>' : ''}
+    ${STYLE === 'anime' && !p.grade && !p.noVig ? '<rect width="1920" height="1920" fill="#2030a0" opacity=".08"/>' : ''}
     ${p.grade && p.grade.wash ? `<rect width="1920" height="1920" fill="${p.grade.wash}" opacity="${p.grade.washA ?? 0.08}"/>` : ''}
-    <rect width="1920" height="1920" fill="url(#vig)"/>
+    ${p.noVig ? '' : '<rect width="1920" height="1920" fill="url(#vig)"/>'}
     <rect width="1920" height="1920" fill="#fff" filter="url(#grain)" opacity=".55"/>
     ${p.torch ? `<defs><radialGradient id="torchG" cx="${p.torch[0] / 1920}" cy="${p.torch[1] / 1920}" r="${(p.torch[2] || 380) / 1920}"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".55" stop-color="#000" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity=".93"/></radialGradient></defs><rect width="1920" height="1920" fill="url(#torchG)"/>` : ''}
     ${p.flash != null && t >= p.flash && t < p.flash + 1 / 30 ? '<rect width="1920" height="1920" fill="#fff"/>' : ''}
@@ -1853,4 +1853,33 @@ S.thumbF13 = (t, d, p) => {
     <rect x="0" y="420" width="900" height="1080" fill="#ff2020" opacity=".1"/>
     ${p.text ? p.text.map(([w, c], i) => `<text x="${p.tx ?? 470}" y="${(p.ty ?? 600) + i * 180}" text-anchor="middle" font-family="Anton" font-size="${p.size || 180}" fill="${c}" stroke="#000" stroke-width="18" paint-order="stroke" letter-spacing="3">${w}</text>`).join('') : ''}
     <rect width="1920" height="1920" fill="url(#vig)" opacity=".5"/>`;
+};
+
+// Vibrant thumbnail kit (Ifglass look): saturated gradient sky, soft bokeh lights, neon rim glow on characters, big
+// rounded-bold words (white + yellow) with a fat black outline and a drop shadow.
+const VIB = {
+  bg: (a, b, c) => `<defs><linearGradient id="vbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset=".55" stop-color="${b}"/><stop offset="1" stop-color="${c}"/></linearGradient></defs><rect width="1920" height="1920" fill="url(#vbg)"/>`,
+  bokeh: (cols, n = 18, seed = 1) => [...Array(n)].map((_, i) => `<circle cx="${(i * 733 * seed + 140) % 1920}" cy="${440 + (i * 389 * seed) % 1040}" r="${18 + (i * 37) % 46}" fill="${cols[i % cols.length]}" opacity="${0.18 + (i % 4) * 0.07}" filter="url(#soft)"/>`).join(''),
+  glow: (col, px = 16) => `filter:drop-shadow(0 0 ${px}px ${col}) drop-shadow(0 0 ${px / 2}px ${col})`,
+  words: (lines, x, y, anchor = 'start') => lines.map(([w, c, sz], i) => { const yy = y + lines.slice(0, i + 1).reduce((a, l) => a + (l[2] || 160) * 0.92, 0);
+    return `<text x="${x}" y="${yy}" text-anchor="${anchor}" font-family="Inter Display, Inter" font-weight="900" font-size="${sz || 160}" fill="${c}" stroke="#0a0614" stroke-width="${(sz || 160) / 7}" paint-order="stroke" stroke-linejoin="round" letter-spacing="-2" style="filter:drop-shadow(0 10px 0 rgba(0,0,0,.55))">${w}</text>`; }).join(''),
+  pill: (txt, x, y, col) => `<g transform="translate(${x},${y})"><rect x="0" y="-62" width="${txt.length * 34 + 70}" height="88" rx="20" fill="#0c0a1c" opacity=".88" stroke="${col}" stroke-width="6" style="filter:drop-shadow(0 0 10px ${col})"/><text x="35" y="0" font-family="Inter Display, Inter" font-weight="900" font-size="54" fill="#ffffff">${txt}</text></g>`,
+};
+
+// Floor Thirteen thumbnail v3 (vibrant): purple-to-red gradient, neon-rimmed nurse face left, teal elevator frame with a hot
+// red corridor and Ruth in it, a glowing red 13, words top-left.
+S.thumbF13v = (t, d, p) => {
+  const ink = K.ink;
+  const ruthHair = '<path d="M-140 200 Q-160 -170 0 -178 Q160 -170 140 200 L106 210 L110 -30 Q70 -110 0 -112 Q-70 -110 -110 -30 L-106 210Z" fill="#14100e" stroke="#000" stroke-width="7"/><path d="M-110 -150 L110 -150 L90 -205 L-90 -205Z" fill="#f4f2ec" stroke="#000" stroke-width="6"/><path d="M-12 -190 h24 M0 -200 v20" stroke="#c0101a" stroke-width="7"/>';
+  return `${VIB.bg('#3a0f7a', '#7a1a8a', '#ff3a3a')}${VIB.bokeh(['#ffb03a', '#ff4ad8', '#6a8aff'], 22)}
+    <g style="${VIB.glow('#2af0ff', 18)}"><rect x="1030" y="560" width="760" height="940" rx="10" fill="#1aa8b8" stroke="${ink}" stroke-width="10"/></g>
+    <rect x="1110" y="660" width="600" height="840" fill="#1a0206"/>
+    <defs><radialGradient id="corr" cx="50%" cy="40%" r="70%"><stop offset="0" stop-color="#ff2a2a" stop-opacity=".95"/><stop offset=".6" stop-color="#8a0010" stop-opacity=".7"/><stop offset="1" stop-color="#1a0206" stop-opacity="0"/></radialGradient></defs>
+    <rect x="1110" y="660" width="600" height="840" fill="url(#corr)"/>
+    <g transform="translate(1410,1150) scale(0.62)" style="${VIB.glow('#ff2a2a', 14)}">${person(0, 0, 1, { hero: false, black: true, eyes: 'wide', look: 0, seed: 1.7, body: '#f2eee6', skin: '#e4ecec', hair: ruthHair })}</g>
+    <g transform="translate(1410,560)"><rect x="-170" y="-110" width="340" height="170" rx="20" fill="#120208" stroke="${ink}" stroke-width="8" style="${VIB.glow('#ff2a2a', 22)}"/>
+      <text y="38" text-anchor="middle" font-family="Inter Display, Inter" font-weight="900" font-size="150" fill="#ff3a3a" style="${VIB.glow('#ff0000', 18)}">13</text></g>
+    <g transform="translate(500,1260)" style="${VIB.glow('#2af0ff', 20)}">${person(0, 0, 1.55, { eyes: 'wide', look: 0.9, mouth: 'o', sweat: true, seed: 1.7 })}</g>
+    <circle cx="560" cy="980" r="360" fill="#ffb060" opacity=".12" filter="url(#blur)"/>
+    ${VIB.words(p.words || [['NO 13TH', '#ffffff', 150], ['FLOOR', '#ffe23a', 200]], 70, 420)}`;
 };
