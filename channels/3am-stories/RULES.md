@@ -18,6 +18,7 @@
 
 | Story | Grade | Hero |
 |---|---|---|
+| 030 lizzie (long) | none: Grok cartoon art, 16:9, 7 Grok video shots (autumn palette + firelight orange) | shy 9-year-old girl (dark bob, green sweater), Lizzie (blonde, 1960s pale blue dress, barefoot), Grandma (grey bun, cardigan); narrator Ara (Grok TTS) |
 | 029 doorbell cam | none: first Grok-painted Short (S.paint, night-vision doorbell look, black + green-grey + red REC) | auburn-haired woman, early 30s, grey tee; the hooded grinning man; narrator Sarah |
 | 028 farmhouse teaser | emberOrange at 0.3 (firelit farmhouse; teaser for 018 long-form) | series continuation of 018: same house-sitter (parted brown hair, navy hoodie); narrator Brian as in the long-form |
 | 027 machine seven | violetHaze at 0.3 (purple neon laundromat night) | 68-year-old woman: silver parted hair, round glasses, plum cardigan + new: bald laundromat owner with a white moustache, Eli (1987 photo); narrator Matilda |
@@ -88,5 +89,6 @@ Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p 
 | 024 stop four | Bill | F13 evidence first + F15 loop | That's when I noticed / Except |
 | 026 black lake | Callum | F5 countdown (One. Two. Three. Four.) + F15 loop | The weird part? |
 | 027 machine seven | Matilda | F4 ignored warning (DO NOT USE sign) + F15 loop | But here's what nobody tells you |
+| 030 lizzie (long) | Ara (Grok) | F2 impossible premise + F15 loop ("she's the reason my grandmother's house burned down") | The weird part? |
 | 029 doorbell cam | Sarah | F13 evidence first ("recorded… motion log says nobody") + hook text NOBODY WAS THERE | That's when I noticed |
 | 028 farmhouse teaser | Brian (matches the long-form) | F2 impossible premise + hook text "DON'T ANSWER" at 0.0 s | silent beat |
