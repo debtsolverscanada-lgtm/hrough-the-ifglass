@@ -1523,7 +1523,7 @@ S.maproute = (t, d, p) => {
     </g>
     ${pa > 0 ? `<g transform="translate(1310,${414 - 300 * (1 - pa)})" opacity="${pa}"><path d="M0 0 c-70 0 -70 90 0 150 c70 -60 70 -150 0 -150z" fill="#ff3a3a" stroke="${ink}" stroke-width="6"/><circle cx="0" cy="58" r="22" fill="#fff"/>
       ${p.pin ? `<rect x="-150" y="170" width="300" height="70" rx="14" fill="#0b0b10" stroke="#ff3a3a" stroke-width="5"/><text x="0" y="218" text-anchor="middle" font-family="Anton" font-size="40" fill="#fff">${esc3(p.pin)}</text>` : ''}</g>` : ''}
-    ${eta != null ? `<g transform="translate(960,1380)"><rect x="-230" y="-70" width="460" height="130" rx="24" fill="#0b0b10" stroke="#3a9aff" stroke-width="6"/>
+    ${eta != null ? `<g transform="translate(960,560)"><rect x="-230" y="-70" width="460" height="130" rx="24" fill="#0b0b10" stroke="#3a9aff" stroke-width="6"/>
       <text x="0" y="20" text-anchor="middle" font-family="Anton" font-size="72" fill="#fff">${eta} MIN</text></g>` : ''}`;
 };
 FOCUS.maproute = 960;
