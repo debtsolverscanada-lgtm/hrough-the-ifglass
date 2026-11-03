@@ -49,6 +49,11 @@ Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p 
   |---|---|---|
   | 025 Floor 13 long | L1 | blood red |
   | 018 Farmhouse Rules | L3 | ember orange on blue-black |
+- BEFORE showing any thumbnail, tick the master playbook (PLAYBOOK.md sections 6 + 8) line by line, out loud:
+  [ ] 3-4 colours, each means one thing (red = danger)  [ ] one lit figure / one glowing thing in near-black
+  [ ] one clear idea, one main wrong thing, no clutter    [ ] no full creature reveal (peek, eye, grin, shadow)
+  [ ] 0-3 words, not the title, readable contrast         [ ] nothing bottom-right  [ ] what's seen first is on the left
+  [ ] reads at 320x180 in one second                      [ ] true: the image is in the video
 - Check at 320x180 before posting: the face, the red eyes and the glowing object must read in one second.
 
 ## Sound (owner's rule, Nov 2026)
