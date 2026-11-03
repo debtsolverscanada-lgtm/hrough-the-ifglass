@@ -1905,3 +1905,25 @@ S.thumbF13p = (t, d, p) => {
     <g transform="translate(470,1330)" style="${sticker('#2af0ff')}">${person(0, 0, 1.85, { eyes: 'wide', look: 0.9, mouth: 'o', sweat: true, seed: 1.7 })}</g>
     ${VIB.words(p.words || [['NO 13TH', '#ffffff', 165], ['FLOOR', '#ffe23a', 225]], 60, 420)}</g>`;
 };
+
+// v5: v4 plus horror. Blood-red handprints and drips, long grey fingers curling round the door frame, Ruth's too-wide
+// black grin, blood dripping from the 13, crimson rays and a red edge glow, tears on the lead.
+S.thumbF13h = (t, d, p) => {
+  const base = S.thumbF13p(t, d, { ...p, words: [] });
+  const rx = 1410, ry = 1250, rs = 0.82, mx = rx + (-20) * rs, my = ry + (-18) * rs;
+  const hand = (x, y, r, s = 1) => `<g transform="translate(${x},${y}) rotate(${r}) scale(${s})" opacity=".92"><path d="M-30 40 Q-40 -6 -26 -24 L-26 -86 Q-20 -98 -12 -86 L-8 -34 L-2 -100 Q6 -112 14 -100 L12 -36 L24 -92 Q32 -102 40 -90 L32 -30 L46 -66 Q56 -74 60 -62 L44 0 Q40 40 10 52 Q-20 58 -30 40Z" fill="#b0000e"/>
+    <path d="M-20 52 q-4 40 2 70 M20 54 q2 30 -2 56" stroke="#b0000e" stroke-width="10" stroke-linecap="round"/></g>`;
+  const drips = (x0, x1, y, n) => [...Array(n)].map((_, i) => { const x = x0 + (x1 - x0) * (i + 0.5) / n, L = 30 + (i * 53) % 90; return `<path d="M${x - 9} ${y} Q${x - 9} ${y + L} ${x} ${y + L + 14} Q${x + 9} ${y + L} ${x + 9} ${y}Z" fill="#a8000c"/>`; }).join('');
+  const fingers = [0, 1, 2, 3].map((k) => `<path d="M1112 ${790 + k * 46} q46 -10 70 18 q18 22 4 40" stroke="#0a0a12" stroke-width="30" fill="none" stroke-linecap="round"/><path d="M1112 ${790 + k * 46} q46 -10 70 18 q18 22 4 40" stroke="#c8d0d0" stroke-width="20" fill="none" stroke-linecap="round"/><path d="M1184 ${846 + k * 46} l8 6" stroke="#2a1a1a" stroke-width="8" stroke-linecap="round"/>`).join('');
+  return `<g style="filter:saturate(1.25) contrast(1.12)">${base}</g>
+    <rect width="1920" height="1920" fill="#ff0010" opacity=".08"/>
+    <defs><radialGradient id="redEdge" r="70%"><stop offset=".55" stop-color="#3a0008" stop-opacity="0"/><stop offset="1" stop-color="#3a0008" stop-opacity=".75"/></radialGradient></defs>
+    <rect x="0" y="420" width="1920" height="1080" fill="url(#redEdge)"/>
+    ${hand(1070, 1080, -12, 1.1)}${hand(1760, 820, 18, 0.95)}${hand(1740, 1290, 6, 0.8)}
+    ${drips(1240, 1580, 648, 7)}
+    <path d="M1300 470 l40 50 l-20 30 l50 40 M1500 460 l-30 60 l30 20" stroke="#ffffff" stroke-width="5" fill="none" opacity=".7"/>
+    <path d="M${mx - 58} ${my - 6} Q${mx} ${my + 70} ${mx + 58} ${my - 6} Q${mx} ${my + 24} ${mx - 58} ${my - 6}Z" fill="#050004" stroke="#000" stroke-width="5"/>
+    ${[-36, -18, 0, 18, 36].map((dx) => `<path d="M${mx + dx} ${my + 6 - Math.abs(dx) * 0.25} v18" stroke="#f0ece0" stroke-width="7"/>`).join('')}
+    ${[[384, 1165], [592, 1165]].map(([x, y]) => `<path d="M${x} ${y} q-10 50 4 90" stroke="#bfefff" stroke-width="16" fill="none" stroke-linecap="round" opacity=".9"/>`).join('')}
+    ${VIB.words([['NO 13TH', '#ffffff', 165], ['FLOOR', '#ffe23a', 225]], 60, 420)}`;
+};
