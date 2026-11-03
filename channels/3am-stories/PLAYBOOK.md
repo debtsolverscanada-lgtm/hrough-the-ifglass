@@ -96,3 +96,15 @@ only selective keywords / handwritten in-scene text; rely on YouTube's closed ca
 
 **Banned list (every brief):** jump-scare stings on every beat, full creature reveals before the climax, red-on-black text
 below readable contrast, default flat gradients, generic fade-ins, bounce easing, centred walls of text.
+
+## 9. Through the Ifglass: YouTube's channel advice (Nov 2026, 13.5K views / 46 h watch time since Oct 28)
+- First 2 s decide stay vs swipe: "Why a freezer would kill you" (Part 2) held 56.7% vs 42.9% for the passive
+  "You close your eyes, wake up in 2126" (Part 1). Every Part opens on the startling claim or dilemma, no lead-in:
+  parts.json "hook"/"hook2" = the claim (e.g. WHY A FREEZER / WOULD KILL YOU), and the part's first sentence states it.
+- Average view duration ~27 s on 30-35 s Shorts: Parts now end on the last spoken word (build.py trims trailing
+  silence) with a brief 1.4 s "next part" card, so they loop instead of signing off.
+- A visual reset every 5-7 s through explanations: a new shot, a zoom, or an on-screen number/word highlight.
+- Owner, in Studio: every Part's Related video = the next Part (last Part = the full episode).
+- Ideas YouTube rates "very likely": What If You Only Needed to Breathe Once an Hour? · What If You Were Put Into
+  Stasis During Interstellar Travel? (sleeper ship wakes centuries off course; follows Frozen 100 Years + 3026) ·
+  What If You Could See the Entire Electromagnetic Spectrum? (follows the Bat video). Long-form first, then its Part series.

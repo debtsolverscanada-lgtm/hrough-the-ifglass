@@ -31,10 +31,10 @@ function drawShot(i,gt){
 function partTop(gt){ if(!TL.part) return ''; const p=TL.part;
   const lab=`PART ${p.n}/${p.N}`, w=lab.length*30+70;
   return `<g transform="translate(540,165) scale(${.8+.2*pop(gt-p.s,0)})"><rect x="${-w/2}" y="-46" width="${w}" height="92" rx="46" fill="${P.mint}" stroke="${INK}" stroke-width="8"/><text y="20" text-anchor="middle" font-size="56" font-weight="900" fill="${INK}">${lab}</text></g>`; }
-function partEnd(gt){ if(!TL.part) return ''; const p=TL.part, k=gt-(p.e-2.2); if(k<0) return '';
+function partEnd(gt){ if(!TL.part) return ''; const p=TL.part, k=gt-(p.e-1.4); if(k<0) return '';  // brief, so the Short loops instead of signing off
   const last=p.n>=p.N, l1=last?'FULL EPISODE':`PART ${p.n+1} NEXT`, l2=last?'ON YOUTUBE':'FOLLOW SO YOU DON\'T MISS IT';
   const sc=pop(k,0,.3), bob=Math.sin(gt*8)*6;
-  return `<g transform="translate(540,${1640+bob}) scale(${sc})"><rect x="-430" y="-95" width="860" height="190" rx="36" fill="${P.gold}" stroke="${INK}" stroke-width="10"/>
+  return `<g transform="translate(540,${1640+bob}) scale(${sc*0.8})"><rect x="-430" y="-95" width="860" height="190" rx="36" fill="${P.gold}" stroke="${INK}" stroke-width="10"/>
     <text y="-8" text-anchor="middle" font-size="66" font-weight="900" fill="${INK}">${l1} →</text><text y="62" text-anchor="middle" font-size="38" font-weight="900" fill="${INK}">${l2}</text></g>`; }
 window.renderFrame=(gt,mode='land',caps=true)=>{
   const i=shotAt(gt); const s=TL.shots[i]; const t=gt-s.s; const XF=.28;

@@ -3,7 +3,7 @@
 usage: python3 pipeline/build.py episodes/001-frozen-100-years [--workers 2] [--seconds 20]
 outputs: build/<episode>/out/<episode>.mp4, thumbnail.jpg, clips/clip-0N.mp4
 """
-import argparse, json, os, subprocess, sys, shutil, math
+import re, argparse, json, os, subprocess, sys, shutil, math
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ap = argparse.ArgumentParser()
 ap.add_argument('episode'); ap.add_argument('--workers', type=int, default=os.cpu_count() or 2)
@@ -62,8 +62,19 @@ PARTS = os.path.exists(f'{EP}/parts.json')
 if PARTS: shutil.rmtree(f'{OUT}/clips', ignore_errors=True); os.makedirs(f'{OUT}/clips')
 if not a.no_clips and (PARTS or os.path.exists(f'{EP}/clips.json')):
     CL = json.load(open(f'{EP}/parts.json' if PARTS else f'{EP}/clips.json'))
+    def speech_end(s0, e0):
+        """Last moment someone speaks inside [s0, e0] of the mix: Parts end on the final word, not on a pause or
+        sign-off, so the Short loops straight back into its hook (YouTube's 'trim the final 2-3 s' advice)."""
+        r = subprocess.run(['ffmpeg', '-v', 'info', '-ss', str(s0), '-t', str(e0 - s0), '-i', mix, '-af', 'silencedetect=n=-38dB:d=0.35', '-f', 'null', '-'],
+                           capture_output=True, text=True).stderr
+        starts = [float(x) for x in re.findall(r'silence_start: ([0-9.]+)', r)]
+        ends = [float(x) for x in re.findall(r'silence_end: ([0-9.]+)', r)]
+        if starts and (not ends or starts[-1] > ends[-1]) and starts[-1] > (e0 - s0) - 4:  # trailing silence runs to the end
+            return s0 + starts[-1] + 0.25
+        return e0
     for c in CL:
         if a.seconds and c['s'] > dur: continue
+        if PARTS: c = dict(c, e=speech_end(c['s'], c['e']))
         tl = dict(TL, hook=c['hook'], hook2=c['hook2'])
         if PARTS: tl['part'] = {'n': c['n'], 'N': len(CL), 's': c['s'], 'e': c['e']}
         tlf = f'{B}/tl_clip{c["n"]}.json'; json.dump(tl, open(tlf, 'w'))

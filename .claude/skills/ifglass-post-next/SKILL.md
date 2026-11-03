@@ -22,3 +22,5 @@ A Zapier "Shorts Zap" also posts from this sheet on a schedule (SCHEDULE.md) and
    If the series' full episode is already up, put its watch link in the description instead of "out this week".
 5. Set the row to `posted` + the new youtube_id. Report the link and what's next in the queue.
 6. If the Zap left rows unmarked, tell the owner to check the Zap's last step (update spreadsheet row) in Zap History.
+
+7. Remind the owner (once per series) to set each Part's Related video to the next Part in Studio; the API can't.
