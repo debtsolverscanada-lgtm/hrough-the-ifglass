@@ -1,0 +1,440 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Matilda",
+ "tts": {
+  "stability": 0.45,
+  "similarity": 0.8,
+  "style": 0.4,
+  "speed": 1.05
+ },
+ "grade": {
+  "preset": "violetHaze",
+  "amount": 0.3,
+  "sat": 0.95
+ },
+ "hero": {
+  "hairStyle": "parted",
+  "hair": "#c8c4c0",
+  "hairH": "#f0ece8",
+  "glasses": "round",
+  "lines": 0.9,
+  "outfit": "sweater",
+  "body": "#6a3a6a",
+  "skin": "#f2d8c4",
+  "skinS": "#d4a88e"
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "washer",
+  "bp": {
+   "timer": "7:00",
+   "hand": 1,
+   "stop": true,
+   "handS": 1.6,
+   "locked": true
+  },
+  "zoom": [
+   960,
+   960,
+   0.86
+  ],
+  "lines": [],
+  "band": 0,
+  "tint": "#1a0830"
+ },
+ "yt": {
+  "title": "Machine 7 has had a DO NOT USE sign since 1987. I used it anyway 😨 #scary #horror #shorts",
+  "description": "3 AM at a 24-hour laundromat. Every machine was full except number 7. The sign said DO NOT USE. The timer said 45 minutes... until it said 7.\n\n🎧 headphones on. Would you have used it?\n\n#scarystories #horror #3amstories #laundromat #creepy #shorts",
+  "tags": [
+   "scary stories",
+   "laundromat horror",
+   "horror short",
+   "3am stories",
+   "creepy",
+   "hide and seek",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "notice",
+   "p": {
+    "yellow": true,
+    "lines": [
+     [
+      "DO NOT USE",
+      "#c0101a",
+      170
+     ],
+     [
+      "MACHINE 7",
+      "#2a2216",
+      90
+     ],
+     [
+      "OUT OF ORDER",
+      "#2a2216",
+      70
+     ]
+    ],
+    "push": 0.035
+   },
+   "text": "Machine seven at my laundromat has had the same sign on it since 1987.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "laundro",
+   "p": {
+    "lead": "stand",
+    "time": [
+     3,
+     4
+    ],
+    "hum": true,
+    "focus": 760,
+    "pops": [
+     {
+      "at": 0.3,
+      "type": "date",
+      "text": "3:04 AM",
+      "x": 0.5,
+      "y": 0.18
+     }
+    ]
+   },
+   "text": "Last Tuesday, at three in the morning, I used it anyway.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "buzz",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "laundro",
+   "p": {
+    "lead": false,
+    "open7": true,
+    "time": [
+     3,
+     5
+    ],
+    "focus": 1325,
+    "snap": {
+     "at": 1.8,
+     "to": [
+      1325,
+      900
+     ],
+     "z": 1.9
+    }
+   },
+   "text": "Every other machine was running. Seven was empty. And its door was already open.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "fridge",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "coinslot",
+   "p": {
+    "coins": 2,
+    "start": false
+   },
+   "text": "Sheets in. Two quarters.",
+   "pause": 0.0
+  },
+  {
+   "scene": "coinslot",
+   "p": {
+    "coins": 2,
+    "start": true,
+    "push": 0
+   },
+   "text": "Start.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "knock1",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "timer": "45:00"
+   },
+   "text": "The screen said forty five minutes.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "water",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "laundro",
+   "p": {
+    "lead": "sit",
+    "run7": true,
+    "time": [
+     3,
+     12
+    ],
+    "focus": 960,
+    "eyes": "tired",
+    "look": 0.2
+   },
+   "text": "So I sat down with my book.",
+   "pause": 0.05
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "timer": "7:00",
+    "snap": {
+     "at": 1.2,
+     "to": [
+      1240,
+      470
+     ],
+     "z": 2.3
+    }
+   },
+   "text": "When I looked up, it didn't say forty five anymore. It said seven.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "sting",
+     1.4
+    ]
+   ]
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "timer": "7:00",
+    "hand": 1,
+    "push": 0.03
+   },
+   "text": "Then something pressed flat against the glass. From the inside.",
+   "pause": 0.7,
+   "sfx": [
+    [
+     "knock1",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "timer": "7:00",
+    "hand": 1,
+    "stop": true,
+    "snap": {
+     "at": 0.2,
+     "to": [
+      990,
+      1150
+     ],
+     "z": 1.8
+    }
+   },
+   "text": "A hand. Small. A child's.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "heart",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "timer": "7:00",
+    "hand": 1,
+    "locked": true,
+    "snap": {
+     "at": 0.3,
+     "to": [
+      830,
+      470
+     ],
+     "z": 2.4,
+     "back": 1.4
+    }
+   },
+   "text": "I pulled the handle. But here's what nobody tells you about these machines. The door locks while they run.",
+   "pause": 0.05
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "from": 6,
+    "to": 2,
+    "hand": 1,
+    "knock": true,
+    "locked": true
+   },
+   "text": "Six. Five. Four. Every minute, the little hand knocked. Once.",
+   "pause": 0.1,
+   "sfx": [
+    [
+     "knock1",
+     0.4
+    ],
+    [
+     "knock1",
+     1.5
+    ],
+    [
+     "knock1",
+     2.6
+    ]
+   ]
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "timer": "0:00",
+    "stop": true,
+    "push": 0
+   },
+   "text": "At zero, the lock clicked.",
+   "pause": 0.9,
+   "sfx": [
+    [
+     "silence_hit",
+     0.9
+    ]
+   ]
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "open": true
+   },
+   "text": "Inside were my sheets. Folded. Bone dry.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "creak",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "open": true,
+    "sock": true,
+    "snap": {
+     "at": 0.4,
+     "to": [
+      980,
+      1120
+     ],
+     "z": 2.6
+    }
+   },
+   "text": "And on top, one tiny wet sock.",
+   "pause": 0.4
+  },
+  {
+   "scene": "counter",
+   "p": {
+    "lead": true
+   },
+   "text": "In the morning, I asked the owner about the sign.",
+   "pause": 0.05
+  },
+  {
+   "scene": "news",
+   "p": {
+    "date": "JUNE 9, 1987",
+    "headline": "BOY, 6, VANISHES|DURING HIDE AND SEEK",
+    "sub": "Last seen at Suds 24 laundromat",
+    "kid": true,
+    "circle": true
+   },
+   "text": "He said in 1987, a six year old named Eli hid in there during hide and seek. Nobody ever found him.",
+   "pause": 0.3,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "home": true,
+    "num": "",
+    "knock": true
+   },
+   "text": "Last night, the washer in my own house started knocking.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "knock1",
+     0.5
+    ],
+    [
+     "knock1",
+     1.6
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Seven knocks.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "knock",
+     0.3
+    ],
+    [
+     "knock",
+     1.1
+    ]
+   ]
+  },
+  {
+   "scene": "washer",
+   "p": {
+    "home": true,
+    "num": "",
+    "timer": "7:00",
+    "hand": 0.6,
+    "push": 0.04
+   },
+   "text": "I think he's hiding again. And it's my turn to count.",
+   "pause": 0.8,
+   "sfx": [
+    [
+     "boom",
+     2.4
+    ]
+   ]
+  }
+ ]
+}

@@ -1603,6 +1603,7 @@ S.news = (t, d, p) => {
       <text x="960" y="490" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="30" fill="#3a2e1e">${esc3(p.date || 'MARCH 3, 1974')}</text>
       <path d="M600 510 H1320" stroke="#3a2e1e" stroke-width="4"/>
       ${String(p.headline || '').split('|').map((ln, i) => `<text x="960" y="${590 + i * 78}" text-anchor="middle" font-family="Anton" font-size="${Math.min(76, 1300 / Math.max(8, ln.length))}" fill="#1e1810">${esc3(ln)}</text>`).join('')}
+      ${p.kid ? `<g transform="translate(960,930)"><rect x="-170" y="-170" width="340" height="340" fill="#8a8070" stroke="#3a2e1e" stroke-width="6"/><g transform="translate(0,40) scale(0.9)" style="filter:grayscale(1)">${head(0, 0, 1, { hero: false, eyes: 'normal', look: 0, smile: 0.5, hair: '<path d="M-120 -40 Q-130 -160 0 -164 Q130 -160 120 -40 Q100 -110 40 -100 Q20 -130 -20 -104 Q-80 -116 -120 -40Z" fill="#4a3a2a" stroke="#120d0a" stroke-width="7"/>' })}</g>${p.circle ? `<ellipse cx="0" cy="0" rx="210" ry="200" fill="none" stroke="#c0101a" stroke-width="10" stroke-dasharray="${1400 * ease(Math.min(1, t / 1.2))} 1400" transform="rotate(-8)"/>` : ''}</g>` : ''}
       ${p.photo ? `<g transform="translate(960,${930})"><rect x="-170" y="-170" width="340" height="340" fill="#8a8070" stroke="#3a2e1e" stroke-width="6"/>
         <g transform="translate(0,40) scale(0.9)" style="filter:grayscale(1)">${head(0, 0, 1, { hero: false, eyes: 'normal', look: 0, hair: '<path d="M-132 60 Q-150 -170 0 -176 Q150 -170 132 60 L104 -30 Q60 -110 0 -112 Q-60 -110 -104 -30Z" fill="#3a3028" stroke="#120d0a" stroke-width="7"/><path d="M-110 -150 L110 -150 L90 -200 L-90 -200Z" fill="#f4f2ec" stroke="#120d0a" stroke-width="6"/><path d="M-12 -190 h24 v-0 M0 -198 v20" stroke="#c02020" stroke-width="8"/>' })}</g>
         ${p.circle ? `<ellipse cx="0" cy="0" rx="${210}" ry="${200}" fill="none" stroke="#c0101a" stroke-width="10" stroke-dasharray="${1400 * ease(Math.min(1, t / 1.2))} 1400" transform="rotate(-8)"/>` : ''}</g>` : ''}
@@ -1682,3 +1683,131 @@ S.shore = (t, d, p) => {
     <rect width="1920" height="1920" fill="#ff8a3a" opacity=".04"/>`;
 };
 FOCUS.shore = 960;
+
+// ---------- 24-hour laundromat: the row of washers, one porthole close-up, the coin slot, the notice, the counter ----------
+// a wall-clock face for any scene: hh:mm text drawn as hands
+function wallClock(x, y, r, hh, mm) {
+  const ink = K.ink, a = ((hh % 12) + mm / 60) * 30 - 90, b = mm * 6 - 90, rad = Math.PI / 180;
+  return `<g transform="translate(${x},${y})"><circle r="${r}" fill="#f2efe6" stroke="${ink}" stroke-width="8"/>
+    ${[...Array(12)].map((_, i) => `<path d="M${Math.cos(i * 30 * rad) * r * 0.8} ${Math.sin(i * 30 * rad) * r * 0.8} L${Math.cos(i * 30 * rad) * r * 0.92} ${Math.sin(i * 30 * rad) * r * 0.92}" stroke="${ink}" stroke-width="5"/>`).join('')}
+    <path d="M0 0 L${Math.cos(a * rad) * r * 0.5} ${Math.sin(a * rad) * r * 0.5}" stroke="${ink}" stroke-width="10" stroke-linecap="round"/>
+    <path d="M0 0 L${Math.cos(b * rad) * r * 0.78} ${Math.sin(b * rad) * r * 0.78}" stroke="${ink}" stroke-width="6" stroke-linecap="round"/><circle r="9" fill="${ink}"/></g>`;
+}
+// tumbling laundry inside a round window: p colours, t time, spin speed, r radius
+function tumble(t, r, cols, speed = 2.4) {
+  return `<g transform="rotate(${t * speed * 57.3})">${cols.map((c, i) => { const a = i * (6.283 / cols.length);
+    return `<path d="M${Math.cos(a) * r * 0.2} ${Math.sin(a) * r * 0.2} Q${Math.cos(a + 0.6) * r * 0.9} ${Math.sin(a + 0.6) * r * 0.9} ${Math.cos(a + 1.1) * r * 0.55} ${Math.sin(a + 1.1) * r * 0.55} Q${Math.cos(a + 0.3) * r * 0.4} ${Math.sin(a + 0.3) * r * 0.4} ${Math.cos(a) * r * 0.2} ${Math.sin(a) * r * 0.2}Z" fill="${c}" stroke="#0a0a12" stroke-width="4" opacity=".92"/>`; }).join('')}</g>`;
+}
+const LAUNDRY_COLS = [['#d84a4a', '#f2f2f2', '#3a5a9a'], ['#e8c84a', '#4a8a5a', '#f2e8d8'], ['#7a4a9a', '#e8e8f0', '#d88a3a'], ['#2a2a34', '#c8c8d0', '#6a8ab0'], ['#f0a0b0', '#f8f8f8', '#5a6a3a'], ['#3a6a8a', '#d8d0c0', '#a03a3a']];
+// the laundromat at 3 AM: washers numbered 3-9 along the back wall, machine 7 (x 1325) with a paper sign.
+// p.open7 (door open, empty), p.run7 (7 running with sheets), p.lead ('stand' | 'sit' | false), p.time [h, m] wall clock,
+// p.hum (fluorescent flicker), p.empty (no other machines running)
+S.laundro = (t, d, p) => {
+  const ink = K.ink, fl = p.hum ? flick(t, 0.6) : 1;
+  const mach = (n, i) => {
+    const x = 170 + i * 260, cx = x + 115, is7 = n === 7, run = is7 ? p.run7 : !p.empty;
+    return `<g><rect x="${x}" y="760" width="230" height="330" rx="12" fill="#e8eaee" stroke="${ink}" stroke-width="7"/>
+      <rect x="${x + 14}" y="774" width="202" height="46" rx="6" fill="#c8ccd4" stroke="${ink}" stroke-width="4"/>
+      <rect x="${x + 130}" y="782" width="74" height="30" rx="4" fill="#0e1a12"/><text x="${x + 167}" y="806" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="22" fill="${run ? '#5aff8a' : '#1e3a24'}">${run ? (is7 ? '45:00' : `${12 + i * 7}:0${i}`) : '--:--'}</text>
+      <text x="${x + 50}" y="810" text-anchor="middle" font-family="Anton" font-size="34" fill="${is7 ? '#c0101a' : '#2a2e3a'}">${n}</text>
+      ${is7 && p.open7 ? `<circle cx="${cx}" cy="950" r="86" fill="#0c0e14" stroke="${ink}" stroke-width="6"/><g transform="translate(${cx - 150},950) scale(0.92,1)"><circle r="92" fill="#cfe4f0" fill-opacity=".25" stroke="#9aa4b0" stroke-width="16"/></g>`
+        : `<circle cx="${cx}" cy="950" r="92" fill="#9aa4b0" stroke="${ink}" stroke-width="7"/><circle cx="${cx}" cy="950" r="74" fill="#0c1018"/>
+        ${run ? `<g transform="translate(${cx},950)">${tumble(t + i, 70, is7 ? ['#f4f0e8', '#e8dcc8', '#f8f4f0'] : LAUNDRY_COLS[i % 6])}</g>` : ''}
+        <circle cx="${cx}" cy="950" r="74" fill="#bfe0ff" opacity=".12"/><path d="M${cx - 40} 900 q30 -18 60 -8" stroke="#fff" stroke-width="8" opacity=".35" fill="none" stroke-linecap="round"/>`}
+      ${is7 ? `<g transform="translate(${cx},${p.open7 ? 840 : 852}) rotate(-4)"><rect x="-74" y="-22" width="148" height="78" fill="#f6f0d8" stroke="#8a7a50" stroke-width="3"/><rect x="-26" y="-30" width="52" height="16" fill="#e8e0b0" opacity=".8"/>
+        <text x="0" y="12" text-anchor="middle" font-family="Anton" font-size="24" fill="#c0101a">DO NOT USE</text><text x="0" y="40" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="16" fill="#3a2e1e">OUT OF ORDER</text></g>` : ''}
+      </g>`;
+  };
+  const [hh, mm] = p.time || [3, 4];
+  return `<rect width="1920" height="1920" fill="#d8d4e4"/><rect y="0" width="1920" height="740" fill="#cfc8dc"/>
+    <rect y="1090" width="1920" height="830" fill="#8a8698"/>${[...Array(12)].map((_, i) => `<path d="M${i * 180} 1090 L${i * 180 - 300} 1920" stroke="#6e6a7c" stroke-width="4"/>`).join('')}
+    <path d="M0 1260 H1920 M0 1500 H1920" stroke="#6e6a7c" stroke-width="4"/>
+    ${[260, 960, 1660].map((x) => `<rect x="${x - 200}" y="440" width="400" height="24" rx="8" fill="#ffffff" opacity="${fl}" stroke="#9a96a8" stroke-width="4"/><rect x="${x - 260}" y="464" width="520" height="300" fill="#f8f4ff" opacity="${0.12 * fl}"/>`).join('')}
+    <rect x="200" y="520" width="520" height="190" fill="#0a0c1a" stroke="${ink}" stroke-width="8"/>${[...Array(5)].map((_, i) => `<rect x="${230 + i * 95}" y="${600 - (i % 3) * 30}" width="60" height="${110 + (i % 3) * 30}" fill="#14182a"/><rect x="${244 + i * 95}" y="${620 - (i % 3) * 30}" width="12" height="14" fill="#ffd27a" opacity=".7"/>`).join('')}
+    <text x="460" y="580" text-anchor="middle" font-family="Anton" font-size="44" fill="#ff5ad8" opacity="${0.85 * fl}" style="filter:drop-shadow(0 0 10px #ff2ad0)">OPEN 24 HRS</text>
+    ${wallClock(1000, 600, 78, hh, mm)}
+    <rect x="1300" y="520" width="380" height="120" fill="#2a3a8a" stroke="${ink}" stroke-width="6"/><text x="1490" y="600" text-anchor="middle" font-family="Anton" font-size="62" fill="#f2f2ff">SUDS 24</text>
+    ${[3, 4, 5, 6, 7, 8, 9].map(mach).join('')}
+    <rect x="80" y="1300" width="1760" height="40" rx="10" fill="#5a3a24" stroke="${ink}" stroke-width="7"/>${[220, 960, 1700].map((x) => `<rect x="${x - 14}" y="1340" width="28" height="140" fill="#3a2414"/>`).join('')}
+    ${p.lead ? `<g transform="translate(${p.lead === 'sit' ? 900 : 760},${p.lead === 'sit' ? 1060 : 960}) scale(0.62)">${person(0, 0, 1, { eyes: p.eyes || 'normal', look: p.look ?? 0.6, reach: p.lead === 'stand' })}</g>` : ''}
+    ${p.lead === 'sit' ? `<g transform="translate(980,1300) rotate(-8)"><rect x="-70" y="-90" width="140" height="100" fill="#8a2a2a" stroke="${ink}" stroke-width="6"/><path d="M0 -90 v100" stroke="${ink}" stroke-width="5"/><path d="M-60 -70 h50 M10 -70 h50 M-60 -50 h50 M10 -50 h50" stroke="#e8d8c8" stroke-width="4"/></g>` : ''}
+    ${p.lead === 'stand' ? `<g transform="translate(620,1290)"><path d="M-110 -110 L110 -110 L90 10 L-90 10Z" fill="#c8a870" stroke="${ink}" stroke-width="7"/>${[-60, 0, 60].map((x) => `<path d="M${x} -110 v120" stroke="#9a7a48" stroke-width="5"/>`).join('')}<path d="M-100 -116 q60 -50 120 -10 q40 -30 80 6" fill="#f4f0e8" stroke="${ink}" stroke-width="5"/></g>` : ''}
+    <rect width="1920" height="1920" fill="#b070ff" opacity=".05"/>`;
+};
+FOCUS.laundro = 1060;
+
+// close-up of a front-loader: big porthole, timer screen above. p.timer (text) or p.from/p.to (minutes, counting down
+// across the scene); p.hand (0..1 a small hand pressed flat on the glass from inside), p.knock (shake + hand taps),
+// p.locked (padlock icon lit), p.open (door swung open: folded sheets), p.sock (tiny wet sock on top),
+// p.home (her machine at home: almond enamel, dark, no laundry), p.stop (drum stopped), p.num (machine number)
+S.washer = (t, d, p) => {
+  const ink = K.ink, home = p.home;
+  let tm = p.timer ?? (p.home ? '' : '45:00');
+  if (p.from != null) { const n = Math.max(p.to, p.from - Math.floor((t / d) * (p.from - p.to + 1))); tm = `${n}:00`; }
+  const shake = p.knock ? Math.sin(t * 40) * 4 * (Math.sin(t * 3.3) > 0.6 ? 1 : 0) : 0;
+  const tapK = p.knock ? (Math.sin(t * 3.3) > 0.6 ? 1 : 0) : 0;
+  const body = home ? '#e4d6b4' : '#eceef2', rim = home ? '#b0a07a' : '#a4acb8';
+  const handA = p.hand ?? 0;
+  const hand = handA > 0 ? `<g transform="translate(${30 + shake},${20 - tapK * 6}) rotate(-10) scale(${p.handS || 1})" opacity="${handA}">
+      <path d="M-60 60 Q-70 -10 -50 -40 L-46 -120 Q-40 -136 -28 -120 L-24 -50 L-14 -140 Q-6 -156 6 -140 L6 -54 L20 -134 Q30 -150 40 -132 L32 -48 L50 -110 Q62 -124 70 -106 L56 -30 Q76 -40 92 -26 Q60 20 40 70 Q0 96 -60 60Z" fill="#e8c8b8" stroke="#6a4a3a" stroke-width="5"/>
+      <path d="M-40 30 q30 10 60 0" stroke="#b08a7a" stroke-width="4" fill="none"/><ellipse cx="0" cy="0" rx="90" ry="110" fill="#ffffff" opacity=".08"/></g>` : '';
+  const inside = p.open ? '' : home ? `<circle r="330" fill="#06070a"/>` : `<circle r="330" fill="#0c1018"/>${p.stop ? `<g transform="rotate(30)">${tumble(0, 320, ['#f4f0e8', '#e8dcc8', '#f8f4f0', '#ece4d8', '#f6f2ea', '#e0d6c8'], 0)}</g><path d="M-300 150 Q-150 90 0 130 Q150 80 300 150 A330 330 0 0 1 -300 150Z" fill="#e8e0d2" stroke="#0a0a12" stroke-width="5" opacity=".9"/>` : tumble(t, 320, ['#f4f0e8', '#e8dcc8', '#f8f4f0', '#ece4d8', '#f6f2ea', '#e0d6c8'])}<path d="M-300 150 Q-150 90 0 130 Q150 80 300 150 A330 330 0 0 1 -300 150Z" fill="#e8e0d2" stroke="#0a0a12" stroke-width="5" opacity=".9"/>`;
+  return `<g transform="translate(${shake},0)"><rect width="1920" height="1920" fill="${home ? '#3a2e24' : '#d8d4e4'}"/>
+    ${home ? `${[...Array(14)].map((_, i) => `<path d="M${i * 140} 0 V1920" stroke="#4a3a2e" stroke-width="30"/>`).join('')}<rect width="1920" height="1920" fill="#000" opacity=".45"/>` : ''}
+    <rect x="360" y="300" width="1200" height="1500" rx="40" fill="${body}" stroke="${ink}" stroke-width="10"/>
+    <rect x="400" y="340" width="1120" height="280" rx="20" fill="${home ? '#d4c4a0' : '#d2d6de'}" stroke="${ink}" stroke-width="6"/>
+    <rect x="1040" y="400" width="400" height="150" rx="14" fill="#06120a" stroke="${ink}" stroke-width="6"/>
+    <text x="1240" y="510" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="104" fill="${home && !p.timer ? '#10241a' : '#5aff8a'}" style="filter:drop-shadow(0 0 12px #2aff6a)">${esc3(tm)}</text>
+    <text x="560" y="520" text-anchor="middle" font-family="Anton" font-size="150" fill="${home ? '#5a4a30' : '#c0101a'}">${esc3(p.num ?? (home ? '' : '7'))}</text>
+    ${p.locked ? `<g transform="translate(830,470)"><rect x="-34" y="-10" width="68" height="56" rx="8" fill="#ff3a3a" style="filter:drop-shadow(0 0 10px #ff2a2a)"/><path d="M-20 -10 v-20 a20 20 0 0 1 40 0 v20" stroke="#ff3a3a" stroke-width="10" fill="none"/></g>` : ''}
+    <g transform="translate(960,1150)">
+      <circle r="420" fill="${rim}" stroke="${ink}" stroke-width="10"/><circle r="350" fill="#2a2e38" stroke="${ink}" stroke-width="8"/>
+      ${p.open ? `<circle r="340" fill="#0a0c12"/><g transform="translate(0,120)"><rect x="-220" y="-120" width="440" height="80" rx="14" fill="#f4f0e8" stroke="${ink}" stroke-width="6"/><rect x="-210" y="-50" width="420" height="80" rx="14" fill="#e8dcc8" stroke="${ink}" stroke-width="6"/><rect x="-200" y="20" width="400" height="80" rx="14" fill="#f8f4f0" stroke="${ink}" stroke-width="6"/>
+          ${p.sock ? `<g transform="translate(20,-150) rotate(-12)"><path d="M-30 -60 h50 v70 q0 20 30 26 q30 8 26 34 q-6 24 -40 20 l-60 -6 q-12 -2 -8 -18Z" fill="#7aa8d8" stroke="${ink}" stroke-width="6"/><path d="M-30 -50 h50 M-30 -36 h50" stroke="#f2f2f2" stroke-width="6"/><circle cx="40" cy="60" r="7" fill="#bfe6ff"/><circle cx="-10" cy="44" r="5" fill="#bfe6ff"/>
+            <rect x="-24" y="-20" width="40" height="18" fill="#f8f8f0" stroke="${ink}" stroke-width="3"/><text x="-4" y="-6" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="13" fill="#1a1a2a">ELI</text></g>` : ''}</g>
+          <g transform="translate(-560,0) scale(0.6,1)"><circle r="420" fill="${rim}" stroke="${ink}" stroke-width="10"/><circle r="330" fill="#bfe0ff" opacity=".2"/></g>`
+        : `${inside}${hand}<circle r="330" fill="#bfe0ff" opacity=".1"/><path d="M-200 -200 q120 -90 260 -60" stroke="#fff" stroke-width="22" opacity=".25" fill="none" stroke-linecap="round"/>`}
+    </g>
+    ${!home ? `<rect x="400" y="1620" width="1120" height="130" rx="16" fill="#c4c8d0" stroke="${ink}" stroke-width="5"/>` : ''}
+    ${home ? '<rect width="1920" height="1920" fill="#1a2a5a" opacity=".2"/>' : '<rect width="1920" height="1920" fill="#b070ff" opacity=".05"/>'}</g>`;
+};
+FOCUS.washer = 960;
+
+// coin slot close-up: p.coins (how many quarters are in), the hand pushing the last one, p.start (START button lit)
+S.coinslot = (t, d, p) => {
+  const ink = K.ink, n = p.coins ?? 2, k = ease(Math.min(1, t / Math.max(0.6, d * 0.5)));
+  return `<rect width="1920" height="1920" fill="#d2d6de"/><rect x="300" y="600" width="1320" height="760" rx="30" fill="#bcc2cc" stroke="${ink}" stroke-width="10"/>
+    <rect x="460" y="760" width="440" height="140" rx="16" fill="#2a2e38" stroke="${ink}" stroke-width="6"/><text x="680" y="860" text-anchor="middle" font-family="Anton" font-size="80" fill="#e8eaf0">25¢</text>
+    <rect x="1040" y="740" width="380" height="180" rx="20" fill="#3a3e4a" stroke="${ink}" stroke-width="6"/><rect x="1110" y="815" width="240" height="30" rx="10" fill="#0a0a10"/>
+    ${[...Array(n)].map((_, i) => { const last = i === n - 1, y = last ? 830 - 260 * (1 - k) : 830; return `<g transform="translate(${1170 + i * 120},${y})"><ellipse rx="56" ry="56" fill="#c8ccd4" stroke="${ink}" stroke-width="6"/><ellipse rx="40" ry="40" fill="none" stroke="#8a90a0" stroke-width="5"/><text y="16" text-anchor="middle" font-family="Anton" font-size="40" fill="#5a6070">25</text></g>`; }).join('')}
+    <g transform="translate(${1330},${560 - 250 * (1 - k)})">${STYLE === 'anime' ? `<path d="M-70 -400 L-70 -40 Q-80 30 -20 50 L60 50 Q100 20 90 -40 L90 -400Z" fill="${HERO_BODY || '#6a4a7a'}" stroke="${ink}" stroke-width="8"/><path d="M-60 -40 Q-70 60 -10 70 L50 70 Q90 40 80 -20" fill="${AN.skin}" stroke="${ink}" stroke-width="7"/>` : ''}</g>
+    <rect x="460" y="1060" width="960" height="200" rx="24" fill="${p.start ? '#2aff6a' : '#1a5a2a'}" stroke="${ink}" stroke-width="8" style="${p.start ? 'filter:drop-shadow(0 0 22px #2aff6a)' : ''}"/>
+    <text x="940" y="1195" text-anchor="middle" font-family="Anton" font-size="120" fill="${p.start ? '#04140a' : '#0c2a14'}">START</text>
+    <rect width="1920" height="1920" fill="#b070ff" opacity=".05"/>`;
+};
+FOCUS.coinslot = 1000;
+
+// a paper notice taped to a machine, close: p.lines [[text, colour, size], ...], p.yellow (old, sun-faded)
+S.notice = (t, d, p) => {
+  const ink = K.ink, lines = p.lines || [['DO NOT USE', '#c0101a', 150], ['OUT OF ORDER', '#2a2216', 80]];
+  return `<rect width="1920" height="1920" fill="#e8eaee"/>${[...Array(30)].map((_, i) => `<path d="M0 ${i * 70} H1920" stroke="#d8dce4" stroke-width="3"/>`).join('')}
+    <g transform="rotate(-3 960 960)"><rect x="380" y="560" width="1160" height="820" fill="${p.yellow ? '#efe2b0' : '#f8f6ee'}" stroke="#9a8a5a" stroke-width="6"/>
+      <rect x="840" y="520" width="240" height="70" fill="#e8e0b4" opacity=".85"/><rect x="380" y="560" width="1160" height="820" fill="url(#vig)" opacity=".25"/>
+      ${lines.map(([tx, c, sz], i) => `<text x="960" y="${780 + i * 210}" text-anchor="middle" font-family="${sz > 100 ? 'Anton' : 'Courier New, monospace'}" font-weight="700" font-size="${sz || 100}" fill="${c || '#2a2216'}">${esc3(tx)}</text>`).join('')}
+    </g>`;
+};
+FOCUS.notice = 960;
+
+// the attendant's counter: "WASH & FOLD", detergent shelves, the old owner (grey moustache, bald) behind the till
+S.counter = (t, d, p) => {
+  const ink = K.ink;
+  return `<rect width="1920" height="1920" fill="#c8c2d4"/>
+    ${[0, 1, 2].map((r) => `<rect x="1180" y="${480 + r * 170}" width="560" height="20" fill="#6a4a2a"/>${[...Array(6)].map((_, c) => `<rect x="${1200 + c * 88}" y="${380 + r * 170}" width="64" height="100" rx="10" fill="${['#ff8a2a', '#2a8aff', '#3ad86a', '#ff4a6a'][(r + c) % 4]}" stroke="${ink}" stroke-width="4"/>`).join('')}`).join('')}
+    <rect x="300" y="420" width="700" height="130" fill="#2a3a8a" stroke="${ink}" stroke-width="6"/><text x="650" y="510" text-anchor="middle" font-family="Anton" font-size="66" fill="#f2f2ff">WASH &amp; FOLD</text>
+    <g transform="translate(860,1000) scale(0.75)">${person(0, 0, 1, { hero: false, body: '#2a5a4a', eyes: p.oEyes || 'tired', look: -0.3, hair: HAIRS.bald(K.ink).split(AN.hair).join('#d8d8dc') + '<path d="M-44 74 Q-20 58 0 70 Q20 58 44 74 Q20 84 0 76 Q-20 84 -44 74Z" fill="#e8e8ec" stroke="#0a0a12" stroke-width="5"/>' })}</g>
+    <rect x="200" y="1180" width="1520" height="740" fill="#5a3a24" stroke="${ink}" stroke-width="10"/><rect x="180" y="1150" width="1560" height="44" fill="#7a5234" stroke="${ink}" stroke-width="7"/>
+    <rect x="1240" y="1060" width="200" height="100" rx="8" fill="#3a3a44" stroke="${ink}" stroke-width="5"/><rect x="1260" y="1076" width="160" height="40" fill="#0e1a12"/>
+    ${p.lead ? `<g transform="translate(560,1180) scale(0.8)">${person(0, 0, 1, { back: true })}</g>` : ''}
+    <rect width="1920" height="1920" fill="#b070ff" opacity=".05"/>`;
+};
+FOCUS.counter = 900;
