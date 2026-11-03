@@ -63,6 +63,14 @@ jobs:
           GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
           GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
         run: set -o pipefail; python3 vlog/drive_put.py "$OUT" "${{ github.event.inputs.name }} - $(basename $OUT .mp4)${{ github.event.inputs.style && format(' {0}', github.event.inputs.style) || '' }} - $(date -u +%Y%m%d-%H%M).mp4" | tee vlog/${{ github.event.inputs.name }}/review/drive.txt
+      - name: Review frames to Drive (private, so the editor can watch the cut)
+        env:
+          GDRIVE_CLIENT_ID: ${{ secrets.GDRIVE_CLIENT_ID }}
+          GDRIVE_CLIENT_SECRET: ${{ secrets.GDRIVE_CLIENT_SECRET }}
+          GDRIVE_REFRESH_TOKEN: ${{ secrets.GDRIVE_REFRESH_TOKEN }}
+        run: |
+          D=vlog/${{ github.event.inputs.name }}
+          for f in $D/review/sheet*.jpg; do python3 vlog/drive_put.py "$f" "${{ github.event.inputs.name }} ${{ github.run_id }} $(basename $f)" "Review"; done
       - name: Commit sealed review
         run: |
           D=vlog/${{ github.event.inputs.name }}; mkdir -p $D/sealed
