@@ -18,6 +18,7 @@
 
 | Story | Grade | Hero |
 |---|---|---|
+| 028 farmhouse teaser | emberOrange at 0.3 (firelit farmhouse; teaser for 018 long-form) | series continuation of 018: same house-sitter (parted brown hair, navy hoodie); narrator Brian as in the long-form |
 | 027 machine seven | violetHaze at 0.3 (purple neon laundromat night) | 68-year-old woman: silver parted hair, round glasses, plum cardigan + new: bald laundromat owner with a white moustache, Eli (1987 photo); narrator Matilda |
 | 026 black lake | arcticBlue at 0.35 (icy moonlit lake, reds kept) | curly-haired teen in a red shirt + new: Jordan (blond spikes), Priya (long black hair), the faceless fourth swimmer; narrator Callum |
 | 025 floor thirteen (long) | noirTeal at 0.36 (series continuation of 023: same lead, Ana) | Ana the nurse + new: Mr. Haskell (grey, balding manager), Ruth (1974 clipping); narrator Sarah |
@@ -86,3 +87,4 @@ Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p 
 | 024 stop four | Bill | F13 evidence first + F15 loop | That's when I noticed / Except |
 | 026 black lake | Callum | F5 countdown (One. Two. Three. Four.) + F15 loop | The weird part? |
 | 027 machine seven | Matilda | F4 ignored warning (DO NOT USE sign) + F15 loop | But here's what nobody tells you |
+| 028 farmhouse teaser | Brian (matches the long-form) | F2 impossible premise + hook text "DON'T ANSWER" at 0.0 s | silent beat |

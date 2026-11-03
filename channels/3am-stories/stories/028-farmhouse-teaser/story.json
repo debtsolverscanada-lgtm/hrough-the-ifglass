@@ -1,0 +1,294 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "Brian",
+ "tts": {
+  "stability": 0.4,
+  "similarity": 0.8,
+  "style": 0.4,
+  "speed": 1.08
+ },
+ "grade": {
+  "preset": "emberOrange",
+  "amount": 0.3,
+  "sat": 0.95
+ },
+ "hero": {
+  "hairStyle": "parted",
+  "hair": "#2a1a10",
+  "hairH": "#5a3a24",
+  "body": "#2a3a5a"
+ },
+ "thumb": {
+  "scene": "thumbOver",
+  "style": "anime",
+  "base": "bedroomdoor",
+  "bp": {
+   "feet": true
+  },
+  "zoom": [
+   960,
+   1300,
+   1.5
+  ],
+  "lines": [],
+  "band": 0
+ },
+ "yt": {
+  "title": "It knocked from INSIDE the empty room. The rule said don't answer 😨 #scary #horror #shorts",
+  "description": "House-sitting rule three: the upstairs bedroom stays shut. If it knocks, do not answer.\n\n▶ Full story (all 4 rules): https://www.youtube.com/watch?v=iHLR1WoXnQU\n\n🎧 headphones on. Would you have opened it?\n\n#scarystories #horror #3amstories #housesitting #rules #shorts",
+  "tags": [
+   "scary stories",
+   "house sitting horror",
+   "rules horror",
+   "horror short",
+   "3am stories",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true,
+    "knock": true,
+    "shake": 0.2,
+    "pops": [
+     {
+      "at": 0.0,
+      "type": "label",
+      "text": "DON'T ANSWER",
+      "x": 0.5,
+      "y": 0.2
+     }
+    ]
+   },
+   "text": "Something was knocking on the upstairs bedroom door. From the inside.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "drone",
+     0
+    ],
+    [
+     "knock",
+     0.2
+    ]
+   ]
+  },
+  {
+   "scene": "letter",
+   "p": {
+    "to": "House-sitter:",
+    "lines": [
+     "3. The upstairs bedroom",
+     "    stays shut. If it knocks,",
+     "    DO NOT ANSWER."
+    ],
+    "red": 2,
+    "sign": "- the Pruitts"
+   },
+   "text": "The owners left me one rule about that room. If it knocks, do not answer.",
+   "pause": 0.05
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": false,
+    "push": 0.035
+   },
+   "text": "At four in the afternoon, the light under that door was on.",
+   "pause": 0.05
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true,
+    "snap": {
+     "at": 0.4,
+     "to": [
+      960,
+      1438
+     ],
+     "z": 2.4
+    }
+   },
+   "text": "And two feet were standing in it. Perfectly still.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "heart",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "4:03",
+    "msgs": [
+     [
+      "Me",
+      "is someone staying in the upstairs bedroom??",
+      0.2
+     ],
+     [
+      "Mrs. Pruitt",
+      "No.",
+      1.8
+     ],
+     [
+      "Mrs. Pruitt",
+      "Did you open it?",
+      2.8
+     ]
+    ]
+   },
+   "text": "I texted the owner. Is someone staying up there? No. Did you open it?",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "buzzphone",
+     1.8
+    ]
+   ]
+  },
+  {
+   "scene": "phone",
+   "p": {
+    "time": "4:04",
+    "msgs": [
+     [
+      "Me",
+      "no",
+      0
+     ],
+     [
+      "Mrs. Pruitt",
+      "Good. Whatever it says tonight, it is not us.",
+      1.0
+     ]
+    ]
+   },
+   "text": "Good. Whatever it says tonight, it is not us.",
+   "pause": 0.2,
+   "sfx": [
+    [
+     "buzzphone",
+     1.0
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:14",
+    "label": "farmhouse night 2",
+    "rec": true,
+    "spike": 0.2
+   },
+   "text": "At three fourteen, my phone recorded three knocks. Slow. From upstairs.",
+   "pause": 0.05,
+   "sfx": [
+    [
+     "knock",
+     1.6
+    ]
+   ]
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:15",
+    "label": "farmhouse night 2",
+    "rec": true,
+    "spike": 0.7,
+    "shake": 0.2
+   },
+   "text": "Then a man's voice. Warm. Tired.",
+   "pause": 0.2
+  },
+  {
+   "scene": "memo",
+   "p": {
+    "clock": "3:15",
+    "label": "farmhouse night 2",
+    "rec": true,
+    "spike": 1.0,
+    "shake": 0.4
+   },
+   "text": "Hey. It's Mr. Pruitt. We came home early. Can you open the door? It's stuck.",
+   "voice": [
+    "Bill",
+    "George",
+    "Brian"
+   ],
+   "pause": 0.3
+  },
+  {
+   "scene": "snow",
+   "p": {
+    "prints": 0,
+    "light": false,
+    "snap": {
+     "at": 0.6,
+     "to": [
+      1180,
+      1250
+     ],
+     "z": 1.8
+    }
+   },
+   "text": "There was no car in the driveway but mine.",
+   "pause": 0.4
+  },
+  {
+   "scene": "bedroomdoor",
+   "p": {
+    "feet": true,
+    "knock": true,
+    "shake": 0.4
+   },
+   "text": "So I didn't answer. It knocked until six. And right before it stopped, it whispered something.",
+   "pause": 0.9,
+   "sfx": [
+    [
+     "knock",
+     0.4
+    ],
+    [
+     "silence_hit",
+     4.4
+    ]
+   ]
+  },
+  {
+   "scene": "black",
+   "p": {},
+   "text": "Thirty one.",
+   "voice": [
+    "Clyde",
+    "George",
+    "Brian"
+   ],
+   "pause": 0.6
+  },
+  {
+   "scene": "text",
+   "p": {
+    "text": "FULL STORY|ON THE CHANNEL",
+    "color": "#ff8a2a",
+    "sub": "if it knocks... don't answer"
+   },
+   "text": "It was counting its steps to my bed. The whole story is on my channel.",
+   "pause": 0.6,
+   "sfx": [
+    [
+     "boom",
+     2.0
+    ]
+   ]
+  }
+ ]
+}
