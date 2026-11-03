@@ -1997,3 +1997,30 @@ S.thumbFarmPOV = (t, d, p) => {
     <rect x="0" y="420" width="1920" height="1080" fill="url(#vig)" opacity=".55"/>
     ${VIB.words(p.words || [["IT'S", '#ffffff', 165], ['EMPTY', '#ff8a2a', 225]], 60, 420)}`;
 };
+
+// Floor Thirteen thumbnail, clean (playbook pass): near-black, one red light. Left: the lead's frightened face, white
+// sticker edge, lit red from the right. Right: steel elevator doors open a crack on red light; in the gap only a sliver
+// of pale face, one red eye and a grin. The 13 glows above. Two words. No arrow, no blood, no full reveal.
+S.thumbF13c = (t, d, p) => {
+  const ink = K.ink, gap = 1440, gw = 120;
+  return `<rect width="1920" height="1920" fill="#030203"/>
+    <defs><radialGradient id="f13cR" cx="${gap / 1920}" cy=".52" r=".42"><stop offset="0" stop-color="#5a0610" stop-opacity=".9"/><stop offset="1" stop-color="#030203" stop-opacity="0"/></radialGradient>
+      <linearGradient id="f13cDoor" x1="0" x2="1"><stop offset="0" stop-color="#1c1e22"/><stop offset=".85" stop-color="#2a2c32"/><stop offset="1" stop-color="#5a1418"/></linearGradient>
+      <linearGradient id="f13cDoor2" x1="1" x2="0"><stop offset="0" stop-color="#1c1e22"/><stop offset=".85" stop-color="#2a2c32"/><stop offset="1" stop-color="#5a1418"/></linearGradient></defs>
+    <rect width="1920" height="1920" fill="url(#f13cR)"/>
+    <rect x="${gap - gw / 2}" y="640" width="${gw}" height="860" fill="#ff1a1a" style="${VIB.glow('#ff0000', 30)}"/>
+    <rect x="${gap - gw / 2}" y="640" width="${gw}" height="860" fill="#7a0008"/>
+    <path d="M${gap + 60} 800 Q${gap - 46} 820 ${gap - 40} 940 Q${gap - 30} 1050 ${gap + 60} 1062Z" fill="#d4dad6"/><path d="M${gap + 60} 750 Q${gap - 80} 770 ${gap - 64} 1000 L${gap - 56} 1260 L${gap - 36} 1260 Q${gap - 44} 980 ${gap - 26} 870 Q${gap} 812 ${gap + 60} 806Z" fill="#050304"/>
+    <circle cx="${gap - 6}" cy="900" r="17" fill="#ff2a2a" style="${VIB.glow('#ff0000', 18)}"/><circle cx="${gap - 6}" cy="900" r="6" fill="#fff"/>
+    <path d="M${gap - 36} 975 Q${gap + 10} 1015 ${gap + 60} 978 Q${gap + 10} 996 ${gap - 36} 975Z" fill="#050004"/>${[-24, -8, 8, 24, 40].map((dx) => `<path d="M${gap + dx} ${982 + Math.abs(dx - 8) * 0.12} v12" stroke="#f0ece0" stroke-width="6"/>`).join('')}
+    <path d="M${gap - 160} 640 L${gap - 60} 640 L${gap - 60} 1500 L${gap - 180} 1500Z" fill="#14100e"/>
+    <path d="M${gap + 50} 640 L${gap + 60} 640 L${gap + 60} 1500 L${gap + 50} 1500Z" fill="#14100e"/>
+    <rect x="1000" y="640" width="${gap - gw / 2 - 1000}" height="860" fill="url(#f13cDoor)" stroke="${ink}" stroke-width="10"/>
+    <rect x="${gap + gw / 2}" y="640" width="${1880 - gap - gw / 2}" height="860" fill="url(#f13cDoor2)" stroke="${ink}" stroke-width="10"/>
+    <rect x="960" y="590" width="960" height="54" fill="#121316" stroke="${ink}" stroke-width="8"/>
+    <g transform="translate(${gap},500)"><rect x="-150" y="-80" width="300" height="150" rx="16" fill="#0a0203" stroke="#2a0a0c" stroke-width="6"/>
+      <text y="44" text-anchor="middle" font-family="Inter Display, Inter" font-weight="900" font-size="140" fill="#fff4f0" style="${VIB.glow('#ff0000', 22)}">13</text></g>
+    <g transform="translate(470,1330)" style="filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff) drop-shadow(0 0 16px #ff2a2a)">${person(0, 0, 1.85, { eyes: 'wide', look: 0.95, mouth: 'o', sweat: true, seed: 1.7 })}</g>
+    <defs><radialGradient id="f13cFace" cx=".42" cy=".55" r=".3"><stop offset="0" stop-color="#ff1a1a" stop-opacity=".16"/><stop offset="1" stop-color="#ff1a1a" stop-opacity="0"/></radialGradient></defs><rect width="1920" height="1920" fill="url(#f13cFace)"/>
+    ${VIB.words(p.words || [['NO 13TH', '#ffffff', 165], ['FLOOR', '#ff2a2a', 225]], 60, 420)}`;
+};
