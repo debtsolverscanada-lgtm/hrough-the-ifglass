@@ -1933,10 +1933,10 @@ S.thumbF13h = (t, d, p) => {
 // feet, a knock burst, blood handprints. Words top-left.
 S.thumbFarmH = (t, d, p) => {
   const ink = K.ink, sticker = (c) => `filter:drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff) drop-shadow(0 0 3px #fff) drop-shadow(0 0 22px ${c}) drop-shadow(0 0 10px ${c})`;
-  const rays = [...Array(18)].map((_, i) => { const a = i * Math.PI / 9, b = a + 0.12; return `<path d="M520 1000 L${520 + Math.cos(a) * 1400} ${1000 + Math.sin(a) * 1400} L${520 + Math.cos(b) * 1400} ${1000 + Math.sin(b) * 1400}Z" fill="#ffd25a" opacity=".16"/>`; }).join('');
+  const dark = p.dark, rays = [...Array(18)].map((_, i) => { const a = i * Math.PI / 9, b = a + 0.12; return `<path d="M520 1000 L${520 + Math.cos(a) * 1400} ${1000 + Math.sin(a) * 1400} L${520 + Math.cos(b) * 1400} ${1000 + Math.sin(b) * 1400}Z" fill="${dark ? '#ff1a1a' : '#ffd25a'}" opacity="${dark ? 0.07 : 0.16}"/>`; }).join('');
   const hand = (x, y, r, s = 1) => `<g transform="translate(${x},${y}) rotate(${r}) scale(${s})" opacity=".92"><path d="M-30 40 Q-40 -6 -26 -24 L-26 -86 Q-20 -98 -12 -86 L-8 -34 L-2 -100 Q6 -112 14 -100 L12 -36 L24 -92 Q32 -102 40 -90 L32 -30 L46 -66 Q56 -74 60 -62 L44 0 Q40 40 10 52 Q-20 58 -30 40Z" fill="#b0000e"/><path d="M-20 52 q-4 40 2 70 M20 54 q2 30 -2 56" stroke="#b0000e" stroke-width="10" stroke-linecap="round"/></g>`;
   const gx = 1250;  // the gap between door and frame
-  return `<g style="filter:saturate(1.3) contrast(1.1)">${VIB.bg('#4a12b8', '#c81a8a', '#ff6a1a')}${rays}${VIB.bokeh(['#ffe03a', '#ff4ad8', '#3ae0ff'], 24)}
+  return `<g style="filter:saturate(${dark ? 1.1 : 1.3}) contrast(1.1)">${dark ? VIB.bg('#050104', '#1a0308', '#4a060c') : VIB.bg('#4a12b8', '#c81a8a', '#ff6a1a')}${rays}${dark ? VIB.bokeh(['#ff2a1a', '#ff8a3a'], 10) : VIB.bokeh(['#ffe03a', '#ff4ad8', '#3ae0ff'], 24)}
     <g style="${VIB.glow('#ffb03a', 22)}"><rect x="1060" y="560" width="680" height="940" fill="#6a3a1a" stroke="${ink}" stroke-width="12"/></g>
     <rect x="1110" y="610" width="580" height="890" fill="#1a0206"/>
     <defs><radialGradient id="farmR" cx="25%" cy="45%" r="60%"><stop offset="0" stop-color="#ff3a2a"/><stop offset=".7" stop-color="#900010" stop-opacity=".6"/><stop offset="1" stop-color="#1a0206" stop-opacity="0"/></radialGradient></defs>
@@ -1952,9 +1952,9 @@ S.thumbFarmH = (t, d, p) => {
     <g stroke="#ffffff" stroke-width="12" stroke-linecap="round" style="${VIB.glow('#ff2a2a', 12)}">${[0, 1, 2, 3, 4, 5, 6, 7].map((k) => { const a = k * 0.785; return `<path d="M${1480 + Math.cos(a) * 50} ${860 + Math.sin(a) * 50} L${1480 + Math.cos(a) * 92} ${860 + Math.sin(a) * 92}"/>`; }).join('')}</g>
     ${hand(1120, 1250, -10, 1.0)}${hand(1700, 900, 14, 0.9)}${hand(1560, 1280, 8, 0.8)}
     <g stroke="#ff2a2a" stroke-width="34" stroke-linecap="round" stroke-linejoin="round" fill="none" style="filter:drop-shadow(0 8px 0 rgba(0,0,0,.6))"><path d="M960 760 Q1060 700 1150 860"/><path d="M1150 860 l-74 -30 M1150 860 l4 -80"/></g>
-    <g transform="translate(470,1330)" style="${sticker('#2af0ff')}">${person(0, 0, 1.85, { eyes: 'wide', look: 0.9, mouth: 'o', sweat: true, seed: 1.7 })}</g>
+    <g transform="translate(470,1330)" style="${sticker(dark ? '#ff3a2a' : '#2af0ff')}">${person(0, 0, 1.85, { eyes: 'wide', look: 0.9, mouth: 'o', sweat: true, seed: 1.7 })}</g>
     ${[[384, 1165], [592, 1165]].map(([x, y]) => `<path d="M${x} ${y} q-10 50 4 90" stroke="#bfefff" stroke-width="16" fill="none" stroke-linecap="round" opacity=".9"/>`).join('')}
-    </g><rect width="1920" height="1920" fill="#ff0010" opacity=".06"/>
+    </g><rect width="1920" height="1920" fill="#ff0010" opacity="${dark ? 0.03 : 0.06}"/>${dark ? '<rect x="0" y="420" width="1920" height="1080" fill="url(#vig)" opacity=".7"/>' : ''}
     <defs><radialGradient id="redEdgeF" r="70%"><stop offset=".55" stop-color="#3a0008" stop-opacity="0"/><stop offset="1" stop-color="#3a0008" stop-opacity=".7"/></radialGradient></defs><rect x="0" y="420" width="1920" height="1080" fill="url(#redEdgeF)"/>
-    ${VIB.words(p.words || [["IT'S", '#ffffff', 165], ['EMPTY', '#ffe23a', 225]], 60, 420)}`;
+    ${VIB.words(p.words || [["IT'S", '#ffffff', 165], ['EMPTY', dark ? '#ff2a2a' : '#ffe23a', 225]], 60, 420)}`;
 };

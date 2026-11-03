@@ -27,8 +27,9 @@
 
 ## Thumbnails: the Floor 13 v5 recipe (owner's rule, Nov 2026)
 Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p + S.thumbF13h). Use it for most thumbnails.
-- Bright, saturated background: purple to hot pink to orange gradient, sunburst rays behind the lead, bokeh lights.
-  Never a dark/grey image. Run the whole thing through saturate ~1.3 / contrast ~1.1, p.noVig, no colour grade.
+- Owner update: darker vibe, fewer colours. Background near-black to blood red (S.thumbFarmH p.dark), faint red rays,
+  a few red/orange bokeh. Palette = black, blood red, one warm light, white + red words. Keep the glows and sticker
+  outlines so it still pops; never flat grey. Run the whole thing through saturate ~1.3 / contrast ~1.1, p.noVig, no colour grade.
 - Left: the lead's frightened face, big (about half the frame height), white sticker outline + cyan neon glow,
   eyes wide, mouth open, sweat and tears.
 - Right: the threat, small but unmistakable, white sticker outline + red glow, glowing red eyes, a too-wide black grin.
