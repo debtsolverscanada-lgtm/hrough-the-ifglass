@@ -2032,16 +2032,40 @@ S.thumbF13c = (t, d, p) => {
 S.paint = (t, d, p) => {
   const [x, y, w, h] = p.wide ? [0, 420, 1920, 1080] : [420, 0, 1080, 1920];
   const fl = p.flick ? flick(t, 0.8) : 1;
-  const cam = p.cam ? `<g font-family="Courier New, monospace" font-weight="700">
-      <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#camVig)"/>
+  // animated clip (Grok video frames) or a still with a slow pan
+  const src = p.imgs && p.imgs.length ? p.imgs[Math.min(p.imgs.length - 1, Math.floor(t * (p.fps || 12)) % (p.loop ? p.imgs.length : 1e9))] : p.img;
+  const [px, py] = p.pan || [0, 0], k = ease(t / Math.max(d, 0.1));
+  const ox = px * k, oy = py * k, over = (Math.abs(px) || Math.abs(py)) ? 1.08 : 1;
+  // glitch: scan tears + colour split at the start of a camera shot and at p.glitch times
+  const gl = p.cam && (t < 0.22 || (p.glitch || []).some((g) => t >= g && t < g + 0.18));
+  const tears = gl ? [...Array(6)].map((_, i) => { const yy = y + ((i * 397 + Math.floor(t * 60) * 131) % h); return `<rect x="${x}" y="${yy}" width="${w}" height="${10 + (i * 7) % 26}" fill="#fff" opacity=".12"/><rect x="${x + 30}" y="${yy + 6}" width="${w}" height="6" fill="#ff2a5a" opacity=".18"/>`; }).join('') : '';
+  const img = src ? `<g transform="translate(${ox + (gl ? 14 * Math.sin(t * 90) : 0)},${oy})"><image href="${src}" x="${x - (over - 1) * w / 2}" y="${y - (over - 1) * h / 2}" width="${w * over}" height="${h * over}" preserveAspectRatio="xMidYMid slice" opacity="${fl}" style="filter:brightness(${p.bright ?? 1.15}) contrast(1.05)"/></g>` : '';
+  let cam = '';
+  if (p.cam) {
+    const base = String(p.cam.time || '3:12 AM').match(/(\d+):(\d+)\s*(AM|PM)?/i) || [0, 3, 12, 'AM'];
+    const sec = Math.floor((p.cam.s0 || 0) + t) % 60;
+    const ts = `${base[1]}:${base[2]}:${String(sec).padStart(2, '0')} ${base[3] || ''}`;
+    const tx = x + w - (p.wide ? 70 : 150), ty = y + (p.wide ? 90 : 340);
+    cam = `<g font-family="Courier New, monospace" font-weight="700">
       <defs><radialGradient id="camVig" r="62%"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></radialGradient>
         <pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="1" fill="#fff" opacity=".05"/></pattern></defs>
-      <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#scan)"/>
-      <text x="${x + w - (p.wide ? 70 : 150)}" y="${y + (p.wide ? 90 : 340)}" text-anchor="end" font-size="54" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.time || '3:12 AM')}</text>
-      <circle cx="${x + w - (p.wide ? 40 : 118)}" cy="${y + (p.wide ? 72 : 322)}" r="14" fill="#ff2020" opacity="${Math.floor(t * 2) % 2 ? 1 : 0.35}"/>
-      <text x="${x + (p.wide ? 70 : 110)}" y="${y + (p.wide ? 90 : 340)}" font-size="38" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.label || 'FRONT DOOR')}</text></g>` : '';
-  return `<rect width="1920" height="1920" fill="#000"/>
-    ${p.img ? `<image href="${p.img}" x="${x}" y="${y}" width="${w}" height="${h}" preserveAspectRatio="xMidYMid slice" opacity="${fl}" style="filter:brightness(${p.bright ?? 1.15}) contrast(1.05)"/>` : ''}
-    ${p.dim ? `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#000" opacity="${p.dim}"/>` : ''}${cam}`;
+      <rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#camVig)"/><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="url(#scan)"/>
+      <text x="${tx}" y="${ty}" text-anchor="end" font-size="50" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(ts)}</text>
+      <circle cx="${tx + 32}" cy="${ty - 18}" r="13" fill="#ff2020" opacity="${Math.floor(t * 2) % 2 ? 1 : 0.3}"/>
+      <text x="${x + (p.wide ? 70 : 110)}" y="${ty}" font-size="38" fill="#f0f0f0" stroke="#000" stroke-width="3" paint-order="stroke">${esc3(p.cam.label || 'FRONT DOOR')}</text>
+      ${[[0, 0], [1, 0], [0, 1], [1, 1]].map(([cx, cy]) => { const X = x + (p.wide ? 40 : 90) + cx * (w - (p.wide ? 80 : 180)), Y = y + (p.wide ? 30 : 280) + cy * (h - (p.wide ? 60 : 560)), sx = cx ? -1 : 1, sy = cy ? -1 : 1;
+        return `<path d="M${X} ${Y + sy * 60} V${Y} H${X + sx * 60}" stroke="#f0f0f0" stroke-width="5" fill="none" opacity=".7"/>`; }).join('')}</g>`;
+  }
+  // motion-detection box: p.box [x, y, w, h] as fractions of the picture, p.boxLabel, p.boxAt (seconds it appears)
+  let box = '';
+  if (p.box && t >= (p.boxAt || 0)) {
+    const [bx, by, bw, bh] = p.box, X = x + bx * w, Y = y + by * h, W = bw * w, Hh = bh * h, on = Math.floor(t * 4) % 2;
+    const c = p.boxColor || '#ff3a3a';
+    box = `<g><rect x="${X}" y="${Y}" width="${W}" height="${Hh}" fill="none" stroke="${c}" stroke-width="${on ? 6 : 4}" opacity="${on ? 1 : 0.7}" style="filter:drop-shadow(0 0 8px ${c})"/>
+      <rect x="${X}" y="${Y - 54}" width="${Math.max(220, (p.boxLabel || 'PERSON').length * 26 + 30)}" height="48" fill="${c}"/>
+      <text x="${X + 14}" y="${Y - 18}" font-family="Courier New, monospace" font-weight="700" font-size="34" fill="#000">${esc3(p.boxLabel || 'PERSON 98%')}</text></g>`;
+  }
+  return `<rect width="1920" height="1920" fill="#000"/>${img}
+    ${p.dim ? `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#000" opacity="${p.dim}"/>` : ''}${tears}${box}${cam}`;
 };
 FOCUS.paint = 960;

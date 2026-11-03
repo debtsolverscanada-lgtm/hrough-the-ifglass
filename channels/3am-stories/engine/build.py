@@ -54,9 +54,9 @@ def voice_line(i, text, who=None):
             tt += 0.33
         json.dump({'characters': chars, 'character_start_times_seconds': st, 'character_end_times_seconds': en}, open(js, 'w'))
     elif not os.path.exists(mp3):
-        if not KEY: sys.exit('ELEVENLABS_API_KEY needed to voice: ' + text)
+        if not KEY and not GROK: sys.exit('ELEVENLABS_API_KEY needed to voice: ' + text)
         prev = ' '.join(t for t in lines[max(0, i - 2):i] if t); nxt = next((t for t in lines[i + 1:] if t), '')
-        audio, al = tts_call(text, who, prev, nxt); open(mp3, 'wb').write(audio); json.dump(al, open(js, 'w'))
+        audio, al = tts_call(text, who, prev, nxt); open(mp3, 'wb').write(audio); json.dump(al or {'characters': [], 'character_start_times_seconds': [], 'character_end_times_seconds': []}, open(js, 'w'))
         print(f'voiced scene {i}: {text[:50]}', flush=True)
     al = json.load(open(js)); words, cur, st = [], '', None
     for ch, s0, e0 in zip(al['characters'], al['character_start_times_seconds'], al['character_end_times_seconds']):
@@ -71,7 +71,31 @@ def voice_line(i, text, who=None):
 # ---------- one-take narration (tts.one_take): consecutive narrator lines are voiced as ONE continuous read, so the
 # intonation flows like a real storyteller and nothing is clipped; the take is then cut per scene in the middle of
 # the natural pauses between sentences. Character lines (scene "voice") stay separate takes.
+GROK = TTS.get('provider') == 'grok'
+def grok_tts(text, who):
+    v = who if isinstance(who, str) else ST.get('voice', 'ara')
+    if isinstance(who, list): v = next((w.lower() for w in who if w.lower() in GROK_VOICES), ST.get('voice', 'ara'))
+    h = {'Content-Type': 'application/json'}
+    if os.environ.get('XAI_API_KEY'): h['Authorization'] = 'Bearer ' + os.environ['XAI_API_KEY']
+    r = requests.post('https://api.x.ai/v1/tts', headers=h, timeout=600, json={'text': text, 'voice_id': v.lower(), 'language': TTS.get('language', 'en')})
+    if r.status_code != 200: sys.exit(f'Grok TTS {r.status_code}: {r.text[:300]}')
+    return r.content, None
+GROK_VOICES = {'ara', 'eve', 'luna', 'ursa', 'aurora', 'carina', 'celeste', 'iris', 'liora', 'rex', 'sal', 'orion', 'leo', 'atlas', 'altair', 'castor', 'cosmo', 'helios', 'helix', 'kepler', 'lumen', 'lux', 'naksh', 'perseus', 'rigel', 'sirius', 'zagan', 'zenith'}
+def silence_cuts(mp3, texts):
+    """Grok TTS has no timestamps: cut the take in the pauses nearest to where each line should end (by text length)."""
+    r = subprocess.run(['ffmpeg', '-v', 'info', '-i', mp3, '-af', 'silencedetect=n=-38dB:d=0.18', '-f', 'null', '-'], capture_output=True, text=True).stderr
+    import re as _re
+    st = [float(x) for x in _re.findall(r'silence_start: ([0-9.]+)', r)]; en = [float(x) for x in _re.findall(r'silence_end: ([0-9.]+)', r)]
+    mids = [(a + b) / 2 for a, b in zip(st, en)]
+    total = dur_of(mp3); L = [len(t) for t in texts]; cum, cuts, used = 0, [0.0], set()
+    for k in range(len(texts) - 1):
+        cum += L[k]; want = total * cum / sum(L)
+        cand = [m for m in mids if m > cuts[-1] + 0.3 and m not in used]
+        m = min(cand, key=lambda x: abs(x - want)) if cand else want
+        used.add(m); cuts.append(m)
+    return cuts + [total]
 def tts_call(text, who, prev='', nxt=''):
+    if GROK: return grok_tts(text, who)
     model = TTS.get('model', 'eleven_multilingual_v2')
     st = dict(SETTINGS)
     if model == 'eleven_v3': st = {'stability': min([0.0, 0.5, 1.0], key=lambda v: abs(v - SETTINGS['stability'])), 'similarity_boost': SETTINGS['similarity_boost'],
@@ -103,10 +127,18 @@ if TTS.get('one_take') and not os.environ.get('FAKE_TTS'):
         h = hashlib.sha1(json.dumps([full, ST.get('voice'), SETTINGS, TTS.get('model')]).encode()).hexdigest()[:10]
         mp3, js = f'{VO}/take-{rn[0]:02d}-{h}.mp3', f'{VO}/take-{rn[0]:02d}-{h}.json'
         if not os.path.exists(mp3):
-            if not KEY: sys.exit('ELEVENLABS_API_KEY needed to voice the take')
-            audio, al = tts_call(full, NARRATOR); open(mp3, 'wb').write(audio); json.dump(al, open(js, 'w'))
+            if not KEY and not GROK: sys.exit('ELEVENLABS_API_KEY needed to voice the take')
+            audio, al = tts_call(full, NARRATOR); open(mp3, 'wb').write(audio)
+            json.dump(al if al else {'cuts': silence_cuts(mp3, texts)}, open(js, 'w'))
             print(f'voiced one take: scenes {rn[0]}-{rn[-1]}', flush=True)
-        al = json.load(open(js)); ch, cs, ce = al['characters'], al['character_start_times_seconds'], al['character_end_times_seconds']
+        al = json.load(open(js))
+        if 'cuts' in al:
+            for n, i in enumerate(rn):
+                piece = f'{WK}/take{i:02d}.wav'
+                run('ffmpeg', '-v', 'error', '-y', '-i', mp3, '-ss', f"{al['cuts'][n]:.3f}", '-to', f"{al['cuts'][n + 1]:.3f}", '-ar', '44100', '-ac', '1', piece)
+                ONE[i] = (piece, [])
+            continue
+        ch, cs, ce = al['characters'], al['character_start_times_seconds'], al['character_end_times_seconds']
         joined = ''.join(ch); pos = 0; spans = []
         for tx in texts:
             k = joined.find(tx[:12], pos); k = pos if k < 0 else k; e = min(len(ch) - 1, k + len(tx) - 1)
@@ -230,7 +262,7 @@ FR = f'{WK}/frames'; subprocess.run(['rm', '-rf', FR])
 fmt = 'short' if SHORT else 'long'
 procs = [subprocess.Popen(['node', f'{HERE}/render.js', f'{WK}/timeline.json', FR, fmt, str(w), str(a.workers)]) for w in range(a.workers)]
 if any(p.wait() for p in procs): sys.exit('frame render failed')
-vf = f"subtitles={ass}:fontsdir={HERE}" if SHORT else 'null'
+vf = f"subtitles={ass}:fontsdir={HERE}" if SHORT and ST.get('captions', True) else 'null'
 run('ffmpeg', '-v', 'error', '-y', '-framerate', 30, '-i', f'{FR}/f%05d.jpg', '-i', f'{WK}/mix.wav', '-vf', vf,
     '-c:v', 'libx264', '-preset', 'medium', '-crf', 19, '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-movflags', '+faststart', f'{OUT}/video.mp4')
 
