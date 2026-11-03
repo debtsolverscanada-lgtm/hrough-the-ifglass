@@ -56,6 +56,16 @@ Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p 
   [ ] reads at 320x180 in one second                      [ ] true: the image is in the video
 - Check at 320x180 before posting: the face, the red eyes and the glowing object must read in one second.
 
+## YouTube channel advice (Studio "Improve your channel", Nov 2026)
+- Stayed-to-watch on our best Shorts is 47-62%: the first 1-2 s must open mid-tension (no setup line) and the first frame
+  carries a 2-4 word hook text pop stating the rule/conflict (p.pops type 'label' at 0.0 s), e.g. "DON'T COUNT", "NO 13TH FLOOR".
+- Everyday dread wins in comments (mirrors, phones in the dark, late-night routines). Idea bank, use in rotation:
+  smart-home glitches (security camera, voice assistant, doorbell cam), midnight deliveries, rideshare anomalies,
+  rules/rituals with a forbidden condition ("don't look", "count the knocks").
+- Every horror Short that has a long-form version: owner sets YouTube Studio > Short > Related video to the long-form
+  (not possible through the API). Teaser Shorts ("Part 1" / the central chilling moment) for every long-form.
+- Long-form packaging: one eerie focal point, little or no text; titles leave a question open instead of telling the plot.
+
 ## Sound (owner's rule, Nov 2026)
 - Effects sit under the voice: no sharp "bing" stings, no loud booms. Loud hits make people scroll away.
 - Measured target: loudest moment no more than ~7 dB above the typical level (022: was 11 dB, now 6.7 dB).

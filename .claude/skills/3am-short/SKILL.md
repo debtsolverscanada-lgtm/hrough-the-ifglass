@@ -15,7 +15,9 @@ Read first, every time: `channels/3am-stories/RULES.md` (owner's rules + rotatio
 - Rotate: narrator (Brian, Sarah, Bill, Matilda, Callum, Dorothy; never 3 in a row; first-person voice matches the lead;
   check the voice exists in ElevenLabs or the build falls back to a male voice), middle turn, hook formula. Log each in RULES.md.
 - Soft sound: no loud bings/booms. Silence before the payoff. Numbers as objects. ~160 words per 50 s.
-- Title ≤100 chars, title + thumbnail planned together, thumbnail text never the title.
+- Title ≤100 chars, title + thumbnail planned together, thumbnail text never the title. Titles leave a question open.
+- First 1-2 s: open mid-tension and put a 2-4 word hook text pop on the first frame (p.pops label at 0.0). Prefer everyday
+  dread (see the idea bank in RULES.md). If a long-form exists, remind the owner to set it as the Short's Related video.
 
 ## Steps
 1. Pick hook formula, narrator, turn, grade, lead (check the RULES.md tables). Write `stories/0NN-slug/story.json`
