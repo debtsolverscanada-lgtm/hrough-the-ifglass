@@ -18,6 +18,7 @@
 
 | Story | Grade | Hero |
 |---|---|---|
+| 032 night shift | none: Grok cartoon art, fluorescent white + night blue + cyan (owner chose Grok's script and title as written) | small woman clerk (dark ponytail, grey hoodie), stern Eastern European regular + his 1988 self; narrator Ara |
 | 031 lizzie teaser | none: vertical Grok repaints of 030 + 3 Grok video shots | same cast as 030; narrator Ara |
 | 030 lizzie (long) | none: Grok cartoon art, 16:9, 7 Grok video shots (autumn palette + firelight orange) | shy 9-year-old girl (dark bob, green sweater), Lizzie (blonde, 1960s pale blue dress, barefoot), Grandma (grey bun, cardigan); narrator Ara (Grok TTS) |
 | 029 doorbell cam | none: first Grok-painted Short (S.paint, night-vision doorbell look, black + green-grey + red REC) | auburn-haired woman, early 30s, grey tee; the hooded grinning man; narrator Sarah |

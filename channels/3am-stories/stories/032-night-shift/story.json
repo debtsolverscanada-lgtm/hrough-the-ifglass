@@ -1,0 +1,556 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "ara",
+ "tts": {
+  "provider": "grok",
+  "one_take": true,
+  "language": "en"
+ },
+ "captions": false,
+ "art_aspect": "9:16",
+ "art_style": "2D animated horror cartoon frame, anime-inspired horror animation, clean thick black ink outlines, flat cel shading with soft gradients, bold readable shapes, expressive characters, cinematic lighting, harsh fluorescent gas-station whites against deep night blues, sodium-orange highway lights, small red accents, vertical 9:16, no text, no captions, no watermark, no logos.",
+ "art_cast": "",
+ "scenes": [
+  {
+   "scene": "paint",
+   "text": "I slept through a murder at the gas station.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.035,
+    "img": "channels/3am-stories/stories/032-night-shift/art/00.jpg",
+    "snap": {
+     "at": 1.0,
+     "to": [
+      960,
+      1100
+     ],
+     "z": 1.7
+    },
+    "pulse": true,
+    "pops": [
+     {
+      "at": 0.0,
+      "type": "label",
+      "text": "I SLEPT THROUGH MURDER",
+      "x": 0.5,
+      "y": 0.16
+     }
+    ]
+   },
+   "pause": 0.3,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "I've worked midnight shifts for years.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.035,
+    "img": "channels/3am-stories/stories/032-night-shift/art/00.jpg",
+    "pan": [
+     0,
+     -80
+    ],
+    "whip": true
+   },
+   "pause": 0.2
+  },
+  {
+   "scene": "paint",
+   "text": "Regulars always worried about me.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.035,
+    "img": "channels/3am-stories/stories/032-night-shift/art/01.jpg",
+    "snap": {
+     "at": 1.2,
+     "to": [
+      960,
+      900
+     ],
+     "z": 1.5
+    }
+   },
+   "pause": 0.2
+  },
+  {
+   "scene": "paint",
+   "text": "One older man from Eastern Europe came every morning.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.05,
+    "img": "channels/3am-stories/stories/032-night-shift/art/02.jpg",
+    "whip": true
+   },
+   "pause": 0.2
+  },
+  {
+   "scene": "paint",
+   "text": "After months I finally made him smile.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.06,
+    "img": "channels/3am-stories/stories/032-night-shift/art/03.jpg"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "Then he asked if I ever get scared.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.06,
+    "img": "channels/3am-stories/stories/032-night-shift/art/04.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/032-night-shift/art/04/f001.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f002.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f003.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f004.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f005.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f006.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f007.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f008.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f009.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f010.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f011.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f012.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f013.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f014.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f015.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f016.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f017.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f018.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f019.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f020.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f021.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f022.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f023.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f024.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f025.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f026.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f027.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f028.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f029.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f030.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f031.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f032.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f033.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f034.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f035.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f036.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f037.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f038.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f039.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f040.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f041.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f042.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f043.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f044.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f045.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f046.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f047.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f048.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f049.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f050.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f051.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f052.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f053.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f054.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f055.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f056.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f057.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f058.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f059.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f060.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/04/f061.jpg"
+    ],
+    "fps": 12,
+    "whip": true,
+    "pulse": true
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "He told me what happened back in the late eighties.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.0,
+    "img": "channels/3am-stories/stories/032-night-shift/art/05.jpg",
+    "dust": true,
+    "glitch": [
+     0.05
+    ],
+    "pull": true
+   },
+   "pause": 0.2
+  },
+  {
+   "scene": "paint",
+   "text": "He fell asleep on his midnight shift.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/032-night-shift/art/06.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/032-night-shift/art/06/f001.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f002.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f003.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f004.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f005.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f006.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f007.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f008.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f009.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f010.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f011.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f012.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f013.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f014.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f015.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f016.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f017.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f018.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f019.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f020.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f021.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f022.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f023.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f024.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f025.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f026.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f027.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f028.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f029.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f030.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f031.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f032.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f033.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f034.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f035.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f036.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f037.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f038.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f039.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f040.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f041.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f042.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f043.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f044.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f045.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f046.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f047.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f048.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f049.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f050.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f051.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f052.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f053.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f054.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f055.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f056.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f057.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f058.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f059.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f060.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/06/f061.jpg"
+    ],
+    "fps": 12,
+    "dust": true
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "That's when his manager screamed to look outside.",
+   "p": {
+    "noVig": true,
+    "shake": 0.3,
+    "push": 0.035,
+    "img": "channels/3am-stories/stories/032-night-shift/art/07.jpg",
+    "whip": true,
+    "flashAt": [
+     0.02
+    ]
+   },
+   "pause": 0.2
+  },
+  {
+   "scene": "paint",
+   "text": "Thieves stole every drop of oil while he slept.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.035,
+    "img": "channels/3am-stories/stories/032-night-shift/art/08.jpg",
+    "pan": [
+     -100,
+     0
+    ]
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "They left him alone and drove to the next station.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.04,
+    "img": "channels/3am-stories/stories/032-night-shift/art/09.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/032-night-shift/art/09/f001.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f002.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f003.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f004.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f005.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f006.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f007.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f008.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f009.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f010.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f011.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f012.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f013.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f014.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f015.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f016.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f017.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f018.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f019.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f020.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f021.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f022.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f023.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f024.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f025.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f026.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f027.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f028.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f029.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f030.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f031.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f032.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f033.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f034.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f035.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f036.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f037.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f038.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f039.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f040.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f041.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f042.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f043.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f044.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f045.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f046.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f047.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f048.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f049.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f050.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f051.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f052.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f053.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f054.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f055.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f056.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f057.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f058.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f059.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f060.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/09/f061.jpg"
+    ],
+    "fps": 12,
+    "pulse": true
+   },
+   "pause": 0.4
+  },
+  {
+   "scene": "paint",
+   "text": "The clerk there fought back.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.05,
+    "img": "channels/3am-stories/stories/032-night-shift/art/10.jpg",
+    "pulse": true
+   },
+   "pause": 0.8,
+   "sfx": [
+    [
+     "heart",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "He didn't make it.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/032-night-shift/art/11.jpg",
+    "glitch": [
+     0.0
+    ]
+   },
+   "pause": 1.0,
+   "sfx": [
+    [
+     "silence_hit",
+     0.9
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "The old man looked me dead in the eyes.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.035,
+    "img": "channels/3am-stories/stories/032-night-shift/art/12.jpg",
+    "snap": {
+     "at": 1.2,
+     "to": [
+      960,
+      850
+     ],
+     "z": 1.8
+    }
+   },
+   "pause": 0.4
+  },
+  {
+   "scene": "paint",
+   "text": "If you ever feel sleepy just lock the door.",
+   "p": {
+    "noVig": true,
+    "shake": 0.08,
+    "push": 0.03,
+    "img": "channels/3am-stories/stories/032-night-shift/art/13.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/032-night-shift/art/13/f001.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f002.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f003.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f004.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f005.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f006.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f007.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f008.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f009.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f010.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f011.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f012.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f013.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f014.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f015.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f016.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f017.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f018.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f019.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f020.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f021.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f022.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f023.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f024.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f025.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f026.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f027.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f028.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f029.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f030.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f031.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f032.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f033.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f034.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f035.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f036.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f037.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f038.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f039.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f040.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f041.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f042.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f043.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f044.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f045.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f046.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f047.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f048.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f049.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f050.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f051.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f052.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f053.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f054.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f055.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f056.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f057.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f058.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f059.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f060.jpg",
+     "channels/3am-stories/stories/032-night-shift/art/13/f061.jpg"
+    ],
+    "fps": 12,
+    "pulse": true
+   },
+   "pause": 0.9
+  },
+  {
+   "scene": "paint",
+   "text": "I slept through a murder at the gas station.",
+   "p": {
+    "noVig": true,
+    "shake": 0.2,
+    "push": 0.06,
+    "img": "channels/3am-stories/stories/032-night-shift/art/00.jpg",
+    "flashAt": [
+     0.02
+    ],
+    "glitch": [
+     0.0,
+     0.6
+    ]
+   },
+   "pause": 1.0,
+   "sfx": [
+    [
+     "boom",
+     1.2
+    ]
+   ]
+  }
+ ],
+ "yt": {
+  "title": "I Slept Through a Murder at the Gas Station 😨 #horror #shorts",
+  "description": "I work the midnight shift at a gas station. One of my regulars, an old man who never smiled, finally told me why he thinks falling asleep is the safest thing you can do at 3 AM.\n\n🎧 headphones on. Would you lock the door?\n\n#scarystories #horror #3amstories #nightshift #gasstation #truestory #shorts",
+  "tags": [
+   "scary stories",
+   "night shift horror",
+   "gas station horror",
+   "true scary stories",
+   "horror short",
+   "3am stories",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "thumb_art": "2D animated horror cartoon YouTube thumbnail, anime-inspired, clean thick black outlines, flat cel shading, 16:9. Night. View from a dark empty parking lot: a small brightly lit gas station store far away in the right half, a tiny young woman with a dark ponytail behind the counter, unaware. In the dark foreground left, the black silhouette of a boxy van with its headlights just switching on, cold cyan glow. Near-black everywhere else, fluorescent cyan store light, one small red accent. Empty dark space top-left for text. No text, no watermark."
+}
