@@ -1,0 +1,410 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "ara",
+ "tts": {
+  "provider": "grok",
+  "one_take": true,
+  "language": "en"
+ },
+ "captions": false,
+ "art_aspect": "9:16",
+ "art_style": "2D animated horror cartoon frame, anime-inspired horror animation, clean thick black ink outlines, flat cel shading with soft gradients, bold readable shapes, expressive characters, cinematic lighting, sodium-orange streetlights against deep foggy night blues, small red accents, vertical 9:16, no text, no captions, no watermark, no logos.",
+ "art_cast": "",
+ "yt": {
+  "title": "The Police Said I'm Not The First To See Him 😨 #horror #shorts",
+  "description": "The full story (and what happened after): LONGFORM\n\n🎧 headphones on. Would you have looked out the window?\n\nRetold from a famous true story shared on r/LetsNotMeet.\n#scarystories #horror #3amstories #letsnotmeet #truestory #shorts",
+  "tags": [
+   "scary stories",
+   "the smiling man",
+   "lets not meet",
+   "true scary stories",
+   "horror short",
+   "3am stories",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "paint",
+   "text": "The police told me I wasn't the first woman he'd followed home.",
+   "art": "Morning: the narrator: a young woman in her early twenties with short wavy black hair, an oversized olive-green parka and white sneakers at a small police station front desk talking to a tired middle-aged officer holding a coffee.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "pops": [
+     {
+      "at": 0.0,
+      "type": "label",
+      "text": "NOT THE FIRST",
+      "x": 0.5,
+      "y": 0.16
+     }
+    ],
+    "pulse": true,
+    "img": "channels/3am-stories/stories/036-smiling-man-c/art/00.jpg"
+   },
+   "pause": 0.3,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "I'd called them the morning after a smiling man danced toward me at three A.M.",
+   "art": "Mid-distance: the Smiling Man: a very tall, thin man in a dated grey suit that is slightly too small, slicked dark hair, pale skin, and an enormous fixed grin stretched far too wide, eyes wide open and unblinking moving down the middle of the empty street in a strange exaggerated dance, knees high, arms swinging wide, under the orange lights.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "whip": true,
+    "img": "channels/3am-stories/stories/036-smiling-man-c/art/01.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f001.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f002.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f003.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f004.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f005.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f006.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f007.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f008.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f009.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f010.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f011.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f012.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f013.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f014.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f015.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f016.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f017.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f018.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f019.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f020.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f021.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f022.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f023.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f024.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f025.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f026.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f027.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f028.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f029.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f030.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f031.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f032.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f033.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f034.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f035.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f036.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f037.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f038.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f039.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f040.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f041.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f042.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f043.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f044.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f045.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f046.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f047.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f048.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f049.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f050.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f051.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f052.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f053.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f054.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f055.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f056.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f057.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f058.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f059.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f060.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/01/f061.jpg"
+    ],
+    "fps": 12
+   },
+   "pause": 0.3,
+   "anim": "Animated horror cartoon. On an empty foggy street at night, the tall thin man in the grey suit dances toward the camera with big exaggerated steps, knees high, arms swinging wide, smiling. Static camera."
+  },
+  {
+   "scene": "paint",
+   "text": "The officer said a man dancing in the street isn't a crime.",
+   "art": "Close-up of the officer's face, his expression changing, uneasy, looking away.",
+   "p": {
+    "noVig": true,
+    "push": 0.05,
+    "shake": 0.08,
+    "img": "channels/3am-stories/stories/036-smiling-man-c/art/02.jpg"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "Then he lowered his voice. You're not the first person to call about him.",
+   "art": "Close-up of the officer's face, his expression changing, uneasy, looking away.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "snap": {
+     "at": 1.6,
+     "to": [
+      960,
+      850
+     ],
+     "z": 1.8
+    },
+    "pulse": true,
+    "img": "channels/3am-stories/stories/036-smiling-man-c/art/03.jpg"
+   },
+   "pause": 0.6
+  },
+  {
+   "scene": "paint",
+   "text": "Years of calls. Always after midnight. Always a woman walking alone.",
+   "art": "An old cork board in the police station with several faded call-log notes and a blurry printed photo of a tall figure on a dark street.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "dust": true,
+    "snap": {
+     "at": 2.4,
+     "to": [
+      960,
+      850
+     ],
+     "z": 1.9
+    },
+    "img": "channels/3am-stories/stories/036-smiling-man-c/art/04.jpg"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "I asked what he does to them.",
+   "art": "the narrator: a young woman in her early twenties with short wavy black hair, an oversized olive-green parka and white sneakers at the desk, very still, asking.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "img": "channels/3am-stories/stories/036-smiling-man-c/art/05.jpg"
+   },
+   "pause": 0.7
+  },
+  {
+   "scene": "paint",
+   "text": "Nothing, he said. He just follows them home. And waits under the light until they look out the window.",
+   "art": "Looking down from a fourth-floor window at night: directly below under a streetlight, the Smiling Man: a very tall, thin man in a dated grey suit that is slightly too small, slicked dark hair, pale skin, and an enormous fixed grin stretched far too wide, eyes wide open and unblinking stands with his head tilted all the way back, grinning straight up at the viewer.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "flashAt": [
+     0.02
+    ],
+    "glitch": [
+     0.0
+    ],
+    "img": "channels/3am-stories/stories/036-smiling-man-c/art/06.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f001.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f002.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f003.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f004.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f005.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f006.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f007.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f008.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f009.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f010.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f011.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f012.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f013.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f014.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f015.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f016.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f017.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f018.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f019.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f020.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f021.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f022.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f023.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f024.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f025.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f026.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f027.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f028.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f029.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f030.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f031.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f032.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f033.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f034.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f035.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f036.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f037.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f038.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f039.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f040.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f041.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f042.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f043.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f044.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f045.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f046.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f047.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f048.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f049.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f050.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f051.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f052.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f053.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f054.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f055.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f056.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f057.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f058.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f059.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f060.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/06/f061.jpg"
+    ],
+    "fps": 12
+   },
+   "pause": 0.8,
+   "anim": "Animated horror cartoon. Looking down from a high window at night: under the streetlight below, the grinning man slowly tilts his head all the way back to stare up at the window, then raises one hand and waves. Static camera."
+  },
+  {
+   "scene": "paint",
+   "text": "I moved across town. But some nights I still wake up at two forty seven.",
+   "art": "A new bedroom at night, the narrator: a young woman in her early twenties with short wavy black hair, an oversized olive-green parka and white sneakers sitting up in bed awake, digital clock reading 2:47, the window blind closed.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "whip": true,
+    "pops": [
+     {
+      "at": 2.6,
+      "type": "date",
+      "text": "2:47 AM",
+      "x": 0.75,
+      "y": 0.18
+     }
+    ],
+    "img": "channels/3am-stories/stories/036-smiling-man-c/art/07.jpg"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "And I don't go to the window. Because I know he'd want me to.",
+   "art": "Close-up of the narrator: a young woman in her early twenties with short wavy black hair, an oversized olive-green parka and white sneakers's hand hovering near the closed blind, trembling, not pulling it.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "pulse": true,
+    "img": "channels/3am-stories/stories/036-smiling-man-c/art/08.jpg"
+   },
+   "pause": 0.8
+  },
+  {
+   "scene": "paint",
+   "text": "He's already smiling.",
+   "art": "the Smiling Man: a very tall, thin man in a dated grey suit that is slightly too small, slicked dark hair, pale skin, and an enormous fixed grin stretched far too wide, eyes wide open and unblinking dancing straight toward the viewer down the middle of the empty foggy street, grin filling the frame, arms wide.",
+   "p": {
+    "noVig": true,
+    "push": 0.07,
+    "shake": 0.2,
+    "flashAt": [
+     0.02
+    ],
+    "glitch": [
+     0.0,
+     0.6
+    ],
+    "img": "channels/3am-stories/stories/036-smiling-man-c/art/09.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f001.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f002.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f003.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f004.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f005.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f006.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f007.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f008.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f009.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f010.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f011.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f012.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f013.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f014.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f015.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f016.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f017.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f018.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f019.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f020.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f021.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f022.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f023.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f024.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f025.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f026.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f027.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f028.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f029.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f030.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f031.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f032.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f033.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f034.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f035.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f036.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f037.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f038.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f039.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f040.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f041.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f042.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f043.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f044.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f045.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f046.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f047.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f048.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f049.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f050.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f051.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f052.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f053.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f054.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f055.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f056.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f057.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f058.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f059.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f060.jpg",
+     "channels/3am-stories/stories/036-smiling-man-c/art/09/f061.jpg"
+    ],
+    "fps": 12
+   },
+   "pause": 1.3,
+   "anim": "Animated horror cartoon. The tall grinning man dances straight toward the camera down an empty foggy street at night, getting closer and closer until his huge smile fills the frame. Static camera.",
+   "sfx": [
+    [
+     "boom",
+     0.9
+    ]
+   ]
+  }
+ ]
+}

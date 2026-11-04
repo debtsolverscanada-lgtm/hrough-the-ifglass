@@ -1,0 +1,344 @@
+{
+ "format": "short",
+ "style": "anime",
+ "voice": "ara",
+ "tts": {
+  "provider": "grok",
+  "one_take": true,
+  "language": "en"
+ },
+ "captions": false,
+ "art_aspect": "9:16",
+ "art_style": "2D animated horror cartoon frame, anime-inspired horror animation, clean thick black ink outlines, flat cel shading with soft gradients, bold readable shapes, expressive characters, cinematic lighting, sodium-orange streetlights against deep foggy night blues, small red accents, vertical 9:16, no text, no captions, no watermark, no logos.",
+ "art_cast": "",
+ "yt": {
+  "title": "He Danced Toward Me Smiling The Whole Time 😨 #horror #shorts",
+  "description": "The full story (and what happened after): LONGFORM\n\n🎧 headphones on. Would you have looked out the window?\n\nRetold from a famous true story shared on r/LetsNotMeet.\n#scarystories #horror #3amstories #letsnotmeet #truestory #shorts",
+  "tags": [
+   "scary stories",
+   "the smiling man",
+   "lets not meet",
+   "true scary stories",
+   "horror short",
+   "3am stories",
+   "creepy",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "paint",
+   "text": "At two forty seven in the morning, a man danced toward me down an empty street.",
+   "art": "a quiet mid-sized city downtown at 3 AM in late autumn: wet asphalt, sodium-orange streetlights in a long row, closed shops, light fog. Far down the empty avenue, under one streetlight, the silhouette of the Smiling Man: a very tall, thin man in a dated grey suit that is slightly too small, slicked dark hair, pale skin, and an enormous fixed grin stretched far too wide, eyes wide open and unblinking frozen mid-dance step, one knee raised high.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "pops": [
+     {
+      "at": 0.0,
+      "type": "label",
+      "text": "NO MUSIC",
+      "x": 0.5,
+      "y": 0.16
+     }
+    ],
+    "pulse": true,
+    "snap": {
+     "at": 3.0,
+     "to": [
+      960,
+      900
+     ],
+     "z": 1.8
+    },
+    "img": "channels/3am-stories/stories/034-smiling-man-a/art/00.jpg"
+   },
+   "pause": 0.3,
+   "sfx": [
+    [
+     "drone",
+     0
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "Big swinging steps. Knees way too high. Arms out wide.",
+   "art": "Mid-distance: the Smiling Man: a very tall, thin man in a dated grey suit that is slightly too small, slicked dark hair, pale skin, and an enormous fixed grin stretched far too wide, eyes wide open and unblinking moving down the middle of the empty street in a strange exaggerated dance, knees high, arms swinging wide, under the orange lights.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "whip": true,
+    "img": "channels/3am-stories/stories/034-smiling-man-a/art/01.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f001.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f002.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f003.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f004.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f005.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f006.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f007.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f008.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f009.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f010.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f011.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f012.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f013.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f014.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f015.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f016.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f017.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f018.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f019.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f020.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f021.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f022.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f023.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f024.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f025.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f026.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f027.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f028.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f029.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f030.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f031.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f032.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f033.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f034.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f035.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f036.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f037.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f038.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f039.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f040.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f041.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f042.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f043.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f044.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f045.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f046.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f047.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f048.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f049.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f050.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f051.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f052.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f053.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f054.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f055.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f056.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f057.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f058.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f059.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f060.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/01/f061.jpg"
+    ],
+    "fps": 12
+   },
+   "pause": 0.3,
+   "anim": "Animated horror cartoon. On an empty foggy street at night, the tall thin man in the grey suit dances toward the camera with big exaggerated steps, knees high, arms swinging wide, smiling. Static camera."
+  },
+  {
+   "scene": "paint",
+   "text": "The weird part? There was no music. Just his shoes on the wet road.",
+   "art": "Extreme close-up of polished old leather shoes landing on wet asphalt mid-dance step, splashing a puddle, orange light.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "snap": {
+     "at": 2.2,
+     "to": [
+      960,
+      1000
+     ],
+     "z": 1.7
+    },
+    "img": "channels/3am-stories/stories/034-smiling-man-a/art/02.jpg"
+   },
+   "pause": 0.5,
+   "sfx": [
+    [
+     "steps",
+     0.3
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "I hid in a bakery doorway and told myself he hadn't seen me.",
+   "art": "the narrator: a young woman in her early twenties with short wavy black hair, an oversized olive-green parka and white sneakers pressing herself into the shadowed doorway of a closed bakery, peeking out sideways down the street.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "pulse": true,
+    "whip": true,
+    "img": "channels/3am-stories/stories/034-smiling-man-a/art/03.jpg"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "Lamp to lamp, he kept coming. A little faster every time.",
+   "art": "Looking down the row of streetlights: the Smiling Man: a very tall, thin man in a dated grey suit that is slightly too small, slicked dark hair, pale skin, and an enormous fixed grin stretched far too wide, eyes wide open and unblinking caught between two pools of light, dancing, much closer now.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "pan": [
+     0,
+     -80
+    ],
+    "snap": {
+     "at": 2.6,
+     "to": [
+      960,
+      880
+     ],
+     "z": 1.8
+    },
+    "img": "channels/3am-stories/stories/034-smiling-man-a/art/04.jpg"
+   },
+   "pause": 0.3
+  },
+  {
+   "scene": "paint",
+   "text": "Then I saw his face.",
+   "art": "Mid-shot of the Smiling Man: a very tall, thin man in a dated grey suit that is slightly too small, slicked dark hair, pale skin, and an enormous fixed grin stretched far too wide, eyes wide open and unblinking under a streetlight, face just coming into the light.",
+   "p": {
+    "noVig": true,
+    "push": 0.06,
+    "shake": 0.08,
+    "img": "channels/3am-stories/stories/034-smiling-man-a/art/05.jpg"
+   },
+   "pause": 0.8,
+   "sfx": [
+    [
+     "silence_hit",
+     0.6
+    ]
+   ]
+  },
+  {
+   "scene": "paint",
+   "text": "His smile went way too far up his cheeks. And his eyes never left me.",
+   "art": "Close-up of the Smiling Man: a very tall, thin man in a dated grey suit that is slightly too small, slicked dark hair, pale skin, and an enormous fixed grin stretched far too wide, eyes wide open and unblinking's face: an enormous unnatural grin stretching far up his cheeks, wide unblinking eyes staring straight into the viewer.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "flashAt": [
+     0.02
+    ],
+    "glitch": [
+     0.0,
+     1.0
+    ],
+    "img": "channels/3am-stories/stories/034-smiling-man-a/art/06.jpg",
+    "imgs": [
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f001.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f002.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f003.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f004.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f005.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f006.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f007.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f008.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f009.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f010.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f011.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f012.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f013.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f014.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f015.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f016.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f017.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f018.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f019.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f020.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f021.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f022.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f023.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f024.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f025.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f026.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f027.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f028.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f029.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f030.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f031.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f032.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f033.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f034.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f035.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f036.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f037.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f038.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f039.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f040.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f041.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f042.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f043.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f044.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f045.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f046.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f047.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f048.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f049.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f050.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f051.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f052.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f053.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f054.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f055.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f056.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f057.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f058.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f059.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f060.jpg",
+     "channels/3am-stories/stories/034-smiling-man-a/art/06/f061.jpg"
+    ],
+    "fps": 12
+   },
+   "pause": 0.3,
+   "anim": "Animated horror cartoon. Close-up of the tall man's face under a streetlight: his already huge grin slowly stretches even wider while his unblinking eyes stay locked on the viewer. Static camera."
+  },
+  {
+   "scene": "paint",
+   "text": "He stopped right across the street. Perfectly still. Smiling.",
+   "art": "Wide shot across the empty street: the Smiling Man: a very tall, thin man in a dated grey suit that is slightly too small, slicked dark hair, pale skin, and an enormous fixed grin stretched far too wide, eyes wide open and unblinking standing perfectly still on the opposite curb, arms at his sides, grinning straight at the bakery doorway where the narrator: a young woman in her early twenties with short wavy black hair, an oversized olive-green parka and white sneakers hides.",
+   "p": {
+    "noVig": true,
+    "push": 0.035,
+    "shake": 0.08,
+    "pulse": true,
+    "img": "channels/3am-stories/stories/034-smiling-man-a/art/07.jpg"
+   },
+   "pause": 0.9
+  },
+  {
+   "scene": "paint",
+   "text": "Then he lifted one foot. And started to tiptoe toward me.",
+   "art": "the Smiling Man: a very tall, thin man in a dated grey suit that is slightly too small, slicked dark hair, pale skin, and an enormous fixed grin stretched far too wide, eyes wide open and unblinking mid-street, frozen in an exaggerated tiptoe, one long leg lifted high, hands raised like a cartoon sneak, grinning.",
+   "p": {
+    "noVig": true,
+    "push": 0.06,
+    "shake": 0.2,
+    "flashAt": [
+     0.02
+    ],
+    "img": "channels/3am-stories/stories/034-smiling-man-a/art/08.jpg"
+   },
+   "pause": 1.0,
+   "sfx": [
+    [
+     "boom",
+     2.2
+    ]
+   ]
+  }
+ ]
+}
