@@ -2114,12 +2114,12 @@ S.nursery = (t, d, p) => `<rect width="1920" height="1920" fill="#0d1612"/>
   <g transform="translate(1600,0)"><rect x="-150" y="380" width="300" height="800" fill="#1d2b24" stroke="#33463b" stroke-width="12"/><circle cx="100" cy="800" r="16" fill="#9fb8a9"/>
     <path d="M-20 500 l14 30 l32 4 l-24 22 l6 32 l-28 -16 l-28 16 l6 -32 l-24 -22 l32 -4z" fill="#d8e8a0" opacity=".7"/></g>
   <circle cx="1280" cy="1150" r="22" fill="#fff4b0"/><circle cx="1280" cy="1150" r="140" fill="#fff4b0" opacity=".08"/>
-  ${crib(520, 1250, 0.95, {}, false)}${crib(1180, 1330, 0.85, {}, true)}
-  <g transform="translate(1180,${760 + Math.sin(t) * 6}) rotate(${Math.sin(t * 0.6) * 8})"><line x1="0" y1="-760" x2="0" y2="0" stroke="#9fb8a9" stroke-width="5"/><path d="M-160 0 H160" stroke="#9fb8a9" stroke-width="7"/>
+  ${crib(760, 1250, 0.72, {}, false)}${crib(1200, 1360, 0.66, {}, true)}
+  <g transform="translate(1200,${820 + Math.sin(t) * 6}) rotate(${Math.sin(t * 0.6) * 8})"><line x1="0" y1="-760" x2="0" y2="0" stroke="#9fb8a9" stroke-width="5"/><path d="M-160 0 H160" stroke="#9fb8a9" stroke-width="7"/>
     ${[-150, -50, 50, 150].map((mx, i) => `<line x1="${mx}" y1="0" x2="${mx}" y2="70" stroke="#9fb8a9" stroke-width="3"/><circle cx="${mx}" cy="92" r="24" fill="${['#c9b3ff', '#ffe3a0', '#a8f0d0', '#ffb3c7'][i]}" opacity=".75"/>`).join('')}</g>
   <rect x="${-200 + ((t * 160) % 2400)}" width="120" height="1920" fill="#fff" opacity=".025"/>
   ${dets(t, d, p)}
-  ${p.count != null ? `<g transform="translate(1180,260)"><rect x="0" y="-70" width="560" height="100" rx="50" fill="${p.count > 2 ? '#ff3b3b' : '#1e3a2c'}" opacity=".92"/>
+  ${p.count != null ? `<g transform="translate(680,300)"><rect x="0" y="-70" width="560" height="100" rx="50" fill="${p.count > 2 ? '#ff3b3b' : '#1e3a2c'}" opacity=".92"/>
     <text x="280" y="2" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="52" fill="#fff">PEOPLE: ${p.count}</text></g>` : ''}`;
 FOCUS.nursery = 960;
 // CCTV in the hallway ceiling corner, looking down the corridor. p.dets slide toward the camera.
@@ -2147,7 +2147,7 @@ S.alert = (t, d, p) => {
       <rect x="650" y="${y + 35}" width="90" height="70" rx="14" fill="#0b0f14" stroke="${red ? '#ff3b3b' : '#3dff8a'}" stroke-width="5"/><circle cx="695" cy="${y + 70}" r="16" fill="${red ? '#ff3b3b' : '#3dff8a'}"/>
       <text x="770" y="${y + 66}" font-family="Inter, Arial" font-weight="800" font-size="38" fill="#fff">${esc3(m[0])}</text>
       <text x="770" y="${y + 112}" font-family="Inter, Arial" font-size="30" fill="${red ? '#ff8a8a' : '#3dff8a'}">${esc3(m[1])}</text></g>`; };
-  return `<rect width="1920" height="1920" fill="#050608"/><circle cx="960" cy="1000" r="1000" fill="url(#cold)" opacity=".35"/>
+  return `<rect width="1920" height="1920" fill="#050608"/><circle cx="960" cy="1000" r="1000" fill="url(#cold)" opacity=".35"/><g transform="translate(960,1000) scale(1.22) translate(-960,-1080)">
     <circle cx="300" cy="400" r="60" fill="#3a4a6a" opacity=".25"/><circle cx="1650" cy="300" r="40" fill="#6a3a3a" opacity=".2"/>
     <rect x="560" y="300" width="800" height="1560" rx="90" fill="#0a0a0c" stroke="#2a2d33" stroke-width="14"/>
     <rect x="585" y="330" width="750" height="1500" rx="70" fill="#0e131a"/>
@@ -2162,13 +2162,12 @@ S.alert = (t, d, p) => {
       ${Array.from({ length: 14 }, (_, i) => `<rect x="610" y="${(p.live.y || 1180) + ((i * 37 + t * 900) % 520)}" width="700" height="3" fill="#fff" opacity=".08"/>`).join('')}
       <rect x="640" y="${(p.live.y || 1180) + 30}" width="220" height="56" rx="10" fill="#ff3b3b"/><text x="750" y="${(p.live.y || 1180) + 70}" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="36" fill="#fff">● LIVE</text>
       <text x="1280" y="${(p.live.y || 1180) + 70}" text-anchor="end" font-family="Courier New, monospace" font-weight="700" font-size="36" fill="#ff8a8a">${esc3(p.live.label || 'CAM 3')}</text></g>` : ''}
-    ${[-210, -70, 70, 210].map((fx, i) => `<ellipse cx="${960 + fx}" cy="1860" rx="70" ry="110" fill="url(#skin)" stroke="${INK}" stroke-width="7"/>`).join('')}
-    <ellipse cx="540" cy="1300" rx="70" ry="140" fill="url(#skin)" stroke="${INK}" stroke-width="7"/>
+    </g>
     ${p.buzz && (t % 0.5) < 0.25 && t < 1.2 ? '<rect width="1920" height="1920" fill="#fff" opacity=".04"/>' : ''}`;
 };
 FOCUS.alert = 960;
 // seen from the ceiling: the bed, the lead lying awake with her phone. Night-vision, CAM 3 view. p.dets
-S.bedTop = (t, d, p) => `<rect width="1920" height="1920" fill="#0d1612"/>
+S.bedTop = (t, d, p) => `<g transform="translate(250,0)"><rect width="1920" height="1920" fill="#0d1612"/>
   <rect x="160" y="160" width="1600" height="1600" fill="#14201a"/><path d="M160 160 h1600 v1600 h-1600z" fill="none" stroke="#1f2f27" stroke-width="12"/>
   <rect x="1500" y="240" width="200" height="200" rx="20" fill="#1d2b24" stroke="#2a3e33" stroke-width="8"/><circle cx="1600" cy="340" r="40" fill="#fff4b0" opacity=".25"/>
   <rect x="460" y="300" width="1000" height="1360" rx="40" fill="#2a3a32" stroke="${INK}" stroke-width="9"/>
@@ -2181,5 +2180,5 @@ S.bedTop = (t, d, p) => `<rect width="1920" height="1920" fill="#0d1612"/>
     <ellipse cx="-100" cy="20" rx="26" ry="34" fill="url(#skin)" stroke="${INK}" stroke-width="6"/><ellipse cx="100" cy="20" rx="26" ry="34" fill="url(#skin)" stroke="${INK}" stroke-width="6"/></g>
   <circle cx="710" cy="760" r="320" fill="#bfe3ff" opacity=".08"/>
   <rect x="${-200 + ((t * 160) % 2400)}" width="120" height="1920" fill="#fff" opacity=".025"/>
-  ${dets(t, d, p)}`;
+  </g>${dets(t, d, p)}`;
 FOCUS.bedTop = 960;
