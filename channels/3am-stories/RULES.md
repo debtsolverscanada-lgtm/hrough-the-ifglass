@@ -59,6 +59,7 @@ Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p 
   | 034 Smiling Man A | L5 | cold cyan |
   | 035 Smiling Man B | L2 | sick green |
   | 036 Smiling Man C | L4 (glowing clock) | violet |
+  | 037 Third Camera | L1 (face from CAM 3 + red alert) | blood red |
 - BEFORE showing any thumbnail, tick the master playbook (PLAYBOOK.md sections 6 + 8) line by line, out loud:
   [ ] 3-4 colours, each means one thing (red = danger)  [ ] one lit figure / one glowing thing in near-black
   [ ] one clear idea, one main wrong thing, no clutter    [ ] no full creature reveal (peek, eye, grin, shadow)
@@ -97,5 +98,6 @@ Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p 
 | 026 black lake | Callum | F5 countdown (One. Two. Three. Four.) + F15 loop | The weird part? |
 | 027 machine seven | Matilda | F4 ignored warning (DO NOT USE sign) + F15 loop | But here's what nobody tells you |
 | 030 lizzie (long) | Ara (Grok) | F2 impossible premise + F15 loop ("she's the reason my grandmother's house burned down") | The weird part? |
+| 037 third camera | voicebox Chatterbox Turbo (free) | Specificity ("counts people... counted three") + F15 loop ("connected to three") | Except... |
 | 029 doorbell cam | Sarah | F13 evidence first ("recorded… motion log says nobody") + hook text NOBODY WAS THERE | That's when I noticed |
 | 028 farmhouse teaser | Brian (matches the long-form) | F2 impossible premise + hook text "DON'T ANSWER" at 0.0 s | silent beat |
