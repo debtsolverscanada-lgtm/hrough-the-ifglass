@@ -100,6 +100,6 @@ Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p 
 | 027 machine seven | Matilda | F4 ignored warning (DO NOT USE sign) + F15 loop | But here's what nobody tells you |
 | 030 lizzie (long) | Ara (Grok) | F2 impossible premise + F15 loop ("she's the reason my grandmother's house burned down") | The weird part? |
 | 037 third camera (OwV8pbyWf_k) | voicebox Chatterbox Turbo (free) | Specificity ("counts people... counted three") + F15 loop ("connected to three") | Except... |
-| 039 don't open the door pt1 (soft style) | voicebox Kokoro af_heart (free) | 2nd person + plot in line 1 + F15 loop | silent "typing..." beat |
+| 039 don't open the door pt1 (soft style, 1UVPl_rRuyI) | voicebox Kokoro af_heart (free) | 2nd person + plot in line 1 + F15 loop | silent "typing..." beat |
 | 029 doorbell cam | Sarah | F13 evidence first ("recorded… motion log says nobody") + hook text NOBODY WAS THERE | That's when I noticed |
 | 028 farmhouse teaser | Brian (matches the long-form) | F2 impossible premise + hook text "DON'T ANSWER" at 0.0 s | silent beat |
