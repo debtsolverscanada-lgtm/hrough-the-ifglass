@@ -60,6 +60,7 @@ Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p 
   | 035 Smiling Man B | L2 | sick green |
   | 036 Smiling Man C | L4 (glowing clock) | violet |
   | 037 Third Camera | L1 (face from CAM 3 + red alert) | blood red |
+  | 039 Don't Open The Door 1 | L3 (your phone in front, feet under the door) | ember orange |
 - BEFORE showing any thumbnail, tick the master playbook (PLAYBOOK.md sections 6 + 8) line by line, out loud:
   [ ] 3-4 colours, each means one thing (red = danger)  [ ] one lit figure / one glowing thing in near-black
   [ ] one clear idea, one main wrong thing, no clutter    [ ] no full creature reveal (peek, eye, grin, shadow)
@@ -99,5 +100,6 @@ Approved look: stories/025-floor-thirteen-long/thumb-v5.jpg (scenes S.thumbF13p 
 | 027 machine seven | Matilda | F4 ignored warning (DO NOT USE sign) + F15 loop | But here's what nobody tells you |
 | 030 lizzie (long) | Ara (Grok) | F2 impossible premise + F15 loop ("she's the reason my grandmother's house burned down") | The weird part? |
 | 037 third camera (OwV8pbyWf_k) | voicebox Chatterbox Turbo (free) | Specificity ("counts people... counted three") + F15 loop ("connected to three") | Except... |
+| 039 don't open the door pt1 (soft style) | voicebox Kokoro af_heart (free) | 2nd person + plot in line 1 + F15 loop | silent "typing..." beat |
 | 029 doorbell cam | Sarah | F13 evidence first ("recorded… motion log says nobody") + hook text NOBODY WAS THERE | That's when I noticed |
 | 028 farmhouse teaser | Brian (matches the long-form) | F2 impossible premise + hook text "DON'T ANSWER" at 0.0 s | silent beat |
