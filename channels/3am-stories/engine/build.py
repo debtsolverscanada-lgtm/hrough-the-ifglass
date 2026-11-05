@@ -54,7 +54,7 @@ def voice_line(i, text, who=None):
             tt += 0.33
         json.dump({'characters': chars, 'character_start_times_seconds': st, 'character_end_times_seconds': en}, open(js, 'w'))
     elif not os.path.exists(mp3):
-        if not KEY and not GROK: sys.exit('ELEVENLABS_API_KEY needed to voice: ' + text)
+        if not KEY and not GROK and not VB: sys.exit('ELEVENLABS_API_KEY needed to voice: ' + text)
         prev = ' '.join(t for t in lines[max(0, i - 2):i] if t); nxt = next((t for t in lines[i + 1:] if t), '')
         audio, al = tts_call(text, who, prev, nxt); open(mp3, 'wb').write(audio); json.dump(al or {'characters': [], 'character_start_times_seconds': [], 'character_end_times_seconds': []}, open(js, 'w'))
         print(f'voiced scene {i}: {text[:50]}', flush=True)
@@ -72,6 +72,7 @@ def voice_line(i, text, who=None):
 # intonation flows like a real storyteller and nothing is clipped; the take is then cut per scene in the middle of
 # the natural pauses between sentences. Character lines (scene "voice") stay separate takes.
 GROK = TTS.get('provider') == 'grok'
+VB = TTS.get('provider') == 'voicebox'  # free local voices (jamiepine/voicebox engines), voiced on GitHub by 3am-voicebox.yml
 def grok_tts(text, who):
     v = who if isinstance(who, str) else ST.get('voice', 'ara')
     if isinstance(who, list): v = next((w.lower() for w in who if w.lower() in GROK_VOICES), ST.get('voice', 'ara'))
@@ -94,8 +95,15 @@ def silence_cuts(mp3, texts):
         m = min(cand, key=lambda x: abs(x - want)) if cand else want
         used.add(m); cuts.append(m)
     return cuts + [total]
+def vb_tts(text):
+    tmp = f'{WK}/vb.wav'
+    r = subprocess.run([sys.executable, os.path.join(HERE, 'voicebox_tts.py'), TTS.get('engine', 'chatterbox'), TTS.get('vb_voice', ''), tmp], input=text, text=True)
+    if r.returncode: sys.exit('voicebox TTS failed')
+    run('ffmpeg', '-v', 'error', '-y', '-i', tmp, '-ar', '44100', '-ac', '1', '-b:a', '160k', f'{WK}/vb.mp3')
+    return open(f'{WK}/vb.mp3', 'rb').read(), None
 def tts_call(text, who, prev='', nxt=''):
     if GROK: return grok_tts(text, who)
+    if VB: return vb_tts(text)
     model = TTS.get('model', 'eleven_multilingual_v2')
     st = dict(SETTINGS)
     if model == 'eleven_v3': st = {'stability': min([0.0, 0.5, 1.0], key=lambda v: abs(v - SETTINGS['stability'])), 'similarity_boost': SETTINGS['similarity_boost'],
@@ -129,7 +137,7 @@ if TTS.get('one_take') and not os.environ.get('FAKE_TTS'):
         h = hashlib.sha1(json.dumps([full, ST.get('voice'), SETTINGS, TTS.get('model')]).encode()).hexdigest()[:10]
         mp3, js = f'{VO}/take-{rn[0]:02d}-{h}.mp3', f'{VO}/take-{rn[0]:02d}-{h}.json'
         if not os.path.exists(mp3):
-            if not KEY and not GROK: sys.exit('ELEVENLABS_API_KEY needed to voice the take')
+            if not KEY and not GROK and not VB: sys.exit('ELEVENLABS_API_KEY needed to voice the take')
             audio, al = tts_call(full, NARRATOR); open(mp3, 'wb').write(audio)
             json.dump(al if al else {'cuts': silence_cuts(mp3, texts)}, open(js, 'w'))
             print(f'voiced one take: scenes {rn[0]}-{rn[-1]}', flush=True)

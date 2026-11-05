@@ -1,0 +1,30 @@
+{
+ "format": "short", "style": "anime", "voice": "vb-chatterbox-default", "captions": false,
+ "tts": {"provider": "voicebox", "engine": "chatterbox", "one_take": true},
+ "grade": {"preset": "coldSteel", "amount": 0.35, "sat": 0.9},
+ "hero": {"hairStyle": "long", "hair": "#2a1a14", "hairH": "#5a3a2a", "outfit": "hoodie", "body": "#4a5a7a", "skin": "#f0d2bc", "skinS": "#d0a68a"},
+ "yt": {
+  "title": "Our Baby Monitor Counted 3 People. We Have 2 Kids. 😨 #horror #shorts",
+  "description": "3:07 AM. The baby monitor app said there were three people in the nursery. There are two.\n\n🎧 headphones on. Would you have checked the room?\n\n#scarystories #horror #3amstories #babymonitor #creepy #shorts",
+  "tags": ["scary stories", "baby monitor horror", "horror short", "3am stories", "creepy", "smart home horror", "shorts"]
+ },
+ "scenes": [
+  {"scene": "alert", "p": {"clock": "3:07", "buzz": true, "msgs": [["3:07 AM", "Nursery", "3 people detected", 0.3, true]], "push": 0.03}, "text": "Our baby monitor counts people.", "pause": 0.05},
+  {"scene": "nursery", "p": {"cam": {"time": "3:07 AM", "label": "NURSERY"}, "count": 3, "push": 0.04, "pops": [{"at": 0.4, "type": "date", "text": "3:07 AM", "x": 0.5, "y": 0.86}]}, "text": "At 3:07 last night, it counted three.", "pause": 0.1},
+  {"scene": "nursery", "p": {"cam": {"time": "3:07 AM", "label": "NURSERY", "s0": 4}, "dets": [{"x": 330, "y": 1060, "w": 420, "h": 300, "label": "PERSON 1", "at": 0.2}, {"x": 990, "y": 1160, "w": 380, "h": 280, "label": "PERSON 2", "at": 0.6}], "push": 0.02}, "text": "There are two people in that nursery.", "pause": 0.05},
+  {"scene": "nursery", "p": {"cam": {"time": "3:07 AM", "label": "NURSERY", "s0": 7}, "focus": 700, "snap": {"at": 0.1, "to": [800, 1200], "z": 1.5}, "pops": [{"at": 0.2, "type": "label", "text": "MIA, 4", "x": 0.3, "y": 0.35}, {"at": 1.6, "type": "label", "text": "THEO, 8 MONTHS", "x": 0.62, "y": 0.42}]}, "text": "Mia. She's four. And Theo. Eight months.", "pause": 0.1},
+  {"scene": "alert", "p": {"clock": "3:07", "msgs": [["3:07 AM", "Nursery", "3 people detected", 0, true]], "live": {"at": 0.5, "label": "NURSERY", "y": 1060}, "push": 0.05}, "text": "So I opened the camera.", "pause": 0.05},
+  {"scene": "nursery", "p": {"cam": {"time": "3:08 AM", "label": "NURSERY"}, "push": 0.06}, "text": "Two cribs. Two kids. Both asleep.", "pause": 0.1},
+  {"scene": "bed", "p": {"phone": true, "eyes": "tired", "look": 0.2, "time": [3, 9], "push": 0.02}, "text": "A glitch, I told myself.", "pause": 0.3},
+  {"scene": "alert", "p": {"clock": "3:12", "buzz": true, "msgs": [["3:12 AM", "Nursery", "Person detected", 0.5, true]], "push": 0.04}, "text": "But at 3:12, my phone buzzed again.", "pause": 0.05},
+  {"scene": "nursery", "p": {"cam": {"time": "3:12 AM", "label": "NURSERY"}, "dets": [{"x": 900, "y": 520, "w": 300, "h": 640, "label": "PERSON", "at": 0.1, "to": [1450, 420], "red": true, "empty": true}], "push": 0.02}, "text": "Person detected. Leaving nursery.", "pause": 0.1},
+  {"scene": "nursery", "p": {"cam": {"time": "3:12 AM", "label": "NURSERY", "s0": 5}, "focus": 1600, "snap": {"at": 0.2, "to": [1600, 780], "z": 1.9}}, "text": "The nursery door never moved.", "pause": 0.35},
+  {"scene": "hallcam", "p": {"cam": {"time": "3:12 AM", "label": "HALLWAY"}, "dets": [{"x": 860, "y": 760, "w": 200, "h": 420, "label": "PERSON", "at": 0.8, "to": [700, 760], "red": true, "empty": true}], "push": 0.05}, "text": "Then the hallway camera. Person detected. Walking.", "pause": 0.1},
+  {"scene": "alert", "p": {"clock": "3:13", "buzz": true, "msgs": [["3:12 AM", "Hallway", "Person detected", 0, false], ["3:13 AM", "Master bedroom", "Person detected", 0.6, true]], "push": 0.04}, "text": "Then. Person detected. Master bedroom.", "pause": 0.15},
+  {"scene": "bed", "p": {"phone": true, "eyes": "wide", "look": -0.8, "sweat": true, "push": 0.08}, "text": "[gasp] That's my room. I was lying in it. It was empty.", "pause": 0.35},
+  {"scene": "alert", "p": {"clock": "3:13", "title": "NestWatch", "sub": "Home · CAM 3 connected", "live": {"at": 0.4, "label": "CAM 3", "y": 900}, "push": 0.05}, "text": "Except the app had opened a live view I'd never seen before.", "pause": 0.1},
+  {"scene": "bedTop", "p": {"cam": {"time": "3:13 AM", "label": "CAM 3 · MASTER BEDROOM"}, "dets": [{"x": 500, "y": 330, "w": 440, "h": 620, "label": "PERSON 1", "at": 1.2}], "push": 0.07}, "text": "My bed. From the ceiling. Me, staring at my phone.", "pause": 0.4},
+  {"scene": "alert", "p": {"clock": "3:13", "title": "Devices", "sub": "Home", "devices": [["Nursery", "Online", 0.2, false], ["Hallway", "Online", 0.8, false]], "push": 0.03}, "text": "We own two cameras. The nursery and the hallway.", "pause": 0.1},
+  {"scene": "alert", "p": {"clock": "3:13", "title": "Devices", "sub": "Home", "big": "3 CONNECTED", "devices": [["Nursery", "Online", 0, false], ["Hallway", "Online", 0, false], ["CAM 3", "Unknown device · Online", 0.9, true]], "push": 0.05}, "text": "The app says we're connected to three.", "pause": 1.2}
+ ]
+}

@@ -2079,3 +2079,107 @@ S.paint = (t, d, p) => {
     ${p.dim ? `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#000" opacity="${p.dim}"/>` : ''}${tears}${box}${cam}`;
 };
 FOCUS.paint = 960;
+
+// ---------- 037 The Third Camera: smart-camera horror kit (night-vision feeds, detection boxes, the camera app) ----------
+// p.dets = [{ x, y, w, h, label, at, to: [x2, y2] (box slides there over the scene), red, empty }] — the app's "person" boxes
+function dets(t, d, p) {
+  return (p.dets || []).map((b) => {
+    const k = clamp((t - (b.at || 0)) / 0.25); if (k <= 0) return '';
+    const m = b.to ? ease(clamp((t - (b.at || 0)) / Math.max(0.5, d - (b.at || 0)))) : 0;
+    const x = b.x + (b.to ? (b.to[0] - b.x) * m : 0), y = b.y + (b.to ? (b.to[1] - b.y) * m : 0);
+    const c = b.red ? '#ff3b3b' : '#3dff8a', jit = b.empty ? Math.sin(t * 31) * 4 : 0, L = esc3(b.label || 'PERSON');
+    return `<g opacity="${k}" transform="translate(${jit},0)"><rect x="${x}" y="${y}" width="${b.w}" height="${b.h}" fill="${c}" fill-opacity=".05" stroke="${c}" stroke-width="7"/>
+      <rect x="${x}" y="${y - 58}" width="${L.length * 26 + 40}" height="52" fill="${c}"/>
+      <text x="${x + 20}" y="${y - 20}" font-family="Courier New, monospace" font-weight="700" font-size="40" fill="#04140a">${L}</text></g>`;
+  }).join('');
+}
+function crib(x, y, s, kidO, baby) {
+  const bars = Array.from({ length: 11 }, (_, i) => `<rect x="${-300 + i * 58}" y="-150" width="16" height="300" rx="8" fill="#c9d6cf" stroke="${INK}" stroke-width="4"/>`).join('');
+  return `<g transform="translate(${x},${y}) scale(${s})">
+    <rect x="-330" y="40" width="660" height="150" rx="16" fill="#3a4a44" stroke="${INK}" stroke-width="7"/>
+    <rect x="-300" y="-20" width="600" height="90" rx="30" fill="#dfe8e2"/>
+    <g transform="translate(-120,-10) scale(${baby ? 0.42 : 0.55})">${head(0, 0, 1, { eyes: 'closed', ...kidO })}</g>
+    <path d="M-60 -20 Q120 -90 300 -10 L300 70 L-60 70Z" fill="${baby ? '#7aa894' : '#8c7ab0'}" stroke="${INK}" stroke-width="6"/>
+    <rect x="-330" y="-170" width="660" height="34" rx="14" fill="#e6efe9" stroke="${INK}" stroke-width="7"/>${bars}
+    <rect x="-350" y="-190" width="40" height="420" rx="14" fill="#e6efe9" stroke="${INK}" stroke-width="7"/><rect x="310" y="-190" width="40" height="420" rx="14" fill="#e6efe9" stroke="${INK}" stroke-width="7"/>
+  </g>`;
+}
+// night-vision nursery feed. p: count (number shown in the app badge), door ('closed'), dets, mobile
+S.nursery = (t, d, p) => `<rect width="1920" height="1920" fill="#0d1612"/>
+  <rect y="0" width="1920" height="1180" fill="#16231d"/><rect y="1180" width="1920" height="740" fill="#0f1814"/>
+  <g opacity=".5">${Array.from({ length: 9 }, (_, i) => `<circle cx="${140 + i * 210}" cy="300" r="34" fill="#22342b"/>`).join('')}</g>
+  <rect x="150" y="420" width="380" height="460" fill="#cfe8da" opacity=".16" stroke="#2a3e33" stroke-width="16"/><path d="M340 420 V880 M150 650 H530" stroke="#2a3e33" stroke-width="14"/>
+  <circle cx="440" cy="520" r="46" fill="#e8fff2" opacity=".55"/>
+  <path d="M110 400 Q160 650 120 920 L200 920 Q230 650 190 400Z" fill="#2a3a32"/><path d="M570 400 Q520 650 560 920 L480 920 Q450 650 490 400Z" fill="#2a3a32"/>
+  <g transform="translate(1600,0)"><rect x="-150" y="380" width="300" height="800" fill="#1d2b24" stroke="#33463b" stroke-width="12"/><circle cx="100" cy="800" r="16" fill="#9fb8a9"/>
+    <path d="M-20 500 l14 30 l32 4 l-24 22 l6 32 l-28 -16 l-28 16 l6 -32 l-24 -22 l32 -4z" fill="#d8e8a0" opacity=".7"/></g>
+  <circle cx="1280" cy="1150" r="22" fill="#fff4b0"/><circle cx="1280" cy="1150" r="140" fill="#fff4b0" opacity=".08"/>
+  ${crib(520, 1250, 0.95, {}, false)}${crib(1180, 1330, 0.85, {}, true)}
+  <g transform="translate(1180,${760 + Math.sin(t) * 6}) rotate(${Math.sin(t * 0.6) * 8})"><line x1="0" y1="-760" x2="0" y2="0" stroke="#9fb8a9" stroke-width="5"/><path d="M-160 0 H160" stroke="#9fb8a9" stroke-width="7"/>
+    ${[-150, -50, 50, 150].map((mx, i) => `<line x1="${mx}" y1="0" x2="${mx}" y2="70" stroke="#9fb8a9" stroke-width="3"/><circle cx="${mx}" cy="92" r="24" fill="${['#c9b3ff', '#ffe3a0', '#a8f0d0', '#ffb3c7'][i]}" opacity=".75"/>`).join('')}</g>
+  <rect x="${-200 + ((t * 160) % 2400)}" width="120" height="1920" fill="#fff" opacity=".025"/>
+  ${dets(t, d, p)}
+  ${p.count != null ? `<g transform="translate(1180,260)"><rect x="0" y="-70" width="560" height="100" rx="50" fill="${p.count > 2 ? '#ff3b3b' : '#1e3a2c'}" opacity=".92"/>
+    <text x="280" y="2" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="52" fill="#fff">PEOPLE: ${p.count}</text></g>` : ''}`;
+FOCUS.nursery = 960;
+// CCTV in the hallway ceiling corner, looking down the corridor. p.dets slide toward the camera.
+S.hallcam = (t, d, p) => `<rect width="1920" height="1920" fill="#0b120f"/>
+  <path d="M0 0 L760 640 L1160 640 L1920 0Z" fill="#121d18"/><path d="M0 1920 L760 1240 L1160 1240 L1920 1920Z" fill="#17241e"/>
+  <path d="M0 0 L760 640 L760 1240 L0 1920Z" fill="#1a2822"/><path d="M1920 0 L1160 640 L1160 1240 L1920 1920Z" fill="#15221c"/>
+  <rect x="760" y="640" width="400" height="600" fill="#0a0f0c"/><rect x="900" y="780" width="120" height="460" fill="#16231d" stroke="#2a3e33" stroke-width="6"/>
+  <path d="M250 420 L560 650 L560 1330 L250 1580Z" fill="#1f2f27" stroke="#33463b" stroke-width="10"/><path d="M440 900 l10 22 l24 3 l-18 16 l5 24 l-21 -12 l-21 12 l5 -24 l-18 -16 l24 -3z" fill="#d8e8a0" opacity=".6"/>
+  <path d="M1670 420 L1360 650 L1360 1330 L1670 1580Z" fill="#1f2f27" stroke="#33463b" stroke-width="10"/>
+  <circle cx="960" cy="1210" r="10" fill="#fff4b0"/><circle cx="960" cy="1210" r="90" fill="#fff4b0" opacity=".07"/>
+  ${Array.from({ length: 6 }, (_, i) => `<rect x="${700 - i * 60}" y="${1300 + i * 100}" width="${520 + i * 120}" height="6" fill="#22332b" opacity=".6"/>`).join('')}
+  <rect x="${-200 + ((t * 160) % 2400)}" width="120" height="1920" fill="#fff" opacity=".025"/>
+  ${dets(t, d, p)}`;
+FOCUS.hallcam = 960;
+// a phone in a hand, the camera app open. p.msgs = [[time, title, body, at, red]], p.devices = [[name, status, at, red]], p.live (thumbnail of CAM 3)
+S.alert = (t, d, p) => {
+  const card = (m, i) => { const k = clamp((t - (m[3] || 0)) / 0.25); if (k <= 0) return ''; const y = 760 + i * 230 - (1 - ease(k)) * 60, red = m[4];
+    return `<g opacity="${k}"><rect x="610" y="${y}" width="700" height="200" rx="34" fill="${red ? '#3a0f12' : '#1b2430'}" stroke="${red ? '#ff3b3b' : '#2e3c50'}" stroke-width="5"/>
+      <circle cx="680" cy="${y + 64}" r="30" fill="${red ? '#ff3b3b' : '#3dff8a'}"/><path d="M666 ${y + 64} h28 M680 ${y + 50} v28" stroke="#04140a" stroke-width="6"/>
+      <text x="730" y="${y + 58}" font-family="Inter, Arial" font-weight="800" font-size="36" fill="#fff">${esc3(m[1])}</text>
+      <text x="1280" y="${y + 58}" text-anchor="end" font-family="Inter, Arial" font-size="28" fill="#8a9bb0">${esc3(m[0])}</text>
+      <text x="650" y="${y + 140}" font-family="Inter, Arial" font-size="34" fill="${red ? '#ffb3b3' : '#c8d4e4'}">${esc3(m[2])}</text></g>`; };
+  const dev = (m, i) => { const k = clamp((t - (m[2] || 0)) / 0.25); if (k <= 0) return ''; const y = 820 + i * 170, red = m[3], g = red && Math.floor(t * 12) % 7 === 0 ? 8 : 0;
+    return `<g opacity="${k}" transform="translate(${g},0)"><rect x="610" y="${y}" width="700" height="140" rx="28" fill="${red ? '#3a0f12' : '#1b2430'}" stroke="${red ? '#ff3b3b' : '#2e3c50'}" stroke-width="5"/>
+      <rect x="650" y="${y + 35}" width="90" height="70" rx="14" fill="#0b0f14" stroke="${red ? '#ff3b3b' : '#3dff8a'}" stroke-width="5"/><circle cx="695" cy="${y + 70}" r="16" fill="${red ? '#ff3b3b' : '#3dff8a'}"/>
+      <text x="770" y="${y + 66}" font-family="Inter, Arial" font-weight="800" font-size="38" fill="#fff">${esc3(m[0])}</text>
+      <text x="770" y="${y + 112}" font-family="Inter, Arial" font-size="30" fill="${red ? '#ff8a8a' : '#3dff8a'}">${esc3(m[1])}</text></g>`; };
+  return `<rect width="1920" height="1920" fill="#050608"/><circle cx="960" cy="1000" r="1000" fill="url(#cold)" opacity=".35"/>
+    <circle cx="300" cy="400" r="60" fill="#3a4a6a" opacity=".25"/><circle cx="1650" cy="300" r="40" fill="#6a3a3a" opacity=".2"/>
+    <rect x="560" y="300" width="800" height="1560" rx="90" fill="#0a0a0c" stroke="#2a2d33" stroke-width="14"/>
+    <rect x="585" y="330" width="750" height="1500" rx="70" fill="#0e131a"/>
+    <text x="640" y="450" font-family="Inter, Arial" font-size="34" fill="#8a9bb0">${esc3(p.clock || '3:07')}</text><rect x="900" y="410" width="120" height="34" rx="17" fill="#000"/>
+    <text x="640" y="560" font-family="Inter, Arial" font-weight="900" font-size="58" fill="#fff">${esc3(p.title || 'NestWatch')}</text>
+    <text x="640" y="620" font-family="Inter, Arial" font-size="32" fill="#8a9bb0">${esc3(p.sub || 'Home · 2 cameras')}</text>
+    ${p.big ? `<text x="960" y="${p.devices || p.msgs ? 740 : 1100}" text-anchor="middle" font-family="Inter, Arial" font-weight="900" font-size="${p.devices || p.msgs ? 70 : 150}" fill="#ff3b3b" opacity="${ease(t / 0.3)}">${esc3(p.big)}</text>` : ''}
+    ${(p.msgs || []).map(card).join('')}${(p.devices || []).map(dev).join('')}
+    ${p.live ? `<g opacity="${ease((t - (p.live.at || 0)) / 0.3)}"><rect x="610" y="${p.live.y || 1180}" width="700" height="520" rx="30" fill="#101814" stroke="#ff3b3b" stroke-width="6"/>
+      <rect x="760" y="${(p.live.y || 1180) + 120}" width="400" height="300" rx="20" fill="#2a3a32"/><rect x="800" y="${(p.live.y || 1180) + 150}" width="320" height="80" rx="30" fill="#c9d6cf"/>
+      <circle cx="960" cy="${(p.live.y || 1180) + 250}" r="44" fill="#d9c6b0" stroke="${INK}" stroke-width="5"/><rect x="930" y="${(p.live.y || 1180) + 300}" width="60" height="40" rx="8" fill="#bfe6ff"/>
+      ${Array.from({ length: 14 }, (_, i) => `<rect x="610" y="${(p.live.y || 1180) + ((i * 37 + t * 900) % 520)}" width="700" height="3" fill="#fff" opacity=".08"/>`).join('')}
+      <rect x="640" y="${(p.live.y || 1180) + 30}" width="220" height="56" rx="10" fill="#ff3b3b"/><text x="750" y="${(p.live.y || 1180) + 70}" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="36" fill="#fff">● LIVE</text>
+      <text x="1280" y="${(p.live.y || 1180) + 70}" text-anchor="end" font-family="Courier New, monospace" font-weight="700" font-size="36" fill="#ff8a8a">${esc3(p.live.label || 'CAM 3')}</text></g>` : ''}
+    ${[-210, -70, 70, 210].map((fx, i) => `<ellipse cx="${960 + fx}" cy="1860" rx="70" ry="110" fill="url(#skin)" stroke="${INK}" stroke-width="7"/>`).join('')}
+    <ellipse cx="540" cy="1300" rx="70" ry="140" fill="url(#skin)" stroke="${INK}" stroke-width="7"/>
+    ${p.buzz && (t % 0.5) < 0.25 && t < 1.2 ? '<rect width="1920" height="1920" fill="#fff" opacity=".04"/>' : ''}`;
+};
+FOCUS.alert = 960;
+// seen from the ceiling: the bed, the lead lying awake with her phone. Night-vision, CAM 3 view. p.dets
+S.bedTop = (t, d, p) => `<rect width="1920" height="1920" fill="#0d1612"/>
+  <rect x="160" y="160" width="1600" height="1600" fill="#14201a"/><path d="M160 160 h1600 v1600 h-1600z" fill="none" stroke="#1f2f27" stroke-width="12"/>
+  <rect x="1500" y="240" width="200" height="200" rx="20" fill="#1d2b24" stroke="#2a3e33" stroke-width="8"/><circle cx="1600" cy="340" r="40" fill="#fff4b0" opacity=".25"/>
+  <rect x="460" y="300" width="1000" height="1360" rx="40" fill="#2a3a32" stroke="${INK}" stroke-width="9"/>
+  <rect x="500" y="340" width="420" height="230" rx="60" fill="#cfdcd4" stroke="${INK}" stroke-width="7"/><rect x="1000" y="340" width="420" height="230" rx="60" fill="#cfdcd4" stroke="${INK}" stroke-width="7"/>
+  <path d="M560 470 Q700 330 860 470 Q900 640 840 720 L580 720 Q520 640 560 470Z" fill="${(HERO && HERO.hair) || "#1a1412"}" stroke="${INK}" stroke-width="6"/>
+  ${head(710, 560, 0.95, { eyes: 'wide', look: 0, glow: 'phoneGlow', light: '#9fd2ff', mouth: 'o' })}
+  <path d="M470 760 Q960 690 1450 760 L1450 1640 L470 1640Z" fill="url(#blanket)" stroke="${INK}" stroke-width="8"/>
+  <path d="M600 780 Q700 900 640 1100 Q760 1200 900 1150 M560 1300 q200 60 420 0" stroke="#3a4a66" stroke-width="10" fill="none" opacity=".6"/>
+  <g transform="translate(710,800)"><rect x="-80" y="-30" width="160" height="90" rx="14" fill="#0c0c0c" stroke="#d8eeff" stroke-width="6"/><rect x="-68" y="-20" width="136" height="70" rx="8" fill="#dff1ff"/>
+    <ellipse cx="-100" cy="20" rx="26" ry="34" fill="url(#skin)" stroke="${INK}" stroke-width="6"/><ellipse cx="100" cy="20" rx="26" ry="34" fill="url(#skin)" stroke="${INK}" stroke-width="6"/></g>
+  <circle cx="710" cy="760" r="320" fill="#bfe3ff" opacity=".08"/>
+  <rect x="${-200 + ((t * 160) % 2400)}" width="120" height="1920" fill="#fff" opacity=".025"/>
+  ${dets(t, d, p)}`;
+FOCUS.bedTop = 960;
