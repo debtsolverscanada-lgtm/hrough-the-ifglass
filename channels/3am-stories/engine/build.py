@@ -252,7 +252,7 @@ ass = f'{WK}/caps.ass'
 def ts(x): return f'{int(x // 3600)}:{int(x % 3600 // 60):02d}:{x % 60:05.2f}'
 head = ('[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\n\n[V4+ Styles]\n'
         'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\n'
-        + ('Style: Cap,Inter Display Black,78,&H00FFFFFF,&H000000FF,&H00000000,&H96000000,1,1,0,0,100,100,0,0,1,6,2,2,60,60,760,1\n\n' if ST.get('captions') == 'soft' else
+        + ('Style: Cap,Inter Display Black,78,&H00FFFFFF,&H000000FF,&H00000000,&H96000000,1,1,0,0,100,100,0,0,1,6,2,2,60,60,520,1\n\n' if ST.get('captions') == 'soft' else
            'Style: Cap,Permanent Marker,84,&H00FFFFFF,&H000000FF,&H00000000,&H96000000,0,0,0,0,100,100,1,0,1,7,3,2,60,60,560,1\n\n')
         + 
         '[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n')

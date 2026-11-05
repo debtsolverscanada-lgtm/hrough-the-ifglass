@@ -1,0 +1,313 @@
+{
+ "format": "short",
+ "style": "soft",
+ "voice": "vb-kokoro-af_heart",
+ "captions": "soft",
+ "tts": {
+  "provider": "voicebox",
+  "engine": "kokoro",
+  "vb_voice": "af_heart",
+  "one_take": true
+ },
+ "yt": {
+  "title": "Mom Knocked On My Door. Then She Texted: \"I'm Not Home.\" 😨 #horror #shorts",
+  "description": "3:41 AM. Your mom knocks on your door. Your phone lights up. It's Mom: \"Don't open your door. I'm not home.\"\n\nPart 1. Which one do you let in? Comment below.\n\n#scarystories #horror #3amstories #dontopenthedoor #creepy #shorts",
+  "tags": [
+   "scary stories",
+   "horror short",
+   "3am stories",
+   "dont open the door",
+   "creepy texts",
+   "animated horror",
+   "shorts"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "sDoor",
+   "p": {
+    "knock": true,
+    "tag": [
+     "3:41 AM",
+     "YOUR ROOM"
+    ],
+    "push": 0.03
+   },
+   "text": "Your mom just knocked on your bedroom door.",
+   "pause": 0.1
+  },
+  {
+   "scene": "sDoor",
+   "p": {
+    "feet": true,
+    "tag": [
+     "3:41 AM",
+     "YOUR ROOM"
+    ],
+    "push": 0.05
+   },
+   "text": "\"Sweetie? Can I come in?\"",
+   "pause": 0.15
+  },
+  {
+   "scene": "sBed",
+   "p": {
+    "hstyle": "short",
+    "hair": "#2a1a14",
+    "eyes": "open",
+    "mouth": "flat",
+    "tag": [
+     "3:41 AM",
+     "YOUR BED"
+    ],
+    "push": 0.03
+   },
+   "text": "But your phone lights up. It's Mom.",
+   "pause": 0.05
+  },
+  {
+   "scene": "sChat",
+   "p": {
+    "clock": "3:41",
+    "chat": [
+     [
+      "l",
+      "Don't open your door.",
+      0.2
+     ]
+    ],
+    "tag": [
+     "3:41 AM",
+     "TEXT FROM MOM"
+    ]
+   },
+   "text": "\"Don't open your door.\"",
+   "pause": 0.1
+  },
+  {
+   "scene": "sChat",
+   "p": {
+    "clock": "3:41",
+    "chat": [
+     [
+      "l",
+      "Don't open your door.",
+      0
+     ],
+     [
+      "l",
+      "I'm at the hospital with Grandpa. I'm not home.",
+      0.3,
+      true
+     ]
+    ],
+    "tag": [
+     "3:41 AM",
+     "TEXT FROM MOM"
+    ]
+   },
+   "text": "\"I'm at the hospital with Grandpa. I'm not home.\"",
+   "pause": 0.1
+  },
+  {
+   "scene": "sDoor",
+   "p": {
+    "knock": true,
+    "feet": true,
+    "tag": [
+     "3:42 AM",
+     "YOUR ROOM"
+    ],
+    "push": 0.06
+   },
+   "text": "Knock. Knock. \"Sweetie. Open the door.\"",
+   "pause": 0.2
+  },
+  {
+   "scene": "sFace",
+   "p": {
+    "hstyle": "short",
+    "hair": "#2a1a14",
+    "eyes": "wide",
+    "mouth": "worry",
+    "tag": [
+     "3:42 AM",
+     "YOUR BED"
+    ],
+    "push": 0.05
+   },
+   "text": "So you test her.",
+   "pause": 0.05
+  },
+  {
+   "scene": "sChat",
+   "p": {
+    "clock": "3:42",
+    "chat": [
+     [
+      "l",
+      "I'm at the hospital with Grandpa. I'm not home.",
+      0
+     ],
+     [
+      "r",
+      "If you're really Mom, what did we name the goldfish?",
+      0.2
+     ]
+    ],
+    "tag": [
+     "3:42 AM",
+     "YOUR PHONE"
+    ]
+   },
+   "text": "\"If you're really Mom, what did we name the goldfish?\"",
+   "pause": 0.05
+  },
+  {
+   "scene": "sChat",
+   "p": {
+    "clock": "3:42",
+    "chat": [
+     [
+      "r",
+      "If you're really Mom, what did we name the goldfish?",
+      0
+     ]
+    ],
+    "typing": 0.1,
+    "tag": [
+     "3:42 AM",
+     "YOUR PHONE"
+    ]
+   },
+   "text": "Typing.",
+   "pause": 0.6
+  },
+  {
+   "scene": "sChat",
+   "p": {
+    "clock": "3:42",
+    "chat": [
+     [
+      "r",
+      "If you're really Mom, what did we name the goldfish?",
+      0
+     ],
+     [
+      "l",
+      "Bubbles. Why?",
+      0.15
+     ]
+    ],
+    "tag": [
+     "3:42 AM",
+     "YOUR PHONE"
+    ]
+   },
+   "text": "\"Bubbles. Why?\"",
+   "pause": 0.2
+  },
+  {
+   "scene": "sFish",
+   "p": {
+    "tag": [
+     "3:43 AM",
+     "YOUR DESK"
+    ],
+    "push": 0.04
+   },
+   "text": "Then, through the door, very quietly:",
+   "pause": 0.1
+  },
+  {
+   "scene": "sDoor",
+   "p": {
+    "feet": true,
+    "light": false,
+    "tag": [
+     "3:43 AM",
+     "YOUR ROOM"
+    ],
+    "push": 0.09
+   },
+   "text": "\"Bubbles.\"",
+   "pause": 0.6
+  },
+  {
+   "scene": "sChat",
+   "p": {
+    "clock": "3:43",
+    "chat": [
+     [
+      "l",
+      "Bubbles. Why?",
+      0
+     ],
+     [
+      "l",
+      "I'm pulling into the driveway now.",
+      0.2
+     ]
+    ],
+    "tag": [
+     "3:43 AM",
+     "TEXT FROM MOM"
+    ]
+   },
+   "text": "\"I'm pulling into the driveway now.\"",
+   "pause": 0.1
+  },
+  {
+   "scene": "sWindow",
+   "p": {
+    "sweep": 0.2,
+    "tag": [
+     "3:43 AM",
+     "YOUR WINDOW"
+    ],
+    "push": 0.03
+   },
+   "text": "Headlights sweep across your window.",
+   "pause": 0.2
+  },
+  {
+   "scene": "sDoor",
+   "p": {
+    "feet": true,
+    "tag": [
+     "3:43 AM",
+     "YOUR ROOM"
+    ],
+    "push": 0.05
+   },
+   "text": "And the voice outside your door says:",
+   "pause": 0.15
+  },
+  {
+   "scene": "sFace",
+   "p": {
+    "hstyle": "short",
+    "hair": "#2a1a14",
+    "eyes": "wide",
+    "mouth": "o",
+    "tag": [
+     "3:43 AM",
+     "YOUR BED"
+    ],
+    "push": 0.08
+   },
+   "text": "\"Don't let her in. That's not me.\"",
+   "pause": 0.8
+  },
+  {
+   "scene": "sEnd",
+   "p": {
+    "title": "DON'T OPEN THE DOOR",
+    "part": "PART 1",
+    "q": "Which one do you let in?"
+   },
+   "text": "Which one do you let in?",
+   "pause": 1.4
+  }
+ ]
+}

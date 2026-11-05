@@ -2234,14 +2234,14 @@ const sRoomBack = (lamp = true) => `${SOFT_DEFS}<rect width="1920" height="1920"
 S.sBed = (t, d, p) => `${sRoomBack(p.lamp !== false)}
   <rect x="560" y="880" width="900" height="120" rx="40" fill="#2a3b66"/><rect x="520" y="980" width="980" height="560" rx="60" fill="${SOFT.bed}"/>
   <rect x="620" y="920" width="420" height="170" rx="70" fill="${SOFT.pillow}"/>
-  ${sHead(820, 1000 + Math.sin(t * 1.6) * 3, 1.15, { eyes: p.eyes || 'open', mouth: p.mouth, style: 'bun', hair: '#4a2a1e', glow: p.phone !== false })}
+  ${sHead(820, 1000 + Math.sin(t * 1.6) * 3, 1.15, { eyes: p.eyes || 'open', mouth: p.mouth, style: p.hstyle || 'bun', hair: p.hair || '#4a2a1e', glow: p.phone !== false })}
   <path d="M480 1120 Q960 1040 1540 1120 L1560 1640 L460 1640Z" fill="url(#sBlanket)"/><path d="M620 1200 q140 -30 280 0 M1020 1180 q160 -20 300 10" stroke="#6e5cb8" stroke-width="10" fill="none" stroke-linecap="round" opacity=".7"/>
   ${p.phone !== false ? sPhoneSmall(820, 1150, 1.1) : ''}`;
 FOCUS.sBed = 900;
 // close-up of a face on the pillow. p: eyes, mouth, glow, hair, style
 S.sFace = (t, d, p) => `${SOFT_DEFS}<rect width="1920" height="1920" fill="${SOFT.night}"/>
   <rect x="200" y="400" width="1520" height="900" rx="200" fill="${SOFT.pillow}" opacity=".9"/>
-  ${sHead(960, 900 + Math.sin(t * 1.4) * 4, 3.2, { eyes: p.eyes || 'wide', mouth: p.mouth || 'flat', style: p.style || 'bun', hair: p.hair || '#4a2a1e', glow: p.glow !== false })}
+  ${sHead(960, 900 + Math.sin(t * 1.4) * 4, 3.2, { eyes: p.eyes || 'wide', mouth: p.mouth || 'flat', style: p.hstyle || 'bun', hair: p.hair || '#4a2a1e', glow: p.glow !== false })}
   <path d="M0 1380 Q960 1260 1920 1380 L1920 1920 L0 1920Z" fill="url(#sBlanket)"/>`;
 FOCUS.sFace = 960;
 function sCrib(x, y, s, kidO) {
@@ -2286,3 +2286,63 @@ S.sCeil = (t, d, p) => `${SOFT_DEFS}<rect width="1920" height="1920" fill="#1426
   <rect width="1920" height="1920" fill="#3dff8a" opacity=".06"/>${Array.from({ length: 30 }, (_, k) => `<rect y="${k * 64 + (t * 40) % 64}" width="1920" height="2" fill="#fff" opacity=".04"/>`).join('')}
   ${dets(t, d, p)}`;
 FOCUS.sCeil = 960;
+
+// ---------- soft kit, part 2: the bedroom door, the chat, the goldfish, the window, the end card ----------
+// inside the bedroom looking at the closed door. p.knock (shake), p.feet (two shadows in the light gap), p.light (hall light on)
+S.sDoor = (t, d, p) => {
+  const k = p.knock ? (Math.floor(t * 2.4) % 3 === 0 && (t % (1 / 2.4)) < 0.1 ? 7 : 0) : 0, lit = p.light !== false;
+  return `${SOFT_DEFS}<rect width="1920" height="1920" fill="url(#sWall)"/><rect y="1520" width="1920" height="400" fill="${SOFT.floor}"/>
+    <rect x="640" y="420" width="640" height="1110" rx="10" fill="#1a2440"/><g transform="translate(${k},0)"><rect x="670" y="450" width="580" height="1072" rx="8" fill="#2c3d6c"/>
+    <rect x="730" y="520" width="460" height="400" rx="14" fill="#33477a"/><rect x="730" y="980" width="460" height="460" rx="14" fill="#33477a"/>
+    <circle cx="1180" cy="1000" r="22" fill="#c9b8e8"/><rect x="1176" y="1000" width="40" height="12" rx="6" fill="#c9b8e8"/></g>
+    ${lit ? `<rect x="670" y="1516" width="580" height="12" fill="#ffd9a0"/><path d="M670 1528 L1250 1528 L1420 1920 L500 1920Z" fill="#ffd9a0" opacity=".12"/>` : ''}
+    ${p.feet ? `<rect x="820" y="1516" width="90" height="12" fill="#0a0d18"/><rect x="1010" y="1516" width="90" height="12" fill="#0a0d18"/><path d="M820 1528 L910 1528 L960 1920 L800 1920Z" fill="#0a0d18" opacity=".5"/><path d="M1010 1528 L1100 1528 L1180 1920 L1030 1920Z" fill="#0a0d18" opacity=".5"/>` : ''}
+    <rect x="200" y="1200" width="260" height="330" rx="20" fill="#2a2140"/><circle cx="330" cy="1130" r="80" fill="#9fd4ff" opacity=".35"/><path d="M270 1150 q60 -60 120 0 q-60 60 -120 0" fill="#ffad5a" opacity=".8"/>`;
+};
+FOCUS.sDoor = 960;
+// the phone in hand with a chat thread. p.who (contact), p.chat = [[side 'l'|'r', text, at, photo?]], p.typing (at), p.clock
+S.sChat = (t, d, p) => {
+  let y = 700;
+  const bub = (m) => { const k = clamp((t - (m[2] || 0)) / 0.2); if (k <= 0) return ''; const L = String(m[1]), lines = [];
+    let cur = ''; for (const w of L.split(' ')) { if ((cur + ' ' + w).trim().length > 22) { lines.push(cur.trim()); cur = w; } else cur += ' ' + w; } if (cur.trim()) lines.push(cur.trim());
+    const h = (m[3] ? 260 : 0) + lines.length * 52 + 40, w = m[3] ? 420 : Math.min(560, Math.max(...lines.map((l) => l.length)) * 23 + 60), r = m[0] === 'r', x = r ? 1300 - w : 620;
+    const g = `<g opacity="${k}" transform="translate(0,${(1 - k) * 20})"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="34" fill="${r ? '#3a7bff' : '#2a3150'}"/>
+      ${m[3] ? `<g transform="translate(${x + 20},${y + 20})"><rect width="${w - 40}" height="230" rx="20" fill="#dfe8f2"/><rect x="40" y="110" width="${w - 120}" height="70" rx="20" fill="#9fb8d8"/><rect x="${w - 140}" y="30" width="60" height="120" rx="8" fill="#7a8aa8"/>${sHead(110, 90, 0.45, { eyes: 'closed', mouth: 'flat', style: 'short', hair: '#cfcfd8' })}<path d="M${w - 110} 50 l20 0 m-10 -10 l0 20" stroke="#e05050" stroke-width="6"/></g>` : ''}
+      ${lines.map((l, i) => `<text x="${x + 30}" y="${y + (m[3] ? 260 : 0) + 58 + i * 52}" font-family="Inter, Arial" font-size="40" fill="#fff">${esc3(l)}</text>`).join('')}</g>`;
+    y += h + 26; return g; };
+  const msgs = (p.chat || []).map(bub).join('');
+  const typing = p.typing != null && t >= p.typing ? `<g transform="translate(620,${y})"><rect width="150" height="80" rx="40" fill="#2a3150"/>${[0, 1, 2].map((i) => `<circle cx="${42 + i * 34}" cy="40" r="10" fill="#9fb0d8" opacity="${0.35 + 0.65 * (Math.floor(t * 3 + i) % 3 === 0)}"/>`).join('')}</g>` : '';
+  return `${SOFT_DEFS}<rect width="1920" height="1920" fill="${SOFT.night}"/><circle cx="960" cy="900" r="900" fill="url(#sGlow)" opacity=".5"/>
+    <path d="M880 1957 Q900 1780 900 1700 L1070 1700 Q1080 1800 1100 1957Z" fill="url(#sSkin)"/><rect x="860" y="1690" width="250" height="90" rx="40" fill="${p.sleeve || '#3a6a9a'}"/>
+    <g transform="translate(0,${Math.sin(t * 1.2) * 6}) rotate(${-2 + Math.sin(t * .8)},960,1000)">
+    <rect x="570" y="420" width="780" height="1300" rx="90" fill="#0a0a0c"/><rect x="590" y="440" width="740" height="1260" rx="74" fill="#0d1220"/>
+    <text x="640" y="520" font-family="Inter, Arial" font-size="30" fill="#8a9bb0">${esc3(p.clock || '3:41')}</text><rect x="900" y="480" width="120" height="34" rx="17" fill="#000"/>
+    <circle cx="960" cy="600" r="44" fill="#4a5a80"/><text x="960" y="616" text-anchor="middle" font-family="Inter, Arial" font-weight="800" font-size="40" fill="#fff">${esc3((p.who || 'Mom')[0])}</text>
+    <text x="960" y="680" text-anchor="middle" font-family="Inter, Arial" font-weight="700" font-size="32" fill="#fff">${esc3(p.who || 'Mom')} ›</text>
+    ${msgs}${typing}</g><rect x="1310" y="1150" width="56" height="150" rx="28" fill="url(#sSkin)" transform="rotate(-8,1338,1225)"/>`;
+};
+FOCUS.sChat = 960;
+// the goldfish bowl on the desk, Bubbles swimming. p.zoom (closer)
+S.sFish = (t, d, p) => `${SOFT_DEFS}<rect width="1920" height="1920" fill="url(#sWall)"/><rect y="1260" width="1920" height="660" fill="#2a2140"/>
+  <circle cx="960" cy="1000" r="300" fill="url(#sLamp)" opacity=".5"/><circle cx="960" cy="1000" r="280" fill="#9fd4ff" opacity=".25" stroke="#c8e6ff" stroke-width="10"/>
+  <path d="M700 1060 Q960 1130 1220 1060 L1200 1180 Q960 1290 720 1180Z" fill="#6fa8d8" opacity=".4"/>
+  <g transform="translate(${960 + Math.sin(t * .9) * 120},${1000 + Math.sin(t * 1.7) * 30}) scale(${Math.cos(t * .9) > 0 ? 1 : -1},1)"><ellipse rx="90" ry="56" fill="#ff8a3d"/><path d="M80 0 l70 -50 l0 100z" fill="#ff8a3d"/><circle cx="-46" cy="-12" r="9" fill="${SOFT.ink}"/></g>
+  ${[0, 1, 2].map((i) => `<circle cx="${900 + i * 40}" cy="${900 - ((t * 120 + i * 90) % 300)}" r="${10 + i * 3}" fill="none" stroke="#e8f6ff" stroke-width="4" opacity=".7"/>`).join('')}
+  <rect x="760" y="1280" width="400" height="60" rx="16" fill="#3a3060"/><text x="960" y="1322" text-anchor="middle" font-family="Inter, Arial" font-weight="900" font-size="34" fill="#ffd28a">BUBBLES</text>`;
+FOCUS.sFish = 960;
+// the bedroom window: headlights sweep across the curtains (p.sweep = start time)
+S.sWindow = (t, d, p) => { const sw = clamp((t - (p.sweep || 0.3)) / 1.6);
+  return `${SOFT_DEFS}<rect width="1920" height="1920" fill="url(#sWall)"/><rect x="560" y="420" width="800" height="900" rx="20" fill="#0f1830"/>
+  <path d="M960 420 v900 M560 870 h800" stroke="${SOFT.wall2}" stroke-width="18"/>
+  <rect x="560" y="420" width="800" height="900" fill="#fff4c8" opacity="${sw > 0 && sw < 1 ? 0.35 * Math.sin(sw * Math.PI) : 0}"/>
+  <path d="M${200 + sw * 1600} 300 L${600 + sw * 1600} 300 L${200 + sw * 1200} 1700 L${-300 + sw * 1200} 1700Z" fill="#fff4c8" opacity="${sw > 0 && sw < 1 ? 0.18 : 0}"/>
+  <path d="M520 400 Q600 900 540 1400 L720 1400 Q680 900 640 400Z" fill="#5a4aa0"/><path d="M1400 400 Q1320 900 1380 1400 L1200 1400 Q1240 900 1280 400Z" fill="#5a4aa0"/>
+  <rect y="1520" width="1920" height="400" fill="${SOFT.floor}"/>`; };
+FOCUS.sWindow = 960;
+// end card: p.title, p.part, p.q (comment question)
+S.sEnd = (t, d, p) => `<rect width="1920" height="1920" fill="#0b0f1c"/>
+  <text x="960" y="760" text-anchor="middle" font-family="Courier New, monospace" font-weight="700" font-size="34" letter-spacing="8" fill="#9fb0d8" opacity="${ease(t / 0.5)}">${esc3(p.title || '')}</text>
+  <text x="960" y="900" text-anchor="middle" font-family="Inter, Arial" font-weight="900" font-style="italic" font-size="150" fill="#ff5a4a" opacity="${ease((t - 0.3) / 0.5)}">${esc3(p.part || 'TO BE CONTINUED')}</text>
+  <text x="960" y="1020" text-anchor="middle" font-family="Inter, Arial" font-weight="800" font-style="italic" font-size="46" fill="#ffd28a" opacity="${ease((t - 0.9) / 0.5)}">${esc3(p.q || '')}</text>
+  <text x="960" y="1090" text-anchor="middle" font-family="Inter, Arial" font-size="34" fill="#9fb0d8" opacity="${ease((t - 1.2) / 0.5)}">Comment below. Follow for part 2.</text>`;
+FOCUS.sEnd = 960;
