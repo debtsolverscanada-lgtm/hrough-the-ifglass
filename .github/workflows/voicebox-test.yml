@@ -1,0 +1,29 @@
+name: Voicebox voice test
+on: workflow_dispatch
+jobs:
+  voice:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [chatterbox, kokoro-am_michael, kokoro-af_heart, qwen]
+    steps:
+      - uses: actions/checkout@v4
+        with: { sparse-checkout: tools/voicebox_test }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Install engine
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq espeak-ng ffmpeg sox >/dev/null
+          pip install -q torch torchaudio --index-url https://download.pytorch.org/whl/cpu
+          case "${{ matrix.engine }}" in
+            chatterbox*) pip install -q chatterbox-tts soundfile ;;
+            kokoro*) pip install -q "kokoro>=0.9.4" soundfile misaki[en] ;;
+            qwen*) pip install -q "qwen-tts>=0.1.1" soundfile ;;
+          esac
+      - name: Generate
+        run: python tools/voicebox_test/run.py ${{ matrix.engine }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: { name: "voice-${{ matrix.engine }}", path: out }
