@@ -860,7 +860,7 @@ function frameSVG(name, t, d, p, view, frameNo) {
     <rect width="1920" height="1920" fill="#fff" filter="url(#grain)" opacity=".55"/>
     ${p.torch ? `<defs><radialGradient id="torchG" cx="${p.torch[0] / 1920}" cy="${p.torch[1] / 1920}" r="${(p.torch[2] || 380) / 1920}"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset=".55" stop-color="#000" stop-opacity=".35"/><stop offset="1" stop-color="#000" stop-opacity=".93"/></radialGradient></defs><rect width="1920" height="1920" fill="url(#torchG)"/>` : ''}
     ${p.flash != null && t >= p.flash && t < p.flash + 1 / 30 ? '<rect width="1920" height="1920" fill="#fff"/>' : ''}
-    ${camHud(t, p, view)}${pops(t, p, view)}
+    ${camHud(t, p, view)}${sTag(t, p, view)}${pops(t, p, view)}
   </svg>`;
 }
 
@@ -2182,3 +2182,107 @@ S.bedTop = (t, d, p) => `<g transform="translate(250,0)"><rect width="1920" heig
   <rect x="${-200 + ((t * 160) % 2400)}" width="120" height="1920" fill="#fff" opacity=".025"/>
   </g>${dets(t, d, p)}`;
 FOCUS.bedTop = 960;
+
+// ---------- SOFT style (Nov 2026): calm flat-2D bedtime look, soft shading, simple bean-head characters ----------
+// Original cast design: bean-shaped heads with blush + a small nose line, dot eyes, chunky hair silhouettes.
+const SOFT = { night: '#14203a', night2: '#1d2c4c', wall: '#22345a', wall2: '#2b4170', floor: '#1a2742', bed: '#3a5488',
+  blanket: '#5a4aa0', blanket2: '#433682', pillow: '#c9d4ee', skin: '#f6e6dc', skinS: '#dcbfb2', ink: '#1a1630', glow: '#9fd4ff' };
+const SOFT_DEFS = `<defs>
+  <radialGradient id="sSkin" cx=".4" cy=".35" r=".75"><stop offset="0" stop-color="#fff6ef"/><stop offset=".7" stop-color="${SOFT.skin}"/><stop offset="1" stop-color="${SOFT.skinS}"/></radialGradient>
+  <radialGradient id="sGlow" r=".5"><stop offset="0" stop-color="${SOFT.glow}" stop-opacity=".55"/><stop offset="1" stop-color="${SOFT.glow}" stop-opacity="0"/></radialGradient>
+  <radialGradient id="sLamp" r=".5"><stop offset="0" stop-color="#ffd9a0" stop-opacity=".5"/><stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/></radialGradient>
+  <linearGradient id="sWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SOFT.night}"/><stop offset="1" stop-color="${SOFT.wall2}"/></linearGradient>
+  <linearGradient id="sBlanket" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${SOFT.blanket}"/><stop offset="1" stop-color="${SOFT.blanket2}"/></linearGradient>
+  <filter id="sSoft"><feGaussianBlur stdDeviation="3"/></filter></defs>`;
+// o: eyes 'open'|'wide'|'closed'|'side', mouth 'flat'|'o'|'smile'|'grin'|'worry', hair colour, style 'bun'|'short'|'tuft', glow (lit by phone)
+function sHead(x, y, s, o = {}) {
+  const hair = o.hair || '#3a2418', ink = SOFT.ink, ex = 34, ey = -6;
+  const eye = (dx) => o.eyes === 'closed' ? `<path d="M${dx - 14} ${ey} q14 12 28 0" stroke="${ink}" stroke-width="6" fill="none" stroke-linecap="round"/>`
+    : o.eyes === 'wide' ? `<circle cx="${dx}" cy="${ey}" r="13" fill="#fff" stroke="${ink}" stroke-width="3"/><circle cx="${dx}" cy="${ey}" r="6" fill="${ink}"/>`
+    : `<circle cx="${dx + (o.eyes === 'side' ? 6 : 0)}" cy="${ey}" r="8" fill="${ink}"/>`;
+  const mouth = { flat: `<path d="M-14 46 h28" stroke="${ink}" stroke-width="5" stroke-linecap="round"/>`, o: `<ellipse cx="0" cy="48" rx="9" ry="12" fill="${ink}"/>`,
+    smile: `<path d="M-18 40 q18 16 36 0" stroke="${ink}" stroke-width="5" fill="none" stroke-linecap="round"/>`, worry: `<path d="M-16 50 q16 -12 32 0" stroke="${ink}" stroke-width="5" fill="none" stroke-linecap="round"/>`,
+    grin: `<path d="M-70 26 Q0 110 70 26 Q0 60 -70 26Z" fill="#1a0a14"/>${Array.from({ length: 9 }, (_, k) => `<path d="M${-60 + k * 15} ${32 + Math.sin(k / 8 * Math.PI) * 30} l7 14 l7 -14" fill="#fff8e8"/>`).join('')}` }[o.mouth || 'flat'];
+  const hairBack = o.style === 'bun' ? `<circle cx="-30" cy="-118" r="44" fill="${hair}"/>` : '';
+  const hairTop = o.style === 'tuft' ? `<path d="M-80 -60 Q-70 -120 0 -118 Q70 -120 80 -60 Q50 -90 0 -86 Q-50 -90 -80 -60Z" fill="${hair}"/><path d="M-6 -118 q10 -30 26 -26" stroke="${hair}" stroke-width="12" fill="none" stroke-linecap="round"/>`
+    : o.style === 'short' ? `<path d="M-96 -20 Q-104 -116 0 -120 Q104 -116 96 -20 Q76 -76 0 -80 Q-76 -76 -96 -20Z" fill="${hair}"/>`
+    : `<path d="M-100 10 Q-112 -120 0 -124 Q112 -120 100 10 Q90 -60 40 -78 Q-20 -60 -70 -74 Q-96 -40 -100 10Z" fill="${hair}"/>`;
+  return `<g transform="translate(${x},${y}) scale(${s})">${o.glow ? `<circle cx="0" cy="40" r="300" fill="url(#sGlow)"/>` : ''}${hairBack}
+    <path d="M-92 -30 Q-96 -112 0 -112 Q96 -112 92 -30 Q96 70 40 98 Q0 112 -40 98 Q-96 70 -92 -30Z" fill="url(#sSkin)"/>
+    ${o.glow ? `<path d="M-92 -30 Q-96 -112 0 -112 Q96 -112 92 -30 Q96 70 40 98 Q0 112 -40 98 Q-96 70 -92 -30Z" fill="${SOFT.glow}" opacity=".22"/>` : ''}
+    ${hairTop}${eye(-ex)}${eye(ex)}<path d="M2 8 q8 10 -2 16" stroke="${SOFT.skinS}" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <ellipse cx="-56" cy="26" rx="16" ry="9" fill="#f29aa8" opacity=".45"/><ellipse cx="56" cy="26" rx="16" ry="9" fill="#f29aa8" opacity=".45"/>${mouth}</g>`;
+}
+function sPhoneSmall(x, y, s, lit = true) {
+  return `<g transform="translate(${x},${y}) scale(${s})"><rect x="-40" y="-70" width="80" height="140" rx="16" fill="#0c1020"/>${lit ? `<rect x="-32" y="-60" width="64" height="120" rx="10" fill="${SOFT.glow}"/><circle r="160" fill="url(#sGlow)"/>` : ''}
+    <ellipse cx="-44" cy="20" rx="16" ry="24" fill="url(#sSkin)"/><ellipse cx="44" cy="20" rx="16" ry="24" fill="url(#sSkin)"/></g>`;
+}
+// p.tag = ['3:07 AM', 'NURSERY CAM'] : the little time/place tag, drawn in screen space by sTag()
+function sTag(t, p, view) {
+  if (!p.tag) return '';
+  const [x, y, w] = view, X = x + w * 0.07, Y = y + 150;
+  return `<g font-family="Courier New, monospace" font-weight="700" opacity="${ease(t / 0.4)}"><rect x="${X - 20}" y="${Y - 62}" width="${Math.max(260, p.tag[1].length * 17 + 60)}" height="112" rx="16" fill="#0a0f1e" opacity=".72"/>
+    <circle cx="${X}" cy="${Y - 30}" r="7" fill="#ff5a4a" opacity="${Math.floor(t * 2) % 2 ? 1 : .35}"/><text x="${X + 18}" y="${Y - 16}" font-size="46" fill="#ffd28a">${esc3(p.tag[0])}</text>
+    <text x="${X}" y="${Y + 30}" font-size="24" letter-spacing="3" fill="#9fb0d8">${esc3(p.tag[1])}</text></g>`;
+}
+const sRoomBack = (lamp = true) => `${SOFT_DEFS}<rect width="1920" height="1920" fill="url(#sWall)"/>
+  <rect x="1180" y="300" width="380" height="460" rx="20" fill="#0f1830"/><path d="M1370 300 v460 M1180 530 h380" stroke="${SOFT.wall2}" stroke-width="14"/>
+  <circle cx="1460" cy="400" r="40" fill="#e8ecff" opacity=".7"/><circle cx="1460" cy="400" r="200" fill="#c8d4ff" opacity=".06"/>
+  ${lamp ? `<rect x="300" y="900" width="200" height="220" rx="16" fill="#2a2140"/><path d="M340 760 h120 l30 110 h-180z" fill="#f2c890"/><rect x="392" y="870" width="16" height="40" fill="#5a4a6a"/><circle cx="400" cy="830" r="300" fill="url(#sLamp)"/>` : ''}
+  <rect y="1500" width="1920" height="420" fill="${SOFT.floor}"/>`;
+// the lead in bed, phone in hand. p: eyes, mouth, lamp (bool), look ('phone' | 'door'), hair
+S.sBed = (t, d, p) => `${sRoomBack(p.lamp !== false)}
+  <rect x="560" y="880" width="900" height="120" rx="40" fill="#2a3b66"/><rect x="520" y="980" width="980" height="560" rx="60" fill="${SOFT.bed}"/>
+  <rect x="620" y="920" width="420" height="170" rx="70" fill="${SOFT.pillow}"/>
+  ${sHead(820, 1000 + Math.sin(t * 1.6) * 3, 1.15, { eyes: p.eyes || 'open', mouth: p.mouth, style: 'bun', hair: '#4a2a1e', glow: p.phone !== false })}
+  <path d="M480 1120 Q960 1040 1540 1120 L1560 1640 L460 1640Z" fill="url(#sBlanket)"/><path d="M620 1200 q140 -30 280 0 M1020 1180 q160 -20 300 10" stroke="#6e5cb8" stroke-width="10" fill="none" stroke-linecap="round" opacity=".7"/>
+  ${p.phone !== false ? sPhoneSmall(820, 1150, 1.1) : ''}`;
+FOCUS.sBed = 900;
+// close-up of a face on the pillow. p: eyes, mouth, glow, hair, style
+S.sFace = (t, d, p) => `${SOFT_DEFS}<rect width="1920" height="1920" fill="${SOFT.night}"/>
+  <rect x="200" y="400" width="1520" height="900" rx="200" fill="${SOFT.pillow}" opacity=".9"/>
+  ${sHead(960, 900 + Math.sin(t * 1.4) * 4, 3.2, { eyes: p.eyes || 'wide', mouth: p.mouth || 'flat', style: p.style || 'bun', hair: p.hair || '#4a2a1e', glow: p.glow !== false })}
+  <path d="M0 1380 Q960 1260 1920 1380 L1920 1920 L0 1920Z" fill="url(#sBlanket)"/>`;
+FOCUS.sFace = 960;
+function sCrib(x, y, s, kidO) {
+  return `<g transform="translate(${x},${y}) scale(${s})"><rect x="-300" y="-20" width="600" height="200" rx="30" fill="#e9e4f6"/>
+    ${sHead(-110, -20, 1.05, { eyes: 'closed', mouth: 'smile', ...kidO })}<path d="M-40 -10 Q120 -70 290 0 L290 120 L-40 120Z" fill="${kidO.blanket || '#7fb8a8'}"/>
+    ${Array.from({ length: 10 }, (_, i) => `<rect x="${-290 + i * 64}" y="-170" width="18" height="300" rx="9" fill="#f4f0fb" opacity=".95"/>`).join('')}
+    <rect x="-320" y="-190" width="640" height="34" rx="17" fill="#f4f0fb"/><rect x="-320" y="140" width="640" height="60" rx="20" fill="#cfc6e6"/></g>`;
+}
+// soft nursery seen through the baby cam (greenish tint optional p.nv), cribs, mobile, night light, p.dets reused
+S.sNursery = (t, d, p) => `${SOFT_DEFS}<rect width="1920" height="1920" fill="${p.nv ? '#14261f' : SOFT.night2}"/>
+  <rect y="1360" width="1920" height="560" fill="${p.nv ? '#10201a' : SOFT.floor}"/>
+  ${Array.from({ length: 7 }, (_, i) => `<path d="M${200 + i * 260} 260 l12 26 l28 4 l-20 20 l6 28 l-26 -14 l-26 14 l6 -28 l-20 -20 l28 -4z" fill="#ffe9a8" opacity=".35"/>`).join('')}
+  <circle cx="1560" cy="1300" r="26" fill="#ffd9a0"/><circle cx="1560" cy="1300" r="220" fill="url(#sLamp)"/>
+  <g transform="translate(1600,0)"><rect x="-130" y="560" width="260" height="800" rx="12" fill="${p.nv ? '#1b3128' : '#1a2848'}"/><circle cx="90" cy="980" r="14" fill="#c8d0e8"/></g>
+  ${sCrib(760, 960, 0.8, { style: 'tuft', hair: '#c47a3a' })}${sCrib(1200, 1010, 0.68, { style: 'short', hair: '#2a1a14', blanket: '#e0a8c0' })}
+  <g transform="translate(1200,${560 + Math.sin(t) * 6}) rotate(${Math.sin(t * .6) * 7})"><line x1="0" y1="-560" x2="0" y2="0" stroke="#c8d0e8" stroke-width="4"/><path d="M-150 0 H150" stroke="#c8d0e8" stroke-width="6"/>
+    ${[-140, -45, 45, 140].map((mx, i) => `<line x1="${mx}" y1="0" x2="${mx}" y2="60" stroke="#c8d0e8" stroke-width="3"/><circle cx="${mx}" cy="84" r="24" fill="${['#ffd28a', '#9fd4ff', '#ffb3c7', '#b8f0c8'][i]}"/>`).join('')}</g>
+  ${p.nv ? `<rect width="1920" height="1920" fill="#3dff8a" opacity=".05"/>${Array.from({ length: 30 }, (_, k) => `<rect y="${k * 64 + (t * 40) % 64}" width="1920" height="2" fill="#fff" opacity=".04"/>`).join('')}` : ''}
+  ${dets(t, d, p)}`;
+FOCUS.sNursery = 960;
+// soft hallway: closed doors, night light at the end, an empty detection box (p.dets)
+S.sHall = (t, d, p) => `${SOFT_DEFS}<rect width="1920" height="1920" fill="${p.nv ? '#14261f' : SOFT.night}"/>
+  <path d="M0 0 L760 620 L1160 620 L1920 0Z" fill="${p.nv ? '#18301f' : '#1a2848'}"/><path d="M0 1920 L760 1260 L1160 1260 L1920 1920Z" fill="${p.nv ? '#10201a' : SOFT.floor}"/>
+  <path d="M0 0 L760 620 L760 1260 L0 1920Z" fill="${p.nv ? '#1d382c' : SOFT.wall}"/><path d="M1920 0 L1160 620 L1160 1260 L1920 1920Z" fill="${p.nv ? '#1a3226' : '#1f3058'}"/>
+  <rect x="760" y="620" width="400" height="640" fill="#0c1222"/><rect x="890" y="760" width="140" height="500" rx="8" fill="#222e50"/>
+  <path d="M260 440 L560 660 L560 1320 L260 1560Z" fill="${p.nv ? '#24443a' : '#2a3d6a'}"/><path d="M1660 440 L1360 660 L1360 1320 L1660 1560Z" fill="${p.nv ? '#24443a' : '#2a3d6a'}"/>
+  <circle cx="960" cy="1230" r="12" fill="#ffd9a0"/><circle cx="960" cy="1230" r="160" fill="url(#sLamp)"/>
+  ${p.nv ? `<rect width="1920" height="1920" fill="#3dff8a" opacity=".05"/>` : ''}${dets(t, d, p)}`;
+FOCUS.sHall = 960;
+// a hand holding the phone up close; same app UI as S.alert but soft-styled (p.msgs, p.devices, p.live, p.big, p.title, p.sub, p.clock)
+S.sPhone = (t, d, p) => `${SOFT_DEFS}<rect width="1920" height="1920" fill="${SOFT.night}"/><circle cx="960" cy="900" r="900" fill="url(#sGlow)" opacity=".5"/>
+  <path d="M880 1957 Q900 1780 900 1700 L1070 1700 Q1080 1800 1100 1957Z" fill="url(#sSkin)"/><rect x="860" y="1690" width="250" height="90" rx="40" fill="#5a4aa0"/>
+  <g transform="translate(0,${Math.sin(t * 1.2) * 6}) rotate(${-2 + Math.sin(t * .8)},960,1000) translate(960,1020) scale(.74) translate(-960,-1000)">${S.alert(t, d, p).replace(/<rect width="1920" height="1920" fill="#050608"\/><circle cx="960" cy="1000" r="1000" fill="url\(#cold\)" opacity=".35"\/>/, '')}</g>
+  <rect x="1238" y="1180" width="56" height="150" rx="28" fill="url(#sSkin)" transform="rotate(-8,1266,1255)"/>`;
+FOCUS.sPhone = 960;
+// seen from the ceiling (CAM 3): the lead in bed holding the phone, soft style, night-vision tint. p.dets
+S.sCeil = (t, d, p) => `${SOFT_DEFS}<rect width="1920" height="1920" fill="#14261f"/><g transform="translate(230,330)">
+  <rect x="460" y="300" width="1000" height="1360" rx="60" fill="#2a4a40"/><rect x="520" y="340" width="420" height="230" rx="80" fill="#c9d8d0"/><rect x="980" y="340" width="420" height="230" rx="80" fill="#c9d8d0"/>
+  ${sHead(730, 520, 1.25, { eyes: 'wide', mouth: 'o', style: 'bun', hair: '#4a2a1e', glow: true })}
+  <path d="M470 720 Q960 650 1450 720 L1450 1640 L470 1640Z" fill="#3e5f80"/>
+  ${sPhoneSmall(730, 800, 1.1)}</g>
+  <rect width="1920" height="1920" fill="#3dff8a" opacity=".06"/>${Array.from({ length: 30 }, (_, k) => `<rect y="${k * 64 + (t * 40) % 64}" width="1920" height="2" fill="#fff" opacity=".04"/>`).join('')}
+  ${dets(t, d, p)}`;
+FOCUS.sCeil = 960;

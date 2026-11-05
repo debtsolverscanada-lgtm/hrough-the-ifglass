@@ -183,6 +183,9 @@ for i, s in enumerate(ST['scenes']):
             lead = 0.1  # voice starts right on the cut (tight pacing)
             dur = lead + dur_of(mp3) + max(s.get('pause', 0.45), 0.25)  # never butt two takes together
         voices.append((mp3, t + lead, s.get('fx')))
+        if not words and ST.get('captions'):  # no word timings (Grok / voicebox): spread the words over the spoken part
+            ws = [w for w in s['text'].split() if not w.startswith('[')]; sp = max(0.4, dur_of(mp3) - 0.35); step = sp / max(1, len(ws))
+            words = [(w, k * step, (k + 1) * step) for k, w in enumerate(ws)]
         if s['scene'] in ('text', 'black'): words = []  # the words are already on screen
         caps += [(w, t + lead + a0, t + lead + b0) for w, a0, b0 in words]
     else:
@@ -249,13 +252,16 @@ ass = f'{WK}/caps.ass'
 def ts(x): return f'{int(x // 3600)}:{int(x % 3600 // 60):02d}:{x % 60:05.2f}'
 head = ('[Script Info]\nScriptType: v4.00+\nPlayResX: 1080\nPlayResY: 1920\n\n[V4+ Styles]\n'
         'Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding\n'
-        'Style: Cap,Permanent Marker,84,&H00FFFFFF,&H000000FF,&H00000000,&H96000000,0,0,0,0,100,100,1,0,1,7,3,2,60,60,560,1\n\n'
+        + ('Style: Cap,Inter Display Black,78,&H00FFFFFF,&H000000FF,&H00000000,&H96000000,1,1,0,0,100,100,0,0,1,6,2,2,60,60,760,1\n\n' if ST.get('captions') == 'soft' else
+           'Style: Cap,Permanent Marker,84,&H00FFFFFF,&H000000FF,&H00000000,&H96000000,0,0,0,0,100,100,1,0,1,7,3,2,60,60,560,1\n\n')
+        + 
         '[Events]\nFormat: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text\n')
 ev, grp = [], []
 def flush():
     for k, w in enumerate(grp):
         en = grp[k + 1][1] if k + 1 < len(grp) else w[2] + 0.2
-        txt = ' '.join(('{\\c&H3B3BFF&}' + x[0].upper() + '{\\r}') if x is w else x[0].upper() for x in grp)
+        hi = '{\\c&H3D8AFF&}' if ST.get('captions') == 'soft' else '{\\c&H3B3BFF&}'
+        txt = ' '.join((hi + x[0].upper() + '{\\r}') if x is w else x[0].upper() for x in grp)
         ev.append(f'Dialogue: 0,{ts(w[1])},{ts(en)},Cap,,0,0,0,,{txt}')
     grp.clear()
 for w in caps:
