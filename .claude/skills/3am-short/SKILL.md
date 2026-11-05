@@ -19,6 +19,29 @@ Read first, every time: `channels/3am-stories/RULES.md` (owner's rules + rotatio
 - First 1-2 s: open mid-tension and put a 2-4 word hook text pop on the first frame (p.pops label at 0.0). Prefer everyday
   dread (see the idea bank in RULES.md). If a long-form exists, remind the owner to set it as the Short's Related video.
 
+## Script system: hooks → script audit → voice (run all three on every script, in this order)
+Owner's rule (Nov 2026): each part alone makes a generic script; all three together make it sound like the channel.
+Methods learned from the MIT-licensed `rediumvex/viral-hooks-skill` and `artemnovitckii/content-skills` (if the owner's
+forks are attached, read their SKILL.md files too). Never copy wording from `tiktok-viral-hooks` or anyone's videos: patterns only.
+
+1. **Hooks: stop the scroll.** Write 3 candidate first lines from different triggers (one stop-scroll: specificity,
+   negation or question; one retention: story, confession or emotion; one free) on top of the PLAYBOOK F-formula. Each
+   under 12 words, says what the story is about, no "wait till you see this". Fail any hook that is generic, has no
+   tension in the first 3 seconds, or promises nothing. Pick the one the last line can pay off.
+2. **Script: audit the structure** before building. Horror version of the 5-part check:
+   HOOK (stops the scroll, plot in one line) → SETUP (one normal detail, ≤2 lines) → ESCALATION (every beat joined by
+   BUT or THEREFORE, never "and then"; ≥3 escalations) → TURN (the rotating middle-turn line, then the wrong thing)
+   → LAST DAB (a line someone would repeat to a friend, written first, and it loops back into the hook on replay).
+   Also: every sentence on its own line with a jagged rhythm (short, short, one long); specific details over categories
+   (names, ages, exact times like 3:07); no em dashes, no "let that sink in", no filler openers; ~2 words per second.
+   Print the audit (✓ / ⚠ per part) and fix every ⚠ before step 3 of the build.
+3. **Voice: sound like the channel, not an AI.** Keep a voice file for 3 AM Stories (how our narrators talk: first
+   person, plain words, short sentences, quiet dread, never jokey, no exclamation marks; numbers said like a person
+   would) and read every line aloud against it. Rewrite anything that sounds performed or like a coach.
+   Narrator voices: ElevenLabs/Grok as before, or the FREE voicebox engines (tts.provider "voicebox", engine
+   chatterbox|kokoro|qwen; voiced on GitHub by `.github/workflows/3am-voicebox.yml`, which commits the takes).
+   Chatterbox Turbo understands [gasp] [sigh] [chuckle]: one tag per Short at most.
+
 ## Steps
 1. Pick hook formula, narrator, turn, grade, lead (check the RULES.md tables). Write `stories/0NN-slug/story.json`
    (copy the shape of the latest story: format, style "anime", voice, tts, grade, hero, thumb, yt, scenes[]).
