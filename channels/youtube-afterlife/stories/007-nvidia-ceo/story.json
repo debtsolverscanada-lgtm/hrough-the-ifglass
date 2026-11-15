@@ -1,0 +1,331 @@
+{
+ "format": "long",
+ "style": "3d",
+ "voice": "Adam",
+ "tts": {
+  "stability": 0.5,
+  "similarity": 0.8,
+  "style": 0.25,
+  "speed": 1.0
+ },
+ "thumb": {
+  "scene": "yaThumbJH",
+  "style": "3d",
+  "title": "OUT IN",
+  "sub": "14 DAYS"
+ },
+ "yt": {
+  "title": "Nvidia's CEO Was Out in 14 Days. Here's What Happened",
+  "description": "In July 2025, Nvidia was worth around $4 trillion and Jensen Huang was one of the most famous CEOs alive. On October 29, 2026, the New York Times reported a spy-plot allegation (Nvidia says the related allegations were investigated and debunked). Affair reports followed. On November 12 he resigned. This is what's been reported so far, and what hasn't been confirmed.\n\nThis video covers reported allegations. Nothing here is a finding of wrongdoing, and details may change as the story develops.\n\nSources:\nCNBC (Oct 29, 2026): https://www.cnbc.com/2026/10/29/nvidia-jensen-huang-chinese-intelligence-asset.html\nABC News: https://abcnews.com/US/nvidia-responds-report-ceo-allegedly-targeted-chinese-spy/story?id=137704250\nCNBC (Nov 12, 2026): https://www.cnbc.com/2026/11/12/nvidia-nvda-jensen-huang-second-affair.html\nCNBC (Nov 13, 2026): https://www.cnbc.com/2026/11/13/nvidia-nvda-stock-jensen-huang-transition.html\nCNN: https://www.cnn.com/2026/11/11/business/live-news/nvidia-jensen-huang-investigation-fallout\n\nAll people are shown as original cartoon illustrations.\n\n#nvidia #jensenhuang #youtubeafterlife #whathappened #techscandal",
+  "tags": [
+   "jensen huang",
+   "nvidia",
+   "nvidia ceo",
+   "jensen huang resigns",
+   "nvidia scandal",
+   "what happened to jensen huang",
+   "nvidia stock",
+   "youtube afterlife",
+   "tech scandal",
+   "fall from grace"
+  ]
+ },
+ "scenes": [
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "NOVEMBER 12, 2026",
+    "sub": "Nvidia, Santa Clara, California"
+   },
+   "text": "On November twelfth, twenty twenty six, the man who built the most valuable chip company on Earth walked away from it.",
+   "pause": 0.3
+  },
+  {
+   "scene": "yaJH",
+   "p": {
+    "mood": "stage",
+    "chip": true,
+    "eyes": "normal",
+    "look": 0.3
+   },
+   "text": "Thirty three years. One leather jacket. And a company worth around four trillion dollars.",
+   "pause": 0.3
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "14 DAYS",
+    "color": "#ff3a4a",
+    "sub": "from the first report to the resignation"
+   },
+   "text": "And it took just fourteen days for all of it to come apart.",
+   "pause": 0.5,
+   "sfx": [
+    [
+     "boom",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaTitle",
+   "p": {
+    "name": "JENSEN HUANG",
+    "years": "CEO 1993 - 2026",
+    "sub": "WHAT HAPPENED?"
+   },
+   "text": "This is the story of Jensen Huang. How Nvidia's CEO went from the top of the world to the front page, and what we actually know so far.",
+   "pause": 0.5
+  },
+  {
+   "scene": "yaTimeline",
+   "p": {
+    "items": [
+     [
+      "1963",
+      "born in Taiwan"
+     ],
+     [
+      "AGE 9",
+      "sent to the U.S."
+     ],
+     [
+      "1993",
+      "starts Nvidia"
+     ],
+     [
+      "1999",
+      "first GeForce"
+     ],
+     [
+      "2025",
+      "$4 trillion"
+     ]
+    ],
+    "hi": 0
+   },
+   "text": "Before the scandal, there was the climb.",
+   "pause": 0.3
+  },
+  {
+   "scene": "yaJH",
+   "p": {
+    "mood": "stage",
+    "eyes": "normal",
+    "look": -0.3,
+    "happy": 0.3
+   },
+   "text": "Jensen Huang was born in Taiwan in nineteen sixty three. As a kid, he was sent to the United States and ended up at a boarding school in rural Kentucky, cleaning bathrooms as one of his chores.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "DENNY'S",
+    "sub": "dishwasher, busboy, waiter"
+   },
+   "text": "As a teenager he worked at Denny's. Washing dishes, busing tables. He has said it taught him to work hard and stay humble.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "1993",
+    "sub": "a booth at a Denny's in San Jose"
+   },
+   "text": "Then, in nineteen ninety three, after engineering degrees from Oregon State and Stanford, he sat down in a Denny's booth with two friends and planned a graphics chip company. They called it Nvidia.",
+   "pause": 0.3
+  },
+  {
+   "scene": "yaJH",
+   "p": {
+    "mood": "stage",
+    "chip": true,
+    "eyes": "normal",
+    "look": 0.4
+   },
+   "text": "Nvidia's chips started in video games. But the same chips turned out to be perfect for training artificial intelligence. When the AI boom hit, almost every major AI company on the planet needed Nvidia's hardware.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaCounter",
+   "p": {
+    "from": 0,
+    "to": 4000,
+    "mode": "rise",
+    "label": "BILLION DOLLARS",
+    "src": "Nvidia market value, July 2025 (CNBC)"
+   },
+   "text": "By July twenty twenty five, Nvidia was worth around four trillion dollars. And Jensen, in his signature black leather jacket, was one of the most famous CEOs alive.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaNews",
+   "p": {
+    "headline": "REPORT: NVIDIA CEO TARGETED IN SPY PLOT",
+    "ticker": "New York Times report, October 29, 2026 - Nvidia says allegations were investigated and debunked"
+   },
+   "text": "Then, on October twenty ninth, twenty twenty six, the New York Times published a report that changed everything.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaJH",
+   "p": {
+    "mood": "dark",
+    "eyes": "tired",
+    "look": -0.4
+   },
+   "text": "According to the report, U.S. intelligence officials believed that an executive at a Singapore based cloud company, named in the report as Alice Huang of Megaspeed, had developed a close relationship with him, and was passing information to Beijing.",
+   "pause": 0.25
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "\"INVESTIGATED|AND DEBUNKED\"",
+    "size": 130,
+    "sub": "Nvidia's response, via CNBC",
+    "src": "CNBC, October 29, 2026"
+   },
+   "text": "Nvidia pushed back hard. The company said Megaspeed was a regular cloud customer, that his meetings with them were normal, and that the related allegations had already been investigated and debunked.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaPost",
+   "p": {
+    "contact": "Reports",
+    "msgs": [
+     [
+      "them",
+      "x"
+     ],
+     [
+      "them",
+      "x"
+     ],
+     [
+      "them",
+      "x"
+     ]
+    ],
+    "stamp": "UNCONFIRMED"
+   },
+   "text": "But the story didn't stop there. Over the next two weeks, more reports claimed he'd had affairs. Some said two women, some said three. The details don't match from source to source, and one of the women has never been identified. Nvidia hasn't confirmed them, so we're not naming anyone who hasn't been confirmed.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "40+ YEARS",
+    "sub": "married to Lori Huang"
+   },
+   "text": "And through all of it, there's one detail people keep asking about. As of now, there is no report of a divorce. He's been married to his wife Lori for more than forty years.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaNews",
+   "p": {
+    "headline": "JENSEN HUANG RESIGNS AS NVIDIA CEO",
+    "ticker": "November 12, 2026 - leaves the board - CFO Colette Kress named interim CEO"
+   },
+   "text": "Then, on November twelfth, it was over. Jensen Huang stepped down as Nvidia's CEO and left the board, effective immediately. The company's chief financial officer, Colette Kress, became interim CEO.",
+   "pause": 0.4,
+   "sfx": [
+    [
+     "boom",
+     0.1
+    ]
+   ]
+  },
+  {
+   "scene": "yaCounter",
+   "p": {
+    "from": 0,
+    "to": 6,
+    "mode": "drop",
+    "label": "% DOWN IN TWO DAYS",
+    "src": "Nvidia stock, Nov 12-13, 2026: -4.3% and -2.0% (CNBC)"
+   },
+   "text": "Wall Street reacted fast. Nvidia's stock fell more than four percent that day, and another two percent the next. For the first time since July twenty twenty five, Nvidia closed below four trillion dollars.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaJH",
+   "p": {
+    "mood": "dark",
+    "eyes": "tired",
+    "look": 0
+   },
+   "text": "For a founder whose fortune is mostly tied up in company stock, a drop like that is worth billions on paper. But the bigger loss is the one you can't put a number on. The company he built in a Denny's booth is now being run by someone else.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaNews",
+   "p": {
+    "headline": "HUANG SUMMONED TO TESTIFY BEFORE CONGRESS",
+    "ticker": "CNN, November 2026 - investigation ongoing"
+   },
+   "text": "And it isn't over. According to CNN, he's been summoned to testify before Congress. Nvidia's investigation is reportedly still going, and the board is searching for a permanent replacement.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaTimeline",
+   "p": {
+    "items": [
+     [
+      "OCT 29",
+      "spy plot report"
+     ],
+     [
+      "EARLY NOV",
+      "affair reports"
+     ],
+     [
+      "NOV 12",
+      "resigns"
+     ],
+     [
+      "NOV 13",
+      "below $4T"
+     ],
+     [
+      "NEXT",
+      "Congress"
+     ]
+    ],
+    "hi": 2
+   },
+   "text": "So here's how fast it all happened.",
+   "pause": 0.6
+  },
+  {
+   "scene": "yaJH",
+   "p": {
+    "mood": "stage",
+    "chip": true,
+    "crack": true,
+    "eyes": "closed"
+   },
+   "text": "Thirty three years ago, a former Denny's busboy sketched out a company in a diner booth. It grew into one of the most powerful companies in the world. And in fourteen days, he lost the job that came with it.",
+   "pause": 0.5
+  },
+  {
+   "scene": "yaCard",
+   "p": {
+    "text": "WHAT DO YOU THINK?",
+    "sub": "Tell me in the comments"
+   },
+   "text": "Was this a spy story, a scandal, or a bit of both? Tell me what you think in the comments. And if you want the next part of this story when it breaks, subscribe.",
+   "pause": 0.4
+  },
+  {
+   "scene": "yaTitle",
+   "p": {
+    "name": "JENSEN HUANG",
+    "years": "CEO 1993 - 2026",
+    "sub": "SUBSCRIBE"
+   },
+   "text": "This has been YouTube Afterlife.",
+   "pause": 1.2
+  }
+ ]
+}

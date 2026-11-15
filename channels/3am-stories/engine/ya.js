@@ -189,7 +189,8 @@ const YA_EK = { man: { cap: false, hairCol: '#8a8a8e', hairHi: '#c8c8cc', beard:
   woman: { hairCols: ['#4a3022', '#2a1810', '#140a06'], skinT: 'url(#k3skin)', top: '#2a2a34' } };
 // Shane Dawson preset: messy brown hair, stubble, fair skin, black hoodie, no jewellery.
 const YA_SD = { cap: false, hairCol: '#4a2e1a', hairHi: '#8a5a34', beard: 'rgba(74,46,26,.55)', skinT: 'url(#k3fair)', earT: 'url(#k3ear)', neckT: '#e2ae92', body: '#16161c', chain: false, earrings: false };
-const YA_PAIRS = { ek: YA_EK.man, sd: YA_SD };
+const YA_JH = { cap: false, hairCol: '#5a5a62', hairHi: '#b8b8c2', glasses: true, body: '#0c0c10', chain: false, earrings: false };  // Jensen: grey-black hair, glasses, black leather jacket
+const YA_PAIRS = { ek: YA_EK.man, sd: YA_SD, jh: YA_JH };
 // Wolfie alone. p: prop ('phone'|'mic'|'sign'), eyes, sign
 S.yaWolfie = (t, d, p) => `${room('#141024')}
     ${yaWolfie(960, 900, 1.05, { ...(YA_PAIRS[p.pair] || {}), eyes: p.eyes || 'normal', look: p.look ?? 0, breathe: t * 2, cap: p.cap ?? (p.pair ? false : true), happy: p.happy, glow: p.prop === 'phone' ? 'phoneGlow' : null, light: p.prop === 'phone' ? '#9fd2ff' : null, mouth: p.mouth })}
@@ -288,3 +289,31 @@ S.yaMeSheet = (t, d, p) => `${yaBg('#3a1670', '#0b0618')}
   ${yaMe(300, 980, 0.72, { outfit: 'hoodie', mouth: 'pout', eyes: 'tired' })}${yaMe(740, 980, 0.72, { outfit: 'hoodie', hood: true, mouth: 'talk', open: 0.8, look: 0.4 })}
   ${yaMe(1180, 980, 0.72, { outfit: 'black', happy: 0.6 })}${yaMe(1620, 980, 0.72, { outfit: 'suit', mouth: 'pout', look: -0.3 })}
   ${['HOODIE', 'HOOD UP · TALKING', 'BLACK TEE · SMILE', 'SUIT'].map((l, i) => `<text x="${300 + i * 440}" y="1440" text-anchor="middle" font-family="Anton" font-size="40" fill="${YA.gold}">${l}</text>`).join('')}`;
+
+// ---------- 007 Nvidia: the leather jacket, the green chip, the crash ----------
+// leather-jacket sheen + zip drawn over the cartoon body. Used by yaJH scenes.
+const yaJacket = (x, y, s) => `<g transform="translate(${x},${y}) scale(${s})"><path d="M-150 150 Q-190 300 -200 520 L-60 520 L-30 170Z" fill="#fff" opacity=".07"/>
+  <path d="M-34 150 L-90 260 L-40 300 L-10 170Z M34 150 L90 260 L40 300 L10 170Z" fill="#1c1c22" stroke="#000" stroke-width="5"/><path d="M0 170 V520" stroke="#9a9aa6" stroke-width="5" stroke-dasharray="10 6"/></g>`;
+const yaChip = (x, y, s, o = {}) => `<g transform="translate(${x},${y}) scale(${s})">
+  ${[...Array(8)].map((_, i) => `<rect x="${-170 + i * 46}" y="-232" width="18" height="40" fill="#c8ccd4"/><rect x="${-170 + i * 46}" y="192" width="18" height="40" fill="#c8ccd4"/><rect x="-232" y="${-170 + i * 46}" width="40" height="18" fill="#c8ccd4"/><rect x="192" y="${-170 + i * 46}" width="40" height="18" fill="#c8ccd4"/>`).join('')}
+  <rect x="-200" y="-200" width="400" height="400" rx="30" fill="#1a1f1a" stroke="#76ff3a" stroke-width="10" style="filter:drop-shadow(0 0 ${o.glow ?? 40}px #76ff3a)"/>
+  <rect x="-130" y="-130" width="260" height="260" rx="16" fill="#0f140f" stroke="#76ff3a" stroke-width="4" opacity=".8"/>
+  <text y="40" text-anchor="middle" font-family="Anton" font-size="120" fill="#76ff3a">${o.label || 'AI'}</text>
+  ${o.crack ? `<path d="M-200 -60 L-90 -20 L-120 40 L10 70 L-20 130 L120 160 L200 120" stroke="#000" stroke-width="16" fill="none"/><path d="M-200 -60 L-90 -20 L-120 40 L10 70 L-20 130 L120 160 L200 120" stroke="#ff3a4a" stroke-width="5" fill="none"/>` : ''}</g>`;
+// Jensen on stage in the leather jacket. p: eyes, mouth, look, mood ('stage'|'dark'), chip (bool), crack
+S.yaJH = (t, d, p) => `${p.mood === 'dark' ? yaBg('#1a0a14', '#050208') : yaBg('#0f2a14', '#04080a')}
+  ${p.mood === 'stage' ? `<path d="M960 0 L560 1500 L1360 1500Z" fill="#fff" opacity=".06"/>` : ''}
+  ${p.chip ? yaChip(1500, 760, 0.85 + Math.sin(t) * 0.01, { crack: p.crack, glow: p.crack ? 14 : 40 }) : ''}
+  ${yaWolfie(p.chip ? 760 : 960, 900, 1.05, { ...YA_JH, eyes: p.eyes || 'normal', look: p.look ?? 0, breathe: t * 2, happy: p.happy, mouth: p.mouth })}
+  ${yaJacket(p.chip ? 760 : 960, 900, 1.05)}`;
+// the thumbnail: Jensen left (shocked), cracked green chip, red crash line, big text right. p: title, sub
+S.yaThumbJH = (t, d, p) => `${yaBg('#0e2a12', '#030604')}
+  <defs><linearGradient id="jhRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff3a4a" stop-opacity=".0"/><stop offset="1" stop-color="#ff3a4a" stop-opacity=".35"/></linearGradient></defs>
+  <rect y="420" width="1920" height="1080" fill="url(#jhRed)"/>
+  ${yaChip(1460, 1150, 0.72, { crack: true, glow: 50 })}
+  <path d="M1010 640 L1180 760 L1270 700 L1460 960 L1560 900 L1780 1330" stroke="#000" stroke-width="44" fill="none" stroke-linejoin="round"/>
+  <path d="M1010 640 L1180 760 L1270 700 L1460 960 L1560 900 L1780 1330" stroke="#ff3a4a" stroke-width="26" fill="none" stroke-linejoin="round" style="filter:drop-shadow(0 0 18px #ff3a4a)"/>
+  <path d="M1720 1240 L1800 1360 L1660 1350Z" fill="#ff3a4a" stroke="#000" stroke-width="8"/>
+  <g style="filter:drop-shadow(0 0 30px rgba(118,255,58,.45))">${yaWolfie(560, 1000, 1.2, { ...YA_JH, eyes: 'wide', mouth: 'o', look: 0.5 })}${yaJacket(560, 1000, 1.2)}</g>
+  <text x="1440" y="620" text-anchor="middle" font-family="Anton" font-size="${fit(p.title, 190, 0.5)}" fill="#fff" stroke="#000" stroke-width="14" paint-order="stroke">${esc(p.title)}</text>
+  <text x="1440" y="800" text-anchor="middle" font-family="Anton" font-size="${fit(p.sub || '', 190, 0.5)}" fill="#ff3a4a" stroke="#000" stroke-width="14" paint-order="stroke">${esc(p.sub || '')}</text>`;
