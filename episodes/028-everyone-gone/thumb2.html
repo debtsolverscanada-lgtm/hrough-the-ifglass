@@ -1,0 +1,78 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/thumbkit.js"></script><script>
+// 028 (Nov 25 style): big lone face LEFT looking out at an empty, overgrown city street. Cold teal + golden hour.
+// 3 elements: the face, the empty street, the words. Nothing important bottom-right.
+const K='#0A0612', VX=1330, VY=600;
+// --- street in one-point perspective, sun low at the end of the road ---
+const wallL='#2F5E66', wallR='#3C6E74', winD='#16323A', ivy='#3E8A4A', ivy2='#2E6E3A';
+let st='';
+// sky
+st+=`<defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1E5A6A"/><stop offset=".55" stop-color="#7FBCB0"/><stop offset=".85" stop-color="#F2B46A"/><stop offset="1" stop-color="#FFD58A"/></linearGradient>
+ <linearGradient id="rd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9A070"/><stop offset=".25" stop-color="#5E6E70"/><stop offset="1" stop-color="#2E3C44"/></linearGradient></defs>
+ <rect width="1920" height="1080" fill="url(#sk)"/>`;
+st+=TK.glowBlob(VX,VY-40,420,'#FFC46A',.85)+`<circle cx="${VX}" cy="${VY-40}" r="90" fill="#FFF1C8"/>`+TK.rays(VX,VY-40,'#FFE2A8',18,1800,.07);
+// far skyline silhouette at the vanishing point
+const r=rng(28);let x=VX-420;while(x<VX+420){const w=30+r()*60,h=60+r()*200;st+=`<rect x="${x}" y="${VY-h}" width="${w}" height="${h+60}" fill="#6E8E8A" opacity=".7"/>`;x+=w+4;}
+// road
+st+=`<path d="M-200 1080 L${VX-70} ${VY} L${VX+70} ${VY} L2200 1080Z" fill="url(#rd)"/>`;
+for(let i=0;i<7;i++){const a=1-Math.pow(.6,i),b=1-Math.pow(.6,i+.5);const y1=1080+(VY-1080)*a,y2=1080+(VY-1080)*b,x1=1000+(VX-1000)*a,x2=1000+(VX-1000)*b,w1=40*(1-a)+2,w2=40*(1-b)+2;
+ st+=`<path d="M${x1-w1} ${y1} L${x2-w2} ${y2} L${x2+w2} ${y2} L${x1+w1} ${y1}Z" fill="#F2E2B8" opacity=".85"/>`;}
+// grass bursting through cracks
+const r2=rng(5);for(let i=0;i<26;i++){const k=r2(),y=VY+20+(1080-VY)*k*k,xx=VX+(r2()-.5)*(200+1900*k*k),s=.3+k*1.4;
+ st+=`<path d="M${xx-10*s} ${y} Q${xx-16*s} ${y-30*s} ${xx-26*s} ${y-48*s} Q${xx-4*s} ${y-28*s} ${xx} ${y-62*s} Q${xx+6*s} ${y-30*s} ${xx+26*s} ${y-44*s} Q${xx+14*s} ${y-20*s} ${xx+10*s} ${y}Z" fill="#5FBF5A" stroke="#0A0612" stroke-width="${1+2*s}" stroke-linejoin="round"/>`;}
+// buildings: left wall (behind the face) and right wall, with dark windows and ivy
+const wall=(nearX,nearTop,nearBot,farX,farTop,farBot,col)=>{let s=`<path d="M${nearX} ${nearTop} L${farX} ${farTop} L${farX} ${farBot} L${nearX} ${nearBot}Z" fill="${col}" stroke="${K}" stroke-width="5"/>`;
+ const D=[0,.32,.52,.66,.76,.83,.88,.92];for(let i=0;i<D.length-1;i++){const u1=D[i]+.05*(D[i+1]-D[i]),u2=D[i+1]-.32*(D[i+1]-D[i]);
+  for(let j=0;j<4;j++){const v1=.1+j*.2,v2=v1+.12;const P=(u,v)=>{const xx=nearX+(farX-nearX)*u,t=nearTop+(farTop-nearTop)*u,b=nearBot+(farBot-nearBot)*u;return [xx,t+(b-t)*v];};
+   const a=P(u1,v1),b=P(u2,v1),c=P(u2,v2),d=P(u1,v2);s+=`<path d="M${a} L${b} L${c} L${d}Z" fill="${winD}" stroke="${K}" stroke-width="3"/>`;}}
+ return s;};
+st+=wall(2000,140,1020,VX+90,VY-120,VY+20,wallR);
+st+=wall(-80,60,1020,VX-90,VY-130,VY+20,wallL);
+// ivy curtains hanging down the right wall + bushes along the kerb
+[[1880,180,360],[1700,260,280],[1560,340,180],[1470,420,100]].forEach(([ix,iy,len],i)=>{for(let k=0;k<6;k++){const xx=ix-k*18*(1-i*.15);st+=`<path d="M${xx} ${iy} q${12-k*4} ${len*.5} ${-6+k*3} ${len}" stroke="${k%2?ivy:ivy2}" stroke-width="${14-i*2.5}" fill="none" stroke-linecap="round"/>`;}
+ st+=`<circle cx="${ix-40}" cy="${iy}" r="${70-i*14}" fill="${ivy}" stroke="${K}" stroke-width="5"/>`;});
+[[1960,1010,120],[1760,880,90],[1600,790,64],[1500,720,44],[1430,670,28]].forEach(([bx,by,br])=>st+=`<circle cx="${bx}" cy="${by}" r="${br}" fill="${ivy2}" stroke="${K}" stroke-width="5"/><circle cx="${bx-br*.6}" cy="${by+br*.1}" r="${br*.7}" fill="${ivy}" stroke="${K}" stroke-width="4"/>`);
+// a dead traffic light wrapped in ivy, mid-distance on the right
+st+=`<g transform="translate(1520,560)"><rect x="-8" y="0" width="16" height="200" fill="#2A3238" stroke="${K}" stroke-width="4"/><rect x="-26" y="-110" width="52" height="120" rx="10" fill="#2A3238" stroke="${K}" stroke-width="5"/>${[0,1,2].map(i=>`<circle cx="0" cy="${-84+i*36}" r="12" fill="#3A4448"/>`).join('')}<path d="M-10 190 q24 -60 -4 -120 q26 -50 0 -120" stroke="${ivy}" stroke-width="9" fill="none"/></g>`;
+// a deer standing on the road in the low sun (the only living thing)
+const deer=`<g transform="translate(1210,700) scale(.42)">${[-80,-50,60,90].map(lx=>`<path d="M${lx} 30 L${lx} 170" stroke="${K}" stroke-width="22" stroke-linecap="round"/><path d="M${lx} 30 L${lx} 170" stroke="#3A2A22" stroke-width="12" stroke-linecap="round"/>`).join('')}
+ <ellipse rx="130" ry="64" fill="#3A2A22" stroke="${K}" stroke-width="8"/><g transform="translate(110,-30)"><path d="M-20 10 L20 -90 L60 -80 L30 20Z" fill="#3A2A22" stroke="${K}" stroke-width="7"/><ellipse cx="40" cy="-100" rx="44" ry="30" fill="#3A2A22" stroke="${K}" stroke-width="7"/>
+ <path d="M30 -128 L10 -200 M10 -200 L-20 -220 M10 -200 L30 -240 M50 -128 L70 -200 M70 -200 L100 -224 M70 -200 L60 -246" stroke="#3A2A22" stroke-width="10" stroke-linecap="round"/></g></g>`;
+st+=deer;
+// cool shade over the left half so the face pops; warm wash from the sun
+st+=TK.glowBlob(VX,VY-20,260,'#FFD58A',.55)+`<rect width="1920" height="1080" fill="#06222C" opacity=".12"/><path d="M0 0 H900 L620 1080 H0Z" fill="#05202A" opacity=".35"/>`;
+
+// --- the big face (Glint): round cream head, gold glasses, eyes wide, looking right down the road ---
+const cream='#FFF2E0', shade='#E9CBB0';
+const face=`<g transform="translate(470,640)">
+ <path d="M-430 520 Q-400 270 -150 230 L150 230 Q400 270 430 520Z" fill="#26404E" stroke="${K}" stroke-width="14"/>
+ <path d="M-250 240 Q0 330 250 240 L270 320 Q0 420 -270 320Z" fill="#3DF5C2" stroke="${K}" stroke-width="12" stroke-linejoin="round"/>
+ <path d="M170 300 Q260 330 300 470 L220 480 Q200 380 140 330Z" fill="#3DF5C2" stroke="${K}" stroke-width="12" stroke-linejoin="round"/>
+ <circle cx="0" cy="-40" r="330" fill="${cream}" stroke="${K}" stroke-width="16"/>
+ <path d="M200 -300 A330 330 0 0 1 320 40" stroke="#FFC46A" stroke-width="26" fill="none" stroke-linecap="round" opacity=".9"/>
+ <path d="M-250 -230 A330 330 0 0 1 -60 -360" stroke="#fff" stroke-width="22" fill="none" stroke-linecap="round" opacity=".6"/>
+ <path d="M-300 60 Q-270 200 -150 260" stroke="${shade}" stroke-width="30" fill="none" opacity=".6" stroke-linecap="round"/>
+ <ellipse cx="-190" cy="110" rx="50" ry="28" fill="#FF8A80" opacity=".45"/><ellipse cx="210" cy="110" rx="50" ry="28" fill="#FF8A80" opacity=".45"/>
+ <!-- eyes: wide, pupils hard right -->
+ <ellipse cx="-110" cy="-60" rx="82" ry="96" fill="#fff" stroke="${K}" stroke-width="12"/><ellipse cx="110" cy="-60" rx="82" ry="96" fill="#fff" stroke="${K}" stroke-width="12"/>
+ <circle cx="-72" cy="-52" r="32" fill="${K}"/><circle cx="-62" cy="-66" r="10" fill="#fff"/><circle cx="148" cy="-52" r="32" fill="${K}"/><circle cx="158" cy="-66" r="10" fill="#fff"/>
+ <!-- gold round glasses -->
+ <circle cx="-110" cy="-60" r="118" fill="rgba(255,230,160,.10)" stroke="${K}" stroke-width="34"/><circle cx="110" cy="-60" r="118" fill="rgba(255,230,160,.10)" stroke="${K}" stroke-width="34"/>
+ <circle cx="-110" cy="-60" r="118" fill="none" stroke="#F2C14E" stroke-width="16"/><circle cx="110" cy="-60" r="118" fill="none" stroke="#F2C14E" stroke-width="16"/>
+ <path d="M-14 -66 Q0 -86 14 -66" stroke="#F2C14E" stroke-width="14" fill="none"/>
+ <path d="M-190 -140 A95 95 0 0 1 -140 -168" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round" opacity=".85"/><path d="M30 -140 A95 95 0 0 1 80 -168" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round" opacity=".85"/>
+ <!-- brows raised high: shock -->
+ <rect x="-170" y="-252" width="120" height="30" rx="15" fill="${K}" transform="rotate(-10 -110 -237)"/><rect x="50" y="-252" width="120" height="30" rx="15" fill="${K}" transform="rotate(10 110 -237)"/>
+ <!-- small open mouth -->
+ <ellipse cx="20" cy="140" rx="40" ry="52" fill="#3A1220" stroke="${K}" stroke-width="12"/>
+ <!-- one bead of sweat -->
+ <path d="M268 -190 q30 54 0 78 q-30 -24 0 -78Z" fill="#9FD8FF" stroke="${K}" stroke-width="7"/>
+</g>`;
+
+document.getElementById('s').innerHTML=TK.wrap(`
+ ${st}
+ ${TK.rim(face,'#FFC46A',28)}
+ ${TK.text(1020,190,'WHERE IS',{size:140,fill:'#fff',rot:-2})}
+ ${TK.text(950,350,'EVERYONE?',{size:155,fill:'#FFD43B',rot:-2,depth:16})}
+`,'#1E5A6A');
+</script></body></html>

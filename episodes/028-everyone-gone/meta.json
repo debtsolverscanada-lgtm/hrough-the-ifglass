@@ -1,0 +1,109 @@
+{
+ "episode": "028",
+ "title": "What If You Woke Up and EVERYONE Was Gone?",
+ "description": "Glint, 19, finishes a night shift at the city science museum and walks out into a silent street. Every alarm clock is ringing. Nobody switches them off. Nan is gone, Kai is gone, Dr. Osei is gone. Everyone on Earth has vanished, except Glint and Nan's grumpy cat, Mr. Pickles. The real science of what fails, and in what order, when there is nobody left to run a city (the power grid, the subway pumps, the food in your fridge) leads him to the most dangerous thing left: the used fuel pool at the nuclear plant upriver, with six hours of backup diesel left. He can't refuel it forever, so he makes gravity do the job. Six months later, when the new urban forest drops its leaves, a second window lights up across the city.\n\nIf you woke up and everyone was gone, what's the first thing you would do? Tell me in the comments 👇\n\n▶ More What Ifs: What If You Woke Up 1,000 Years in the Future?\n\nCHAPTERS\n0:00 Cold open: six hours of diesel left\n0:30 Seven days earlier: the night shift\n1:26 The Rules: what fails, in what order\n2:28 Plus: The city is his\n2:42 Minus: The lights go out\n3:06 Minus: The underground floods\n3:31 Plus: The stars come back\n4:03 Minus: The silence\n4:15 Minus: The plant\n4:31 The Crisis: the used fuel pool\n6:07 The Solution: gravity\n7:43 The Twist: the second window\n9:16 Would you?\n\nSOURCES\n• Alan Weisman, The World Without Us (2007): how cities, subways and power systems fail without people\n• US EIA and NERC balancing standards: the grid matches supply and demand every second\n• USDA FSIS, \"Keeping Food Safe During an Emergency\" (fridge about 4 hours, full freezer about 48 hours) and \"Shelf-Stable Food Safety\" (canned food)\n• MTA / NYC Transit: about 13 million gallons of water pumped out of the subway on a dry day\n• 1994 Northridge earthquake blackout: Los Angeles residents reported a \"silver cloud\" (the Milky Way); Griffith Observatory; International Dark-Sky Association\n• US NRC: reactor scram; Backgrounder on Spent Fuel Pools; NUREG-1738 and NUREG-2161 (spent fuel pool studies)\n• NRC Regulatory Guide 1.137 / ANSI/ANS-59.51: about seven days of onsite diesel for emergency generators (US)\n• NRC Order EA-12-049 (\"FLEX\", 2012): ways to add water to the fuel pool from outside after Fukushima (2011)\n• Hydrostatic pressure: about 1 atmosphere per 10 m of water (water towers)\n• Cherenkov radiation: the blue glow around used fuel in water (P. A. Cherenkov, Nobel Prize in Physics 1958)\n• Deryabina et al., Current Biology 25 (2015): wildlife at Chernobyl after 1986 (elk, deer, wild boar, wolves)\n• Story is fiction: the vanishing, the city, the plant, the reservoir height and the Morse message are made up; the science rules are real.\n\n#whatif #science #story",
+ "tags": [
+  "what if",
+  "what if everyone disappeared",
+  "what if you were the last person on earth",
+  "last person on earth",
+  "world without us",
+  "everyone vanished",
+  "story",
+  "animated story",
+  "power grid",
+  "nuclear power plant",
+  "spent fuel pool",
+  "cherenkov radiation",
+  "chernobyl wildlife",
+  "science story",
+  "through the ifglass"
+ ],
+ "category_id": "28",
+ "hook": [
+  "EVERYONE ON EARTH",
+  "IS GONE. EXCEPT YOU."
+ ],
+ "handle": "@throughtheifglass",
+ "thumbnail": "028-thumbnail.jpg",
+ "script": "028-everyone-gone-VOICEOVER.txt",
+ "voice": "voiceover.mp3",
+ "subs": [
+  [
+   "thirteen million gallons",
+   "13 million gallons"
+  ],
+  [
+   "nineteen ninety four",
+   "1994"
+  ],
+  [
+   "nineteen eighty six",
+   "1986"
+  ],
+  [
+   "two thousand and eleven",
+   "2011"
+  ],
+  [
+   "forty metres",
+   "40 metres"
+  ],
+  [
+   "twelve metres",
+   "12 metres"
+  ],
+  [
+   "ten metres",
+   "10 metres"
+  ],
+  [
+   "six hours",
+   "6 hours"
+  ],
+  [
+   "five hours",
+   "5 hours"
+  ],
+  [
+   "three hours",
+   "3 hours"
+  ],
+  [
+   "four hours",
+   "4 hours"
+  ],
+  [
+   "one hour",
+   "1 hour"
+  ],
+  [
+   "ten minutes",
+   "10 minutes"
+  ],
+  [
+   "seven days",
+   "7 days"
+  ],
+  [
+   "two days",
+   "2 days"
+  ],
+  [
+   "day six",
+   "day 6"
+  ],
+  [
+   "day seven",
+   "day 7"
+  ],
+  [
+   "month six",
+   "month 6"
+  ],
+  [
+   "hour one",
+   "hour 1"
+  ]
+ ]
+}
