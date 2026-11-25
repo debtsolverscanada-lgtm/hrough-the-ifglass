@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/thumbkit.js"></script><script>
+// Nov 25 style: ONE split face (left Glint, right Dex), blue vs orange split, 2 words. Nothing bottom-right.
+const K='#0A0612', B='#2F8CFF', O='#FF7A1A', cx=760, cy=600, R=360;
+const glS='#FFF6EA', dxS='#E2A97E';
+const left=`<g clip-path="url(#cl)">
+  <path d="M${cx-560} 1100 Q${cx-520} ${cy+330} ${cx-180} ${cy+300} L${cx} ${cy+300} L${cx} 1100Z" fill="#2A3A6A" stroke="${K}" stroke-width="14"/>
+  <path d="M${cx-300} ${cy+330} Q${cx-150} ${cy+400} ${cx} ${cy+380} L${cx} ${cy+460} Q${cx-160} ${cy+480} ${cx-320} ${cy+410}Z" fill="#3DF5C2" stroke="${K}" stroke-width="14" stroke-linejoin="round"/>
+  <circle cx="${cx}" cy="${cy}" r="${R}" fill="${glS}" stroke="${K}" stroke-width="16"/>
+  <path d="M${cx-250} ${cy-230} A330 330 0 0 1 ${cx-60} ${cy-340}" stroke="#fff" stroke-width="22" fill="none" stroke-linecap="round" opacity=".8"/>
+  <ellipse cx="${cx-160}" cy="${cy-40}" rx="78" ry="92" fill="#fff" stroke="${K}" stroke-width="12"/><circle cx="${cx-150}" cy="${cy-30}" r="34" fill="${K}"/><circle cx="${cx-138}" cy="${cy-46}" r="12" fill="#fff"/>
+  <circle cx="${cx-160}" cy="${cy-40}" r="120" fill="rgba(255,230,160,.15)" stroke="${K}" stroke-width="34"/><circle cx="${cx-160}" cy="${cy-40}" r="120" fill="none" stroke="#F2C14E" stroke-width="16"/>
+  <path d="M${cx-40} ${cy-46} H${cx}" stroke="#F2C14E" stroke-width="14"/>
+  <g transform="translate(${cx-160},${cy-215}) rotate(-14)"><rect x="-80" y="-14" width="160" height="28" rx="14" fill="${K}"/></g>
+  <ellipse cx="${cx-260}" cy="${cy+120}" rx="54" ry="30" fill="#FF5E5B" opacity=".45"/>
+ </g>`;
+const right=`<g clip-path="url(#cr)">
+  <path d="M${cx} 1100 L${cx} ${cy+300} L${cx+200} ${cy+300} Q${cx+560} ${cy+320} ${cx+620} 1100Z" fill="#24222E" stroke="${K}" stroke-width="14"/>
+  <path d="M${cx} ${cy+470} L${cx+560} ${cy+470}" stroke="${O}" stroke-width="30"/>
+  <path d="M${cx} ${cy+300} L${cx+120} ${cy+420} L${cx+230} ${cy+300}" fill="#3A3848" stroke="${K}" stroke-width="12"/>
+  <ellipse cx="${cx+R+10}" cy="${cy-10}" rx="54" ry="84" fill="${dxS}" stroke="${K}" stroke-width="14"/>
+  <circle cx="${cx}" cy="${cy}" r="${R}" fill="${dxS}" stroke="${K}" stroke-width="16"/>
+  <path d="M${cx} ${cy-R-6} Q${cx+330} ${cy-R} ${cx+R} ${cy-130} Q${cx+300} ${cy-260} ${cx} ${cy-270}Z" fill="#2A1C14" stroke="${K}" stroke-width="14" stroke-linejoin="round"/>
+  <path d="M${cx+60} ${cy+200} Q${cx+220} ${cy+250} ${cx+300} ${cy+120}" stroke="#B9835C" stroke-width="44" fill="none" opacity=".5" stroke-linecap="round"/>
+  <ellipse cx="${cx+160}" cy="${cy-30}" rx="64" ry="74" fill="#fff" stroke="${K}" stroke-width="12"/><circle cx="${cx+150}" cy="${cy-24}" r="26" fill="${K}"/><circle cx="${cx+160}" cy="${cy-36}" r="9" fill="#fff"/>
+  <g transform="translate(${cx+165},${cy-170}) rotate(-18)"><rect x="-100" y="-26" width="200" height="52" rx="22" fill="${K}"/></g>
+  <ellipse cx="${cx+250}" cy="${cy+110}" rx="54" ry="30" fill="#FF5E5B" opacity=".3"/>
+ </g>`;
+const mouth=`<ellipse cx="${cx}" cy="${cy+175}" rx="96" ry="112" fill="#5A1E22" stroke="${K}" stroke-width="14"/><ellipse cx="${cx}" cy="${cy+238}" rx="54" ry="28" fill="#C9575A"/><path d="M${cx-80} ${cy+120} Q${cx} ${cy+92} ${cx+80} ${cy+120}" stroke="#fff" stroke-width="12" fill="none"/>`;
+const seam=`<path d="M${cx} ${cy-R-40} V${cy+R+40}" stroke="${K}" stroke-width="14"/><path d="M${cx} ${cy-R-40} V${cy+R+40}" stroke="#fff" stroke-width="5" stroke-dasharray="26 18"/>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ <defs><clipPath id="cl"><rect x="0" y="0" width="${cx}" height="1080"/></clipPath><clipPath id="cr"><rect x="${cx}" y="0" width="${1920-cx}" height="1080"/></clipPath>
+ <linearGradient id="bgB" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0E2A6A"/><stop offset="1" stop-color="#1D5FD0"/></linearGradient>
+ <linearGradient id="bgO" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF9A2E"/><stop offset="1" stop-color="#B8400A"/></linearGradient></defs>
+ <rect width="${cx}" height="1080" fill="url(#bgB)"/><rect x="${cx}" width="${1920-cx}" height="1080" fill="url(#bgO)"/>
+ ${TK.glowBlob(380,520,360,'#7CC4FF',.45)}${TK.glowBlob(1300,300,420,'#FFD28A',.45)}${TK.rays(1500,160,'#FFE2B0',14,1500,.08)}
+ ${TK.rim(left+right+mouth,'#FFFFFF',22)}${seam}
+ ${TK.text(1210,300,"HE'S",{size:230,fill:'#fff',rot:-4})}
+ ${TK.text(1220,540,'ME?',{size:290,fill:'#FFD43B',rot:-4,depth:18})}
+`,'#0B1026');
+</script></body></html>
