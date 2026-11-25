@@ -1,0 +1,45 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/thumbkit.js"></script><script>
+// 030 (Nov 25 style): centred close-up of a still face on a hospital pillow, ONE eye opening + a tear,
+// a glowing heart-monitor line, "I CAN / HEAR YOU" top-left. Dark hospital blue + warm amber monitor glow.
+const K='#0A0612', AMB='#FFB45C';
+const skin='#F6E7CF', shade='#D9BFA0';
+// heart-monitor line (left -> into the face), with a big beat
+let d='M-40 760';const pts=[[160,760],[200,740],[230,760],[300,760],[330,600],[365,900],[395,720],[420,760],[520,760],[545,740],[570,760],[630,760],[660,640],[690,860],[715,740],[735,760],[860,760]];
+pts.forEach(([x,y])=>d+=` L${x} ${y}`);
+const ecgLine=`<path d="${d}" stroke="${AMB}" stroke-width="40" fill="none" opacity=".25" stroke-linejoin="round"/><path d="${d}" stroke="${AMB}" stroke-width="14" fill="none" stroke-linejoin="round" style="filter:drop-shadow(0 0 18px ${AMB})"/><circle cx="860" cy="760" r="16" fill="#FFF1D6" style="filter:drop-shadow(0 0 20px ${AMB})"/>`;
+const face=`<g transform="translate(1250,590) rotate(-6)">
+ <ellipse cx="-20" cy="250" rx="560" ry="200" fill="#EEF4FA" stroke="${K}" stroke-width="14"/>
+ <path d="M-520 260 Q-300 150 -60 210" stroke="#C9D6E6" stroke-width="16" fill="none"/>
+ <ellipse cx="0" cy="0" rx="330" ry="350" fill="${skin}" stroke="${K}" stroke-width="14"/>
+ <ellipse cx="-330" cy="40" rx="44" ry="76" fill="${skin}" stroke="${K}" stroke-width="12"/><ellipse cx="330" cy="40" rx="44" ry="76" fill="${skin}" stroke="${K}" stroke-width="12"/>
+ <path d="M-300 -120 Q0 -330 300 -120" stroke="#F4F6FA" stroke-width="70" fill="none" stroke-linecap="round"/><path d="M-300 -120 Q0 -330 300 -120" stroke="${K}" stroke-width="6" fill="none" opacity=".25" transform="translate(0,30)"/>
+ <path d="M-270 150 Q-230 260 -130 300" stroke="${shade}" stroke-width="24" fill="none" opacity=".6" stroke-linecap="round"/><path d="M270 150 Q230 260 130 300" stroke="${shade}" stroke-width="24" fill="none" opacity=".6" stroke-linecap="round"/>
+ <ellipse cx="-210" cy="120" rx="50" ry="28" fill="#FF8FA3" opacity=".45"/><ellipse cx="210" cy="120" rx="50" ry="28" fill="#FF8FA3" opacity=".45"/>
+ <!-- left eye: closed -->
+ <path d="M-210 10 Q-130 60 -50 10" stroke="${K}" stroke-width="14" fill="none" stroke-linecap="round"/>
+ <path d="M-190 34 l-14 22 M-150 48 l-8 24 M-110 50 l0 24 M-70 40 l10 22" stroke="${K}" stroke-width="8" stroke-linecap="round"/>
+ <!-- right eye: opening -->
+ <path d="M50 10 Q130 -60 210 10 Q130 54 50 10Z" fill="#fff" stroke="${K}" stroke-width="12"/>
+ <circle cx="138" cy="6" r="30" fill="#2B5D8A"/><circle cx="138" cy="6" r="15" fill="${K}"/><circle cx="148" cy="-6" r="7" fill="#fff"/>
+ <path d="M40 4 Q130 -82 222 4" stroke="${K}" stroke-width="16" fill="none" stroke-linecap="round"/>
+ <!-- glasses -->
+ <circle cx="-130" cy="16" r="112" fill="rgba(255,230,160,.10)" stroke="${K}" stroke-width="26"/><circle cx="130" cy="16" r="112" fill="rgba(255,230,160,.10)" stroke="${K}" stroke-width="26"/>
+ <circle cx="-130" cy="16" r="112" fill="none" stroke="#F2C14E" stroke-width="12"/><circle cx="130" cy="16" r="112" fill="none" stroke="#F2C14E" stroke-width="12"/>
+ <path d="M-20 8 Q0 -10 20 8" stroke="#F2C14E" stroke-width="10" fill="none"/>
+ <!-- tear -->
+ <path d="M200 70 Q236 150 214 196 Q186 230 166 186 Q156 140 200 70Z" fill="#BFEFFF" stroke="${K}" stroke-width="7" style="filter:drop-shadow(0 0 14px #9FD8FF)"/><path d="M196 120 q-10 30 0 50" stroke="#fff" stroke-width="7" fill="none" stroke-linecap="round"/>
+ <ellipse cx="0" cy="214" rx="26" ry="20" fill="#5A1E22" stroke="${K}" stroke-width="10"/><path d="M60 -110 Q140 -160 220 -112" stroke="${K}" stroke-width="20" fill="none" stroke-linecap="round"/><path d="M-220 -84 Q-140 -100 -60 -84" stroke="${K}" stroke-width="18" fill="none" stroke-linecap="round"/>
+ <path d="M-560 380 Q-200 300 0 340 Q300 380 560 320 L600 520 H-600Z" fill="#5FA8C8" stroke="${K}" stroke-width="14"/>
+</g>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#0A1A33"/>
+ <circle cx="1250" cy="560" r="760" fill="url(#gIce)" opacity=".22"/>
+ <circle cx="420" cy="760" r="520" fill="url(#gWarm)" opacity=".55"/>
+ <g opacity=".5">${[0,1,2,3,4].map(i=>`<path d="M${1560+i*90} 0 Q${1600+i*90} 500 ${1550+i*90} 1080" stroke="#1F5A6A" stroke-width="56" fill="none"/>`).join('')}</g>
+ ${ecgLine}
+ ${TK.rim(face,'#7FC4FF',34)}
+ ${TK.text(70,250,'I CAN',{size:210,fill:'#fff',rot:-3})}
+ ${TK.text(70,480,'HEAR YOU',{size:200,fill:AMB,rot:-3,depth:16})}
+`,'#0A1A33');
+</script></body></html>
