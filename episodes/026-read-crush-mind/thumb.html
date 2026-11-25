@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/shots.js"></script><script src="../../studio/cast.js"></script><script src="../../studio/thumbkit.js"></script><script src="../../studio/ep/021.js"></script><script src="../../studio/ep/026.js"></script><script>
+// Nov 25 style: big shocked-blushing Glint face RIGHT, Maya left with the thought bubble, warm pink/purple. 3 elements, no badge.
+const K='#0A0612', g=.4;
+const r=rng(260);let stars='';for(let i=0;i<90;i++)stars+=`<circle cx="${r()*1920}" cy="${r()*1080}" r="${1+r()*3}" fill="#fff" opacity="${.25+r()*.5}"/>`;
+const hero=`<g transform="translate(1440,830) scale(3.3)">${glint({t:g,mouth:'o',brows:'raised',look:-1,blink:0,sweat:1})}${t26_blush(0,0,1,g,1)}</g>`;
+const maya=`<g transform="translate(470,800) scale(1.75)">${t26_maya({t:g,mouth:'smirk',look:1,blush:.7,pose:'down'})}</g>`;
+// cloud bubble
+let cl='';[[-300,-40,110],[-160,-120,130],[20,-140,140],[200,-110,125],[320,-20,105],[220,90,110],[40,120,120],[-140,110,115],[-300,70,95]].forEach(([x,y,rr])=>cl+=`<circle cx="${x}" cy="${y}" r="${rr}"/>`);
+const bub=`<g transform="translate(560,250)"><g fill="${K}" stroke="${K}" stroke-width="36">${cl}<rect x="-320" y="-120" width="640" height="240" rx="100"/></g><g fill="#FFF4FB">${cl}<rect x="-320" y="-120" width="640" height="240" rx="100"/></g>
+ <circle cx="-110" cy="235" r="34" fill="#FFF4FB" stroke="${K}" stroke-width="12"/><circle cx="-80" cy="320" r="20" fill="#FFF4FB" stroke="${K}" stroke-width="10"/>
+ <text x="0" y="-22" text-anchor="middle" font-size="150" font-weight="900" fill="${K}" letter-spacing="-3">I HEARD</text><text x="0" y="128" text-anchor="middle" font-size="160" font-weight="900" fill="#FF2E8E" letter-spacing="-2">THAT</text></g>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#2A0B40"/>${TK.glowBlob(1450,520,620,'#FF5FB4',.55)}${TK.glowBlob(380,700,480,'#9A5CFF',.55)}${stars}
+ <path d="M-200 1080 A1200 1000 0 0 1 2120 1080" fill="none" stroke="#FF9AD6" stroke-width="8" opacity=".25"/>
+ ${TK.rim(maya,'#C9A2FF',26)}${TK.rim(hero,'#FF7AC8',34)}${bub}
+`,'#2A0B40');
+</script></body></html>
