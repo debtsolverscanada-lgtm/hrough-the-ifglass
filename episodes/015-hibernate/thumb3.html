@@ -1,0 +1,53 @@
+<!doctype html><html><head><meta charset="utf-8"><style>html,body{margin:0}svg{display:block}text{font-family:"Inter Display","Inter",sans-serif}</style></head><body><div id="s"></div>
+<script src="../../studio/lib.js"></script><script src="../../studio/thumbkit.js"></script><script>
+// Nov 25 redesign (PLAYBOOK §10): consequence on a big face, 2-3 words, no badge, face left / proof right.
+const K='#0A0612';
+const r=rng(151);
+let frost='';for(let i=0;i<70;i++){const x=r()*1920,y=r()*1080,edge=Math.min(x,1920-x,y,1080-y);if(edge>220)continue;const s=10+r()*26;
+ frost+=`<g transform="translate(${x},${y}) rotate(${r()*60})" stroke="#DFF3FF" stroke-width="3" opacity="${.35+r()*.4}"><path d="M${-s} 0H${s}M0 ${-s}V${s}M${-s*.7} ${-s*.7}L${s*.7} ${s*.7}M${-s*.7} ${s*.7}L${s*.7} ${-s*.7}"/></g>`;}
+// calendar: NOV..MAR crossed, APR circled
+const months=['NOV','DEC','JAN','FEB','MAR','APR'];
+let cal=`<rect x="-250" y="-215" width="500" height="430" rx="18" fill="#F4F1EA" stroke="${K}" stroke-width="10"/>
+ <rect x="-250" y="-215" width="500" height="80" rx="18" fill="#E0403A" stroke="${K}" stroke-width="10"/>
+ <circle cx="-150" cy="-215" r="14" fill="${K}"/><circle cx="150" cy="-215" r="14" fill="${K}"/>
+ <text x="0" y="-157" text-anchor="middle" font-size="44" font-weight="900" fill="#fff" letter-spacing="4">WINTER</text>`;
+months.forEach((m,i)=>{const cx=-160+(i%3)*160, cy=-55+Math.floor(i/3)*150;
+ cal+=`<text x="${cx}" y="${cy+22}" text-anchor="middle" font-size="58" font-weight="900" fill="#2A2A35">${m}</text>`;
+ if(i<5) cal+=`<path d="M${cx-58} ${cy-36}L${cx+58} ${cy+44}M${cx+58} ${cy-36}L${cx-58} ${cy+44}" stroke="#E0403A" stroke-width="13" stroke-linecap="round"/>`;
+ else cal+=`<ellipse cx="${cx}" cy="${cy+4}" rx="80" ry="56" fill="none" stroke="#E0403A" stroke-width="10" transform="rotate(-8 ${cx} ${cy})"/>`;});
+// big face
+const skin='#E9C9AE', shade='#B98F78', cold='#9FC3E0';
+const face=`<g transform="translate(600,650)">
+ <path d="M-420 520 Q-400 250 -170 215 L170 215 Q400 250 420 520Z" fill="#5C7FA8" stroke="${K}" stroke-width="14"/>
+ <path d="M-330 520 Q-300 330 -120 300 M330 520 Q300 330 120 300" stroke="#43638A" stroke-width="10" fill="none"/>
+ <path d="M-95 160 L-90 250 Q0 290 90 250 L95 160Z" fill="${shade}" stroke="${K}" stroke-width="12"/>
+ <ellipse cx="0" cy="-40" rx="300" ry="340" fill="${skin}" stroke="${K}" stroke-width="14"/>
+ <ellipse cx="-300" cy="-10" rx="44" ry="74" fill="${skin}" stroke="${K}" stroke-width="12"/><ellipse cx="300" cy="-10" rx="44" ry="74" fill="${skin}" stroke="${K}" stroke-width="12"/>
+ <path d="M-250 110 Q-225 200 -160 250" stroke="${shade}" stroke-width="22" fill="none" opacity=".55" stroke-linecap="round"/>
+ <path d="M250 110 Q225 200 160 250" stroke="${shade}" stroke-width="22" fill="none" opacity=".55" stroke-linecap="round"/>
+ <path d="M-310 -120 Q-330 -400 0 -405 Q330 -400 310 -120 Q290 -250 160 -280 Q40 -230 -60 -290 Q-200 -270 -310 -120Z" fill="#3A2A22" stroke="${K}" stroke-width="14" stroke-linejoin="round"/>
+ <path d="M-300 -170 Q-250 -330 -60 -360 M-120 -300 Q20 -380 180 -330 M90 -295 Q240 -300 300 -170" stroke="#EAF7FF" stroke-width="20" stroke-linecap="round" fill="none"/>
+ ${[-250,-190,-120,-40,40,120,200,260].map((x,i)=>`<path d="M${x} ${-300+Math.abs(x)*.35} l${8-i%3*6} ${26+i%2*14} l${10} ${-22}" fill="#EAF7FF" stroke="${K}" stroke-width="4"/>`).join('')}
+ <ellipse cx="-118" cy="-10" rx="98" ry="112" fill="#fff" stroke="${K}" stroke-width="12"/><ellipse cx="118" cy="-10" rx="98" ry="112" fill="#fff" stroke="${K}" stroke-width="12"/>
+ <circle cx="-112" cy="-4" r="30" fill="#2B5D8A"/><circle cx="-112" cy="-4" r="15" fill="${K}"/><circle cx="-102" cy="-16" r="7" fill="#fff"/>
+ <circle cx="124" cy="-4" r="30" fill="#2B5D8A"/><circle cx="124" cy="-4" r="15" fill="${K}"/><circle cx="134" cy="-16" r="7" fill="#fff"/>
+ <path d="M-180 118 Q-118 142 -60 118" stroke="#7E5E8E" stroke-width="12" fill="none" opacity=".55" stroke-linecap="round"/><path d="M60 118 Q118 142 180 118" stroke="#7E5E8E" stroke-width="12" fill="none" opacity=".55" stroke-linecap="round"/>
+ <path d="M-215 -150 Q-130 -215 -40 -165" stroke="${K}" stroke-width="26" fill="none" stroke-linecap="round"/><path d="M40 -165 Q130 -215 215 -150" stroke="${K}" stroke-width="26" fill="none" stroke-linecap="round"/>
+ <path d="M-215 -158 Q-130 -222 -40 -173 M40 -173 Q130 -222 215 -158" stroke="#EAF7FF" stroke-width="9" fill="none" stroke-linecap="round"/>
+ <path d="M-10 60 Q-30 120 0 135 Q20 135 26 120" stroke="${K}" stroke-width="10" fill="none" stroke-linecap="round"/>
+ <ellipse cx="0" cy="215" rx="62" ry="80" fill="#5A1E22" stroke="${K}" stroke-width="12"/><ellipse cx="0" cy="260" rx="36" ry="20" fill="#C9575A"/>
+ <path d="M-62 200 Q0 175 62 200" stroke="#fff" stroke-width="8" fill="none" opacity=".8"/>
+ <path d="M-300 40 Q-250 0 -260 -80" stroke="${cold}" stroke-width="16" fill="none" opacity=".45" stroke-linecap="round"/>
+ <g fill="#9FD8FF" stroke="${K}" stroke-width="4"><path d="M238 -140 q14 30 0 44 q-14 -14 0 -44z"/><path d="M-250 30 q12 26 0 38 q-12 -12 0 -38z"/></g>
+</g>`;
+document.getElementById('s').innerHTML=TK.wrap(`
+ <rect width="1920" height="1080" fill="#0D2238"/>
+ ${TK.glowBlob(1650,150,520,'#FFB45C',.55)}${TK.rays(1700,60,'#FFD9A0',16,1700,.07)}
+ ${TK.glowBlob(450,560,420,'#7FC4FF',.35)}
+ ${frost}
+ <g transform="translate(1440,690) rotate(5)" filter="url(#tkShadow)">${cal}</g>
+ ${TK.rim(face,'#9FD8FF',30)}
+ ${TK.text(1080,215,'5 MONTHS',{size:150,fill:'#fff',rot:-3})}
+ ${TK.text(1170,385,'GONE',{size:175,fill:'#FFD43B',rot:-3,depth:16})}
+`,'#0D2238');
+</script></body></html>

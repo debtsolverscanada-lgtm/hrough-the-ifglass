@@ -1,3 +1,16 @@
+# Thumbnail style (updated Nov 25, 2026)
+
+**Nov 25 change (data review, see PLAYBOOK §10):** the Glint-on-the-right + yellow headline + stat badge template is
+retired. 15 long-forms in that template averaged ~5-15 views and they are indistinguishable in a grid.
+- Show **the consequence for a person**: a big human face (or Glint's face filling a third of the frame) in fear,
+  shock or pain, readable at 320x180. Glint can be in the scene but is no longer the default hero.
+- **No stat badges.** 2-4 words, the danger, not the topic name ("5 MONTHS GONE", not "HIBERNATE").
+- **Rotate layout** (face left / face right / centred close-up / split before-after) and palette every upload; never
+  two in a row alike. Check the last 6 thumbnails side by side before posting.
+- Make 3 variants for Studio Test & Compare on every long-form.
+
+(Older notes below still apply where they don't conflict.)
+
 # Thumbnail style (from Oct 30, 2026)
 
 The target look is the 016 "I SEE EVERYTHING" thumbnail (`episodes/016-invisible/thumb4.html`).

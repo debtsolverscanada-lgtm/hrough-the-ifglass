@@ -12,6 +12,12 @@ Sheets via Zapier GoogleSheetsV2CLIAPI `_zap_raw_request` on connection `0290d47
 Channel: YouTube connection `02fbff33-7e6c-848c-817a-ee35e4c556b2`, uploads playlist `UUEmR0Rx8ovmSC3vrhBcYCDw`.
 A Zapier "Shorts Zap" also posts from this sheet on a schedule (SCHEDULE.md) and has been seen NOT marking rows posted.
 
+## Rules (Nov 25 data review, PLAYBOOK §10)
+- Title starts with the hook line, never "Part N" (e.g. "Your city could be underwater | What If You Woke Up in 3026? 🌊").
+  If a queued row's title starts with or leans on "Part N", rewrite it before posting and update the sheet.
+- About 2 Ifglass Shorts a day, 3+ hours apart, every day; no bursts.
+- Long-forms: at most 1 a week, only after its Shorts series, and every Short's description links it.
+
 ## Steps
 1. Read the last ~6 uploads (YouTube `playlistItems`, part snippet). Read the Shorts tab.
 2. Reconcile first: any row still `ready` whose title is already on the channel → set status `posted` + youtube_id.

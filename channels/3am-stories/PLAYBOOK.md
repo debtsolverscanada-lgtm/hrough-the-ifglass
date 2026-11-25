@@ -108,3 +108,25 @@ below readable contrast, default flat gradients, generic fade-ins, bounce easing
 - Ideas YouTube rates "very likely": What If You Only Needed to Breathe Once an Hour? · What If You Were Put Into
   Stasis During Interstellar Travel? (sleeper ship wakes centuries off course; follows Frozen 100 Years + 3026) ·
   What If You Could See the Entire Electromagnetic Spectrum? (follows the Bat video). Long-form first, then its Part series.
+
+## 10. Data review, Nov 25 2026 (all 89 uploads, public view counts) → standing rules
+What the numbers showed: every Short on all three channels stops at ~1,000-1,600 views (YouTube's first test audience)
+and none broke out; Ifglass long-forms average ~5-15 views (the exception, Woke Up 1,000 Years at 531, had 13 Shorts
+pointing at it); Invisible Parts 6-10 fell to ~100-160 views once titles said "Part 10"; danger-to-you topics beat
+wonder topics; 3 AM Stories went silent for 20 days after a burst; AfterLife's real-photo thumbnail (Klein, 338) beat
+the cartoon one (Nvidia, 1).
+1. **Beat the swipe.** The first frame states the threat to the viewer; no lead-in, no logo. 48 h after posting, read
+   "Viewed vs. swiped away" in Studio (target: over 70% viewed) and copy whatever opening beat it.
+2. **Every Short stands alone.** Never start a Short title with "Part N"; lead with the hook line. Series live in a
+   playlist and in the description. A Short must make sense to someone who saw no other part.
+3. **Danger beats wonder.** Frame every What If as what it would do TO you ("Why hibernating would wreck your body"),
+   not as a cool power. Horror: everyday tech dread (phone, AirTag, doorbell cam, smart speaker) is the proven lane.
+4. **Long-form only behind Shorts.** Ifglass: at most 1 long-form a week, published after its Shorts series, and every
+   Short points to it (description link + Related video). No more daily long-forms nobody is sent to.
+5. **Steady cadence, never bursts.** About 2 Shorts a day per channel, 3+ hours apart, every day. A burst then silence
+   hurts more than a slower steady pace.
+6. **No templates (monetisation).** YouTube's inauthentic-content review is channel-wide: thumbnails, openings and
+   structures must visibly differ video to video. Same template on every upload is the pattern it demonetises.
+7. **Thumbnails:** one big readable face showing the consequence (fear, shock), 2-4 words, max 3 elements, no stat
+   badges, a new layout and colour each time. Long-forms get 3 variants in Studio "Test & Compare".
+8. **AfterLife:** recognisable real faces on thumbnails (editorial use), post within 24-48 h of the news.
