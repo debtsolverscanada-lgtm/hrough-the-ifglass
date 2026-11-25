@@ -130,7 +130,7 @@ aniHook26(t,d,p,g){
    ${glint({x:420,y:560,s:.95,t:g,mouth:kn?'o':'flat',brows:'raised',look:1,blink:kn?0:BL(g),sweat:ht?1:0})}
    ${ff?t26_timer(900,g,{x:420,y:200,s:1.05}):''}${mw?`<g transform="translate(1180,520) scale(${pop(t,p.motor??8.3).toFixed(3)})">${labelPill(0,0,'90 MINUTES OF MOTORWAY',P.coral,44)}</g>`:''}
    ${ht?`<g transform="translate(420,880) scale(${pop(t,p.heard??13).toFixed(3)})">${labelPill(0,0,'HE HEARD THE THOUGHT',t26_PK,46)}</g>`:''}
-   ${T(960,ff?150:150,'ABOUT TO DRIVE HALF ASLEEP',{size:ff?62:88,fill:P.white,sc:IN(t,.1)})}`;
+   ${!ff?T(960,150,'ABOUT TO DRIVE HALF ASLEEP',{size:88,fill:P.white,sc:IN(t,.1)}):''}`;
 },
 aniCast(t,d,p,g){
   const bf=AT(t,p.best??3.3),me=AT(t,p.mentor??4.6),gi=AT(t,p.girl??5.6),nb=AT(t,p.nobody??8.4);
